@@ -39,12 +39,12 @@ internal sealed partial class InfoFeatureStateConverter : System.Text.Json.Seria
 		LocalJsonValue<IReadOnlyCollection<string>> propIndices = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propFeatureName.TryRead(ref reader, options, PropFeatureName))
+			if (propFeatureName.TryReadProperty(ref reader, options, PropFeatureName, null))
 			{
 				continue;
 			}
 
-			if (propIndices.TryRead(ref reader, options, PropIndices, typeof(SingleOrManyMarker<IReadOnlyCollection<string>, string>)))
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
@@ -64,8 +64,8 @@ internal sealed partial class InfoFeatureStateConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, InfoFeatureState value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFeatureName, value.FeatureName);
-		writer.WriteProperty(options, PropIndices, value.Indices, null, typeof(SingleOrManyMarker<IReadOnlyCollection<string>, string>));
+		writer.WriteProperty(options, PropFeatureName, value.FeatureName, null, null);
+		writer.WriteProperty(options, PropIndices, value.Indices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

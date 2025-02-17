@@ -40,12 +40,12 @@ internal sealed partial class RankEvalQueryConverter : System.Text.Json.Serializ
 		LocalJsonValue<int?> propSize = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propQuery.TryRead(ref reader, options, PropQuery))
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
 			{
 				continue;
 			}
 
-			if (propSize.TryRead(ref reader, options, PropSize))
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
 			{
 				continue;
 			}
@@ -53,7 +53,7 @@ internal sealed partial class RankEvalQueryConverter : System.Text.Json.Serializ
 			try
 			{
 				reader = readerSnapshot;
-				var result = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(options);
+				var result = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(options, null);
 				return new RankEvalQuery { Query = result };
 			}
 			catch (System.Text.Json.JsonException)
@@ -74,8 +74,8 @@ internal sealed partial class RankEvalQueryConverter : System.Text.Json.Serializ
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, RankEvalQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropQuery, value.Query);
-		writer.WriteProperty(options, PropSize, value.Size);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
 		writer.WriteEndObject();
 	}
 }

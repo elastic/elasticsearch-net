@@ -91,12 +91,12 @@ internal sealed partial class CreateRequestConverter<TDocument> : System.Text.Js
 {
 	public override CreateRequest<TDocument> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		return new CreateRequest<TDocument> { Document = reader.ReadValue<TDocument>(options, typeof(SourceMarker<TDocument>)) };
+		return new CreateRequest<TDocument> { Document = reader.ReadValue<TDocument>(options, static TDocument (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<TDocument>(o, typeof(SourceMarker<TDocument>))!) };
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, CreateRequest<TDocument> value, System.Text.Json.JsonSerializerOptions options)
 	{
-		writer.WriteValue(options, value.Document, typeof(SourceMarker<TDocument>));
+		writer.WriteValue(options, value.Document, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, TDocument v) => w.WriteValueEx<TDocument>(o, v, typeof(SourceMarker<TDocument>)));
 	}
 }
 

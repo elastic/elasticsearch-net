@@ -38,7 +38,7 @@ internal sealed partial class ClearCursorResponseConverter : System.Text.Json.Se
 		LocalJsonValue<bool> propSucceeded = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propSucceeded.TryRead(ref reader, options, PropSucceeded))
+			if (propSucceeded.TryReadProperty(ref reader, options, PropSucceeded, null))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class ClearCursorResponseConverter : System.Text.Json.Se
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ClearCursorResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropSucceeded, value.Succeeded);
+		writer.WriteProperty(options, PropSucceeded, value.Succeeded, null, null);
 		writer.WriteEndObject();
 	}
 }

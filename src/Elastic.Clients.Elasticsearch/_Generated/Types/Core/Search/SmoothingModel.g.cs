@@ -84,7 +84,7 @@ internal sealed partial class SmoothingModelConverter : System.Text.Json.Seriali
 			{
 				variantType = VariantLaplace.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel?>(options, null);
 				continue;
 			}
 
@@ -92,7 +92,7 @@ internal sealed partial class SmoothingModelConverter : System.Text.Json.Seriali
 			{
 				variantType = VariantLinearInterpolation.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel?>(options, null);
 				continue;
 			}
 
@@ -100,7 +100,7 @@ internal sealed partial class SmoothingModelConverter : System.Text.Json.Seriali
 			{
 				variantType = VariantStupidBackoff.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel?>(options, null);
 				continue;
 			}
 
@@ -119,13 +119,13 @@ internal sealed partial class SmoothingModelConverter : System.Text.Json.Seriali
 			case "":
 				break;
 			case "laplace":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel?)value.Variant, null, null);
 				break;
 			case "linear_interpolation":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel?)value.Variant, null, null);
 				break;
 			case "stupid_backoff":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel?)value.Variant, null, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(SmoothingModel)}'.");

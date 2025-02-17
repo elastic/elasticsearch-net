@@ -63,12 +63,12 @@ internal sealed partial class PutDataLifecycleRequestConverter : System.Text.Jso
 {
 	public override PutDataLifecycleRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		return new PutDataLifecycleRequest { Lifecycle = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle>(options) };
+		return new PutDataLifecycleRequest { Lifecycle = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle>(options, null) };
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, PutDataLifecycleRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
-		writer.WriteValue(options, value.Lifecycle);
+		writer.WriteValue(options, value.Lifecycle, null);
 	}
 }
 

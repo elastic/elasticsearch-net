@@ -46,22 +46,22 @@ internal sealed partial class LanguageAnalyzerConverter : System.Text.Json.Seria
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propLanguage.TryRead(ref reader, options, PropLanguage))
+			if (propLanguage.TryReadProperty(ref reader, options, PropLanguage, null))
 			{
 				continue;
 			}
 
-			if (propStemExclusion.TryRead(ref reader, options, PropStemExclusion))
+			if (propStemExclusion.TryReadProperty(ref reader, options, PropStemExclusion, static ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propStopwords.TryRead(ref reader, options, PropStopwords, typeof(SingleOrManyMarker<ICollection<string>?, string>)))
+			if (propStopwords.TryReadProperty(ref reader, options, PropStopwords, static ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propStopwordsPath.TryRead(ref reader, options, PropStopwordsPath))
+			if (propStopwordsPath.TryReadProperty(ref reader, options, PropStopwordsPath, null))
 			{
 				continue;
 			}
@@ -72,7 +72,7 @@ internal sealed partial class LanguageAnalyzerConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propVersion.TryRead(ref reader, options, PropVersion))
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
 			{
 				continue;
 			}
@@ -98,12 +98,12 @@ internal sealed partial class LanguageAnalyzerConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, LanguageAnalyzer value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropLanguage, value.Language);
-		writer.WriteProperty(options, PropStemExclusion, value.StemExclusion);
-		writer.WriteProperty(options, PropStopwords, value.Stopwords, null, typeof(SingleOrManyMarker<ICollection<string>?, string>));
-		writer.WriteProperty(options, PropStopwordsPath, value.StopwordsPath);
-		writer.WriteProperty(options, PropType, value.Type);
-		writer.WriteProperty(options, PropVersion, value.Version);
+		writer.WriteProperty(options, PropLanguage, value.Language, null, null);
+		writer.WriteProperty(options, PropStemExclusion, value.StemExclusion, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropStopwords, value.Stopwords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropStopwordsPath, value.StopwordsPath, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();
 	}
 }

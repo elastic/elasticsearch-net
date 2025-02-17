@@ -44,22 +44,22 @@ internal sealed partial class BulkPutRoleResponseConverter : System.Text.Json.Se
 		LocalJsonValue<IReadOnlyCollection<string>?> propUpdated = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCreated.TryRead(ref reader, options, PropCreated))
+			if (propCreated.TryReadProperty(ref reader, options, PropCreated, static IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propErrors.TryRead(ref reader, options, PropErrors))
+			if (propErrors.TryReadProperty(ref reader, options, PropErrors, null))
 			{
 				continue;
 			}
 
-			if (propNoop.TryRead(ref reader, options, PropNoop))
+			if (propNoop.TryReadProperty(ref reader, options, PropNoop, static IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propUpdated.TryRead(ref reader, options, PropUpdated))
+			if (propUpdated.TryReadProperty(ref reader, options, PropUpdated, static IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
@@ -83,10 +83,10 @@ internal sealed partial class BulkPutRoleResponseConverter : System.Text.Json.Se
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, BulkPutRoleResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCreated, value.Created);
-		writer.WriteProperty(options, PropErrors, value.Errors);
-		writer.WriteProperty(options, PropNoop, value.Noop);
-		writer.WriteProperty(options, PropUpdated, value.Updated);
+		writer.WriteProperty(options, PropCreated, value.Created, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropErrors, value.Errors, null, null);
+		writer.WriteProperty(options, PropNoop, value.Noop, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropUpdated, value.Updated, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

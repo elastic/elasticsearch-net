@@ -42,17 +42,17 @@ internal sealed partial class BulkResponseConverter : System.Text.Json.Serializa
 		LocalJsonValue<long> propTook = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propErrors.TryRead(ref reader, options, PropErrors))
+			if (propErrors.TryReadProperty(ref reader, options, PropErrors, null))
 			{
 				continue;
 			}
 
-			if (propIngestTook.TryRead(ref reader, options, PropIngestTook))
+			if (propIngestTook.TryReadProperty(ref reader, options, PropIngestTook, null))
 			{
 				continue;
 			}
 
-			if (propTook.TryRead(ref reader, options, PropTook))
+			if (propTook.TryReadProperty(ref reader, options, PropTook, null))
 			{
 				continue;
 			}
@@ -74,9 +74,9 @@ internal sealed partial class BulkResponseConverter : System.Text.Json.Serializa
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, BulkResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropErrors, value.Errors);
-		writer.WriteProperty(options, PropIngestTook, value.IngestTook);
-		writer.WriteProperty(options, PropTook, value.Took);
+		writer.WriteProperty(options, PropErrors, value.Errors, null, null);
+		writer.WriteProperty(options, PropIngestTook, value.IngestTook, null, null);
+		writer.WriteProperty(options, PropTook, value.Took, null, null);
 		writer.WriteEndObject();
 	}
 }

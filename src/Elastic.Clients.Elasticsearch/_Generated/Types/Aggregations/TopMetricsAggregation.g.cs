@@ -47,32 +47,32 @@ internal sealed partial class TopMetricsAggregationConverter : System.Text.Json.
 		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.SortOptions>?> propSort = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propField.TryRead(ref reader, options, PropField))
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
 			{
 				continue;
 			}
 
-			if (propMetrics.TryRead(ref reader, options, PropMetrics, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>?, Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>)))
+			if (propMetrics.TryReadProperty(ref reader, options, PropMetrics, static ICollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>(o, null)))
 			{
 				continue;
 			}
 
-			if (propMissing.TryRead(ref reader, options, PropMissing))
+			if (propMissing.TryReadProperty(ref reader, options, PropMissing, null))
 			{
 				continue;
 			}
 
-			if (propScript.TryRead(ref reader, options, PropScript))
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
 			{
 				continue;
 			}
 
-			if (propSize.TryRead(ref reader, options, PropSize))
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
 			{
 				continue;
 			}
 
-			if (propSort.TryRead(ref reader, options, PropSort, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.SortOptions>?, Elastic.Clients.Elasticsearch.SortOptions>)))
+			if (propSort.TryReadProperty(ref reader, options, PropSort, static ICollection<Elastic.Clients.Elasticsearch.SortOptions>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.SortOptions>(o, null)))
 			{
 				continue;
 			}
@@ -100,12 +100,12 @@ internal sealed partial class TopMetricsAggregationConverter : System.Text.Json.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, TopMetricsAggregation value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropField, value.Field);
-		writer.WriteProperty(options, PropMetrics, value.Metrics, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>?, Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>));
-		writer.WriteProperty(options, PropMissing, value.Missing);
-		writer.WriteProperty(options, PropScript, value.Script);
-		writer.WriteProperty(options, PropSize, value.Size);
-		writer.WriteProperty(options, PropSort, value.Sort, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.SortOptions>?, Elastic.Clients.Elasticsearch.SortOptions>));
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropMetrics, value.Metrics, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>(o, v, null));
+		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropSort, value.Sort, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.SortOptions>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.SortOptions>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

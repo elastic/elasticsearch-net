@@ -40,12 +40,12 @@ internal sealed partial class ExecutePolicyResponseConverter : System.Text.Json.
 		LocalJsonValue<Elastic.Clients.Elasticsearch.TaskId?> propTaskId = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propStatus.TryRead(ref reader, options, PropStatus))
+			if (propStatus.TryReadProperty(ref reader, options, PropStatus, null))
 			{
 				continue;
 			}
 
-			if (propTaskId.TryRead(ref reader, options, PropTaskId))
+			if (propTaskId.TryReadProperty(ref reader, options, PropTaskId, null))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class ExecutePolicyResponseConverter : System.Text.Json.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ExecutePolicyResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropStatus, value.Status);
-		writer.WriteProperty(options, PropTaskId, value.TaskId);
+		writer.WriteProperty(options, PropStatus, value.Status, null, null);
+		writer.WriteProperty(options, PropTaskId, value.TaskId, null, null);
 		writer.WriteEndObject();
 	}
 }

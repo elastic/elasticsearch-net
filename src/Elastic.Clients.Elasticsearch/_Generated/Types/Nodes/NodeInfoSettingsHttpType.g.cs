@@ -35,7 +35,7 @@ internal sealed partial class NodeInfoSettingsHttpTypeConverter : System.Text.Js
 	{
 		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
 		{
-			var value = reader.ReadValue<string>(options);
+			var value = reader.ReadValue<string>(options, null);
 			return new NodeInfoSettingsHttpType { Default = value };
 		}
 
@@ -43,7 +43,7 @@ internal sealed partial class NodeInfoSettingsHttpTypeConverter : System.Text.Js
 		LocalJsonValue<string> propDefault = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDefault.TryRead(ref reader, options, PropDefault))
+			if (propDefault.TryReadProperty(ref reader, options, PropDefault, null))
 			{
 				continue;
 			}
@@ -61,7 +61,7 @@ internal sealed partial class NodeInfoSettingsHttpTypeConverter : System.Text.Js
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, NodeInfoSettingsHttpType value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDefault, value.Default);
+		writer.WriteProperty(options, PropDefault, value.Default, null, null);
 		writer.WriteEndObject();
 	}
 }

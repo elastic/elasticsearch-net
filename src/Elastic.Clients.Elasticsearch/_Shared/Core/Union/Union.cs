@@ -6,77 +6,117 @@ using System;
 
 namespace Elastic.Clients.Elasticsearch;
 
-/// <summary>
-/// Represents the union of two types, <typeparamref name="TFirst" /> and <typeparamref name="TSecond" />. Used
-/// in scenarios where an Elasticsearch API may accept more than one different input data structure.
-/// </summary>
-/// <typeparam name="TFirst">The first type</typeparam>
-/// <typeparam name="TSecond">The second type</typeparam>
-public class Union<TFirst, TSecond>
+public enum UnionTag
 {
-	internal readonly int Tag;
-	internal readonly TFirst Item1;
-	internal readonly TSecond Item2;
+	None,
+	T1,
+	T2
+}
+
+/// <summary>
+/// Represents the union of two types, <typeparamref name="T1"/> and <typeparamref name="T2"/>.
+/// </summary>
+/// <typeparam name="T1">The first type.</typeparam>
+/// <typeparam name="T2">The second type.</typeparam>
+public class Union<T1, T2>
+{
+	/// <summary>
+	/// A tag that signals which value type is encapsulated in the union.
+	/// </summary>
+	/// <remarks>
+	/// This tag should be used as the discriminator in <see langword="switch"/> expressions before accessing the actual encapsulated
+	/// value in either <see cref="Value1"/> or <see cref="Value2"/>.
+	/// <para>
+	///     As an alternative, the <see cref="Match"/> or <see cref="Match{T}"/> method might be used to access the encapsulated value
+	///     in a safe way.
+	/// </para>
+	/// </remarks>
+	public UnionTag Tag { get; }
 
 	/// <summary>
-	/// Creates an new instance of <see cref="Union{TFirst,TSecond}" /> that encapsulates <paramref name="item" /> value
+	/// The <typeparamref name="T1"/> value. This property is initialized only when <see cref="Tag"/> contains <see cref="UnionTag.T1"/>.
 	/// </summary>
-	/// <param name="item">The value to encapsulate</param>
-	public Union(TFirst item)
+	public T1? Value1 { get; }
+
+	/// <summary>
+	/// The <typeparamref name="T2"/> value. This property is initialized only when <see cref="Tag"/> contains <see cref="UnionTag.T2"/>.
+	/// </summary>
+	public T2? Value2 { get; }
+
+	/// <summary>
+	/// Creates a new instance of <see cref="Union{T1,T2}"/> that encapsulates a <paramref name="value"/> of
+	/// type <typeparamref name="T1"/>.
+	/// </summary>
+	/// <param name="value">The value to encapsulate.</param>
+	public Union(T1? value)
 	{
-		Item1 = item;
-		Tag = 0;
+		Value1 = value;
+		Tag = UnionTag.T1;
 	}
 
 	/// <summary>
-	/// Creates an new instance of <see cref="Union{TFirst,TSecond}" /> that encapsulates <paramref name="item" /> value
+	/// Creates a new instance of <see cref="Union{T1,T2}" /> that encapsulates a <paramref name="value"/> of
+	/// type <typeparamref name="T2"/>.
 	/// </summary>
-	/// <param name="item">The value to encapsulate</param>
-	public Union(TSecond item)
+	/// <param name="value">The value to encapsulate.</param>
+	public Union(T2? value)
 	{
-		Item2 = item;
-		Tag = 1;
+		Value2 = value;
+		Tag = UnionTag.T2;
 	}
 
 	/// <summary>
-	/// Runs an <see cref="Action{T}" /> delegate against the encapsulated value
+	/// Runs an <see cref="Action{T}"/> delegate against the encapsulated value.
 	/// </summary>
-	/// <param name="first">The delegate to run when this instance encapsulates an instance of <typeparamref name="TFirst" /></param>
-	/// <param name="second">The delegate to run when this instance encapsulates an instance of <typeparamref name="TSecond" /></param>
-	public void Match(Action<TFirst> first, Action<TSecond> second)
+	/// <param name="first">The delegate to run when this instance encapsulates a value of type <typeparamref name="T1"/>.</param>
+	/// <param name="second">The delegate to run when this instance encapsulates a value of type <typeparamref name="T2"/>.</param>
+	public void Match(Action<T1?>? first, Action<T2?>? second)
 	{
 		switch (Tag)
 		{
-			case 0:
-				first(Item1);
+			case UnionTag.T1:
+				first?.Invoke(Value1);
 				break;
-			case 1:
-				second(Item2);
+
+			case UnionTag.T2:
+				second?.Invoke(Value2);
 				break;
+
 			default:
-				throw new Exception($"Unrecognized tag value: {Tag}");
+				throw new InvalidOperationException($"Unrecognized tag value: {Tag}");
 		}
 	}
 
 	/// <summary>
-	/// Runs a <see cref="Func{T,TResult}" /> delegate against the encapsulated value
+	/// Runs a <see cref="Func{T,TResult}"/> delegate against the encapsulated value.
 	/// </summary>
-	/// <param name="first">The delegate to run when this instance encapsulates an instance of <typeparamref name="TFirst" /></param>
-	/// <param name="second">The delegate to run when this instance encapsulates an instance of <typeparamref name="TSecond" /></param>
-	public T Match<T>(Func<TFirst, T> first, Func<TSecond, T> second)
+	/// <param name="first">The delegate to run when this instance encapsulates a value of type <typeparamref name="T1"/>.</param>
+	/// <param name="second">The delegate to run when this instance encapsulates a value of type <typeparamref name="T2"/>.</param>
+	public T Match<T>(Func<T1?, T> first, Func<T2?, T> second)
 	{
-		switch (Tag)
+		if (first is null)
 		{
-			case 0:
-				return first(Item1);
-			case 1:
-				return second(Item2);
-			default:
-				throw new Exception($"Unrecognized tag value: {Tag}");
+			throw new ArgumentNullException(nameof(first));
 		}
+
+		if (second is null)
+		{
+			throw new ArgumentNullException(nameof(second));
+		}
+
+		return Tag switch
+		{
+			UnionTag.T1 => first(Value1),
+			UnionTag.T2 => second(Value2),
+			_ => throw new InvalidOperationException($"Unrecognized tag value: {Tag}")
+		};
 	}
 
-	public static implicit operator Union<TFirst, TSecond>(TFirst first) => new(first);
+#pragma warning disable CA2225
 
-	public static implicit operator Union<TFirst, TSecond>(TSecond second) => new(second);
+	public static implicit operator Union<T1, T2>(T1? first) => new(first);
+
+	public static implicit operator Union<T1, T2>(T2? second) => new(second);
+
+#pragma warning restore CA2225
 }

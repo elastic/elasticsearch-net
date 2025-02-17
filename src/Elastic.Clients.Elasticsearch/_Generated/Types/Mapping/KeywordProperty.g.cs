@@ -76,102 +76,102 @@ internal sealed partial class KeywordPropertyConverter : System.Text.Json.Serial
 		LocalJsonValue<bool?> propTimeSeriesDimension = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBoost.TryRead(ref reader, options, PropBoost))
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
 			{
 				continue;
 			}
 
-			if (propCopyTo.TryRead(ref reader, options, PropCopyTo, typeof(SingleOrManyFieldsMarker)))
+			if (propCopyTo.TryReadProperty(ref reader, options, PropCopyTo, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(SingleOrManyFieldsMarker))))
 			{
 				continue;
 			}
 
-			if (propDocValues.TryRead(ref reader, options, PropDocValues))
+			if (propDocValues.TryReadProperty(ref reader, options, PropDocValues, null))
 			{
 				continue;
 			}
 
-			if (propDynamic.TryRead(ref reader, options, PropDynamic))
+			if (propDynamic.TryReadProperty(ref reader, options, PropDynamic, null))
 			{
 				continue;
 			}
 
-			if (propEagerGlobalOrdinals.TryRead(ref reader, options, PropEagerGlobalOrdinals))
+			if (propEagerGlobalOrdinals.TryReadProperty(ref reader, options, PropEagerGlobalOrdinals, null))
 			{
 				continue;
 			}
 
-			if (propFields.TryRead(ref reader, options, PropFields))
+			if (propFields.TryReadProperty(ref reader, options, PropFields, null))
 			{
 				continue;
 			}
 
-			if (propIgnoreAbove.TryRead(ref reader, options, PropIgnoreAbove))
+			if (propIgnoreAbove.TryReadProperty(ref reader, options, PropIgnoreAbove, null))
 			{
 				continue;
 			}
 
-			if (propIndex.TryRead(ref reader, options, PropIndex))
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
 			{
 				continue;
 			}
 
-			if (propIndexOptions.TryRead(ref reader, options, PropIndexOptions))
+			if (propIndexOptions.TryReadProperty(ref reader, options, PropIndexOptions, null))
 			{
 				continue;
 			}
 
-			if (propMeta.TryRead(ref reader, options, PropMeta))
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static IDictionary<string, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propNormalizer.TryRead(ref reader, options, PropNormalizer))
+			if (propNormalizer.TryReadProperty(ref reader, options, PropNormalizer, null))
 			{
 				continue;
 			}
 
-			if (propNorms.TryRead(ref reader, options, PropNorms))
+			if (propNorms.TryReadProperty(ref reader, options, PropNorms, null))
 			{
 				continue;
 			}
 
-			if (propNullValue.TryRead(ref reader, options, PropNullValue))
+			if (propNullValue.TryReadProperty(ref reader, options, PropNullValue, null))
 			{
 				continue;
 			}
 
-			if (propOnScriptError.TryRead(ref reader, options, PropOnScriptError))
+			if (propOnScriptError.TryReadProperty(ref reader, options, PropOnScriptError, null))
 			{
 				continue;
 			}
 
-			if (propProperties.TryRead(ref reader, options, PropProperties))
+			if (propProperties.TryReadProperty(ref reader, options, PropProperties, null))
 			{
 				continue;
 			}
 
-			if (propScript.TryRead(ref reader, options, PropScript))
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
 			{
 				continue;
 			}
 
-			if (propSimilarity.TryRead(ref reader, options, PropSimilarity))
+			if (propSimilarity.TryReadProperty(ref reader, options, PropSimilarity, null))
 			{
 				continue;
 			}
 
-			if (propSplitQueriesOnWhitespace.TryRead(ref reader, options, PropSplitQueriesOnWhitespace))
+			if (propSplitQueriesOnWhitespace.TryReadProperty(ref reader, options, PropSplitQueriesOnWhitespace, null))
 			{
 				continue;
 			}
 
-			if (propStore.TryRead(ref reader, options, PropStore))
+			if (propStore.TryReadProperty(ref reader, options, PropStore, null))
 			{
 				continue;
 			}
 
-			if (propTimeSeriesDimension.TryRead(ref reader, options, PropTimeSeriesDimension))
+			if (propTimeSeriesDimension.TryReadProperty(ref reader, options, PropTimeSeriesDimension, null))
 			{
 				continue;
 			}
@@ -233,27 +233,27 @@ internal sealed partial class KeywordPropertyConverter : System.Text.Json.Serial
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, KeywordProperty value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBoost, value.Boost);
-		writer.WriteProperty(options, PropCopyTo, value.CopyTo, null, typeof(SingleOrManyFieldsMarker));
-		writer.WriteProperty(options, PropDocValues, value.DocValues);
-		writer.WriteProperty(options, PropDynamic, value.Dynamic);
-		writer.WriteProperty(options, PropEagerGlobalOrdinals, value.EagerGlobalOrdinals);
-		writer.WriteProperty(options, PropFields, value.Fields);
-		writer.WriteProperty(options, PropIgnoreAbove, value.IgnoreAbove);
-		writer.WriteProperty(options, PropIndex, value.Index);
-		writer.WriteProperty(options, PropIndexOptions, value.IndexOptions);
-		writer.WriteProperty(options, PropMeta, value.Meta);
-		writer.WriteProperty(options, PropNormalizer, value.Normalizer);
-		writer.WriteProperty(options, PropNorms, value.Norms);
-		writer.WriteProperty(options, PropNullValue, value.NullValue);
-		writer.WriteProperty(options, PropOnScriptError, value.OnScriptError);
-		writer.WriteProperty(options, PropProperties, value.Properties);
-		writer.WriteProperty(options, PropScript, value.Script);
-		writer.WriteProperty(options, PropSimilarity, value.Similarity);
-		writer.WriteProperty(options, PropSplitQueriesOnWhitespace, value.SplitQueriesOnWhitespace);
-		writer.WriteProperty(options, PropStore, value.Store);
-		writer.WriteProperty(options, PropTimeSeriesDimension, value.TimeSeriesDimension);
-		writer.WriteProperty(options, PropType, value.Type);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropCopyTo, value.CopyTo, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropDocValues, value.DocValues, null, null);
+		writer.WriteProperty(options, PropDynamic, value.Dynamic, null, null);
+		writer.WriteProperty(options, PropEagerGlobalOrdinals, value.EagerGlobalOrdinals, null, null);
+		writer.WriteProperty(options, PropFields, value.Fields, null, null);
+		writer.WriteProperty(options, PropIgnoreAbove, value.IgnoreAbove, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropIndexOptions, value.IndexOptions, null, null);
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropNormalizer, value.Normalizer, null, null);
+		writer.WriteProperty(options, PropNorms, value.Norms, null, null);
+		writer.WriteProperty(options, PropNullValue, value.NullValue, null, null);
+		writer.WriteProperty(options, PropOnScriptError, value.OnScriptError, null, null);
+		writer.WriteProperty(options, PropProperties, value.Properties, null, null);
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
+		writer.WriteProperty(options, PropSimilarity, value.Similarity, null, null);
+		writer.WriteProperty(options, PropSplitQueriesOnWhitespace, value.SplitQueriesOnWhitespace, null, null);
+		writer.WriteProperty(options, PropStore, value.Store, null, null);
+		writer.WriteProperty(options, PropTimeSeriesDimension, value.TimeSeriesDimension, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
 	}
 }

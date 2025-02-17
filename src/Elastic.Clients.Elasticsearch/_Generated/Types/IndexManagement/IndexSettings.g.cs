@@ -148,282 +148,282 @@ internal sealed partial class IndexSettingsConverter : System.Text.Json.Serializ
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAnalysis.TryRead(ref reader, options, PropAnalysis))
+			if (propAnalysis.TryReadProperty(ref reader, options, PropAnalysis, null))
 			{
 				continue;
 			}
 
-			if (propAnalyze.TryRead(ref reader, options, PropAnalyze))
+			if (propAnalyze.TryReadProperty(ref reader, options, PropAnalyze, null))
 			{
 				continue;
 			}
 
-			if (propAutoExpandReplicas.TryRead(ref reader, options, PropAutoExpandReplicas))
+			if (propAutoExpandReplicas.TryReadProperty(ref reader, options, PropAutoExpandReplicas, null))
 			{
 				continue;
 			}
 
-			if (propBlocks.TryRead(ref reader, options, PropBlocks))
+			if (propBlocks.TryReadProperty(ref reader, options, PropBlocks, null))
 			{
 				continue;
 			}
 
-			if (propCheckOnStartup.TryRead(ref reader, options, PropCheckOnStartup))
+			if (propCheckOnStartup.TryReadProperty(ref reader, options, PropCheckOnStartup, null))
 			{
 				continue;
 			}
 
-			if (propCodec.TryRead(ref reader, options, PropCodec))
+			if (propCodec.TryReadProperty(ref reader, options, PropCodec, null))
 			{
 				continue;
 			}
 
-			if (propCreationDate.TryRead(ref reader, options, PropCreationDate))
+			if (propCreationDate.TryReadProperty(ref reader, options, PropCreationDate, null))
 			{
 				continue;
 			}
 
-			if (propCreationDateString.TryRead(ref reader, options, PropCreationDateString))
+			if (propCreationDateString.TryReadProperty(ref reader, options, PropCreationDateString, null))
 			{
 				continue;
 			}
 
-			if (propDefaultPipeline.TryRead(ref reader, options, PropDefaultPipeline))
+			if (propDefaultPipeline.TryReadProperty(ref reader, options, PropDefaultPipeline, null))
 			{
 				continue;
 			}
 
-			if (propFinalPipeline.TryRead(ref reader, options, PropFinalPipeline))
+			if (propFinalPipeline.TryReadProperty(ref reader, options, PropFinalPipeline, null))
 			{
 				continue;
 			}
 
-			if (propFormat.TryRead(ref reader, options, PropFormat))
+			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
 			{
 				continue;
 			}
 
-			if (propGcDeletes.TryRead(ref reader, options, PropGcDeletes))
+			if (propGcDeletes.TryReadProperty(ref reader, options, PropGcDeletes, null))
 			{
 				continue;
 			}
 
-			if (propHidden.TryRead(ref reader, options, PropHidden))
+			if (propHidden.TryReadProperty(ref reader, options, PropHidden, null))
 			{
 				continue;
 			}
 
-			if (propHighlight.TryRead(ref reader, options, PropHighlight))
+			if (propHighlight.TryReadProperty(ref reader, options, PropHighlight, null))
 			{
 				continue;
 			}
 
-			if (propIndex.TryRead(ref reader, options, PropIndex))
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
 			{
 				continue;
 			}
 
-			if (propIndexingPressure.TryRead(ref reader, options, PropIndexingPressure))
+			if (propIndexingPressure.TryReadProperty(ref reader, options, PropIndexingPressure, null))
 			{
 				continue;
 			}
 
-			if (propIndexingSlowlog.TryRead(ref reader, options, PropIndexingSlowlog))
+			if (propIndexingSlowlog.TryReadProperty(ref reader, options, PropIndexingSlowlog, null))
 			{
 				continue;
 			}
 
-			if (propLifecycle.TryRead(ref reader, options, PropLifecycle))
+			if (propLifecycle.TryReadProperty(ref reader, options, PropLifecycle, null))
 			{
 				continue;
 			}
 
-			if (propLoadFixedBitsetFiltersEagerly.TryRead(ref reader, options, PropLoadFixedBitsetFiltersEagerly))
+			if (propLoadFixedBitsetFiltersEagerly.TryReadProperty(ref reader, options, PropLoadFixedBitsetFiltersEagerly, null))
 			{
 				continue;
 			}
 
-			if (propMapping.TryRead(ref reader, options, PropMapping))
+			if (propMapping.TryReadProperty(ref reader, options, PropMapping, null))
 			{
 				continue;
 			}
 
-			if (propMaxDocvalueFieldsSearch.TryRead(ref reader, options, PropMaxDocvalueFieldsSearch))
+			if (propMaxDocvalueFieldsSearch.TryReadProperty(ref reader, options, PropMaxDocvalueFieldsSearch, null))
 			{
 				continue;
 			}
 
-			if (propMaxInnerResultWindow.TryRead(ref reader, options, PropMaxInnerResultWindow))
+			if (propMaxInnerResultWindow.TryReadProperty(ref reader, options, PropMaxInnerResultWindow, null))
 			{
 				continue;
 			}
 
-			if (propMaxNgramDiff.TryRead(ref reader, options, PropMaxNgramDiff))
+			if (propMaxNgramDiff.TryReadProperty(ref reader, options, PropMaxNgramDiff, null))
 			{
 				continue;
 			}
 
-			if (propMaxRefreshListeners.TryRead(ref reader, options, PropMaxRefreshListeners))
+			if (propMaxRefreshListeners.TryReadProperty(ref reader, options, PropMaxRefreshListeners, null))
 			{
 				continue;
 			}
 
-			if (propMaxRegexLength.TryRead(ref reader, options, PropMaxRegexLength))
+			if (propMaxRegexLength.TryReadProperty(ref reader, options, PropMaxRegexLength, null))
 			{
 				continue;
 			}
 
-			if (propMaxRescoreWindow.TryRead(ref reader, options, PropMaxRescoreWindow))
+			if (propMaxRescoreWindow.TryReadProperty(ref reader, options, PropMaxRescoreWindow, null))
 			{
 				continue;
 			}
 
-			if (propMaxResultWindow.TryRead(ref reader, options, PropMaxResultWindow))
+			if (propMaxResultWindow.TryReadProperty(ref reader, options, PropMaxResultWindow, null))
 			{
 				continue;
 			}
 
-			if (propMaxScriptFields.TryRead(ref reader, options, PropMaxScriptFields))
+			if (propMaxScriptFields.TryReadProperty(ref reader, options, PropMaxScriptFields, null))
 			{
 				continue;
 			}
 
-			if (propMaxShingleDiff.TryRead(ref reader, options, PropMaxShingleDiff))
+			if (propMaxShingleDiff.TryReadProperty(ref reader, options, PropMaxShingleDiff, null))
 			{
 				continue;
 			}
 
-			if (propMaxSlicesPerScroll.TryRead(ref reader, options, PropMaxSlicesPerScroll))
+			if (propMaxSlicesPerScroll.TryReadProperty(ref reader, options, PropMaxSlicesPerScroll, null))
 			{
 				continue;
 			}
 
-			if (propMaxTermsCount.TryRead(ref reader, options, PropMaxTermsCount))
+			if (propMaxTermsCount.TryReadProperty(ref reader, options, PropMaxTermsCount, null))
 			{
 				continue;
 			}
 
-			if (propMerge.TryRead(ref reader, options, PropMerge))
+			if (propMerge.TryReadProperty(ref reader, options, PropMerge, null))
 			{
 				continue;
 			}
 
-			if (propMode.TryRead(ref reader, options, PropMode))
+			if (propMode.TryReadProperty(ref reader, options, PropMode, null))
 			{
 				continue;
 			}
 
-			if (propNumberOfReplicas.TryRead(ref reader, options, PropNumberOfReplicas))
+			if (propNumberOfReplicas.TryReadProperty(ref reader, options, PropNumberOfReplicas, null))
 			{
 				continue;
 			}
 
-			if (propNumberOfRoutingShards.TryRead(ref reader, options, PropNumberOfRoutingShards))
+			if (propNumberOfRoutingShards.TryReadProperty(ref reader, options, PropNumberOfRoutingShards, null))
 			{
 				continue;
 			}
 
-			if (propNumberOfShards.TryRead(ref reader, options, PropNumberOfShards))
+			if (propNumberOfShards.TryReadProperty(ref reader, options, PropNumberOfShards, null))
 			{
 				continue;
 			}
 
-			if (propPriority.TryRead(ref reader, options, PropPriority))
+			if (propPriority.TryReadProperty(ref reader, options, PropPriority, null))
 			{
 				continue;
 			}
 
-			if (propProvidedName.TryRead(ref reader, options, PropProvidedName))
+			if (propProvidedName.TryReadProperty(ref reader, options, PropProvidedName, null))
 			{
 				continue;
 			}
 
-			if (propQueries.TryRead(ref reader, options, PropQueries))
+			if (propQueries.TryReadProperty(ref reader, options, PropQueries, null))
 			{
 				continue;
 			}
 
-			if (propQueryString.TryRead(ref reader, options, PropQueryString))
+			if (propQueryString.TryReadProperty(ref reader, options, PropQueryString, null))
 			{
 				continue;
 			}
 
-			if (propRefreshInterval.TryRead(ref reader, options, PropRefreshInterval))
+			if (propRefreshInterval.TryReadProperty(ref reader, options, PropRefreshInterval, null))
 			{
 				continue;
 			}
 
-			if (propRouting.TryRead(ref reader, options, PropRouting))
+			if (propRouting.TryReadProperty(ref reader, options, PropRouting, null))
 			{
 				continue;
 			}
 
-			if (propRoutingPartitionSize.TryRead(ref reader, options, PropRoutingPartitionSize))
+			if (propRoutingPartitionSize.TryReadProperty(ref reader, options, PropRoutingPartitionSize, null))
 			{
 				continue;
 			}
 
-			if (propRoutingPath.TryRead(ref reader, options, PropRoutingPath, typeof(SingleOrManyMarker<ICollection<string>?, string>)))
+			if (propRoutingPath.TryReadProperty(ref reader, options, PropRoutingPath, static ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propSearch.TryRead(ref reader, options, PropSearch))
+			if (propSearch.TryReadProperty(ref reader, options, PropSearch, null))
 			{
 				continue;
 			}
 
-			if (propSettings.TryRead(ref reader, options, PropSettings))
+			if (propSettings.TryReadProperty(ref reader, options, PropSettings, null))
 			{
 				continue;
 			}
 
-			if (propSimilarity.TryRead(ref reader, options, PropSimilarity))
+			if (propSimilarity.TryReadProperty(ref reader, options, PropSimilarity, null))
 			{
 				continue;
 			}
 
-			if (propSoftDeletes.TryRead(ref reader, options, PropSoftDeletes))
+			if (propSoftDeletes.TryReadProperty(ref reader, options, PropSoftDeletes, null))
 			{
 				continue;
 			}
 
-			if (propSort.TryRead(ref reader, options, PropSort))
+			if (propSort.TryReadProperty(ref reader, options, PropSort, null))
 			{
 				continue;
 			}
 
-			if (propStore.TryRead(ref reader, options, PropStore))
+			if (propStore.TryReadProperty(ref reader, options, PropStore, null))
 			{
 				continue;
 			}
 
-			if (propTimeSeries.TryRead(ref reader, options, PropTimeSeries))
+			if (propTimeSeries.TryReadProperty(ref reader, options, PropTimeSeries, null))
 			{
 				continue;
 			}
 
-			if (propTopMetricsMaxSize.TryRead(ref reader, options, PropTopMetricsMaxSize))
+			if (propTopMetricsMaxSize.TryReadProperty(ref reader, options, PropTopMetricsMaxSize, null))
 			{
 				continue;
 			}
 
-			if (propTranslog.TryRead(ref reader, options, PropTranslog))
+			if (propTranslog.TryReadProperty(ref reader, options, PropTranslog, null))
 			{
 				continue;
 			}
 
-			if (propUuid.TryRead(ref reader, options, PropUuid))
+			if (propUuid.TryReadProperty(ref reader, options, PropUuid, null))
 			{
 				continue;
 			}
 
-			if (propVerifiedBeforeClose.TryRead(ref reader, options, PropVerifiedBeforeClose))
+			if (propVerifiedBeforeClose.TryReadProperty(ref reader, options, PropVerifiedBeforeClose, null))
 			{
 				continue;
 			}
 
-			if (propVersion.TryRead(ref reader, options, PropVersion))
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
 			{
 				continue;
 			}
@@ -555,62 +555,62 @@ internal sealed partial class IndexSettingsConverter : System.Text.Json.Serializ
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, IndexSettings value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAnalysis, value.Analysis);
-		writer.WriteProperty(options, PropAnalyze, value.Analyze);
-		writer.WriteProperty(options, PropAutoExpandReplicas, value.AutoExpandReplicas);
-		writer.WriteProperty(options, PropBlocks, value.Blocks);
-		writer.WriteProperty(options, PropCheckOnStartup, value.CheckOnStartup);
-		writer.WriteProperty(options, PropCodec, value.Codec);
-		writer.WriteProperty(options, PropCreationDate, value.CreationDate);
-		writer.WriteProperty(options, PropCreationDateString, value.CreationDateString);
-		writer.WriteProperty(options, PropDefaultPipeline, value.DefaultPipeline);
-		writer.WriteProperty(options, PropFinalPipeline, value.FinalPipeline);
-		writer.WriteProperty(options, PropFormat, value.Format);
-		writer.WriteProperty(options, PropGcDeletes, value.GcDeletes);
-		writer.WriteProperty(options, PropHidden, value.Hidden);
-		writer.WriteProperty(options, PropHighlight, value.Highlight);
-		writer.WriteProperty(options, PropIndex, value.Index);
-		writer.WriteProperty(options, PropIndexingPressure, value.IndexingPressure);
-		writer.WriteProperty(options, PropIndexingSlowlog, value.IndexingSlowlog);
-		writer.WriteProperty(options, PropLifecycle, value.Lifecycle);
-		writer.WriteProperty(options, PropLoadFixedBitsetFiltersEagerly, value.LoadFixedBitsetFiltersEagerly);
-		writer.WriteProperty(options, PropMapping, value.Mapping);
-		writer.WriteProperty(options, PropMaxDocvalueFieldsSearch, value.MaxDocvalueFieldsSearch);
-		writer.WriteProperty(options, PropMaxInnerResultWindow, value.MaxInnerResultWindow);
-		writer.WriteProperty(options, PropMaxNgramDiff, value.MaxNgramDiff);
-		writer.WriteProperty(options, PropMaxRefreshListeners, value.MaxRefreshListeners);
-		writer.WriteProperty(options, PropMaxRegexLength, value.MaxRegexLength);
-		writer.WriteProperty(options, PropMaxRescoreWindow, value.MaxRescoreWindow);
-		writer.WriteProperty(options, PropMaxResultWindow, value.MaxResultWindow);
-		writer.WriteProperty(options, PropMaxScriptFields, value.MaxScriptFields);
-		writer.WriteProperty(options, PropMaxShingleDiff, value.MaxShingleDiff);
-		writer.WriteProperty(options, PropMaxSlicesPerScroll, value.MaxSlicesPerScroll);
-		writer.WriteProperty(options, PropMaxTermsCount, value.MaxTermsCount);
-		writer.WriteProperty(options, PropMerge, value.Merge);
-		writer.WriteProperty(options, PropMode, value.Mode);
-		writer.WriteProperty(options, PropNumberOfReplicas, value.NumberOfReplicas);
-		writer.WriteProperty(options, PropNumberOfRoutingShards, value.NumberOfRoutingShards);
-		writer.WriteProperty(options, PropNumberOfShards, value.NumberOfShards);
-		writer.WriteProperty(options, PropPriority, value.Priority);
-		writer.WriteProperty(options, PropProvidedName, value.ProvidedName);
-		writer.WriteProperty(options, PropQueries, value.Queries);
-		writer.WriteProperty(options, PropQueryString, value.QueryString);
-		writer.WriteProperty(options, PropRefreshInterval, value.RefreshInterval);
-		writer.WriteProperty(options, PropRouting, value.Routing);
-		writer.WriteProperty(options, PropRoutingPartitionSize, value.RoutingPartitionSize);
-		writer.WriteProperty(options, PropRoutingPath, value.RoutingPath, null, typeof(SingleOrManyMarker<ICollection<string>?, string>));
-		writer.WriteProperty(options, PropSearch, value.Search);
-		writer.WriteProperty(options, PropSettings, value.Settings);
-		writer.WriteProperty(options, PropSimilarity, value.Similarity);
-		writer.WriteProperty(options, PropSoftDeletes, value.SoftDeletes);
-		writer.WriteProperty(options, PropSort, value.Sort);
-		writer.WriteProperty(options, PropStore, value.Store);
-		writer.WriteProperty(options, PropTimeSeries, value.TimeSeries);
-		writer.WriteProperty(options, PropTopMetricsMaxSize, value.TopMetricsMaxSize);
-		writer.WriteProperty(options, PropTranslog, value.Translog);
-		writer.WriteProperty(options, PropUuid, value.Uuid);
-		writer.WriteProperty(options, PropVerifiedBeforeClose, value.VerifiedBeforeClose);
-		writer.WriteProperty(options, PropVersion, value.Version);
+		writer.WriteProperty(options, PropAnalysis, value.Analysis, null, null);
+		writer.WriteProperty(options, PropAnalyze, value.Analyze, null, null);
+		writer.WriteProperty(options, PropAutoExpandReplicas, value.AutoExpandReplicas, null, null);
+		writer.WriteProperty(options, PropBlocks, value.Blocks, null, null);
+		writer.WriteProperty(options, PropCheckOnStartup, value.CheckOnStartup, null, null);
+		writer.WriteProperty(options, PropCodec, value.Codec, null, null);
+		writer.WriteProperty(options, PropCreationDate, value.CreationDate, null, null);
+		writer.WriteProperty(options, PropCreationDateString, value.CreationDateString, null, null);
+		writer.WriteProperty(options, PropDefaultPipeline, value.DefaultPipeline, null, null);
+		writer.WriteProperty(options, PropFinalPipeline, value.FinalPipeline, null, null);
+		writer.WriteProperty(options, PropFormat, value.Format, null, null);
+		writer.WriteProperty(options, PropGcDeletes, value.GcDeletes, null, null);
+		writer.WriteProperty(options, PropHidden, value.Hidden, null, null);
+		writer.WriteProperty(options, PropHighlight, value.Highlight, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropIndexingPressure, value.IndexingPressure, null, null);
+		writer.WriteProperty(options, PropIndexingSlowlog, value.IndexingSlowlog, null, null);
+		writer.WriteProperty(options, PropLifecycle, value.Lifecycle, null, null);
+		writer.WriteProperty(options, PropLoadFixedBitsetFiltersEagerly, value.LoadFixedBitsetFiltersEagerly, null, null);
+		writer.WriteProperty(options, PropMapping, value.Mapping, null, null);
+		writer.WriteProperty(options, PropMaxDocvalueFieldsSearch, value.MaxDocvalueFieldsSearch, null, null);
+		writer.WriteProperty(options, PropMaxInnerResultWindow, value.MaxInnerResultWindow, null, null);
+		writer.WriteProperty(options, PropMaxNgramDiff, value.MaxNgramDiff, null, null);
+		writer.WriteProperty(options, PropMaxRefreshListeners, value.MaxRefreshListeners, null, null);
+		writer.WriteProperty(options, PropMaxRegexLength, value.MaxRegexLength, null, null);
+		writer.WriteProperty(options, PropMaxRescoreWindow, value.MaxRescoreWindow, null, null);
+		writer.WriteProperty(options, PropMaxResultWindow, value.MaxResultWindow, null, null);
+		writer.WriteProperty(options, PropMaxScriptFields, value.MaxScriptFields, null, null);
+		writer.WriteProperty(options, PropMaxShingleDiff, value.MaxShingleDiff, null, null);
+		writer.WriteProperty(options, PropMaxSlicesPerScroll, value.MaxSlicesPerScroll, null, null);
+		writer.WriteProperty(options, PropMaxTermsCount, value.MaxTermsCount, null, null);
+		writer.WriteProperty(options, PropMerge, value.Merge, null, null);
+		writer.WriteProperty(options, PropMode, value.Mode, null, null);
+		writer.WriteProperty(options, PropNumberOfReplicas, value.NumberOfReplicas, null, null);
+		writer.WriteProperty(options, PropNumberOfRoutingShards, value.NumberOfRoutingShards, null, null);
+		writer.WriteProperty(options, PropNumberOfShards, value.NumberOfShards, null, null);
+		writer.WriteProperty(options, PropPriority, value.Priority, null, null);
+		writer.WriteProperty(options, PropProvidedName, value.ProvidedName, null, null);
+		writer.WriteProperty(options, PropQueries, value.Queries, null, null);
+		writer.WriteProperty(options, PropQueryString, value.QueryString, null, null);
+		writer.WriteProperty(options, PropRefreshInterval, value.RefreshInterval, null, null);
+		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
+		writer.WriteProperty(options, PropRoutingPartitionSize, value.RoutingPartitionSize, null, null);
+		writer.WriteProperty(options, PropRoutingPath, value.RoutingPath, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropSearch, value.Search, null, null);
+		writer.WriteProperty(options, PropSettings, value.Settings, null, null);
+		writer.WriteProperty(options, PropSimilarity, value.Similarity, null, null);
+		writer.WriteProperty(options, PropSoftDeletes, value.SoftDeletes, null, null);
+		writer.WriteProperty(options, PropSort, value.Sort, null, null);
+		writer.WriteProperty(options, PropStore, value.Store, null, null);
+		writer.WriteProperty(options, PropTimeSeries, value.TimeSeries, null, null);
+		writer.WriteProperty(options, PropTopMetricsMaxSize, value.TopMetricsMaxSize, null, null);
+		writer.WriteProperty(options, PropTranslog, value.Translog, null, null);
+		writer.WriteProperty(options, PropUuid, value.Uuid, null, null);
+		writer.WriteProperty(options, PropVerifiedBeforeClose, value.VerifiedBeforeClose, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		if (value.OtherSettings is not null)
 		{
 			foreach (var item in value.OtherSettings)

@@ -43,22 +43,22 @@ internal sealed partial class IndicesOptionsConverter : System.Text.Json.Seriali
 		LocalJsonValue<bool?> propIgnoreUnavailable = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAllowNoIndices.TryRead(ref reader, options, PropAllowNoIndices))
+			if (propAllowNoIndices.TryReadProperty(ref reader, options, PropAllowNoIndices, null))
 			{
 				continue;
 			}
 
-			if (propExpandWildcards.TryRead(ref reader, options, PropExpandWildcards, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?, Elastic.Clients.Elasticsearch.ExpandWildcard>)))
+			if (propExpandWildcards.TryReadProperty(ref reader, options, PropExpandWildcards, static ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.ExpandWildcard>(o, null)))
 			{
 				continue;
 			}
 
-			if (propIgnoreThrottled.TryRead(ref reader, options, PropIgnoreThrottled))
+			if (propIgnoreThrottled.TryReadProperty(ref reader, options, PropIgnoreThrottled, null))
 			{
 				continue;
 			}
 
-			if (propIgnoreUnavailable.TryRead(ref reader, options, PropIgnoreUnavailable))
+			if (propIgnoreUnavailable.TryReadProperty(ref reader, options, PropIgnoreUnavailable, null))
 			{
 				continue;
 			}
@@ -82,10 +82,10 @@ internal sealed partial class IndicesOptionsConverter : System.Text.Json.Seriali
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, IndicesOptions value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAllowNoIndices, value.AllowNoIndices);
-		writer.WriteProperty(options, PropExpandWildcards, value.ExpandWildcards, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?, Elastic.Clients.Elasticsearch.ExpandWildcard>));
-		writer.WriteProperty(options, PropIgnoreThrottled, value.IgnoreThrottled);
-		writer.WriteProperty(options, PropIgnoreUnavailable, value.IgnoreUnavailable);
+		writer.WriteProperty(options, PropAllowNoIndices, value.AllowNoIndices, null, null);
+		writer.WriteProperty(options, PropExpandWildcards, value.ExpandWildcards, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.ExpandWildcard>(o, v, null));
+		writer.WriteProperty(options, PropIgnoreThrottled, value.IgnoreThrottled, null, null);
+		writer.WriteProperty(options, PropIgnoreUnavailable, value.IgnoreUnavailable, null, null);
 		writer.WriteEndObject();
 	}
 }

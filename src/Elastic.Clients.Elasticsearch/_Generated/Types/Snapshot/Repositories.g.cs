@@ -97,7 +97,7 @@ internal sealed partial class RepositoryInterfaceConverter : System.Text.Json.Se
 		string? discriminator = null;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TryReadProperty(options, PropDiscriminator, ref discriminator))
+			if (reader.TryReadProperty(options, PropDiscriminator, ref discriminator, null))
 			{
 				break;
 			}
@@ -108,12 +108,12 @@ internal sealed partial class RepositoryInterfaceConverter : System.Text.Json.Se
 		reader = readerSnapshot;
 		return discriminator switch
 		{
-			"azure" => reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.AzureRepository>(options),
-			"gcs" => reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.GcsRepository>(options),
-			"url" => reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepository>(options),
-			"s3" => reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.S3Repository>(options),
-			"fs" => reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.SharedFileSystemRepository>(options),
-			"source" => reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepository>(options),
+			"azure" => reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.AzureRepository>(options, null),
+			"gcs" => reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.GcsRepository>(options, null),
+			"url" => reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepository>(options, null),
+			"s3" => reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.S3Repository>(options, null),
+			"fs" => reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.SharedFileSystemRepository>(options, null),
+			"source" => reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepository>(options, null),
 			_ => throw new System.Text.Json.JsonException($"Variant '{discriminator}' is not supported for type '{nameof(IRepository)}'.")
 		};
 	}
@@ -123,22 +123,22 @@ internal sealed partial class RepositoryInterfaceConverter : System.Text.Json.Se
 		switch (value.Type)
 		{
 			case "azure":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Snapshot.AzureRepository)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Snapshot.AzureRepository)value, null);
 				break;
 			case "gcs":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Snapshot.GcsRepository)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Snapshot.GcsRepository)value, null);
 				break;
 			case "url":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepository)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepository)value, null);
 				break;
 			case "s3":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Snapshot.S3Repository)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Snapshot.S3Repository)value, null);
 				break;
 			case "fs":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Snapshot.SharedFileSystemRepository)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Snapshot.SharedFileSystemRepository)value, null);
 				break;
 			case "source":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepository)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepository)value, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.Type}' is not supported for type '{nameof(IRepository)}'.");

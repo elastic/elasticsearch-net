@@ -42,17 +42,17 @@ internal sealed partial class CloseIndexResponseConverter : System.Text.Json.Ser
 		LocalJsonValue<bool> propShardsAcknowledged = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAcknowledged.TryRead(ref reader, options, PropAcknowledged))
+			if (propAcknowledged.TryReadProperty(ref reader, options, PropAcknowledged, null))
 			{
 				continue;
 			}
 
-			if (propIndices.TryRead(ref reader, options, PropIndices))
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, static IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResult> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResult>(o, null, null)!))
 			{
 				continue;
 			}
 
-			if (propShardsAcknowledged.TryRead(ref reader, options, PropShardsAcknowledged))
+			if (propShardsAcknowledged.TryReadProperty(ref reader, options, PropShardsAcknowledged, null))
 			{
 				continue;
 			}
@@ -74,9 +74,9 @@ internal sealed partial class CloseIndexResponseConverter : System.Text.Json.Ser
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, CloseIndexResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged);
-		writer.WriteProperty(options, PropIndices, value.Indices);
-		writer.WriteProperty(options, PropShardsAcknowledged, value.ShardsAcknowledged);
+		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged, null, null);
+		writer.WriteProperty(options, PropIndices, value.Indices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResult> v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResult>(o, v, null, null));
+		writer.WriteProperty(options, PropShardsAcknowledged, value.ShardsAcknowledged, null, null);
 		writer.WriteEndObject();
 	}
 }

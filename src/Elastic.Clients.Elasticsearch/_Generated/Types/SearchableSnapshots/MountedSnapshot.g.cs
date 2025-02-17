@@ -41,17 +41,17 @@ internal sealed partial class MountedSnapshotConverter : System.Text.Json.Serial
 		LocalJsonValue<string> propSnapshot = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propIndices.TryRead(ref reader, options, PropIndices, typeof(SingleOrManyMarker<IReadOnlyCollection<string>, string>)))
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propShards.TryRead(ref reader, options, PropShards))
+			if (propShards.TryReadProperty(ref reader, options, PropShards, null))
 			{
 				continue;
 			}
 
-			if (propSnapshot.TryRead(ref reader, options, PropSnapshot))
+			if (propSnapshot.TryReadProperty(ref reader, options, PropSnapshot, null))
 			{
 				continue;
 			}
@@ -73,9 +73,9 @@ internal sealed partial class MountedSnapshotConverter : System.Text.Json.Serial
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, MountedSnapshot value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropIndices, value.Indices, null, typeof(SingleOrManyMarker<IReadOnlyCollection<string>, string>));
-		writer.WriteProperty(options, PropShards, value.Shards);
-		writer.WriteProperty(options, PropSnapshot, value.Snapshot);
+		writer.WriteProperty(options, PropIndices, value.Indices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropShards, value.Shards, null, null);
+		writer.WriteProperty(options, PropSnapshot, value.Snapshot, null, null);
 		writer.WriteEndObject();
 	}
 }

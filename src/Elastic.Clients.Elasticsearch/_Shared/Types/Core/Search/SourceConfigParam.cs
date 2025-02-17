@@ -16,12 +16,10 @@ public partial class SourceConfigParam :
 #endif
 {
 	public string GetString(ITransportConfiguration settings) =>
-		Tag switch
-		{
-			0 => UrlFormatter.CreateString(Item1, settings)!,
-			1 => UrlFormatter.CreateString(Item2, settings)!,
-			_ => throw new InvalidOperationException()
-		};
+		Match(
+			v => UrlFormatter.CreateString(v, settings),
+			v => UrlFormatter.CreateString(v, settings)
+		);
 
 	#region IParsable
 

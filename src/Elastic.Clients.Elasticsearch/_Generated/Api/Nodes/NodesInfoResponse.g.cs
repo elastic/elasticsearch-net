@@ -42,17 +42,17 @@ internal sealed partial class NodesInfoResponseConverter : System.Text.Json.Seri
 		LocalJsonValue<Elastic.Clients.Elasticsearch.NodeStatistics?> propNodeStats = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propClusterName.TryRead(ref reader, options, PropClusterName))
+			if (propClusterName.TryReadProperty(ref reader, options, PropClusterName, null))
 			{
 				continue;
 			}
 
-			if (propNodes.TryRead(ref reader, options, PropNodes))
+			if (propNodes.TryReadProperty(ref reader, options, PropNodes, static IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeInfo> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.NodeInfo>(o, null, null)!))
 			{
 				continue;
 			}
 
-			if (propNodeStats.TryRead(ref reader, options, PropNodeStats))
+			if (propNodeStats.TryReadProperty(ref reader, options, PropNodeStats, null))
 			{
 				continue;
 			}
@@ -74,9 +74,9 @@ internal sealed partial class NodesInfoResponseConverter : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, NodesInfoResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropClusterName, value.ClusterName);
-		writer.WriteProperty(options, PropNodes, value.Nodes);
-		writer.WriteProperty(options, PropNodeStats, value.NodeStats);
+		writer.WriteProperty(options, PropClusterName, value.ClusterName, null, null);
+		writer.WriteProperty(options, PropNodes, value.Nodes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeInfo> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.NodeInfo>(o, v, null, null));
+		writer.WriteProperty(options, PropNodeStats, value.NodeStats, null, null);
 		writer.WriteEndObject();
 	}
 }

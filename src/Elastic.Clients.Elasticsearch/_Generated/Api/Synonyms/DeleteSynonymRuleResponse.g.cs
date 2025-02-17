@@ -40,12 +40,12 @@ internal sealed partial class DeleteSynonymRuleResponseConverter : System.Text.J
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Result> propResult = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propReloadAnalyzersDetails.TryRead(ref reader, options, PropReloadAnalyzersDetails))
+			if (propReloadAnalyzersDetails.TryReadProperty(ref reader, options, PropReloadAnalyzersDetails, null))
 			{
 				continue;
 			}
 
-			if (propResult.TryRead(ref reader, options, PropResult))
+			if (propResult.TryReadProperty(ref reader, options, PropResult, null))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class DeleteSynonymRuleResponseConverter : System.Text.J
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, DeleteSynonymRuleResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropReloadAnalyzersDetails, value.ReloadAnalyzersDetails);
-		writer.WriteProperty(options, PropResult, value.Result);
+		writer.WriteProperty(options, PropReloadAnalyzersDetails, value.ReloadAnalyzersDetails, null, null);
+		writer.WriteProperty(options, PropResult, value.Result, null, null);
 		writer.WriteEndObject();
 	}
 }

@@ -46,27 +46,27 @@ internal sealed partial class InferenceAggregateConverter : System.Text.Json.Ser
 		LocalJsonValue<string?> propWarning = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propFeatureImportance.TryRead(ref reader, options, PropFeatureImportance))
+			if (propFeatureImportance.TryReadProperty(ref reader, options, PropFeatureImportance, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.InferenceFeatureImportance>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.InferenceFeatureImportance>(o, null)))
 			{
 				continue;
 			}
 
-			if (propMeta.TryRead(ref reader, options, PropMeta))
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static IReadOnlyDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propTopClasses.TryRead(ref reader, options, PropTopClasses))
+			if (propTopClasses.TryReadProperty(ref reader, options, PropTopClasses, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.InferenceTopClassEntry>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.InferenceTopClassEntry>(o, null)))
 			{
 				continue;
 			}
 
-			if (propValue.TryRead(ref reader, options, PropValue))
+			if (propValue.TryReadProperty(ref reader, options, PropValue, null))
 			{
 				continue;
 			}
 
-			if (propWarning.TryRead(ref reader, options, PropWarning))
+			if (propWarning.TryReadProperty(ref reader, options, PropWarning, null))
 			{
 				continue;
 			}
@@ -96,11 +96,11 @@ internal sealed partial class InferenceAggregateConverter : System.Text.Json.Ser
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, InferenceAggregate value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFeatureImportance, value.FeatureImportance);
-		writer.WriteProperty(options, PropMeta, value.Meta);
-		writer.WriteProperty(options, PropTopClasses, value.TopClasses);
-		writer.WriteProperty(options, PropValue, value.Value);
-		writer.WriteProperty(options, PropWarning, value.Warning);
+		writer.WriteProperty(options, PropFeatureImportance, value.FeatureImportance, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.InferenceFeatureImportance>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.InferenceFeatureImportance>(o, v, null));
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropTopClasses, value.TopClasses, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.InferenceTopClassEntry>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.InferenceTopClassEntry>(o, v, null));
+		writer.WriteProperty(options, PropValue, value.Value, null, null);
+		writer.WriteProperty(options, PropWarning, value.Warning, null, null);
 		if (value.Data is not null)
 		{
 			foreach (var item in value.Data)

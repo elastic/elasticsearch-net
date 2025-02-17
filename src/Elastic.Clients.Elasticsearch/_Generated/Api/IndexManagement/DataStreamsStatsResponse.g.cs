@@ -48,32 +48,32 @@ internal sealed partial class DataStreamsStatsResponseConverter : System.Text.Js
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propTotalStoreSizes = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBackingIndices.TryRead(ref reader, options, PropBackingIndices))
+			if (propBackingIndices.TryReadProperty(ref reader, options, PropBackingIndices, null))
 			{
 				continue;
 			}
 
-			if (propDataStreamCount.TryRead(ref reader, options, PropDataStreamCount))
+			if (propDataStreamCount.TryReadProperty(ref reader, options, PropDataStreamCount, null))
 			{
 				continue;
 			}
 
-			if (propDataStreams.TryRead(ref reader, options, PropDataStreams))
+			if (propDataStreams.TryReadProperty(ref reader, options, PropDataStreams, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsItem> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsItem>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propShards.TryRead(ref reader, options, PropShards))
+			if (propShards.TryReadProperty(ref reader, options, PropShards, null))
 			{
 				continue;
 			}
 
-			if (propTotalStoreSizeBytes.TryRead(ref reader, options, PropTotalStoreSizeBytes))
+			if (propTotalStoreSizeBytes.TryReadProperty(ref reader, options, PropTotalStoreSizeBytes, null))
 			{
 				continue;
 			}
 
-			if (propTotalStoreSizes.TryRead(ref reader, options, PropTotalStoreSizes))
+			if (propTotalStoreSizes.TryReadProperty(ref reader, options, PropTotalStoreSizes, null))
 			{
 				continue;
 			}
@@ -101,12 +101,12 @@ internal sealed partial class DataStreamsStatsResponseConverter : System.Text.Js
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, DataStreamsStatsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBackingIndices, value.BackingIndices);
-		writer.WriteProperty(options, PropDataStreamCount, value.DataStreamCount);
-		writer.WriteProperty(options, PropDataStreams, value.DataStreams);
-		writer.WriteProperty(options, PropShards, value.Shards);
-		writer.WriteProperty(options, PropTotalStoreSizeBytes, value.TotalStoreSizeBytes);
-		writer.WriteProperty(options, PropTotalStoreSizes, value.TotalStoreSizes);
+		writer.WriteProperty(options, PropBackingIndices, value.BackingIndices, null, null);
+		writer.WriteProperty(options, PropDataStreamCount, value.DataStreamCount, null, null);
+		writer.WriteProperty(options, PropDataStreams, value.DataStreams, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsItem> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsItem>(o, v, null));
+		writer.WriteProperty(options, PropShards, value.Shards, null, null);
+		writer.WriteProperty(options, PropTotalStoreSizeBytes, value.TotalStoreSizeBytes, null, null);
+		writer.WriteProperty(options, PropTotalStoreSizes, value.TotalStoreSizes, null, null);
 		writer.WriteEndObject();
 	}
 }

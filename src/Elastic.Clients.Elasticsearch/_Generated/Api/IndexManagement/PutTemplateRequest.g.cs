@@ -70,32 +70,32 @@ internal sealed partial class PutTemplateRequestConverter : System.Text.Json.Ser
 		LocalJsonValue<long?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAliases.TryRead(ref reader, options, PropAliases))
+			if (propAliases.TryReadProperty(ref reader, options, PropAliases, static IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propIndexPatterns.TryRead(ref reader, options, PropIndexPatterns, typeof(SingleOrManyMarker<ICollection<string>?, string>)))
+			if (propIndexPatterns.TryReadProperty(ref reader, options, PropIndexPatterns, static ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propMappings.TryRead(ref reader, options, PropMappings))
+			if (propMappings.TryReadProperty(ref reader, options, PropMappings, null))
 			{
 				continue;
 			}
 
-			if (propOrder.TryRead(ref reader, options, PropOrder))
+			if (propOrder.TryReadProperty(ref reader, options, PropOrder, null))
 			{
 				continue;
 			}
 
-			if (propSettings.TryRead(ref reader, options, PropSettings))
+			if (propSettings.TryReadProperty(ref reader, options, PropSettings, null))
 			{
 				continue;
 			}
 
-			if (propVersion.TryRead(ref reader, options, PropVersion))
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
 			{
 				continue;
 			}
@@ -123,12 +123,12 @@ internal sealed partial class PutTemplateRequestConverter : System.Text.Json.Ser
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, PutTemplateRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAliases, value.Aliases);
-		writer.WriteProperty(options, PropIndexPatterns, value.IndexPatterns, null, typeof(SingleOrManyMarker<ICollection<string>?, string>));
-		writer.WriteProperty(options, PropMappings, value.Mappings);
-		writer.WriteProperty(options, PropOrder, value.Order);
-		writer.WriteProperty(options, PropSettings, value.Settings);
-		writer.WriteProperty(options, PropVersion, value.Version);
+		writer.WriteProperty(options, PropAliases, value.Aliases, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>(o, v, null, null));
+		writer.WriteProperty(options, PropIndexPatterns, value.IndexPatterns, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropMappings, value.Mappings, null, null);
+		writer.WriteProperty(options, PropOrder, value.Order, null, null);
+		writer.WriteProperty(options, PropSettings, value.Settings, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();
 	}
 }

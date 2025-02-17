@@ -42,17 +42,17 @@ internal sealed partial class PutCalendarResponseConverter : System.Text.Json.Se
 		LocalJsonValue<IReadOnlyCollection<string>> propJobIds = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCalendarId.TryRead(ref reader, options, PropCalendarId))
+			if (propCalendarId.TryReadProperty(ref reader, options, PropCalendarId, null))
 			{
 				continue;
 			}
 
-			if (propDescription.TryRead(ref reader, options, PropDescription))
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
 			{
 				continue;
 			}
 
-			if (propJobIds.TryRead(ref reader, options, PropJobIds, typeof(SingleOrManyMarker<IReadOnlyCollection<string>, string>)))
+			if (propJobIds.TryReadProperty(ref reader, options, PropJobIds, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
@@ -74,9 +74,9 @@ internal sealed partial class PutCalendarResponseConverter : System.Text.Json.Se
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, PutCalendarResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCalendarId, value.CalendarId);
-		writer.WriteProperty(options, PropDescription, value.Description);
-		writer.WriteProperty(options, PropJobIds, value.JobIds, null, typeof(SingleOrManyMarker<IReadOnlyCollection<string>, string>));
+		writer.WriteProperty(options, PropCalendarId, value.CalendarId, null, null);
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropJobIds, value.JobIds, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

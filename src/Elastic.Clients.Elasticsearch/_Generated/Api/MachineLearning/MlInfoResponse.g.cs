@@ -44,22 +44,22 @@ internal sealed partial class MlInfoResponseConverter : System.Text.Json.Seriali
 		LocalJsonValue<bool> propUpgradeMode = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDefaults.TryRead(ref reader, options, PropDefaults))
+			if (propDefaults.TryReadProperty(ref reader, options, PropDefaults, null))
 			{
 				continue;
 			}
 
-			if (propLimits.TryRead(ref reader, options, PropLimits))
+			if (propLimits.TryReadProperty(ref reader, options, PropLimits, null))
 			{
 				continue;
 			}
 
-			if (propNativeCode.TryRead(ref reader, options, PropNativeCode))
+			if (propNativeCode.TryReadProperty(ref reader, options, PropNativeCode, null))
 			{
 				continue;
 			}
 
-			if (propUpgradeMode.TryRead(ref reader, options, PropUpgradeMode))
+			if (propUpgradeMode.TryReadProperty(ref reader, options, PropUpgradeMode, null))
 			{
 				continue;
 			}
@@ -83,10 +83,10 @@ internal sealed partial class MlInfoResponseConverter : System.Text.Json.Seriali
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, MlInfoResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDefaults, value.Defaults);
-		writer.WriteProperty(options, PropLimits, value.Limits);
-		writer.WriteProperty(options, PropNativeCode, value.NativeCode);
-		writer.WriteProperty(options, PropUpgradeMode, value.UpgradeMode);
+		writer.WriteProperty(options, PropDefaults, value.Defaults, null, null);
+		writer.WriteProperty(options, PropLimits, value.Limits, null, null);
+		writer.WriteProperty(options, PropNativeCode, value.NativeCode, null, null);
+		writer.WriteProperty(options, PropUpgradeMode, value.UpgradeMode, null, null);
 		writer.WriteEndObject();
 	}
 }

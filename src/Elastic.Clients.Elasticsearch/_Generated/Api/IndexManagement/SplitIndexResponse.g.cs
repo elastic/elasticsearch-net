@@ -42,17 +42,17 @@ internal sealed partial class SplitIndexResponseConverter : System.Text.Json.Ser
 		LocalJsonValue<bool> propShardsAcknowledged = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAcknowledged.TryRead(ref reader, options, PropAcknowledged))
+			if (propAcknowledged.TryReadProperty(ref reader, options, PropAcknowledged, null))
 			{
 				continue;
 			}
 
-			if (propIndex.TryRead(ref reader, options, PropIndex))
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
 			{
 				continue;
 			}
 
-			if (propShardsAcknowledged.TryRead(ref reader, options, PropShardsAcknowledged))
+			if (propShardsAcknowledged.TryReadProperty(ref reader, options, PropShardsAcknowledged, null))
 			{
 				continue;
 			}
@@ -74,9 +74,9 @@ internal sealed partial class SplitIndexResponseConverter : System.Text.Json.Ser
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, SplitIndexResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged);
-		writer.WriteProperty(options, PropIndex, value.Index);
-		writer.WriteProperty(options, PropShardsAcknowledged, value.ShardsAcknowledged);
+		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropShardsAcknowledged, value.ShardsAcknowledged, null, null);
 		writer.WriteEndObject();
 	}
 }

@@ -38,7 +38,7 @@ internal sealed partial class GetInferenceResponseConverter : System.Text.Json.S
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.InferenceEndpointInfo>> propEndpoints = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propEndpoints.TryRead(ref reader, options, PropEndpoints))
+			if (propEndpoints.TryReadProperty(ref reader, options, PropEndpoints, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.InferenceEndpointInfo> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Inference.InferenceEndpointInfo>(o, null)!))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class GetInferenceResponseConverter : System.Text.Json.S
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetInferenceResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropEndpoints, value.Endpoints);
+		writer.WriteProperty(options, PropEndpoints, value.Endpoints, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.InferenceEndpointInfo> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Inference.InferenceEndpointInfo>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

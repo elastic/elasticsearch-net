@@ -41,17 +41,17 @@ internal sealed partial class MatrixStatsAggregationConverter : System.Text.Json
 		LocalJsonValue<Elastic.Clients.Elasticsearch.SortMode?> propMode = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propFields.TryRead(ref reader, options, PropFields, typeof(SingleOrManyFieldsMarker)))
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(SingleOrManyFieldsMarker))))
 			{
 				continue;
 			}
 
-			if (propMissing.TryRead(ref reader, options, PropMissing))
+			if (propMissing.TryReadProperty(ref reader, options, PropMissing, static IDictionary<Elastic.Clients.Elasticsearch.Field, double>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Field, double>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propMode.TryRead(ref reader, options, PropMode))
+			if (propMode.TryReadProperty(ref reader, options, PropMode, null))
 			{
 				continue;
 			}
@@ -73,9 +73,9 @@ internal sealed partial class MatrixStatsAggregationConverter : System.Text.Json
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, MatrixStatsAggregation value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFields, value.Fields, null, typeof(SingleOrManyFieldsMarker));
-		writer.WriteProperty(options, PropMissing, value.Missing);
-		writer.WriteProperty(options, PropMode, value.Mode);
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropMissing, value.Missing, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IDictionary<Elastic.Clients.Elasticsearch.Field, double>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, double>(o, v, null, null));
+		writer.WriteProperty(options, PropMode, value.Mode, null, null);
 		writer.WriteEndObject();
 	}
 }

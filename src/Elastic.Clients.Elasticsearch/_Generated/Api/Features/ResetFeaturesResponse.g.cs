@@ -38,7 +38,7 @@ internal sealed partial class ResetFeaturesResponseConverter : System.Text.Json.
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Features.Feature>> propFeatures = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propFeatures.TryRead(ref reader, options, PropFeatures))
+			if (propFeatures.TryReadProperty(ref reader, options, PropFeatures, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Features.Feature> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Features.Feature>(o, null)!))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class ResetFeaturesResponseConverter : System.Text.Json.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ResetFeaturesResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFeatures, value.Features);
+		writer.WriteProperty(options, PropFeatures, value.Features, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Features.Feature> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Features.Feature>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

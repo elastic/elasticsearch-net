@@ -40,12 +40,12 @@ internal sealed partial class GetDatafeedStatsResponseConverter : System.Text.Js
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DatafeedStats>> propDatafeeds = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCount.TryRead(ref reader, options, PropCount))
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
 			{
 				continue;
 			}
 
-			if (propDatafeeds.TryRead(ref reader, options, PropDatafeeds))
+			if (propDatafeeds.TryReadProperty(ref reader, options, PropDatafeeds, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DatafeedStats> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.DatafeedStats>(o, null)!))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class GetDatafeedStatsResponseConverter : System.Text.Js
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetDatafeedStatsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCount, value.Count);
-		writer.WriteProperty(options, PropDatafeeds, value.Datafeeds);
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropDatafeeds, value.Datafeeds, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DatafeedStats> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.DatafeedStats>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

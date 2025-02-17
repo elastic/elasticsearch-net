@@ -55,52 +55,52 @@ internal sealed partial class HistogramAggregationConverter : System.Text.Json.S
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propExtendedBounds.TryRead(ref reader, options, PropExtendedBounds))
+			if (propExtendedBounds.TryReadProperty(ref reader, options, PropExtendedBounds, null))
 			{
 				continue;
 			}
 
-			if (propField.TryRead(ref reader, options, PropField))
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
 			{
 				continue;
 			}
 
-			if (propFormat.TryRead(ref reader, options, PropFormat))
+			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
 			{
 				continue;
 			}
 
-			if (propHardBounds.TryRead(ref reader, options, PropHardBounds))
+			if (propHardBounds.TryReadProperty(ref reader, options, PropHardBounds, null))
 			{
 				continue;
 			}
 
-			if (propInterval.TryRead(ref reader, options, PropInterval))
+			if (propInterval.TryReadProperty(ref reader, options, PropInterval, null))
 			{
 				continue;
 			}
 
-			if (propMinDocCount.TryRead(ref reader, options, PropMinDocCount))
+			if (propMinDocCount.TryReadProperty(ref reader, options, PropMinDocCount, null))
 			{
 				continue;
 			}
 
-			if (propMissing.TryRead(ref reader, options, PropMissing))
+			if (propMissing.TryReadProperty(ref reader, options, PropMissing, null))
 			{
 				continue;
 			}
 
-			if (propOffset.TryRead(ref reader, options, PropOffset))
+			if (propOffset.TryReadProperty(ref reader, options, PropOffset, null))
 			{
 				continue;
 			}
 
-			if (propOrder.TryRead(ref reader, options, PropOrder, typeof(SingleOrManyMarker<ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>?, KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>)))
+			if (propOrder.TryReadProperty(ref reader, options, PropOrder, static ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(o, null)))
 			{
 				continue;
 			}
 
-			if (propScript.TryRead(ref reader, options, PropScript))
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
 			{
 				continue;
 			}
@@ -136,16 +136,16 @@ internal sealed partial class HistogramAggregationConverter : System.Text.Json.S
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, HistogramAggregation value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropExtendedBounds, value.ExtendedBounds);
-		writer.WriteProperty(options, PropField, value.Field);
-		writer.WriteProperty(options, PropFormat, value.Format);
-		writer.WriteProperty(options, PropHardBounds, value.HardBounds);
-		writer.WriteProperty(options, PropInterval, value.Interval);
-		writer.WriteProperty(options, PropMinDocCount, value.MinDocCount);
-		writer.WriteProperty(options, PropMissing, value.Missing);
-		writer.WriteProperty(options, PropOffset, value.Offset);
-		writer.WriteProperty(options, PropOrder, value.Order, null, typeof(SingleOrManyMarker<ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>?, KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>));
-		writer.WriteProperty(options, PropScript, value.Script);
+		writer.WriteProperty(options, PropExtendedBounds, value.ExtendedBounds, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropFormat, value.Format, null, null);
+		writer.WriteProperty(options, PropHardBounds, value.HardBounds, null, null);
+		writer.WriteProperty(options, PropInterval, value.Interval, null, null);
+		writer.WriteProperty(options, PropMinDocCount, value.MinDocCount, null, null);
+		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
+		writer.WriteProperty(options, PropOffset, value.Offset, null, null);
+		writer.WriteProperty(options, PropOrder, value.Order, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? v) => w.WriteSingleOrManyCollectionValue<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(o, v, null));
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
 		writer.WriteEndObject();
 	}
 }

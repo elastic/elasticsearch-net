@@ -60,62 +60,62 @@ internal sealed partial class UpdateDataFrameAnalyticsResponseConverter : System
 		LocalJsonValue<string> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAllowLazyStart.TryRead(ref reader, options, PropAllowLazyStart))
+			if (propAllowLazyStart.TryReadProperty(ref reader, options, PropAllowLazyStart, null))
 			{
 				continue;
 			}
 
-			if (propAnalysis.TryRead(ref reader, options, PropAnalysis))
+			if (propAnalysis.TryReadProperty(ref reader, options, PropAnalysis, null))
 			{
 				continue;
 			}
 
-			if (propAnalyzedFields.TryRead(ref reader, options, PropAnalyzedFields))
+			if (propAnalyzedFields.TryReadProperty(ref reader, options, PropAnalyzedFields, null))
 			{
 				continue;
 			}
 
-			if (propAuthorization.TryRead(ref reader, options, PropAuthorization))
+			if (propAuthorization.TryReadProperty(ref reader, options, PropAuthorization, null))
 			{
 				continue;
 			}
 
-			if (propCreateTime.TryRead(ref reader, options, PropCreateTime))
+			if (propCreateTime.TryReadProperty(ref reader, options, PropCreateTime, null))
 			{
 				continue;
 			}
 
-			if (propDescription.TryRead(ref reader, options, PropDescription))
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
 			{
 				continue;
 			}
 
-			if (propDest.TryRead(ref reader, options, PropDest))
+			if (propDest.TryReadProperty(ref reader, options, PropDest, null))
 			{
 				continue;
 			}
 
-			if (propId.TryRead(ref reader, options, PropId))
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
 			{
 				continue;
 			}
 
-			if (propMaxNumThreads.TryRead(ref reader, options, PropMaxNumThreads))
+			if (propMaxNumThreads.TryReadProperty(ref reader, options, PropMaxNumThreads, null))
 			{
 				continue;
 			}
 
-			if (propModelMemoryLimit.TryRead(ref reader, options, PropModelMemoryLimit))
+			if (propModelMemoryLimit.TryReadProperty(ref reader, options, PropModelMemoryLimit, null))
 			{
 				continue;
 			}
 
-			if (propSource.TryRead(ref reader, options, PropSource))
+			if (propSource.TryReadProperty(ref reader, options, PropSource, null))
 			{
 				continue;
 			}
 
-			if (propVersion.TryRead(ref reader, options, PropVersion))
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
 			{
 				continue;
 			}
@@ -155,18 +155,18 @@ internal sealed partial class UpdateDataFrameAnalyticsResponseConverter : System
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, UpdateDataFrameAnalyticsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAllowLazyStart, value.AllowLazyStart);
-		writer.WriteProperty(options, PropAnalysis, value.Analysis);
-		writer.WriteProperty(options, PropAnalyzedFields, value.AnalyzedFields);
-		writer.WriteProperty(options, PropAuthorization, value.Authorization);
-		writer.WriteProperty(options, PropCreateTime, value.CreateTime);
-		writer.WriteProperty(options, PropDescription, value.Description);
-		writer.WriteProperty(options, PropDest, value.Dest);
-		writer.WriteProperty(options, PropId, value.Id);
-		writer.WriteProperty(options, PropMaxNumThreads, value.MaxNumThreads);
-		writer.WriteProperty(options, PropModelMemoryLimit, value.ModelMemoryLimit);
-		writer.WriteProperty(options, PropSource, value.Source);
-		writer.WriteProperty(options, PropVersion, value.Version);
+		writer.WriteProperty(options, PropAllowLazyStart, value.AllowLazyStart, null, null);
+		writer.WriteProperty(options, PropAnalysis, value.Analysis, null, null);
+		writer.WriteProperty(options, PropAnalyzedFields, value.AnalyzedFields, null, null);
+		writer.WriteProperty(options, PropAuthorization, value.Authorization, null, null);
+		writer.WriteProperty(options, PropCreateTime, value.CreateTime, null, null);
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropDest, value.Dest, null, null);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropMaxNumThreads, value.MaxNumThreads, null, null);
+		writer.WriteProperty(options, PropModelMemoryLimit, value.ModelMemoryLimit, null, null);
+		writer.WriteProperty(options, PropSource, value.Source, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();
 	}
 }

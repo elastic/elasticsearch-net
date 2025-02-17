@@ -124,12 +124,12 @@ internal sealed partial class IndexRequestConverter<TDocument> : System.Text.Jso
 {
 	public override IndexRequest<TDocument> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		return new IndexRequest<TDocument> { Document = reader.ReadValue<TDocument>(options, typeof(SourceMarker<TDocument>)) };
+		return new IndexRequest<TDocument> { Document = reader.ReadValue<TDocument>(options, static TDocument (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<TDocument>(o, typeof(SourceMarker<TDocument>))!) };
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, IndexRequest<TDocument> value, System.Text.Json.JsonSerializerOptions options)
 	{
-		writer.WriteValue(options, value.Document, typeof(SourceMarker<TDocument>));
+		writer.WriteValue(options, value.Document, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, TDocument v) => w.WriteValueEx<TDocument>(o, v, typeof(SourceMarker<TDocument>)));
 	}
 }
 
@@ -168,10 +168,10 @@ public sealed partial class IndexRequest<TDocument> : PlainRequest<IndexRequestP
 	{
 	}
 
-	[JsonConstructor]
-	internal IndexRequest()
-	{
-	}
+	//[JsonConstructor]
+	//internal IndexRequest()
+	//{
+	//}
 
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceIndex;
 

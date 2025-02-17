@@ -46,27 +46,27 @@ internal sealed partial class SamlAuthenticateResponseConverter : System.Text.Js
 		LocalJsonValue<string> propUsername = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAccessToken.TryRead(ref reader, options, PropAccessToken))
+			if (propAccessToken.TryReadProperty(ref reader, options, PropAccessToken, null))
 			{
 				continue;
 			}
 
-			if (propExpiresIn.TryRead(ref reader, options, PropExpiresIn))
+			if (propExpiresIn.TryReadProperty(ref reader, options, PropExpiresIn, null))
 			{
 				continue;
 			}
 
-			if (propRealm.TryRead(ref reader, options, PropRealm))
+			if (propRealm.TryReadProperty(ref reader, options, PropRealm, null))
 			{
 				continue;
 			}
 
-			if (propRefreshToken.TryRead(ref reader, options, PropRefreshToken))
+			if (propRefreshToken.TryReadProperty(ref reader, options, PropRefreshToken, null))
 			{
 				continue;
 			}
 
-			if (propUsername.TryRead(ref reader, options, PropUsername))
+			if (propUsername.TryReadProperty(ref reader, options, PropUsername, null))
 			{
 				continue;
 			}
@@ -92,11 +92,11 @@ internal sealed partial class SamlAuthenticateResponseConverter : System.Text.Js
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, SamlAuthenticateResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAccessToken, value.AccessToken);
-		writer.WriteProperty(options, PropExpiresIn, value.ExpiresIn);
-		writer.WriteProperty(options, PropRealm, value.Realm);
-		writer.WriteProperty(options, PropRefreshToken, value.RefreshToken);
-		writer.WriteProperty(options, PropUsername, value.Username);
+		writer.WriteProperty(options, PropAccessToken, value.AccessToken, null, null);
+		writer.WriteProperty(options, PropExpiresIn, value.ExpiresIn, null, null);
+		writer.WriteProperty(options, PropRealm, value.Realm, null, null);
+		writer.WriteProperty(options, PropRefreshToken, value.RefreshToken, null, null);
+		writer.WriteProperty(options, PropUsername, value.Username, null, null);
 		writer.WriteEndObject();
 	}
 }

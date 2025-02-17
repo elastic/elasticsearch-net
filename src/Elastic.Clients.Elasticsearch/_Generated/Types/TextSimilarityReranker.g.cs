@@ -49,37 +49,37 @@ internal sealed partial class TextSimilarityRerankerConverter : System.Text.Json
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Retriever> propRetriever = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propField.TryRead(ref reader, options, PropField))
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
 			{
 				continue;
 			}
 
-			if (propFilter.TryRead(ref reader, options, PropFilter, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?, Elastic.Clients.Elasticsearch.QueryDsl.Query>)))
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, static ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, null)))
 			{
 				continue;
 			}
 
-			if (propInferenceId.TryRead(ref reader, options, PropInferenceId))
+			if (propInferenceId.TryReadProperty(ref reader, options, PropInferenceId, null))
 			{
 				continue;
 			}
 
-			if (propInferenceText.TryRead(ref reader, options, PropInferenceText))
+			if (propInferenceText.TryReadProperty(ref reader, options, PropInferenceText, null))
 			{
 				continue;
 			}
 
-			if (propMinScore.TryRead(ref reader, options, PropMinScore))
+			if (propMinScore.TryReadProperty(ref reader, options, PropMinScore, null))
 			{
 				continue;
 			}
 
-			if (propRankWindowSize.TryRead(ref reader, options, PropRankWindowSize))
+			if (propRankWindowSize.TryReadProperty(ref reader, options, PropRankWindowSize, null))
 			{
 				continue;
 			}
 
-			if (propRetriever.TryRead(ref reader, options, PropRetriever))
+			if (propRetriever.TryReadProperty(ref reader, options, PropRetriever, null))
 			{
 				continue;
 			}
@@ -109,13 +109,13 @@ internal sealed partial class TextSimilarityRerankerConverter : System.Text.Json
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, TextSimilarityReranker value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropField, value.Field);
-		writer.WriteProperty(options, PropFilter, value.Filter, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?, Elastic.Clients.Elasticsearch.QueryDsl.Query>));
-		writer.WriteProperty(options, PropInferenceId, value.InferenceId);
-		writer.WriteProperty(options, PropInferenceText, value.InferenceText);
-		writer.WriteProperty(options, PropMinScore, value.MinScore);
-		writer.WriteProperty(options, PropRankWindowSize, value.RankWindowSize);
-		writer.WriteProperty(options, PropRetriever, value.Retriever);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropFilter, value.Filter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, v, null));
+		writer.WriteProperty(options, PropInferenceId, value.InferenceId, null, null);
+		writer.WriteProperty(options, PropInferenceText, value.InferenceText, null, null);
+		writer.WriteProperty(options, PropMinScore, value.MinScore, null, null);
+		writer.WriteProperty(options, PropRankWindowSize, value.RankWindowSize, null, null);
+		writer.WriteProperty(options, PropRetriever, value.Retriever, null, null);
 		writer.WriteEndObject();
 	}
 }

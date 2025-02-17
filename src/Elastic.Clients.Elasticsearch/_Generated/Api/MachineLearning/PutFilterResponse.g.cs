@@ -42,17 +42,17 @@ internal sealed partial class PutFilterResponseConverter : System.Text.Json.Seri
 		LocalJsonValue<IReadOnlyCollection<string>> propItems = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDescription.TryRead(ref reader, options, PropDescription))
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
 			{
 				continue;
 			}
 
-			if (propFilterId.TryRead(ref reader, options, PropFilterId))
+			if (propFilterId.TryReadProperty(ref reader, options, PropFilterId, null))
 			{
 				continue;
 			}
 
-			if (propItems.TryRead(ref reader, options, PropItems))
+			if (propItems.TryReadProperty(ref reader, options, PropItems, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
@@ -74,9 +74,9 @@ internal sealed partial class PutFilterResponseConverter : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, PutFilterResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDescription, value.Description);
-		writer.WriteProperty(options, PropFilterId, value.FilterId);
-		writer.WriteProperty(options, PropItems, value.Items);
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropFilterId, value.FilterId, null, null);
+		writer.WriteProperty(options, PropItems, value.Items, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

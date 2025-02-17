@@ -38,7 +38,7 @@ internal sealed partial class GetBasicStatusResponseConverter : System.Text.Json
 		LocalJsonValue<bool> propEligibleToStartBasic = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propEligibleToStartBasic.TryRead(ref reader, options, PropEligibleToStartBasic))
+			if (propEligibleToStartBasic.TryReadProperty(ref reader, options, PropEligibleToStartBasic, null))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class GetBasicStatusResponseConverter : System.Text.Json
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetBasicStatusResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropEligibleToStartBasic, value.EligibleToStartBasic);
+		writer.WriteProperty(options, PropEligibleToStartBasic, value.EligibleToStartBasic, null, null);
 		writer.WriteEndObject();
 	}
 }

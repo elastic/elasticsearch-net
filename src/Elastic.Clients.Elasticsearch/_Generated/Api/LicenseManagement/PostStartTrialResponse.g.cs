@@ -44,22 +44,22 @@ internal sealed partial class PostStartTrialResponseConverter : System.Text.Json
 		LocalJsonValue<Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType?> propType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAcknowledged.TryRead(ref reader, options, PropAcknowledged))
+			if (propAcknowledged.TryReadProperty(ref reader, options, PropAcknowledged, null))
 			{
 				continue;
 			}
 
-			if (propErrorMessage.TryRead(ref reader, options, PropErrorMessage))
+			if (propErrorMessage.TryReadProperty(ref reader, options, PropErrorMessage, null))
 			{
 				continue;
 			}
 
-			if (propTrialWasStarted.TryRead(ref reader, options, PropTrialWasStarted))
+			if (propTrialWasStarted.TryReadProperty(ref reader, options, PropTrialWasStarted, null))
 			{
 				continue;
 			}
 
-			if (propType.TryRead(ref reader, options, PropType))
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
 			{
 				continue;
 			}
@@ -83,10 +83,10 @@ internal sealed partial class PostStartTrialResponseConverter : System.Text.Json
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, PostStartTrialResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged);
-		writer.WriteProperty(options, PropErrorMessage, value.ErrorMessage);
-		writer.WriteProperty(options, PropTrialWasStarted, value.TrialWasStarted);
-		writer.WriteProperty(options, PropType, value.Type);
+		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged, null, null);
+		writer.WriteProperty(options, PropErrorMessage, value.ErrorMessage, null, null);
+		writer.WriteProperty(options, PropTrialWasStarted, value.TrialWasStarted, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
 	}
 }

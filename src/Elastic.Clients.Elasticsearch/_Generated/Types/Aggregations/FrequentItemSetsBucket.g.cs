@@ -42,17 +42,17 @@ internal sealed partial class FrequentItemSetsBucketConverter : System.Text.Json
 		LocalJsonValue<double> propSupport = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDocCount.TryRead(ref reader, options, PropDocCount))
+			if (propDocCount.TryReadProperty(ref reader, options, PropDocCount, null))
 			{
 				continue;
 			}
 
-			if (propKey.TryRead(ref reader, options, PropKey))
+			if (propKey.TryReadProperty(ref reader, options, PropKey, static IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<string>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<string>>(o, null, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!)!))
 			{
 				continue;
 			}
 
-			if (propSupport.TryRead(ref reader, options, PropSupport))
+			if (propSupport.TryReadProperty(ref reader, options, PropSupport, null))
 			{
 				continue;
 			}
@@ -78,9 +78,9 @@ internal sealed partial class FrequentItemSetsBucketConverter : System.Text.Json
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, FrequentItemSetsBucket value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDocCount, value.DocCount);
-		writer.WriteProperty(options, PropKey, value.Key);
-		writer.WriteProperty(options, PropSupport, value.Support);
+		writer.WriteProperty(options, PropDocCount, value.DocCount, null, null);
+		writer.WriteProperty(options, PropKey, value.Key, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<string>> v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<string>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null)));
+		writer.WriteProperty(options, PropSupport, value.Support, null, null);
 		if (value.Aggregations is not null)
 		{
 			foreach (var item in value.Aggregations)

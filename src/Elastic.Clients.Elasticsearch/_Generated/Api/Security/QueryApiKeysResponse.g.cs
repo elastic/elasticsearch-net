@@ -44,22 +44,22 @@ internal sealed partial class QueryApiKeysResponseConverter : System.Text.Json.S
 		LocalJsonValue<int> propTotal = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAggregations.TryRead(ref reader, options, PropAggregations))
+			if (propAggregations.TryReadProperty(ref reader, options, PropAggregations, null))
 			{
 				continue;
 			}
 
-			if (propApiKeys.TryRead(ref reader, options, PropApiKeys))
+			if (propApiKeys.TryReadProperty(ref reader, options, PropApiKeys, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApiKey> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.ApiKey>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propCount.TryRead(ref reader, options, PropCount))
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
 			{
 				continue;
 			}
 
-			if (propTotal.TryRead(ref reader, options, PropTotal))
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
 			{
 				continue;
 			}
@@ -83,10 +83,10 @@ internal sealed partial class QueryApiKeysResponseConverter : System.Text.Json.S
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, QueryApiKeysResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAggregations, value.Aggregations);
-		writer.WriteProperty(options, PropApiKeys, value.ApiKeys);
-		writer.WriteProperty(options, PropCount, value.Count);
-		writer.WriteProperty(options, PropTotal, value.Total);
+		writer.WriteProperty(options, PropAggregations, value.Aggregations, null, null);
+		writer.WriteProperty(options, PropApiKeys, value.ApiKeys, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApiKey> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.ApiKey>(o, v, null));
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
 		writer.WriteEndObject();
 	}
 }

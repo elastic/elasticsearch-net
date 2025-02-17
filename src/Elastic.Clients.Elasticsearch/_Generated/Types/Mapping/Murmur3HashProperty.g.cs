@@ -52,42 +52,42 @@ internal sealed partial class Murmur3HashPropertyConverter : System.Text.Json.Se
 		LocalJsonValue<bool?> propStore = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCopyTo.TryRead(ref reader, options, PropCopyTo, typeof(SingleOrManyFieldsMarker)))
+			if (propCopyTo.TryReadProperty(ref reader, options, PropCopyTo, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(SingleOrManyFieldsMarker))))
 			{
 				continue;
 			}
 
-			if (propDocValues.TryRead(ref reader, options, PropDocValues))
+			if (propDocValues.TryReadProperty(ref reader, options, PropDocValues, null))
 			{
 				continue;
 			}
 
-			if (propDynamic.TryRead(ref reader, options, PropDynamic))
+			if (propDynamic.TryReadProperty(ref reader, options, PropDynamic, null))
 			{
 				continue;
 			}
 
-			if (propFields.TryRead(ref reader, options, PropFields))
+			if (propFields.TryReadProperty(ref reader, options, PropFields, null))
 			{
 				continue;
 			}
 
-			if (propIgnoreAbove.TryRead(ref reader, options, PropIgnoreAbove))
+			if (propIgnoreAbove.TryReadProperty(ref reader, options, PropIgnoreAbove, null))
 			{
 				continue;
 			}
 
-			if (propMeta.TryRead(ref reader, options, PropMeta))
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static IDictionary<string, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propProperties.TryRead(ref reader, options, PropProperties))
+			if (propProperties.TryReadProperty(ref reader, options, PropProperties, null))
 			{
 				continue;
 			}
 
-			if (propStore.TryRead(ref reader, options, PropStore))
+			if (propStore.TryReadProperty(ref reader, options, PropStore, null))
 			{
 				continue;
 			}
@@ -125,15 +125,15 @@ internal sealed partial class Murmur3HashPropertyConverter : System.Text.Json.Se
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Murmur3HashProperty value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCopyTo, value.CopyTo, null, typeof(SingleOrManyFieldsMarker));
-		writer.WriteProperty(options, PropDocValues, value.DocValues);
-		writer.WriteProperty(options, PropDynamic, value.Dynamic);
-		writer.WriteProperty(options, PropFields, value.Fields);
-		writer.WriteProperty(options, PropIgnoreAbove, value.IgnoreAbove);
-		writer.WriteProperty(options, PropMeta, value.Meta);
-		writer.WriteProperty(options, PropProperties, value.Properties);
-		writer.WriteProperty(options, PropStore, value.Store);
-		writer.WriteProperty(options, PropType, value.Type);
+		writer.WriteProperty(options, PropCopyTo, value.CopyTo, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropDocValues, value.DocValues, null, null);
+		writer.WriteProperty(options, PropDynamic, value.Dynamic, null, null);
+		writer.WriteProperty(options, PropFields, value.Fields, null, null);
+		writer.WriteProperty(options, PropIgnoreAbove, value.IgnoreAbove, null, null);
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropProperties, value.Properties, null, null);
+		writer.WriteProperty(options, PropStore, value.Store, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
 	}
 }

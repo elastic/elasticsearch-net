@@ -86,127 +86,127 @@ internal sealed partial class AllocationExplainResponseConverter : System.Text.J
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.UnassignedInformation?> propUnassignedInfo = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAllocateExplanation.TryRead(ref reader, options, PropAllocateExplanation))
+			if (propAllocateExplanation.TryReadProperty(ref reader, options, PropAllocateExplanation, null))
 			{
 				continue;
 			}
 
-			if (propAllocationDelay.TryRead(ref reader, options, PropAllocationDelay))
+			if (propAllocationDelay.TryReadProperty(ref reader, options, PropAllocationDelay, null))
 			{
 				continue;
 			}
 
-			if (propAllocationDelayInMillis.TryRead(ref reader, options, PropAllocationDelayInMillis))
+			if (propAllocationDelayInMillis.TryReadProperty(ref reader, options, PropAllocationDelayInMillis, null))
 			{
 				continue;
 			}
 
-			if (propCanAllocate.TryRead(ref reader, options, PropCanAllocate))
+			if (propCanAllocate.TryReadProperty(ref reader, options, PropCanAllocate, null))
 			{
 				continue;
 			}
 
-			if (propCanMoveToOtherNode.TryRead(ref reader, options, PropCanMoveToOtherNode))
+			if (propCanMoveToOtherNode.TryReadProperty(ref reader, options, PropCanMoveToOtherNode, null))
 			{
 				continue;
 			}
 
-			if (propCanRebalanceCluster.TryRead(ref reader, options, PropCanRebalanceCluster))
+			if (propCanRebalanceCluster.TryReadProperty(ref reader, options, PropCanRebalanceCluster, null))
 			{
 				continue;
 			}
 
-			if (propCanRebalanceClusterDecisions.TryRead(ref reader, options, PropCanRebalanceClusterDecisions))
+			if (propCanRebalanceClusterDecisions.TryReadProperty(ref reader, options, PropCanRebalanceClusterDecisions, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision>(o, null)))
 			{
 				continue;
 			}
 
-			if (propCanRebalanceToOtherNode.TryRead(ref reader, options, PropCanRebalanceToOtherNode))
+			if (propCanRebalanceToOtherNode.TryReadProperty(ref reader, options, PropCanRebalanceToOtherNode, null))
 			{
 				continue;
 			}
 
-			if (propCanRemainDecisions.TryRead(ref reader, options, PropCanRemainDecisions))
+			if (propCanRemainDecisions.TryReadProperty(ref reader, options, PropCanRemainDecisions, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision>(o, null)))
 			{
 				continue;
 			}
 
-			if (propCanRemainOnCurrentNode.TryRead(ref reader, options, PropCanRemainOnCurrentNode))
+			if (propCanRemainOnCurrentNode.TryReadProperty(ref reader, options, PropCanRemainOnCurrentNode, null))
 			{
 				continue;
 			}
 
-			if (propClusterInfo.TryRead(ref reader, options, PropClusterInfo))
+			if (propClusterInfo.TryReadProperty(ref reader, options, PropClusterInfo, null))
 			{
 				continue;
 			}
 
-			if (propConfiguredDelay.TryRead(ref reader, options, PropConfiguredDelay))
+			if (propConfiguredDelay.TryReadProperty(ref reader, options, PropConfiguredDelay, null))
 			{
 				continue;
 			}
 
-			if (propConfiguredDelayInMillis.TryRead(ref reader, options, PropConfiguredDelayInMillis))
+			if (propConfiguredDelayInMillis.TryReadProperty(ref reader, options, PropConfiguredDelayInMillis, null))
 			{
 				continue;
 			}
 
-			if (propCurrentNode.TryRead(ref reader, options, PropCurrentNode))
+			if (propCurrentNode.TryReadProperty(ref reader, options, PropCurrentNode, null))
 			{
 				continue;
 			}
 
-			if (propCurrentState.TryRead(ref reader, options, PropCurrentState))
+			if (propCurrentState.TryReadProperty(ref reader, options, PropCurrentState, null))
 			{
 				continue;
 			}
 
-			if (propIndex.TryRead(ref reader, options, PropIndex))
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
 			{
 				continue;
 			}
 
-			if (propMoveExplanation.TryRead(ref reader, options, PropMoveExplanation))
+			if (propMoveExplanation.TryReadProperty(ref reader, options, PropMoveExplanation, null))
 			{
 				continue;
 			}
 
-			if (propNodeAllocationDecisions.TryRead(ref reader, options, PropNodeAllocationDecisions))
+			if (propNodeAllocationDecisions.TryReadProperty(ref reader, options, PropNodeAllocationDecisions, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.NodeAllocationExplanation>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Cluster.NodeAllocationExplanation>(o, null)))
 			{
 				continue;
 			}
 
-			if (propNote.TryRead(ref reader, options, PropNote))
+			if (propNote.TryReadProperty(ref reader, options, PropNote, null))
 			{
 				continue;
 			}
 
-			if (propPrimary.TryRead(ref reader, options, PropPrimary))
+			if (propPrimary.TryReadProperty(ref reader, options, PropPrimary, null))
 			{
 				continue;
 			}
 
-			if (propRebalanceExplanation.TryRead(ref reader, options, PropRebalanceExplanation))
+			if (propRebalanceExplanation.TryReadProperty(ref reader, options, PropRebalanceExplanation, null))
 			{
 				continue;
 			}
 
-			if (propRemainingDelay.TryRead(ref reader, options, PropRemainingDelay))
+			if (propRemainingDelay.TryReadProperty(ref reader, options, PropRemainingDelay, null))
 			{
 				continue;
 			}
 
-			if (propRemainingDelayInMillis.TryRead(ref reader, options, PropRemainingDelayInMillis))
+			if (propRemainingDelayInMillis.TryReadProperty(ref reader, options, PropRemainingDelayInMillis, null))
 			{
 				continue;
 			}
 
-			if (propShard.TryRead(ref reader, options, PropShard))
+			if (propShard.TryReadProperty(ref reader, options, PropShard, null))
 			{
 				continue;
 			}
 
-			if (propUnassignedInfo.TryRead(ref reader, options, PropUnassignedInfo))
+			if (propUnassignedInfo.TryReadProperty(ref reader, options, PropUnassignedInfo, null))
 			{
 				continue;
 			}
@@ -272,31 +272,31 @@ internal sealed partial class AllocationExplainResponseConverter : System.Text.J
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, AllocationExplainResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAllocateExplanation, value.AllocateExplanation);
-		writer.WriteProperty(options, PropAllocationDelay, value.AllocationDelay);
-		writer.WriteProperty(options, PropAllocationDelayInMillis, value.AllocationDelayInMillis);
-		writer.WriteProperty(options, PropCanAllocate, value.CanAllocate);
-		writer.WriteProperty(options, PropCanMoveToOtherNode, value.CanMoveToOtherNode);
-		writer.WriteProperty(options, PropCanRebalanceCluster, value.CanRebalanceCluster);
-		writer.WriteProperty(options, PropCanRebalanceClusterDecisions, value.CanRebalanceClusterDecisions);
-		writer.WriteProperty(options, PropCanRebalanceToOtherNode, value.CanRebalanceToOtherNode);
-		writer.WriteProperty(options, PropCanRemainDecisions, value.CanRemainDecisions);
-		writer.WriteProperty(options, PropCanRemainOnCurrentNode, value.CanRemainOnCurrentNode);
-		writer.WriteProperty(options, PropClusterInfo, value.ClusterInfo);
-		writer.WriteProperty(options, PropConfiguredDelay, value.ConfiguredDelay);
-		writer.WriteProperty(options, PropConfiguredDelayInMillis, value.ConfiguredDelayInMillis);
-		writer.WriteProperty(options, PropCurrentNode, value.CurrentNode);
-		writer.WriteProperty(options, PropCurrentState, value.CurrentState);
-		writer.WriteProperty(options, PropIndex, value.Index);
-		writer.WriteProperty(options, PropMoveExplanation, value.MoveExplanation);
-		writer.WriteProperty(options, PropNodeAllocationDecisions, value.NodeAllocationDecisions);
-		writer.WriteProperty(options, PropNote, value.Note);
-		writer.WriteProperty(options, PropPrimary, value.Primary);
-		writer.WriteProperty(options, PropRebalanceExplanation, value.RebalanceExplanation);
-		writer.WriteProperty(options, PropRemainingDelay, value.RemainingDelay);
-		writer.WriteProperty(options, PropRemainingDelayInMillis, value.RemainingDelayInMillis);
-		writer.WriteProperty(options, PropShard, value.Shard);
-		writer.WriteProperty(options, PropUnassignedInfo, value.UnassignedInfo);
+		writer.WriteProperty(options, PropAllocateExplanation, value.AllocateExplanation, null, null);
+		writer.WriteProperty(options, PropAllocationDelay, value.AllocationDelay, null, null);
+		writer.WriteProperty(options, PropAllocationDelayInMillis, value.AllocationDelayInMillis, null, null);
+		writer.WriteProperty(options, PropCanAllocate, value.CanAllocate, null, null);
+		writer.WriteProperty(options, PropCanMoveToOtherNode, value.CanMoveToOtherNode, null, null);
+		writer.WriteProperty(options, PropCanRebalanceCluster, value.CanRebalanceCluster, null, null);
+		writer.WriteProperty(options, PropCanRebalanceClusterDecisions, value.CanRebalanceClusterDecisions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision>(o, v, null));
+		writer.WriteProperty(options, PropCanRebalanceToOtherNode, value.CanRebalanceToOtherNode, null, null);
+		writer.WriteProperty(options, PropCanRemainDecisions, value.CanRemainDecisions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision>(o, v, null));
+		writer.WriteProperty(options, PropCanRemainOnCurrentNode, value.CanRemainOnCurrentNode, null, null);
+		writer.WriteProperty(options, PropClusterInfo, value.ClusterInfo, null, null);
+		writer.WriteProperty(options, PropConfiguredDelay, value.ConfiguredDelay, null, null);
+		writer.WriteProperty(options, PropConfiguredDelayInMillis, value.ConfiguredDelayInMillis, null, null);
+		writer.WriteProperty(options, PropCurrentNode, value.CurrentNode, null, null);
+		writer.WriteProperty(options, PropCurrentState, value.CurrentState, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropMoveExplanation, value.MoveExplanation, null, null);
+		writer.WriteProperty(options, PropNodeAllocationDecisions, value.NodeAllocationDecisions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.NodeAllocationExplanation>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Cluster.NodeAllocationExplanation>(o, v, null));
+		writer.WriteProperty(options, PropNote, value.Note, null, null);
+		writer.WriteProperty(options, PropPrimary, value.Primary, null, null);
+		writer.WriteProperty(options, PropRebalanceExplanation, value.RebalanceExplanation, null, null);
+		writer.WriteProperty(options, PropRemainingDelay, value.RemainingDelay, null, null);
+		writer.WriteProperty(options, PropRemainingDelayInMillis, value.RemainingDelayInMillis, null, null);
+		writer.WriteProperty(options, PropShard, value.Shard, null, null);
+		writer.WriteProperty(options, PropUnassignedInfo, value.UnassignedInfo, null, null);
 		writer.WriteEndObject();
 	}
 }

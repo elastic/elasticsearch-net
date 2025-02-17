@@ -42,17 +42,17 @@ internal sealed partial class NodeInfoDiscoverConverter : System.Text.Json.Seria
 		LocalJsonValue<string?> propType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propSeedHosts.TryRead(ref reader, options, PropSeedHosts))
+			if (propSeedHosts.TryReadProperty(ref reader, options, PropSeedHosts, static IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propSeedProviders.TryRead(ref reader, options, PropSeedProviders))
+			if (propSeedProviders.TryReadProperty(ref reader, options, PropSeedProviders, static IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propType.TryRead(ref reader, options, PropType))
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
 			{
 				continue;
 			}
@@ -78,9 +78,9 @@ internal sealed partial class NodeInfoDiscoverConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, NodeInfoDiscover value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropSeedHosts, value.SeedHosts);
-		writer.WriteProperty(options, PropSeedProviders, value.SeedProviders);
-		writer.WriteProperty(options, PropType, value.Type);
+		writer.WriteProperty(options, PropSeedHosts, value.SeedHosts, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropSeedProviders, value.SeedProviders, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropType, value.Type, null, null);
 		if (value.Settings is not null)
 		{
 			foreach (var item in value.Settings)

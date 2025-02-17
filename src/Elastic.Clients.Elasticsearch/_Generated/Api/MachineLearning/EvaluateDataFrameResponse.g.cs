@@ -42,17 +42,17 @@ internal sealed partial class EvaluateDataFrameResponseConverter : System.Text.J
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeRegressionSummary?> propRegression = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propClassification.TryRead(ref reader, options, PropClassification))
+			if (propClassification.TryReadProperty(ref reader, options, PropClassification, null))
 			{
 				continue;
 			}
 
-			if (propOutlierDetection.TryRead(ref reader, options, PropOutlierDetection))
+			if (propOutlierDetection.TryReadProperty(ref reader, options, PropOutlierDetection, null))
 			{
 				continue;
 			}
 
-			if (propRegression.TryRead(ref reader, options, PropRegression))
+			if (propRegression.TryReadProperty(ref reader, options, PropRegression, null))
 			{
 				continue;
 			}
@@ -74,9 +74,9 @@ internal sealed partial class EvaluateDataFrameResponseConverter : System.Text.J
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, EvaluateDataFrameResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropClassification, value.Classification);
-		writer.WriteProperty(options, PropOutlierDetection, value.OutlierDetection);
-		writer.WriteProperty(options, PropRegression, value.Regression);
+		writer.WriteProperty(options, PropClassification, value.Classification, null, null);
+		writer.WriteProperty(options, PropOutlierDetection, value.OutlierDetection, null, null);
+		writer.WriteProperty(options, PropRegression, value.Regression, null, null);
 		writer.WriteEndObject();
 	}
 }

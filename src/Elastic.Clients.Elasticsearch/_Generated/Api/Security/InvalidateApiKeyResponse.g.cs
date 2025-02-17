@@ -44,22 +44,22 @@ internal sealed partial class InvalidateApiKeyResponseConverter : System.Text.Js
 		LocalJsonValue<IReadOnlyCollection<string>> propPreviouslyInvalidatedApiKeys = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propErrorCount.TryRead(ref reader, options, PropErrorCount))
+			if (propErrorCount.TryReadProperty(ref reader, options, PropErrorCount, null))
 			{
 				continue;
 			}
 
-			if (propErrorDetails.TryRead(ref reader, options, PropErrorDetails))
+			if (propErrorDetails.TryReadProperty(ref reader, options, PropErrorDetails, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.ErrorCause>(o, null)))
 			{
 				continue;
 			}
 
-			if (propInvalidatedApiKeys.TryRead(ref reader, options, PropInvalidatedApiKeys))
+			if (propInvalidatedApiKeys.TryReadProperty(ref reader, options, PropInvalidatedApiKeys, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propPreviouslyInvalidatedApiKeys.TryRead(ref reader, options, PropPreviouslyInvalidatedApiKeys))
+			if (propPreviouslyInvalidatedApiKeys.TryReadProperty(ref reader, options, PropPreviouslyInvalidatedApiKeys, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
@@ -83,10 +83,10 @@ internal sealed partial class InvalidateApiKeyResponseConverter : System.Text.Js
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, InvalidateApiKeyResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropErrorCount, value.ErrorCount);
-		writer.WriteProperty(options, PropErrorDetails, value.ErrorDetails);
-		writer.WriteProperty(options, PropInvalidatedApiKeys, value.InvalidatedApiKeys);
-		writer.WriteProperty(options, PropPreviouslyInvalidatedApiKeys, value.PreviouslyInvalidatedApiKeys);
+		writer.WriteProperty(options, PropErrorCount, value.ErrorCount, null, null);
+		writer.WriteProperty(options, PropErrorDetails, value.ErrorDetails, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.ErrorCause>(o, v, null));
+		writer.WriteProperty(options, PropInvalidatedApiKeys, value.InvalidatedApiKeys, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropPreviouslyInvalidatedApiKeys, value.PreviouslyInvalidatedApiKeys, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

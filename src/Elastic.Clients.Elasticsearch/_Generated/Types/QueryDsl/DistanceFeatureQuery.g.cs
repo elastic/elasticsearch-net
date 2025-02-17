@@ -37,7 +37,7 @@ internal sealed partial class DistanceFeatureQueryConverter : System.Text.Json.S
 {
 	public override IDistanceFeatureQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		return reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQuery>(options);
+		return reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQuery>(options, null);
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, IDistanceFeatureQuery value, System.Text.Json.JsonSerializerOptions options)
@@ -45,13 +45,13 @@ internal sealed partial class DistanceFeatureQueryConverter : System.Text.Json.S
 		switch (value)
 		{
 			case Elastic.Clients.Elasticsearch.QueryDsl.DateDistanceFeatureQuery v:
-				writer.WriteValue(options, v);
+				writer.WriteValue(options, v, null);
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQuery v:
-				writer.WriteValue(options, v);
+				writer.WriteValue(options, v, null);
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQuery v:
-				writer.WriteValue(options, v);
+				writer.WriteValue(options, v, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.Type}' is not supported for type '{nameof(IDistanceFeatureQuery)}'.");

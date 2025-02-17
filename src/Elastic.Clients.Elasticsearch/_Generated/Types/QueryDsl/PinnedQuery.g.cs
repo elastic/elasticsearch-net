@@ -105,17 +105,17 @@ internal sealed partial class PinnedQueryConverter : System.Text.Json.Serializat
 		object? variant = null;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBoost.TryRead(ref reader, options, PropBoost))
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
 			{
 				continue;
 			}
 
-			if (propOrganic.TryRead(ref reader, options, PropOrganic))
+			if (propOrganic.TryReadProperty(ref reader, options, PropOrganic, null))
 			{
 				continue;
 			}
 
-			if (propQueryName.TryRead(ref reader, options, PropQueryName))
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
 			{
 				continue;
 			}
@@ -124,7 +124,7 @@ internal sealed partial class PinnedQueryConverter : System.Text.Json.Serializat
 			{
 				variantType = VariantDocs.Value;
 				reader.Read();
-				variant = reader.ReadValue<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>?>(options);
+				variant = reader.ReadValue<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>?>(options, static ICollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>(o, null));
 				continue;
 			}
 
@@ -132,7 +132,7 @@ internal sealed partial class PinnedQueryConverter : System.Text.Json.Serializat
 			{
 				variantType = VariantIds.Value;
 				reader.Read();
-				variant = reader.ReadValue<ICollection<Elastic.Clients.Elasticsearch.Id>?>(options);
+				variant = reader.ReadValue<ICollection<Elastic.Clients.Elasticsearch.Id>?>(options, static ICollection<Elastic.Clients.Elasticsearch.Id>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Id>(o, null));
 				continue;
 			}
 
@@ -160,18 +160,18 @@ internal sealed partial class PinnedQueryConverter : System.Text.Json.Serializat
 			case "":
 				break;
 			case "docs":
-				writer.WriteProperty(options, value.VariantType, (ICollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (ICollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>?)value.Variant, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>(o, v, null));
 				break;
 			case "ids":
-				writer.WriteProperty(options, value.VariantType, (ICollection<Elastic.Clients.Elasticsearch.Id>?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (ICollection<Elastic.Clients.Elasticsearch.Id>?)value.Variant, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.Id>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Id>(o, v, null));
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(PinnedQuery)}'.");
 		}
 
-		writer.WriteProperty(options, PropBoost, value.Boost);
-		writer.WriteProperty(options, PropOrganic, value.Organic);
-		writer.WriteProperty(options, PropQueryName, value.QueryName);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropOrganic, value.Organic, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
 		writer.WriteEndObject();
 	}
 }

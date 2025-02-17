@@ -126,17 +126,17 @@ internal sealed partial class TermVectorsRequestConverter<TDocument> : System.Te
 		LocalJsonValue<IDictionary<Elastic.Clients.Elasticsearch.Field, string>?> propPerFieldAnalyzer = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDoc.TryRead(ref reader, options, PropDoc, typeof(SourceMarker<TDocument?>)))
+			if (propDoc.TryReadProperty(ref reader, options, PropDoc, static TDocument? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<TDocument?>(o, typeof(SourceMarker<TDocument?>))))
 			{
 				continue;
 			}
 
-			if (propFilter.TryRead(ref reader, options, PropFilter))
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, null))
 			{
 				continue;
 			}
 
-			if (propPerFieldAnalyzer.TryRead(ref reader, options, PropPerFieldAnalyzer))
+			if (propPerFieldAnalyzer.TryReadProperty(ref reader, options, PropPerFieldAnalyzer, static IDictionary<Elastic.Clients.Elasticsearch.Field, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Field, string>(o, null, null)))
 			{
 				continue;
 			}
@@ -158,9 +158,9 @@ internal sealed partial class TermVectorsRequestConverter<TDocument> : System.Te
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, TermVectorsRequest<TDocument> value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDoc, value.Doc, null, typeof(SourceMarker<TDocument?>));
-		writer.WriteProperty(options, PropFilter, value.Filter);
-		writer.WriteProperty(options, PropPerFieldAnalyzer, value.PerFieldAnalyzer);
+		writer.WriteProperty(options, PropDoc, value.Doc, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, TDocument? v) => w.WriteValueEx<TDocument?>(o, v, typeof(SourceMarker<TDocument?>)));
+		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
+		writer.WriteProperty(options, PropPerFieldAnalyzer, value.PerFieldAnalyzer, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IDictionary<Elastic.Clients.Elasticsearch.Field, string>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, string>(o, v, null, null));
 		writer.WriteEndObject();
 	}
 }

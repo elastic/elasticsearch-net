@@ -40,12 +40,12 @@ internal sealed partial class ReloadSearchAnalyzersResponseConverter : System.Te
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ShardStatistics> propShards = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propReloadDetails.TryRead(ref reader, options, PropReloadDetails))
+			if (propReloadDetails.TryReadProperty(ref reader, options, PropReloadDetails, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ReloadDetails> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.ReloadDetails>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propShards.TryRead(ref reader, options, PropShards))
+			if (propShards.TryReadProperty(ref reader, options, PropShards, null))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class ReloadSearchAnalyzersResponseConverter : System.Te
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ReloadSearchAnalyzersResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropReloadDetails, value.ReloadDetails);
-		writer.WriteProperty(options, PropShards, value.Shards);
+		writer.WriteProperty(options, PropReloadDetails, value.ReloadDetails, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ReloadDetails> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.ReloadDetails>(o, v, null));
+		writer.WriteProperty(options, PropShards, value.Shards, null, null);
 		writer.WriteEndObject();
 	}
 }

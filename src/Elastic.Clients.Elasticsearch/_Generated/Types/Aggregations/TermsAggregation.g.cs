@@ -69,87 +69,87 @@ internal sealed partial class TermsAggregationConverter : System.Text.Json.Seria
 		LocalJsonValue<string?> propValueType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCollectMode.TryRead(ref reader, options, PropCollectMode))
+			if (propCollectMode.TryReadProperty(ref reader, options, PropCollectMode, null))
 			{
 				continue;
 			}
 
-			if (propExclude.TryRead(ref reader, options, PropExclude))
+			if (propExclude.TryReadProperty(ref reader, options, PropExclude, null))
 			{
 				continue;
 			}
 
-			if (propExecutionHint.TryRead(ref reader, options, PropExecutionHint))
+			if (propExecutionHint.TryReadProperty(ref reader, options, PropExecutionHint, null))
 			{
 				continue;
 			}
 
-			if (propField.TryRead(ref reader, options, PropField))
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
 			{
 				continue;
 			}
 
-			if (propFormat.TryRead(ref reader, options, PropFormat))
+			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
 			{
 				continue;
 			}
 
-			if (propInclude.TryRead(ref reader, options, PropInclude))
+			if (propInclude.TryReadProperty(ref reader, options, PropInclude, null))
 			{
 				continue;
 			}
 
-			if (propMinDocCount.TryRead(ref reader, options, PropMinDocCount))
+			if (propMinDocCount.TryReadProperty(ref reader, options, PropMinDocCount, null))
 			{
 				continue;
 			}
 
-			if (propMissing.TryRead(ref reader, options, PropMissing))
+			if (propMissing.TryReadProperty(ref reader, options, PropMissing, null))
 			{
 				continue;
 			}
 
-			if (propMissingBucket.TryRead(ref reader, options, PropMissingBucket))
+			if (propMissingBucket.TryReadProperty(ref reader, options, PropMissingBucket, null))
 			{
 				continue;
 			}
 
-			if (propMissingOrder.TryRead(ref reader, options, PropMissingOrder))
+			if (propMissingOrder.TryReadProperty(ref reader, options, PropMissingOrder, null))
 			{
 				continue;
 			}
 
-			if (propOrder.TryRead(ref reader, options, PropOrder, typeof(SingleOrManyMarker<ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>?, KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>)))
+			if (propOrder.TryReadProperty(ref reader, options, PropOrder, static ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(o, null)))
 			{
 				continue;
 			}
 
-			if (propScript.TryRead(ref reader, options, PropScript))
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
 			{
 				continue;
 			}
 
-			if (propShardMinDocCount.TryRead(ref reader, options, PropShardMinDocCount))
+			if (propShardMinDocCount.TryReadProperty(ref reader, options, PropShardMinDocCount, null))
 			{
 				continue;
 			}
 
-			if (propShardSize.TryRead(ref reader, options, PropShardSize))
+			if (propShardSize.TryReadProperty(ref reader, options, PropShardSize, null))
 			{
 				continue;
 			}
 
-			if (propShowTermDocCountError.TryRead(ref reader, options, PropShowTermDocCountError))
+			if (propShowTermDocCountError.TryReadProperty(ref reader, options, PropShowTermDocCountError, null))
 			{
 				continue;
 			}
 
-			if (propSize.TryRead(ref reader, options, PropSize))
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
 			{
 				continue;
 			}
 
-			if (propValueType.TryRead(ref reader, options, PropValueType))
+			if (propValueType.TryReadProperty(ref reader, options, PropValueType, null))
 			{
 				continue;
 			}
@@ -199,23 +199,23 @@ internal sealed partial class TermsAggregationConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, TermsAggregation value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCollectMode, value.CollectMode);
-		writer.WriteProperty(options, PropExclude, value.Exclude);
-		writer.WriteProperty(options, PropExecutionHint, value.ExecutionHint);
-		writer.WriteProperty(options, PropField, value.Field);
-		writer.WriteProperty(options, PropFormat, value.Format);
-		writer.WriteProperty(options, PropInclude, value.Include);
-		writer.WriteProperty(options, PropMinDocCount, value.MinDocCount);
-		writer.WriteProperty(options, PropMissing, value.Missing);
-		writer.WriteProperty(options, PropMissingBucket, value.MissingBucket);
-		writer.WriteProperty(options, PropMissingOrder, value.MissingOrder);
-		writer.WriteProperty(options, PropOrder, value.Order, null, typeof(SingleOrManyMarker<ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>?, KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>));
-		writer.WriteProperty(options, PropScript, value.Script);
-		writer.WriteProperty(options, PropShardMinDocCount, value.ShardMinDocCount);
-		writer.WriteProperty(options, PropShardSize, value.ShardSize);
-		writer.WriteProperty(options, PropShowTermDocCountError, value.ShowTermDocCountError);
-		writer.WriteProperty(options, PropSize, value.Size);
-		writer.WriteProperty(options, PropValueType, value.ValueType);
+		writer.WriteProperty(options, PropCollectMode, value.CollectMode, null, null);
+		writer.WriteProperty(options, PropExclude, value.Exclude, null, null);
+		writer.WriteProperty(options, PropExecutionHint, value.ExecutionHint, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropFormat, value.Format, null, null);
+		writer.WriteProperty(options, PropInclude, value.Include, null, null);
+		writer.WriteProperty(options, PropMinDocCount, value.MinDocCount, null, null);
+		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
+		writer.WriteProperty(options, PropMissingBucket, value.MissingBucket, null, null);
+		writer.WriteProperty(options, PropMissingOrder, value.MissingOrder, null, null);
+		writer.WriteProperty(options, PropOrder, value.Order, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? v) => w.WriteSingleOrManyCollectionValue<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(o, v, null));
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
+		writer.WriteProperty(options, PropShardMinDocCount, value.ShardMinDocCount, null, null);
+		writer.WriteProperty(options, PropShardSize, value.ShardSize, null, null);
+		writer.WriteProperty(options, PropShowTermDocCountError, value.ShowTermDocCountError, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropValueType, value.ValueType, null, null);
 		writer.WriteEndObject();
 	}
 }

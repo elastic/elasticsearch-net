@@ -46,22 +46,22 @@ internal sealed partial class KeywordMarkerTokenFilterConverter : System.Text.Js
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propIgnoreCase.TryRead(ref reader, options, PropIgnoreCase))
+			if (propIgnoreCase.TryReadProperty(ref reader, options, PropIgnoreCase, null))
 			{
 				continue;
 			}
 
-			if (propKeywords.TryRead(ref reader, options, PropKeywords, typeof(SingleOrManyMarker<ICollection<string>?, string>)))
+			if (propKeywords.TryReadProperty(ref reader, options, PropKeywords, static ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propKeywordsPath.TryRead(ref reader, options, PropKeywordsPath))
+			if (propKeywordsPath.TryReadProperty(ref reader, options, PropKeywordsPath, null))
 			{
 				continue;
 			}
 
-			if (propKeywordsPattern.TryRead(ref reader, options, PropKeywordsPattern))
+			if (propKeywordsPattern.TryReadProperty(ref reader, options, PropKeywordsPattern, null))
 			{
 				continue;
 			}
@@ -72,7 +72,7 @@ internal sealed partial class KeywordMarkerTokenFilterConverter : System.Text.Js
 				continue;
 			}
 
-			if (propVersion.TryRead(ref reader, options, PropVersion))
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
 			{
 				continue;
 			}
@@ -98,12 +98,12 @@ internal sealed partial class KeywordMarkerTokenFilterConverter : System.Text.Js
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, KeywordMarkerTokenFilter value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropIgnoreCase, value.IgnoreCase);
-		writer.WriteProperty(options, PropKeywords, value.Keywords, null, typeof(SingleOrManyMarker<ICollection<string>?, string>));
-		writer.WriteProperty(options, PropKeywordsPath, value.KeywordsPath);
-		writer.WriteProperty(options, PropKeywordsPattern, value.KeywordsPattern);
-		writer.WriteProperty(options, PropType, value.Type);
-		writer.WriteProperty(options, PropVersion, value.Version);
+		writer.WriteProperty(options, PropIgnoreCase, value.IgnoreCase, null, null);
+		writer.WriteProperty(options, PropKeywords, value.Keywords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropKeywordsPath, value.KeywordsPath, null, null);
+		writer.WriteProperty(options, PropKeywordsPattern, value.KeywordsPattern, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();
 	}
 }

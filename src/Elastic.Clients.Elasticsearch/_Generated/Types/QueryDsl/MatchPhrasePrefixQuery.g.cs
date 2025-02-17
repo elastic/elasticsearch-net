@@ -42,11 +42,11 @@ internal sealed partial class MatchPhrasePrefixQueryConverter : System.Text.Json
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
 		reader.Read();
-		propField.ReadPropertyName(ref reader, options);
+		propField.ReadPropertyName(ref reader, options, null);
 		reader.Read();
 		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
 		{
-			var value = reader.ReadValue<string>(options);
+			var value = reader.ReadValue<string>(options, null);
 			reader.Read();
 			return new MatchPhrasePrefixQuery { Query = value };
 		}
@@ -61,37 +61,37 @@ internal sealed partial class MatchPhrasePrefixQueryConverter : System.Text.Json
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery?> propZeroTermsQuery = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAnalyzer.TryRead(ref reader, options, PropAnalyzer))
+			if (propAnalyzer.TryReadProperty(ref reader, options, PropAnalyzer, null))
 			{
 				continue;
 			}
 
-			if (propBoost.TryRead(ref reader, options, PropBoost))
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
 			{
 				continue;
 			}
 
-			if (propMaxExpansions.TryRead(ref reader, options, PropMaxExpansions))
+			if (propMaxExpansions.TryReadProperty(ref reader, options, PropMaxExpansions, null))
 			{
 				continue;
 			}
 
-			if (propQuery.TryRead(ref reader, options, PropQuery))
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
 			{
 				continue;
 			}
 
-			if (propQueryName.TryRead(ref reader, options, PropQueryName))
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
 			{
 				continue;
 			}
 
-			if (propSlop.TryRead(ref reader, options, PropSlop))
+			if (propSlop.TryReadProperty(ref reader, options, PropSlop, null))
 			{
 				continue;
 			}
 
-			if (propZeroTermsQuery.TryRead(ref reader, options, PropZeroTermsQuery))
+			if (propZeroTermsQuery.TryReadProperty(ref reader, options, PropZeroTermsQuery, null))
 			{
 				continue;
 			}
@@ -125,15 +125,15 @@ internal sealed partial class MatchPhrasePrefixQueryConverter : System.Text.Json
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, MatchPhrasePrefixQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName(options, value.Field);
+		writer.WritePropertyName(options, value.Field, null);
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAnalyzer, value.Analyzer);
-		writer.WriteProperty(options, PropBoost, value.Boost);
-		writer.WriteProperty(options, PropMaxExpansions, value.MaxExpansions);
-		writer.WriteProperty(options, PropQuery, value.Query);
-		writer.WriteProperty(options, PropQueryName, value.QueryName);
-		writer.WriteProperty(options, PropSlop, value.Slop);
-		writer.WriteProperty(options, PropZeroTermsQuery, value.ZeroTermsQuery);
+		writer.WriteProperty(options, PropAnalyzer, value.Analyzer, null, null);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropMaxExpansions, value.MaxExpansions, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteProperty(options, PropSlop, value.Slop, null, null);
+		writer.WriteProperty(options, PropZeroTermsQuery, value.ZeroTermsQuery, null, null);
 		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}

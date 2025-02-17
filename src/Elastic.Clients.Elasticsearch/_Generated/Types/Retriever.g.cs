@@ -88,7 +88,7 @@ internal sealed partial class RetrieverConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantKnn.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.KnnRetriever?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.KnnRetriever?>(options, null);
 				continue;
 			}
 
@@ -96,7 +96,7 @@ internal sealed partial class RetrieverConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantRrf.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.RRFRetriever?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.RRFRetriever?>(options, null);
 				continue;
 			}
 
@@ -104,7 +104,7 @@ internal sealed partial class RetrieverConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantRule.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.RuleRetriever?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.RuleRetriever?>(options, null);
 				continue;
 			}
 
@@ -112,7 +112,7 @@ internal sealed partial class RetrieverConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantStandard.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.StandardRetriever?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.StandardRetriever?>(options, null);
 				continue;
 			}
 
@@ -120,7 +120,7 @@ internal sealed partial class RetrieverConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantTextSimilarityReranker.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.TextSimilarityReranker?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.TextSimilarityReranker?>(options, null);
 				continue;
 			}
 
@@ -139,19 +139,19 @@ internal sealed partial class RetrieverConverter : System.Text.Json.Serializatio
 			case "":
 				break;
 			case "knn":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.KnnRetriever?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.KnnRetriever?)value.Variant, null, null);
 				break;
 			case "rrf":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.RRFRetriever?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.RRFRetriever?)value.Variant, null, null);
 				break;
 			case "rule":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.RuleRetriever?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.RuleRetriever?)value.Variant, null, null);
 				break;
 			case "standard":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.StandardRetriever?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.StandardRetriever?)value.Variant, null, null);
 				break;
 			case "text_similarity_reranker":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.TextSimilarityReranker?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.TextSimilarityReranker?)value.Variant, null, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Retriever)}'.");

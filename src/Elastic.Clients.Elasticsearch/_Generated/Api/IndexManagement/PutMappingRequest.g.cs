@@ -111,57 +111,57 @@ internal sealed partial class PutMappingRequestConverter : System.Text.Json.Seri
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.SourceField?> propSource = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDateDetection.TryRead(ref reader, options, PropDateDetection))
+			if (propDateDetection.TryReadProperty(ref reader, options, PropDateDetection, null))
 			{
 				continue;
 			}
 
-			if (propDynamic.TryRead(ref reader, options, PropDynamic))
+			if (propDynamic.TryReadProperty(ref reader, options, PropDynamic, null))
 			{
 				continue;
 			}
 
-			if (propDynamicDateFormats.TryRead(ref reader, options, PropDynamicDateFormats))
+			if (propDynamicDateFormats.TryReadProperty(ref reader, options, PropDynamicDateFormats, static ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propDynamicTemplates.TryRead(ref reader, options, PropDynamicTemplates, typeof(SingleOrManyMarker<ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?, IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>)))
+			if (propDynamicTemplates.TryReadProperty(ref reader, options, PropDynamicTemplates, static ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>(o, static IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>(o, null, null)!)))
 			{
 				continue;
 			}
 
-			if (propFieldNames.TryRead(ref reader, options, PropFieldNames))
+			if (propFieldNames.TryReadProperty(ref reader, options, PropFieldNames, null))
 			{
 				continue;
 			}
 
-			if (propMeta.TryRead(ref reader, options, PropMeta))
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propNumericDetection.TryRead(ref reader, options, PropNumericDetection))
+			if (propNumericDetection.TryReadProperty(ref reader, options, PropNumericDetection, null))
 			{
 				continue;
 			}
 
-			if (propProperties.TryRead(ref reader, options, PropProperties))
+			if (propProperties.TryReadProperty(ref reader, options, PropProperties, null))
 			{
 				continue;
 			}
 
-			if (propRouting.TryRead(ref reader, options, PropRouting))
+			if (propRouting.TryReadProperty(ref reader, options, PropRouting, null))
 			{
 				continue;
 			}
 
-			if (propRuntime.TryRead(ref reader, options, PropRuntime))
+			if (propRuntime.TryReadProperty(ref reader, options, PropRuntime, static IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propSource.TryRead(ref reader, options, PropSource))
+			if (propSource.TryReadProperty(ref reader, options, PropSource, null))
 			{
 				continue;
 			}
@@ -199,17 +199,17 @@ internal sealed partial class PutMappingRequestConverter : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, PutMappingRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDateDetection, value.DateDetection);
-		writer.WriteProperty(options, PropDynamic, value.Dynamic);
-		writer.WriteProperty(options, PropDynamicDateFormats, value.DynamicDateFormats);
-		writer.WriteProperty(options, PropDynamicTemplates, value.DynamicTemplates, null, typeof(SingleOrManyMarker<ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?, IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>));
-		writer.WriteProperty(options, PropFieldNames, value.FieldNames);
-		writer.WriteProperty(options, PropMeta, value.Meta);
-		writer.WriteProperty(options, PropNumericDetection, value.NumericDetection);
-		writer.WriteProperty(options, PropProperties, value.Properties);
-		writer.WriteProperty(options, PropRouting, value.Routing);
-		writer.WriteProperty(options, PropRuntime, value.Runtime);
-		writer.WriteProperty(options, PropSource, value.Source);
+		writer.WriteProperty(options, PropDateDetection, value.DateDetection, null, null);
+		writer.WriteProperty(options, PropDynamic, value.Dynamic, null, null);
+		writer.WriteProperty(options, PropDynamicDateFormats, value.DynamicDateFormats, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropDynamicTemplates, value.DynamicTemplates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? v) => w.WriteSingleOrManyCollectionValue<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>(o, v, null, null)));
+		writer.WriteProperty(options, PropFieldNames, value.FieldNames, null, null);
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropNumericDetection, value.NumericDetection, null, null);
+		writer.WriteProperty(options, PropProperties, value.Properties, null, null);
+		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
+		writer.WriteProperty(options, PropRuntime, value.Runtime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, v, null, null));
+		writer.WriteProperty(options, PropSource, value.Source, null, null);
 		writer.WriteEndObject();
 	}
 }

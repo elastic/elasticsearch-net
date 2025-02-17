@@ -76,102 +76,102 @@ internal sealed partial class PutTrainedModelResponseConverter : System.Text.Jso
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCompressedDefinition.TryRead(ref reader, options, PropCompressedDefinition))
+			if (propCompressedDefinition.TryReadProperty(ref reader, options, PropCompressedDefinition, null))
 			{
 				continue;
 			}
 
-			if (propCreatedBy.TryRead(ref reader, options, PropCreatedBy))
+			if (propCreatedBy.TryReadProperty(ref reader, options, PropCreatedBy, null))
 			{
 				continue;
 			}
 
-			if (propCreateTime.TryRead(ref reader, options, PropCreateTime))
+			if (propCreateTime.TryReadProperty(ref reader, options, PropCreateTime, null))
 			{
 				continue;
 			}
 
-			if (propDefaultFieldMap.TryRead(ref reader, options, PropDefaultFieldMap))
+			if (propDefaultFieldMap.TryReadProperty(ref reader, options, PropDefaultFieldMap, static IReadOnlyDictionary<string, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propDescription.TryRead(ref reader, options, PropDescription))
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
 			{
 				continue;
 			}
 
-			if (propEstimatedHeapMemoryUsageBytes.TryRead(ref reader, options, PropEstimatedHeapMemoryUsageBytes))
+			if (propEstimatedHeapMemoryUsageBytes.TryReadProperty(ref reader, options, PropEstimatedHeapMemoryUsageBytes, null))
 			{
 				continue;
 			}
 
-			if (propEstimatedOperations.TryRead(ref reader, options, PropEstimatedOperations))
+			if (propEstimatedOperations.TryReadProperty(ref reader, options, PropEstimatedOperations, null))
 			{
 				continue;
 			}
 
-			if (propFullyDefined.TryRead(ref reader, options, PropFullyDefined))
+			if (propFullyDefined.TryReadProperty(ref reader, options, PropFullyDefined, null))
 			{
 				continue;
 			}
 
-			if (propInferenceConfig.TryRead(ref reader, options, PropInferenceConfig))
+			if (propInferenceConfig.TryReadProperty(ref reader, options, PropInferenceConfig, null))
 			{
 				continue;
 			}
 
-			if (propInput.TryRead(ref reader, options, PropInput))
+			if (propInput.TryReadProperty(ref reader, options, PropInput, null))
 			{
 				continue;
 			}
 
-			if (propLicenseLevel.TryRead(ref reader, options, PropLicenseLevel))
+			if (propLicenseLevel.TryReadProperty(ref reader, options, PropLicenseLevel, null))
 			{
 				continue;
 			}
 
-			if (propLocation.TryRead(ref reader, options, PropLocation))
+			if (propLocation.TryReadProperty(ref reader, options, PropLocation, null))
 			{
 				continue;
 			}
 
-			if (propMetadata.TryRead(ref reader, options, PropMetadata))
+			if (propMetadata.TryReadProperty(ref reader, options, PropMetadata, null))
 			{
 				continue;
 			}
 
-			if (propModelId.TryRead(ref reader, options, PropModelId))
+			if (propModelId.TryReadProperty(ref reader, options, PropModelId, null))
 			{
 				continue;
 			}
 
-			if (propModelPackage.TryRead(ref reader, options, PropModelPackage))
+			if (propModelPackage.TryReadProperty(ref reader, options, PropModelPackage, null))
 			{
 				continue;
 			}
 
-			if (propModelSizeBytes.TryRead(ref reader, options, PropModelSizeBytes))
+			if (propModelSizeBytes.TryReadProperty(ref reader, options, PropModelSizeBytes, null))
 			{
 				continue;
 			}
 
-			if (propModelType.TryRead(ref reader, options, PropModelType))
+			if (propModelType.TryReadProperty(ref reader, options, PropModelType, null))
 			{
 				continue;
 			}
 
-			if (propPrefixStrings.TryRead(ref reader, options, PropPrefixStrings))
+			if (propPrefixStrings.TryReadProperty(ref reader, options, PropPrefixStrings, null))
 			{
 				continue;
 			}
 
-			if (propTags.TryRead(ref reader, options, PropTags))
+			if (propTags.TryReadProperty(ref reader, options, PropTags, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propVersion.TryRead(ref reader, options, PropVersion))
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
 			{
 				continue;
 			}
@@ -227,26 +227,26 @@ internal sealed partial class PutTrainedModelResponseConverter : System.Text.Jso
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, PutTrainedModelResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCompressedDefinition, value.CompressedDefinition);
-		writer.WriteProperty(options, PropCreatedBy, value.CreatedBy);
-		writer.WriteProperty(options, PropCreateTime, value.CreateTime);
-		writer.WriteProperty(options, PropDefaultFieldMap, value.DefaultFieldMap);
-		writer.WriteProperty(options, PropDescription, value.Description);
-		writer.WriteProperty(options, PropEstimatedHeapMemoryUsageBytes, value.EstimatedHeapMemoryUsageBytes);
-		writer.WriteProperty(options, PropEstimatedOperations, value.EstimatedOperations);
-		writer.WriteProperty(options, PropFullyDefined, value.FullyDefined);
-		writer.WriteProperty(options, PropInferenceConfig, value.InferenceConfig);
-		writer.WriteProperty(options, PropInput, value.Input);
-		writer.WriteProperty(options, PropLicenseLevel, value.LicenseLevel);
-		writer.WriteProperty(options, PropLocation, value.Location);
-		writer.WriteProperty(options, PropMetadata, value.Metadata);
-		writer.WriteProperty(options, PropModelId, value.ModelId);
-		writer.WriteProperty(options, PropModelPackage, value.ModelPackage);
-		writer.WriteProperty(options, PropModelSizeBytes, value.ModelSizeBytes);
-		writer.WriteProperty(options, PropModelType, value.ModelType);
-		writer.WriteProperty(options, PropPrefixStrings, value.PrefixStrings);
-		writer.WriteProperty(options, PropTags, value.Tags);
-		writer.WriteProperty(options, PropVersion, value.Version);
+		writer.WriteProperty(options, PropCompressedDefinition, value.CompressedDefinition, null, null);
+		writer.WriteProperty(options, PropCreatedBy, value.CreatedBy, null, null);
+		writer.WriteProperty(options, PropCreateTime, value.CreateTime, null, null);
+		writer.WriteProperty(options, PropDefaultFieldMap, value.DefaultFieldMap, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropEstimatedHeapMemoryUsageBytes, value.EstimatedHeapMemoryUsageBytes, null, null);
+		writer.WriteProperty(options, PropEstimatedOperations, value.EstimatedOperations, null, null);
+		writer.WriteProperty(options, PropFullyDefined, value.FullyDefined, null, null);
+		writer.WriteProperty(options, PropInferenceConfig, value.InferenceConfig, null, null);
+		writer.WriteProperty(options, PropInput, value.Input, null, null);
+		writer.WriteProperty(options, PropLicenseLevel, value.LicenseLevel, null, null);
+		writer.WriteProperty(options, PropLocation, value.Location, null, null);
+		writer.WriteProperty(options, PropMetadata, value.Metadata, null, null);
+		writer.WriteProperty(options, PropModelId, value.ModelId, null, null);
+		writer.WriteProperty(options, PropModelPackage, value.ModelPackage, null, null);
+		writer.WriteProperty(options, PropModelSizeBytes, value.ModelSizeBytes, null, null);
+		writer.WriteProperty(options, PropModelType, value.ModelType, null, null);
+		writer.WriteProperty(options, PropPrefixStrings, value.PrefixStrings, null, null);
+		writer.WriteProperty(options, PropTags, value.Tags, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();
 	}
 }

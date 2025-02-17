@@ -38,7 +38,7 @@ internal sealed partial class GetDataLifecycleResponseConverter : System.Text.Js
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamWithLifecycle>> propDataStreams = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDataStreams.TryRead(ref reader, options, PropDataStreams))
+			if (propDataStreams.TryReadProperty(ref reader, options, PropDataStreams, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamWithLifecycle> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamWithLifecycle>(o, null)!))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class GetDataLifecycleResponseConverter : System.Text.Js
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetDataLifecycleResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDataStreams, value.DataStreams);
+		writer.WriteProperty(options, PropDataStreams, value.DataStreams, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamWithLifecycle> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamWithLifecycle>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

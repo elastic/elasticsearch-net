@@ -40,12 +40,12 @@ internal sealed partial class GetTransformStatsResponseConverter : System.Text.J
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.TransformManagement.TransformStats>> propTransforms = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCount.TryRead(ref reader, options, PropCount))
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
 			{
 				continue;
 			}
 
-			if (propTransforms.TryRead(ref reader, options, PropTransforms))
+			if (propTransforms.TryReadProperty(ref reader, options, PropTransforms, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.TransformManagement.TransformStats> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.TransformManagement.TransformStats>(o, null)!))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class GetTransformStatsResponseConverter : System.Text.J
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetTransformStatsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCount, value.Count);
-		writer.WriteProperty(options, PropTransforms, value.Transforms);
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropTransforms, value.Transforms, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.TransformManagement.TransformStats> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.TransformManagement.TransformStats>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

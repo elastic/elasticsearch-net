@@ -84,112 +84,112 @@ internal sealed partial class IcuCollationPropertyConverter : System.Text.Json.S
 		LocalJsonValue<string?> propVariant = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAlternate.TryRead(ref reader, options, PropAlternate))
+			if (propAlternate.TryReadProperty(ref reader, options, PropAlternate, null))
 			{
 				continue;
 			}
 
-			if (propCaseFirst.TryRead(ref reader, options, PropCaseFirst))
+			if (propCaseFirst.TryReadProperty(ref reader, options, PropCaseFirst, null))
 			{
 				continue;
 			}
 
-			if (propCaseLevel.TryRead(ref reader, options, PropCaseLevel))
+			if (propCaseLevel.TryReadProperty(ref reader, options, PropCaseLevel, null))
 			{
 				continue;
 			}
 
-			if (propCopyTo.TryRead(ref reader, options, PropCopyTo, typeof(SingleOrManyFieldsMarker)))
+			if (propCopyTo.TryReadProperty(ref reader, options, PropCopyTo, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(SingleOrManyFieldsMarker))))
 			{
 				continue;
 			}
 
-			if (propCountry.TryRead(ref reader, options, PropCountry))
+			if (propCountry.TryReadProperty(ref reader, options, PropCountry, null))
 			{
 				continue;
 			}
 
-			if (propDecomposition.TryRead(ref reader, options, PropDecomposition))
+			if (propDecomposition.TryReadProperty(ref reader, options, PropDecomposition, null))
 			{
 				continue;
 			}
 
-			if (propDocValues.TryRead(ref reader, options, PropDocValues))
+			if (propDocValues.TryReadProperty(ref reader, options, PropDocValues, null))
 			{
 				continue;
 			}
 
-			if (propDynamic.TryRead(ref reader, options, PropDynamic))
+			if (propDynamic.TryReadProperty(ref reader, options, PropDynamic, null))
 			{
 				continue;
 			}
 
-			if (propFields.TryRead(ref reader, options, PropFields))
+			if (propFields.TryReadProperty(ref reader, options, PropFields, null))
 			{
 				continue;
 			}
 
-			if (propHiraganaQuaternaryMode.TryRead(ref reader, options, PropHiraganaQuaternaryMode))
+			if (propHiraganaQuaternaryMode.TryReadProperty(ref reader, options, PropHiraganaQuaternaryMode, null))
 			{
 				continue;
 			}
 
-			if (propIgnoreAbove.TryRead(ref reader, options, PropIgnoreAbove))
+			if (propIgnoreAbove.TryReadProperty(ref reader, options, PropIgnoreAbove, null))
 			{
 				continue;
 			}
 
-			if (propIndex.TryRead(ref reader, options, PropIndex))
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
 			{
 				continue;
 			}
 
-			if (propIndexOptions.TryRead(ref reader, options, PropIndexOptions))
+			if (propIndexOptions.TryReadProperty(ref reader, options, PropIndexOptions, null))
 			{
 				continue;
 			}
 
-			if (propLanguage.TryRead(ref reader, options, PropLanguage))
+			if (propLanguage.TryReadProperty(ref reader, options, PropLanguage, null))
 			{
 				continue;
 			}
 
-			if (propMeta.TryRead(ref reader, options, PropMeta))
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static IDictionary<string, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propNorms.TryRead(ref reader, options, PropNorms))
+			if (propNorms.TryReadProperty(ref reader, options, PropNorms, null))
 			{
 				continue;
 			}
 
-			if (propNullValue.TryRead(ref reader, options, PropNullValue))
+			if (propNullValue.TryReadProperty(ref reader, options, PropNullValue, null))
 			{
 				continue;
 			}
 
-			if (propNumeric.TryRead(ref reader, options, PropNumeric))
+			if (propNumeric.TryReadProperty(ref reader, options, PropNumeric, null))
 			{
 				continue;
 			}
 
-			if (propProperties.TryRead(ref reader, options, PropProperties))
+			if (propProperties.TryReadProperty(ref reader, options, PropProperties, null))
 			{
 				continue;
 			}
 
-			if (propRules.TryRead(ref reader, options, PropRules))
+			if (propRules.TryReadProperty(ref reader, options, PropRules, null))
 			{
 				continue;
 			}
 
-			if (propStore.TryRead(ref reader, options, PropStore))
+			if (propStore.TryReadProperty(ref reader, options, PropStore, null))
 			{
 				continue;
 			}
 
-			if (propStrength.TryRead(ref reader, options, PropStrength))
+			if (propStrength.TryReadProperty(ref reader, options, PropStrength, null))
 			{
 				continue;
 			}
@@ -200,12 +200,12 @@ internal sealed partial class IcuCollationPropertyConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propVariableTop.TryRead(ref reader, options, PropVariableTop))
+			if (propVariableTop.TryReadProperty(ref reader, options, PropVariableTop, null))
 			{
 				continue;
 			}
 
-			if (propVariant.TryRead(ref reader, options, PropVariant))
+			if (propVariant.TryReadProperty(ref reader, options, PropVariant, null))
 			{
 				continue;
 			}
@@ -269,31 +269,31 @@ internal sealed partial class IcuCollationPropertyConverter : System.Text.Json.S
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, IcuCollationProperty value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAlternate, value.Alternate);
-		writer.WriteProperty(options, PropCaseFirst, value.CaseFirst);
-		writer.WriteProperty(options, PropCaseLevel, value.CaseLevel);
-		writer.WriteProperty(options, PropCopyTo, value.CopyTo, null, typeof(SingleOrManyFieldsMarker));
-		writer.WriteProperty(options, PropCountry, value.Country);
-		writer.WriteProperty(options, PropDecomposition, value.Decomposition);
-		writer.WriteProperty(options, PropDocValues, value.DocValues);
-		writer.WriteProperty(options, PropDynamic, value.Dynamic);
-		writer.WriteProperty(options, PropFields, value.Fields);
-		writer.WriteProperty(options, PropHiraganaQuaternaryMode, value.HiraganaQuaternaryMode);
-		writer.WriteProperty(options, PropIgnoreAbove, value.IgnoreAbove);
-		writer.WriteProperty(options, PropIndex, value.Index);
-		writer.WriteProperty(options, PropIndexOptions, value.IndexOptions);
-		writer.WriteProperty(options, PropLanguage, value.Language);
-		writer.WriteProperty(options, PropMeta, value.Meta);
-		writer.WriteProperty(options, PropNorms, value.Norms);
-		writer.WriteProperty(options, PropNullValue, value.NullValue);
-		writer.WriteProperty(options, PropNumeric, value.Numeric);
-		writer.WriteProperty(options, PropProperties, value.Properties);
-		writer.WriteProperty(options, PropRules, value.Rules);
-		writer.WriteProperty(options, PropStore, value.Store);
-		writer.WriteProperty(options, PropStrength, value.Strength);
-		writer.WriteProperty(options, PropType, value.Type);
-		writer.WriteProperty(options, PropVariableTop, value.VariableTop);
-		writer.WriteProperty(options, PropVariant, value.Variant);
+		writer.WriteProperty(options, PropAlternate, value.Alternate, null, null);
+		writer.WriteProperty(options, PropCaseFirst, value.CaseFirst, null, null);
+		writer.WriteProperty(options, PropCaseLevel, value.CaseLevel, null, null);
+		writer.WriteProperty(options, PropCopyTo, value.CopyTo, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropCountry, value.Country, null, null);
+		writer.WriteProperty(options, PropDecomposition, value.Decomposition, null, null);
+		writer.WriteProperty(options, PropDocValues, value.DocValues, null, null);
+		writer.WriteProperty(options, PropDynamic, value.Dynamic, null, null);
+		writer.WriteProperty(options, PropFields, value.Fields, null, null);
+		writer.WriteProperty(options, PropHiraganaQuaternaryMode, value.HiraganaQuaternaryMode, null, null);
+		writer.WriteProperty(options, PropIgnoreAbove, value.IgnoreAbove, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropIndexOptions, value.IndexOptions, null, null);
+		writer.WriteProperty(options, PropLanguage, value.Language, null, null);
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropNorms, value.Norms, null, null);
+		writer.WriteProperty(options, PropNullValue, value.NullValue, null, null);
+		writer.WriteProperty(options, PropNumeric, value.Numeric, null, null);
+		writer.WriteProperty(options, PropProperties, value.Properties, null, null);
+		writer.WriteProperty(options, PropRules, value.Rules, null, null);
+		writer.WriteProperty(options, PropStore, value.Store, null, null);
+		writer.WriteProperty(options, PropStrength, value.Strength, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVariableTop, value.VariableTop, null, null);
+		writer.WriteProperty(options, PropVariant, value.Variant, null, null);
 		writer.WriteEndObject();
 	}
 }

@@ -46,22 +46,22 @@ internal sealed partial class PatternAnalyzerConverter : System.Text.Json.Serial
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propFlags.TryRead(ref reader, options, PropFlags))
+			if (propFlags.TryReadProperty(ref reader, options, PropFlags, null))
 			{
 				continue;
 			}
 
-			if (propLowercase.TryRead(ref reader, options, PropLowercase))
+			if (propLowercase.TryReadProperty(ref reader, options, PropLowercase, null))
 			{
 				continue;
 			}
 
-			if (propPattern.TryRead(ref reader, options, PropPattern))
+			if (propPattern.TryReadProperty(ref reader, options, PropPattern, null))
 			{
 				continue;
 			}
 
-			if (propStopwords.TryRead(ref reader, options, PropStopwords, typeof(SingleOrManyMarker<ICollection<string>?, string>)))
+			if (propStopwords.TryReadProperty(ref reader, options, PropStopwords, static ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
@@ -72,7 +72,7 @@ internal sealed partial class PatternAnalyzerConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propVersion.TryRead(ref reader, options, PropVersion))
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
 			{
 				continue;
 			}
@@ -98,12 +98,12 @@ internal sealed partial class PatternAnalyzerConverter : System.Text.Json.Serial
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, PatternAnalyzer value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFlags, value.Flags);
-		writer.WriteProperty(options, PropLowercase, value.Lowercase);
-		writer.WriteProperty(options, PropPattern, value.Pattern);
-		writer.WriteProperty(options, PropStopwords, value.Stopwords, null, typeof(SingleOrManyMarker<ICollection<string>?, string>));
-		writer.WriteProperty(options, PropType, value.Type);
-		writer.WriteProperty(options, PropVersion, value.Version);
+		writer.WriteProperty(options, PropFlags, value.Flags, null, null);
+		writer.WriteProperty(options, PropLowercase, value.Lowercase, null, null);
+		writer.WriteProperty(options, PropPattern, value.Pattern, null, null);
+		writer.WriteProperty(options, PropStopwords, value.Stopwords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();
 	}
 }

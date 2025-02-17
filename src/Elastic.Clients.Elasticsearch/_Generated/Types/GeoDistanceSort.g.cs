@@ -49,38 +49,38 @@ internal sealed partial class GeoDistanceSortConverter : System.Text.Json.Serial
 		LocalJsonValue<Elastic.Clients.Elasticsearch.DistanceUnit?> propUnit = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDistanceType.TryRead(ref reader, options, PropDistanceType))
+			if (propDistanceType.TryReadProperty(ref reader, options, PropDistanceType, null))
 			{
 				continue;
 			}
 
-			if (propIgnoreUnmapped.TryRead(ref reader, options, PropIgnoreUnmapped))
+			if (propIgnoreUnmapped.TryReadProperty(ref reader, options, PropIgnoreUnmapped, null))
 			{
 				continue;
 			}
 
-			if (propMode.TryRead(ref reader, options, PropMode))
+			if (propMode.TryReadProperty(ref reader, options, PropMode, null))
 			{
 				continue;
 			}
 
-			if (propNested.TryRead(ref reader, options, PropNested))
+			if (propNested.TryReadProperty(ref reader, options, PropNested, null))
 			{
 				continue;
 			}
 
-			if (propOrder.TryRead(ref reader, options, PropOrder))
+			if (propOrder.TryReadProperty(ref reader, options, PropOrder, null))
 			{
 				continue;
 			}
 
-			if (propUnit.TryRead(ref reader, options, PropUnit))
+			if (propUnit.TryReadProperty(ref reader, options, PropUnit, null))
 			{
 				continue;
 			}
 
 			propField.Initialized = propLocation.Initialized = true;
-			reader.ReadProperty(options, out propField.Value, out propLocation.Value, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.GeoLocation>, Elastic.Clients.Elasticsearch.GeoLocation>));
+			reader.ReadProperty(options, out propField.Value, out propLocation.Value, null, static ICollection<Elastic.Clients.Elasticsearch.GeoLocation> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.GeoLocation>(o, null)!);
 		}
 
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
@@ -107,13 +107,13 @@ internal sealed partial class GeoDistanceSortConverter : System.Text.Json.Serial
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GeoDistanceSort value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDistanceType, value.DistanceType);
-		writer.WriteProperty(options, PropIgnoreUnmapped, value.IgnoreUnmapped);
-		writer.WriteProperty(options, PropMode, value.Mode);
-		writer.WriteProperty(options, PropNested, value.Nested);
-		writer.WriteProperty(options, PropOrder, value.Order);
-		writer.WriteProperty(options, PropUnit, value.Unit);
-		writer.WriteProperty(options, value.Field, value.Location, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.GeoLocation>, Elastic.Clients.Elasticsearch.GeoLocation>));
+		writer.WriteProperty(options, PropDistanceType, value.DistanceType, null, null);
+		writer.WriteProperty(options, PropIgnoreUnmapped, value.IgnoreUnmapped, null, null);
+		writer.WriteProperty(options, PropMode, value.Mode, null, null);
+		writer.WriteProperty(options, PropNested, value.Nested, null, null);
+		writer.WriteProperty(options, PropOrder, value.Order, null, null);
+		writer.WriteProperty(options, PropUnit, value.Unit, null, null);
+		writer.WriteProperty(options, value.Field, value.Location, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.GeoLocation> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.GeoLocation>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

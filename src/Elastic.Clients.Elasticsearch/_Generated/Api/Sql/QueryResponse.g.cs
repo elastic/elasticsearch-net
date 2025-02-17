@@ -46,27 +46,27 @@ internal sealed partial class QueryResponseConverter : System.Text.Json.Serializ
 		LocalJsonValue<bool?> propIsRunning = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propColumns.TryRead(ref reader, options, PropColumns))
+			if (propColumns.TryReadProperty(ref reader, options, PropColumns, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Sql.Column>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Sql.Column>(o, null)))
 			{
 				continue;
 			}
 
-			if (propCursor.TryRead(ref reader, options, PropCursor))
+			if (propCursor.TryReadProperty(ref reader, options, PropCursor, null))
 			{
 				continue;
 			}
 
-			if (propId.TryRead(ref reader, options, PropId))
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
 			{
 				continue;
 			}
 
-			if (propIsPartial.TryRead(ref reader, options, PropIsPartial))
+			if (propIsPartial.TryReadProperty(ref reader, options, PropIsPartial, null))
 			{
 				continue;
 			}
 
-			if (propIsRunning.TryRead(ref reader, options, PropIsRunning))
+			if (propIsRunning.TryReadProperty(ref reader, options, PropIsRunning, null))
 			{
 				continue;
 			}
@@ -92,11 +92,11 @@ internal sealed partial class QueryResponseConverter : System.Text.Json.Serializ
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, QueryResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropColumns, value.Columns);
-		writer.WriteProperty(options, PropCursor, value.Cursor);
-		writer.WriteProperty(options, PropId, value.Id);
-		writer.WriteProperty(options, PropIsPartial, value.IsPartial);
-		writer.WriteProperty(options, PropIsRunning, value.IsRunning);
+		writer.WriteProperty(options, PropColumns, value.Columns, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Sql.Column>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Sql.Column>(o, v, null));
+		writer.WriteProperty(options, PropCursor, value.Cursor, null, null);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropIsPartial, value.IsPartial, null, null);
+		writer.WriteProperty(options, PropIsRunning, value.IsRunning, null, null);
 		writer.WriteEndObject();
 	}
 }

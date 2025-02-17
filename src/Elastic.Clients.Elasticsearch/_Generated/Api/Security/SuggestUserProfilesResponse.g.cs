@@ -42,17 +42,17 @@ internal sealed partial class SuggestUserProfilesResponseConverter : System.Text
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.TotalUserProfiles> propTotal = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propProfiles.TryRead(ref reader, options, PropProfiles))
+			if (propProfiles.TryReadProperty(ref reader, options, PropProfiles, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserProfile> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.UserProfile>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propTook.TryRead(ref reader, options, PropTook))
+			if (propTook.TryReadProperty(ref reader, options, PropTook, null))
 			{
 				continue;
 			}
 
-			if (propTotal.TryRead(ref reader, options, PropTotal))
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
 			{
 				continue;
 			}
@@ -74,9 +74,9 @@ internal sealed partial class SuggestUserProfilesResponseConverter : System.Text
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, SuggestUserProfilesResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropProfiles, value.Profiles);
-		writer.WriteProperty(options, PropTook, value.Took);
-		writer.WriteProperty(options, PropTotal, value.Total);
+		writer.WriteProperty(options, PropProfiles, value.Profiles, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserProfile> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.UserProfile>(o, v, null));
+		writer.WriteProperty(options, PropTook, value.Took, null, null);
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
 		writer.WriteEndObject();
 	}
 }

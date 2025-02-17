@@ -43,22 +43,22 @@ internal sealed partial class GrantApiKeyConverter : System.Text.Json.Serializat
 		LocalJsonValue<ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>?> propRoleDescriptors = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propExpiration.TryRead(ref reader, options, PropExpiration))
+			if (propExpiration.TryReadProperty(ref reader, options, PropExpiration, null))
 			{
 				continue;
 			}
 
-			if (propMetadata.TryRead(ref reader, options, PropMetadata))
+			if (propMetadata.TryReadProperty(ref reader, options, PropMetadata, static IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propName.TryRead(ref reader, options, PropName))
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
 			{
 				continue;
 			}
 
-			if (propRoleDescriptors.TryRead(ref reader, options, PropRoleDescriptors, typeof(SingleOrManyMarker<ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>?, IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>)))
+			if (propRoleDescriptors.TryReadProperty(ref reader, options, PropRoleDescriptors, static ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>(o, static IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>(o, null, null)!)))
 			{
 				continue;
 			}
@@ -82,10 +82,10 @@ internal sealed partial class GrantApiKeyConverter : System.Text.Json.Serializat
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GrantApiKey value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropExpiration, value.Expiration);
-		writer.WriteProperty(options, PropMetadata, value.Metadata);
-		writer.WriteProperty(options, PropName, value.Name);
-		writer.WriteProperty(options, PropRoleDescriptors, value.RoleDescriptors, null, typeof(SingleOrManyMarker<ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>?, IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>));
+		writer.WriteProperty(options, PropExpiration, value.Expiration, null, null);
+		writer.WriteProperty(options, PropMetadata, value.Metadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropRoleDescriptors, value.RoleDescriptors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>? v) => w.WriteSingleOrManyCollectionValue<IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>(o, v, null, null)));
 		writer.WriteEndObject();
 	}
 }

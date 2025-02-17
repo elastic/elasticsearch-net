@@ -38,12 +38,12 @@ internal sealed partial class PutInferenceRequestConverter : System.Text.Json.Se
 {
 	public override PutInferenceRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		return new PutInferenceRequest { InferenceConfig = reader.ReadValue<Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint>(options) };
+		return new PutInferenceRequest { InferenceConfig = reader.ReadValue<Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint>(options, null) };
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, PutInferenceRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
-		writer.WriteValue(options, value.InferenceConfig);
+		writer.WriteValue(options, value.InferenceConfig, null);
 	}
 }
 

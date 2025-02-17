@@ -40,12 +40,12 @@ internal sealed partial class GetCategoriesResponseConverter : System.Text.Json.
 		LocalJsonValue<long> propCount = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCategories.TryRead(ref reader, options, PropCategories))
+			if (propCategories.TryReadProperty(ref reader, options, PropCategories, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Category> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.Category>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propCount.TryRead(ref reader, options, PropCount))
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class GetCategoriesResponseConverter : System.Text.Json.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetCategoriesResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCategories, value.Categories);
-		writer.WriteProperty(options, PropCount, value.Count);
+		writer.WriteProperty(options, PropCategories, value.Categories, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Category> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.Category>(o, v, null));
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
 		writer.WriteEndObject();
 	}
 }

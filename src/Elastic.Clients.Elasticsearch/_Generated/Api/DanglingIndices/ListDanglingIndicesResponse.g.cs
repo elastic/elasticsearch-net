@@ -38,7 +38,7 @@ internal sealed partial class ListDanglingIndicesResponseConverter : System.Text
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.DanglingIndices.DanglingIndex>> propDanglingIndices = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDanglingIndices.TryRead(ref reader, options, PropDanglingIndices))
+			if (propDanglingIndices.TryReadProperty(ref reader, options, PropDanglingIndices, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.DanglingIndices.DanglingIndex> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.DanglingIndices.DanglingIndex>(o, null)!))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class ListDanglingIndicesResponseConverter : System.Text
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ListDanglingIndicesResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDanglingIndices, value.DanglingIndices);
+		writer.WriteProperty(options, PropDanglingIndices, value.DanglingIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.DanglingIndices.DanglingIndex> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.DanglingIndices.DanglingIndex>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

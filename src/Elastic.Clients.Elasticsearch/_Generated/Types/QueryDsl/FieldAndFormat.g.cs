@@ -37,7 +37,7 @@ internal sealed partial class FieldAndFormatConverter : System.Text.Json.Seriali
 	{
 		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
 		{
-			var value = reader.ReadValue<Elastic.Clients.Elasticsearch.Field>(options);
+			var value = reader.ReadValue<Elastic.Clients.Elasticsearch.Field>(options, null);
 			return new FieldAndFormat { Field = value };
 		}
 
@@ -47,17 +47,17 @@ internal sealed partial class FieldAndFormatConverter : System.Text.Json.Seriali
 		LocalJsonValue<bool?> propIncludeUnmapped = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propField.TryRead(ref reader, options, PropField))
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
 			{
 				continue;
 			}
 
-			if (propFormat.TryRead(ref reader, options, PropFormat))
+			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
 			{
 				continue;
 			}
 
-			if (propIncludeUnmapped.TryRead(ref reader, options, PropIncludeUnmapped))
+			if (propIncludeUnmapped.TryReadProperty(ref reader, options, PropIncludeUnmapped, null))
 			{
 				continue;
 			}
@@ -79,9 +79,9 @@ internal sealed partial class FieldAndFormatConverter : System.Text.Json.Seriali
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, FieldAndFormat value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropField, value.Field);
-		writer.WriteProperty(options, PropFormat, value.Format);
-		writer.WriteProperty(options, PropIncludeUnmapped, value.IncludeUnmapped);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropFormat, value.Format, null, null);
+		writer.WriteProperty(options, PropIncludeUnmapped, value.IncludeUnmapped, null, null);
 		writer.WriteEndObject();
 	}
 }

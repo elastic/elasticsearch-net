@@ -40,12 +40,12 @@ internal sealed partial class ForcemergeResponseConverter : System.Text.Json.Ser
 		LocalJsonValue<string?> propTask = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propShards.TryRead(ref reader, options, PropShards))
+			if (propShards.TryReadProperty(ref reader, options, PropShards, null))
 			{
 				continue;
 			}
 
-			if (propTask.TryRead(ref reader, options, PropTask))
+			if (propTask.TryReadProperty(ref reader, options, PropTask, null))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class ForcemergeResponseConverter : System.Text.Json.Ser
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ForcemergeResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropShards, value.Shards);
-		writer.WriteProperty(options, PropTask, value.Task);
+		writer.WriteProperty(options, PropShards, value.Shards, null, null);
+		writer.WriteProperty(options, PropTask, value.Task, null, null);
 		writer.WriteEndObject();
 	}
 }

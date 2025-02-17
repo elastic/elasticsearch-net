@@ -42,17 +42,17 @@ internal sealed partial class HealthReportResponseConverter : System.Text.Json.S
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus?> propStatus = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propClusterName.TryRead(ref reader, options, PropClusterName))
+			if (propClusterName.TryReadProperty(ref reader, options, PropClusterName, null))
 			{
 				continue;
 			}
 
-			if (propIndicators.TryRead(ref reader, options, PropIndicators))
+			if (propIndicators.TryReadProperty(ref reader, options, PropIndicators, null))
 			{
 				continue;
 			}
 
-			if (propStatus.TryRead(ref reader, options, PropStatus))
+			if (propStatus.TryReadProperty(ref reader, options, PropStatus, null))
 			{
 				continue;
 			}
@@ -74,9 +74,9 @@ internal sealed partial class HealthReportResponseConverter : System.Text.Json.S
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, HealthReportResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropClusterName, value.ClusterName);
-		writer.WriteProperty(options, PropIndicators, value.Indicators);
-		writer.WriteProperty(options, PropStatus, value.Status);
+		writer.WriteProperty(options, PropClusterName, value.ClusterName, null, null);
+		writer.WriteProperty(options, PropIndicators, value.Indicators, null, null);
+		writer.WriteProperty(options, PropStatus, value.Status, null, null);
 		writer.WriteEndObject();
 	}
 }

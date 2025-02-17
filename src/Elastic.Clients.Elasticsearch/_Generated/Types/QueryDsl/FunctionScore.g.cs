@@ -107,12 +107,12 @@ internal sealed partial class FunctionScoreConverter : System.Text.Json.Serializ
 		object? variant = null;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propFilter.TryRead(ref reader, options, PropFilter))
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, null))
 			{
 				continue;
 			}
 
-			if (propWeight.TryRead(ref reader, options, PropWeight))
+			if (propWeight.TryReadProperty(ref reader, options, PropWeight, null))
 			{
 				continue;
 			}
@@ -121,7 +121,7 @@ internal sealed partial class FunctionScoreConverter : System.Text.Json.Serializ
 			{
 				variantType = VariantExp.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction>(options, null);
 				continue;
 			}
 
@@ -129,7 +129,7 @@ internal sealed partial class FunctionScoreConverter : System.Text.Json.Serializ
 			{
 				variantType = VariantFieldValueFactor.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction?>(options, null);
 				continue;
 			}
 
@@ -137,7 +137,7 @@ internal sealed partial class FunctionScoreConverter : System.Text.Json.Serializ
 			{
 				variantType = VariantGauss.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction>(options, null);
 				continue;
 			}
 
@@ -145,7 +145,7 @@ internal sealed partial class FunctionScoreConverter : System.Text.Json.Serializ
 			{
 				variantType = VariantLinear.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction>(options, null);
 				continue;
 			}
 
@@ -153,7 +153,7 @@ internal sealed partial class FunctionScoreConverter : System.Text.Json.Serializ
 			{
 				variantType = VariantRandomScore.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction?>(options, null);
 				continue;
 			}
 
@@ -161,7 +161,7 @@ internal sealed partial class FunctionScoreConverter : System.Text.Json.Serializ
 			{
 				variantType = VariantScriptScore.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction?>(options, null);
 				continue;
 			}
 
@@ -187,29 +187,29 @@ internal sealed partial class FunctionScoreConverter : System.Text.Json.Serializ
 			case "":
 				break;
 			case "exp":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction)value.Variant, null, null);
 				break;
 			case "field_value_factor":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction?)value.Variant, null, null);
 				break;
 			case "gauss":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction)value.Variant, null, null);
 				break;
 			case "linear":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction)value.Variant, null, null);
 				break;
 			case "random_score":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction?)value.Variant, null, null);
 				break;
 			case "script_score":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction?)value.Variant, null, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(FunctionScore)}'.");
 		}
 
-		writer.WriteProperty(options, PropFilter, value.Filter);
-		writer.WriteProperty(options, PropWeight, value.Weight);
+		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
+		writer.WriteProperty(options, PropWeight, value.Weight, null, null);
 		writer.WriteEndObject();
 	}
 }

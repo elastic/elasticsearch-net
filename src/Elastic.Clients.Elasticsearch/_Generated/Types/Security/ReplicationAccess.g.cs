@@ -39,12 +39,12 @@ internal sealed partial class ReplicationAccessConverter : System.Text.Json.Seri
 		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.IndexName>> propNames = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAllowRestrictedIndices.TryRead(ref reader, options, PropAllowRestrictedIndices))
+			if (propAllowRestrictedIndices.TryReadProperty(ref reader, options, PropAllowRestrictedIndices, null))
 			{
 				continue;
 			}
 
-			if (propNames.TryRead(ref reader, options, PropNames, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.IndexName>, Elastic.Clients.Elasticsearch.IndexName>)))
+			if (propNames.TryReadProperty(ref reader, options, PropNames, static ICollection<Elastic.Clients.Elasticsearch.IndexName> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.IndexName>(o, null)!))
 			{
 				continue;
 			}
@@ -64,8 +64,8 @@ internal sealed partial class ReplicationAccessConverter : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ReplicationAccess value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAllowRestrictedIndices, value.AllowRestrictedIndices);
-		writer.WriteProperty(options, PropNames, value.Names, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.IndexName>, Elastic.Clients.Elasticsearch.IndexName>));
+		writer.WriteProperty(options, PropAllowRestrictedIndices, value.AllowRestrictedIndices, null, null);
+		writer.WriteProperty(options, PropNames, value.Names, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.IndexName> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.IndexName>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

@@ -40,12 +40,12 @@ internal sealed partial class GetJobStatsResponseConverter : System.Text.Json.Se
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.JobStats>> propJobs = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCount.TryRead(ref reader, options, PropCount))
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
 			{
 				continue;
 			}
 
-			if (propJobs.TryRead(ref reader, options, PropJobs))
+			if (propJobs.TryReadProperty(ref reader, options, PropJobs, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.JobStats> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.JobStats>(o, null)!))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class GetJobStatsResponseConverter : System.Text.Json.Se
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetJobStatsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCount, value.Count);
-		writer.WriteProperty(options, PropJobs, value.Jobs);
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropJobs, value.Jobs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.JobStats> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.JobStats>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

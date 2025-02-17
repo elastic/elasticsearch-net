@@ -40,12 +40,12 @@ internal sealed partial class SimulateTemplateResponseConverter : System.Text.Js
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.Template> propTemplate = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propOverlapping.TryRead(ref reader, options, PropOverlapping))
+			if (propOverlapping.TryReadProperty(ref reader, options, PropOverlapping, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.Overlapping>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.Overlapping>(o, null)))
 			{
 				continue;
 			}
 
-			if (propTemplate.TryRead(ref reader, options, PropTemplate))
+			if (propTemplate.TryReadProperty(ref reader, options, PropTemplate, null))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class SimulateTemplateResponseConverter : System.Text.Js
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, SimulateTemplateResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropOverlapping, value.Overlapping);
-		writer.WriteProperty(options, PropTemplate, value.Template);
+		writer.WriteProperty(options, PropOverlapping, value.Overlapping, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.Overlapping>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.Overlapping>(o, v, null));
+		writer.WriteProperty(options, PropTemplate, value.Template, null, null);
 		writer.WriteEndObject();
 	}
 }

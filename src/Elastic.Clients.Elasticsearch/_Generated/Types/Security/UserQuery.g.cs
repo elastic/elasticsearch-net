@@ -104,7 +104,7 @@ internal sealed partial class UserQueryConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantBool.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery?>(options, null);
 				continue;
 			}
 
@@ -112,7 +112,7 @@ internal sealed partial class UserQueryConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantExists.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery?>(options, null);
 				continue;
 			}
 
@@ -120,7 +120,7 @@ internal sealed partial class UserQueryConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantIds.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery?>(options, null);
 				continue;
 			}
 
@@ -128,7 +128,7 @@ internal sealed partial class UserQueryConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantMatch.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery?>(options, null);
 				continue;
 			}
 
@@ -136,7 +136,7 @@ internal sealed partial class UserQueryConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantMatchAll.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery?>(options, null);
 				continue;
 			}
 
@@ -144,7 +144,7 @@ internal sealed partial class UserQueryConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantPrefix.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery?>(options, null);
 				continue;
 			}
 
@@ -152,7 +152,7 @@ internal sealed partial class UserQueryConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantRange.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery>(options, null);
 				continue;
 			}
 
@@ -160,7 +160,7 @@ internal sealed partial class UserQueryConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantSimpleQueryString.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery?>(options, null);
 				continue;
 			}
 
@@ -168,7 +168,7 @@ internal sealed partial class UserQueryConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantTerm.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.TermQuery?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.TermQuery?>(options, null);
 				continue;
 			}
 
@@ -176,7 +176,7 @@ internal sealed partial class UserQueryConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantTerms.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery?>(options, null);
 				continue;
 			}
 
@@ -184,7 +184,7 @@ internal sealed partial class UserQueryConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantWildcard.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery?>(options, null);
 				continue;
 			}
 
@@ -203,37 +203,37 @@ internal sealed partial class UserQueryConverter : System.Text.Json.Serializatio
 			case "":
 				break;
 			case "bool":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery?)value.Variant, null, null);
 				break;
 			case "exists":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery?)value.Variant, null, null);
 				break;
 			case "ids":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery?)value.Variant, null, null);
 				break;
 			case "match":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery?)value.Variant, null, null);
 				break;
 			case "match_all":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery?)value.Variant, null, null);
 				break;
 			case "prefix":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery?)value.Variant, null, null);
 				break;
 			case "range":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery)value.Variant, null, null);
 				break;
 			case "simple_query_string":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery?)value.Variant, null, null);
 				break;
 			case "term":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.TermQuery?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.TermQuery?)value.Variant, null, null);
 				break;
 			case "terms":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery?)value.Variant, null, null);
 				break;
 			case "wildcard":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery?)value.Variant, null, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(UserQuery)}'.");

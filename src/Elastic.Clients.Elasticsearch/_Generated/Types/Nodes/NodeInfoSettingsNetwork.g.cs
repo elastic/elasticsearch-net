@@ -37,7 +37,7 @@ internal sealed partial class NodeInfoSettingsNetworkConverter : System.Text.Jso
 		LocalJsonValue<IReadOnlyCollection<string>?> propHost = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propHost.TryRead(ref reader, options, PropHost, typeof(SingleOrManyMarker<IReadOnlyCollection<string>?, string>)))
+			if (propHost.TryReadProperty(ref reader, options, PropHost, static IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
@@ -55,7 +55,7 @@ internal sealed partial class NodeInfoSettingsNetworkConverter : System.Text.Jso
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, NodeInfoSettingsNetwork value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropHost, value.Host, null, typeof(SingleOrManyMarker<IReadOnlyCollection<string>?, string>));
+		writer.WriteProperty(options, PropHost, value.Host, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

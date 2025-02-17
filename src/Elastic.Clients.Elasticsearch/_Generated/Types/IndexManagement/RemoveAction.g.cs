@@ -45,27 +45,27 @@ internal sealed partial class RemoveActionConverter : System.Text.Json.Serializa
 		LocalJsonValue<bool?> propMustExist = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAlias.TryRead(ref reader, options, PropAlias))
+			if (propAlias.TryReadProperty(ref reader, options, PropAlias, null))
 			{
 				continue;
 			}
 
-			if (propAliases.TryRead(ref reader, options, PropAliases, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.IndexAlias>?, Elastic.Clients.Elasticsearch.IndexAlias>)))
+			if (propAliases.TryReadProperty(ref reader, options, PropAliases, static ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.IndexAlias>(o, null)))
 			{
 				continue;
 			}
 
-			if (propIndex.TryRead(ref reader, options, PropIndex))
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
 			{
 				continue;
 			}
 
-			if (propIndices.TryRead(ref reader, options, PropIndices))
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, null))
 			{
 				continue;
 			}
 
-			if (propMustExist.TryRead(ref reader, options, PropMustExist))
+			if (propMustExist.TryReadProperty(ref reader, options, PropMustExist, null))
 			{
 				continue;
 			}
@@ -91,11 +91,11 @@ internal sealed partial class RemoveActionConverter : System.Text.Json.Serializa
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, RemoveAction value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAlias, value.Alias);
-		writer.WriteProperty(options, PropAliases, value.Aliases, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.IndexAlias>?, Elastic.Clients.Elasticsearch.IndexAlias>));
-		writer.WriteProperty(options, PropIndex, value.Index);
-		writer.WriteProperty(options, PropIndices, value.Indices);
-		writer.WriteProperty(options, PropMustExist, value.MustExist);
+		writer.WriteProperty(options, PropAlias, value.Alias, null, null);
+		writer.WriteProperty(options, PropAliases, value.Aliases, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.IndexAlias>(o, v, null));
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropIndices, value.Indices, null, null);
+		writer.WriteProperty(options, PropMustExist, value.MustExist, null, null);
 		writer.WriteEndObject();
 	}
 }

@@ -30,13 +30,52 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+[JsonConverter(typeof(NodeReloadResultConverter))]
 public sealed partial class NodeReloadResult : Union<Elastic.Clients.Elasticsearch.Nodes.Stats, Elastic.Clients.Elasticsearch.Nodes.NodeReloadError>
 {
-	public NodeReloadResult(Elastic.Clients.Elasticsearch.Nodes.Stats Stats) : base(Stats)
+	public NodeReloadResult(Elastic.Clients.Elasticsearch.Nodes.Stats stats) : base(stats)
 	{
 	}
 
-	public NodeReloadResult(Elastic.Clients.Elasticsearch.Nodes.NodeReloadError Error) : base(Error)
+	public NodeReloadResult(Elastic.Clients.Elasticsearch.Nodes.NodeReloadError error) : base(error)
 	{
+	}
+
+	public static implicit operator NodeReloadResult(Elastic.Clients.Elasticsearch.Nodes.Stats stats) => new NodeReloadResult(stats);
+	public static implicit operator NodeReloadResult(Elastic.Clients.Elasticsearch.Nodes.NodeReloadError error) => new NodeReloadResult(error);
+}
+
+internal sealed partial class NodeReloadResultConverter : System.Text.Json.Serialization.JsonConverter<NodeReloadResult>
+{
+	public override NodeReloadResult Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var selector = static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByPropertyOfT2(ref r, o, "name");
+		return selector(ref reader, options) switch
+		{
+			Elastic.Clients.Elasticsearch.UnionTag.T1 => new NodeReloadResult(reader.ReadValue<Elastic.Clients.Elasticsearch.Nodes.Stats>(options, null)),
+			Elastic.Clients.Elasticsearch.UnionTag.T2 => new NodeReloadResult(reader.ReadValue<Elastic.Clients.Elasticsearch.Nodes.NodeReloadError>(options, null)),
+			_ => throw new System.InvalidOperationException($"Failed to select a union variant for type '{nameof(NodeReloadResult)}")
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, NodeReloadResult value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value.Tag)
+		{
+			case Elastic.Clients.Elasticsearch.UnionTag.T1:
+				{
+					writer.WriteValue(options, value.Value1, null);
+					break;
+				}
+
+			case Elastic.Clients.Elasticsearch.UnionTag.T2:
+				{
+					writer.WriteValue(options, value.Value2, null);
+					break;
+				}
+
+			default:
+				throw new System.InvalidOperationException($"Unrecognized tag value: {value.Tag}");
+		}
 	}
 }

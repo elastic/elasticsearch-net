@@ -38,7 +38,7 @@ internal sealed partial class DeleteExpiredDataResponseConverter : System.Text.J
 		LocalJsonValue<bool> propDeleted = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDeleted.TryRead(ref reader, options, PropDeleted))
+			if (propDeleted.TryReadProperty(ref reader, options, PropDeleted, null))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class DeleteExpiredDataResponseConverter : System.Text.J
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, DeleteExpiredDataResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDeleted, value.Deleted);
+		writer.WriteProperty(options, PropDeleted, value.Deleted, null, null);
 		writer.WriteEndObject();
 	}
 }

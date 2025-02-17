@@ -40,12 +40,12 @@ internal sealed partial class ForecastResponseConverter : System.Text.Json.Seria
 		LocalJsonValue<string> propForecastId = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAcknowledged.TryRead(ref reader, options, PropAcknowledged))
+			if (propAcknowledged.TryReadProperty(ref reader, options, PropAcknowledged, null))
 			{
 				continue;
 			}
 
-			if (propForecastId.TryRead(ref reader, options, PropForecastId))
+			if (propForecastId.TryReadProperty(ref reader, options, PropForecastId, null))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class ForecastResponseConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ForecastResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged);
-		writer.WriteProperty(options, PropForecastId, value.ForecastId);
+		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged, null, null);
+		writer.WriteProperty(options, PropForecastId, value.ForecastId, null, null);
 		writer.WriteEndObject();
 	}
 }

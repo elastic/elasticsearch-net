@@ -59,62 +59,62 @@ internal sealed partial class FieldCapabilityConverter : System.Text.Json.Serial
 		LocalJsonValue<string> propType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAggregatable.TryRead(ref reader, options, PropAggregatable))
+			if (propAggregatable.TryReadProperty(ref reader, options, PropAggregatable, null))
 			{
 				continue;
 			}
 
-			if (propIndices.TryRead(ref reader, options, PropIndices, typeof(SingleOrManyMarker<IReadOnlyCollection<string>?, string>)))
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, static IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propMeta.TryRead(ref reader, options, PropMeta))
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static IReadOnlyDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propMetadataField.TryRead(ref reader, options, PropMetadataField))
+			if (propMetadataField.TryReadProperty(ref reader, options, PropMetadataField, null))
 			{
 				continue;
 			}
 
-			if (propMetricConflictsIndices.TryRead(ref reader, options, PropMetricConflictsIndices))
+			if (propMetricConflictsIndices.TryReadProperty(ref reader, options, PropMetricConflictsIndices, static IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propNonAggregatableIndices.TryRead(ref reader, options, PropNonAggregatableIndices, typeof(SingleOrManyMarker<IReadOnlyCollection<string>?, string>)))
+			if (propNonAggregatableIndices.TryReadProperty(ref reader, options, PropNonAggregatableIndices, static IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propNonDimensionIndices.TryRead(ref reader, options, PropNonDimensionIndices))
+			if (propNonDimensionIndices.TryReadProperty(ref reader, options, PropNonDimensionIndices, static IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propNonSearchableIndices.TryRead(ref reader, options, PropNonSearchableIndices, typeof(SingleOrManyMarker<IReadOnlyCollection<string>?, string>)))
+			if (propNonSearchableIndices.TryReadProperty(ref reader, options, PropNonSearchableIndices, static IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propSearchable.TryRead(ref reader, options, PropSearchable))
+			if (propSearchable.TryReadProperty(ref reader, options, PropSearchable, null))
 			{
 				continue;
 			}
 
-			if (propTimeSeriesDimension.TryRead(ref reader, options, PropTimeSeriesDimension))
+			if (propTimeSeriesDimension.TryReadProperty(ref reader, options, PropTimeSeriesDimension, null))
 			{
 				continue;
 			}
 
-			if (propTimeSeriesMetric.TryRead(ref reader, options, PropTimeSeriesMetric))
+			if (propTimeSeriesMetric.TryReadProperty(ref reader, options, PropTimeSeriesMetric, null))
 			{
 				continue;
 			}
 
-			if (propType.TryRead(ref reader, options, PropType))
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
 			{
 				continue;
 			}
@@ -154,18 +154,18 @@ internal sealed partial class FieldCapabilityConverter : System.Text.Json.Serial
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, FieldCapability value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAggregatable, value.Aggregatable);
-		writer.WriteProperty(options, PropIndices, value.Indices, null, typeof(SingleOrManyMarker<IReadOnlyCollection<string>?, string>));
-		writer.WriteProperty(options, PropMeta, value.Meta);
-		writer.WriteProperty(options, PropMetadataField, value.MetadataField);
-		writer.WriteProperty(options, PropMetricConflictsIndices, value.MetricConflictsIndices);
-		writer.WriteProperty(options, PropNonAggregatableIndices, value.NonAggregatableIndices, null, typeof(SingleOrManyMarker<IReadOnlyCollection<string>?, string>));
-		writer.WriteProperty(options, PropNonDimensionIndices, value.NonDimensionIndices);
-		writer.WriteProperty(options, PropNonSearchableIndices, value.NonSearchableIndices, null, typeof(SingleOrManyMarker<IReadOnlyCollection<string>?, string>));
-		writer.WriteProperty(options, PropSearchable, value.Searchable);
-		writer.WriteProperty(options, PropTimeSeriesDimension, value.TimeSeriesDimension);
-		writer.WriteProperty(options, PropTimeSeriesMetric, value.TimeSeriesMetric);
-		writer.WriteProperty(options, PropType, value.Type);
+		writer.WriteProperty(options, PropAggregatable, value.Aggregatable, null, null);
+		writer.WriteProperty(options, PropIndices, value.Indices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropMetadataField, value.MetadataField, null, null);
+		writer.WriteProperty(options, PropMetricConflictsIndices, value.MetricConflictsIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropNonAggregatableIndices, value.NonAggregatableIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropNonDimensionIndices, value.NonDimensionIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropNonSearchableIndices, value.NonSearchableIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropSearchable, value.Searchable, null, null);
+		writer.WriteProperty(options, PropTimeSeriesDimension, value.TimeSeriesDimension, null, null);
+		writer.WriteProperty(options, PropTimeSeriesMetric, value.TimeSeriesMetric, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
 	}
 }

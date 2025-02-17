@@ -133,7 +133,7 @@ internal sealed partial class TokenizerInterfaceConverter : System.Text.Json.Ser
 		string? discriminator = null;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TryReadProperty(options, PropDiscriminator, ref discriminator))
+			if (reader.TryReadProperty(options, PropDiscriminator, ref discriminator, null))
 			{
 				break;
 			}
@@ -144,24 +144,24 @@ internal sealed partial class TokenizerInterfaceConverter : System.Text.Json.Ser
 		reader = readerSnapshot;
 		return discriminator switch
 		{
-			"char_group" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.CharGroupTokenizer>(options),
-			"classic" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizer>(options),
-			"edge_ngram" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizer>(options),
-			"icu_tokenizer" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.IcuTokenizer>(options),
-			"keyword" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizer>(options),
-			"kuromoji_tokenizer" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizer>(options),
-			"letter" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.LetterTokenizer>(options),
-			"lowercase" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenizer>(options),
-			"ngram" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.NGramTokenizer>(options),
-			"nori_tokenizer" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer>(options),
-			"path_hierarchy" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer>(options),
-			"pattern" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PatternTokenizer>(options),
-			"simple_pattern_split" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SimplePatternSplitTokenizer>(options),
-			"simple_pattern" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizer>(options),
-			"standard" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.StandardTokenizer>(options),
-			"thai" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizer>(options),
-			"uax_url_email" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.UaxEmailUrlTokenizer>(options),
-			"whitespace" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.WhitespaceTokenizer>(options),
+			"char_group" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.CharGroupTokenizer>(options, null),
+			"classic" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizer>(options, null),
+			"edge_ngram" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizer>(options, null),
+			"icu_tokenizer" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.IcuTokenizer>(options, null),
+			"keyword" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizer>(options, null),
+			"kuromoji_tokenizer" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizer>(options, null),
+			"letter" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.LetterTokenizer>(options, null),
+			"lowercase" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenizer>(options, null),
+			"ngram" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.NGramTokenizer>(options, null),
+			"nori_tokenizer" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer>(options, null),
+			"path_hierarchy" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer>(options, null),
+			"pattern" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PatternTokenizer>(options, null),
+			"simple_pattern_split" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SimplePatternSplitTokenizer>(options, null),
+			"simple_pattern" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizer>(options, null),
+			"standard" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.StandardTokenizer>(options, null),
+			"thai" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizer>(options, null),
+			"uax_url_email" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.UaxEmailUrlTokenizer>(options, null),
+			"whitespace" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.WhitespaceTokenizer>(options, null),
 			_ => throw new System.Text.Json.JsonException($"Variant '{discriminator}' is not supported for type '{nameof(ITokenizer)}'.")
 		};
 	}
@@ -171,58 +171,58 @@ internal sealed partial class TokenizerInterfaceConverter : System.Text.Json.Ser
 		switch (value.Type)
 		{
 			case "char_group":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.CharGroupTokenizer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.CharGroupTokenizer)value, null);
 				break;
 			case "classic":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizer)value, null);
 				break;
 			case "edge_ngram":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizer)value, null);
 				break;
 			case "icu_tokenizer":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.IcuTokenizer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.IcuTokenizer)value, null);
 				break;
 			case "keyword":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizer)value, null);
 				break;
 			case "kuromoji_tokenizer":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizer)value, null);
 				break;
 			case "letter":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.LetterTokenizer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.LetterTokenizer)value, null);
 				break;
 			case "lowercase":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenizer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenizer)value, null);
 				break;
 			case "ngram":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.NGramTokenizer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.NGramTokenizer)value, null);
 				break;
 			case "nori_tokenizer":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer)value, null);
 				break;
 			case "path_hierarchy":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer)value, null);
 				break;
 			case "pattern":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PatternTokenizer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PatternTokenizer)value, null);
 				break;
 			case "simple_pattern_split":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.SimplePatternSplitTokenizer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.SimplePatternSplitTokenizer)value, null);
 				break;
 			case "simple_pattern":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizer)value, null);
 				break;
 			case "standard":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.StandardTokenizer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.StandardTokenizer)value, null);
 				break;
 			case "thai":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizer)value, null);
 				break;
 			case "uax_url_email":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.UaxEmailUrlTokenizer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.UaxEmailUrlTokenizer)value, null);
 				break;
 			case "whitespace":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.WhitespaceTokenizer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.WhitespaceTokenizer)value, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.Type}' is not supported for type '{nameof(ITokenizer)}'.");

@@ -48,32 +48,32 @@ internal sealed partial class RollupSearchResponseConverter<TDocument> : System.
 		LocalJsonValue<long> propTook = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAggregations.TryRead(ref reader, options, PropAggregations))
+			if (propAggregations.TryReadProperty(ref reader, options, PropAggregations, null))
 			{
 				continue;
 			}
 
-			if (propHits.TryRead(ref reader, options, PropHits))
+			if (propHits.TryReadProperty(ref reader, options, PropHits, null))
 			{
 				continue;
 			}
 
-			if (propShards.TryRead(ref reader, options, PropShards))
+			if (propShards.TryReadProperty(ref reader, options, PropShards, null))
 			{
 				continue;
 			}
 
-			if (propTerminatedEarly.TryRead(ref reader, options, PropTerminatedEarly))
+			if (propTerminatedEarly.TryReadProperty(ref reader, options, PropTerminatedEarly, null))
 			{
 				continue;
 			}
 
-			if (propTimedOut.TryRead(ref reader, options, PropTimedOut))
+			if (propTimedOut.TryReadProperty(ref reader, options, PropTimedOut, null))
 			{
 				continue;
 			}
 
-			if (propTook.TryRead(ref reader, options, PropTook))
+			if (propTook.TryReadProperty(ref reader, options, PropTook, null))
 			{
 				continue;
 			}
@@ -101,12 +101,12 @@ internal sealed partial class RollupSearchResponseConverter<TDocument> : System.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, RollupSearchResponse<TDocument> value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAggregations, value.Aggregations);
-		writer.WriteProperty(options, PropHits, value.Hits);
-		writer.WriteProperty(options, PropShards, value.Shards);
-		writer.WriteProperty(options, PropTerminatedEarly, value.TerminatedEarly);
-		writer.WriteProperty(options, PropTimedOut, value.TimedOut);
-		writer.WriteProperty(options, PropTook, value.Took);
+		writer.WriteProperty(options, PropAggregations, value.Aggregations, null, null);
+		writer.WriteProperty(options, PropHits, value.Hits, null, null);
+		writer.WriteProperty(options, PropShards, value.Shards, null, null);
+		writer.WriteProperty(options, PropTerminatedEarly, value.TerminatedEarly, null, null);
+		writer.WriteProperty(options, PropTimedOut, value.TimedOut, null, null);
+		writer.WriteProperty(options, PropTook, value.Took, null, null);
 		writer.WriteEndObject();
 	}
 }

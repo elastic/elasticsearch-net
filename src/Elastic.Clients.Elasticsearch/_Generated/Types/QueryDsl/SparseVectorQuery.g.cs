@@ -140,32 +140,32 @@ internal sealed partial class SparseVectorQueryConverter : System.Text.Json.Seri
 		object? variant = null;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBoost.TryRead(ref reader, options, PropBoost))
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
 			{
 				continue;
 			}
 
-			if (propField.TryRead(ref reader, options, PropField))
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
 			{
 				continue;
 			}
 
-			if (propPrune.TryRead(ref reader, options, PropPrune))
+			if (propPrune.TryReadProperty(ref reader, options, PropPrune, null))
 			{
 				continue;
 			}
 
-			if (propPruningConfig.TryRead(ref reader, options, PropPruningConfig))
+			if (propPruningConfig.TryReadProperty(ref reader, options, PropPruningConfig, null))
 			{
 				continue;
 			}
 
-			if (propQuery.TryRead(ref reader, options, PropQuery))
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
 			{
 				continue;
 			}
 
-			if (propQueryName.TryRead(ref reader, options, PropQueryName))
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
 			{
 				continue;
 			}
@@ -174,7 +174,7 @@ internal sealed partial class SparseVectorQueryConverter : System.Text.Json.Seri
 			{
 				variantType = VariantInferenceId.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Id?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Id?>(options, null);
 				continue;
 			}
 
@@ -208,18 +208,18 @@ internal sealed partial class SparseVectorQueryConverter : System.Text.Json.Seri
 			case "":
 				break;
 			case "inference_id":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Id?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Id?)value.Variant, null, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(SparseVectorQuery)}'.");
 		}
 
-		writer.WriteProperty(options, PropBoost, value.Boost);
-		writer.WriteProperty(options, PropField, value.Field);
-		writer.WriteProperty(options, PropPrune, value.Prune);
-		writer.WriteProperty(options, PropPruningConfig, value.PruningConfig);
-		writer.WriteProperty(options, PropQuery, value.Query);
-		writer.WriteProperty(options, PropQueryName, value.QueryName);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropPrune, value.Prune, null, null);
+		writer.WriteProperty(options, PropPruningConfig, value.PruningConfig, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
 		writer.WriteEndObject();
 	}
 }

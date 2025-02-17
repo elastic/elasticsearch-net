@@ -40,12 +40,12 @@ internal sealed partial class GetCalendarsResponseConverter : System.Text.Json.S
 		LocalJsonValue<long> propCount = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCalendars.TryRead(ref reader, options, PropCalendars))
+			if (propCalendars.TryReadProperty(ref reader, options, PropCalendars, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Calendar> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.Calendar>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propCount.TryRead(ref reader, options, PropCount))
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class GetCalendarsResponseConverter : System.Text.Json.S
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetCalendarsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCalendars, value.Calendars);
-		writer.WriteProperty(options, PropCount, value.Count);
+		writer.WriteProperty(options, PropCalendars, value.Calendars, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Calendar> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.Calendar>(o, v, null));
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
 		writer.WriteEndObject();
 	}
 }

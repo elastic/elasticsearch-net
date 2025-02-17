@@ -40,12 +40,12 @@ internal sealed partial class GetRecordsResponseConverter : System.Text.Json.Ser
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Anomaly>> propRecords = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCount.TryRead(ref reader, options, PropCount))
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
 			{
 				continue;
 			}
 
-			if (propRecords.TryRead(ref reader, options, PropRecords))
+			if (propRecords.TryReadProperty(ref reader, options, PropRecords, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Anomaly> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.Anomaly>(o, null)!))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class GetRecordsResponseConverter : System.Text.Json.Ser
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetRecordsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCount, value.Count);
-		writer.WriteProperty(options, PropRecords, value.Records);
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropRecords, value.Records, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Anomaly> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.Anomaly>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

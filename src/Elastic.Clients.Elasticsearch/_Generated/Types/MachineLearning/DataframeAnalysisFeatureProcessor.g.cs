@@ -88,7 +88,7 @@ internal sealed partial class DataframeAnalysisFeatureProcessorConverter : Syste
 			{
 				variantType = VariantFrequencyEncoding.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding?>(options, null);
 				continue;
 			}
 
@@ -96,7 +96,7 @@ internal sealed partial class DataframeAnalysisFeatureProcessorConverter : Syste
 			{
 				variantType = VariantMultiEncoding.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncoding?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncoding?>(options, null);
 				continue;
 			}
 
@@ -104,7 +104,7 @@ internal sealed partial class DataframeAnalysisFeatureProcessorConverter : Syste
 			{
 				variantType = VariantNGramEncoding.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding?>(options, null);
 				continue;
 			}
 
@@ -112,7 +112,7 @@ internal sealed partial class DataframeAnalysisFeatureProcessorConverter : Syste
 			{
 				variantType = VariantOneHotEncoding.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding?>(options, null);
 				continue;
 			}
 
@@ -120,7 +120,7 @@ internal sealed partial class DataframeAnalysisFeatureProcessorConverter : Syste
 			{
 				variantType = VariantTargetMeanEncoding.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncoding?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncoding?>(options, null);
 				continue;
 			}
 
@@ -139,19 +139,19 @@ internal sealed partial class DataframeAnalysisFeatureProcessorConverter : Syste
 			case "":
 				break;
 			case "frequency_encoding":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding?)value.Variant, null, null);
 				break;
 			case "multi_encoding":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncoding?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncoding?)value.Variant, null, null);
 				break;
 			case "n_gram_encoding":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding?)value.Variant, null, null);
 				break;
 			case "one_hot_encoding":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding?)value.Variant, null, null);
 				break;
 			case "target_mean_encoding":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncoding?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncoding?)value.Variant, null, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(DataframeAnalysisFeatureProcessor)}'.");

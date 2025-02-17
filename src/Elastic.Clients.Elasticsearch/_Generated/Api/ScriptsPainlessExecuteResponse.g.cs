@@ -38,7 +38,7 @@ internal sealed partial class ScriptsPainlessExecuteResponseConverter<TResult> :
 		LocalJsonValue<TResult> propResult = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propResult.TryRead(ref reader, options, PropResult, typeof(SourceMarker<TResult>)))
+			if (propResult.TryReadProperty(ref reader, options, PropResult, static TResult (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<TResult>(o, typeof(SourceMarker<TResult>))!))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class ScriptsPainlessExecuteResponseConverter<TResult> :
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ScriptsPainlessExecuteResponse<TResult> value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropResult, value.Result, null, typeof(SourceMarker<TResult>));
+		writer.WriteProperty(options, PropResult, value.Result, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, TResult v) => w.WriteValueEx<TResult>(o, v, typeof(SourceMarker<TResult>)));
 		writer.WriteEndObject();
 	}
 }

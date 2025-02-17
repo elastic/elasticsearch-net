@@ -40,12 +40,12 @@ internal sealed partial class GetScriptLanguagesResponseConverter : System.Text.
 		LocalJsonValue<IReadOnlyCollection<string>> propTypesAllowed = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propLanguageContexts.TryRead(ref reader, options, PropLanguageContexts))
+			if (propLanguageContexts.TryReadProperty(ref reader, options, PropLanguageContexts, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.GetScriptLanguages.LanguageContext> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.GetScriptLanguages.LanguageContext>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propTypesAllowed.TryRead(ref reader, options, PropTypesAllowed))
+			if (propTypesAllowed.TryReadProperty(ref reader, options, PropTypesAllowed, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class GetScriptLanguagesResponseConverter : System.Text.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetScriptLanguagesResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropLanguageContexts, value.LanguageContexts);
-		writer.WriteProperty(options, PropTypesAllowed, value.TypesAllowed);
+		writer.WriteProperty(options, PropLanguageContexts, value.LanguageContexts, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.GetScriptLanguages.LanguageContext> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.GetScriptLanguages.LanguageContext>(o, v, null));
+		writer.WriteProperty(options, PropTypesAllowed, value.TypesAllowed, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

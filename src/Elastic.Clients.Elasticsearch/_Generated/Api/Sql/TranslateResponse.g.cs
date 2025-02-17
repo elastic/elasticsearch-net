@@ -48,32 +48,32 @@ internal sealed partial class TranslateResponseConverter : System.Text.Json.Seri
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.SourceConfig?> propSource = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAggregations.TryRead(ref reader, options, PropAggregations))
+			if (propAggregations.TryReadProperty(ref reader, options, PropAggregations, static IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propFields.TryRead(ref reader, options, PropFields))
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>(o, null)))
 			{
 				continue;
 			}
 
-			if (propQuery.TryRead(ref reader, options, PropQuery))
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
 			{
 				continue;
 			}
 
-			if (propSize.TryRead(ref reader, options, PropSize))
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
 			{
 				continue;
 			}
 
-			if (propSort.TryRead(ref reader, options, PropSort, typeof(SingleOrManyMarker<IReadOnlyCollection<Elastic.Clients.Elasticsearch.SortOptions>?, Elastic.Clients.Elasticsearch.SortOptions>)))
+			if (propSort.TryReadProperty(ref reader, options, PropSort, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.SortOptions>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.SortOptions>(o, null)))
 			{
 				continue;
 			}
 
-			if (propSource.TryRead(ref reader, options, PropSource))
+			if (propSource.TryReadProperty(ref reader, options, PropSource, null))
 			{
 				continue;
 			}
@@ -101,12 +101,12 @@ internal sealed partial class TranslateResponseConverter : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, TranslateResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAggregations, value.Aggregations);
-		writer.WriteProperty(options, PropFields, value.Fields);
-		writer.WriteProperty(options, PropQuery, value.Query);
-		writer.WriteProperty(options, PropSize, value.Size);
-		writer.WriteProperty(options, PropSort, value.Sort, null, typeof(SingleOrManyMarker<IReadOnlyCollection<Elastic.Clients.Elasticsearch.SortOptions>?, Elastic.Clients.Elasticsearch.SortOptions>));
-		writer.WriteProperty(options, PropSource, value.Source);
+		writer.WriteProperty(options, PropAggregations, value.Aggregations, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>(o, v, null, null));
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>(o, v, null));
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropSort, value.Sort, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.SortOptions>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.SortOptions>(o, v, null));
+		writer.WriteProperty(options, PropSource, value.Source, null, null);
 		writer.WriteEndObject();
 	}
 }

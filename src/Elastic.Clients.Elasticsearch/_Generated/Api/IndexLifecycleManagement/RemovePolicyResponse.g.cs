@@ -40,12 +40,12 @@ internal sealed partial class RemovePolicyResponseConverter : System.Text.Json.S
 		LocalJsonValue<bool> propHasFailures = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propFailedIndexes.TryRead(ref reader, options, PropFailedIndexes))
+			if (propFailedIndexes.TryReadProperty(ref reader, options, PropFailedIndexes, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propHasFailures.TryRead(ref reader, options, PropHasFailures))
+			if (propHasFailures.TryReadProperty(ref reader, options, PropHasFailures, null))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class RemovePolicyResponseConverter : System.Text.Json.S
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, RemovePolicyResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFailedIndexes, value.FailedIndexes);
-		writer.WriteProperty(options, PropHasFailures, value.HasFailures);
+		writer.WriteProperty(options, PropFailedIndexes, value.FailedIndexes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropHasFailures, value.HasFailures, null, null);
 		writer.WriteEndObject();
 	}
 }

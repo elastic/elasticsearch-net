@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
@@ -20,12 +19,10 @@ public partial class ByteSize :
 #endif
 {
 	public string GetString(ITransportConfiguration settings) =>
-		Tag switch
-		{
-			0 => Item1.ToString(CultureInfo.InvariantCulture),
-			1 => Item2!,
-			_ => throw new InvalidOperationException()
-		};
+		Match(
+			v => v.ToString(CultureInfo.InvariantCulture),
+			v => v ?? string.Empty
+		);
 
 	#region IParsable
 

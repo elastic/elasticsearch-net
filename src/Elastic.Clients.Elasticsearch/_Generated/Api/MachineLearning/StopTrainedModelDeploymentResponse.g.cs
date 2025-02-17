@@ -38,7 +38,7 @@ internal sealed partial class StopTrainedModelDeploymentResponseConverter : Syst
 		LocalJsonValue<bool> propStopped = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propStopped.TryRead(ref reader, options, PropStopped))
+			if (propStopped.TryReadProperty(ref reader, options, PropStopped, null))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class StopTrainedModelDeploymentResponseConverter : Syst
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, StopTrainedModelDeploymentResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropStopped, value.Stopped);
+		writer.WriteProperty(options, PropStopped, value.Stopped, null, null);
 		writer.WriteEndObject();
 	}
 }

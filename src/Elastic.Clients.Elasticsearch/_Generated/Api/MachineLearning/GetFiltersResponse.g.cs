@@ -40,12 +40,12 @@ internal sealed partial class GetFiltersResponseConverter : System.Text.Json.Ser
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Filter>> propFilters = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCount.TryRead(ref reader, options, PropCount))
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
 			{
 				continue;
 			}
 
-			if (propFilters.TryRead(ref reader, options, PropFilters))
+			if (propFilters.TryReadProperty(ref reader, options, PropFilters, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Filter> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.Filter>(o, null)!))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class GetFiltersResponseConverter : System.Text.Json.Ser
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetFiltersResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCount, value.Count);
-		writer.WriteProperty(options, PropFilters, value.Filters);
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropFilters, value.Filters, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Filter> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.Filter>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

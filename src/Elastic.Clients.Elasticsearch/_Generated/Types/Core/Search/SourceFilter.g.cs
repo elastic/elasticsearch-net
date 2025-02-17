@@ -38,7 +38,7 @@ internal sealed partial class SourceFilterConverter : System.Text.Json.Serializa
 	{
 		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
 		{
-			var value = reader.ReadValue<Elastic.Clients.Elasticsearch.Fields?>(options, typeof(SingleOrManyFieldsMarker));
+			var value = reader.ReadValue<Elastic.Clients.Elasticsearch.Fields?>(options, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(SingleOrManyFieldsMarker)));
 			return new SourceFilter { Includes = value };
 		}
 
@@ -47,12 +47,12 @@ internal sealed partial class SourceFilterConverter : System.Text.Json.Serializa
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propIncludes = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propExcludes.TryRead(ref reader, options, PropExcludes, typeof(SingleOrManyFieldsMarker)) || propExcludes.TryRead(ref reader, options, PropExcludes1, typeof(SingleOrManyFieldsMarker)))
+			if (propExcludes.TryReadProperty(ref reader, options, PropExcludes, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(SingleOrManyFieldsMarker))) || propExcludes.TryReadProperty(ref reader, options, PropExcludes1, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(SingleOrManyFieldsMarker))))
 			{
 				continue;
 			}
 
-			if (propIncludes.TryRead(ref reader, options, PropIncludes, typeof(SingleOrManyFieldsMarker)) || propIncludes.TryRead(ref reader, options, PropIncludes1, typeof(SingleOrManyFieldsMarker)))
+			if (propIncludes.TryReadProperty(ref reader, options, PropIncludes, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(SingleOrManyFieldsMarker))) || propIncludes.TryReadProperty(ref reader, options, PropIncludes1, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(SingleOrManyFieldsMarker))))
 			{
 				continue;
 			}
@@ -72,8 +72,8 @@ internal sealed partial class SourceFilterConverter : System.Text.Json.Serializa
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, SourceFilter value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropExcludes, value.Excludes, null, typeof(SingleOrManyFieldsMarker));
-		writer.WriteProperty(options, PropIncludes, value.Includes, null, typeof(SingleOrManyFieldsMarker));
+		writer.WriteProperty(options, PropExcludes, value.Excludes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropIncludes, value.Includes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(SingleOrManyFieldsMarker)));
 		writer.WriteEndObject();
 	}
 }

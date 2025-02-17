@@ -43,22 +43,22 @@ internal sealed partial class NodeInfoPathConverter : System.Text.Json.Serializa
 		LocalJsonValue<IReadOnlyCollection<string>?> propRepo = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propData.TryRead(ref reader, options, PropData, typeof(SingleOrManyMarker<IReadOnlyCollection<string>?, string>)))
+			if (propData.TryReadProperty(ref reader, options, PropData, static IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propHome.TryRead(ref reader, options, PropHome))
+			if (propHome.TryReadProperty(ref reader, options, PropHome, null))
 			{
 				continue;
 			}
 
-			if (propLogs.TryRead(ref reader, options, PropLogs))
+			if (propLogs.TryReadProperty(ref reader, options, PropLogs, null))
 			{
 				continue;
 			}
 
-			if (propRepo.TryRead(ref reader, options, PropRepo))
+			if (propRepo.TryReadProperty(ref reader, options, PropRepo, static IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
@@ -82,10 +82,10 @@ internal sealed partial class NodeInfoPathConverter : System.Text.Json.Serializa
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, NodeInfoPath value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropData, value.Data, null, typeof(SingleOrManyMarker<IReadOnlyCollection<string>?, string>));
-		writer.WriteProperty(options, PropHome, value.Home);
-		writer.WriteProperty(options, PropLogs, value.Logs);
-		writer.WriteProperty(options, PropRepo, value.Repo);
+		writer.WriteProperty(options, PropData, value.Data, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropHome, value.Home, null, null);
+		writer.WriteProperty(options, PropLogs, value.Logs, null, null);
+		writer.WriteProperty(options, PropRepo, value.Repo, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

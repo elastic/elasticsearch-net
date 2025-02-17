@@ -20,12 +20,12 @@ internal sealed partial class GetSourceResponseConverter<TDocument> : System.Tex
 {
 	public override GetSourceResponse<TDocument> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		return new GetSourceResponse<TDocument> { Body = reader.ReadValue<TDocument>(options, typeof(SourceMarker<TDocument>)) };
+		return new GetSourceResponse<TDocument> { Body = reader.ReadValueEx<TDocument>(options, typeof(SourceMarker<TDocument>)) };
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetSourceResponse<TDocument> value, System.Text.Json.JsonSerializerOptions options)
 	{
-		writer.WriteValue(options, value.Body, typeof(SourceMarker<TDocument>));
+		writer.WriteValueEx(options, value.Body, typeof(SourceMarker<TDocument>));
 	}
 }
 

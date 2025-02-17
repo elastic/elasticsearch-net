@@ -42,17 +42,17 @@ internal sealed partial class GetMemoryStatsResponseConverter : System.Text.Json
 		LocalJsonValue<Elastic.Clients.Elasticsearch.NodeStatistics> propNodeStatistics = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propClusterName.TryRead(ref reader, options, PropClusterName))
+			if (propClusterName.TryReadProperty(ref reader, options, PropClusterName, null))
 			{
 				continue;
 			}
 
-			if (propNodes.TryRead(ref reader, options, PropNodes))
+			if (propNodes.TryReadProperty(ref reader, options, PropNodes, static IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.Memory> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.MachineLearning.Memory>(o, null, null)!))
 			{
 				continue;
 			}
 
-			if (propNodeStatistics.TryRead(ref reader, options, PropNodeStatistics))
+			if (propNodeStatistics.TryReadProperty(ref reader, options, PropNodeStatistics, null))
 			{
 				continue;
 			}
@@ -74,9 +74,9 @@ internal sealed partial class GetMemoryStatsResponseConverter : System.Text.Json
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetMemoryStatsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropClusterName, value.ClusterName);
-		writer.WriteProperty(options, PropNodes, value.Nodes);
-		writer.WriteProperty(options, PropNodeStatistics, value.NodeStatistics);
+		writer.WriteProperty(options, PropClusterName, value.ClusterName, null, null);
+		writer.WriteProperty(options, PropNodes, value.Nodes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.Memory> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.MachineLearning.Memory>(o, v, null, null));
+		writer.WriteProperty(options, PropNodeStatistics, value.NodeStatistics, null, null);
 		writer.WriteEndObject();
 	}
 }

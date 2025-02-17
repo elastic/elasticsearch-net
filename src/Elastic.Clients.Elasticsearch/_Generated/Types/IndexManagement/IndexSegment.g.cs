@@ -27,8 +27,41 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class IndexSegmentConverter : System.Text.Json.Serialization.JsonConverter<IndexSegment>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("shards");
+
+	public override IndexSegment Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyDictionary<string, Union<Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment>>>> propShards = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propShards.TryReadProperty(ref reader, options, PropShards, static IReadOnlyDictionary<string, Union<Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment>>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Union<Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment>>>(o, null, static Union<Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment>>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartObject, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartArray), null, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment>(o, null)!)!)!))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new IndexSegment
+		{
+			Shards = propShards.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, IndexSegment value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropShards, value.Shards, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, Union<Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment>>> v) => w.WriteDictionaryValue<string, Union<Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment>>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Union<Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment>> v) => w.WriteUnionValue<Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment>(o, v, null))));
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(IndexSegmentConverter))]
 public sealed partial class IndexSegment
 {
-	[JsonInclude, JsonPropertyName("shards")]
 	public IReadOnlyDictionary<string, Union<Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment>>> Shards { get; init; }
 }

@@ -1,3 +1,7 @@
+#if !NET5_0_OR_GREATER
+using System.Linq;
+#endif
+
 namespace Elastic.Clients.Elasticsearch;
 
 using System;
@@ -11,7 +15,11 @@ internal static class EnumValueParser<T>
 
 	static EnumValueParser()
 	{
+#if NET5_0_OR_GREATER
 		foreach (var value in Enum.GetValues<T>())
+#else
+		foreach (var value in Enum.GetValues(typeof(T)).OfType<T>())
+#endif
 		{
 			var name = value.ToString();
 			ValueMap[name] = value;

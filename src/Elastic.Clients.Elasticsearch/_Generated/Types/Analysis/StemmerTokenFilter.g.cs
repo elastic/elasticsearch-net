@@ -41,7 +41,7 @@ internal sealed partial class StemmerTokenFilterConverter : System.Text.Json.Ser
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propLanguage.TryRead(ref reader, options, PropLanguage) || propLanguage.TryRead(ref reader, options, PropLanguage1))
+			if (propLanguage.TryReadProperty(ref reader, options, PropLanguage, null) || propLanguage.TryReadProperty(ref reader, options, PropLanguage1, null))
 			{
 				continue;
 			}
@@ -52,7 +52,7 @@ internal sealed partial class StemmerTokenFilterConverter : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propVersion.TryRead(ref reader, options, PropVersion))
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
 			{
 				continue;
 			}
@@ -72,9 +72,9 @@ internal sealed partial class StemmerTokenFilterConverter : System.Text.Json.Ser
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, StemmerTokenFilter value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropLanguage, value.Language);
-		writer.WriteProperty(options, PropType, value.Type);
-		writer.WriteProperty(options, PropVersion, value.Version);
+		writer.WriteProperty(options, PropLanguage, value.Language, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();
 	}
 }

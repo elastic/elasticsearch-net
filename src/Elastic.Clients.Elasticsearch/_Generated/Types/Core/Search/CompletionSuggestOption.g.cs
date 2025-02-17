@@ -55,52 +55,52 @@ internal sealed partial class CompletionSuggestOptionConverter<TDocument> : Syst
 		LocalJsonValue<string> propText = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCollateMatch.TryRead(ref reader, options, PropCollateMatch))
+			if (propCollateMatch.TryReadProperty(ref reader, options, PropCollateMatch, null))
 			{
 				continue;
 			}
 
-			if (propContexts.TryRead(ref reader, options, PropContexts))
+			if (propContexts.TryReadProperty(ref reader, options, PropContexts, static IReadOnlyDictionary<string, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Context>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Context>>(o, null, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Context> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.Context>(o, null)!)))
 			{
 				continue;
 			}
 
-			if (propFields.TryRead(ref reader, options, PropFields))
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static IReadOnlyDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propId.TryRead(ref reader, options, PropId))
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
 			{
 				continue;
 			}
 
-			if (propIndex.TryRead(ref reader, options, PropIndex))
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
 			{
 				continue;
 			}
 
-			if (propRouting.TryRead(ref reader, options, PropRouting))
+			if (propRouting.TryReadProperty(ref reader, options, PropRouting, null))
 			{
 				continue;
 			}
 
-			if (propScore.TryRead(ref reader, options, PropScore))
+			if (propScore.TryReadProperty(ref reader, options, PropScore, null))
 			{
 				continue;
 			}
 
-			if (propScore0.TryRead(ref reader, options, PropScore0))
+			if (propScore0.TryReadProperty(ref reader, options, PropScore0, null))
 			{
 				continue;
 			}
 
-			if (propSource.TryRead(ref reader, options, PropSource, typeof(SourceMarker<TDocument?>)))
+			if (propSource.TryReadProperty(ref reader, options, PropSource, static TDocument? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<TDocument?>(o, typeof(SourceMarker<TDocument?>))))
 			{
 				continue;
 			}
 
-			if (propText.TryRead(ref reader, options, PropText))
+			if (propText.TryReadProperty(ref reader, options, PropText, null))
 			{
 				continue;
 			}
@@ -136,16 +136,16 @@ internal sealed partial class CompletionSuggestOptionConverter<TDocument> : Syst
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, CompletionSuggestOption<TDocument> value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCollateMatch, value.CollateMatch);
-		writer.WriteProperty(options, PropContexts, value.Contexts);
-		writer.WriteProperty(options, PropFields, value.Fields);
-		writer.WriteProperty(options, PropId, value.Id);
-		writer.WriteProperty(options, PropIndex, value.Index);
-		writer.WriteProperty(options, PropRouting, value.Routing);
-		writer.WriteProperty(options, PropScore, value.Score);
-		writer.WriteProperty(options, PropScore0, value.Score0);
-		writer.WriteProperty(options, PropSource, value.Source, null, typeof(SourceMarker<TDocument?>));
-		writer.WriteProperty(options, PropText, value.Text);
+		writer.WriteProperty(options, PropCollateMatch, value.CollateMatch, null, null);
+		writer.WriteProperty(options, PropContexts, value.Contexts, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Context>>? v) => w.WriteDictionaryValue<string, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Context>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Context> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.Context>(o, v, null)));
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
+		writer.WriteProperty(options, PropScore, value.Score, null, null);
+		writer.WriteProperty(options, PropScore0, value.Score0, null, null);
+		writer.WriteProperty(options, PropSource, value.Source, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, TDocument? v) => w.WriteValueEx<TDocument?>(o, v, typeof(SourceMarker<TDocument?>)));
+		writer.WriteProperty(options, PropText, value.Text, null, null);
 		writer.WriteEndObject();
 	}
 }

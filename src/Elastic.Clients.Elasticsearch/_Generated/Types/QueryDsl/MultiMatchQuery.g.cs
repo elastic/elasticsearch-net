@@ -71,92 +71,92 @@ internal sealed partial class MultiMatchQueryConverter : System.Text.Json.Serial
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery?> propZeroTermsQuery = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAnalyzer.TryRead(ref reader, options, PropAnalyzer))
+			if (propAnalyzer.TryReadProperty(ref reader, options, PropAnalyzer, null))
 			{
 				continue;
 			}
 
-			if (propAutoGenerateSynonymsPhraseQuery.TryRead(ref reader, options, PropAutoGenerateSynonymsPhraseQuery))
+			if (propAutoGenerateSynonymsPhraseQuery.TryReadProperty(ref reader, options, PropAutoGenerateSynonymsPhraseQuery, null))
 			{
 				continue;
 			}
 
-			if (propBoost.TryRead(ref reader, options, PropBoost))
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
 			{
 				continue;
 			}
 
-			if (propFields.TryRead(ref reader, options, PropFields, typeof(SingleOrManyFieldsMarker)))
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(SingleOrManyFieldsMarker))))
 			{
 				continue;
 			}
 
-			if (propFuzziness.TryRead(ref reader, options, PropFuzziness))
+			if (propFuzziness.TryReadProperty(ref reader, options, PropFuzziness, null))
 			{
 				continue;
 			}
 
-			if (propFuzzyRewrite.TryRead(ref reader, options, PropFuzzyRewrite))
+			if (propFuzzyRewrite.TryReadProperty(ref reader, options, PropFuzzyRewrite, null))
 			{
 				continue;
 			}
 
-			if (propFuzzyTranspositions.TryRead(ref reader, options, PropFuzzyTranspositions))
+			if (propFuzzyTranspositions.TryReadProperty(ref reader, options, PropFuzzyTranspositions, null))
 			{
 				continue;
 			}
 
-			if (propLenient.TryRead(ref reader, options, PropLenient))
+			if (propLenient.TryReadProperty(ref reader, options, PropLenient, null))
 			{
 				continue;
 			}
 
-			if (propMaxExpansions.TryRead(ref reader, options, PropMaxExpansions))
+			if (propMaxExpansions.TryReadProperty(ref reader, options, PropMaxExpansions, null))
 			{
 				continue;
 			}
 
-			if (propMinimumShouldMatch.TryRead(ref reader, options, PropMinimumShouldMatch))
+			if (propMinimumShouldMatch.TryReadProperty(ref reader, options, PropMinimumShouldMatch, null))
 			{
 				continue;
 			}
 
-			if (propOperator.TryRead(ref reader, options, PropOperator))
+			if (propOperator.TryReadProperty(ref reader, options, PropOperator, null))
 			{
 				continue;
 			}
 
-			if (propPrefixLength.TryRead(ref reader, options, PropPrefixLength))
+			if (propPrefixLength.TryReadProperty(ref reader, options, PropPrefixLength, null))
 			{
 				continue;
 			}
 
-			if (propQuery.TryRead(ref reader, options, PropQuery))
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
 			{
 				continue;
 			}
 
-			if (propQueryName.TryRead(ref reader, options, PropQueryName))
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
 			{
 				continue;
 			}
 
-			if (propSlop.TryRead(ref reader, options, PropSlop))
+			if (propSlop.TryReadProperty(ref reader, options, PropSlop, null))
 			{
 				continue;
 			}
 
-			if (propTieBreaker.TryRead(ref reader, options, PropTieBreaker))
+			if (propTieBreaker.TryReadProperty(ref reader, options, PropTieBreaker, null))
 			{
 				continue;
 			}
 
-			if (propType.TryRead(ref reader, options, PropType))
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
 			{
 				continue;
 			}
 
-			if (propZeroTermsQuery.TryRead(ref reader, options, PropZeroTermsQuery))
+			if (propZeroTermsQuery.TryReadProperty(ref reader, options, PropZeroTermsQuery, null))
 			{
 				continue;
 			}
@@ -208,24 +208,24 @@ internal sealed partial class MultiMatchQueryConverter : System.Text.Json.Serial
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, MultiMatchQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAnalyzer, value.Analyzer);
-		writer.WriteProperty(options, PropAutoGenerateSynonymsPhraseQuery, value.AutoGenerateSynonymsPhraseQuery);
-		writer.WriteProperty(options, PropBoost, value.Boost);
-		writer.WriteProperty(options, PropFields, value.Fields, null, typeof(SingleOrManyFieldsMarker));
-		writer.WriteProperty(options, PropFuzziness, value.Fuzziness);
-		writer.WriteProperty(options, PropFuzzyRewrite, value.FuzzyRewrite);
-		writer.WriteProperty(options, PropFuzzyTranspositions, value.FuzzyTranspositions);
-		writer.WriteProperty(options, PropLenient, value.Lenient);
-		writer.WriteProperty(options, PropMaxExpansions, value.MaxExpansions);
-		writer.WriteProperty(options, PropMinimumShouldMatch, value.MinimumShouldMatch);
-		writer.WriteProperty(options, PropOperator, value.Operator);
-		writer.WriteProperty(options, PropPrefixLength, value.PrefixLength);
-		writer.WriteProperty(options, PropQuery, value.Query);
-		writer.WriteProperty(options, PropQueryName, value.QueryName);
-		writer.WriteProperty(options, PropSlop, value.Slop);
-		writer.WriteProperty(options, PropTieBreaker, value.TieBreaker);
-		writer.WriteProperty(options, PropType, value.Type);
-		writer.WriteProperty(options, PropZeroTermsQuery, value.ZeroTermsQuery);
+		writer.WriteProperty(options, PropAnalyzer, value.Analyzer, null, null);
+		writer.WriteProperty(options, PropAutoGenerateSynonymsPhraseQuery, value.AutoGenerateSynonymsPhraseQuery, null, null);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropFuzziness, value.Fuzziness, null, null);
+		writer.WriteProperty(options, PropFuzzyRewrite, value.FuzzyRewrite, null, null);
+		writer.WriteProperty(options, PropFuzzyTranspositions, value.FuzzyTranspositions, null, null);
+		writer.WriteProperty(options, PropLenient, value.Lenient, null, null);
+		writer.WriteProperty(options, PropMaxExpansions, value.MaxExpansions, null, null);
+		writer.WriteProperty(options, PropMinimumShouldMatch, value.MinimumShouldMatch, null, null);
+		writer.WriteProperty(options, PropOperator, value.Operator, null, null);
+		writer.WriteProperty(options, PropPrefixLength, value.PrefixLength, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteProperty(options, PropSlop, value.Slop, null, null);
+		writer.WriteProperty(options, PropTieBreaker, value.TieBreaker, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropZeroTermsQuery, value.ZeroTermsQuery, null, null);
 		writer.WriteEndObject();
 	}
 }

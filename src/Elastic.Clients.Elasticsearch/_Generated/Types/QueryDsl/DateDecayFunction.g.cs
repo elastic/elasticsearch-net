@@ -39,13 +39,13 @@ internal sealed partial class DateDecayFunctionConverter : System.Text.Json.Seri
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode?> propMultiValueMode = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propMultiValueMode.TryRead(ref reader, options, PropMultiValueMode))
+			if (propMultiValueMode.TryReadProperty(ref reader, options, PropMultiValueMode, null))
 			{
 				continue;
 			}
 
 			propField.Initialized = propPlacement.Initialized = true;
-			reader.ReadProperty(options, out propField.Value, out propPlacement.Value);
+			reader.ReadProperty(options, out propField.Value, out propPlacement.Value, null, null);
 		}
 
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
@@ -62,8 +62,8 @@ internal sealed partial class DateDecayFunctionConverter : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, DateDecayFunction value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMultiValueMode, value.MultiValueMode);
-		writer.WriteProperty(options, value.Field, value.Placement);
+		writer.WriteProperty(options, PropMultiValueMode, value.MultiValueMode, null, null);
+		writer.WriteProperty(options, value.Field, value.Placement, null, null);
 		writer.WriteEndObject();
 	}
 }

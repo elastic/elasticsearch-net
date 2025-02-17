@@ -41,7 +41,7 @@ internal sealed partial class FieldSortConverter : System.Text.Json.Serializatio
 	{
 		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
 		{
-			var value = reader.ReadValue<Elastic.Clients.Elasticsearch.SortOrder?>(options);
+			var value = reader.ReadValue<Elastic.Clients.Elasticsearch.SortOrder?>(options, null);
 			return new FieldSort { Order = value };
 		}
 
@@ -55,37 +55,37 @@ internal sealed partial class FieldSortConverter : System.Text.Json.Serializatio
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.FieldType?> propUnmappedType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propFormat.TryRead(ref reader, options, PropFormat))
+			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
 			{
 				continue;
 			}
 
-			if (propMissing.TryRead(ref reader, options, PropMissing))
+			if (propMissing.TryReadProperty(ref reader, options, PropMissing, null))
 			{
 				continue;
 			}
 
-			if (propMode.TryRead(ref reader, options, PropMode))
+			if (propMode.TryReadProperty(ref reader, options, PropMode, null))
 			{
 				continue;
 			}
 
-			if (propNested.TryRead(ref reader, options, PropNested))
+			if (propNested.TryReadProperty(ref reader, options, PropNested, null))
 			{
 				continue;
 			}
 
-			if (propNumericType.TryRead(ref reader, options, PropNumericType))
+			if (propNumericType.TryReadProperty(ref reader, options, PropNumericType, null))
 			{
 				continue;
 			}
 
-			if (propOrder.TryRead(ref reader, options, PropOrder))
+			if (propOrder.TryReadProperty(ref reader, options, PropOrder, null))
 			{
 				continue;
 			}
 
-			if (propUnmappedType.TryRead(ref reader, options, PropUnmappedType))
+			if (propUnmappedType.TryReadProperty(ref reader, options, PropUnmappedType, null))
 			{
 				continue;
 			}
@@ -115,13 +115,13 @@ internal sealed partial class FieldSortConverter : System.Text.Json.Serializatio
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, FieldSort value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFormat, value.Format);
-		writer.WriteProperty(options, PropMissing, value.Missing);
-		writer.WriteProperty(options, PropMode, value.Mode);
-		writer.WriteProperty(options, PropNested, value.Nested);
-		writer.WriteProperty(options, PropNumericType, value.NumericType);
-		writer.WriteProperty(options, PropOrder, value.Order);
-		writer.WriteProperty(options, PropUnmappedType, value.UnmappedType);
+		writer.WriteProperty(options, PropFormat, value.Format, null, null);
+		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
+		writer.WriteProperty(options, PropMode, value.Mode, null, null);
+		writer.WriteProperty(options, PropNested, value.Nested, null, null);
+		writer.WriteProperty(options, PropNumericType, value.NumericType, null, null);
+		writer.WriteProperty(options, PropOrder, value.Order, null, null);
+		writer.WriteProperty(options, PropUnmappedType, value.UnmappedType, null, null);
 		writer.WriteEndObject();
 	}
 }

@@ -61,67 +61,67 @@ internal sealed partial class DateHistogramAggregationConverter : System.Text.Js
 		LocalJsonValue<string?> propTimeZone = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCalendarInterval.TryRead(ref reader, options, PropCalendarInterval))
+			if (propCalendarInterval.TryReadProperty(ref reader, options, PropCalendarInterval, null))
 			{
 				continue;
 			}
 
-			if (propExtendedBounds.TryRead(ref reader, options, PropExtendedBounds))
+			if (propExtendedBounds.TryReadProperty(ref reader, options, PropExtendedBounds, null))
 			{
 				continue;
 			}
 
-			if (propField.TryRead(ref reader, options, PropField))
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
 			{
 				continue;
 			}
 
-			if (propFixedInterval.TryRead(ref reader, options, PropFixedInterval))
+			if (propFixedInterval.TryReadProperty(ref reader, options, PropFixedInterval, null))
 			{
 				continue;
 			}
 
-			if (propFormat.TryRead(ref reader, options, PropFormat))
+			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
 			{
 				continue;
 			}
 
-			if (propHardBounds.TryRead(ref reader, options, PropHardBounds))
+			if (propHardBounds.TryReadProperty(ref reader, options, PropHardBounds, null))
 			{
 				continue;
 			}
 
-			if (propMinDocCount.TryRead(ref reader, options, PropMinDocCount))
+			if (propMinDocCount.TryReadProperty(ref reader, options, PropMinDocCount, null))
 			{
 				continue;
 			}
 
-			if (propMissing.TryRead(ref reader, options, PropMissing))
+			if (propMissing.TryReadProperty(ref reader, options, PropMissing, null))
 			{
 				continue;
 			}
 
-			if (propOffset.TryRead(ref reader, options, PropOffset))
+			if (propOffset.TryReadProperty(ref reader, options, PropOffset, null))
 			{
 				continue;
 			}
 
-			if (propOrder.TryRead(ref reader, options, PropOrder, typeof(SingleOrManyMarker<ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>?, KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>)))
+			if (propOrder.TryReadProperty(ref reader, options, PropOrder, static ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(o, null)))
 			{
 				continue;
 			}
 
-			if (propParams.TryRead(ref reader, options, PropParams))
+			if (propParams.TryReadProperty(ref reader, options, PropParams, static IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propScript.TryRead(ref reader, options, PropScript))
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
 			{
 				continue;
 			}
 
-			if (propTimeZone.TryRead(ref reader, options, PropTimeZone))
+			if (propTimeZone.TryReadProperty(ref reader, options, PropTimeZone, null))
 			{
 				continue;
 			}
@@ -163,19 +163,19 @@ internal sealed partial class DateHistogramAggregationConverter : System.Text.Js
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, DateHistogramAggregation value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCalendarInterval, value.CalendarInterval);
-		writer.WriteProperty(options, PropExtendedBounds, value.ExtendedBounds);
-		writer.WriteProperty(options, PropField, value.Field);
-		writer.WriteProperty(options, PropFixedInterval, value.FixedInterval);
-		writer.WriteProperty(options, PropFormat, value.Format);
-		writer.WriteProperty(options, PropHardBounds, value.HardBounds);
-		writer.WriteProperty(options, PropMinDocCount, value.MinDocCount);
-		writer.WriteProperty(options, PropMissing, value.Missing);
-		writer.WriteProperty(options, PropOffset, value.Offset);
-		writer.WriteProperty(options, PropOrder, value.Order, null, typeof(SingleOrManyMarker<ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>?, KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>));
-		writer.WriteProperty(options, PropParams, value.Params);
-		writer.WriteProperty(options, PropScript, value.Script);
-		writer.WriteProperty(options, PropTimeZone, value.TimeZone);
+		writer.WriteProperty(options, PropCalendarInterval, value.CalendarInterval, null, null);
+		writer.WriteProperty(options, PropExtendedBounds, value.ExtendedBounds, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropFixedInterval, value.FixedInterval, null, null);
+		writer.WriteProperty(options, PropFormat, value.Format, null, null);
+		writer.WriteProperty(options, PropHardBounds, value.HardBounds, null, null);
+		writer.WriteProperty(options, PropMinDocCount, value.MinDocCount, null, null);
+		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
+		writer.WriteProperty(options, PropOffset, value.Offset, null, null);
+		writer.WriteProperty(options, PropOrder, value.Order, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? v) => w.WriteSingleOrManyCollectionValue<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(o, v, null));
+		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
+		writer.WriteProperty(options, PropTimeZone, value.TimeZone, null, null);
 		writer.WriteEndObject();
 	}
 }

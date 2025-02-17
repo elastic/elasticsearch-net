@@ -42,17 +42,17 @@ internal sealed partial class RankEvalResponseConverter : System.Text.Json.Seria
 		LocalJsonValue<double> propMetricScore = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDetails.TryRead(ref reader, options, PropDetails))
+			if (propDetails.TryReadProperty(ref reader, options, PropDetails, static IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDetail> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDetail>(o, null, null)!))
 			{
 				continue;
 			}
 
-			if (propFailures.TryRead(ref reader, options, PropFailures))
+			if (propFailures.TryReadProperty(ref reader, options, PropFailures, static IReadOnlyDictionary<string, object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)!))
 			{
 				continue;
 			}
 
-			if (propMetricScore.TryRead(ref reader, options, PropMetricScore))
+			if (propMetricScore.TryReadProperty(ref reader, options, PropMetricScore, null))
 			{
 				continue;
 			}
@@ -74,9 +74,9 @@ internal sealed partial class RankEvalResponseConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, RankEvalResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDetails, value.Details);
-		writer.WriteProperty(options, PropFailures, value.Failures);
-		writer.WriteProperty(options, PropMetricScore, value.MetricScore);
+		writer.WriteProperty(options, PropDetails, value.Details, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDetail> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDetail>(o, v, null, null));
+		writer.WriteProperty(options, PropFailures, value.Failures, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, object> v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropMetricScore, value.MetricScore, null, null);
 		writer.WriteEndObject();
 	}
 }

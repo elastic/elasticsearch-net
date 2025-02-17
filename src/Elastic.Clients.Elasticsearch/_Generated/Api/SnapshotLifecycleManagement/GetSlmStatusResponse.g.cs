@@ -38,7 +38,7 @@ internal sealed partial class GetSlmStatusResponseConverter : System.Text.Json.S
 		LocalJsonValue<Elastic.Clients.Elasticsearch.LifecycleOperationMode> propOperationMode = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propOperationMode.TryRead(ref reader, options, PropOperationMode))
+			if (propOperationMode.TryReadProperty(ref reader, options, PropOperationMode, null))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class GetSlmStatusResponseConverter : System.Text.Json.S
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetSlmStatusResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropOperationMode, value.OperationMode);
+		writer.WriteProperty(options, PropOperationMode, value.OperationMode, null, null);
 		writer.WriteEndObject();
 	}
 }

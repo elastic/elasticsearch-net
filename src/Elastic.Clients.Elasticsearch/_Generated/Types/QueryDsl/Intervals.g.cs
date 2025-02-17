@@ -90,7 +90,7 @@ internal sealed partial class IntervalsConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantAllOf.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf?>(options, null);
 				continue;
 			}
 
@@ -98,7 +98,7 @@ internal sealed partial class IntervalsConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantAnyOf.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf?>(options, null);
 				continue;
 			}
 
@@ -106,7 +106,7 @@ internal sealed partial class IntervalsConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantFuzzy.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy?>(options, null);
 				continue;
 			}
 
@@ -114,7 +114,7 @@ internal sealed partial class IntervalsConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantMatch.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch?>(options, null);
 				continue;
 			}
 
@@ -122,7 +122,7 @@ internal sealed partial class IntervalsConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantPrefix.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix?>(options, null);
 				continue;
 			}
 
@@ -130,7 +130,7 @@ internal sealed partial class IntervalsConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantWildcard.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard?>(options, null);
 				continue;
 			}
 
@@ -149,22 +149,22 @@ internal sealed partial class IntervalsConverter : System.Text.Json.Serializatio
 			case "":
 				break;
 			case "all_of":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf?)value.Variant, null, null);
 				break;
 			case "any_of":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf?)value.Variant, null, null);
 				break;
 			case "fuzzy":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy?)value.Variant, null, null);
 				break;
 			case "match":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch?)value.Variant, null, null);
 				break;
 			case "prefix":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix?)value.Variant, null, null);
 				break;
 			case "wildcard":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard?)value.Variant, null, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Intervals)}'.");

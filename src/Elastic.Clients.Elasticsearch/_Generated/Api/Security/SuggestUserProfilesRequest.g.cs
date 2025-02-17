@@ -50,22 +50,22 @@ internal sealed partial class SuggestUserProfilesRequestConverter : System.Text.
 		LocalJsonValue<long?> propSize = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propData.TryRead(ref reader, options, PropData, typeof(SingleOrManyMarker<ICollection<string>?, string>)))
+			if (propData.TryReadProperty(ref reader, options, PropData, static ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propHint.TryRead(ref reader, options, PropHint))
+			if (propHint.TryReadProperty(ref reader, options, PropHint, null))
 			{
 				continue;
 			}
 
-			if (propName.TryRead(ref reader, options, PropName))
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
 			{
 				continue;
 			}
 
-			if (propSize.TryRead(ref reader, options, PropSize))
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
 			{
 				continue;
 			}
@@ -89,10 +89,10 @@ internal sealed partial class SuggestUserProfilesRequestConverter : System.Text.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, SuggestUserProfilesRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropData, value.Data, null, typeof(SingleOrManyMarker<ICollection<string>?, string>));
-		writer.WriteProperty(options, PropHint, value.Hint);
-		writer.WriteProperty(options, PropName, value.Name);
-		writer.WriteProperty(options, PropSize, value.Size);
+		writer.WriteProperty(options, PropData, value.Data, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropHint, value.Hint, null, null);
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
 		writer.WriteEndObject();
 	}
 }

@@ -38,7 +38,7 @@ internal sealed partial class CloseJobResponseConverter : System.Text.Json.Seria
 		LocalJsonValue<bool> propClosed = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propClosed.TryRead(ref reader, options, PropClosed))
+			if (propClosed.TryReadProperty(ref reader, options, PropClosed, null))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class CloseJobResponseConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, CloseJobResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropClosed, value.Closed);
+		writer.WriteProperty(options, PropClosed, value.Closed, null, null);
 		writer.WriteEndObject();
 	}
 }

@@ -61,67 +61,67 @@ internal sealed partial class MultiTermVectorsOperationConverter : System.Text.J
 		LocalJsonValue<Elastic.Clients.Elasticsearch.VersionType?> propVersionType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDoc.TryRead(ref reader, options, PropDoc))
+			if (propDoc.TryReadProperty(ref reader, options, PropDoc, null))
 			{
 				continue;
 			}
 
-			if (propFields.TryRead(ref reader, options, PropFields, typeof(SingleOrManyFieldsMarker)))
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(SingleOrManyFieldsMarker))))
 			{
 				continue;
 			}
 
-			if (propFieldStatistics.TryRead(ref reader, options, PropFieldStatistics))
+			if (propFieldStatistics.TryReadProperty(ref reader, options, PropFieldStatistics, null))
 			{
 				continue;
 			}
 
-			if (propFilter.TryRead(ref reader, options, PropFilter))
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, null))
 			{
 				continue;
 			}
 
-			if (propId.TryRead(ref reader, options, PropId))
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
 			{
 				continue;
 			}
 
-			if (propIndex.TryRead(ref reader, options, PropIndex))
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
 			{
 				continue;
 			}
 
-			if (propOffsets.TryRead(ref reader, options, PropOffsets))
+			if (propOffsets.TryReadProperty(ref reader, options, PropOffsets, null))
 			{
 				continue;
 			}
 
-			if (propPayloads.TryRead(ref reader, options, PropPayloads))
+			if (propPayloads.TryReadProperty(ref reader, options, PropPayloads, null))
 			{
 				continue;
 			}
 
-			if (propPositions.TryRead(ref reader, options, PropPositions))
+			if (propPositions.TryReadProperty(ref reader, options, PropPositions, null))
 			{
 				continue;
 			}
 
-			if (propRouting.TryRead(ref reader, options, PropRouting))
+			if (propRouting.TryReadProperty(ref reader, options, PropRouting, null))
 			{
 				continue;
 			}
 
-			if (propTermStatistics.TryRead(ref reader, options, PropTermStatistics))
+			if (propTermStatistics.TryReadProperty(ref reader, options, PropTermStatistics, null))
 			{
 				continue;
 			}
 
-			if (propVersion.TryRead(ref reader, options, PropVersion))
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
 			{
 				continue;
 			}
 
-			if (propVersionType.TryRead(ref reader, options, PropVersionType))
+			if (propVersionType.TryReadProperty(ref reader, options, PropVersionType, null))
 			{
 				continue;
 			}
@@ -163,19 +163,19 @@ internal sealed partial class MultiTermVectorsOperationConverter : System.Text.J
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, MultiTermVectorsOperation value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDoc, value.Doc);
-		writer.WriteProperty(options, PropFields, value.Fields, null, typeof(SingleOrManyFieldsMarker));
-		writer.WriteProperty(options, PropFieldStatistics, value.FieldStatistics);
-		writer.WriteProperty(options, PropFilter, value.Filter);
-		writer.WriteProperty(options, PropId, value.Id);
-		writer.WriteProperty(options, PropIndex, value.Index);
-		writer.WriteProperty(options, PropOffsets, value.Offsets);
-		writer.WriteProperty(options, PropPayloads, value.Payloads);
-		writer.WriteProperty(options, PropPositions, value.Positions);
-		writer.WriteProperty(options, PropRouting, value.Routing);
-		writer.WriteProperty(options, PropTermStatistics, value.TermStatistics);
-		writer.WriteProperty(options, PropVersion, value.Version);
-		writer.WriteProperty(options, PropVersionType, value.VersionType);
+		writer.WriteProperty(options, PropDoc, value.Doc, null, null);
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropFieldStatistics, value.FieldStatistics, null, null);
+		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropOffsets, value.Offsets, null, null);
+		writer.WriteProperty(options, PropPayloads, value.Payloads, null, null);
+		writer.WriteProperty(options, PropPositions, value.Positions, null, null);
+		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
+		writer.WriteProperty(options, PropTermStatistics, value.TermStatistics, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteProperty(options, PropVersionType, value.VersionType, null, null);
 		writer.WriteEndObject();
 	}
 }

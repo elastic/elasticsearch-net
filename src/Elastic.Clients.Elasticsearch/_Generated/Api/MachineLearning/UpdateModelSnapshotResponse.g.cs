@@ -40,12 +40,12 @@ internal sealed partial class UpdateModelSnapshotResponseConverter : System.Text
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshot> propModel = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAcknowledged.TryRead(ref reader, options, PropAcknowledged))
+			if (propAcknowledged.TryReadProperty(ref reader, options, PropAcknowledged, null))
 			{
 				continue;
 			}
 
-			if (propModel.TryRead(ref reader, options, PropModel))
+			if (propModel.TryReadProperty(ref reader, options, PropModel, null))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class UpdateModelSnapshotResponseConverter : System.Text
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, UpdateModelSnapshotResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged);
-		writer.WriteProperty(options, PropModel, value.Model);
+		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged, null, null);
+		writer.WriteProperty(options, PropModel, value.Model, null, null);
 		writer.WriteEndObject();
 	}
 }

@@ -43,23 +43,23 @@ internal sealed partial class ShardStoreConverter : System.Text.Json.Serializati
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreException?> propStoreException = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAllocation.TryRead(ref reader, options, PropAllocation))
+			if (propAllocation.TryReadProperty(ref reader, options, PropAllocation, null))
 			{
 				continue;
 			}
 
-			if (propAllocationId.TryRead(ref reader, options, PropAllocationId))
+			if (propAllocationId.TryReadProperty(ref reader, options, PropAllocationId, null))
 			{
 				continue;
 			}
 
-			if (propStoreException.TryRead(ref reader, options, PropStoreException))
+			if (propStoreException.TryReadProperty(ref reader, options, PropStoreException, null))
 			{
 				continue;
 			}
 
 			propNodeId.Initialized = propNode.Initialized = true;
-			reader.ReadProperty(options, out propNodeId.Value, out propNode.Value);
+			reader.ReadProperty(options, out propNodeId.Value, out propNode.Value, null, null);
 		}
 
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
@@ -80,10 +80,10 @@ internal sealed partial class ShardStoreConverter : System.Text.Json.Serializati
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ShardStore value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAllocation, value.Allocation);
-		writer.WriteProperty(options, PropAllocationId, value.AllocationId);
-		writer.WriteProperty(options, PropStoreException, value.StoreException);
-		writer.WriteProperty(options, value.NodeId, value.Node);
+		writer.WriteProperty(options, PropAllocation, value.Allocation, null, null);
+		writer.WriteProperty(options, PropAllocationId, value.AllocationId, null, null);
+		writer.WriteProperty(options, PropStoreException, value.StoreException, null, null);
+		writer.WriteProperty(options, value.NodeId, value.Node, null, null);
 		writer.WriteEndObject();
 	}
 }

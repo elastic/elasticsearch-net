@@ -38,7 +38,7 @@ internal sealed partial class GetPolicyResponseConverter : System.Text.Json.Seri
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.EnrichSummary>> propPolicies = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propPolicies.TryRead(ref reader, options, PropPolicies))
+			if (propPolicies.TryReadProperty(ref reader, options, PropPolicies, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.EnrichSummary> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Enrich.EnrichSummary>(o, null)!))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class GetPolicyResponseConverter : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetPolicyResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropPolicies, value.Policies);
+		writer.WriteProperty(options, PropPolicies, value.Policies, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.EnrichSummary> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Enrich.EnrichSummary>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

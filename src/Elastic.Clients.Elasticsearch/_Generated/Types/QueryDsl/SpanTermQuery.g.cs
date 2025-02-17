@@ -38,11 +38,11 @@ internal sealed partial class SpanTermQueryConverter : System.Text.Json.Serializ
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
 		reader.Read();
-		propField.ReadPropertyName(ref reader, options);
+		propField.ReadPropertyName(ref reader, options, null);
 		reader.Read();
 		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
 		{
-			var value = reader.ReadValue<string>(options);
+			var value = reader.ReadValue<string>(options, null);
 			reader.Read();
 			return new SpanTermQuery { Value = value };
 		}
@@ -53,17 +53,17 @@ internal sealed partial class SpanTermQueryConverter : System.Text.Json.Serializ
 		LocalJsonValue<string> propValue = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBoost.TryRead(ref reader, options, PropBoost))
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
 			{
 				continue;
 			}
 
-			if (propQueryName.TryRead(ref reader, options, PropQueryName))
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
 			{
 				continue;
 			}
 
-			if (propValue.TryRead(ref reader, options, PropValue))
+			if (propValue.TryReadProperty(ref reader, options, PropValue, null))
 			{
 				continue;
 			}
@@ -89,11 +89,11 @@ internal sealed partial class SpanTermQueryConverter : System.Text.Json.Serializ
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, SpanTermQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName(options, value.Field);
+		writer.WritePropertyName(options, value.Field, null);
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBoost, value.Boost);
-		writer.WriteProperty(options, PropQueryName, value.QueryName);
-		writer.WriteProperty(options, PropValue, value.Value);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteProperty(options, PropValue, value.Value, null, null);
 		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}

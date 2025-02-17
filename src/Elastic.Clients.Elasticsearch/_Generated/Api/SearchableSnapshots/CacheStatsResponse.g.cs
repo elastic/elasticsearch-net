@@ -38,7 +38,7 @@ internal sealed partial class CacheStatsResponseConverter : System.Text.Json.Ser
 		LocalJsonValue<IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.SearchableSnapshots.Node>> propNodes = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propNodes.TryRead(ref reader, options, PropNodes))
+			if (propNodes.TryReadProperty(ref reader, options, PropNodes, static IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.SearchableSnapshots.Node> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.SearchableSnapshots.Node>(o, null, null)!))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class CacheStatsResponseConverter : System.Text.Json.Ser
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, CacheStatsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropNodes, value.Nodes);
+		writer.WriteProperty(options, PropNodes, value.Nodes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.SearchableSnapshots.Node> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.SearchableSnapshots.Node>(o, v, null, null));
 		writer.WriteEndObject();
 	}
 }

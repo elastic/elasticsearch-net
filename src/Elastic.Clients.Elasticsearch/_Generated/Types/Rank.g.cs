@@ -80,7 +80,7 @@ internal sealed partial class RankConverter : System.Text.Json.Serialization.Jso
 			{
 				variantType = VariantRrf.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.RrfRank?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.RrfRank?>(options, null);
 				continue;
 			}
 
@@ -99,7 +99,7 @@ internal sealed partial class RankConverter : System.Text.Json.Serialization.Jso
 			case "":
 				break;
 			case "rrf":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.RrfRank?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.RrfRank?)value.Variant, null, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Rank)}'.");

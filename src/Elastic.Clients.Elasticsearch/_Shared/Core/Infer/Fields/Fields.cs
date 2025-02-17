@@ -10,11 +10,13 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Text.Json.Serialization;
 
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
+[JsonConverter(typeof(FieldsConverter))]
 [DebuggerDisplay($"{{{nameof(DebuggerDisplay)},nq}}")]
 public sealed class Fields :
 	IEquatable<Fields>,

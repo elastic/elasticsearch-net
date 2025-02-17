@@ -40,12 +40,12 @@ internal sealed partial class CcrStatsResponseConverter : System.Text.Json.Seria
 		LocalJsonValue<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStats> propFollowStats = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAutoFollowStats.TryRead(ref reader, options, PropAutoFollowStats))
+			if (propAutoFollowStats.TryReadProperty(ref reader, options, PropAutoFollowStats, null))
 			{
 				continue;
 			}
 
-			if (propFollowStats.TryRead(ref reader, options, PropFollowStats))
+			if (propFollowStats.TryReadProperty(ref reader, options, PropFollowStats, null))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class CcrStatsResponseConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, CcrStatsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAutoFollowStats, value.AutoFollowStats);
-		writer.WriteProperty(options, PropFollowStats, value.FollowStats);
+		writer.WriteProperty(options, PropAutoFollowStats, value.AutoFollowStats, null, null);
+		writer.WriteProperty(options, PropFollowStats, value.FollowStats, null, null);
 		writer.WriteEndObject();
 	}
 }

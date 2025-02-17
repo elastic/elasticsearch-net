@@ -40,12 +40,12 @@ internal sealed partial class GetSynonymRuleResponseConverter : System.Text.Json
 		LocalJsonValue<string> propSynonyms = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propId.TryRead(ref reader, options, PropId))
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
 			{
 				continue;
 			}
 
-			if (propSynonyms.TryRead(ref reader, options, PropSynonyms))
+			if (propSynonyms.TryReadProperty(ref reader, options, PropSynonyms, null))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class GetSynonymRuleResponseConverter : System.Text.Json
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetSynonymRuleResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropId, value.Id);
-		writer.WriteProperty(options, PropSynonyms, value.Synonyms);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropSynonyms, value.Synonyms, null, null);
 		writer.WriteEndObject();
 	}
 }

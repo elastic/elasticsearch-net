@@ -27,26 +27,140 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.ReindexRethrottle;
 
+internal sealed partial class ReindexTaskConverter : System.Text.Json.Serialization.JsonConverter<ReindexTask>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAction = System.Text.Json.JsonEncodedText.Encode("action");
+	private static readonly System.Text.Json.JsonEncodedText PropCancellable = System.Text.Json.JsonEncodedText.Encode("cancellable");
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropHeaders = System.Text.Json.JsonEncodedText.Encode("headers");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node");
+	private static readonly System.Text.Json.JsonEncodedText PropRunningTimeInNanos = System.Text.Json.JsonEncodedText.Encode("running_time_in_nanos");
+	private static readonly System.Text.Json.JsonEncodedText PropStartTimeInMillis = System.Text.Json.JsonEncodedText.Encode("start_time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override ReindexTask Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propAction = default;
+		LocalJsonValue<bool> propCancellable = default;
+		LocalJsonValue<string> propDescription = default;
+		LocalJsonValue<IReadOnlyDictionary<string, Union<string, IReadOnlyCollection<string>>>> propHeaders = default;
+		LocalJsonValue<long> propId = default;
+		LocalJsonValue<string> propNode = default;
+		LocalJsonValue<long> propRunningTimeInNanos = default;
+		LocalJsonValue<long> propStartTimeInMillis = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexStatus> propStatus = default;
+		LocalJsonValue<string> propType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAction.TryReadProperty(ref reader, options, PropAction, null))
+			{
+				continue;
+			}
+
+			if (propCancellable.TryReadProperty(ref reader, options, PropCancellable, null))
+			{
+				continue;
+			}
+
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propHeaders.TryReadProperty(ref reader, options, PropHeaders, static IReadOnlyDictionary<string, Union<string, IReadOnlyCollection<string>>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Union<string, IReadOnlyCollection<string>>>(o, null, static Union<string, IReadOnlyCollection<string>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<string, IReadOnlyCollection<string>>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartArray), null, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)!)!)!))
+			{
+				continue;
+			}
+
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (propNode.TryReadProperty(ref reader, options, PropNode, null))
+			{
+				continue;
+			}
+
+			if (propRunningTimeInNanos.TryReadProperty(ref reader, options, PropRunningTimeInNanos, null))
+			{
+				continue;
+			}
+
+			if (propStartTimeInMillis.TryReadProperty(ref reader, options, PropStartTimeInMillis, null))
+			{
+				continue;
+			}
+
+			if (propStatus.TryReadProperty(ref reader, options, PropStatus, null))
+			{
+				continue;
+			}
+
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new ReindexTask
+		{
+			Action = propAction.Value
+,
+			Cancellable = propCancellable.Value
+,
+			Description = propDescription.Value
+,
+			Headers = propHeaders.Value
+,
+			Id = propId.Value
+,
+			Node = propNode.Value
+,
+			RunningTimeInNanos = propRunningTimeInNanos.Value
+,
+			StartTimeInMillis = propStartTimeInMillis.Value
+,
+			Status = propStatus.Value
+,
+			Type = propType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ReindexTask value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAction, value.Action, null, null);
+		writer.WriteProperty(options, PropCancellable, value.Cancellable, null, null);
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropHeaders, value.Headers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, Union<string, IReadOnlyCollection<string>>> v) => w.WriteDictionaryValue<string, Union<string, IReadOnlyCollection<string>>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Union<string, IReadOnlyCollection<string>> v) => w.WriteUnionValue<string, IReadOnlyCollection<string>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null))));
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropNode, value.Node, null, null);
+		writer.WriteProperty(options, PropRunningTimeInNanos, value.RunningTimeInNanos, null, null);
+		writer.WriteProperty(options, PropStartTimeInMillis, value.StartTimeInMillis, null, null);
+		writer.WriteProperty(options, PropStatus, value.Status, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(ReindexTaskConverter))]
 public sealed partial class ReindexTask
 {
-	[JsonInclude, JsonPropertyName("action")]
 	public string Action { get; init; }
-	[JsonInclude, JsonPropertyName("cancellable")]
 	public bool Cancellable { get; init; }
-	[JsonInclude, JsonPropertyName("description")]
 	public string Description { get; init; }
-	[JsonInclude, JsonPropertyName("headers")]
 	public IReadOnlyDictionary<string, Union<string, IReadOnlyCollection<string>>> Headers { get; init; }
-	[JsonInclude, JsonPropertyName("id")]
 	public long Id { get; init; }
-	[JsonInclude, JsonPropertyName("node")]
 	public string Node { get; init; }
-	[JsonInclude, JsonPropertyName("running_time_in_nanos")]
 	public long RunningTimeInNanos { get; init; }
-	[JsonInclude, JsonPropertyName("start_time_in_millis")]
 	public long StartTimeInMillis { get; init; }
-	[JsonInclude, JsonPropertyName("status")]
 	public Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexStatus Status { get; init; }
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type { get; init; }
 }

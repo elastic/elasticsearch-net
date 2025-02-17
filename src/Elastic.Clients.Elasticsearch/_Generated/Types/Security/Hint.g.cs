@@ -27,6 +27,50 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class HintConverter : System.Text.Json.Serialization.JsonConverter<Hint>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropLabels = System.Text.Json.JsonEncodedText.Encode("labels");
+	private static readonly System.Text.Json.JsonEncodedText PropUids = System.Text.Json.JsonEncodedText.Encode("uids");
+
+	public override Hint Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IDictionary<string, Union<string, ICollection<string>>>?> propLabels = default;
+		LocalJsonValue<ICollection<string>?> propUids = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propLabels.TryReadProperty(ref reader, options, PropLabels, static IDictionary<string, Union<string, ICollection<string>>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Union<string, ICollection<string>>>(o, null, static Union<string, ICollection<string>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<string, ICollection<string>>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartArray), null, static ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)!)!)))
+			{
+				continue;
+			}
+
+			if (propUids.TryReadProperty(ref reader, options, PropUids, static ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Hint
+		{
+			Labels = propLabels.Value
+,
+			Uids = propUids.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Hint value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropLabels, value.Labels, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IDictionary<string, Union<string, ICollection<string>>>? v) => w.WriteDictionaryValue<string, Union<string, ICollection<string>>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Union<string, ICollection<string>> v) => w.WriteUnionValue<string, ICollection<string>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string> v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null))));
+		writer.WriteProperty(options, PropUids, value.Uids, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(HintConverter))]
 public sealed partial class Hint
 {
 	/// <summary>
@@ -36,7 +80,6 @@ public sealed partial class Hint
 	/// at least one of the strings.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("labels")]
 	public IDictionary<string, Union<string, ICollection<string>>>? Labels { get; set; }
 
 	/// <summary>
@@ -44,7 +87,6 @@ public sealed partial class Hint
 	/// A list of Profile UIDs to match against.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("uids")]
 	public ICollection<string>? Uids { get; set; }
 }
 

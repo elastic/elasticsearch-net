@@ -50,37 +50,37 @@ internal sealed partial class ActivateUserProfileResponseConverter : System.Text
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.UserProfileUser> propUser = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propData.TryRead(ref reader, options, PropData))
+			if (propData.TryReadProperty(ref reader, options, PropData, static IReadOnlyDictionary<string, object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)!))
 			{
 				continue;
 			}
 
-			if (propDoc.TryRead(ref reader, options, PropDoc))
+			if (propDoc.TryReadProperty(ref reader, options, PropDoc, null))
 			{
 				continue;
 			}
 
-			if (propEnabled.TryRead(ref reader, options, PropEnabled))
+			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
 			{
 				continue;
 			}
 
-			if (propLabels.TryRead(ref reader, options, PropLabels))
+			if (propLabels.TryReadProperty(ref reader, options, PropLabels, static IReadOnlyDictionary<string, object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)!))
 			{
 				continue;
 			}
 
-			if (propLastSynchronized.TryRead(ref reader, options, PropLastSynchronized))
+			if (propLastSynchronized.TryReadProperty(ref reader, options, PropLastSynchronized, null))
 			{
 				continue;
 			}
 
-			if (propUid.TryRead(ref reader, options, PropUid))
+			if (propUid.TryReadProperty(ref reader, options, PropUid, null))
 			{
 				continue;
 			}
 
-			if (propUser.TryRead(ref reader, options, PropUser))
+			if (propUser.TryReadProperty(ref reader, options, PropUser, null))
 			{
 				continue;
 			}
@@ -110,13 +110,13 @@ internal sealed partial class ActivateUserProfileResponseConverter : System.Text
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ActivateUserProfileResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropData, value.Data);
-		writer.WriteProperty(options, PropDoc, value.Doc);
-		writer.WriteProperty(options, PropEnabled, value.Enabled);
-		writer.WriteProperty(options, PropLabels, value.Labels);
-		writer.WriteProperty(options, PropLastSynchronized, value.LastSynchronized);
-		writer.WriteProperty(options, PropUid, value.Uid);
-		writer.WriteProperty(options, PropUser, value.User);
+		writer.WriteProperty(options, PropData, value.Data, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, object> v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropDoc, value.Doc, null, null);
+		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
+		writer.WriteProperty(options, PropLabels, value.Labels, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, object> v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropLastSynchronized, value.LastSynchronized, null, null);
+		writer.WriteProperty(options, PropUid, value.Uid, null, null);
+		writer.WriteProperty(options, PropUser, value.User, null, null);
 		writer.WriteEndObject();
 	}
 }

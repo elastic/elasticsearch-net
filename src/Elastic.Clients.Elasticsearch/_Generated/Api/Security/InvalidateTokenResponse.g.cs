@@ -44,22 +44,22 @@ internal sealed partial class InvalidateTokenResponseConverter : System.Text.Jso
 		LocalJsonValue<long> propPreviouslyInvalidatedTokens = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propErrorCount.TryRead(ref reader, options, PropErrorCount))
+			if (propErrorCount.TryReadProperty(ref reader, options, PropErrorCount, null))
 			{
 				continue;
 			}
 
-			if (propErrorDetails.TryRead(ref reader, options, PropErrorDetails))
+			if (propErrorDetails.TryReadProperty(ref reader, options, PropErrorDetails, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.ErrorCause>(o, null)))
 			{
 				continue;
 			}
 
-			if (propInvalidatedTokens.TryRead(ref reader, options, PropInvalidatedTokens))
+			if (propInvalidatedTokens.TryReadProperty(ref reader, options, PropInvalidatedTokens, null))
 			{
 				continue;
 			}
 
-			if (propPreviouslyInvalidatedTokens.TryRead(ref reader, options, PropPreviouslyInvalidatedTokens))
+			if (propPreviouslyInvalidatedTokens.TryReadProperty(ref reader, options, PropPreviouslyInvalidatedTokens, null))
 			{
 				continue;
 			}
@@ -83,10 +83,10 @@ internal sealed partial class InvalidateTokenResponseConverter : System.Text.Jso
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, InvalidateTokenResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropErrorCount, value.ErrorCount);
-		writer.WriteProperty(options, PropErrorDetails, value.ErrorDetails);
-		writer.WriteProperty(options, PropInvalidatedTokens, value.InvalidatedTokens);
-		writer.WriteProperty(options, PropPreviouslyInvalidatedTokens, value.PreviouslyInvalidatedTokens);
+		writer.WriteProperty(options, PropErrorCount, value.ErrorCount, null, null);
+		writer.WriteProperty(options, PropErrorDetails, value.ErrorDetails, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.ErrorCause>(o, v, null));
+		writer.WriteProperty(options, PropInvalidatedTokens, value.InvalidatedTokens, null, null);
+		writer.WriteProperty(options, PropPreviouslyInvalidatedTokens, value.PreviouslyInvalidatedTokens, null, null);
 		writer.WriteEndObject();
 	}
 }

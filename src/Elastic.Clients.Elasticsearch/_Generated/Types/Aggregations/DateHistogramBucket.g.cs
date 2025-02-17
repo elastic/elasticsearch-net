@@ -42,17 +42,17 @@ internal sealed partial class DateHistogramBucketConverter : System.Text.Json.Se
 		LocalJsonValue<string?> propKeyAsString = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDocCount.TryRead(ref reader, options, PropDocCount))
+			if (propDocCount.TryReadProperty(ref reader, options, PropDocCount, null))
 			{
 				continue;
 			}
 
-			if (propKey.TryRead(ref reader, options, PropKey))
+			if (propKey.TryReadProperty(ref reader, options, PropKey, null))
 			{
 				continue;
 			}
 
-			if (propKeyAsString.TryRead(ref reader, options, PropKeyAsString))
+			if (propKeyAsString.TryReadProperty(ref reader, options, PropKeyAsString, null))
 			{
 				continue;
 			}
@@ -78,9 +78,9 @@ internal sealed partial class DateHistogramBucketConverter : System.Text.Json.Se
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, DateHistogramBucket value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDocCount, value.DocCount);
-		writer.WriteProperty(options, PropKey, value.Key);
-		writer.WriteProperty(options, PropKeyAsString, value.KeyAsString);
+		writer.WriteProperty(options, PropDocCount, value.DocCount, null, null);
+		writer.WriteProperty(options, PropKey, value.Key, null, null);
+		writer.WriteProperty(options, PropKeyAsString, value.KeyAsString, null, null);
 		if (value.Aggregations is not null)
 		{
 			foreach (var item in value.Aggregations)

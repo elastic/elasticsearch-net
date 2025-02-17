@@ -40,12 +40,12 @@ internal sealed partial class UpgradeJobSnapshotResponseConverter : System.Text.
 		LocalJsonValue<string> propNode = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCompleted.TryRead(ref reader, options, PropCompleted))
+			if (propCompleted.TryReadProperty(ref reader, options, PropCompleted, null))
 			{
 				continue;
 			}
 
-			if (propNode.TryRead(ref reader, options, PropNode))
+			if (propNode.TryReadProperty(ref reader, options, PropNode, null))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class UpgradeJobSnapshotResponseConverter : System.Text.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, UpgradeJobSnapshotResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCompleted, value.Completed);
-		writer.WriteProperty(options, PropNode, value.Node);
+		writer.WriteProperty(options, PropCompleted, value.Completed, null, null);
+		writer.WriteProperty(options, PropNode, value.Node, null, null);
 		writer.WriteEndObject();
 	}
 }

@@ -38,7 +38,7 @@ internal sealed partial class MountResponseConverter : System.Text.Json.Serializ
 		LocalJsonValue<Elastic.Clients.Elasticsearch.SearchableSnapshots.MountedSnapshot> propSnapshot = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propSnapshot.TryRead(ref reader, options, PropSnapshot))
+			if (propSnapshot.TryReadProperty(ref reader, options, PropSnapshot, null))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class MountResponseConverter : System.Text.Json.Serializ
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, MountResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropSnapshot, value.Snapshot);
+		writer.WriteProperty(options, PropSnapshot, value.Snapshot, null, null);
 		writer.WriteEndObject();
 	}
 }

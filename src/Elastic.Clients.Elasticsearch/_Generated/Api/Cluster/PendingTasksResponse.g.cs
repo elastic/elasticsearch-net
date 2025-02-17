@@ -38,7 +38,7 @@ internal sealed partial class PendingTasksResponseConverter : System.Text.Json.S
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.PendingTask>> propTasks = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propTasks.TryRead(ref reader, options, PropTasks))
+			if (propTasks.TryReadProperty(ref reader, options, PropTasks, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.PendingTask> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Cluster.PendingTask>(o, null)!))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class PendingTasksResponseConverter : System.Text.Json.S
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, PendingTasksResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropTasks, value.Tasks);
+		writer.WriteProperty(options, PropTasks, value.Tasks, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.PendingTask> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Cluster.PendingTask>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

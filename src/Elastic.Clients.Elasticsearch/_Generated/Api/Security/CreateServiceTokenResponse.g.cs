@@ -40,12 +40,12 @@ internal sealed partial class CreateServiceTokenResponseConverter : System.Text.
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.ServiceToken> propToken = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCreated.TryRead(ref reader, options, PropCreated))
+			if (propCreated.TryReadProperty(ref reader, options, PropCreated, null))
 			{
 				continue;
 			}
 
-			if (propToken.TryRead(ref reader, options, PropToken))
+			if (propToken.TryReadProperty(ref reader, options, PropToken, null))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class CreateServiceTokenResponseConverter : System.Text.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, CreateServiceTokenResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCreated, value.Created);
-		writer.WriteProperty(options, PropToken, value.Token);
+		writer.WriteProperty(options, PropCreated, value.Created, null, null);
+		writer.WriteProperty(options, PropToken, value.Token, null, null);
 		writer.WriteEndObject();
 	}
 }

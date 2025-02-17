@@ -42,17 +42,17 @@ internal sealed partial class GetScriptResponseConverter : System.Text.Json.Seri
 		LocalJsonValue<Elastic.Clients.Elasticsearch.StoredScript?> propScript = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propFound.TryRead(ref reader, options, PropFound))
+			if (propFound.TryReadProperty(ref reader, options, PropFound, null))
 			{
 				continue;
 			}
 
-			if (propId.TryRead(ref reader, options, PropId))
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
 			{
 				continue;
 			}
 
-			if (propScript.TryRead(ref reader, options, PropScript))
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
 			{
 				continue;
 			}
@@ -74,9 +74,9 @@ internal sealed partial class GetScriptResponseConverter : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetScriptResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFound, value.Found);
-		writer.WriteProperty(options, PropId, value.Id);
-		writer.WriteProperty(options, PropScript, value.Script);
+		writer.WriteProperty(options, PropFound, value.Found, null, null);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
 		writer.WriteEndObject();
 	}
 }

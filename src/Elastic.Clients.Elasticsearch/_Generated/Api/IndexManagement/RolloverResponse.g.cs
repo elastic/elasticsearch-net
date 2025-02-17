@@ -50,37 +50,37 @@ internal sealed partial class RolloverResponseConverter : System.Text.Json.Seria
 		LocalJsonValue<bool> propShardsAcknowledged = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAcknowledged.TryRead(ref reader, options, PropAcknowledged))
+			if (propAcknowledged.TryReadProperty(ref reader, options, PropAcknowledged, null))
 			{
 				continue;
 			}
 
-			if (propConditions.TryRead(ref reader, options, PropConditions))
+			if (propConditions.TryReadProperty(ref reader, options, PropConditions, static IReadOnlyDictionary<string, bool> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, bool>(o, null, null)!))
 			{
 				continue;
 			}
 
-			if (propDryRun.TryRead(ref reader, options, PropDryRun))
+			if (propDryRun.TryReadProperty(ref reader, options, PropDryRun, null))
 			{
 				continue;
 			}
 
-			if (propNewIndex.TryRead(ref reader, options, PropNewIndex))
+			if (propNewIndex.TryReadProperty(ref reader, options, PropNewIndex, null))
 			{
 				continue;
 			}
 
-			if (propOldIndex.TryRead(ref reader, options, PropOldIndex))
+			if (propOldIndex.TryReadProperty(ref reader, options, PropOldIndex, null))
 			{
 				continue;
 			}
 
-			if (propRolledOver.TryRead(ref reader, options, PropRolledOver))
+			if (propRolledOver.TryReadProperty(ref reader, options, PropRolledOver, null))
 			{
 				continue;
 			}
 
-			if (propShardsAcknowledged.TryRead(ref reader, options, PropShardsAcknowledged))
+			if (propShardsAcknowledged.TryReadProperty(ref reader, options, PropShardsAcknowledged, null))
 			{
 				continue;
 			}
@@ -110,13 +110,13 @@ internal sealed partial class RolloverResponseConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, RolloverResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged);
-		writer.WriteProperty(options, PropConditions, value.Conditions);
-		writer.WriteProperty(options, PropDryRun, value.DryRun);
-		writer.WriteProperty(options, PropNewIndex, value.NewIndex);
-		writer.WriteProperty(options, PropOldIndex, value.OldIndex);
-		writer.WriteProperty(options, PropRolledOver, value.RolledOver);
-		writer.WriteProperty(options, PropShardsAcknowledged, value.ShardsAcknowledged);
+		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged, null, null);
+		writer.WriteProperty(options, PropConditions, value.Conditions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, bool> v) => w.WriteDictionaryValue<string, bool>(o, v, null, null));
+		writer.WriteProperty(options, PropDryRun, value.DryRun, null, null);
+		writer.WriteProperty(options, PropNewIndex, value.NewIndex, null, null);
+		writer.WriteProperty(options, PropOldIndex, value.OldIndex, null, null);
+		writer.WriteProperty(options, PropRolledOver, value.RolledOver, null, null);
+		writer.WriteProperty(options, PropShardsAcknowledged, value.ShardsAcknowledged, null, null);
 		writer.WriteEndObject();
 	}
 }

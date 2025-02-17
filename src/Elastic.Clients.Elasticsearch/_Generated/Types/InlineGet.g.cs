@@ -48,32 +48,32 @@ internal sealed partial class InlineGetConverter<TDocument> : System.Text.Json.S
 		LocalJsonValue<TDocument?> propSource = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propFields.TryRead(ref reader, options, PropFields))
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static IReadOnlyDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propFound.TryRead(ref reader, options, PropFound))
+			if (propFound.TryReadProperty(ref reader, options, PropFound, null))
 			{
 				continue;
 			}
 
-			if (propPrimaryTerm.TryRead(ref reader, options, PropPrimaryTerm))
+			if (propPrimaryTerm.TryReadProperty(ref reader, options, PropPrimaryTerm, null))
 			{
 				continue;
 			}
 
-			if (propRouting.TryRead(ref reader, options, PropRouting))
+			if (propRouting.TryReadProperty(ref reader, options, PropRouting, null))
 			{
 				continue;
 			}
 
-			if (propSeqNo.TryRead(ref reader, options, PropSeqNo))
+			if (propSeqNo.TryReadProperty(ref reader, options, PropSeqNo, null))
 			{
 				continue;
 			}
 
-			if (propSource.TryRead(ref reader, options, PropSource, typeof(SourceMarker<TDocument?>)))
+			if (propSource.TryReadProperty(ref reader, options, PropSource, static TDocument? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<TDocument?>(o, typeof(SourceMarker<TDocument?>))))
 			{
 				continue;
 			}
@@ -105,12 +105,12 @@ internal sealed partial class InlineGetConverter<TDocument> : System.Text.Json.S
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, InlineGet<TDocument> value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFields, value.Fields);
-		writer.WriteProperty(options, PropFound, value.Found);
-		writer.WriteProperty(options, PropPrimaryTerm, value.PrimaryTerm);
-		writer.WriteProperty(options, PropRouting, value.Routing);
-		writer.WriteProperty(options, PropSeqNo, value.SeqNo);
-		writer.WriteProperty(options, PropSource, value.Source, null, typeof(SourceMarker<TDocument?>));
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropFound, value.Found, null, null);
+		writer.WriteProperty(options, PropPrimaryTerm, value.PrimaryTerm, null, null);
+		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
+		writer.WriteProperty(options, PropSeqNo, value.SeqNo, null, null);
+		writer.WriteProperty(options, PropSource, value.Source, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, TDocument? v) => w.WriteValueEx<TDocument?>(o, v, typeof(SourceMarker<TDocument?>)));
 		if (value.Metadata is not null)
 		{
 			foreach (var item in value.Metadata)

@@ -41,17 +41,17 @@ internal sealed partial class HitsMetadataConverter<T> : System.Text.Json.Serial
 		LocalJsonValue<Union<Elastic.Clients.Elasticsearch.Core.Search.TotalHits, long>?> propTotal = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propHits.TryRead(ref reader, options, PropHits))
+			if (propHits.TryReadProperty(ref reader, options, PropHits, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Hit<T>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.Hit<T>>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propMaxScore.TryRead(ref reader, options, PropMaxScore))
+			if (propMaxScore.TryReadProperty(ref reader, options, PropMaxScore, null))
 			{
 				continue;
 			}
 
-			if (propTotal.TryRead(ref reader, options, PropTotal))
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, static Union<Elastic.Clients.Elasticsearch.Core.Search.TotalHits, long>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<Elastic.Clients.Elasticsearch.Core.Search.TotalHits, long>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartObject, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.Number), null, null)))
 			{
 				continue;
 			}
@@ -73,9 +73,9 @@ internal sealed partial class HitsMetadataConverter<T> : System.Text.Json.Serial
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, HitsMetadata<T> value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropHits, value.Hits);
-		writer.WriteProperty(options, PropMaxScore, value.MaxScore);
-		writer.WriteProperty(options, PropTotal, value.Total);
+		writer.WriteProperty(options, PropHits, value.Hits, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Hit<T>> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.Hit<T>>(o, v, null));
+		writer.WriteProperty(options, PropMaxScore, value.MaxScore, null, null);
+		writer.WriteProperty(options, PropTotal, value.Total, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Union<Elastic.Clients.Elasticsearch.Core.Search.TotalHits, long>? v) => w.WriteUnionValue<Elastic.Clients.Elasticsearch.Core.Search.TotalHits, long>(o, v, null, null));
 		writer.WriteEndObject();
 	}
 }

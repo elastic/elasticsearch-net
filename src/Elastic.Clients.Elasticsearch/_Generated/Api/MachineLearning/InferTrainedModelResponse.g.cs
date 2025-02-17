@@ -38,7 +38,7 @@ internal sealed partial class InferTrainedModelResponseConverter : System.Text.J
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.InferenceResponseResult>> propInferenceResults = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propInferenceResults.TryRead(ref reader, options, PropInferenceResults))
+			if (propInferenceResults.TryReadProperty(ref reader, options, PropInferenceResults, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.InferenceResponseResult> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.InferenceResponseResult>(o, null)!))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class InferTrainedModelResponseConverter : System.Text.J
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, InferTrainedModelResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropInferenceResults, value.InferenceResults);
+		writer.WriteProperty(options, PropInferenceResults, value.InferenceResults, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.InferenceResponseResult> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.InferenceResponseResult>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

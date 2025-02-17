@@ -38,7 +38,7 @@ internal sealed partial class GetJobsResponseConverter : System.Text.Json.Serial
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.RollupJob>> propJobs = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propJobs.TryRead(ref reader, options, PropJobs))
+			if (propJobs.TryReadProperty(ref reader, options, PropJobs, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.RollupJob> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Rollup.RollupJob>(o, null)!))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class GetJobsResponseConverter : System.Text.Json.Serial
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetJobsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropJobs, value.Jobs);
+		writer.WriteProperty(options, PropJobs, value.Jobs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.RollupJob> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Rollup.RollupJob>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

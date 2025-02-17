@@ -40,12 +40,12 @@ internal sealed partial class PutBehavioralAnalyticsResponseConverter : System.T
 		LocalJsonValue<string> propName = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAcknowledged.TryRead(ref reader, options, PropAcknowledged))
+			if (propAcknowledged.TryReadProperty(ref reader, options, PropAcknowledged, null))
 			{
 				continue;
 			}
 
-			if (propName.TryRead(ref reader, options, PropName))
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class PutBehavioralAnalyticsResponseConverter : System.T
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, PutBehavioralAnalyticsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged);
-		writer.WriteProperty(options, PropName, value.Name);
+		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged, null, null);
+		writer.WriteProperty(options, PropName, value.Name, null, null);
 		writer.WriteEndObject();
 	}
 }

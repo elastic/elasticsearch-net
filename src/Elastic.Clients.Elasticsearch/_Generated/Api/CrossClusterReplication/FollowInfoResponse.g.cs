@@ -38,7 +38,7 @@ internal sealed partial class FollowInfoResponseConverter : System.Text.Json.Ser
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndex>> propFollowerIndices = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propFollowerIndices.TryRead(ref reader, options, PropFollowerIndices))
+			if (propFollowerIndices.TryReadProperty(ref reader, options, PropFollowerIndices, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndex> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndex>(o, null)!))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class FollowInfoResponseConverter : System.Text.Json.Ser
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, FollowInfoResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFollowerIndices, value.FollowerIndices);
+		writer.WriteProperty(options, PropFollowerIndices, value.FollowerIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndex> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndex>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

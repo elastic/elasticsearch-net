@@ -82,7 +82,7 @@ internal sealed partial class InferenceConfigConverter : System.Text.Json.Serial
 			{
 				variantType = VariantClassification.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions?>(options, null);
 				continue;
 			}
 
@@ -90,7 +90,7 @@ internal sealed partial class InferenceConfigConverter : System.Text.Json.Serial
 			{
 				variantType = VariantRegression.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions?>(options, null);
 				continue;
 			}
 
@@ -109,10 +109,10 @@ internal sealed partial class InferenceConfigConverter : System.Text.Json.Serial
 			case "":
 				break;
 			case "classification":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions?)value.Variant, null, null);
 				break;
 			case "regression":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions?)value.Variant, null, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(InferenceConfig)}'.");

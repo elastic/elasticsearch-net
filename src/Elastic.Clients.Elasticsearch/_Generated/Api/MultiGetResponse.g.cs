@@ -38,7 +38,7 @@ internal sealed partial class MultiGetResponseConverter<TDocument> : System.Text
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetResponseItem<TDocument>>> propDocs = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDocs.TryRead(ref reader, options, PropDocs))
+			if (propDocs.TryReadProperty(ref reader, options, PropDocs, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetResponseItem<TDocument>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetResponseItem<TDocument>>(o, null)!))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class MultiGetResponseConverter<TDocument> : System.Text
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, MultiGetResponse<TDocument> value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDocs, value.Docs);
+		writer.WriteProperty(options, PropDocs, value.Docs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetResponseItem<TDocument>> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetResponseItem<TDocument>>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

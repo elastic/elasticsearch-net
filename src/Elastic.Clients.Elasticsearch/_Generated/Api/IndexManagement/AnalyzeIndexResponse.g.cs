@@ -40,12 +40,12 @@ internal sealed partial class AnalyzeIndexResponseConverter : System.Text.Json.S
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeToken>?> propTokens = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDetail.TryRead(ref reader, options, PropDetail))
+			if (propDetail.TryReadProperty(ref reader, options, PropDetail, null))
 			{
 				continue;
 			}
 
-			if (propTokens.TryRead(ref reader, options, PropTokens))
+			if (propTokens.TryReadProperty(ref reader, options, PropTokens, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeToken>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeToken>(o, null)))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class AnalyzeIndexResponseConverter : System.Text.Json.S
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, AnalyzeIndexResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDetail, value.Detail);
-		writer.WriteProperty(options, PropTokens, value.Tokens);
+		writer.WriteProperty(options, PropDetail, value.Detail, null, null);
+		writer.WriteProperty(options, PropTokens, value.Tokens, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeToken>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeToken>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

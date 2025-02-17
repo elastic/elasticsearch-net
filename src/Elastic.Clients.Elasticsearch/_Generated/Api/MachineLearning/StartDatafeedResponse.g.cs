@@ -40,12 +40,12 @@ internal sealed partial class StartDatafeedResponseConverter : System.Text.Json.
 		LocalJsonValue<bool> propStarted = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propNode.TryRead(ref reader, options, PropNode, typeof(SingleOrManyMarker<IReadOnlyCollection<string>, string>)))
+			if (propNode.TryReadProperty(ref reader, options, PropNode, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propStarted.TryRead(ref reader, options, PropStarted))
+			if (propStarted.TryReadProperty(ref reader, options, PropStarted, null))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class StartDatafeedResponseConverter : System.Text.Json.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, StartDatafeedResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropNode, value.Node, null, typeof(SingleOrManyMarker<IReadOnlyCollection<string>, string>));
-		writer.WriteProperty(options, PropStarted, value.Started);
+		writer.WriteProperty(options, PropNode, value.Node, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropStarted, value.Started, null, null);
 		writer.WriteEndObject();
 	}
 }

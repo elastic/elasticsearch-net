@@ -44,22 +44,22 @@ internal sealed partial class GetTasksResponseConverter : System.Text.Json.Seria
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Tasks.TaskInfo> propTask = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCompleted.TryRead(ref reader, options, PropCompleted))
+			if (propCompleted.TryReadProperty(ref reader, options, PropCompleted, null))
 			{
 				continue;
 			}
 
-			if (propError.TryRead(ref reader, options, PropError))
+			if (propError.TryReadProperty(ref reader, options, PropError, null))
 			{
 				continue;
 			}
 
-			if (propResponse.TryRead(ref reader, options, PropResponse))
+			if (propResponse.TryReadProperty(ref reader, options, PropResponse, null))
 			{
 				continue;
 			}
 
-			if (propTask.TryRead(ref reader, options, PropTask))
+			if (propTask.TryReadProperty(ref reader, options, PropTask, null))
 			{
 				continue;
 			}
@@ -83,10 +83,10 @@ internal sealed partial class GetTasksResponseConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetTasksResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCompleted, value.Completed);
-		writer.WriteProperty(options, PropError, value.Error);
-		writer.WriteProperty(options, PropResponse, value.Response);
-		writer.WriteProperty(options, PropTask, value.Task);
+		writer.WriteProperty(options, PropCompleted, value.Completed, null, null);
+		writer.WriteProperty(options, PropError, value.Error, null, null);
+		writer.WriteProperty(options, PropResponse, value.Response, null, null);
+		writer.WriteProperty(options, PropTask, value.Task, null, null);
 		writer.WriteEndObject();
 	}
 }

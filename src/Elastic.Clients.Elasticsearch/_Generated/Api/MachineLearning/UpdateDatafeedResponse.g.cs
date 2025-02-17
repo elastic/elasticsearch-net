@@ -66,77 +66,77 @@ internal sealed partial class UpdateDatafeedResponseConverter : System.Text.Json
 		LocalJsonValue<int> propScrollSize = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAggregations.TryRead(ref reader, options, PropAggregations))
+			if (propAggregations.TryReadProperty(ref reader, options, PropAggregations, static IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propAuthorization.TryRead(ref reader, options, PropAuthorization))
+			if (propAuthorization.TryReadProperty(ref reader, options, PropAuthorization, null))
 			{
 				continue;
 			}
 
-			if (propChunkingConfig.TryRead(ref reader, options, PropChunkingConfig))
+			if (propChunkingConfig.TryReadProperty(ref reader, options, PropChunkingConfig, null))
 			{
 				continue;
 			}
 
-			if (propDatafeedId.TryRead(ref reader, options, PropDatafeedId))
+			if (propDatafeedId.TryReadProperty(ref reader, options, PropDatafeedId, null))
 			{
 				continue;
 			}
 
-			if (propDelayedDataCheckConfig.TryRead(ref reader, options, PropDelayedDataCheckConfig))
+			if (propDelayedDataCheckConfig.TryReadProperty(ref reader, options, PropDelayedDataCheckConfig, null))
 			{
 				continue;
 			}
 
-			if (propFrequency.TryRead(ref reader, options, PropFrequency))
+			if (propFrequency.TryReadProperty(ref reader, options, PropFrequency, null))
 			{
 				continue;
 			}
 
-			if (propIndices.TryRead(ref reader, options, PropIndices))
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propIndicesOptions.TryRead(ref reader, options, PropIndicesOptions))
+			if (propIndicesOptions.TryReadProperty(ref reader, options, PropIndicesOptions, null))
 			{
 				continue;
 			}
 
-			if (propJobId.TryRead(ref reader, options, PropJobId))
+			if (propJobId.TryReadProperty(ref reader, options, PropJobId, null))
 			{
 				continue;
 			}
 
-			if (propMaxEmptySearches.TryRead(ref reader, options, PropMaxEmptySearches))
+			if (propMaxEmptySearches.TryReadProperty(ref reader, options, PropMaxEmptySearches, null))
 			{
 				continue;
 			}
 
-			if (propQuery.TryRead(ref reader, options, PropQuery))
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
 			{
 				continue;
 			}
 
-			if (propQueryDelay.TryRead(ref reader, options, PropQueryDelay))
+			if (propQueryDelay.TryReadProperty(ref reader, options, PropQueryDelay, null))
 			{
 				continue;
 			}
 
-			if (propRuntimeMappings.TryRead(ref reader, options, PropRuntimeMappings))
+			if (propRuntimeMappings.TryReadProperty(ref reader, options, PropRuntimeMappings, static IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propScriptFields.TryRead(ref reader, options, PropScriptFields))
+			if (propScriptFields.TryReadProperty(ref reader, options, PropScriptFields, static IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.ScriptField>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propScrollSize.TryRead(ref reader, options, PropScrollSize))
+			if (propScrollSize.TryReadProperty(ref reader, options, PropScrollSize, null))
 			{
 				continue;
 			}
@@ -182,21 +182,21 @@ internal sealed partial class UpdateDatafeedResponseConverter : System.Text.Json
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, UpdateDatafeedResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAggregations, value.Aggregations);
-		writer.WriteProperty(options, PropAuthorization, value.Authorization);
-		writer.WriteProperty(options, PropChunkingConfig, value.ChunkingConfig);
-		writer.WriteProperty(options, PropDatafeedId, value.DatafeedId);
-		writer.WriteProperty(options, PropDelayedDataCheckConfig, value.DelayedDataCheckConfig);
-		writer.WriteProperty(options, PropFrequency, value.Frequency);
-		writer.WriteProperty(options, PropIndices, value.Indices);
-		writer.WriteProperty(options, PropIndicesOptions, value.IndicesOptions);
-		writer.WriteProperty(options, PropJobId, value.JobId);
-		writer.WriteProperty(options, PropMaxEmptySearches, value.MaxEmptySearches);
-		writer.WriteProperty(options, PropQuery, value.Query);
-		writer.WriteProperty(options, PropQueryDelay, value.QueryDelay);
-		writer.WriteProperty(options, PropRuntimeMappings, value.RuntimeMappings);
-		writer.WriteProperty(options, PropScriptFields, value.ScriptFields);
-		writer.WriteProperty(options, PropScrollSize, value.ScrollSize);
+		writer.WriteProperty(options, PropAggregations, value.Aggregations, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>(o, v, null, null));
+		writer.WriteProperty(options, PropAuthorization, value.Authorization, null, null);
+		writer.WriteProperty(options, PropChunkingConfig, value.ChunkingConfig, null, null);
+		writer.WriteProperty(options, PropDatafeedId, value.DatafeedId, null, null);
+		writer.WriteProperty(options, PropDelayedDataCheckConfig, value.DelayedDataCheckConfig, null, null);
+		writer.WriteProperty(options, PropFrequency, value.Frequency, null, null);
+		writer.WriteProperty(options, PropIndices, value.Indices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropIndicesOptions, value.IndicesOptions, null, null);
+		writer.WriteProperty(options, PropJobId, value.JobId, null, null);
+		writer.WriteProperty(options, PropMaxEmptySearches, value.MaxEmptySearches, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropQueryDelay, value.QueryDelay, null, null);
+		writer.WriteProperty(options, PropRuntimeMappings, value.RuntimeMappings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, v, null, null));
+		writer.WriteProperty(options, PropScriptFields, value.ScriptFields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.ScriptField>(o, v, null, null));
+		writer.WriteProperty(options, PropScrollSize, value.ScrollSize, null, null);
 		writer.WriteEndObject();
 	}
 }

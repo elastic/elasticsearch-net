@@ -27,140 +27,6 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-internal sealed partial class AnalysisConfigConverter : System.Text.Json.Serialization.JsonConverter<AnalysisConfig>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropBucketSpan = System.Text.Json.JsonEncodedText.Encode("bucket_span");
-	private static readonly System.Text.Json.JsonEncodedText PropCategorizationAnalyzer = System.Text.Json.JsonEncodedText.Encode("categorization_analyzer");
-	private static readonly System.Text.Json.JsonEncodedText PropCategorizationFieldName = System.Text.Json.JsonEncodedText.Encode("categorization_field_name");
-	private static readonly System.Text.Json.JsonEncodedText PropCategorizationFilters = System.Text.Json.JsonEncodedText.Encode("categorization_filters");
-	private static readonly System.Text.Json.JsonEncodedText PropDetectors = System.Text.Json.JsonEncodedText.Encode("detectors");
-	private static readonly System.Text.Json.JsonEncodedText PropInfluencers = System.Text.Json.JsonEncodedText.Encode("influencers");
-	private static readonly System.Text.Json.JsonEncodedText PropLatency = System.Text.Json.JsonEncodedText.Encode("latency");
-	private static readonly System.Text.Json.JsonEncodedText PropModelPruneWindow = System.Text.Json.JsonEncodedText.Encode("model_prune_window");
-	private static readonly System.Text.Json.JsonEncodedText PropMultivariateByFields = System.Text.Json.JsonEncodedText.Encode("multivariate_by_fields");
-	private static readonly System.Text.Json.JsonEncodedText PropPerPartitionCategorization = System.Text.Json.JsonEncodedText.Encode("per_partition_categorization");
-	private static readonly System.Text.Json.JsonEncodedText PropSummaryCountFieldName = System.Text.Json.JsonEncodedText.Encode("summary_count_field_name");
-
-	public override AnalysisConfig Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propBucketSpan = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer?> propCategorizationAnalyzer = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propCategorizationFieldName = default;
-		LocalJsonValue<ICollection<string>?> propCategorizationFilters = default;
-		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Detector>> propDetectors = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propInfluencers = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propLatency = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propModelPruneWindow = default;
-		LocalJsonValue<bool?> propMultivariateByFields = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization?> propPerPartitionCategorization = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propSummaryCountFieldName = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propBucketSpan.TryRead(ref reader, options, PropBucketSpan))
-			{
-				continue;
-			}
-
-			if (propCategorizationAnalyzer.TryRead(ref reader, options, PropCategorizationAnalyzer))
-			{
-				continue;
-			}
-
-			if (propCategorizationFieldName.TryRead(ref reader, options, PropCategorizationFieldName))
-			{
-				continue;
-			}
-
-			if (propCategorizationFilters.TryRead(ref reader, options, PropCategorizationFilters))
-			{
-				continue;
-			}
-
-			if (propDetectors.TryRead(ref reader, options, PropDetectors))
-			{
-				continue;
-			}
-
-			if (propInfluencers.TryRead(ref reader, options, PropInfluencers, typeof(FieldsMarker)))
-			{
-				continue;
-			}
-
-			if (propLatency.TryRead(ref reader, options, PropLatency))
-			{
-				continue;
-			}
-
-			if (propModelPruneWindow.TryRead(ref reader, options, PropModelPruneWindow))
-			{
-				continue;
-			}
-
-			if (propMultivariateByFields.TryRead(ref reader, options, PropMultivariateByFields))
-			{
-				continue;
-			}
-
-			if (propPerPartitionCategorization.TryRead(ref reader, options, PropPerPartitionCategorization))
-			{
-				continue;
-			}
-
-			if (propSummaryCountFieldName.TryRead(ref reader, options, PropSummaryCountFieldName))
-			{
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new AnalysisConfig
-		{
-			BucketSpan = propBucketSpan.Value
-,
-			CategorizationAnalyzer = propCategorizationAnalyzer.Value
-,
-			CategorizationFieldName = propCategorizationFieldName.Value
-,
-			CategorizationFilters = propCategorizationFilters.Value
-,
-			Detectors = propDetectors.Value
-,
-			Influencers = propInfluencers.Value
-,
-			Latency = propLatency.Value
-,
-			ModelPruneWindow = propModelPruneWindow.Value
-,
-			MultivariateByFields = propMultivariateByFields.Value
-,
-			PerPartitionCategorization = propPerPartitionCategorization.Value
-,
-			SummaryCountFieldName = propSummaryCountFieldName.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, AnalysisConfig value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBucketSpan, value.BucketSpan);
-		writer.WriteProperty(options, PropCategorizationAnalyzer, value.CategorizationAnalyzer);
-		writer.WriteProperty(options, PropCategorizationFieldName, value.CategorizationFieldName);
-		writer.WriteProperty(options, PropCategorizationFilters, value.CategorizationFilters);
-		writer.WriteProperty(options, PropDetectors, value.Detectors);
-		writer.WriteProperty(options, PropInfluencers, value.Influencers, null, typeof(FieldsMarker));
-		writer.WriteProperty(options, PropLatency, value.Latency);
-		writer.WriteProperty(options, PropModelPruneWindow, value.ModelPruneWindow);
-		writer.WriteProperty(options, PropMultivariateByFields, value.MultivariateByFields);
-		writer.WriteProperty(options, PropPerPartitionCategorization, value.PerPartitionCategorization);
-		writer.WriteProperty(options, PropSummaryCountFieldName, value.SummaryCountFieldName);
-		writer.WriteEndObject();
-	}
-}
-
-[JsonConverter(typeof(AnalysisConfigConverter))]
 public sealed partial class AnalysisConfig
 {
 	/// <summary>
@@ -169,6 +35,7 @@ public sealed partial class AnalysisConfig
 	/// whole number of buckets in one day. If the anomaly detection job uses a datafeed with aggregations, this value must also be divisible by the interval of the date histogram aggregation.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("bucket_span")]
 	public Elastic.Clients.Elasticsearch.Duration? BucketSpan { get; set; }
 
 	/// <summary>
@@ -176,6 +43,7 @@ public sealed partial class AnalysisConfig
 	/// If <c>categorization_field_name</c> is specified, you can also define the analyzer that is used to interpret the categorization field. This property cannot be used at the same time as <c>categorization_filters</c>. The categorization analyzer specifies how the <c>categorization_field</c> is interpreted by the categorization process. The <c>categorization_analyzer</c> field can be specified either as a string or as an object. If it is a string, it must refer to a built-in analyzer or one added by another plugin.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("categorization_analyzer")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer? CategorizationAnalyzer { get; set; }
 
 	/// <summary>
@@ -183,6 +51,7 @@ public sealed partial class AnalysisConfig
 	/// If this property is specified, the values of the specified field will be categorized. The resulting categories must be used in a detector by setting <c>by_field_name</c>, <c>over_field_name</c>, or <c>partition_field_name</c> to the keyword <c>mlcategory</c>.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("categorization_field_name")]
 	public Elastic.Clients.Elasticsearch.Field? CategorizationFieldName { get; set; }
 
 	/// <summary>
@@ -190,6 +59,7 @@ public sealed partial class AnalysisConfig
 	/// If <c>categorization_field_name</c> is specified, you can also define optional filters. This property expects an array of regular expressions. The expressions are used to filter out matching sequences from the categorization field values. You can use this functionality to fine tune the categorization by excluding sequences from consideration when categories are defined. For example, you can exclude SQL statements that appear in your log files. This property cannot be used at the same time as <c>categorization_analyzer</c>. If you only want to define simple regular expression filters that are applied prior to tokenization, setting this property is the easiest method. If you also want to customize the tokenizer or post-tokenization filtering, use the <c>categorization_analyzer</c> property instead and include the filters as pattern_replace character filters. The effect is exactly the same.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("categorization_filters")]
 	public ICollection<string>? CategorizationFilters { get; set; }
 
 	/// <summary>
@@ -197,6 +67,7 @@ public sealed partial class AnalysisConfig
 	/// Detector configuration objects specify which data fields a job analyzes. They also specify which analytical functions are used. You can specify multiple detectors for a job. If the detectors array does not contain at least one detector, no analysis can occur and an error is returned.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("detectors")]
 	public ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Detector> Detectors { get; set; }
 
 	/// <summary>
@@ -204,6 +75,7 @@ public sealed partial class AnalysisConfig
 	/// A comma separated list of influencer field names. Typically these can be the by, over, or partition fields that are used in the detector configuration. You might also want to use a field name that is not specifically named in a detector, but is available as part of the input data. When you use multiple detectors, the use of influencers is recommended as it aggregates results for each influencer entity.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("influencers")]
 	public Elastic.Clients.Elasticsearch.Fields? Influencers { get; set; }
 
 	/// <summary>
@@ -211,6 +83,7 @@ public sealed partial class AnalysisConfig
 	/// The size of the window in which to expect data that is out of time order. If you specify a non-zero value, it must be greater than or equal to one second. NOTE: Latency is applicable only when you send data by using the post data API.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("latency")]
 	public Elastic.Clients.Elasticsearch.Duration? Latency { get; set; }
 
 	/// <summary>
@@ -218,6 +91,7 @@ public sealed partial class AnalysisConfig
 	/// Advanced configuration option. Affects the pruning of models that have not been updated for the given time duration. The value must be set to a multiple of the <c>bucket_span</c>. If set too low, important information may be removed from the model. For jobs created in 8.1 and later, the default value is the greater of <c>30d</c> or 20 times <c>bucket_span</c>.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("model_prune_window")]
 	public Elastic.Clients.Elasticsearch.Duration? ModelPruneWindow { get; set; }
 
 	/// <summary>
@@ -225,6 +99,7 @@ public sealed partial class AnalysisConfig
 	/// This functionality is reserved for internal use. It is not supported for use in customer environments and is not subject to the support SLA of official GA features. If set to <c>true</c>, the analysis will automatically find correlations between metrics for a given by field value and report anomalies when those correlations cease to hold. For example, suppose CPU and memory usage on host A is usually highly correlated with the same metrics on host B. Perhaps this correlation occurs because they are running a load-balanced application. If you enable this property, anomalies will be reported when, for example, CPU usage on host A is high and the value of CPU usage on host B is low. That is to say, you’ll see an anomaly when the CPU of host A is unusual given the CPU of host B. To use the <c>multivariate_by_fields</c> property, you must also specify <c>by_field_name</c> in your detector.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("multivariate_by_fields")]
 	public bool? MultivariateByFields { get; set; }
 
 	/// <summary>
@@ -232,6 +107,7 @@ public sealed partial class AnalysisConfig
 	/// Settings related to how categorization interacts with partition fields.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("per_partition_categorization")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization? PerPartitionCategorization { get; set; }
 
 	/// <summary>
@@ -239,6 +115,7 @@ public sealed partial class AnalysisConfig
 	/// If this property is specified, the data that is fed to the job is expected to be pre-summarized. This property value is the name of the field that contains the count of raw data points that have been summarized. The same <c>summary_count_field_name</c> applies to all detectors in the job. NOTE: The <c>summary_count_field_name</c> property cannot be used with the <c>metric</c> function.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("summary_count_field_name")]
 	public Elastic.Clients.Elasticsearch.Field? SummaryCountFieldName { get; set; }
 }
 

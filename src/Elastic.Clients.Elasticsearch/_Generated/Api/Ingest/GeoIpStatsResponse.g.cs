@@ -40,12 +40,12 @@ internal sealed partial class GeoIpStatsResponseConverter : System.Text.Json.Ser
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Ingest.GeoIpDownloadStatistics> propStats = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propNodes.TryRead(ref reader, options, PropNodes))
+			if (propNodes.TryReadProperty(ref reader, options, PropNodes, static IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabases> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabases>(o, null, null)!))
 			{
 				continue;
 			}
 
-			if (propStats.TryRead(ref reader, options, PropStats))
+			if (propStats.TryReadProperty(ref reader, options, PropStats, null))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class GeoIpStatsResponseConverter : System.Text.Json.Ser
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GeoIpStatsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropNodes, value.Nodes);
-		writer.WriteProperty(options, PropStats, value.Stats);
+		writer.WriteProperty(options, PropNodes, value.Nodes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabases> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabases>(o, v, null, null));
+		writer.WriteProperty(options, PropStats, value.Stats, null, null);
 		writer.WriteEndObject();
 	}
 }

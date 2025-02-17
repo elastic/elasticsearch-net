@@ -64,72 +64,72 @@ internal sealed partial class SearchApplicationSearchResponseConverter<TDocument
 		LocalJsonValue<long> propTook = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAggregations.TryRead(ref reader, options, PropAggregations))
+			if (propAggregations.TryReadProperty(ref reader, options, PropAggregations, null))
 			{
 				continue;
 			}
 
-			if (propClusters.TryRead(ref reader, options, PropClusters))
+			if (propClusters.TryReadProperty(ref reader, options, PropClusters, null))
 			{
 				continue;
 			}
 
-			if (propFields.TryRead(ref reader, options, PropFields))
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static IReadOnlyDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propHitsMetadata.TryRead(ref reader, options, PropHitsMetadata))
+			if (propHitsMetadata.TryReadProperty(ref reader, options, PropHitsMetadata, null))
 			{
 				continue;
 			}
 
-			if (propMaxScore.TryRead(ref reader, options, PropMaxScore))
+			if (propMaxScore.TryReadProperty(ref reader, options, PropMaxScore, null))
 			{
 				continue;
 			}
 
-			if (propNumReducePhases.TryRead(ref reader, options, PropNumReducePhases))
+			if (propNumReducePhases.TryReadProperty(ref reader, options, PropNumReducePhases, null))
 			{
 				continue;
 			}
 
-			if (propPitId.TryRead(ref reader, options, PropPitId))
+			if (propPitId.TryReadProperty(ref reader, options, PropPitId, null))
 			{
 				continue;
 			}
 
-			if (propProfile.TryRead(ref reader, options, PropProfile))
+			if (propProfile.TryReadProperty(ref reader, options, PropProfile, null))
 			{
 				continue;
 			}
 
-			if (propScrollId.TryRead(ref reader, options, PropScrollId))
+			if (propScrollId.TryReadProperty(ref reader, options, PropScrollId, null))
 			{
 				continue;
 			}
 
-			if (propShards.TryRead(ref reader, options, PropShards))
+			if (propShards.TryReadProperty(ref reader, options, PropShards, null))
 			{
 				continue;
 			}
 
-			if (propSuggest.TryRead(ref reader, options, PropSuggest))
+			if (propSuggest.TryReadProperty(ref reader, options, PropSuggest, null))
 			{
 				continue;
 			}
 
-			if (propTerminatedEarly.TryRead(ref reader, options, PropTerminatedEarly))
+			if (propTerminatedEarly.TryReadProperty(ref reader, options, PropTerminatedEarly, null))
 			{
 				continue;
 			}
 
-			if (propTimedOut.TryRead(ref reader, options, PropTimedOut))
+			if (propTimedOut.TryReadProperty(ref reader, options, PropTimedOut, null))
 			{
 				continue;
 			}
 
-			if (propTook.TryRead(ref reader, options, PropTook))
+			if (propTook.TryReadProperty(ref reader, options, PropTook, null))
 			{
 				continue;
 			}
@@ -173,20 +173,20 @@ internal sealed partial class SearchApplicationSearchResponseConverter<TDocument
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, SearchApplicationSearchResponse<TDocument> value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAggregations, value.Aggregations);
-		writer.WriteProperty(options, PropClusters, value.Clusters);
-		writer.WriteProperty(options, PropFields, value.Fields);
-		writer.WriteProperty(options, PropHitsMetadata, value.HitsMetadata);
-		writer.WriteProperty(options, PropMaxScore, value.MaxScore);
-		writer.WriteProperty(options, PropNumReducePhases, value.NumReducePhases);
-		writer.WriteProperty(options, PropPitId, value.PitId);
-		writer.WriteProperty(options, PropProfile, value.Profile);
-		writer.WriteProperty(options, PropScrollId, value.ScrollId);
-		writer.WriteProperty(options, PropShards, value.Shards);
-		writer.WriteProperty(options, PropSuggest, value.Suggest);
-		writer.WriteProperty(options, PropTerminatedEarly, value.TerminatedEarly);
-		writer.WriteProperty(options, PropTimedOut, value.TimedOut);
-		writer.WriteProperty(options, PropTook, value.Took);
+		writer.WriteProperty(options, PropAggregations, value.Aggregations, null, null);
+		writer.WriteProperty(options, PropClusters, value.Clusters, null, null);
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropHitsMetadata, value.HitsMetadata, null, null);
+		writer.WriteProperty(options, PropMaxScore, value.MaxScore, null, null);
+		writer.WriteProperty(options, PropNumReducePhases, value.NumReducePhases, null, null);
+		writer.WriteProperty(options, PropPitId, value.PitId, null, null);
+		writer.WriteProperty(options, PropProfile, value.Profile, null, null);
+		writer.WriteProperty(options, PropScrollId, value.ScrollId, null, null);
+		writer.WriteProperty(options, PropShards, value.Shards, null, null);
+		writer.WriteProperty(options, PropSuggest, value.Suggest, null, null);
+		writer.WriteProperty(options, PropTerminatedEarly, value.TerminatedEarly, null, null);
+		writer.WriteProperty(options, PropTimedOut, value.TimedOut, null, null);
+		writer.WriteProperty(options, PropTook, value.Took, null, null);
 		writer.WriteEndObject();
 	}
 }

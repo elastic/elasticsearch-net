@@ -30,13 +30,49 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+[JsonConverter(typeof(PercentilesConverter))]
 public sealed partial class Percentiles : Union<IReadOnlyDictionary<string, object?>, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.ArrayPercentilesItem>>
 {
-	public Percentiles(IReadOnlyDictionary<string, object?> Keyed) : base(Keyed)
+	public Percentiles(IReadOnlyDictionary<string, object?> keyed) : base(keyed)
 	{
 	}
 
-	public Percentiles(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.ArrayPercentilesItem> Array) : base(Array)
+	public Percentiles(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.ArrayPercentilesItem> array) : base(array)
 	{
+	}
+}
+
+internal sealed partial class PercentilesConverter : System.Text.Json.Serialization.JsonConverter<Percentiles>
+{
+	public override Percentiles Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var selector = static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartObject, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartArray);
+		return selector(ref reader, options) switch
+		{
+			Elastic.Clients.Elasticsearch.UnionTag.T1 => new Percentiles(reader.ReadValue<IReadOnlyDictionary<string, object?>>(options, null)),
+			Elastic.Clients.Elasticsearch.UnionTag.T2 => new Percentiles(reader.ReadValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.ArrayPercentilesItem>>(options, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.ArrayPercentilesItem> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.ArrayPercentilesItem>(o, null)!)),
+			_ => throw new System.InvalidOperationException($"Failed to select a union variant for type '{nameof(Percentiles)}")
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Percentiles value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value.Tag)
+		{
+			case Elastic.Clients.Elasticsearch.UnionTag.T1:
+				{
+					writer.WriteValue(options, value.Value1, null);
+					break;
+				}
+
+			case Elastic.Clients.Elasticsearch.UnionTag.T2:
+				{
+					writer.WriteValue(options, value.Value2, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.ArrayPercentilesItem> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.ArrayPercentilesItem>(o, v, null));
+					break;
+				}
+
+			default:
+				throw new System.InvalidOperationException($"Unrecognized tag value: {value.Tag}");
+		}
 	}
 }

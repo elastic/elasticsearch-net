@@ -40,12 +40,12 @@ internal sealed partial class AdjacencyMatrixBucketConverter : System.Text.Json.
 		LocalJsonValue<string> propKey = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDocCount.TryRead(ref reader, options, PropDocCount))
+			if (propDocCount.TryReadProperty(ref reader, options, PropDocCount, null))
 			{
 				continue;
 			}
 
-			if (propKey.TryRead(ref reader, options, PropKey))
+			if (propKey.TryReadProperty(ref reader, options, PropKey, null))
 			{
 				continue;
 			}
@@ -69,8 +69,8 @@ internal sealed partial class AdjacencyMatrixBucketConverter : System.Text.Json.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, AdjacencyMatrixBucket value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDocCount, value.DocCount);
-		writer.WriteProperty(options, PropKey, value.Key);
+		writer.WriteProperty(options, PropDocCount, value.DocCount, null, null);
+		writer.WriteProperty(options, PropKey, value.Key, null, null);
 		if (value.Aggregations is not null)
 		{
 			foreach (var item in value.Aggregations)

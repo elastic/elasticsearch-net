@@ -84,7 +84,7 @@ internal sealed partial class FieldRuleConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantDn.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Names?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Names?>(options, null);
 				continue;
 			}
 
@@ -92,7 +92,7 @@ internal sealed partial class FieldRuleConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantGroups.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Names?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Names?>(options, null);
 				continue;
 			}
 
@@ -100,7 +100,7 @@ internal sealed partial class FieldRuleConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantUsername.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Names?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Names?>(options, null);
 				continue;
 			}
 
@@ -119,13 +119,13 @@ internal sealed partial class FieldRuleConverter : System.Text.Json.Serializatio
 			case "":
 				break;
 			case "dn":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Names?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Names?)value.Variant, null, null);
 				break;
 			case "groups":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Names?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Names?)value.Variant, null, null);
 				break;
 			case "username":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Names?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Names?)value.Variant, null, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(FieldRule)}'.");

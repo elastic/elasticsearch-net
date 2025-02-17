@@ -44,22 +44,22 @@ internal sealed partial class GetServiceCredentialsResponseConverter : System.Te
 		LocalJsonValue<IReadOnlyDictionary<string, IReadOnlyDictionary<string, object>>> propTokens = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCount.TryRead(ref reader, options, PropCount))
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
 			{
 				continue;
 			}
 
-			if (propNodesCredentials.TryRead(ref reader, options, PropNodesCredentials))
+			if (propNodesCredentials.TryReadProperty(ref reader, options, PropNodesCredentials, null))
 			{
 				continue;
 			}
 
-			if (propServiceAccount.TryRead(ref reader, options, PropServiceAccount))
+			if (propServiceAccount.TryReadProperty(ref reader, options, PropServiceAccount, null))
 			{
 				continue;
 			}
 
-			if (propTokens.TryRead(ref reader, options, PropTokens))
+			if (propTokens.TryReadProperty(ref reader, options, PropTokens, static IReadOnlyDictionary<string, IReadOnlyDictionary<string, object>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, IReadOnlyDictionary<string, object>>(o, null, static IReadOnlyDictionary<string, object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)!)!))
 			{
 				continue;
 			}
@@ -83,10 +83,10 @@ internal sealed partial class GetServiceCredentialsResponseConverter : System.Te
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetServiceCredentialsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCount, value.Count);
-		writer.WriteProperty(options, PropNodesCredentials, value.NodesCredentials);
-		writer.WriteProperty(options, PropServiceAccount, value.ServiceAccount);
-		writer.WriteProperty(options, PropTokens, value.Tokens);
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropNodesCredentials, value.NodesCredentials, null, null);
+		writer.WriteProperty(options, PropServiceAccount, value.ServiceAccount, null, null);
+		writer.WriteProperty(options, PropTokens, value.Tokens, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, IReadOnlyDictionary<string, object>> v) => w.WriteDictionaryValue<string, IReadOnlyDictionary<string, object>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, object> v) => w.WriteDictionaryValue<string, object>(o, v, null, null)));
 		writer.WriteEndObject();
 	}
 }

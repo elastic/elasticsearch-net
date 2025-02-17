@@ -86,7 +86,7 @@ internal sealed partial class PivotGroupByConverter : System.Text.Json.Serializa
 			{
 				variantType = VariantDateHistogram.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation?>(options, null);
 				continue;
 			}
 
@@ -94,7 +94,7 @@ internal sealed partial class PivotGroupByConverter : System.Text.Json.Serializa
 			{
 				variantType = VariantGeotileGrid.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation?>(options, null);
 				continue;
 			}
 
@@ -102,7 +102,7 @@ internal sealed partial class PivotGroupByConverter : System.Text.Json.Serializa
 			{
 				variantType = VariantHistogram.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation?>(options, null);
 				continue;
 			}
 
@@ -110,7 +110,7 @@ internal sealed partial class PivotGroupByConverter : System.Text.Json.Serializa
 			{
 				variantType = VariantTerms.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation?>(options, null);
 				continue;
 			}
 
@@ -129,16 +129,16 @@ internal sealed partial class PivotGroupByConverter : System.Text.Json.Serializa
 			case "":
 				break;
 			case "date_histogram":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation?)value.Variant, null, null);
 				break;
 			case "geotile_grid":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation?)value.Variant, null, null);
 				break;
 			case "histogram":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation?)value.Variant, null, null);
 				break;
 			case "terms":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation?)value.Variant, null, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(PivotGroupBy)}'.");

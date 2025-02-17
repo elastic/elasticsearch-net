@@ -10,8 +10,8 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class IndexRequest<TDocument>
 {
-	// TODO:
-	//public IndexRequest() : this(typeof(TDocument)) { }
+	[JsonConstructor]
+	public IndexRequest() : this(typeof(TDocument)) { }
 
 	public IndexRequest(TDocument document, Id id) : this(typeof(TDocument), id) => Document = document;
 

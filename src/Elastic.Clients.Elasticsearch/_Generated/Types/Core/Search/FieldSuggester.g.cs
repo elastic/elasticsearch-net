@@ -111,17 +111,17 @@ internal sealed partial class FieldSuggesterConverter : System.Text.Json.Seriali
 		object? variant = null;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propPrefix.TryRead(ref reader, options, PropPrefix))
+			if (propPrefix.TryReadProperty(ref reader, options, PropPrefix, null))
 			{
 				continue;
 			}
 
-			if (propRegex.TryRead(ref reader, options, PropRegex))
+			if (propRegex.TryReadProperty(ref reader, options, PropRegex, null))
 			{
 				continue;
 			}
 
-			if (propText.TryRead(ref reader, options, PropText))
+			if (propText.TryReadProperty(ref reader, options, PropText, null))
 			{
 				continue;
 			}
@@ -130,7 +130,7 @@ internal sealed partial class FieldSuggesterConverter : System.Text.Json.Seriali
 			{
 				variantType = VariantCompletion.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester?>(options, null);
 				continue;
 			}
 
@@ -138,7 +138,7 @@ internal sealed partial class FieldSuggesterConverter : System.Text.Json.Seriali
 			{
 				variantType = VariantPhrase.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester?>(options, null);
 				continue;
 			}
 
@@ -146,7 +146,7 @@ internal sealed partial class FieldSuggesterConverter : System.Text.Json.Seriali
 			{
 				variantType = VariantTerm.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.TermSuggester?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.TermSuggester?>(options, null);
 				continue;
 			}
 
@@ -174,21 +174,21 @@ internal sealed partial class FieldSuggesterConverter : System.Text.Json.Seriali
 			case "":
 				break;
 			case "completion":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester?)value.Variant, null, null);
 				break;
 			case "phrase":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester?)value.Variant, null, null);
 				break;
 			case "term":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.TermSuggester?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.TermSuggester?)value.Variant, null, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(FieldSuggester)}'.");
 		}
 
-		writer.WriteProperty(options, PropPrefix, value.Prefix);
-		writer.WriteProperty(options, PropRegex, value.Regex);
-		writer.WriteProperty(options, PropText, value.Text);
+		writer.WriteProperty(options, PropPrefix, value.Prefix, null, null);
+		writer.WriteProperty(options, PropRegex, value.Regex, null, null);
+		writer.WriteProperty(options, PropText, value.Text, null, null);
 		writer.WriteEndObject();
 	}
 }

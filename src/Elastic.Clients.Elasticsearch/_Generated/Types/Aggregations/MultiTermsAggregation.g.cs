@@ -51,42 +51,42 @@ internal sealed partial class MultiTermsAggregationConverter : System.Text.Json.
 		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup>> propTerms = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCollectMode.TryRead(ref reader, options, PropCollectMode))
+			if (propCollectMode.TryReadProperty(ref reader, options, PropCollectMode, null))
 			{
 				continue;
 			}
 
-			if (propMinDocCount.TryRead(ref reader, options, PropMinDocCount))
+			if (propMinDocCount.TryReadProperty(ref reader, options, PropMinDocCount, null))
 			{
 				continue;
 			}
 
-			if (propOrder.TryRead(ref reader, options, PropOrder, typeof(SingleOrManyMarker<ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>?, KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>)))
+			if (propOrder.TryReadProperty(ref reader, options, PropOrder, static ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(o, null)))
 			{
 				continue;
 			}
 
-			if (propShardMinDocCount.TryRead(ref reader, options, PropShardMinDocCount))
+			if (propShardMinDocCount.TryReadProperty(ref reader, options, PropShardMinDocCount, null))
 			{
 				continue;
 			}
 
-			if (propShardSize.TryRead(ref reader, options, PropShardSize))
+			if (propShardSize.TryReadProperty(ref reader, options, PropShardSize, null))
 			{
 				continue;
 			}
 
-			if (propShowTermDocCountError.TryRead(ref reader, options, PropShowTermDocCountError))
+			if (propShowTermDocCountError.TryReadProperty(ref reader, options, PropShowTermDocCountError, null))
 			{
 				continue;
 			}
 
-			if (propSize.TryRead(ref reader, options, PropSize))
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
 			{
 				continue;
 			}
 
-			if (propTerms.TryRead(ref reader, options, PropTerms))
+			if (propTerms.TryReadProperty(ref reader, options, PropTerms, static ICollection<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup>(o, null)!))
 			{
 				continue;
 			}
@@ -118,14 +118,14 @@ internal sealed partial class MultiTermsAggregationConverter : System.Text.Json.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, MultiTermsAggregation value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCollectMode, value.CollectMode);
-		writer.WriteProperty(options, PropMinDocCount, value.MinDocCount);
-		writer.WriteProperty(options, PropOrder, value.Order, null, typeof(SingleOrManyMarker<ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>?, KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>));
-		writer.WriteProperty(options, PropShardMinDocCount, value.ShardMinDocCount);
-		writer.WriteProperty(options, PropShardSize, value.ShardSize);
-		writer.WriteProperty(options, PropShowTermDocCountError, value.ShowTermDocCountError);
-		writer.WriteProperty(options, PropSize, value.Size);
-		writer.WriteProperty(options, PropTerms, value.Terms);
+		writer.WriteProperty(options, PropCollectMode, value.CollectMode, null, null);
+		writer.WriteProperty(options, PropMinDocCount, value.MinDocCount, null, null);
+		writer.WriteProperty(options, PropOrder, value.Order, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? v) => w.WriteSingleOrManyCollectionValue<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(o, v, null));
+		writer.WriteProperty(options, PropShardMinDocCount, value.ShardMinDocCount, null, null);
+		writer.WriteProperty(options, PropShardSize, value.ShardSize, null, null);
+		writer.WriteProperty(options, PropShowTermDocCountError, value.ShowTermDocCountError, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropTerms, value.Terms, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

@@ -82,7 +82,7 @@ internal sealed partial class IndexModifyDataStreamActionConverter : System.Text
 			{
 				variantType = VariantAddBackingIndex.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction?>(options, null);
 				continue;
 			}
 
@@ -90,7 +90,7 @@ internal sealed partial class IndexModifyDataStreamActionConverter : System.Text
 			{
 				variantType = VariantRemoveBackingIndex.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction?>(options, null);
 				continue;
 			}
 
@@ -109,10 +109,10 @@ internal sealed partial class IndexModifyDataStreamActionConverter : System.Text
 			case "":
 				break;
 			case "add_backing_index":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction?)value.Variant, null, null);
 				break;
 			case "remove_backing_index":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction?)value.Variant, null, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(IndexModifyDataStreamAction)}'.");

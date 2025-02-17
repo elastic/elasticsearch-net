@@ -45,27 +45,27 @@ internal sealed partial class DiagnosisAffectedResourcesConverter : System.Text.
 		LocalJsonValue<IReadOnlyCollection<string>?> propSnapshotRepositories = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propFeatureStates.TryRead(ref reader, options, PropFeatureStates))
+			if (propFeatureStates.TryReadProperty(ref reader, options, PropFeatureStates, static IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propIndices.TryRead(ref reader, options, PropIndices, typeof(SingleOrManyMarker<IReadOnlyCollection<string>?, string>)))
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, static IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propNodes.TryRead(ref reader, options, PropNodes))
+			if (propNodes.TryReadProperty(ref reader, options, PropNodes, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorNode>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorNode>(o, null)))
 			{
 				continue;
 			}
 
-			if (propSlmPolicies.TryRead(ref reader, options, PropSlmPolicies))
+			if (propSlmPolicies.TryReadProperty(ref reader, options, PropSlmPolicies, static IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propSnapshotRepositories.TryRead(ref reader, options, PropSnapshotRepositories))
+			if (propSnapshotRepositories.TryReadProperty(ref reader, options, PropSnapshotRepositories, static IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
@@ -91,11 +91,11 @@ internal sealed partial class DiagnosisAffectedResourcesConverter : System.Text.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, DiagnosisAffectedResources value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFeatureStates, value.FeatureStates);
-		writer.WriteProperty(options, PropIndices, value.Indices, null, typeof(SingleOrManyMarker<IReadOnlyCollection<string>?, string>));
-		writer.WriteProperty(options, PropNodes, value.Nodes);
-		writer.WriteProperty(options, PropSlmPolicies, value.SlmPolicies);
-		writer.WriteProperty(options, PropSnapshotRepositories, value.SnapshotRepositories);
+		writer.WriteProperty(options, PropFeatureStates, value.FeatureStates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropIndices, value.Indices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropNodes, value.Nodes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorNode>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorNode>(o, v, null));
+		writer.WriteProperty(options, PropSlmPolicies, value.SlmPolicies, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropSnapshotRepositories, value.SnapshotRepositories, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

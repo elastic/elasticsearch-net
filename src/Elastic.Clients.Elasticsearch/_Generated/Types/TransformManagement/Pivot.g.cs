@@ -40,12 +40,12 @@ internal sealed partial class PivotConverter : System.Text.Json.Serialization.Js
 		LocalJsonValue<IDictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy>?> propGroupBy = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAggregations.TryRead(ref reader, options, PropAggregations) || propAggregations.TryRead(ref reader, options, PropAggregations1))
+			if (propAggregations.TryReadProperty(ref reader, options, PropAggregations, static IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>(o, null, null)) || propAggregations.TryReadProperty(ref reader, options, PropAggregations1, static IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propGroupBy.TryRead(ref reader, options, PropGroupBy))
+			if (propGroupBy.TryReadProperty(ref reader, options, PropGroupBy, static IDictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy>(o, null, null)))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class PivotConverter : System.Text.Json.Serialization.Js
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Pivot value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAggregations, value.Aggregations);
-		writer.WriteProperty(options, PropGroupBy, value.GroupBy);
+		writer.WriteProperty(options, PropAggregations, value.Aggregations, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>(o, v, null, null));
+		writer.WriteProperty(options, PropGroupBy, value.GroupBy, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IDictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy>(o, v, null, null));
 		writer.WriteEndObject();
 	}
 }

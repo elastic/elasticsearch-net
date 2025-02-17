@@ -91,7 +91,7 @@ internal sealed partial class TokenizationConfigConverter : System.Text.Json.Ser
 			{
 				variantType = VariantBert.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig?>(options, null);
 				continue;
 			}
 
@@ -99,7 +99,7 @@ internal sealed partial class TokenizationConfigConverter : System.Text.Json.Ser
 			{
 				variantType = VariantBertJa.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig?>(options, null);
 				continue;
 			}
 
@@ -107,7 +107,7 @@ internal sealed partial class TokenizationConfigConverter : System.Text.Json.Ser
 			{
 				variantType = VariantMpnet.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig?>(options, null);
 				continue;
 			}
 
@@ -115,7 +115,7 @@ internal sealed partial class TokenizationConfigConverter : System.Text.Json.Ser
 			{
 				variantType = VariantRoberta.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig?>(options, null);
 				continue;
 			}
 
@@ -134,16 +134,16 @@ internal sealed partial class TokenizationConfigConverter : System.Text.Json.Ser
 			case "":
 				break;
 			case "bert":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig?)value.Variant, null, null);
 				break;
 			case "bert_ja":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig?)value.Variant, null, null);
 				break;
 			case "mpnet":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig?)value.Variant, null, null);
 				break;
 			case "roberta":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig?)value.Variant, null, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(TokenizationConfig)}'.");

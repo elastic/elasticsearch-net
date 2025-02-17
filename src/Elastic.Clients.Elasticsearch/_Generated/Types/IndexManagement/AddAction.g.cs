@@ -57,57 +57,57 @@ internal sealed partial class AddActionConverter : System.Text.Json.Serializatio
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Routing?> propSearchRouting = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAlias.TryRead(ref reader, options, PropAlias))
+			if (propAlias.TryReadProperty(ref reader, options, PropAlias, null))
 			{
 				continue;
 			}
 
-			if (propAliases.TryRead(ref reader, options, PropAliases, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.IndexAlias>?, Elastic.Clients.Elasticsearch.IndexAlias>)))
+			if (propAliases.TryReadProperty(ref reader, options, PropAliases, static ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.IndexAlias>(o, null)))
 			{
 				continue;
 			}
 
-			if (propFilter.TryRead(ref reader, options, PropFilter))
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, null))
 			{
 				continue;
 			}
 
-			if (propIndex.TryRead(ref reader, options, PropIndex))
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
 			{
 				continue;
 			}
 
-			if (propIndexRouting.TryRead(ref reader, options, PropIndexRouting))
+			if (propIndexRouting.TryReadProperty(ref reader, options, PropIndexRouting, null))
 			{
 				continue;
 			}
 
-			if (propIndices.TryRead(ref reader, options, PropIndices))
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, null))
 			{
 				continue;
 			}
 
-			if (propIsHidden.TryRead(ref reader, options, PropIsHidden))
+			if (propIsHidden.TryReadProperty(ref reader, options, PropIsHidden, null))
 			{
 				continue;
 			}
 
-			if (propIsWriteIndex.TryRead(ref reader, options, PropIsWriteIndex))
+			if (propIsWriteIndex.TryReadProperty(ref reader, options, PropIsWriteIndex, null))
 			{
 				continue;
 			}
 
-			if (propMustExist.TryRead(ref reader, options, PropMustExist))
+			if (propMustExist.TryReadProperty(ref reader, options, PropMustExist, null))
 			{
 				continue;
 			}
 
-			if (propRouting.TryRead(ref reader, options, PropRouting))
+			if (propRouting.TryReadProperty(ref reader, options, PropRouting, null))
 			{
 				continue;
 			}
 
-			if (propSearchRouting.TryRead(ref reader, options, PropSearchRouting))
+			if (propSearchRouting.TryReadProperty(ref reader, options, PropSearchRouting, null))
 			{
 				continue;
 			}
@@ -145,17 +145,17 @@ internal sealed partial class AddActionConverter : System.Text.Json.Serializatio
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, AddAction value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAlias, value.Alias);
-		writer.WriteProperty(options, PropAliases, value.Aliases, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.IndexAlias>?, Elastic.Clients.Elasticsearch.IndexAlias>));
-		writer.WriteProperty(options, PropFilter, value.Filter);
-		writer.WriteProperty(options, PropIndex, value.Index);
-		writer.WriteProperty(options, PropIndexRouting, value.IndexRouting);
-		writer.WriteProperty(options, PropIndices, value.Indices);
-		writer.WriteProperty(options, PropIsHidden, value.IsHidden);
-		writer.WriteProperty(options, PropIsWriteIndex, value.IsWriteIndex);
-		writer.WriteProperty(options, PropMustExist, value.MustExist);
-		writer.WriteProperty(options, PropRouting, value.Routing);
-		writer.WriteProperty(options, PropSearchRouting, value.SearchRouting);
+		writer.WriteProperty(options, PropAlias, value.Alias, null, null);
+		writer.WriteProperty(options, PropAliases, value.Aliases, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.IndexAlias>(o, v, null));
+		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropIndexRouting, value.IndexRouting, null, null);
+		writer.WriteProperty(options, PropIndices, value.Indices, null, null);
+		writer.WriteProperty(options, PropIsHidden, value.IsHidden, null, null);
+		writer.WriteProperty(options, PropIsWriteIndex, value.IsWriteIndex, null, null);
+		writer.WriteProperty(options, PropMustExist, value.MustExist, null, null);
+		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
+		writer.WriteProperty(options, PropSearchRouting, value.SearchRouting, null, null);
 		writer.WriteEndObject();
 	}
 }

@@ -46,27 +46,27 @@ internal sealed partial class ClusterInfoResponseConverter : System.Text.Json.Se
 		LocalJsonValue<IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.ThreadCount>?> propThreadPool = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propClusterName.TryRead(ref reader, options, PropClusterName))
+			if (propClusterName.TryReadProperty(ref reader, options, PropClusterName, null))
 			{
 				continue;
 			}
 
-			if (propHttp.TryRead(ref reader, options, PropHttp))
+			if (propHttp.TryReadProperty(ref reader, options, PropHttp, null))
 			{
 				continue;
 			}
 
-			if (propIngest.TryRead(ref reader, options, PropIngest))
+			if (propIngest.TryReadProperty(ref reader, options, PropIngest, null))
 			{
 				continue;
 			}
 
-			if (propScript.TryRead(ref reader, options, PropScript))
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
 			{
 				continue;
 			}
 
-			if (propThreadPool.TryRead(ref reader, options, PropThreadPool))
+			if (propThreadPool.TryReadProperty(ref reader, options, PropThreadPool, static IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.ThreadCount>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.ThreadCount>(o, null, null)))
 			{
 				continue;
 			}
@@ -92,11 +92,11 @@ internal sealed partial class ClusterInfoResponseConverter : System.Text.Json.Se
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ClusterInfoResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropClusterName, value.ClusterName);
-		writer.WriteProperty(options, PropHttp, value.Http);
-		writer.WriteProperty(options, PropIngest, value.Ingest);
-		writer.WriteProperty(options, PropScript, value.Script);
-		writer.WriteProperty(options, PropThreadPool, value.ThreadPool);
+		writer.WriteProperty(options, PropClusterName, value.ClusterName, null, null);
+		writer.WriteProperty(options, PropHttp, value.Http, null, null);
+		writer.WriteProperty(options, PropIngest, value.Ingest, null, null);
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
+		writer.WriteProperty(options, PropThreadPool, value.ThreadPool, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.ThreadCount>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.ThreadCount>(o, v, null, null));
 		writer.WriteEndObject();
 	}
 }

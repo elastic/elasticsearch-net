@@ -40,12 +40,12 @@ internal sealed partial class StandardAnalyzerConverter : System.Text.Json.Seria
 		LocalJsonValue<ICollection<string>?> propStopwords = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propMaxTokenLength.TryRead(ref reader, options, PropMaxTokenLength))
+			if (propMaxTokenLength.TryReadProperty(ref reader, options, PropMaxTokenLength, null))
 			{
 				continue;
 			}
 
-			if (propStopwords.TryRead(ref reader, options, PropStopwords, typeof(SingleOrManyMarker<ICollection<string>?, string>)))
+			if (propStopwords.TryReadProperty(ref reader, options, PropStopwords, static ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
@@ -71,9 +71,9 @@ internal sealed partial class StandardAnalyzerConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, StandardAnalyzer value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMaxTokenLength, value.MaxTokenLength);
-		writer.WriteProperty(options, PropStopwords, value.Stopwords, null, typeof(SingleOrManyMarker<ICollection<string>?, string>));
-		writer.WriteProperty(options, PropType, value.Type);
+		writer.WriteProperty(options, PropMaxTokenLength, value.MaxTokenLength, null, null);
+		writer.WriteProperty(options, PropStopwords, value.Stopwords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
 	}
 }

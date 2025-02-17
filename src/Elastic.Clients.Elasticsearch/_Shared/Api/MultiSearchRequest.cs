@@ -14,7 +14,7 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class MultiSearchResponse<TDocument>
 {
-	public override bool IsValidResponse => base.IsValidResponse && (Responses?.All(b => b.Item1 is not null && b.Item1.Status == 200) ?? true);
+	public override bool IsValidResponse => base.IsValidResponse && (Responses?.All(b => b.Value1 is not null && b.Value1.Status == 200) ?? true);
 
 	[JsonIgnore]
 	public int TotalResponses => Responses.HasAny() ? Responses.Count() : 0;

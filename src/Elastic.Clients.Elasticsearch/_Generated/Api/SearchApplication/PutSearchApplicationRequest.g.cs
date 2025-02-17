@@ -44,12 +44,12 @@ internal sealed partial class PutSearchApplicationRequestConverter : System.Text
 {
 	public override PutSearchApplicationRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		return new PutSearchApplicationRequest { SearchApplication = reader.ReadValue<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters>(options) };
+		return new PutSearchApplicationRequest { SearchApplication = reader.ReadValue<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters>(options, null) };
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, PutSearchApplicationRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
-		writer.WriteValue(options, value.SearchApplication);
+		writer.WriteValue(options, value.SearchApplication, null);
 	}
 }
 

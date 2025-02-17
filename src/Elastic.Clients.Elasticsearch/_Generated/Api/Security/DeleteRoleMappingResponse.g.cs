@@ -38,7 +38,7 @@ internal sealed partial class DeleteRoleMappingResponseConverter : System.Text.J
 		LocalJsonValue<bool> propFound = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propFound.TryRead(ref reader, options, PropFound))
+			if (propFound.TryReadProperty(ref reader, options, PropFound, null))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class DeleteRoleMappingResponseConverter : System.Text.J
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, DeleteRoleMappingResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFound, value.Found);
+		writer.WriteProperty(options, PropFound, value.Found, null, null);
 		writer.WriteEndObject();
 	}
 }

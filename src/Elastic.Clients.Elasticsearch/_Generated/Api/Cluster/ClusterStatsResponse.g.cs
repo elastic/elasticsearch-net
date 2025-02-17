@@ -50,37 +50,37 @@ internal sealed partial class ClusterStatsResponseConverter : System.Text.Json.S
 		LocalJsonValue<long> propTimestamp = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propClusterName.TryRead(ref reader, options, PropClusterName))
+			if (propClusterName.TryReadProperty(ref reader, options, PropClusterName, null))
 			{
 				continue;
 			}
 
-			if (propClusterUuid.TryRead(ref reader, options, PropClusterUuid))
+			if (propClusterUuid.TryReadProperty(ref reader, options, PropClusterUuid, null))
 			{
 				continue;
 			}
 
-			if (propIndices.TryRead(ref reader, options, PropIndices))
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, null))
 			{
 				continue;
 			}
 
-			if (propNodes.TryRead(ref reader, options, PropNodes))
+			if (propNodes.TryReadProperty(ref reader, options, PropNodes, null))
 			{
 				continue;
 			}
 
-			if (propNodeStats.TryRead(ref reader, options, PropNodeStats))
+			if (propNodeStats.TryReadProperty(ref reader, options, PropNodeStats, null))
 			{
 				continue;
 			}
 
-			if (propStatus.TryRead(ref reader, options, PropStatus))
+			if (propStatus.TryReadProperty(ref reader, options, PropStatus, null))
 			{
 				continue;
 			}
 
-			if (propTimestamp.TryRead(ref reader, options, PropTimestamp))
+			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, null))
 			{
 				continue;
 			}
@@ -110,13 +110,13 @@ internal sealed partial class ClusterStatsResponseConverter : System.Text.Json.S
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ClusterStatsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropClusterName, value.ClusterName);
-		writer.WriteProperty(options, PropClusterUuid, value.ClusterUuid);
-		writer.WriteProperty(options, PropIndices, value.Indices);
-		writer.WriteProperty(options, PropNodes, value.Nodes);
-		writer.WriteProperty(options, PropNodeStats, value.NodeStats);
-		writer.WriteProperty(options, PropStatus, value.Status);
-		writer.WriteProperty(options, PropTimestamp, value.Timestamp);
+		writer.WriteProperty(options, PropClusterName, value.ClusterName, null, null);
+		writer.WriteProperty(options, PropClusterUuid, value.ClusterUuid, null, null);
+		writer.WriteProperty(options, PropIndices, value.Indices, null, null);
+		writer.WriteProperty(options, PropNodes, value.Nodes, null, null);
+		writer.WriteProperty(options, PropNodeStats, value.NodeStats, null, null);
+		writer.WriteProperty(options, PropStatus, value.Status, null, null);
+		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, null);
 		writer.WriteEndObject();
 	}
 }

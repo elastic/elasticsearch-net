@@ -103,7 +103,7 @@ internal sealed partial class SettingsSimilarityInterfaceConverter : System.Text
 		string? discriminator = null;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TryReadProperty(options, PropDiscriminator, ref discriminator))
+			if (reader.TryReadProperty(options, PropDiscriminator, ref discriminator, null))
 			{
 				break;
 			}
@@ -114,14 +114,14 @@ internal sealed partial class SettingsSimilarityInterfaceConverter : System.Text
 		reader = readerSnapshot;
 		return discriminator switch
 		{
-			"BM25" => reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25>(options),
-			"boolean" => reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBoolean>(options),
-			"DFI" => reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi>(options),
-			"DFR" => reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfr>(options),
-			"IB" => reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIb>(options),
-			"LMDirichlet" => reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmd>(options),
-			"LMJelinekMercer" => reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj>(options),
-			"scripted" => reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScripted>(options),
+			"BM25" => reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25>(options, null),
+			"boolean" => reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBoolean>(options, null),
+			"DFI" => reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi>(options, null),
+			"DFR" => reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfr>(options, null),
+			"IB" => reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIb>(options, null),
+			"LMDirichlet" => reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmd>(options, null),
+			"LMJelinekMercer" => reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj>(options, null),
+			"scripted" => reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScripted>(options, null),
 			_ => throw new System.Text.Json.JsonException($"Variant '{discriminator}' is not supported for type '{nameof(ISettingsSimilarity)}'.")
 		};
 	}
@@ -131,28 +131,28 @@ internal sealed partial class SettingsSimilarityInterfaceConverter : System.Text
 		switch (value.Type)
 		{
 			case "BM25":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25)value, null);
 				break;
 			case "boolean":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBoolean)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBoolean)value, null);
 				break;
 			case "DFI":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi)value, null);
 				break;
 			case "DFR":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfr)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfr)value, null);
 				break;
 			case "IB":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIb)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIb)value, null);
 				break;
 			case "LMDirichlet":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmd)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmd)value, null);
 				break;
 			case "LMJelinekMercer":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj)value, null);
 				break;
 			case "scripted":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScripted)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScripted)value, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.Type}' is not supported for type '{nameof(ISettingsSimilarity)}'.");

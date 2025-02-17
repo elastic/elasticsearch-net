@@ -38,12 +38,12 @@ internal sealed partial class DownsampleRequestConverter : System.Text.Json.Seri
 {
 	public override DownsampleRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		return new DownsampleRequest { Config = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig>(options) };
+		return new DownsampleRequest { Config = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig>(options, null) };
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, DownsampleRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
-		writer.WriteValue(options, value.Config);
+		writer.WriteValue(options, value.Config, null);
 	}
 }
 

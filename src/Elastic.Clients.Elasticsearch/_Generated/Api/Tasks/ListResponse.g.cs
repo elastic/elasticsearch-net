@@ -44,22 +44,22 @@ internal sealed partial class ListResponseConverter : System.Text.Json.Serializa
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Tasks.TaskInfos?> propTasks = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propNodeFailures.TryRead(ref reader, options, PropNodeFailures))
+			if (propNodeFailures.TryReadProperty(ref reader, options, PropNodeFailures, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.ErrorCause>(o, null)))
 			{
 				continue;
 			}
 
-			if (propNodes.TryRead(ref reader, options, PropNodes))
+			if (propNodes.TryReadProperty(ref reader, options, PropNodes, static IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Tasks.NodeTasks>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Tasks.NodeTasks>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propTaskFailures.TryRead(ref reader, options, PropTaskFailures))
+			if (propTaskFailures.TryReadProperty(ref reader, options, PropTaskFailures, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.TaskFailure>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.TaskFailure>(o, null)))
 			{
 				continue;
 			}
 
-			if (propTasks.TryRead(ref reader, options, PropTasks))
+			if (propTasks.TryReadProperty(ref reader, options, PropTasks, null))
 			{
 				continue;
 			}
@@ -83,10 +83,10 @@ internal sealed partial class ListResponseConverter : System.Text.Json.Serializa
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ListResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropNodeFailures, value.NodeFailures);
-		writer.WriteProperty(options, PropNodes, value.Nodes);
-		writer.WriteProperty(options, PropTaskFailures, value.TaskFailures);
-		writer.WriteProperty(options, PropTasks, value.Tasks);
+		writer.WriteProperty(options, PropNodeFailures, value.NodeFailures, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.ErrorCause>(o, v, null));
+		writer.WriteProperty(options, PropNodes, value.Nodes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Tasks.NodeTasks>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Tasks.NodeTasks>(o, v, null, null));
+		writer.WriteProperty(options, PropTaskFailures, value.TaskFailures, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.TaskFailure>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.TaskFailure>(o, v, null));
+		writer.WriteProperty(options, PropTasks, value.Tasks, null, null);
 		writer.WriteEndObject();
 	}
 }

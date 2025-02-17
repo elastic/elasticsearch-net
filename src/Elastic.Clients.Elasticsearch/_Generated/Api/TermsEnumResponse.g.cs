@@ -42,17 +42,17 @@ internal sealed partial class TermsEnumResponseConverter : System.Text.Json.Seri
 		LocalJsonValue<IReadOnlyCollection<string>> propTerms = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propComplete.TryRead(ref reader, options, PropComplete))
+			if (propComplete.TryReadProperty(ref reader, options, PropComplete, null))
 			{
 				continue;
 			}
 
-			if (propShards.TryRead(ref reader, options, PropShards))
+			if (propShards.TryReadProperty(ref reader, options, PropShards, null))
 			{
 				continue;
 			}
 
-			if (propTerms.TryRead(ref reader, options, PropTerms))
+			if (propTerms.TryReadProperty(ref reader, options, PropTerms, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
@@ -74,9 +74,9 @@ internal sealed partial class TermsEnumResponseConverter : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, TermsEnumResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropComplete, value.Complete);
-		writer.WriteProperty(options, PropShards, value.Shards);
-		writer.WriteProperty(options, PropTerms, value.Terms);
+		writer.WriteProperty(options, PropComplete, value.Complete, null, null);
+		writer.WriteProperty(options, PropShards, value.Shards, null, null);
+		writer.WriteProperty(options, PropTerms, value.Terms, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

@@ -41,7 +41,7 @@ internal sealed partial class TermsSetQueryConverter : System.Text.Json.Serializ
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
 		reader.Read();
-		propField.ReadPropertyName(ref reader, options);
+		propField.ReadPropertyName(ref reader, options, null);
 		reader.Read();
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<float?> propBoost = default;
@@ -52,32 +52,32 @@ internal sealed partial class TermsSetQueryConverter : System.Text.Json.Serializ
 		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.FieldValue>> propTerms = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBoost.TryRead(ref reader, options, PropBoost))
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
 			{
 				continue;
 			}
 
-			if (propMinimumShouldMatch.TryRead(ref reader, options, PropMinimumShouldMatch))
+			if (propMinimumShouldMatch.TryReadProperty(ref reader, options, PropMinimumShouldMatch, null))
 			{
 				continue;
 			}
 
-			if (propMinimumShouldMatchField.TryRead(ref reader, options, PropMinimumShouldMatchField))
+			if (propMinimumShouldMatchField.TryReadProperty(ref reader, options, PropMinimumShouldMatchField, null))
 			{
 				continue;
 			}
 
-			if (propMinimumShouldMatchScript.TryRead(ref reader, options, PropMinimumShouldMatchScript))
+			if (propMinimumShouldMatchScript.TryReadProperty(ref reader, options, PropMinimumShouldMatchScript, null))
 			{
 				continue;
 			}
 
-			if (propQueryName.TryRead(ref reader, options, PropQueryName))
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
 			{
 				continue;
 			}
 
-			if (propTerms.TryRead(ref reader, options, PropTerms))
+			if (propTerms.TryReadProperty(ref reader, options, PropTerms, static ICollection<Elastic.Clients.Elasticsearch.FieldValue> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, null)!))
 			{
 				continue;
 			}
@@ -109,14 +109,14 @@ internal sealed partial class TermsSetQueryConverter : System.Text.Json.Serializ
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, TermsSetQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName(options, value.Field);
+		writer.WritePropertyName(options, value.Field, null);
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBoost, value.Boost);
-		writer.WriteProperty(options, PropMinimumShouldMatch, value.MinimumShouldMatch);
-		writer.WriteProperty(options, PropMinimumShouldMatchField, value.MinimumShouldMatchField);
-		writer.WriteProperty(options, PropMinimumShouldMatchScript, value.MinimumShouldMatchScript);
-		writer.WriteProperty(options, PropQueryName, value.QueryName);
-		writer.WriteProperty(options, PropTerms, value.Terms);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropMinimumShouldMatch, value.MinimumShouldMatch, null, null);
+		writer.WriteProperty(options, PropMinimumShouldMatchField, value.MinimumShouldMatchField, null, null);
+		writer.WriteProperty(options, PropMinimumShouldMatchScript, value.MinimumShouldMatchScript, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteProperty(options, PropTerms, value.Terms, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.FieldValue> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, v, null));
 		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}

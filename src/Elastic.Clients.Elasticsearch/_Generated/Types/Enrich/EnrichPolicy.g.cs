@@ -47,32 +47,32 @@ internal sealed partial class EnrichPolicyConverter : System.Text.Json.Serializa
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propQuery = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propElasticsearchVersion.TryRead(ref reader, options, PropElasticsearchVersion))
+			if (propElasticsearchVersion.TryReadProperty(ref reader, options, PropElasticsearchVersion, null))
 			{
 				continue;
 			}
 
-			if (propEnrichFields.TryRead(ref reader, options, PropEnrichFields, typeof(SingleOrManyFieldsMarker)))
+			if (propEnrichFields.TryReadProperty(ref reader, options, PropEnrichFields, static Elastic.Clients.Elasticsearch.Fields (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields>(o, typeof(SingleOrManyFieldsMarker))!))
 			{
 				continue;
 			}
 
-			if (propIndices.TryRead(ref reader, options, PropIndices))
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, null))
 			{
 				continue;
 			}
 
-			if (propMatchField.TryRead(ref reader, options, PropMatchField))
+			if (propMatchField.TryReadProperty(ref reader, options, PropMatchField, null))
 			{
 				continue;
 			}
 
-			if (propName.TryRead(ref reader, options, PropName))
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
 			{
 				continue;
 			}
 
-			if (propQuery.TryRead(ref reader, options, PropQuery))
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
 			{
 				continue;
 			}
@@ -100,12 +100,12 @@ internal sealed partial class EnrichPolicyConverter : System.Text.Json.Serializa
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, EnrichPolicy value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropElasticsearchVersion, value.ElasticsearchVersion);
-		writer.WriteProperty(options, PropEnrichFields, value.EnrichFields, null, typeof(SingleOrManyFieldsMarker));
-		writer.WriteProperty(options, PropIndices, value.Indices);
-		writer.WriteProperty(options, PropMatchField, value.MatchField);
-		writer.WriteProperty(options, PropName, value.Name);
-		writer.WriteProperty(options, PropQuery, value.Query);
+		writer.WriteProperty(options, PropElasticsearchVersion, value.ElasticsearchVersion, null, null);
+		writer.WriteProperty(options, PropEnrichFields, value.EnrichFields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields>(o, v, typeof(SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropIndices, value.Indices, null, null);
+		writer.WriteProperty(options, PropMatchField, value.MatchField, null, null);
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
 		writer.WriteEndObject();
 	}
 }

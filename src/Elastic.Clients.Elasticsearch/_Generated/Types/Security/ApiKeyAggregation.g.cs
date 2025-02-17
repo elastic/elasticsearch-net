@@ -108,12 +108,12 @@ internal sealed partial class ApiKeyAggregationConverter : System.Text.Json.Seri
 		object? variant = null;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAggregations.TryRead(ref reader, options, PropAggregations) || propAggregations.TryRead(ref reader, options, PropAggregations1))
+			if (propAggregations.TryReadProperty(ref reader, options, PropAggregations, static IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>(o, null, null)) || propAggregations.TryReadProperty(ref reader, options, PropAggregations1, static IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propMeta.TryRead(ref reader, options, PropMeta))
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
 			{
 				continue;
 			}
@@ -122,7 +122,7 @@ internal sealed partial class ApiKeyAggregationConverter : System.Text.Json.Seri
 			{
 				variantType = VariantCardinality.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation?>(options, null);
 				continue;
 			}
 
@@ -130,7 +130,7 @@ internal sealed partial class ApiKeyAggregationConverter : System.Text.Json.Seri
 			{
 				variantType = VariantComposite.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation?>(options, null);
 				continue;
 			}
 
@@ -138,7 +138,7 @@ internal sealed partial class ApiKeyAggregationConverter : System.Text.Json.Seri
 			{
 				variantType = VariantDateRange.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation?>(options, null);
 				continue;
 			}
 
@@ -146,7 +146,7 @@ internal sealed partial class ApiKeyAggregationConverter : System.Text.Json.Seri
 			{
 				variantType = VariantFilter.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery?>(options, null);
 				continue;
 			}
 
@@ -154,7 +154,7 @@ internal sealed partial class ApiKeyAggregationConverter : System.Text.Json.Seri
 			{
 				variantType = VariantFilters.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation?>(options, null);
 				continue;
 			}
 
@@ -162,7 +162,7 @@ internal sealed partial class ApiKeyAggregationConverter : System.Text.Json.Seri
 			{
 				variantType = VariantMissing.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation?>(options, null);
 				continue;
 			}
 
@@ -170,7 +170,7 @@ internal sealed partial class ApiKeyAggregationConverter : System.Text.Json.Seri
 			{
 				variantType = VariantRange.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation?>(options, null);
 				continue;
 			}
 
@@ -178,7 +178,7 @@ internal sealed partial class ApiKeyAggregationConverter : System.Text.Json.Seri
 			{
 				variantType = VariantTerms.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation?>(options, null);
 				continue;
 			}
 
@@ -186,7 +186,7 @@ internal sealed partial class ApiKeyAggregationConverter : System.Text.Json.Seri
 			{
 				variantType = VariantValueCount.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation?>(options, null);
 				continue;
 			}
 
@@ -212,38 +212,38 @@ internal sealed partial class ApiKeyAggregationConverter : System.Text.Json.Seri
 			case "":
 				break;
 			case "cardinality":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation?)value.Variant, null, null);
 				break;
 			case "composite":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation?)value.Variant, null, null);
 				break;
 			case "date_range":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation?)value.Variant, null, null);
 				break;
 			case "filter":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Security.ApiKeyQuery?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Security.ApiKeyQuery?)value.Variant, null, null);
 				break;
 			case "filters":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation?)value.Variant, null, null);
 				break;
 			case "missing":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation?)value.Variant, null, null);
 				break;
 			case "range":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation?)value.Variant, null, null);
 				break;
 			case "terms":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation?)value.Variant, null, null);
 				break;
 			case "value_count":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation?)value.Variant, null, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(ApiKeyAggregation)}'.");
 		}
 
-		writer.WriteProperty(options, PropAggregations, value.Aggregations);
-		writer.WriteProperty(options, PropMeta, value.Meta);
+		writer.WriteProperty(options, PropAggregations, value.Aggregations, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>(o, v, null, null));
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
 		writer.WriteEndObject();
 	}
 }

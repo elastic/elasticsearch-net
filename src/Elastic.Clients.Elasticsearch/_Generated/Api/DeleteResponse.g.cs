@@ -52,42 +52,42 @@ internal sealed partial class DeleteResponseConverter : System.Text.Json.Seriali
 		LocalJsonValue<long> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propForcedRefresh.TryRead(ref reader, options, PropForcedRefresh))
+			if (propForcedRefresh.TryReadProperty(ref reader, options, PropForcedRefresh, null))
 			{
 				continue;
 			}
 
-			if (propId.TryRead(ref reader, options, PropId))
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
 			{
 				continue;
 			}
 
-			if (propIndex.TryRead(ref reader, options, PropIndex))
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
 			{
 				continue;
 			}
 
-			if (propPrimaryTerm.TryRead(ref reader, options, PropPrimaryTerm))
+			if (propPrimaryTerm.TryReadProperty(ref reader, options, PropPrimaryTerm, null))
 			{
 				continue;
 			}
 
-			if (propResult.TryRead(ref reader, options, PropResult))
+			if (propResult.TryReadProperty(ref reader, options, PropResult, null))
 			{
 				continue;
 			}
 
-			if (propSeqNo.TryRead(ref reader, options, PropSeqNo))
+			if (propSeqNo.TryReadProperty(ref reader, options, PropSeqNo, null))
 			{
 				continue;
 			}
 
-			if (propShards.TryRead(ref reader, options, PropShards))
+			if (propShards.TryReadProperty(ref reader, options, PropShards, null))
 			{
 				continue;
 			}
 
-			if (propVersion.TryRead(ref reader, options, PropVersion))
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
 			{
 				continue;
 			}
@@ -119,14 +119,14 @@ internal sealed partial class DeleteResponseConverter : System.Text.Json.Seriali
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, DeleteResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropForcedRefresh, value.ForcedRefresh);
-		writer.WriteProperty(options, PropId, value.Id);
-		writer.WriteProperty(options, PropIndex, value.Index);
-		writer.WriteProperty(options, PropPrimaryTerm, value.PrimaryTerm);
-		writer.WriteProperty(options, PropResult, value.Result);
-		writer.WriteProperty(options, PropSeqNo, value.SeqNo);
-		writer.WriteProperty(options, PropShards, value.Shards);
-		writer.WriteProperty(options, PropVersion, value.Version);
+		writer.WriteProperty(options, PropForcedRefresh, value.ForcedRefresh, null, null);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropPrimaryTerm, value.PrimaryTerm, null, null);
+		writer.WriteProperty(options, PropResult, value.Result, null, null);
+		writer.WriteProperty(options, PropSeqNo, value.SeqNo, null, null);
+		writer.WriteProperty(options, PropShards, value.Shards, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();
 	}
 }

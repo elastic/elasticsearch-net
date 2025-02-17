@@ -40,12 +40,12 @@ internal sealed partial class ExplainDataFrameAnalyticsResponseConverter : Syste
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsMemoryEstimation> propMemoryEstimation = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propFieldSelection.TryRead(ref reader, options, PropFieldSelection))
+			if (propFieldSelection.TryReadProperty(ref reader, options, PropFieldSelection, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsFieldSelection> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsFieldSelection>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propMemoryEstimation.TryRead(ref reader, options, PropMemoryEstimation))
+			if (propMemoryEstimation.TryReadProperty(ref reader, options, PropMemoryEstimation, null))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class ExplainDataFrameAnalyticsResponseConverter : Syste
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ExplainDataFrameAnalyticsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFieldSelection, value.FieldSelection);
-		writer.WriteProperty(options, PropMemoryEstimation, value.MemoryEstimation);
+		writer.WriteProperty(options, PropFieldSelection, value.FieldSelection, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsFieldSelection> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsFieldSelection>(o, v, null));
+		writer.WriteProperty(options, PropMemoryEstimation, value.MemoryEstimation, null, null);
 		writer.WriteEndObject();
 	}
 }

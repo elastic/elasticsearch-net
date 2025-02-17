@@ -69,87 +69,87 @@ internal sealed partial class SignificantTextAggregationConverter : System.Text.
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propSourceFields = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBackgroundFilter.TryRead(ref reader, options, PropBackgroundFilter))
+			if (propBackgroundFilter.TryReadProperty(ref reader, options, PropBackgroundFilter, null))
 			{
 				continue;
 			}
 
-			if (propChiSquare.TryRead(ref reader, options, PropChiSquare))
+			if (propChiSquare.TryReadProperty(ref reader, options, PropChiSquare, null))
 			{
 				continue;
 			}
 
-			if (propExclude.TryRead(ref reader, options, PropExclude))
+			if (propExclude.TryReadProperty(ref reader, options, PropExclude, null))
 			{
 				continue;
 			}
 
-			if (propExecutionHint.TryRead(ref reader, options, PropExecutionHint))
+			if (propExecutionHint.TryReadProperty(ref reader, options, PropExecutionHint, null))
 			{
 				continue;
 			}
 
-			if (propField.TryRead(ref reader, options, PropField))
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
 			{
 				continue;
 			}
 
-			if (propFilterDuplicateText.TryRead(ref reader, options, PropFilterDuplicateText))
+			if (propFilterDuplicateText.TryReadProperty(ref reader, options, PropFilterDuplicateText, null))
 			{
 				continue;
 			}
 
-			if (propGnd.TryRead(ref reader, options, PropGnd))
+			if (propGnd.TryReadProperty(ref reader, options, PropGnd, null))
 			{
 				continue;
 			}
 
-			if (propInclude.TryRead(ref reader, options, PropInclude))
+			if (propInclude.TryReadProperty(ref reader, options, PropInclude, null))
 			{
 				continue;
 			}
 
-			if (propJlh.TryRead(ref reader, options, PropJlh))
+			if (propJlh.TryReadProperty(ref reader, options, PropJlh, null))
 			{
 				continue;
 			}
 
-			if (propMinDocCount.TryRead(ref reader, options, PropMinDocCount))
+			if (propMinDocCount.TryReadProperty(ref reader, options, PropMinDocCount, null))
 			{
 				continue;
 			}
 
-			if (propMutualInformation.TryRead(ref reader, options, PropMutualInformation))
+			if (propMutualInformation.TryReadProperty(ref reader, options, PropMutualInformation, null))
 			{
 				continue;
 			}
 
-			if (propPercentage.TryRead(ref reader, options, PropPercentage))
+			if (propPercentage.TryReadProperty(ref reader, options, PropPercentage, null))
 			{
 				continue;
 			}
 
-			if (propScriptHeuristic.TryRead(ref reader, options, PropScriptHeuristic))
+			if (propScriptHeuristic.TryReadProperty(ref reader, options, PropScriptHeuristic, null))
 			{
 				continue;
 			}
 
-			if (propShardMinDocCount.TryRead(ref reader, options, PropShardMinDocCount))
+			if (propShardMinDocCount.TryReadProperty(ref reader, options, PropShardMinDocCount, null))
 			{
 				continue;
 			}
 
-			if (propShardSize.TryRead(ref reader, options, PropShardSize))
+			if (propShardSize.TryReadProperty(ref reader, options, PropShardSize, null))
 			{
 				continue;
 			}
 
-			if (propSize.TryRead(ref reader, options, PropSize))
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
 			{
 				continue;
 			}
 
-			if (propSourceFields.TryRead(ref reader, options, PropSourceFields, typeof(SingleOrManyFieldsMarker)))
+			if (propSourceFields.TryReadProperty(ref reader, options, PropSourceFields, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(SingleOrManyFieldsMarker))))
 			{
 				continue;
 			}
@@ -199,23 +199,23 @@ internal sealed partial class SignificantTextAggregationConverter : System.Text.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, SignificantTextAggregation value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBackgroundFilter, value.BackgroundFilter);
-		writer.WriteProperty(options, PropChiSquare, value.ChiSquare);
-		writer.WriteProperty(options, PropExclude, value.Exclude);
-		writer.WriteProperty(options, PropExecutionHint, value.ExecutionHint);
-		writer.WriteProperty(options, PropField, value.Field);
-		writer.WriteProperty(options, PropFilterDuplicateText, value.FilterDuplicateText);
-		writer.WriteProperty(options, PropGnd, value.Gnd);
-		writer.WriteProperty(options, PropInclude, value.Include);
-		writer.WriteProperty(options, PropJlh, value.Jlh);
-		writer.WriteProperty(options, PropMinDocCount, value.MinDocCount);
-		writer.WriteProperty(options, PropMutualInformation, value.MutualInformation);
-		writer.WriteProperty(options, PropPercentage, value.Percentage);
-		writer.WriteProperty(options, PropScriptHeuristic, value.ScriptHeuristic);
-		writer.WriteProperty(options, PropShardMinDocCount, value.ShardMinDocCount);
-		writer.WriteProperty(options, PropShardSize, value.ShardSize);
-		writer.WriteProperty(options, PropSize, value.Size);
-		writer.WriteProperty(options, PropSourceFields, value.SourceFields, null, typeof(SingleOrManyFieldsMarker));
+		writer.WriteProperty(options, PropBackgroundFilter, value.BackgroundFilter, null, null);
+		writer.WriteProperty(options, PropChiSquare, value.ChiSquare, null, null);
+		writer.WriteProperty(options, PropExclude, value.Exclude, null, null);
+		writer.WriteProperty(options, PropExecutionHint, value.ExecutionHint, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropFilterDuplicateText, value.FilterDuplicateText, null, null);
+		writer.WriteProperty(options, PropGnd, value.Gnd, null, null);
+		writer.WriteProperty(options, PropInclude, value.Include, null, null);
+		writer.WriteProperty(options, PropJlh, value.Jlh, null, null);
+		writer.WriteProperty(options, PropMinDocCount, value.MinDocCount, null, null);
+		writer.WriteProperty(options, PropMutualInformation, value.MutualInformation, null, null);
+		writer.WriteProperty(options, PropPercentage, value.Percentage, null, null);
+		writer.WriteProperty(options, PropScriptHeuristic, value.ScriptHeuristic, null, null);
+		writer.WriteProperty(options, PropShardMinDocCount, value.ShardMinDocCount, null, null);
+		writer.WriteProperty(options, PropShardSize, value.ShardSize, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropSourceFields, value.SourceFields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(SingleOrManyFieldsMarker)));
 		writer.WriteEndObject();
 	}
 }

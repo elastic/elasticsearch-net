@@ -98,7 +98,7 @@ internal sealed partial class InferenceConfigUpdateConverter : System.Text.Json.
 			{
 				variantType = VariantClassification.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions?>(options, null);
 				continue;
 			}
 
@@ -106,7 +106,7 @@ internal sealed partial class InferenceConfigUpdateConverter : System.Text.Json.
 			{
 				variantType = VariantFillMask.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceUpdateOptions?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceUpdateOptions?>(options, null);
 				continue;
 			}
 
@@ -114,7 +114,7 @@ internal sealed partial class InferenceConfigUpdateConverter : System.Text.Json.
 			{
 				variantType = VariantNer.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceUpdateOptions?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceUpdateOptions?>(options, null);
 				continue;
 			}
 
@@ -122,7 +122,7 @@ internal sealed partial class InferenceConfigUpdateConverter : System.Text.Json.
 			{
 				variantType = VariantPassThrough.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceUpdateOptions?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceUpdateOptions?>(options, null);
 				continue;
 			}
 
@@ -130,7 +130,7 @@ internal sealed partial class InferenceConfigUpdateConverter : System.Text.Json.
 			{
 				variantType = VariantQuestionAnswering.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptions?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptions?>(options, null);
 				continue;
 			}
 
@@ -138,7 +138,7 @@ internal sealed partial class InferenceConfigUpdateConverter : System.Text.Json.
 			{
 				variantType = VariantRegression.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions?>(options, null);
 				continue;
 			}
 
@@ -146,7 +146,7 @@ internal sealed partial class InferenceConfigUpdateConverter : System.Text.Json.
 			{
 				variantType = VariantTextClassification.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceUpdateOptions?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceUpdateOptions?>(options, null);
 				continue;
 			}
 
@@ -154,7 +154,7 @@ internal sealed partial class InferenceConfigUpdateConverter : System.Text.Json.
 			{
 				variantType = VariantTextEmbedding.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceUpdateOptions?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceUpdateOptions?>(options, null);
 				continue;
 			}
 
@@ -162,7 +162,7 @@ internal sealed partial class InferenceConfigUpdateConverter : System.Text.Json.
 			{
 				variantType = VariantTextExpansion.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceUpdateOptions?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceUpdateOptions?>(options, null);
 				continue;
 			}
 
@@ -170,7 +170,7 @@ internal sealed partial class InferenceConfigUpdateConverter : System.Text.Json.
 			{
 				variantType = VariantZeroShotClassification.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceUpdateOptions?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceUpdateOptions?>(options, null);
 				continue;
 			}
 
@@ -189,34 +189,34 @@ internal sealed partial class InferenceConfigUpdateConverter : System.Text.Json.
 			case "":
 				break;
 			case "classification":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions?)value.Variant, null, null);
 				break;
 			case "fill_mask":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceUpdateOptions?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceUpdateOptions?)value.Variant, null, null);
 				break;
 			case "ner":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceUpdateOptions?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceUpdateOptions?)value.Variant, null, null);
 				break;
 			case "pass_through":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceUpdateOptions?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceUpdateOptions?)value.Variant, null, null);
 				break;
 			case "question_answering":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptions?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptions?)value.Variant, null, null);
 				break;
 			case "regression":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions?)value.Variant, null, null);
 				break;
 			case "text_classification":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceUpdateOptions?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceUpdateOptions?)value.Variant, null, null);
 				break;
 			case "text_embedding":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceUpdateOptions?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceUpdateOptions?)value.Variant, null, null);
 				break;
 			case "text_expansion":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceUpdateOptions?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceUpdateOptions?)value.Variant, null, null);
 				break;
 			case "zero_shot_classification":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceUpdateOptions?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceUpdateOptions?)value.Variant, null, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(InferenceConfigUpdate)}'.");

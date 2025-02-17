@@ -46,27 +46,27 @@ internal sealed partial class ExplainResponseConverter<TDocument> : System.Text.
 		LocalJsonValue<bool> propMatched = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propExplanation.TryRead(ref reader, options, PropExplanation))
+			if (propExplanation.TryReadProperty(ref reader, options, PropExplanation, null))
 			{
 				continue;
 			}
 
-			if (propGet.TryRead(ref reader, options, PropGet))
+			if (propGet.TryReadProperty(ref reader, options, PropGet, null))
 			{
 				continue;
 			}
 
-			if (propId.TryRead(ref reader, options, PropId))
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
 			{
 				continue;
 			}
 
-			if (propIndex.TryRead(ref reader, options, PropIndex))
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
 			{
 				continue;
 			}
 
-			if (propMatched.TryRead(ref reader, options, PropMatched))
+			if (propMatched.TryReadProperty(ref reader, options, PropMatched, null))
 			{
 				continue;
 			}
@@ -92,11 +92,11 @@ internal sealed partial class ExplainResponseConverter<TDocument> : System.Text.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ExplainResponse<TDocument> value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropExplanation, value.Explanation);
-		writer.WriteProperty(options, PropGet, value.Get);
-		writer.WriteProperty(options, PropId, value.Id);
-		writer.WriteProperty(options, PropIndex, value.Index);
-		writer.WriteProperty(options, PropMatched, value.Matched);
+		writer.WriteProperty(options, PropExplanation, value.Explanation, null, null);
+		writer.WriteProperty(options, PropGet, value.Get, null, null);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropMatched, value.Matched, null, null);
 		writer.WriteEndObject();
 	}
 }

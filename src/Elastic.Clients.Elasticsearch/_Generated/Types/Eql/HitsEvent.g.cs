@@ -45,27 +45,27 @@ internal sealed partial class HitsEventConverter<TEvent> : System.Text.Json.Seri
 		LocalJsonValue<TEvent> propSource = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propFields.TryRead(ref reader, options, PropFields))
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<object>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<object>>(o, null, static IReadOnlyCollection<object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<object>(o, null)!)))
 			{
 				continue;
 			}
 
-			if (propId.TryRead(ref reader, options, PropId))
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
 			{
 				continue;
 			}
 
-			if (propIndex.TryRead(ref reader, options, PropIndex))
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
 			{
 				continue;
 			}
 
-			if (propMissing.TryRead(ref reader, options, PropMissing))
+			if (propMissing.TryReadProperty(ref reader, options, PropMissing, null))
 			{
 				continue;
 			}
 
-			if (propSource.TryRead(ref reader, options, PropSource, typeof(SourceMarker<TEvent>)))
+			if (propSource.TryReadProperty(ref reader, options, PropSource, static TEvent (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<TEvent>(o, typeof(SourceMarker<TEvent>))!))
 			{
 				continue;
 			}
@@ -91,11 +91,11 @@ internal sealed partial class HitsEventConverter<TEvent> : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, HitsEvent<TEvent> value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFields, value.Fields);
-		writer.WriteProperty(options, PropId, value.Id);
-		writer.WriteProperty(options, PropIndex, value.Index);
-		writer.WriteProperty(options, PropMissing, value.Missing);
-		writer.WriteProperty(options, PropSource, value.Source, null, typeof(SourceMarker<TEvent>));
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<object>>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<object>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<object> v) => w.WriteCollectionValue<object>(o, v, null)));
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
+		writer.WriteProperty(options, PropSource, value.Source, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, TEvent v) => w.WriteValueEx<TEvent>(o, v, typeof(SourceMarker<TEvent>)));
 		writer.WriteEndObject();
 	}
 }

@@ -64,72 +64,72 @@ internal sealed partial class CompletionPropertyConverter : System.Text.Json.Ser
 		LocalJsonValue<bool?> propStore = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAnalyzer.TryRead(ref reader, options, PropAnalyzer))
+			if (propAnalyzer.TryReadProperty(ref reader, options, PropAnalyzer, null))
 			{
 				continue;
 			}
 
-			if (propContexts.TryRead(ref reader, options, PropContexts))
+			if (propContexts.TryReadProperty(ref reader, options, PropContexts, static ICollection<Elastic.Clients.Elasticsearch.Mapping.SuggestContext>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Mapping.SuggestContext>(o, null)))
 			{
 				continue;
 			}
 
-			if (propCopyTo.TryRead(ref reader, options, PropCopyTo, typeof(SingleOrManyFieldsMarker)))
+			if (propCopyTo.TryReadProperty(ref reader, options, PropCopyTo, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(SingleOrManyFieldsMarker))))
 			{
 				continue;
 			}
 
-			if (propDocValues.TryRead(ref reader, options, PropDocValues))
+			if (propDocValues.TryReadProperty(ref reader, options, PropDocValues, null))
 			{
 				continue;
 			}
 
-			if (propDynamic.TryRead(ref reader, options, PropDynamic))
+			if (propDynamic.TryReadProperty(ref reader, options, PropDynamic, null))
 			{
 				continue;
 			}
 
-			if (propFields.TryRead(ref reader, options, PropFields))
+			if (propFields.TryReadProperty(ref reader, options, PropFields, null))
 			{
 				continue;
 			}
 
-			if (propIgnoreAbove.TryRead(ref reader, options, PropIgnoreAbove))
+			if (propIgnoreAbove.TryReadProperty(ref reader, options, PropIgnoreAbove, null))
 			{
 				continue;
 			}
 
-			if (propMaxInputLength.TryRead(ref reader, options, PropMaxInputLength))
+			if (propMaxInputLength.TryReadProperty(ref reader, options, PropMaxInputLength, null))
 			{
 				continue;
 			}
 
-			if (propMeta.TryRead(ref reader, options, PropMeta))
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static IDictionary<string, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propPreservePositionIncrements.TryRead(ref reader, options, PropPreservePositionIncrements))
+			if (propPreservePositionIncrements.TryReadProperty(ref reader, options, PropPreservePositionIncrements, null))
 			{
 				continue;
 			}
 
-			if (propPreserveSeparators.TryRead(ref reader, options, PropPreserveSeparators))
+			if (propPreserveSeparators.TryReadProperty(ref reader, options, PropPreserveSeparators, null))
 			{
 				continue;
 			}
 
-			if (propProperties.TryRead(ref reader, options, PropProperties))
+			if (propProperties.TryReadProperty(ref reader, options, PropProperties, null))
 			{
 				continue;
 			}
 
-			if (propSearchAnalyzer.TryRead(ref reader, options, PropSearchAnalyzer))
+			if (propSearchAnalyzer.TryReadProperty(ref reader, options, PropSearchAnalyzer, null))
 			{
 				continue;
 			}
 
-			if (propStore.TryRead(ref reader, options, PropStore))
+			if (propStore.TryReadProperty(ref reader, options, PropStore, null))
 			{
 				continue;
 			}
@@ -179,21 +179,21 @@ internal sealed partial class CompletionPropertyConverter : System.Text.Json.Ser
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, CompletionProperty value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAnalyzer, value.Analyzer);
-		writer.WriteProperty(options, PropContexts, value.Contexts);
-		writer.WriteProperty(options, PropCopyTo, value.CopyTo, null, typeof(SingleOrManyFieldsMarker));
-		writer.WriteProperty(options, PropDocValues, value.DocValues);
-		writer.WriteProperty(options, PropDynamic, value.Dynamic);
-		writer.WriteProperty(options, PropFields, value.Fields);
-		writer.WriteProperty(options, PropIgnoreAbove, value.IgnoreAbove);
-		writer.WriteProperty(options, PropMaxInputLength, value.MaxInputLength);
-		writer.WriteProperty(options, PropMeta, value.Meta);
-		writer.WriteProperty(options, PropPreservePositionIncrements, value.PreservePositionIncrements);
-		writer.WriteProperty(options, PropPreserveSeparators, value.PreserveSeparators);
-		writer.WriteProperty(options, PropProperties, value.Properties);
-		writer.WriteProperty(options, PropSearchAnalyzer, value.SearchAnalyzer);
-		writer.WriteProperty(options, PropStore, value.Store);
-		writer.WriteProperty(options, PropType, value.Type);
+		writer.WriteProperty(options, PropAnalyzer, value.Analyzer, null, null);
+		writer.WriteProperty(options, PropContexts, value.Contexts, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.Mapping.SuggestContext>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Mapping.SuggestContext>(o, v, null));
+		writer.WriteProperty(options, PropCopyTo, value.CopyTo, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropDocValues, value.DocValues, null, null);
+		writer.WriteProperty(options, PropDynamic, value.Dynamic, null, null);
+		writer.WriteProperty(options, PropFields, value.Fields, null, null);
+		writer.WriteProperty(options, PropIgnoreAbove, value.IgnoreAbove, null, null);
+		writer.WriteProperty(options, PropMaxInputLength, value.MaxInputLength, null, null);
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropPreservePositionIncrements, value.PreservePositionIncrements, null, null);
+		writer.WriteProperty(options, PropPreserveSeparators, value.PreserveSeparators, null, null);
+		writer.WriteProperty(options, PropProperties, value.Properties, null, null);
+		writer.WriteProperty(options, PropSearchAnalyzer, value.SearchAnalyzer, null, null);
+		writer.WriteProperty(options, PropStore, value.Store, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
 	}
 }

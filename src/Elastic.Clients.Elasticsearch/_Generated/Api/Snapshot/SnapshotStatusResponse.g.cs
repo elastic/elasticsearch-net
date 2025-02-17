@@ -38,7 +38,7 @@ internal sealed partial class SnapshotStatusResponseConverter : System.Text.Json
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.Status>> propSnapshots = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propSnapshots.TryRead(ref reader, options, PropSnapshots))
+			if (propSnapshots.TryReadProperty(ref reader, options, PropSnapshots, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.Status> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Snapshot.Status>(o, null)!))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class SnapshotStatusResponseConverter : System.Text.Json
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, SnapshotStatusResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropSnapshots, value.Snapshots);
+		writer.WriteProperty(options, PropSnapshots, value.Snapshots, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.Status> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Snapshot.Status>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

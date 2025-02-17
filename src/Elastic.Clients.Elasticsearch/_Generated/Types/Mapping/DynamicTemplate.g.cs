@@ -107,37 +107,37 @@ internal sealed partial class DynamicTemplateConverter : System.Text.Json.Serial
 		object? variant = null;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propMatch.TryRead(ref reader, options, PropMatch, typeof(SingleOrManyMarker<ICollection<string>?, string>)))
+			if (propMatch.TryReadProperty(ref reader, options, PropMatch, static ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propMatchMappingType.TryRead(ref reader, options, PropMatchMappingType, typeof(SingleOrManyMarker<ICollection<string>?, string>)))
+			if (propMatchMappingType.TryReadProperty(ref reader, options, PropMatchMappingType, static ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propMatchPattern.TryRead(ref reader, options, PropMatchPattern))
+			if (propMatchPattern.TryReadProperty(ref reader, options, PropMatchPattern, null))
 			{
 				continue;
 			}
 
-			if (propPathMatch.TryRead(ref reader, options, PropPathMatch, typeof(SingleOrManyMarker<ICollection<string>?, string>)))
+			if (propPathMatch.TryReadProperty(ref reader, options, PropPathMatch, static ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propPathUnmatch.TryRead(ref reader, options, PropPathUnmatch, typeof(SingleOrManyMarker<ICollection<string>?, string>)))
+			if (propPathUnmatch.TryReadProperty(ref reader, options, PropPathUnmatch, static ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propUnmatch.TryRead(ref reader, options, PropUnmatch, typeof(SingleOrManyMarker<ICollection<string>?, string>)))
+			if (propUnmatch.TryReadProperty(ref reader, options, PropUnmatch, static ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propUnmatchMappingType.TryRead(ref reader, options, PropUnmatchMappingType, typeof(SingleOrManyMarker<ICollection<string>?, string>)))
+			if (propUnmatchMappingType.TryReadProperty(ref reader, options, PropUnmatchMappingType, static ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
@@ -146,7 +146,7 @@ internal sealed partial class DynamicTemplateConverter : System.Text.Json.Serial
 			{
 				variantType = VariantMapping.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.IProperty?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.IProperty?>(options, null);
 				continue;
 			}
 
@@ -154,7 +154,7 @@ internal sealed partial class DynamicTemplateConverter : System.Text.Json.Serial
 			{
 				variantType = VariantRuntime.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.IProperty?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.IProperty?>(options, null);
 				continue;
 			}
 
@@ -190,22 +190,22 @@ internal sealed partial class DynamicTemplateConverter : System.Text.Json.Serial
 			case "":
 				break;
 			case "mapping":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Mapping.IProperty?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Mapping.IProperty?)value.Variant, null, null);
 				break;
 			case "runtime":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Mapping.IProperty?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Mapping.IProperty?)value.Variant, null, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(DynamicTemplate)}'.");
 		}
 
-		writer.WriteProperty(options, PropMatch, value.Match, null, typeof(SingleOrManyMarker<ICollection<string>?, string>));
-		writer.WriteProperty(options, PropMatchMappingType, value.MatchMappingType, null, typeof(SingleOrManyMarker<ICollection<string>?, string>));
-		writer.WriteProperty(options, PropMatchPattern, value.MatchPattern);
-		writer.WriteProperty(options, PropPathMatch, value.PathMatch, null, typeof(SingleOrManyMarker<ICollection<string>?, string>));
-		writer.WriteProperty(options, PropPathUnmatch, value.PathUnmatch, null, typeof(SingleOrManyMarker<ICollection<string>?, string>));
-		writer.WriteProperty(options, PropUnmatch, value.Unmatch, null, typeof(SingleOrManyMarker<ICollection<string>?, string>));
-		writer.WriteProperty(options, PropUnmatchMappingType, value.UnmatchMappingType, null, typeof(SingleOrManyMarker<ICollection<string>?, string>));
+		writer.WriteProperty(options, PropMatch, value.Match, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropMatchMappingType, value.MatchMappingType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropMatchPattern, value.MatchPattern, null, null);
+		writer.WriteProperty(options, PropPathMatch, value.PathMatch, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropPathUnmatch, value.PathUnmatch, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropUnmatch, value.Unmatch, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropUnmatchMappingType, value.UnmatchMappingType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

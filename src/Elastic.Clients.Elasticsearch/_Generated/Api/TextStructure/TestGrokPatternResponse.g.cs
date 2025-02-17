@@ -38,7 +38,7 @@ internal sealed partial class TestGrokPatternResponseConverter : System.Text.Jso
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.TextStructure.MatchedText>> propMatches = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propMatches.TryRead(ref reader, options, PropMatches))
+			if (propMatches.TryReadProperty(ref reader, options, PropMatches, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.TextStructure.MatchedText> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.TextStructure.MatchedText>(o, null)!))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class TestGrokPatternResponseConverter : System.Text.Jso
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, TestGrokPatternResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMatches, value.Matches);
+		writer.WriteProperty(options, PropMatches, value.Matches, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.TextStructure.MatchedText> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.TextStructure.MatchedText>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

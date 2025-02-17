@@ -36,7 +36,7 @@ internal sealed partial class DataframeAnalysisAnalyzedFieldsConverter : System.
 	{
 		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
 		{
-			var value = reader.ReadValue<ICollection<string>>(options);
+			var value = reader.ReadValue<ICollection<string>>(options, static ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!);
 			return new DataframeAnalysisAnalyzedFields { Includes = value };
 		}
 
@@ -45,12 +45,12 @@ internal sealed partial class DataframeAnalysisAnalyzedFieldsConverter : System.
 		LocalJsonValue<ICollection<string>> propIncludes = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propExcludes.TryRead(ref reader, options, PropExcludes))
+			if (propExcludes.TryReadProperty(ref reader, options, PropExcludes, static ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propIncludes.TryRead(ref reader, options, PropIncludes))
+			if (propIncludes.TryReadProperty(ref reader, options, PropIncludes, static ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
@@ -70,8 +70,8 @@ internal sealed partial class DataframeAnalysisAnalyzedFieldsConverter : System.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, DataframeAnalysisAnalyzedFields value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropExcludes, value.Excludes);
-		writer.WriteProperty(options, PropIncludes, value.Includes);
+		writer.WriteProperty(options, PropExcludes, value.Excludes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropIncludes, value.Includes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

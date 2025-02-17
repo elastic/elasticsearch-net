@@ -35,13 +35,52 @@ namespace Elastic.Clients.Elasticsearch;
 /// Slices configuration used to parallelize a process.
 /// </para>
 /// </summary>
+[JsonConverter(typeof(SlicesConverter))]
 public sealed partial class Slices : Union<int, Elastic.Clients.Elasticsearch.SlicesCalculation>
 {
-	public Slices(int Value) : base(Value)
+	public Slices(int value) : base(value)
 	{
 	}
 
-	public Slices(Elastic.Clients.Elasticsearch.SlicesCalculation Computed) : base(Computed)
+	public Slices(Elastic.Clients.Elasticsearch.SlicesCalculation computed) : base(computed)
 	{
+	}
+
+	public static implicit operator Slices(int value) => new Slices(value);
+	public static implicit operator Slices(Elastic.Clients.Elasticsearch.SlicesCalculation computed) => new Slices(computed);
+}
+
+internal sealed partial class SlicesConverter : System.Text.Json.Serialization.JsonConverter<Slices>
+{
+	public override Slices Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var selector = static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.Number, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String);
+		return selector(ref reader, options) switch
+		{
+			Elastic.Clients.Elasticsearch.UnionTag.T1 => new Slices(reader.ReadValue<int>(options, null)),
+			Elastic.Clients.Elasticsearch.UnionTag.T2 => new Slices(reader.ReadValue<Elastic.Clients.Elasticsearch.SlicesCalculation>(options, null)),
+			_ => throw new System.InvalidOperationException($"Failed to select a union variant for type '{nameof(Slices)}")
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Slices value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value.Tag)
+		{
+			case Elastic.Clients.Elasticsearch.UnionTag.T1:
+				{
+					writer.WriteValue(options, value.Value1, null);
+					break;
+				}
+
+			case Elastic.Clients.Elasticsearch.UnionTag.T2:
+				{
+					writer.WriteValue(options, value.Value2, null);
+					break;
+				}
+
+			default:
+				throw new System.InvalidOperationException($"Unrecognized tag value: {value.Tag}");
+		}
 	}
 }

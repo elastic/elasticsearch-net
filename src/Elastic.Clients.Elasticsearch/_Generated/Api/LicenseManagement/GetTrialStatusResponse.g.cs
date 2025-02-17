@@ -38,7 +38,7 @@ internal sealed partial class GetTrialStatusResponseConverter : System.Text.Json
 		LocalJsonValue<bool> propEligibleToStartTrial = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propEligibleToStartTrial.TryRead(ref reader, options, PropEligibleToStartTrial))
+			if (propEligibleToStartTrial.TryReadProperty(ref reader, options, PropEligibleToStartTrial, null))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class GetTrialStatusResponseConverter : System.Text.Json
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetTrialStatusResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropEligibleToStartTrial, value.EligibleToStartTrial);
+		writer.WriteProperty(options, PropEligibleToStartTrial, value.EligibleToStartTrial, null, null);
 		writer.WriteEndObject();
 	}
 }

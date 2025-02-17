@@ -50,37 +50,37 @@ internal sealed partial class EqlSearchResponseConverter<TEvent> : System.Text.J
 		LocalJsonValue<long?> propTook = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propHits.TryRead(ref reader, options, PropHits))
+			if (propHits.TryReadProperty(ref reader, options, PropHits, null))
 			{
 				continue;
 			}
 
-			if (propId.TryRead(ref reader, options, PropId))
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
 			{
 				continue;
 			}
 
-			if (propIsPartial.TryRead(ref reader, options, PropIsPartial))
+			if (propIsPartial.TryReadProperty(ref reader, options, PropIsPartial, null))
 			{
 				continue;
 			}
 
-			if (propIsRunning.TryRead(ref reader, options, PropIsRunning))
+			if (propIsRunning.TryReadProperty(ref reader, options, PropIsRunning, null))
 			{
 				continue;
 			}
 
-			if (propShardFailures.TryRead(ref reader, options, PropShardFailures))
+			if (propShardFailures.TryReadProperty(ref reader, options, PropShardFailures, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.ShardFailure>(o, null)))
 			{
 				continue;
 			}
 
-			if (propTimedOut.TryRead(ref reader, options, PropTimedOut))
+			if (propTimedOut.TryReadProperty(ref reader, options, PropTimedOut, null))
 			{
 				continue;
 			}
 
-			if (propTook.TryRead(ref reader, options, PropTook))
+			if (propTook.TryReadProperty(ref reader, options, PropTook, null))
 			{
 				continue;
 			}
@@ -110,13 +110,13 @@ internal sealed partial class EqlSearchResponseConverter<TEvent> : System.Text.J
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, EqlSearchResponse<TEvent> value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropHits, value.Hits);
-		writer.WriteProperty(options, PropId, value.Id);
-		writer.WriteProperty(options, PropIsPartial, value.IsPartial);
-		writer.WriteProperty(options, PropIsRunning, value.IsRunning);
-		writer.WriteProperty(options, PropShardFailures, value.ShardFailures);
-		writer.WriteProperty(options, PropTimedOut, value.TimedOut);
-		writer.WriteProperty(options, PropTook, value.Took);
+		writer.WriteProperty(options, PropHits, value.Hits, null, null);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropIsPartial, value.IsPartial, null, null);
+		writer.WriteProperty(options, PropIsRunning, value.IsRunning, null, null);
+		writer.WriteProperty(options, PropShardFailures, value.ShardFailures, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.ShardFailure>(o, v, null));
+		writer.WriteProperty(options, PropTimedOut, value.TimedOut, null, null);
+		writer.WriteProperty(options, PropTook, value.Took, null, null);
 		writer.WriteEndObject();
 	}
 }

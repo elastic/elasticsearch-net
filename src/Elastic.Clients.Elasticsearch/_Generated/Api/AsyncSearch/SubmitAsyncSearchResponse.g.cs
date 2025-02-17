@@ -56,52 +56,52 @@ internal sealed partial class SubmitAsyncSearchResponseConverter<TDocument> : Sy
 		LocalJsonValue<long> propStartTimeInMillis = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCompletionTime.TryRead(ref reader, options, PropCompletionTime))
+			if (propCompletionTime.TryReadProperty(ref reader, options, PropCompletionTime, null))
 			{
 				continue;
 			}
 
-			if (propCompletionTimeInMillis.TryRead(ref reader, options, PropCompletionTimeInMillis))
+			if (propCompletionTimeInMillis.TryReadProperty(ref reader, options, PropCompletionTimeInMillis, null))
 			{
 				continue;
 			}
 
-			if (propExpirationTime.TryRead(ref reader, options, PropExpirationTime))
+			if (propExpirationTime.TryReadProperty(ref reader, options, PropExpirationTime, null))
 			{
 				continue;
 			}
 
-			if (propExpirationTimeInMillis.TryRead(ref reader, options, PropExpirationTimeInMillis))
+			if (propExpirationTimeInMillis.TryReadProperty(ref reader, options, PropExpirationTimeInMillis, null))
 			{
 				continue;
 			}
 
-			if (propId.TryRead(ref reader, options, PropId))
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
 			{
 				continue;
 			}
 
-			if (propIsPartial.TryRead(ref reader, options, PropIsPartial))
+			if (propIsPartial.TryReadProperty(ref reader, options, PropIsPartial, null))
 			{
 				continue;
 			}
 
-			if (propIsRunning.TryRead(ref reader, options, PropIsRunning))
+			if (propIsRunning.TryReadProperty(ref reader, options, PropIsRunning, null))
 			{
 				continue;
 			}
 
-			if (propResponse.TryRead(ref reader, options, PropResponse))
+			if (propResponse.TryReadProperty(ref reader, options, PropResponse, null))
 			{
 				continue;
 			}
 
-			if (propStartTime.TryRead(ref reader, options, PropStartTime))
+			if (propStartTime.TryReadProperty(ref reader, options, PropStartTime, null))
 			{
 				continue;
 			}
 
-			if (propStartTimeInMillis.TryRead(ref reader, options, PropStartTimeInMillis))
+			if (propStartTimeInMillis.TryReadProperty(ref reader, options, PropStartTimeInMillis, null))
 			{
 				continue;
 			}
@@ -137,16 +137,16 @@ internal sealed partial class SubmitAsyncSearchResponseConverter<TDocument> : Sy
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, SubmitAsyncSearchResponse<TDocument> value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCompletionTime, value.CompletionTime);
-		writer.WriteProperty(options, PropCompletionTimeInMillis, value.CompletionTimeInMillis);
-		writer.WriteProperty(options, PropExpirationTime, value.ExpirationTime);
-		writer.WriteProperty(options, PropExpirationTimeInMillis, value.ExpirationTimeInMillis);
-		writer.WriteProperty(options, PropId, value.Id);
-		writer.WriteProperty(options, PropIsPartial, value.IsPartial);
-		writer.WriteProperty(options, PropIsRunning, value.IsRunning);
-		writer.WriteProperty(options, PropResponse, value.Response);
-		writer.WriteProperty(options, PropStartTime, value.StartTime);
-		writer.WriteProperty(options, PropStartTimeInMillis, value.StartTimeInMillis);
+		writer.WriteProperty(options, PropCompletionTime, value.CompletionTime, null, null);
+		writer.WriteProperty(options, PropCompletionTimeInMillis, value.CompletionTimeInMillis, null, null);
+		writer.WriteProperty(options, PropExpirationTime, value.ExpirationTime, null, null);
+		writer.WriteProperty(options, PropExpirationTimeInMillis, value.ExpirationTimeInMillis, null, null);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropIsPartial, value.IsPartial, null, null);
+		writer.WriteProperty(options, PropIsRunning, value.IsRunning, null, null);
+		writer.WriteProperty(options, PropResponse, value.Response, null, null);
+		writer.WriteProperty(options, PropStartTime, value.StartTime, null, null);
+		writer.WriteProperty(options, PropStartTimeInMillis, value.StartTimeInMillis, null, null);
 		writer.WriteEndObject();
 	}
 }

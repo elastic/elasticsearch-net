@@ -42,17 +42,17 @@ internal sealed partial class GetClusterSettingsResponseConverter : System.Text.
 		LocalJsonValue<IReadOnlyDictionary<string, object>> propTransient = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDefaults.TryRead(ref reader, options, PropDefaults))
+			if (propDefaults.TryReadProperty(ref reader, options, PropDefaults, static IReadOnlyDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propPersistent.TryRead(ref reader, options, PropPersistent))
+			if (propPersistent.TryReadProperty(ref reader, options, PropPersistent, static IReadOnlyDictionary<string, object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)!))
 			{
 				continue;
 			}
 
-			if (propTransient.TryRead(ref reader, options, PropTransient))
+			if (propTransient.TryReadProperty(ref reader, options, PropTransient, static IReadOnlyDictionary<string, object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)!))
 			{
 				continue;
 			}
@@ -74,9 +74,9 @@ internal sealed partial class GetClusterSettingsResponseConverter : System.Text.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetClusterSettingsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDefaults, value.Defaults);
-		writer.WriteProperty(options, PropPersistent, value.Persistent);
-		writer.WriteProperty(options, PropTransient, value.Transient);
+		writer.WriteProperty(options, PropDefaults, value.Defaults, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropPersistent, value.Persistent, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, object> v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropTransient, value.Transient, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, object> v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
 		writer.WriteEndObject();
 	}
 }

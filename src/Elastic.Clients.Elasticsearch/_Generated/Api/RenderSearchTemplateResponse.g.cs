@@ -38,7 +38,7 @@ internal sealed partial class RenderSearchTemplateResponseConverter : System.Tex
 		LocalJsonValue<IReadOnlyDictionary<string, object>> propTemplateOutput = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propTemplateOutput.TryRead(ref reader, options, PropTemplateOutput))
+			if (propTemplateOutput.TryReadProperty(ref reader, options, PropTemplateOutput, static IReadOnlyDictionary<string, object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)!))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class RenderSearchTemplateResponseConverter : System.Tex
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, RenderSearchTemplateResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropTemplateOutput, value.TemplateOutput);
+		writer.WriteProperty(options, PropTemplateOutput, value.TemplateOutput, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, object> v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
 		writer.WriteEndObject();
 	}
 }

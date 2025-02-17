@@ -46,27 +46,27 @@ internal sealed partial class IpPrefixBucketConverter : System.Text.Json.Seriali
 		LocalJsonValue<int> propPrefixLength = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDocCount.TryRead(ref reader, options, PropDocCount))
+			if (propDocCount.TryReadProperty(ref reader, options, PropDocCount, null))
 			{
 				continue;
 			}
 
-			if (propIsIpv6.TryRead(ref reader, options, PropIsIpv6))
+			if (propIsIpv6.TryReadProperty(ref reader, options, PropIsIpv6, null))
 			{
 				continue;
 			}
 
-			if (propKey.TryRead(ref reader, options, PropKey))
+			if (propKey.TryReadProperty(ref reader, options, PropKey, null))
 			{
 				continue;
 			}
 
-			if (propNetmask.TryRead(ref reader, options, PropNetmask))
+			if (propNetmask.TryReadProperty(ref reader, options, PropNetmask, null))
 			{
 				continue;
 			}
 
-			if (propPrefixLength.TryRead(ref reader, options, PropPrefixLength))
+			if (propPrefixLength.TryReadProperty(ref reader, options, PropPrefixLength, null))
 			{
 				continue;
 			}
@@ -96,11 +96,11 @@ internal sealed partial class IpPrefixBucketConverter : System.Text.Json.Seriali
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, IpPrefixBucket value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDocCount, value.DocCount);
-		writer.WriteProperty(options, PropIsIpv6, value.IsIpv6);
-		writer.WriteProperty(options, PropKey, value.Key);
-		writer.WriteProperty(options, PropNetmask, value.Netmask);
-		writer.WriteProperty(options, PropPrefixLength, value.PrefixLength);
+		writer.WriteProperty(options, PropDocCount, value.DocCount, null, null);
+		writer.WriteProperty(options, PropIsIpv6, value.IsIpv6, null, null);
+		writer.WriteProperty(options, PropKey, value.Key, null, null);
+		writer.WriteProperty(options, PropNetmask, value.Netmask, null, null);
+		writer.WriteProperty(options, PropPrefixLength, value.PrefixLength, null, null);
 		if (value.Aggregations is not null)
 		{
 			foreach (var item in value.Aggregations)

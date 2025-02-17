@@ -11,30 +11,6 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-internal sealed class FieldsMarker;
-
-internal sealed class FieldsMarkerConverter :
-	JsonConverter<FieldsMarker>,
-	IMarkerTypeConverter
-{
-	public JsonConverter WrappedConverter { get; }
-
-	public FieldsMarkerConverter()
-	{
-		WrappedConverter = new FieldsConverter();
-	}
-
-	public override FieldsMarker Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		throw new InvalidOperationException();
-	}
-
-	public override void Write(Utf8JsonWriter writer, FieldsMarker value, JsonSerializerOptions options)
-	{
-		throw new InvalidOperationException();
-	}
-}
-
 internal sealed class FieldsConverter :
 	JsonConverter<Fields>
 {

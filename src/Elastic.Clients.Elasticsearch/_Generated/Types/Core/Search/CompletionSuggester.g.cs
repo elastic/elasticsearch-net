@@ -27,6 +27,100 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+internal sealed partial class CompletionSuggesterConverter : System.Text.Json.Serialization.JsonConverter<CompletionSuggester>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer");
+	private static readonly System.Text.Json.JsonEncodedText PropContexts = System.Text.Json.JsonEncodedText.Encode("contexts");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropFuzzy = System.Text.Json.JsonEncodedText.Encode("fuzzy");
+	private static readonly System.Text.Json.JsonEncodedText PropRegex = System.Text.Json.JsonEncodedText.Encode("regex");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropSkipDuplicates = System.Text.Json.JsonEncodedText.Encode("skip_duplicates");
+
+	public override CompletionSuggester Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propAnalyzer = default;
+		LocalJsonValue<IDictionary<Elastic.Clients.Elasticsearch.Field, Union<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>>?> propContexts = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness?> propFuzzy = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.RegexOptions?> propRegex = default;
+		LocalJsonValue<int?> propSize = default;
+		LocalJsonValue<bool?> propSkipDuplicates = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAnalyzer.TryReadProperty(ref reader, options, PropAnalyzer, null))
+			{
+				continue;
+			}
+
+			if (propContexts.TryReadProperty(ref reader, options, PropContexts, static IDictionary<Elastic.Clients.Elasticsearch.Field, Union<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Field, Union<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>>(o, null, static Union<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByPropertyOfT1(ref r, o, "dummy"), null, static ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>(o, null)!)!)))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propFuzzy.TryReadProperty(ref reader, options, PropFuzzy, null))
+			{
+				continue;
+			}
+
+			if (propRegex.TryReadProperty(ref reader, options, PropRegex, null))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
+			if (propSkipDuplicates.TryReadProperty(ref reader, options, PropSkipDuplicates, null))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new CompletionSuggester
+		{
+			Analyzer = propAnalyzer.Value
+,
+			Contexts = propContexts.Value
+,
+			Field = propField.Value
+,
+			Fuzzy = propFuzzy.Value
+,
+			Regex = propRegex.Value
+,
+			Size = propSize.Value
+,
+			SkipDuplicates = propSkipDuplicates.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, CompletionSuggester value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAnalyzer, value.Analyzer, null, null);
+		writer.WriteProperty(options, PropContexts, value.Contexts, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IDictionary<Elastic.Clients.Elasticsearch.Field, Union<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, Union<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Union<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>> v) => w.WriteUnionValue<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>(o, v, null))));
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropFuzzy, value.Fuzzy, null, null);
+		writer.WriteProperty(options, PropRegex, value.Regex, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropSkipDuplicates, value.SkipDuplicates, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(CompletionSuggesterConverter))]
 public sealed partial class CompletionSuggester
 {
 	/// <summary>
@@ -35,7 +129,6 @@ public sealed partial class CompletionSuggester
 	/// Defaults to the search analyzer of the suggest field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
 
 	/// <summary>
@@ -43,7 +136,6 @@ public sealed partial class CompletionSuggester
 	/// A value, geo point object, or a geo hash string to filter or boost the suggestion on.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("contexts")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Union<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>>? Contexts { get; set; }
 
 	/// <summary>
@@ -52,7 +144,6 @@ public sealed partial class CompletionSuggester
 	/// Needs to be set globally or per suggestion.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
@@ -60,7 +151,6 @@ public sealed partial class CompletionSuggester
 	/// Enables fuzziness, meaning you can have a typo in your search and still get results back.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fuzzy")]
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness? Fuzzy { get; set; }
 
 	/// <summary>
@@ -68,7 +158,6 @@ public sealed partial class CompletionSuggester
 	/// A regex query that expresses a prefix as a regular expression.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("regex")]
 	public Elastic.Clients.Elasticsearch.Core.Search.RegexOptions? Regex { get; set; }
 
 	/// <summary>
@@ -76,7 +165,6 @@ public sealed partial class CompletionSuggester
 	/// The maximum corrections to be returned per suggest text token.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
@@ -84,7 +172,6 @@ public sealed partial class CompletionSuggester
 	/// Whether duplicate suggestions should be filtered out.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("skip_duplicates")]
 	public bool? SkipDuplicates { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester(CompletionSuggester completionSuggester) => Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester.Completion(completionSuggester);

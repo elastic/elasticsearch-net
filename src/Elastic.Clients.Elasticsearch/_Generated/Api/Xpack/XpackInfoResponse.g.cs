@@ -44,22 +44,22 @@ internal sealed partial class XpackInfoResponseConverter : System.Text.Json.Seri
 		LocalJsonValue<string> propTagline = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBuild.TryRead(ref reader, options, PropBuild))
+			if (propBuild.TryReadProperty(ref reader, options, PropBuild, null))
 			{
 				continue;
 			}
 
-			if (propFeatures.TryRead(ref reader, options, PropFeatures))
+			if (propFeatures.TryReadProperty(ref reader, options, PropFeatures, null))
 			{
 				continue;
 			}
 
-			if (propLicense.TryRead(ref reader, options, PropLicense))
+			if (propLicense.TryReadProperty(ref reader, options, PropLicense, null))
 			{
 				continue;
 			}
 
-			if (propTagline.TryRead(ref reader, options, PropTagline))
+			if (propTagline.TryReadProperty(ref reader, options, PropTagline, null))
 			{
 				continue;
 			}
@@ -83,10 +83,10 @@ internal sealed partial class XpackInfoResponseConverter : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, XpackInfoResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBuild, value.Build);
-		writer.WriteProperty(options, PropFeatures, value.Features);
-		writer.WriteProperty(options, PropLicense, value.License);
-		writer.WriteProperty(options, PropTagline, value.Tagline);
+		writer.WriteProperty(options, PropBuild, value.Build, null, null);
+		writer.WriteProperty(options, PropFeatures, value.Features, null, null);
+		writer.WriteProperty(options, PropLicense, value.License, null, null);
+		writer.WriteProperty(options, PropTagline, value.Tagline, null, null);
 		writer.WriteEndObject();
 	}
 }

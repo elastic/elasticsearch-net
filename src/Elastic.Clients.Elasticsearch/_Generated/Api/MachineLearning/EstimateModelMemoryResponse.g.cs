@@ -38,7 +38,7 @@ internal sealed partial class EstimateModelMemoryResponseConverter : System.Text
 		LocalJsonValue<string> propModelMemoryEstimate = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propModelMemoryEstimate.TryRead(ref reader, options, PropModelMemoryEstimate))
+			if (propModelMemoryEstimate.TryReadProperty(ref reader, options, PropModelMemoryEstimate, null))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class EstimateModelMemoryResponseConverter : System.Text
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, EstimateModelMemoryResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropModelMemoryEstimate, value.ModelMemoryEstimate);
+		writer.WriteProperty(options, PropModelMemoryEstimate, value.ModelMemoryEstimate, null, null);
 		writer.WriteEndObject();
 	}
 }

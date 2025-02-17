@@ -38,7 +38,7 @@ internal sealed partial class SuggesterConverter : System.Text.Json.Serializatio
 		LocalJsonValue<string?> propText = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propText.TryRead(ref reader, options, PropText))
+			if (propText.TryReadProperty(ref reader, options, PropText, null))
 			{
 				continue;
 			}
@@ -60,7 +60,7 @@ internal sealed partial class SuggesterConverter : System.Text.Json.Serializatio
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Suggester value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropText, value.Text);
+		writer.WriteProperty(options, PropText, value.Text, null, null);
 		if (value.Suggesters is not null)
 		{
 			foreach (var item in value.Suggesters)

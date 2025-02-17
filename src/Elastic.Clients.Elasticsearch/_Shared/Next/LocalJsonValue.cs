@@ -2,8 +2,6 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 
@@ -15,10 +13,10 @@ internal ref struct LocalJsonValue<T>
 	public bool Initialized;
 
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public bool TryRead(ref Utf8JsonReader reader, JsonSerializerOptions options, JsonEncodedText name,
-		[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? markerType = null)
+	public bool TryReadProperty(ref Utf8JsonReader reader, JsonSerializerOptions options, JsonEncodedText name,
+		JsonReadFunc<T>? readValue)
 	{
-		var success = reader.TryReadProperty(options, name, ref Value, markerType);
+		var success = reader.TryReadProperty(options, name, ref Value, readValue);
 		Initialized |= success;
 
 		return success;
@@ -26,17 +24,17 @@ internal ref struct LocalJsonValue<T>
 
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public void ReadValue(ref Utf8JsonReader reader, JsonSerializerOptions options,
-		[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? markerType = null)
+		JsonReadFunc<T>? readValue)
 	{
 		Initialized = true;
-		Value = reader.ReadValue<T>(options, markerType);
+		Value = reader.ReadValue(options, readValue);
 	}
 
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public void ReadPropertyName(ref Utf8JsonReader reader, JsonSerializerOptions options,
-		[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? markerType = null)
+		JsonReadFunc<T>? readValue)
 	{
 		Initialized = true;
-		Value = reader.ReadPropertyName<T>(options);
+		Value = reader.ReadPropertyName(options, readValue);
 	}
 }

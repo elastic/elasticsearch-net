@@ -79,112 +79,112 @@ internal sealed partial class StatsConverter : System.Text.Json.Serialization.Js
 		LocalJsonValue<string?> propTransportAddress = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAdaptiveSelection.TryRead(ref reader, options, PropAdaptiveSelection))
+			if (propAdaptiveSelection.TryReadProperty(ref reader, options, PropAdaptiveSelection, static IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propAttributes.TryRead(ref reader, options, PropAttributes))
+			if (propAttributes.TryReadProperty(ref reader, options, PropAttributes, static IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Field, string>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propBreakers.TryRead(ref reader, options, PropBreakers))
+			if (propBreakers.TryReadProperty(ref reader, options, PropBreakers, static IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.Breaker>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.Breaker>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propDiscovery.TryRead(ref reader, options, PropDiscovery))
+			if (propDiscovery.TryReadProperty(ref reader, options, PropDiscovery, null))
 			{
 				continue;
 			}
 
-			if (propFs.TryRead(ref reader, options, PropFs))
+			if (propFs.TryReadProperty(ref reader, options, PropFs, null))
 			{
 				continue;
 			}
 
-			if (propHost.TryRead(ref reader, options, PropHost))
+			if (propHost.TryReadProperty(ref reader, options, PropHost, null))
 			{
 				continue;
 			}
 
-			if (propHttp.TryRead(ref reader, options, PropHttp))
+			if (propHttp.TryReadProperty(ref reader, options, PropHttp, null))
 			{
 				continue;
 			}
 
-			if (propIndexingPressure.TryRead(ref reader, options, PropIndexingPressure))
+			if (propIndexingPressure.TryReadProperty(ref reader, options, PropIndexingPressure, null))
 			{
 				continue;
 			}
 
-			if (propIndices.TryRead(ref reader, options, PropIndices))
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, null))
 			{
 				continue;
 			}
 
-			if (propIngest.TryRead(ref reader, options, PropIngest))
+			if (propIngest.TryReadProperty(ref reader, options, PropIngest, null))
 			{
 				continue;
 			}
 
-			if (propIp.TryRead(ref reader, options, PropIp, typeof(SingleOrManyMarker<IReadOnlyCollection<string>?, string>)))
+			if (propIp.TryReadProperty(ref reader, options, PropIp, static IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propJvm.TryRead(ref reader, options, PropJvm))
+			if (propJvm.TryReadProperty(ref reader, options, PropJvm, null))
 			{
 				continue;
 			}
 
-			if (propName.TryRead(ref reader, options, PropName))
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
 			{
 				continue;
 			}
 
-			if (propOs.TryRead(ref reader, options, PropOs))
+			if (propOs.TryReadProperty(ref reader, options, PropOs, null))
 			{
 				continue;
 			}
 
-			if (propProcess.TryRead(ref reader, options, PropProcess))
+			if (propProcess.TryReadProperty(ref reader, options, PropProcess, null))
 			{
 				continue;
 			}
 
-			if (propRoles.TryRead(ref reader, options, PropRoles))
+			if (propRoles.TryReadProperty(ref reader, options, PropRoles, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.NodeRole>(o, null)))
 			{
 				continue;
 			}
 
-			if (propScript.TryRead(ref reader, options, PropScript))
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
 			{
 				continue;
 			}
 
-			if (propScriptCache.TryRead(ref reader, options, PropScriptCache))
+			if (propScriptCache.TryReadProperty(ref reader, options, PropScriptCache, static IReadOnlyDictionary<string, Union<Elastic.Clients.Elasticsearch.Nodes.ScriptCache, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.ScriptCache>>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Union<Elastic.Clients.Elasticsearch.Nodes.ScriptCache, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.ScriptCache>>>(o, null, static Union<Elastic.Clients.Elasticsearch.Nodes.ScriptCache, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.ScriptCache>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<Elastic.Clients.Elasticsearch.Nodes.ScriptCache, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.ScriptCache>>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartObject, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartArray), null, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.ScriptCache> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Nodes.ScriptCache>(o, null)!)!)))
 			{
 				continue;
 			}
 
-			if (propThreadPool.TryRead(ref reader, options, PropThreadPool))
+			if (propThreadPool.TryReadProperty(ref reader, options, PropThreadPool, static IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.ThreadCount>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.ThreadCount>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propTimestamp.TryRead(ref reader, options, PropTimestamp))
+			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, null))
 			{
 				continue;
 			}
 
-			if (propTransport.TryRead(ref reader, options, PropTransport))
+			if (propTransport.TryReadProperty(ref reader, options, PropTransport, null))
 			{
 				continue;
 			}
 
-			if (propTransportAddress.TryRead(ref reader, options, PropTransportAddress))
+			if (propTransportAddress.TryReadProperty(ref reader, options, PropTransportAddress, null))
 			{
 				continue;
 			}
@@ -244,28 +244,28 @@ internal sealed partial class StatsConverter : System.Text.Json.Serialization.Js
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Stats value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAdaptiveSelection, value.AdaptiveSelection);
-		writer.WriteProperty(options, PropAttributes, value.Attributes);
-		writer.WriteProperty(options, PropBreakers, value.Breakers);
-		writer.WriteProperty(options, PropDiscovery, value.Discovery);
-		writer.WriteProperty(options, PropFs, value.Fs);
-		writer.WriteProperty(options, PropHost, value.Host);
-		writer.WriteProperty(options, PropHttp, value.Http);
-		writer.WriteProperty(options, PropIndexingPressure, value.IndexingPressure);
-		writer.WriteProperty(options, PropIndices, value.Indices);
-		writer.WriteProperty(options, PropIngest, value.Ingest);
-		writer.WriteProperty(options, PropIp, value.Ip, null, typeof(SingleOrManyMarker<IReadOnlyCollection<string>?, string>));
-		writer.WriteProperty(options, PropJvm, value.Jvm);
-		writer.WriteProperty(options, PropName, value.Name);
-		writer.WriteProperty(options, PropOs, value.Os);
-		writer.WriteProperty(options, PropProcess, value.Process);
-		writer.WriteProperty(options, PropRoles, value.Roles);
-		writer.WriteProperty(options, PropScript, value.Script);
-		writer.WriteProperty(options, PropScriptCache, value.ScriptCache);
-		writer.WriteProperty(options, PropThreadPool, value.ThreadPool);
-		writer.WriteProperty(options, PropTimestamp, value.Timestamp);
-		writer.WriteProperty(options, PropTransport, value.Transport);
-		writer.WriteProperty(options, PropTransportAddress, value.TransportAddress);
+		writer.WriteProperty(options, PropAdaptiveSelection, value.AdaptiveSelection, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection>(o, v, null, null));
+		writer.WriteProperty(options, PropAttributes, value.Attributes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, string>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, string>(o, v, null, null));
+		writer.WriteProperty(options, PropBreakers, value.Breakers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.Breaker>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.Breaker>(o, v, null, null));
+		writer.WriteProperty(options, PropDiscovery, value.Discovery, null, null);
+		writer.WriteProperty(options, PropFs, value.Fs, null, null);
+		writer.WriteProperty(options, PropHost, value.Host, null, null);
+		writer.WriteProperty(options, PropHttp, value.Http, null, null);
+		writer.WriteProperty(options, PropIndexingPressure, value.IndexingPressure, null, null);
+		writer.WriteProperty(options, PropIndices, value.Indices, null, null);
+		writer.WriteProperty(options, PropIngest, value.Ingest, null, null);
+		writer.WriteProperty(options, PropIp, value.Ip, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropJvm, value.Jvm, null, null);
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropOs, value.Os, null, null);
+		writer.WriteProperty(options, PropProcess, value.Process, null, null);
+		writer.WriteProperty(options, PropRoles, value.Roles, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.NodeRole>(o, v, null));
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
+		writer.WriteProperty(options, PropScriptCache, value.ScriptCache, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, Union<Elastic.Clients.Elasticsearch.Nodes.ScriptCache, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.ScriptCache>>>? v) => w.WriteDictionaryValue<string, Union<Elastic.Clients.Elasticsearch.Nodes.ScriptCache, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.ScriptCache>>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Union<Elastic.Clients.Elasticsearch.Nodes.ScriptCache, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.ScriptCache>> v) => w.WriteUnionValue<Elastic.Clients.Elasticsearch.Nodes.ScriptCache, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.ScriptCache>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.ScriptCache> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Nodes.ScriptCache>(o, v, null))));
+		writer.WriteProperty(options, PropThreadPool, value.ThreadPool, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.ThreadCount>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.ThreadCount>(o, v, null, null));
+		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, null);
+		writer.WriteProperty(options, PropTransport, value.Transport, null, null);
+		writer.WriteProperty(options, PropTransportAddress, value.TransportAddress, null, null);
 		writer.WriteEndObject();
 	}
 }

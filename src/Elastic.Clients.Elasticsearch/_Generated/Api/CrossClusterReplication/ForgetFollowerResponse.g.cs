@@ -38,7 +38,7 @@ internal sealed partial class ForgetFollowerResponseConverter : System.Text.Json
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ShardStatistics> propShards = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propShards.TryRead(ref reader, options, PropShards))
+			if (propShards.TryReadProperty(ref reader, options, PropShards, null))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class ForgetFollowerResponseConverter : System.Text.Json
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ForgetFollowerResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropShards, value.Shards);
+		writer.WriteProperty(options, PropShards, value.Shards, null, null);
 		writer.WriteEndObject();
 	}
 }

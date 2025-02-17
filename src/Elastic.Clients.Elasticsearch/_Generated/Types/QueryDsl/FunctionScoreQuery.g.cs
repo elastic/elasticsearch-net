@@ -42,7 +42,7 @@ internal sealed partial class FunctionScoreQueryConverter : System.Text.Json.Ser
 	{
 		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
 		{
-			var value = reader.ReadValue<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore>?>(options);
+			var value = reader.ReadValue<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore>?>(options, static ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore>(o, null));
 			return new FunctionScoreQuery { Functions = value };
 		}
 
@@ -57,42 +57,42 @@ internal sealed partial class FunctionScoreQueryConverter : System.Text.Json.Ser
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode?> propScoreMode = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBoost.TryRead(ref reader, options, PropBoost))
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
 			{
 				continue;
 			}
 
-			if (propBoostMode.TryRead(ref reader, options, PropBoostMode))
+			if (propBoostMode.TryReadProperty(ref reader, options, PropBoostMode, null))
 			{
 				continue;
 			}
 
-			if (propFunctions.TryRead(ref reader, options, PropFunctions))
+			if (propFunctions.TryReadProperty(ref reader, options, PropFunctions, static ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore>(o, null)))
 			{
 				continue;
 			}
 
-			if (propMaxBoost.TryRead(ref reader, options, PropMaxBoost))
+			if (propMaxBoost.TryReadProperty(ref reader, options, PropMaxBoost, null))
 			{
 				continue;
 			}
 
-			if (propMinScore.TryRead(ref reader, options, PropMinScore))
+			if (propMinScore.TryReadProperty(ref reader, options, PropMinScore, null))
 			{
 				continue;
 			}
 
-			if (propQuery.TryRead(ref reader, options, PropQuery))
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
 			{
 				continue;
 			}
 
-			if (propQueryName.TryRead(ref reader, options, PropQueryName))
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
 			{
 				continue;
 			}
 
-			if (propScoreMode.TryRead(ref reader, options, PropScoreMode))
+			if (propScoreMode.TryReadProperty(ref reader, options, PropScoreMode, null))
 			{
 				continue;
 			}
@@ -124,14 +124,14 @@ internal sealed partial class FunctionScoreQueryConverter : System.Text.Json.Ser
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, FunctionScoreQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBoost, value.Boost);
-		writer.WriteProperty(options, PropBoostMode, value.BoostMode);
-		writer.WriteProperty(options, PropFunctions, value.Functions);
-		writer.WriteProperty(options, PropMaxBoost, value.MaxBoost);
-		writer.WriteProperty(options, PropMinScore, value.MinScore);
-		writer.WriteProperty(options, PropQuery, value.Query);
-		writer.WriteProperty(options, PropQueryName, value.QueryName);
-		writer.WriteProperty(options, PropScoreMode, value.ScoreMode);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropBoostMode, value.BoostMode, null, null);
+		writer.WriteProperty(options, PropFunctions, value.Functions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore>(o, v, null));
+		writer.WriteProperty(options, PropMaxBoost, value.MaxBoost, null, null);
+		writer.WriteProperty(options, PropMinScore, value.MinScore, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteProperty(options, PropScoreMode, value.ScoreMode, null, null);
 		writer.WriteEndObject();
 	}
 }

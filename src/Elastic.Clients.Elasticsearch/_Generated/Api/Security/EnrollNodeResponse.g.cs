@@ -48,32 +48,32 @@ internal sealed partial class EnrollNodeResponseConverter : System.Text.Json.Ser
 		LocalJsonValue<string> propTransportKey = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propHttpCaCert.TryRead(ref reader, options, PropHttpCaCert))
+			if (propHttpCaCert.TryReadProperty(ref reader, options, PropHttpCaCert, null))
 			{
 				continue;
 			}
 
-			if (propHttpCaKey.TryRead(ref reader, options, PropHttpCaKey))
+			if (propHttpCaKey.TryReadProperty(ref reader, options, PropHttpCaKey, null))
 			{
 				continue;
 			}
 
-			if (propNodesAddresses.TryRead(ref reader, options, PropNodesAddresses))
+			if (propNodesAddresses.TryReadProperty(ref reader, options, PropNodesAddresses, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propTransportCaCert.TryRead(ref reader, options, PropTransportCaCert))
+			if (propTransportCaCert.TryReadProperty(ref reader, options, PropTransportCaCert, null))
 			{
 				continue;
 			}
 
-			if (propTransportCert.TryRead(ref reader, options, PropTransportCert))
+			if (propTransportCert.TryReadProperty(ref reader, options, PropTransportCert, null))
 			{
 				continue;
 			}
 
-			if (propTransportKey.TryRead(ref reader, options, PropTransportKey))
+			if (propTransportKey.TryReadProperty(ref reader, options, PropTransportKey, null))
 			{
 				continue;
 			}
@@ -101,12 +101,12 @@ internal sealed partial class EnrollNodeResponseConverter : System.Text.Json.Ser
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, EnrollNodeResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropHttpCaCert, value.HttpCaCert);
-		writer.WriteProperty(options, PropHttpCaKey, value.HttpCaKey);
-		writer.WriteProperty(options, PropNodesAddresses, value.NodesAddresses);
-		writer.WriteProperty(options, PropTransportCaCert, value.TransportCaCert);
-		writer.WriteProperty(options, PropTransportCert, value.TransportCert);
-		writer.WriteProperty(options, PropTransportKey, value.TransportKey);
+		writer.WriteProperty(options, PropHttpCaCert, value.HttpCaCert, null, null);
+		writer.WriteProperty(options, PropHttpCaKey, value.HttpCaKey, null, null);
+		writer.WriteProperty(options, PropNodesAddresses, value.NodesAddresses, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropTransportCaCert, value.TransportCaCert, null, null);
+		writer.WriteProperty(options, PropTransportCert, value.TransportCert, null, null);
+		writer.WriteProperty(options, PropTransportKey, value.TransportKey, null, null);
 		writer.WriteEndObject();
 	}
 }

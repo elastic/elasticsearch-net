@@ -40,12 +40,12 @@ internal sealed partial class OpenPointInTimeResponseConverter : System.Text.Jso
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ShardStatistics> propShards = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propId.TryRead(ref reader, options, PropId))
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
 			{
 				continue;
 			}
 
-			if (propShards.TryRead(ref reader, options, PropShards))
+			if (propShards.TryReadProperty(ref reader, options, PropShards, null))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class OpenPointInTimeResponseConverter : System.Text.Jso
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, OpenPointInTimeResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropId, value.Id);
-		writer.WriteProperty(options, PropShards, value.Shards);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropShards, value.Shards, null, null);
 		writer.WriteEndObject();
 	}
 }

@@ -40,12 +40,12 @@ internal sealed partial class GetInfluencersResponseConverter : System.Text.Json
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Influencer>> propInfluencers = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCount.TryRead(ref reader, options, PropCount))
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
 			{
 				continue;
 			}
 
-			if (propInfluencers.TryRead(ref reader, options, PropInfluencers))
+			if (propInfluencers.TryReadProperty(ref reader, options, PropInfluencers, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Influencer> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.Influencer>(o, null)!))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class GetInfluencersResponseConverter : System.Text.Json
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetInfluencersResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCount, value.Count);
-		writer.WriteProperty(options, PropInfluencers, value.Influencers);
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropInfluencers, value.Influencers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Influencer> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.Influencer>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

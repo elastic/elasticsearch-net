@@ -42,17 +42,17 @@ internal sealed partial class UpgradeTransformsResponseConverter : System.Text.J
 		LocalJsonValue<int> propUpdated = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propNeedsUpdate.TryRead(ref reader, options, PropNeedsUpdate))
+			if (propNeedsUpdate.TryReadProperty(ref reader, options, PropNeedsUpdate, null))
 			{
 				continue;
 			}
 
-			if (propNoAction.TryRead(ref reader, options, PropNoAction))
+			if (propNoAction.TryReadProperty(ref reader, options, PropNoAction, null))
 			{
 				continue;
 			}
 
-			if (propUpdated.TryRead(ref reader, options, PropUpdated))
+			if (propUpdated.TryReadProperty(ref reader, options, PropUpdated, null))
 			{
 				continue;
 			}
@@ -74,9 +74,9 @@ internal sealed partial class UpgradeTransformsResponseConverter : System.Text.J
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, UpgradeTransformsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropNeedsUpdate, value.NeedsUpdate);
-		writer.WriteProperty(options, PropNoAction, value.NoAction);
-		writer.WriteProperty(options, PropUpdated, value.Updated);
+		writer.WriteProperty(options, PropNeedsUpdate, value.NeedsUpdate, null, null);
+		writer.WriteProperty(options, PropNoAction, value.NoAction, null, null);
+		writer.WriteProperty(options, PropUpdated, value.Updated, null, null);
 		writer.WriteEndObject();
 	}
 }

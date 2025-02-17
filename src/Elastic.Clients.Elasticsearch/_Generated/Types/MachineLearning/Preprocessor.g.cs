@@ -84,7 +84,7 @@ internal sealed partial class PreprocessorConverter : System.Text.Json.Serializa
 			{
 				variantType = VariantFrequencyEncoding.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.FrequencyEncodingPreprocessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.FrequencyEncodingPreprocessor?>(options, null);
 				continue;
 			}
 
@@ -92,7 +92,7 @@ internal sealed partial class PreprocessorConverter : System.Text.Json.Serializa
 			{
 				variantType = VariantOneHotEncoding.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.OneHotEncodingPreprocessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.OneHotEncodingPreprocessor?>(options, null);
 				continue;
 			}
 
@@ -100,7 +100,7 @@ internal sealed partial class PreprocessorConverter : System.Text.Json.Serializa
 			{
 				variantType = VariantTargetMeanEncoding.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor?>(options, null);
 				continue;
 			}
 
@@ -119,13 +119,13 @@ internal sealed partial class PreprocessorConverter : System.Text.Json.Serializa
 			case "":
 				break;
 			case "frequency_encoding":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.FrequencyEncodingPreprocessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.FrequencyEncodingPreprocessor?)value.Variant, null, null);
 				break;
 			case "one_hot_encoding":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.OneHotEncodingPreprocessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.OneHotEncodingPreprocessor?)value.Variant, null, null);
 				break;
 			case "target_mean_encoding":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor?)value.Variant, null, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Preprocessor)}'.");

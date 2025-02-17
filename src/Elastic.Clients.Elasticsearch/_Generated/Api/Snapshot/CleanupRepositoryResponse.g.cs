@@ -38,7 +38,7 @@ internal sealed partial class CleanupRepositoryResponseConverter : System.Text.J
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryResults> propResults = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propResults.TryRead(ref reader, options, PropResults))
+			if (propResults.TryReadProperty(ref reader, options, PropResults, null))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class CleanupRepositoryResponseConverter : System.Text.J
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, CleanupRepositoryResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropResults, value.Results);
+		writer.WriteProperty(options, PropResults, value.Results, null, null);
 		writer.WriteEndObject();
 	}
 }

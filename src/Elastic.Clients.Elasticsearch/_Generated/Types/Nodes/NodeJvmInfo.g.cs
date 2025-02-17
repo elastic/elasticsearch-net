@@ -60,62 +60,62 @@ internal sealed partial class NodeJvmInfoConverter : System.Text.Json.Serializat
 		LocalJsonValue<string> propVmVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propGcCollectors.TryRead(ref reader, options, PropGcCollectors))
+			if (propGcCollectors.TryReadProperty(ref reader, options, PropGcCollectors, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propInputArguments.TryRead(ref reader, options, PropInputArguments))
+			if (propInputArguments.TryReadProperty(ref reader, options, PropInputArguments, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propMem.TryRead(ref reader, options, PropMem))
+			if (propMem.TryReadProperty(ref reader, options, PropMem, null))
 			{
 				continue;
 			}
 
-			if (propMemoryPools.TryRead(ref reader, options, PropMemoryPools))
+			if (propMemoryPools.TryReadProperty(ref reader, options, PropMemoryPools, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propPid.TryRead(ref reader, options, PropPid))
+			if (propPid.TryReadProperty(ref reader, options, PropPid, null))
 			{
 				continue;
 			}
 
-			if (propStartTimeInMillis.TryRead(ref reader, options, PropStartTimeInMillis))
+			if (propStartTimeInMillis.TryReadProperty(ref reader, options, PropStartTimeInMillis, null))
 			{
 				continue;
 			}
 
-			if (propUsingBundledJdk.TryRead(ref reader, options, PropUsingBundledJdk) || propUsingBundledJdk.TryRead(ref reader, options, PropUsingBundledJdk1))
+			if (propUsingBundledJdk.TryReadProperty(ref reader, options, PropUsingBundledJdk, null) || propUsingBundledJdk.TryReadProperty(ref reader, options, PropUsingBundledJdk1, null))
 			{
 				continue;
 			}
 
-			if (propUsingCompressedOrdinaryObjectPointers.TryRead(ref reader, options, PropUsingCompressedOrdinaryObjectPointers))
+			if (propUsingCompressedOrdinaryObjectPointers.TryReadProperty(ref reader, options, PropUsingCompressedOrdinaryObjectPointers, null))
 			{
 				continue;
 			}
 
-			if (propVersion.TryRead(ref reader, options, PropVersion))
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
 			{
 				continue;
 			}
 
-			if (propVmName.TryRead(ref reader, options, PropVmName))
+			if (propVmName.TryReadProperty(ref reader, options, PropVmName, null))
 			{
 				continue;
 			}
 
-			if (propVmVendor.TryRead(ref reader, options, PropVmVendor))
+			if (propVmVendor.TryReadProperty(ref reader, options, PropVmVendor, null))
 			{
 				continue;
 			}
 
-			if (propVmVersion.TryRead(ref reader, options, PropVmVersion))
+			if (propVmVersion.TryReadProperty(ref reader, options, PropVmVersion, null))
 			{
 				continue;
 			}
@@ -155,18 +155,18 @@ internal sealed partial class NodeJvmInfoConverter : System.Text.Json.Serializat
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, NodeJvmInfo value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropGcCollectors, value.GcCollectors);
-		writer.WriteProperty(options, PropInputArguments, value.InputArguments);
-		writer.WriteProperty(options, PropMem, value.Mem);
-		writer.WriteProperty(options, PropMemoryPools, value.MemoryPools);
-		writer.WriteProperty(options, PropPid, value.Pid);
-		writer.WriteProperty(options, PropStartTimeInMillis, value.StartTimeInMillis);
-		writer.WriteProperty(options, PropUsingBundledJdk, value.UsingBundledJdk);
-		writer.WriteProperty(options, PropUsingCompressedOrdinaryObjectPointers, value.UsingCompressedOrdinaryObjectPointers);
-		writer.WriteProperty(options, PropVersion, value.Version);
-		writer.WriteProperty(options, PropVmName, value.VmName);
-		writer.WriteProperty(options, PropVmVendor, value.VmVendor);
-		writer.WriteProperty(options, PropVmVersion, value.VmVersion);
+		writer.WriteProperty(options, PropGcCollectors, value.GcCollectors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropInputArguments, value.InputArguments, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropMem, value.Mem, null, null);
+		writer.WriteProperty(options, PropMemoryPools, value.MemoryPools, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropPid, value.Pid, null, null);
+		writer.WriteProperty(options, PropStartTimeInMillis, value.StartTimeInMillis, null, null);
+		writer.WriteProperty(options, PropUsingBundledJdk, value.UsingBundledJdk, null, null);
+		writer.WriteProperty(options, PropUsingCompressedOrdinaryObjectPointers, value.UsingCompressedOrdinaryObjectPointers, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteProperty(options, PropVmName, value.VmName, null, null);
+		writer.WriteProperty(options, PropVmVendor, value.VmVendor, null, null);
+		writer.WriteProperty(options, PropVmVersion, value.VmVersion, null, null);
 		writer.WriteEndObject();
 	}
 }

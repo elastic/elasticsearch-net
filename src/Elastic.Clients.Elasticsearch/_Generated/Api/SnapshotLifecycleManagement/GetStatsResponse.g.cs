@@ -56,52 +56,52 @@ internal sealed partial class GetStatsResponseConverter : System.Text.Json.Seria
 		LocalJsonValue<long> propTotalSnapshotsTaken = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propPolicyStats.TryRead(ref reader, options, PropPolicyStats))
+			if (propPolicyStats.TryReadProperty(ref reader, options, PropPolicyStats, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propRetentionDeletionTime.TryRead(ref reader, options, PropRetentionDeletionTime))
+			if (propRetentionDeletionTime.TryReadProperty(ref reader, options, PropRetentionDeletionTime, null))
 			{
 				continue;
 			}
 
-			if (propRetentionDeletionTimeMillis.TryRead(ref reader, options, PropRetentionDeletionTimeMillis))
+			if (propRetentionDeletionTimeMillis.TryReadProperty(ref reader, options, PropRetentionDeletionTimeMillis, null))
 			{
 				continue;
 			}
 
-			if (propRetentionFailed.TryRead(ref reader, options, PropRetentionFailed))
+			if (propRetentionFailed.TryReadProperty(ref reader, options, PropRetentionFailed, null))
 			{
 				continue;
 			}
 
-			if (propRetentionRuns.TryRead(ref reader, options, PropRetentionRuns))
+			if (propRetentionRuns.TryReadProperty(ref reader, options, PropRetentionRuns, null))
 			{
 				continue;
 			}
 
-			if (propRetentionTimedOut.TryRead(ref reader, options, PropRetentionTimedOut))
+			if (propRetentionTimedOut.TryReadProperty(ref reader, options, PropRetentionTimedOut, null))
 			{
 				continue;
 			}
 
-			if (propTotalSnapshotDeletionFailures.TryRead(ref reader, options, PropTotalSnapshotDeletionFailures))
+			if (propTotalSnapshotDeletionFailures.TryReadProperty(ref reader, options, PropTotalSnapshotDeletionFailures, null))
 			{
 				continue;
 			}
 
-			if (propTotalSnapshotsDeleted.TryRead(ref reader, options, PropTotalSnapshotsDeleted))
+			if (propTotalSnapshotsDeleted.TryReadProperty(ref reader, options, PropTotalSnapshotsDeleted, null))
 			{
 				continue;
 			}
 
-			if (propTotalSnapshotsFailed.TryRead(ref reader, options, PropTotalSnapshotsFailed))
+			if (propTotalSnapshotsFailed.TryReadProperty(ref reader, options, PropTotalSnapshotsFailed, null))
 			{
 				continue;
 			}
 
-			if (propTotalSnapshotsTaken.TryRead(ref reader, options, PropTotalSnapshotsTaken))
+			if (propTotalSnapshotsTaken.TryReadProperty(ref reader, options, PropTotalSnapshotsTaken, null))
 			{
 				continue;
 			}
@@ -137,16 +137,16 @@ internal sealed partial class GetStatsResponseConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetStatsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropPolicyStats, value.PolicyStats);
-		writer.WriteProperty(options, PropRetentionDeletionTime, value.RetentionDeletionTime);
-		writer.WriteProperty(options, PropRetentionDeletionTimeMillis, value.RetentionDeletionTimeMillis);
-		writer.WriteProperty(options, PropRetentionFailed, value.RetentionFailed);
-		writer.WriteProperty(options, PropRetentionRuns, value.RetentionRuns);
-		writer.WriteProperty(options, PropRetentionTimedOut, value.RetentionTimedOut);
-		writer.WriteProperty(options, PropTotalSnapshotDeletionFailures, value.TotalSnapshotDeletionFailures);
-		writer.WriteProperty(options, PropTotalSnapshotsDeleted, value.TotalSnapshotsDeleted);
-		writer.WriteProperty(options, PropTotalSnapshotsFailed, value.TotalSnapshotsFailed);
-		writer.WriteProperty(options, PropTotalSnapshotsTaken, value.TotalSnapshotsTaken);
+		writer.WriteProperty(options, PropPolicyStats, value.PolicyStats, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropRetentionDeletionTime, value.RetentionDeletionTime, null, null);
+		writer.WriteProperty(options, PropRetentionDeletionTimeMillis, value.RetentionDeletionTimeMillis, null, null);
+		writer.WriteProperty(options, PropRetentionFailed, value.RetentionFailed, null, null);
+		writer.WriteProperty(options, PropRetentionRuns, value.RetentionRuns, null, null);
+		writer.WriteProperty(options, PropRetentionTimedOut, value.RetentionTimedOut, null, null);
+		writer.WriteProperty(options, PropTotalSnapshotDeletionFailures, value.TotalSnapshotDeletionFailures, null, null);
+		writer.WriteProperty(options, PropTotalSnapshotsDeleted, value.TotalSnapshotsDeleted, null, null);
+		writer.WriteProperty(options, PropTotalSnapshotsFailed, value.TotalSnapshotsFailed, null, null);
+		writer.WriteProperty(options, PropTotalSnapshotsTaken, value.TotalSnapshotsTaken, null, null);
 		writer.WriteEndObject();
 	}
 }

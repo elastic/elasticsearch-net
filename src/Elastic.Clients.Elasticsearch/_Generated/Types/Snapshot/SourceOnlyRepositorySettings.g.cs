@@ -50,37 +50,37 @@ internal sealed partial class SourceOnlyRepositorySettingsConverter : System.Tex
 		LocalJsonValue<bool?> propReadOnly = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propChunkSize.TryRead(ref reader, options, PropChunkSize))
+			if (propChunkSize.TryReadProperty(ref reader, options, PropChunkSize, null))
 			{
 				continue;
 			}
 
-			if (propCompress.TryRead(ref reader, options, PropCompress))
+			if (propCompress.TryReadProperty(ref reader, options, PropCompress, null))
 			{
 				continue;
 			}
 
-			if (propDelegateType.TryRead(ref reader, options, PropDelegateType))
+			if (propDelegateType.TryReadProperty(ref reader, options, PropDelegateType, null))
 			{
 				continue;
 			}
 
-			if (propMaxNumberOfSnapshots.TryRead(ref reader, options, PropMaxNumberOfSnapshots))
+			if (propMaxNumberOfSnapshots.TryReadProperty(ref reader, options, PropMaxNumberOfSnapshots, null))
 			{
 				continue;
 			}
 
-			if (propMaxRestoreBytesPerSec.TryRead(ref reader, options, PropMaxRestoreBytesPerSec))
+			if (propMaxRestoreBytesPerSec.TryReadProperty(ref reader, options, PropMaxRestoreBytesPerSec, null))
 			{
 				continue;
 			}
 
-			if (propMaxSnapshotBytesPerSec.TryRead(ref reader, options, PropMaxSnapshotBytesPerSec))
+			if (propMaxSnapshotBytesPerSec.TryReadProperty(ref reader, options, PropMaxSnapshotBytesPerSec, null))
 			{
 				continue;
 			}
 
-			if (propReadOnly.TryRead(ref reader, options, PropReadOnly) || propReadOnly.TryRead(ref reader, options, PropReadOnly1))
+			if (propReadOnly.TryReadProperty(ref reader, options, PropReadOnly, null) || propReadOnly.TryReadProperty(ref reader, options, PropReadOnly1, null))
 			{
 				continue;
 			}
@@ -110,13 +110,13 @@ internal sealed partial class SourceOnlyRepositorySettingsConverter : System.Tex
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, SourceOnlyRepositorySettings value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropChunkSize, value.ChunkSize);
-		writer.WriteProperty(options, PropCompress, value.Compress);
-		writer.WriteProperty(options, PropDelegateType, value.DelegateType);
-		writer.WriteProperty(options, PropMaxNumberOfSnapshots, value.MaxNumberOfSnapshots);
-		writer.WriteProperty(options, PropMaxRestoreBytesPerSec, value.MaxRestoreBytesPerSec);
-		writer.WriteProperty(options, PropMaxSnapshotBytesPerSec, value.MaxSnapshotBytesPerSec);
-		writer.WriteProperty(options, PropReadOnly, value.ReadOnly);
+		writer.WriteProperty(options, PropChunkSize, value.ChunkSize, null, null);
+		writer.WriteProperty(options, PropCompress, value.Compress, null, null);
+		writer.WriteProperty(options, PropDelegateType, value.DelegateType, null, null);
+		writer.WriteProperty(options, PropMaxNumberOfSnapshots, value.MaxNumberOfSnapshots, null, null);
+		writer.WriteProperty(options, PropMaxRestoreBytesPerSec, value.MaxRestoreBytesPerSec, null, null);
+		writer.WriteProperty(options, PropMaxSnapshotBytesPerSec, value.MaxSnapshotBytesPerSec, null, null);
+		writer.WriteProperty(options, PropReadOnly, value.ReadOnly, null, null);
 		writer.WriteEndObject();
 	}
 }

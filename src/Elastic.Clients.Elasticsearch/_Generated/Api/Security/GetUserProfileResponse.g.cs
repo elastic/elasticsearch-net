@@ -40,12 +40,12 @@ internal sealed partial class GetUserProfileResponseConverter : System.Text.Json
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserProfileWithMetadata>> propProfiles = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propErrors.TryRead(ref reader, options, PropErrors))
+			if (propErrors.TryReadProperty(ref reader, options, PropErrors, null))
 			{
 				continue;
 			}
 
-			if (propProfiles.TryRead(ref reader, options, PropProfiles))
+			if (propProfiles.TryReadProperty(ref reader, options, PropProfiles, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserProfileWithMetadata> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.UserProfileWithMetadata>(o, null)!))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class GetUserProfileResponseConverter : System.Text.Json
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetUserProfileResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropErrors, value.Errors);
-		writer.WriteProperty(options, PropProfiles, value.Profiles);
+		writer.WriteProperty(options, PropErrors, value.Errors, null, null);
+		writer.WriteProperty(options, PropProfiles, value.Profiles, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserProfileWithMetadata> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.UserProfileWithMetadata>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

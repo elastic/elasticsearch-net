@@ -40,12 +40,12 @@ internal sealed partial class OpenJobResponseConverter : System.Text.Json.Serial
 		LocalJsonValue<bool> propOpened = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propNode.TryRead(ref reader, options, PropNode))
+			if (propNode.TryReadProperty(ref reader, options, PropNode, null))
 			{
 				continue;
 			}
 
-			if (propOpened.TryRead(ref reader, options, PropOpened))
+			if (propOpened.TryReadProperty(ref reader, options, PropOpened, null))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class OpenJobResponseConverter : System.Text.Json.Serial
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, OpenJobResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropNode, value.Node);
-		writer.WriteProperty(options, PropOpened, value.Opened);
+		writer.WriteProperty(options, PropNode, value.Node, null, null);
+		writer.WriteProperty(options, PropOpened, value.Opened, null, null);
 		writer.WriteEndObject();
 	}
 }

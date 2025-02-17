@@ -45,27 +45,27 @@ internal sealed partial class QueryRuleConverter : System.Text.Json.Serializatio
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType> propType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propActions.TryRead(ref reader, options, PropActions))
+			if (propActions.TryReadProperty(ref reader, options, PropActions, null))
 			{
 				continue;
 			}
 
-			if (propCriteria.TryRead(ref reader, options, PropCriteria, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria>, Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria>)))
+			if (propCriteria.TryReadProperty(ref reader, options, PropCriteria, static ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propPriority.TryRead(ref reader, options, PropPriority))
+			if (propPriority.TryReadProperty(ref reader, options, PropPriority, null))
 			{
 				continue;
 			}
 
-			if (propRuleId.TryRead(ref reader, options, PropRuleId))
+			if (propRuleId.TryReadProperty(ref reader, options, PropRuleId, null))
 			{
 				continue;
 			}
 
-			if (propType.TryRead(ref reader, options, PropType))
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
 			{
 				continue;
 			}
@@ -91,11 +91,11 @@ internal sealed partial class QueryRuleConverter : System.Text.Json.Serializatio
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, QueryRule value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropActions, value.Actions);
-		writer.WriteProperty(options, PropCriteria, value.Criteria, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria>, Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria>));
-		writer.WriteProperty(options, PropPriority, value.Priority);
-		writer.WriteProperty(options, PropRuleId, value.RuleId);
-		writer.WriteProperty(options, PropType, value.Type);
+		writer.WriteProperty(options, PropActions, value.Actions, null, null);
+		writer.WriteProperty(options, PropCriteria, value.Criteria, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria>(o, v, null));
+		writer.WriteProperty(options, PropPriority, value.Priority, null, null);
+		writer.WriteProperty(options, PropRuleId, value.RuleId, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
 	}
 }

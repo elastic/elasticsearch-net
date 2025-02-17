@@ -46,27 +46,27 @@ internal sealed partial class GrantApiKeyResponseConverter : System.Text.Json.Se
 		LocalJsonValue<string> propName = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propApiKey.TryRead(ref reader, options, PropApiKey))
+			if (propApiKey.TryReadProperty(ref reader, options, PropApiKey, null))
 			{
 				continue;
 			}
 
-			if (propEncoded.TryRead(ref reader, options, PropEncoded))
+			if (propEncoded.TryReadProperty(ref reader, options, PropEncoded, null))
 			{
 				continue;
 			}
 
-			if (propExpiration.TryRead(ref reader, options, PropExpiration))
+			if (propExpiration.TryReadProperty(ref reader, options, PropExpiration, null))
 			{
 				continue;
 			}
 
-			if (propId.TryRead(ref reader, options, PropId))
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
 			{
 				continue;
 			}
 
-			if (propName.TryRead(ref reader, options, PropName))
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
 			{
 				continue;
 			}
@@ -92,11 +92,11 @@ internal sealed partial class GrantApiKeyResponseConverter : System.Text.Json.Se
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GrantApiKeyResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropApiKey, value.ApiKey);
-		writer.WriteProperty(options, PropEncoded, value.Encoded);
-		writer.WriteProperty(options, PropExpiration, value.Expiration);
-		writer.WriteProperty(options, PropId, value.Id);
-		writer.WriteProperty(options, PropName, value.Name);
+		writer.WriteProperty(options, PropApiKey, value.ApiKey, null, null);
+		writer.WriteProperty(options, PropEncoded, value.Encoded, null, null);
+		writer.WriteProperty(options, PropExpiration, value.Expiration, null, null);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropName, value.Name, null, null);
 		writer.WriteEndObject();
 	}
 }

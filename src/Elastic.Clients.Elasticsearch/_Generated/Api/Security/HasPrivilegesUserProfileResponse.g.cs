@@ -40,12 +40,12 @@ internal sealed partial class HasPrivilegesUserProfileResponseConverter : System
 		LocalJsonValue<IReadOnlyCollection<string>> propHasPrivilegeUids = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propErrors.TryRead(ref reader, options, PropErrors))
+			if (propErrors.TryReadProperty(ref reader, options, PropErrors, null))
 			{
 				continue;
 			}
 
-			if (propHasPrivilegeUids.TryRead(ref reader, options, PropHasPrivilegeUids))
+			if (propHasPrivilegeUids.TryReadProperty(ref reader, options, PropHasPrivilegeUids, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class HasPrivilegesUserProfileResponseConverter : System
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, HasPrivilegesUserProfileResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropErrors, value.Errors);
-		writer.WriteProperty(options, PropHasPrivilegeUids, value.HasPrivilegeUids);
+		writer.WriteProperty(options, PropErrors, value.Errors, null, null);
+		writer.WriteProperty(options, PropHasPrivilegeUids, value.HasPrivilegeUids, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

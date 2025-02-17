@@ -38,7 +38,7 @@ internal sealed partial class ClearTrainedModelDeploymentCacheResponseConverter 
 		LocalJsonValue<bool> propCleared = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCleared.TryRead(ref reader, options, PropCleared))
+			if (propCleared.TryReadProperty(ref reader, options, PropCleared, null))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class ClearTrainedModelDeploymentCacheResponseConverter 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ClearTrainedModelDeploymentCacheResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCleared, value.Cleared);
+		writer.WriteProperty(options, PropCleared, value.Cleared, null, null);
 		writer.WriteEndObject();
 	}
 }

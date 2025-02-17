@@ -58,57 +58,57 @@ internal sealed partial class AuthenticateResponseConverter : System.Text.Json.S
 		LocalJsonValue<string> propUsername = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propApiKey.TryRead(ref reader, options, PropApiKey))
+			if (propApiKey.TryReadProperty(ref reader, options, PropApiKey, null))
 			{
 				continue;
 			}
 
-			if (propAuthenticationRealm.TryRead(ref reader, options, PropAuthenticationRealm))
+			if (propAuthenticationRealm.TryReadProperty(ref reader, options, PropAuthenticationRealm, null))
 			{
 				continue;
 			}
 
-			if (propAuthenticationType.TryRead(ref reader, options, PropAuthenticationType))
+			if (propAuthenticationType.TryReadProperty(ref reader, options, PropAuthenticationType, null))
 			{
 				continue;
 			}
 
-			if (propEmail.TryRead(ref reader, options, PropEmail))
+			if (propEmail.TryReadProperty(ref reader, options, PropEmail, null))
 			{
 				continue;
 			}
 
-			if (propEnabled.TryRead(ref reader, options, PropEnabled))
+			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
 			{
 				continue;
 			}
 
-			if (propFullName.TryRead(ref reader, options, PropFullName))
+			if (propFullName.TryReadProperty(ref reader, options, PropFullName, null))
 			{
 				continue;
 			}
 
-			if (propLookupRealm.TryRead(ref reader, options, PropLookupRealm))
+			if (propLookupRealm.TryReadProperty(ref reader, options, PropLookupRealm, null))
 			{
 				continue;
 			}
 
-			if (propMetadata.TryRead(ref reader, options, PropMetadata))
+			if (propMetadata.TryReadProperty(ref reader, options, PropMetadata, static IReadOnlyDictionary<string, object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)!))
 			{
 				continue;
 			}
 
-			if (propRoles.TryRead(ref reader, options, PropRoles))
+			if (propRoles.TryReadProperty(ref reader, options, PropRoles, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propToken.TryRead(ref reader, options, PropToken))
+			if (propToken.TryReadProperty(ref reader, options, PropToken, null))
 			{
 				continue;
 			}
 
-			if (propUsername.TryRead(ref reader, options, PropUsername))
+			if (propUsername.TryReadProperty(ref reader, options, PropUsername, null))
 			{
 				continue;
 			}
@@ -146,17 +146,17 @@ internal sealed partial class AuthenticateResponseConverter : System.Text.Json.S
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, AuthenticateResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropApiKey, value.ApiKey);
-		writer.WriteProperty(options, PropAuthenticationRealm, value.AuthenticationRealm);
-		writer.WriteProperty(options, PropAuthenticationType, value.AuthenticationType);
-		writer.WriteProperty(options, PropEmail, value.Email);
-		writer.WriteProperty(options, PropEnabled, value.Enabled);
-		writer.WriteProperty(options, PropFullName, value.FullName);
-		writer.WriteProperty(options, PropLookupRealm, value.LookupRealm);
-		writer.WriteProperty(options, PropMetadata, value.Metadata);
-		writer.WriteProperty(options, PropRoles, value.Roles);
-		writer.WriteProperty(options, PropToken, value.Token);
-		writer.WriteProperty(options, PropUsername, value.Username);
+		writer.WriteProperty(options, PropApiKey, value.ApiKey, null, null);
+		writer.WriteProperty(options, PropAuthenticationRealm, value.AuthenticationRealm, null, null);
+		writer.WriteProperty(options, PropAuthenticationType, value.AuthenticationType, null, null);
+		writer.WriteProperty(options, PropEmail, value.Email, null, null);
+		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
+		writer.WriteProperty(options, PropFullName, value.FullName, null, null);
+		writer.WriteProperty(options, PropLookupRealm, value.LookupRealm, null, null);
+		writer.WriteProperty(options, PropMetadata, value.Metadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, object> v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropRoles, value.Roles, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropToken, value.Token, null, null);
+		writer.WriteProperty(options, PropUsername, value.Username, null, null);
 		writer.WriteEndObject();
 	}
 }

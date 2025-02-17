@@ -40,12 +40,12 @@ internal sealed partial class GetBucketsResponseConverter : System.Text.Json.Ser
 		LocalJsonValue<long> propCount = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBuckets.TryRead(ref reader, options, PropBuckets))
+			if (propBuckets.TryReadProperty(ref reader, options, PropBuckets, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.BucketSummary> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.BucketSummary>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propCount.TryRead(ref reader, options, PropCount))
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class GetBucketsResponseConverter : System.Text.Json.Ser
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetBucketsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBuckets, value.Buckets);
-		writer.WriteProperty(options, PropCount, value.Count);
+		writer.WriteProperty(options, PropBuckets, value.Buckets, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.BucketSummary> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.BucketSummary>(o, v, null));
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
 		writer.WriteEndObject();
 	}
 }

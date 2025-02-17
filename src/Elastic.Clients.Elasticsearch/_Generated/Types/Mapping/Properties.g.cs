@@ -329,7 +329,7 @@ internal sealed partial class PropertyInterfaceConverter : System.Text.Json.Seri
 		string? discriminator = "object";
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TryReadProperty(options, PropDiscriminator, ref discriminator))
+			if (reader.TryReadProperty(options, PropDiscriminator, ref discriminator, null))
 			{
 				break;
 			}
@@ -340,56 +340,56 @@ internal sealed partial class PropertyInterfaceConverter : System.Text.Json.Seri
 		reader = readerSnapshot;
 		return discriminator switch
 		{
-			"aggregate_metric_double" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoubleProperty>(options),
-			"binary" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.BinaryProperty>(options),
-			"boolean" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.BooleanProperty>(options),
-			"byte" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.ByteNumberProperty>(options),
-			"completion" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.CompletionProperty>(options),
-			"constant_keyword" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty>(options),
-			"date_nanos" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.DateNanosProperty>(options),
-			"date" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.DateProperty>(options),
-			"date_range" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.DateRangeProperty>(options),
-			"dense_vector" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty>(options),
-			"double" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.DoubleNumberProperty>(options),
-			"double_range" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.DoubleRangeProperty>(options),
-			"{dynamic_type}" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.DynamicProperty>(options),
-			"alias" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.FieldAliasProperty>(options),
-			"flattened" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty>(options),
-			"float" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.FloatNumberProperty>(options),
-			"float_range" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.FloatRangeProperty>(options),
-			"geo_point" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.GeoPointProperty>(options),
-			"geo_shape" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty>(options),
-			"half_float" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberProperty>(options),
-			"histogram" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.HistogramProperty>(options),
-			"icu_collation_keyword" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty>(options),
-			"integer" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty>(options),
-			"integer_range" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.IntegerRangeProperty>(options),
-			"ip" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.IpProperty>(options),
-			"ip_range" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.IpRangeProperty>(options),
-			"join" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.JoinProperty>(options),
-			"keyword" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.KeywordProperty>(options),
-			"long" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.LongNumberProperty>(options),
-			"long_range" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.LongRangeProperty>(options),
-			"match_only_text" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty>(options),
-			"murmur3" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.Murmur3HashProperty>(options),
-			"nested" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.NestedProperty>(options),
-			"object" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.ObjectProperty>(options),
-			"passthrough" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectProperty>(options),
-			"percolator" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.PercolatorProperty>(options),
-			"point" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.PointProperty>(options),
-			"rank_feature" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty>(options),
-			"rank_features" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.RankFeaturesProperty>(options),
-			"scaled_float" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty>(options),
-			"search_as_you_type" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypeProperty>(options),
-			"semantic_text" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty>(options),
-			"shape" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.ShapeProperty>(options),
-			"short" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.ShortNumberProperty>(options),
-			"sparse_vector" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.SparseVectorProperty>(options),
-			"text" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.TextProperty>(options),
-			"token_count" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.TokenCountProperty>(options),
-			"unsigned_long" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberProperty>(options),
-			"version" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.VersionProperty>(options),
-			"wildcard" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.WildcardProperty>(options),
+			"aggregate_metric_double" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoubleProperty>(options, null),
+			"binary" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.BinaryProperty>(options, null),
+			"boolean" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.BooleanProperty>(options, null),
+			"byte" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.ByteNumberProperty>(options, null),
+			"completion" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.CompletionProperty>(options, null),
+			"constant_keyword" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty>(options, null),
+			"date_nanos" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.DateNanosProperty>(options, null),
+			"date" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.DateProperty>(options, null),
+			"date_range" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.DateRangeProperty>(options, null),
+			"dense_vector" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty>(options, null),
+			"double" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.DoubleNumberProperty>(options, null),
+			"double_range" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.DoubleRangeProperty>(options, null),
+			"{dynamic_type}" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.DynamicProperty>(options, null),
+			"alias" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.FieldAliasProperty>(options, null),
+			"flattened" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty>(options, null),
+			"float" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.FloatNumberProperty>(options, null),
+			"float_range" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.FloatRangeProperty>(options, null),
+			"geo_point" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.GeoPointProperty>(options, null),
+			"geo_shape" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty>(options, null),
+			"half_float" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberProperty>(options, null),
+			"histogram" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.HistogramProperty>(options, null),
+			"icu_collation_keyword" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty>(options, null),
+			"integer" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty>(options, null),
+			"integer_range" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.IntegerRangeProperty>(options, null),
+			"ip" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.IpProperty>(options, null),
+			"ip_range" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.IpRangeProperty>(options, null),
+			"join" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.JoinProperty>(options, null),
+			"keyword" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.KeywordProperty>(options, null),
+			"long" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.LongNumberProperty>(options, null),
+			"long_range" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.LongRangeProperty>(options, null),
+			"match_only_text" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty>(options, null),
+			"murmur3" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.Murmur3HashProperty>(options, null),
+			"nested" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.NestedProperty>(options, null),
+			"object" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.ObjectProperty>(options, null),
+			"passthrough" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectProperty>(options, null),
+			"percolator" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.PercolatorProperty>(options, null),
+			"point" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.PointProperty>(options, null),
+			"rank_feature" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty>(options, null),
+			"rank_features" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.RankFeaturesProperty>(options, null),
+			"scaled_float" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty>(options, null),
+			"search_as_you_type" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypeProperty>(options, null),
+			"semantic_text" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty>(options, null),
+			"shape" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.ShapeProperty>(options, null),
+			"short" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.ShortNumberProperty>(options, null),
+			"sparse_vector" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.SparseVectorProperty>(options, null),
+			"text" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.TextProperty>(options, null),
+			"token_count" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.TokenCountProperty>(options, null),
+			"unsigned_long" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberProperty>(options, null),
+			"version" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.VersionProperty>(options, null),
+			"wildcard" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.WildcardProperty>(options, null),
 			_ => throw new System.Text.Json.JsonException($"Variant '{discriminator}' is not supported for type '{nameof(IProperty)}'.")
 		};
 	}
@@ -399,154 +399,154 @@ internal sealed partial class PropertyInterfaceConverter : System.Text.Json.Seri
 		switch (value.Type)
 		{
 			case "aggregate_metric_double":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoubleProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoubleProperty)value, null);
 				break;
 			case "binary":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.BinaryProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.BinaryProperty)value, null);
 				break;
 			case "boolean":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.BooleanProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.BooleanProperty)value, null);
 				break;
 			case "byte":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.ByteNumberProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.ByteNumberProperty)value, null);
 				break;
 			case "completion":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.CompletionProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.CompletionProperty)value, null);
 				break;
 			case "constant_keyword":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty)value, null);
 				break;
 			case "date_nanos":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.DateNanosProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.DateNanosProperty)value, null);
 				break;
 			case "date":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.DateProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.DateProperty)value, null);
 				break;
 			case "date_range":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.DateRangeProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.DateRangeProperty)value, null);
 				break;
 			case "dense_vector":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty)value, null);
 				break;
 			case "double":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.DoubleNumberProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.DoubleNumberProperty)value, null);
 				break;
 			case "double_range":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.DoubleRangeProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.DoubleRangeProperty)value, null);
 				break;
 			case "{dynamic_type}":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.DynamicProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.DynamicProperty)value, null);
 				break;
 			case "alias":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.FieldAliasProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.FieldAliasProperty)value, null);
 				break;
 			case "flattened":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty)value, null);
 				break;
 			case "float":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.FloatNumberProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.FloatNumberProperty)value, null);
 				break;
 			case "float_range":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.FloatRangeProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.FloatRangeProperty)value, null);
 				break;
 			case "geo_point":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.GeoPointProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.GeoPointProperty)value, null);
 				break;
 			case "geo_shape":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty)value, null);
 				break;
 			case "half_float":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberProperty)value, null);
 				break;
 			case "histogram":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.HistogramProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.HistogramProperty)value, null);
 				break;
 			case "icu_collation_keyword":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty)value, null);
 				break;
 			case "integer":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty)value, null);
 				break;
 			case "integer_range":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.IntegerRangeProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.IntegerRangeProperty)value, null);
 				break;
 			case "ip":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.IpProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.IpProperty)value, null);
 				break;
 			case "ip_range":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.IpRangeProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.IpRangeProperty)value, null);
 				break;
 			case "join":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.JoinProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.JoinProperty)value, null);
 				break;
 			case "keyword":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.KeywordProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.KeywordProperty)value, null);
 				break;
 			case "long":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.LongNumberProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.LongNumberProperty)value, null);
 				break;
 			case "long_range":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.LongRangeProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.LongRangeProperty)value, null);
 				break;
 			case "match_only_text":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty)value, null);
 				break;
 			case "murmur3":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.Murmur3HashProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.Murmur3HashProperty)value, null);
 				break;
 			case "nested":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.NestedProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.NestedProperty)value, null);
 				break;
 			case "object":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.ObjectProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.ObjectProperty)value, null);
 				break;
 			case "passthrough":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectProperty)value, null);
 				break;
 			case "percolator":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.PercolatorProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.PercolatorProperty)value, null);
 				break;
 			case "point":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.PointProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.PointProperty)value, null);
 				break;
 			case "rank_feature":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty)value, null);
 				break;
 			case "rank_features":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.RankFeaturesProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.RankFeaturesProperty)value, null);
 				break;
 			case "scaled_float":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty)value, null);
 				break;
 			case "search_as_you_type":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypeProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypeProperty)value, null);
 				break;
 			case "semantic_text":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty)value, null);
 				break;
 			case "shape":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.ShapeProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.ShapeProperty)value, null);
 				break;
 			case "short":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.ShortNumberProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.ShortNumberProperty)value, null);
 				break;
 			case "sparse_vector":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.SparseVectorProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.SparseVectorProperty)value, null);
 				break;
 			case "text":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.TextProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.TextProperty)value, null);
 				break;
 			case "token_count":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.TokenCountProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.TokenCountProperty)value, null);
 				break;
 			case "unsigned_long":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberProperty)value, null);
 				break;
 			case "version":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.VersionProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.VersionProperty)value, null);
 				break;
 			case "wildcard":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.WildcardProperty)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.WildcardProperty)value, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.Type}' is not supported for type '{nameof(IProperty)}'.");

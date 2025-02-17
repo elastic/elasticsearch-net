@@ -38,7 +38,7 @@ internal sealed partial class PreviewDataFrameAnalyticsResponseConverter : Syste
 		LocalJsonValue<IReadOnlyCollection<IReadOnlyDictionary<string, string>>> propFeatureValues = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propFeatureValues.TryRead(ref reader, options, PropFeatureValues))
+			if (propFeatureValues.TryReadProperty(ref reader, options, PropFeatureValues, static IReadOnlyCollection<IReadOnlyDictionary<string, string>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<IReadOnlyDictionary<string, string>>(o, static IReadOnlyDictionary<string, string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)!)!))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class PreviewDataFrameAnalyticsResponseConverter : Syste
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, PreviewDataFrameAnalyticsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFeatureValues, value.FeatureValues);
+		writer.WriteProperty(options, PropFeatureValues, value.FeatureValues, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<IReadOnlyDictionary<string, string>> v) => w.WriteCollectionValue<IReadOnlyDictionary<string, string>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, string> v) => w.WriteDictionaryValue<string, string>(o, v, null, null)));
 		writer.WriteEndObject();
 	}
 }

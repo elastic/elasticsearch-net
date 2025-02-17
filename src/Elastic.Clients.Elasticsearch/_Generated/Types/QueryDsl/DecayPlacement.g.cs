@@ -43,22 +43,22 @@ internal sealed partial class DecayPlacementConverter<TOrigin, TScale> : System.
 		LocalJsonValue<TScale?> propScale = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDecay.TryRead(ref reader, options, PropDecay))
+			if (propDecay.TryReadProperty(ref reader, options, PropDecay, null))
 			{
 				continue;
 			}
 
-			if (propOffset.TryRead(ref reader, options, PropOffset, typeof(SourceMarker<TScale?>)))
+			if (propOffset.TryReadProperty(ref reader, options, PropOffset, null))
 			{
 				continue;
 			}
 
-			if (propOrigin.TryRead(ref reader, options, PropOrigin, typeof(SourceMarker<TOrigin?>)))
+			if (propOrigin.TryReadProperty(ref reader, options, PropOrigin, null))
 			{
 				continue;
 			}
 
-			if (propScale.TryRead(ref reader, options, PropScale, typeof(SourceMarker<TScale?>)))
+			if (propScale.TryReadProperty(ref reader, options, PropScale, null))
 			{
 				continue;
 			}
@@ -82,10 +82,10 @@ internal sealed partial class DecayPlacementConverter<TOrigin, TScale> : System.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, DecayPlacement<TOrigin, TScale> value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDecay, value.Decay);
-		writer.WriteProperty(options, PropOffset, value.Offset, null, typeof(SourceMarker<TScale?>));
-		writer.WriteProperty(options, PropOrigin, value.Origin, null, typeof(SourceMarker<TOrigin?>));
-		writer.WriteProperty(options, PropScale, value.Scale, null, typeof(SourceMarker<TScale?>));
+		writer.WriteProperty(options, PropDecay, value.Decay, null, null);
+		writer.WriteProperty(options, PropOffset, value.Offset, null, null);
+		writer.WriteProperty(options, PropOrigin, value.Origin, null, null);
+		writer.WriteProperty(options, PropScale, value.Scale, null, null);
 		writer.WriteEndObject();
 	}
 }

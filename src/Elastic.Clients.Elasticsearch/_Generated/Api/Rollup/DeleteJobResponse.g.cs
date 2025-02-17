@@ -40,12 +40,12 @@ internal sealed partial class DeleteJobResponseConverter : System.Text.Json.Seri
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.TaskFailure>?> propTaskFailures = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAcknowledged.TryRead(ref reader, options, PropAcknowledged))
+			if (propAcknowledged.TryReadProperty(ref reader, options, PropAcknowledged, null))
 			{
 				continue;
 			}
 
-			if (propTaskFailures.TryRead(ref reader, options, PropTaskFailures))
+			if (propTaskFailures.TryReadProperty(ref reader, options, PropTaskFailures, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.TaskFailure>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.TaskFailure>(o, null)))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class DeleteJobResponseConverter : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, DeleteJobResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged);
-		writer.WriteProperty(options, PropTaskFailures, value.TaskFailures);
+		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged, null, null);
+		writer.WriteProperty(options, PropTaskFailures, value.TaskFailures, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.TaskFailure>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.TaskFailure>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

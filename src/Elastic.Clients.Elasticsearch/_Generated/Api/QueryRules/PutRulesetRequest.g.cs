@@ -44,7 +44,7 @@ internal sealed partial class PutRulesetRequestConverter : System.Text.Json.Seri
 		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRule>> propRules = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propRules.TryRead(ref reader, options, PropRules, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRule>, Elastic.Clients.Elasticsearch.QueryRules.QueryRule>)))
+			if (propRules.TryReadProperty(ref reader, options, PropRules, static ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRule> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryRules.QueryRule>(o, null)!))
 			{
 				continue;
 			}
@@ -62,7 +62,7 @@ internal sealed partial class PutRulesetRequestConverter : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, PutRulesetRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropRules, value.Rules, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRule>, Elastic.Clients.Elasticsearch.QueryRules.QueryRule>));
+		writer.WriteProperty(options, PropRules, value.Rules, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRule> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryRules.QueryRule>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

@@ -38,7 +38,7 @@ internal sealed partial class SamlLogoutResponseConverter : System.Text.Json.Ser
 		LocalJsonValue<string> propRedirect = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propRedirect.TryRead(ref reader, options, PropRedirect))
+			if (propRedirect.TryReadProperty(ref reader, options, PropRedirect, null))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class SamlLogoutResponseConverter : System.Text.Json.Ser
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, SamlLogoutResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropRedirect, value.Redirect);
+		writer.WriteProperty(options, PropRedirect, value.Redirect, null, null);
 		writer.WriteEndObject();
 	}
 }

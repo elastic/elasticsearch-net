@@ -96,7 +96,7 @@ internal sealed partial class IntervalsFilterConverter : System.Text.Json.Serial
 			{
 				variantType = VariantAfter.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(options, null);
 				continue;
 			}
 
@@ -104,7 +104,7 @@ internal sealed partial class IntervalsFilterConverter : System.Text.Json.Serial
 			{
 				variantType = VariantBefore.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(options, null);
 				continue;
 			}
 
@@ -112,7 +112,7 @@ internal sealed partial class IntervalsFilterConverter : System.Text.Json.Serial
 			{
 				variantType = VariantContainedBy.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(options, null);
 				continue;
 			}
 
@@ -120,7 +120,7 @@ internal sealed partial class IntervalsFilterConverter : System.Text.Json.Serial
 			{
 				variantType = VariantContaining.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(options, null);
 				continue;
 			}
 
@@ -128,7 +128,7 @@ internal sealed partial class IntervalsFilterConverter : System.Text.Json.Serial
 			{
 				variantType = VariantNotContainedBy.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(options, null);
 				continue;
 			}
 
@@ -136,7 +136,7 @@ internal sealed partial class IntervalsFilterConverter : System.Text.Json.Serial
 			{
 				variantType = VariantNotContaining.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(options, null);
 				continue;
 			}
 
@@ -144,7 +144,7 @@ internal sealed partial class IntervalsFilterConverter : System.Text.Json.Serial
 			{
 				variantType = VariantNotOverlapping.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(options, null);
 				continue;
 			}
 
@@ -152,7 +152,7 @@ internal sealed partial class IntervalsFilterConverter : System.Text.Json.Serial
 			{
 				variantType = VariantOverlapping.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(options, null);
 				continue;
 			}
 
@@ -160,7 +160,7 @@ internal sealed partial class IntervalsFilterConverter : System.Text.Json.Serial
 			{
 				variantType = VariantScript.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Script?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Script?>(options, null);
 				continue;
 			}
 
@@ -179,31 +179,31 @@ internal sealed partial class IntervalsFilterConverter : System.Text.Json.Serial
 			case "":
 				break;
 			case "after":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals?)value.Variant, null, null);
 				break;
 			case "before":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals?)value.Variant, null, null);
 				break;
 			case "contained_by":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals?)value.Variant, null, null);
 				break;
 			case "containing":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals?)value.Variant, null, null);
 				break;
 			case "not_contained_by":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals?)value.Variant, null, null);
 				break;
 			case "not_containing":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals?)value.Variant, null, null);
 				break;
 			case "not_overlapping":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals?)value.Variant, null, null);
 				break;
 			case "overlapping":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals?)value.Variant, null, null);
 				break;
 			case "script":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Script?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Script?)value.Variant, null, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(IntervalsFilter)}'.");

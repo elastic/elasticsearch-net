@@ -45,27 +45,27 @@ internal sealed partial class UserIndicesPrivilegesConverter : System.Text.Json.
 		LocalJsonValue<object?> propQuery = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAllowRestrictedIndices.TryRead(ref reader, options, PropAllowRestrictedIndices))
+			if (propAllowRestrictedIndices.TryReadProperty(ref reader, options, PropAllowRestrictedIndices, null))
 			{
 				continue;
 			}
 
-			if (propFieldSecurity.TryRead(ref reader, options, PropFieldSecurity))
+			if (propFieldSecurity.TryReadProperty(ref reader, options, PropFieldSecurity, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.FieldSecurity>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.FieldSecurity>(o, null)))
 			{
 				continue;
 			}
 
-			if (propNames.TryRead(ref reader, options, PropNames, typeof(SingleOrManyMarker<IReadOnlyCollection<string>, string>)))
+			if (propNames.TryReadProperty(ref reader, options, PropNames, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propPrivileges.TryRead(ref reader, options, PropPrivileges))
+			if (propPrivileges.TryReadProperty(ref reader, options, PropPrivileges, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.IndexPrivilege>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propQuery.TryRead(ref reader, options, PropQuery))
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
 			{
 				continue;
 			}
@@ -91,11 +91,11 @@ internal sealed partial class UserIndicesPrivilegesConverter : System.Text.Json.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, UserIndicesPrivileges value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAllowRestrictedIndices, value.AllowRestrictedIndices);
-		writer.WriteProperty(options, PropFieldSecurity, value.FieldSecurity);
-		writer.WriteProperty(options, PropNames, value.Names, null, typeof(SingleOrManyMarker<IReadOnlyCollection<string>, string>));
-		writer.WriteProperty(options, PropPrivileges, value.Privileges);
-		writer.WriteProperty(options, PropQuery, value.Query);
+		writer.WriteProperty(options, PropAllowRestrictedIndices, value.AllowRestrictedIndices, null, null);
+		writer.WriteProperty(options, PropFieldSecurity, value.FieldSecurity, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.FieldSecurity>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.FieldSecurity>(o, v, null));
+		writer.WriteProperty(options, PropNames, value.Names, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropPrivileges, value.Privileges, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.IndexPrivilege>(o, v, null));
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
 		writer.WriteEndObject();
 	}
 }

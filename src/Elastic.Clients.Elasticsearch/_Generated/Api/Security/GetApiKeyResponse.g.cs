@@ -38,7 +38,7 @@ internal sealed partial class GetApiKeyResponseConverter : System.Text.Json.Seri
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApiKey>> propApiKeys = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propApiKeys.TryRead(ref reader, options, PropApiKeys))
+			if (propApiKeys.TryReadProperty(ref reader, options, PropApiKeys, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApiKey> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.ApiKey>(o, null)!))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class GetApiKeyResponseConverter : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetApiKeyResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropApiKeys, value.ApiKeys);
+		writer.WriteProperty(options, PropApiKeys, value.ApiKeys, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApiKey> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.ApiKey>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

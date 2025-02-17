@@ -38,7 +38,7 @@ internal sealed partial class UpdateCrossClusterApiKeyResponseConverter : System
 		LocalJsonValue<bool> propUpdated = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propUpdated.TryRead(ref reader, options, PropUpdated))
+			if (propUpdated.TryReadProperty(ref reader, options, PropUpdated, null))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class UpdateCrossClusterApiKeyResponseConverter : System
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, UpdateCrossClusterApiKeyResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropUpdated, value.Updated);
+		writer.WriteProperty(options, PropUpdated, value.Updated, null, null);
 		writer.WriteEndObject();
 	}
 }

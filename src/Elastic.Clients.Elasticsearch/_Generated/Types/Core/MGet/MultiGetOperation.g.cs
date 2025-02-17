@@ -49,37 +49,37 @@ internal sealed partial class MultiGetOperationConverter : System.Text.Json.Seri
 		LocalJsonValue<Elastic.Clients.Elasticsearch.VersionType?> propVersionType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propId.TryRead(ref reader, options, PropId))
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
 			{
 				continue;
 			}
 
-			if (propIndex.TryRead(ref reader, options, PropIndex))
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
 			{
 				continue;
 			}
 
-			if (propRouting.TryRead(ref reader, options, PropRouting))
+			if (propRouting.TryReadProperty(ref reader, options, PropRouting, null))
 			{
 				continue;
 			}
 
-			if (propSource.TryRead(ref reader, options, PropSource))
+			if (propSource.TryReadProperty(ref reader, options, PropSource, null))
 			{
 				continue;
 			}
 
-			if (propStoredFields.TryRead(ref reader, options, PropStoredFields, typeof(SingleOrManyFieldsMarker)))
+			if (propStoredFields.TryReadProperty(ref reader, options, PropStoredFields, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(SingleOrManyFieldsMarker))))
 			{
 				continue;
 			}
 
-			if (propVersion.TryRead(ref reader, options, PropVersion))
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
 			{
 				continue;
 			}
 
-			if (propVersionType.TryRead(ref reader, options, PropVersionType))
+			if (propVersionType.TryReadProperty(ref reader, options, PropVersionType, null))
 			{
 				continue;
 			}
@@ -109,13 +109,13 @@ internal sealed partial class MultiGetOperationConverter : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, MultiGetOperation value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropId, value.Id);
-		writer.WriteProperty(options, PropIndex, value.Index);
-		writer.WriteProperty(options, PropRouting, value.Routing);
-		writer.WriteProperty(options, PropSource, value.Source);
-		writer.WriteProperty(options, PropStoredFields, value.StoredFields, null, typeof(SingleOrManyFieldsMarker));
-		writer.WriteProperty(options, PropVersion, value.Version);
-		writer.WriteProperty(options, PropVersionType, value.VersionType);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
+		writer.WriteProperty(options, PropSource, value.Source, null, null);
+		writer.WriteProperty(options, PropStoredFields, value.StoredFields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteProperty(options, PropVersionType, value.VersionType, null, null);
 		writer.WriteEndObject();
 	}
 }

@@ -79,112 +79,112 @@ internal sealed partial class HighlightFieldConverter : System.Text.Json.Seriali
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.HighlighterType?> propType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBoundaryChars.TryRead(ref reader, options, PropBoundaryChars))
+			if (propBoundaryChars.TryReadProperty(ref reader, options, PropBoundaryChars, null))
 			{
 				continue;
 			}
 
-			if (propBoundaryMaxScan.TryRead(ref reader, options, PropBoundaryMaxScan))
+			if (propBoundaryMaxScan.TryReadProperty(ref reader, options, PropBoundaryMaxScan, null))
 			{
 				continue;
 			}
 
-			if (propBoundaryScanner.TryRead(ref reader, options, PropBoundaryScanner))
+			if (propBoundaryScanner.TryReadProperty(ref reader, options, PropBoundaryScanner, null))
 			{
 				continue;
 			}
 
-			if (propBoundaryScannerLocale.TryRead(ref reader, options, PropBoundaryScannerLocale))
+			if (propBoundaryScannerLocale.TryReadProperty(ref reader, options, PropBoundaryScannerLocale, null))
 			{
 				continue;
 			}
 
-			if (propFragmenter.TryRead(ref reader, options, PropFragmenter))
+			if (propFragmenter.TryReadProperty(ref reader, options, PropFragmenter, null))
 			{
 				continue;
 			}
 
-			if (propFragmentOffset.TryRead(ref reader, options, PropFragmentOffset))
+			if (propFragmentOffset.TryReadProperty(ref reader, options, PropFragmentOffset, null))
 			{
 				continue;
 			}
 
-			if (propFragmentSize.TryRead(ref reader, options, PropFragmentSize))
+			if (propFragmentSize.TryReadProperty(ref reader, options, PropFragmentSize, null))
 			{
 				continue;
 			}
 
-			if (propHighlightFilter.TryRead(ref reader, options, PropHighlightFilter))
+			if (propHighlightFilter.TryReadProperty(ref reader, options, PropHighlightFilter, null))
 			{
 				continue;
 			}
 
-			if (propHighlightQuery.TryRead(ref reader, options, PropHighlightQuery))
+			if (propHighlightQuery.TryReadProperty(ref reader, options, PropHighlightQuery, null))
 			{
 				continue;
 			}
 
-			if (propMatchedFields.TryRead(ref reader, options, PropMatchedFields, typeof(SingleOrManyFieldsMarker)))
+			if (propMatchedFields.TryReadProperty(ref reader, options, PropMatchedFields, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(SingleOrManyFieldsMarker))))
 			{
 				continue;
 			}
 
-			if (propMaxAnalyzedOffset.TryRead(ref reader, options, PropMaxAnalyzedOffset))
+			if (propMaxAnalyzedOffset.TryReadProperty(ref reader, options, PropMaxAnalyzedOffset, null))
 			{
 				continue;
 			}
 
-			if (propMaxFragmentLength.TryRead(ref reader, options, PropMaxFragmentLength))
+			if (propMaxFragmentLength.TryReadProperty(ref reader, options, PropMaxFragmentLength, null))
 			{
 				continue;
 			}
 
-			if (propNoMatchSize.TryRead(ref reader, options, PropNoMatchSize))
+			if (propNoMatchSize.TryReadProperty(ref reader, options, PropNoMatchSize, null))
 			{
 				continue;
 			}
 
-			if (propNumberOfFragments.TryRead(ref reader, options, PropNumberOfFragments))
+			if (propNumberOfFragments.TryReadProperty(ref reader, options, PropNumberOfFragments, null))
 			{
 				continue;
 			}
 
-			if (propOptions.TryRead(ref reader, options, PropOptions))
+			if (propOptions.TryReadProperty(ref reader, options, PropOptions, static IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propOrder.TryRead(ref reader, options, PropOrder))
+			if (propOrder.TryReadProperty(ref reader, options, PropOrder, null))
 			{
 				continue;
 			}
 
-			if (propPhraseLimit.TryRead(ref reader, options, PropPhraseLimit))
+			if (propPhraseLimit.TryReadProperty(ref reader, options, PropPhraseLimit, null))
 			{
 				continue;
 			}
 
-			if (propPostTags.TryRead(ref reader, options, PropPostTags))
+			if (propPostTags.TryReadProperty(ref reader, options, PropPostTags, static ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propPreTags.TryRead(ref reader, options, PropPreTags))
+			if (propPreTags.TryReadProperty(ref reader, options, PropPreTags, static ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propRequireFieldMatch.TryRead(ref reader, options, PropRequireFieldMatch))
+			if (propRequireFieldMatch.TryReadProperty(ref reader, options, PropRequireFieldMatch, null))
 			{
 				continue;
 			}
 
-			if (propTagsSchema.TryRead(ref reader, options, PropTagsSchema))
+			if (propTagsSchema.TryReadProperty(ref reader, options, PropTagsSchema, null))
 			{
 				continue;
 			}
 
-			if (propType.TryRead(ref reader, options, PropType))
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
 			{
 				continue;
 			}
@@ -244,28 +244,28 @@ internal sealed partial class HighlightFieldConverter : System.Text.Json.Seriali
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, HighlightField value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBoundaryChars, value.BoundaryChars);
-		writer.WriteProperty(options, PropBoundaryMaxScan, value.BoundaryMaxScan);
-		writer.WriteProperty(options, PropBoundaryScanner, value.BoundaryScanner);
-		writer.WriteProperty(options, PropBoundaryScannerLocale, value.BoundaryScannerLocale);
-		writer.WriteProperty(options, PropFragmenter, value.Fragmenter);
-		writer.WriteProperty(options, PropFragmentOffset, value.FragmentOffset);
-		writer.WriteProperty(options, PropFragmentSize, value.FragmentSize);
-		writer.WriteProperty(options, PropHighlightFilter, value.HighlightFilter);
-		writer.WriteProperty(options, PropHighlightQuery, value.HighlightQuery);
-		writer.WriteProperty(options, PropMatchedFields, value.MatchedFields, null, typeof(SingleOrManyFieldsMarker));
-		writer.WriteProperty(options, PropMaxAnalyzedOffset, value.MaxAnalyzedOffset);
-		writer.WriteProperty(options, PropMaxFragmentLength, value.MaxFragmentLength);
-		writer.WriteProperty(options, PropNoMatchSize, value.NoMatchSize);
-		writer.WriteProperty(options, PropNumberOfFragments, value.NumberOfFragments);
-		writer.WriteProperty(options, PropOptions, value.Options);
-		writer.WriteProperty(options, PropOrder, value.Order);
-		writer.WriteProperty(options, PropPhraseLimit, value.PhraseLimit);
-		writer.WriteProperty(options, PropPostTags, value.PostTags);
-		writer.WriteProperty(options, PropPreTags, value.PreTags);
-		writer.WriteProperty(options, PropRequireFieldMatch, value.RequireFieldMatch);
-		writer.WriteProperty(options, PropTagsSchema, value.TagsSchema);
-		writer.WriteProperty(options, PropType, value.Type);
+		writer.WriteProperty(options, PropBoundaryChars, value.BoundaryChars, null, null);
+		writer.WriteProperty(options, PropBoundaryMaxScan, value.BoundaryMaxScan, null, null);
+		writer.WriteProperty(options, PropBoundaryScanner, value.BoundaryScanner, null, null);
+		writer.WriteProperty(options, PropBoundaryScannerLocale, value.BoundaryScannerLocale, null, null);
+		writer.WriteProperty(options, PropFragmenter, value.Fragmenter, null, null);
+		writer.WriteProperty(options, PropFragmentOffset, value.FragmentOffset, null, null);
+		writer.WriteProperty(options, PropFragmentSize, value.FragmentSize, null, null);
+		writer.WriteProperty(options, PropHighlightFilter, value.HighlightFilter, null, null);
+		writer.WriteProperty(options, PropHighlightQuery, value.HighlightQuery, null, null);
+		writer.WriteProperty(options, PropMatchedFields, value.MatchedFields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropMaxAnalyzedOffset, value.MaxAnalyzedOffset, null, null);
+		writer.WriteProperty(options, PropMaxFragmentLength, value.MaxFragmentLength, null, null);
+		writer.WriteProperty(options, PropNoMatchSize, value.NoMatchSize, null, null);
+		writer.WriteProperty(options, PropNumberOfFragments, value.NumberOfFragments, null, null);
+		writer.WriteProperty(options, PropOptions, value.Options, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropOrder, value.Order, null, null);
+		writer.WriteProperty(options, PropPhraseLimit, value.PhraseLimit, null, null);
+		writer.WriteProperty(options, PropPostTags, value.PostTags, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropPreTags, value.PreTags, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropRequireFieldMatch, value.RequireFieldMatch, null, null);
+		writer.WriteProperty(options, PropTagsSchema, value.TagsSchema, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
 	}
 }

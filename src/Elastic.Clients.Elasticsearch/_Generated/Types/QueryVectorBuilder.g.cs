@@ -80,7 +80,7 @@ internal sealed partial class QueryVectorBuilderConverter : System.Text.Json.Ser
 			{
 				variantType = VariantTextEmbedding.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.TextEmbedding?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.TextEmbedding?>(options, null);
 				continue;
 			}
 
@@ -99,7 +99,7 @@ internal sealed partial class QueryVectorBuilderConverter : System.Text.Json.Ser
 			case "":
 				break;
 			case "text_embedding":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.TextEmbedding?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.TextEmbedding?)value.Variant, null, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(QueryVectorBuilder)}'.");

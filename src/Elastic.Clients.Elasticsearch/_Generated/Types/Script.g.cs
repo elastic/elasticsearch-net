@@ -39,7 +39,7 @@ internal sealed partial class ScriptConverter : System.Text.Json.Serialization.J
 	{
 		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
 		{
-			var value = reader.ReadValue<string?>(options);
+			var value = reader.ReadValue<string?>(options, null);
 			return new Script { Source = value };
 		}
 
@@ -51,27 +51,27 @@ internal sealed partial class ScriptConverter : System.Text.Json.Serialization.J
 		LocalJsonValue<string?> propSource = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propId.TryRead(ref reader, options, PropId))
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
 			{
 				continue;
 			}
 
-			if (propLang.TryRead(ref reader, options, PropLang))
+			if (propLang.TryReadProperty(ref reader, options, PropLang, null))
 			{
 				continue;
 			}
 
-			if (propOptions.TryRead(ref reader, options, PropOptions))
+			if (propOptions.TryReadProperty(ref reader, options, PropOptions, static IDictionary<string, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propParams.TryRead(ref reader, options, PropParams))
+			if (propParams.TryReadProperty(ref reader, options, PropParams, static IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propSource.TryRead(ref reader, options, PropSource))
+			if (propSource.TryReadProperty(ref reader, options, PropSource, null))
 			{
 				continue;
 			}
@@ -97,11 +97,11 @@ internal sealed partial class ScriptConverter : System.Text.Json.Serialization.J
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Script value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropId, value.Id);
-		writer.WriteProperty(options, PropLang, value.Lang);
-		writer.WriteProperty(options, PropOptions, value.Options);
-		writer.WriteProperty(options, PropParams, value.Params);
-		writer.WriteProperty(options, PropSource, value.Source);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropLang, value.Lang, null, null);
+		writer.WriteProperty(options, PropOptions, value.Options, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropSource, value.Source, null, null);
 		writer.WriteEndObject();
 	}
 }

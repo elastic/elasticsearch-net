@@ -95,7 +95,7 @@ internal sealed partial class DatabaseConfigurationConverter : System.Text.Json.
 		object? variant = null;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propName.TryRead(ref reader, options, PropName))
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
 			{
 				continue;
 			}
@@ -104,7 +104,7 @@ internal sealed partial class DatabaseConfigurationConverter : System.Text.Json.
 			{
 				variantType = VariantIpinfo.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.Ipinfo?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.Ipinfo?>(options, null);
 				continue;
 			}
 
@@ -112,7 +112,7 @@ internal sealed partial class DatabaseConfigurationConverter : System.Text.Json.
 			{
 				variantType = VariantMaxmind.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.Maxmind?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.Maxmind?>(options, null);
 				continue;
 			}
 
@@ -136,16 +136,16 @@ internal sealed partial class DatabaseConfigurationConverter : System.Text.Json.
 			case "":
 				break;
 			case "ipinfo":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.Ipinfo?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.Ipinfo?)value.Variant, null, null);
 				break;
 			case "maxmind":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.Maxmind?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.Maxmind?)value.Variant, null, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(DatabaseConfiguration)}'.");
 		}
 
-		writer.WriteProperty(options, PropName, value.Name);
+		writer.WriteProperty(options, PropName, value.Name, null, null);
 		writer.WriteEndObject();
 	}
 }

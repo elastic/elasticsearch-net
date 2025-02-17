@@ -43,11 +43,11 @@ internal sealed partial class FuzzyQueryConverter : System.Text.Json.Serializati
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
 		reader.Read();
-		propField.ReadPropertyName(ref reader, options);
+		propField.ReadPropertyName(ref reader, options, null);
 		reader.Read();
 		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
 		{
-			var value = reader.ReadValue<object>(options);
+			var value = reader.ReadValue<object>(options, null);
 			reader.Read();
 			return new FuzzyQuery { Value = value };
 		}
@@ -63,42 +63,42 @@ internal sealed partial class FuzzyQueryConverter : System.Text.Json.Serializati
 		LocalJsonValue<object> propValue = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBoost.TryRead(ref reader, options, PropBoost))
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
 			{
 				continue;
 			}
 
-			if (propFuzziness.TryRead(ref reader, options, PropFuzziness))
+			if (propFuzziness.TryReadProperty(ref reader, options, PropFuzziness, null))
 			{
 				continue;
 			}
 
-			if (propMaxExpansions.TryRead(ref reader, options, PropMaxExpansions))
+			if (propMaxExpansions.TryReadProperty(ref reader, options, PropMaxExpansions, null))
 			{
 				continue;
 			}
 
-			if (propPrefixLength.TryRead(ref reader, options, PropPrefixLength))
+			if (propPrefixLength.TryReadProperty(ref reader, options, PropPrefixLength, null))
 			{
 				continue;
 			}
 
-			if (propQueryName.TryRead(ref reader, options, PropQueryName))
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
 			{
 				continue;
 			}
 
-			if (propRewrite.TryRead(ref reader, options, PropRewrite))
+			if (propRewrite.TryReadProperty(ref reader, options, PropRewrite, null))
 			{
 				continue;
 			}
 
-			if (propTranspositions.TryRead(ref reader, options, PropTranspositions))
+			if (propTranspositions.TryReadProperty(ref reader, options, PropTranspositions, null))
 			{
 				continue;
 			}
 
-			if (propValue.TryRead(ref reader, options, PropValue))
+			if (propValue.TryReadProperty(ref reader, options, PropValue, null))
 			{
 				continue;
 			}
@@ -134,16 +134,16 @@ internal sealed partial class FuzzyQueryConverter : System.Text.Json.Serializati
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, FuzzyQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName(options, value.Field);
+		writer.WritePropertyName(options, value.Field, null);
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBoost, value.Boost);
-		writer.WriteProperty(options, PropFuzziness, value.Fuzziness);
-		writer.WriteProperty(options, PropMaxExpansions, value.MaxExpansions);
-		writer.WriteProperty(options, PropPrefixLength, value.PrefixLength);
-		writer.WriteProperty(options, PropQueryName, value.QueryName);
-		writer.WriteProperty(options, PropRewrite, value.Rewrite);
-		writer.WriteProperty(options, PropTranspositions, value.Transpositions);
-		writer.WriteProperty(options, PropValue, value.Value);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropFuzziness, value.Fuzziness, null, null);
+		writer.WriteProperty(options, PropMaxExpansions, value.MaxExpansions, null, null);
+		writer.WriteProperty(options, PropPrefixLength, value.PrefixLength, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteProperty(options, PropRewrite, value.Rewrite, null, null);
+		writer.WriteProperty(options, PropTranspositions, value.Transpositions, null, null);
+		writer.WriteProperty(options, PropValue, value.Value, null, null);
 		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}

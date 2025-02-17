@@ -48,32 +48,32 @@ internal sealed partial class ErrorCauseConverter : System.Text.Json.Serializati
 		LocalJsonValue<string> propType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCausedBy.TryRead(ref reader, options, PropCausedBy))
+			if (propCausedBy.TryReadProperty(ref reader, options, PropCausedBy, null))
 			{
 				continue;
 			}
 
-			if (propReason.TryRead(ref reader, options, PropReason))
+			if (propReason.TryReadProperty(ref reader, options, PropReason, null))
 			{
 				continue;
 			}
 
-			if (propRootCause.TryRead(ref reader, options, PropRootCause))
+			if (propRootCause.TryReadProperty(ref reader, options, PropRootCause, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.ErrorCause>(o, null)))
 			{
 				continue;
 			}
 
-			if (propStackTrace.TryRead(ref reader, options, PropStackTrace))
+			if (propStackTrace.TryReadProperty(ref reader, options, PropStackTrace, null))
 			{
 				continue;
 			}
 
-			if (propSuppressed.TryRead(ref reader, options, PropSuppressed))
+			if (propSuppressed.TryReadProperty(ref reader, options, PropSuppressed, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.ErrorCause>(o, null)))
 			{
 				continue;
 			}
 
-			if (propType.TryRead(ref reader, options, PropType))
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
 			{
 				continue;
 			}
@@ -105,12 +105,12 @@ internal sealed partial class ErrorCauseConverter : System.Text.Json.Serializati
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ErrorCause value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCausedBy, value.CausedBy);
-		writer.WriteProperty(options, PropReason, value.Reason);
-		writer.WriteProperty(options, PropRootCause, value.RootCause);
-		writer.WriteProperty(options, PropStackTrace, value.StackTrace);
-		writer.WriteProperty(options, PropSuppressed, value.Suppressed);
-		writer.WriteProperty(options, PropType, value.Type);
+		writer.WriteProperty(options, PropCausedBy, value.CausedBy, null, null);
+		writer.WriteProperty(options, PropReason, value.Reason, null, null);
+		writer.WriteProperty(options, PropRootCause, value.RootCause, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.ErrorCause>(o, v, null));
+		writer.WriteProperty(options, PropStackTrace, value.StackTrace, null, null);
+		writer.WriteProperty(options, PropSuppressed, value.Suppressed, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.ErrorCause>(o, v, null));
+		writer.WriteProperty(options, PropType, value.Type, null, null);
 		if (value.Metadata is not null)
 		{
 			foreach (var item in value.Metadata)

@@ -168,7 +168,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantAppend.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.AppendProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.AppendProcessor?>(options, null);
 				continue;
 			}
 
@@ -176,7 +176,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantAttachment.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor?>(options, null);
 				continue;
 			}
 
@@ -184,7 +184,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantBytes.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.BytesProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.BytesProcessor?>(options, null);
 				continue;
 			}
 
@@ -192,7 +192,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantCircle.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.CircleProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.CircleProcessor?>(options, null);
 				continue;
 			}
 
@@ -200,7 +200,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantCommunityId.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor?>(options, null);
 				continue;
 			}
 
@@ -208,7 +208,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantConvert.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.ConvertProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.ConvertProcessor?>(options, null);
 				continue;
 			}
 
@@ -216,7 +216,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantCsv.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.CsvProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.CsvProcessor?>(options, null);
 				continue;
 			}
 
@@ -224,7 +224,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantDate.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.DateProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.DateProcessor?>(options, null);
 				continue;
 			}
 
@@ -232,7 +232,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantDateIndexName.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor?>(options, null);
 				continue;
 			}
 
@@ -240,7 +240,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantDissect.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.DissectProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.DissectProcessor?>(options, null);
 				continue;
 			}
 
@@ -248,7 +248,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantDotExpander.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessor?>(options, null);
 				continue;
 			}
 
@@ -256,7 +256,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantDrop.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.DropProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.DropProcessor?>(options, null);
 				continue;
 			}
 
@@ -264,7 +264,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantEnrich.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor?>(options, null);
 				continue;
 			}
 
@@ -272,7 +272,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantFail.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.FailProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.FailProcessor?>(options, null);
 				continue;
 			}
 
@@ -280,7 +280,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantFingerprint.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor?>(options, null);
 				continue;
 			}
 
@@ -288,7 +288,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantForeach.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor?>(options, null);
 				continue;
 			}
 
@@ -296,7 +296,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantGeoGrid.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor?>(options, null);
 				continue;
 			}
 
@@ -304,7 +304,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantGeoip.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor?>(options, null);
 				continue;
 			}
 
@@ -312,7 +312,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantGrok.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.GrokProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.GrokProcessor?>(options, null);
 				continue;
 			}
 
@@ -320,7 +320,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantGsub.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.GsubProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.GsubProcessor?>(options, null);
 				continue;
 			}
 
@@ -328,7 +328,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantHtmlStrip.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessor?>(options, null);
 				continue;
 			}
 
@@ -336,7 +336,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantInference.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor?>(options, null);
 				continue;
 			}
 
@@ -344,7 +344,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantIpLocation.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor?>(options, null);
 				continue;
 			}
 
@@ -352,7 +352,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantJoin.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.JoinProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.JoinProcessor?>(options, null);
 				continue;
 			}
 
@@ -360,7 +360,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantJson.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.JsonProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.JsonProcessor?>(options, null);
 				continue;
 			}
 
@@ -368,7 +368,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantKv.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor?>(options, null);
 				continue;
 			}
 
@@ -376,7 +376,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantLowercase.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor?>(options, null);
 				continue;
 			}
 
@@ -384,7 +384,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantNetworkDirection.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessor?>(options, null);
 				continue;
 			}
 
@@ -392,7 +392,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantPipeline.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor?>(options, null);
 				continue;
 			}
 
@@ -400,7 +400,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantRedact.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.RedactProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.RedactProcessor?>(options, null);
 				continue;
 			}
 
@@ -408,7 +408,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantRegisteredDomain.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessor?>(options, null);
 				continue;
 			}
 
@@ -416,7 +416,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantRemove.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor?>(options, null);
 				continue;
 			}
 
@@ -424,7 +424,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantRename.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.RenameProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.RenameProcessor?>(options, null);
 				continue;
 			}
 
@@ -432,7 +432,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantReroute.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor?>(options, null);
 				continue;
 			}
 
@@ -440,7 +440,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantScript.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.ScriptProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.ScriptProcessor?>(options, null);
 				continue;
 			}
 
@@ -448,7 +448,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantSet.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.SetProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.SetProcessor?>(options, null);
 				continue;
 			}
 
@@ -456,7 +456,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantSetSecurityUser.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor?>(options, null);
 				continue;
 			}
 
@@ -464,7 +464,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantSort.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.SortProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.SortProcessor?>(options, null);
 				continue;
 			}
 
@@ -472,7 +472,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantSplit.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.SplitProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.SplitProcessor?>(options, null);
 				continue;
 			}
 
@@ -480,7 +480,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantTerminate.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.TerminateProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.TerminateProcessor?>(options, null);
 				continue;
 			}
 
@@ -488,7 +488,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantTrim.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.TrimProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.TrimProcessor?>(options, null);
 				continue;
 			}
 
@@ -496,7 +496,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantUppercase.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessor?>(options, null);
 				continue;
 			}
 
@@ -504,7 +504,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantUriParts.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessor?>(options, null);
 				continue;
 			}
 
@@ -512,7 +512,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantUrlDecode.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor?>(options, null);
 				continue;
 			}
 
@@ -520,7 +520,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			{
 				variantType = VariantUserAgent.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor?>(options, null);
 				continue;
 			}
 
@@ -539,139 +539,139 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 			case "":
 				break;
 			case "append":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.AppendProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.AppendProcessor?)value.Variant, null, null);
 				break;
 			case "attachment":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor?)value.Variant, null, null);
 				break;
 			case "bytes":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.BytesProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.BytesProcessor?)value.Variant, null, null);
 				break;
 			case "circle":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.CircleProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.CircleProcessor?)value.Variant, null, null);
 				break;
 			case "community_id":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor?)value.Variant, null, null);
 				break;
 			case "convert":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.ConvertProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.ConvertProcessor?)value.Variant, null, null);
 				break;
 			case "csv":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.CsvProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.CsvProcessor?)value.Variant, null, null);
 				break;
 			case "date":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.DateProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.DateProcessor?)value.Variant, null, null);
 				break;
 			case "date_index_name":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor?)value.Variant, null, null);
 				break;
 			case "dissect":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.DissectProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.DissectProcessor?)value.Variant, null, null);
 				break;
 			case "dot_expander":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessor?)value.Variant, null, null);
 				break;
 			case "drop":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.DropProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.DropProcessor?)value.Variant, null, null);
 				break;
 			case "enrich":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor?)value.Variant, null, null);
 				break;
 			case "fail":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.FailProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.FailProcessor?)value.Variant, null, null);
 				break;
 			case "fingerprint":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor?)value.Variant, null, null);
 				break;
 			case "foreach":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor?)value.Variant, null, null);
 				break;
 			case "geo_grid":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor?)value.Variant, null, null);
 				break;
 			case "geoip":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor?)value.Variant, null, null);
 				break;
 			case "grok":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.GrokProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.GrokProcessor?)value.Variant, null, null);
 				break;
 			case "gsub":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.GsubProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.GsubProcessor?)value.Variant, null, null);
 				break;
 			case "html_strip":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessor?)value.Variant, null, null);
 				break;
 			case "inference":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor?)value.Variant, null, null);
 				break;
 			case "ip_location":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor?)value.Variant, null, null);
 				break;
 			case "join":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.JoinProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.JoinProcessor?)value.Variant, null, null);
 				break;
 			case "json":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.JsonProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.JsonProcessor?)value.Variant, null, null);
 				break;
 			case "kv":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor?)value.Variant, null, null);
 				break;
 			case "lowercase":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor?)value.Variant, null, null);
 				break;
 			case "network_direction":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessor?)value.Variant, null, null);
 				break;
 			case "pipeline":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor?)value.Variant, null, null);
 				break;
 			case "redact":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.RedactProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.RedactProcessor?)value.Variant, null, null);
 				break;
 			case "registered_domain":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessor?)value.Variant, null, null);
 				break;
 			case "remove":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor?)value.Variant, null, null);
 				break;
 			case "rename":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.RenameProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.RenameProcessor?)value.Variant, null, null);
 				break;
 			case "reroute":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor?)value.Variant, null, null);
 				break;
 			case "script":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.ScriptProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.ScriptProcessor?)value.Variant, null, null);
 				break;
 			case "set":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.SetProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.SetProcessor?)value.Variant, null, null);
 				break;
 			case "set_security_user":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor?)value.Variant, null, null);
 				break;
 			case "sort":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.SortProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.SortProcessor?)value.Variant, null, null);
 				break;
 			case "split":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.SplitProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.SplitProcessor?)value.Variant, null, null);
 				break;
 			case "terminate":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.TerminateProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.TerminateProcessor?)value.Variant, null, null);
 				break;
 			case "trim":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.TrimProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.TrimProcessor?)value.Variant, null, null);
 				break;
 			case "uppercase":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessor?)value.Variant, null, null);
 				break;
 			case "uri_parts":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessor?)value.Variant, null, null);
 				break;
 			case "urldecode":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor?)value.Variant, null, null);
 				break;
 			case "user_agent":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor?)value.Variant, null, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Processor)}'.");

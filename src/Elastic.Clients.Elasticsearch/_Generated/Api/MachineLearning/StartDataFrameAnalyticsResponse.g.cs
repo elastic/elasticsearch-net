@@ -40,12 +40,12 @@ internal sealed partial class StartDataFrameAnalyticsResponseConverter : System.
 		LocalJsonValue<string> propNode = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAcknowledged.TryRead(ref reader, options, PropAcknowledged))
+			if (propAcknowledged.TryReadProperty(ref reader, options, PropAcknowledged, null))
 			{
 				continue;
 			}
 
-			if (propNode.TryRead(ref reader, options, PropNode))
+			if (propNode.TryReadProperty(ref reader, options, PropNode, null))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class StartDataFrameAnalyticsResponseConverter : System.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, StartDataFrameAnalyticsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged);
-		writer.WriteProperty(options, PropNode, value.Node);
+		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged, null, null);
+		writer.WriteProperty(options, PropNode, value.Node, null, null);
 		writer.WriteEndObject();
 	}
 }

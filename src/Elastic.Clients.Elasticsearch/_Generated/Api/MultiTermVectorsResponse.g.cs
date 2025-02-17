@@ -38,7 +38,7 @@ internal sealed partial class MultiTermVectorsResponseConverter : System.Text.Js
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsResult>> propDocs = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDocs.TryRead(ref reader, options, PropDocs))
+			if (propDocs.TryReadProperty(ref reader, options, PropDocs, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsResult> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsResult>(o, null)!))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class MultiTermVectorsResponseConverter : System.Text.Js
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, MultiTermVectorsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDocs, value.Docs);
+		writer.WriteProperty(options, PropDocs, value.Docs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsResult> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsResult>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

@@ -38,7 +38,7 @@ internal sealed partial class PutRuleResponseConverter : System.Text.Json.Serial
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Result> propResult = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propResult.TryRead(ref reader, options, PropResult))
+			if (propResult.TryReadProperty(ref reader, options, PropResult, null))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class PutRuleResponseConverter : System.Text.Json.Serial
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, PutRuleResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropResult, value.Result);
+		writer.WriteProperty(options, PropResult, value.Result, null, null);
 		writer.WriteEndObject();
 	}
 }

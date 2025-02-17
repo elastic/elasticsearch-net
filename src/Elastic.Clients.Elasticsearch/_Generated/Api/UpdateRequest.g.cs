@@ -138,37 +138,37 @@ internal sealed partial class UpdateRequestConverter<TDocument, TPartialDocument
 		LocalJsonValue<TDocument?> propUpsert = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDetectNoop.TryRead(ref reader, options, PropDetectNoop))
+			if (propDetectNoop.TryReadProperty(ref reader, options, PropDetectNoop, null))
 			{
 				continue;
 			}
 
-			if (propDoc.TryRead(ref reader, options, PropDoc, typeof(SourceMarker<TPartialDocument?>)))
+			if (propDoc.TryReadProperty(ref reader, options, PropDoc, static TPartialDocument? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<TPartialDocument?>(o, typeof(SourceMarker<TPartialDocument?>))))
 			{
 				continue;
 			}
 
-			if (propDocAsUpsert.TryRead(ref reader, options, PropDocAsUpsert))
+			if (propDocAsUpsert.TryReadProperty(ref reader, options, PropDocAsUpsert, null))
 			{
 				continue;
 			}
 
-			if (propScript.TryRead(ref reader, options, PropScript))
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
 			{
 				continue;
 			}
 
-			if (propScriptedUpsert.TryRead(ref reader, options, PropScriptedUpsert))
+			if (propScriptedUpsert.TryReadProperty(ref reader, options, PropScriptedUpsert, null))
 			{
 				continue;
 			}
 
-			if (propSource.TryRead(ref reader, options, PropSource))
+			if (propSource.TryReadProperty(ref reader, options, PropSource, null))
 			{
 				continue;
 			}
 
-			if (propUpsert.TryRead(ref reader, options, PropUpsert, typeof(SourceMarker<TDocument?>)))
+			if (propUpsert.TryReadProperty(ref reader, options, PropUpsert, static TDocument? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<TDocument?>(o, typeof(SourceMarker<TDocument?>))))
 			{
 				continue;
 			}
@@ -198,13 +198,13 @@ internal sealed partial class UpdateRequestConverter<TDocument, TPartialDocument
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, UpdateRequest<TDocument, TPartialDocument> value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDetectNoop, value.DetectNoop);
-		writer.WriteProperty(options, PropDoc, value.Doc, null, typeof(SourceMarker<TPartialDocument?>));
-		writer.WriteProperty(options, PropDocAsUpsert, value.DocAsUpsert);
-		writer.WriteProperty(options, PropScript, value.Script);
-		writer.WriteProperty(options, PropScriptedUpsert, value.ScriptedUpsert);
-		writer.WriteProperty(options, PropSource, value.Source);
-		writer.WriteProperty(options, PropUpsert, value.Upsert, null, typeof(SourceMarker<TDocument?>));
+		writer.WriteProperty(options, PropDetectNoop, value.DetectNoop, null, null);
+		writer.WriteProperty(options, PropDoc, value.Doc, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, TPartialDocument? v) => w.WriteValueEx<TPartialDocument?>(o, v, typeof(SourceMarker<TPartialDocument?>)));
+		writer.WriteProperty(options, PropDocAsUpsert, value.DocAsUpsert, null, null);
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
+		writer.WriteProperty(options, PropScriptedUpsert, value.ScriptedUpsert, null, null);
+		writer.WriteProperty(options, PropSource, value.Source, null, null);
+		writer.WriteProperty(options, PropUpsert, value.Upsert, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, TDocument? v) => w.WriteValueEx<TDocument?>(o, v, typeof(SourceMarker<TDocument?>)));
 		writer.WriteEndObject();
 	}
 }

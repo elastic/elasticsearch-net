@@ -46,27 +46,27 @@ internal sealed partial class SignificantLongTermsBucketConverter : System.Text.
 		LocalJsonValue<double> propScore = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBgCount.TryRead(ref reader, options, PropBgCount))
+			if (propBgCount.TryReadProperty(ref reader, options, PropBgCount, null))
 			{
 				continue;
 			}
 
-			if (propDocCount.TryRead(ref reader, options, PropDocCount))
+			if (propDocCount.TryReadProperty(ref reader, options, PropDocCount, null))
 			{
 				continue;
 			}
 
-			if (propKey.TryRead(ref reader, options, PropKey))
+			if (propKey.TryReadProperty(ref reader, options, PropKey, null))
 			{
 				continue;
 			}
 
-			if (propKeyAsString.TryRead(ref reader, options, PropKeyAsString))
+			if (propKeyAsString.TryReadProperty(ref reader, options, PropKeyAsString, null))
 			{
 				continue;
 			}
 
-			if (propScore.TryRead(ref reader, options, PropScore))
+			if (propScore.TryReadProperty(ref reader, options, PropScore, null))
 			{
 				continue;
 			}
@@ -96,11 +96,11 @@ internal sealed partial class SignificantLongTermsBucketConverter : System.Text.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, SignificantLongTermsBucket value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBgCount, value.BgCount);
-		writer.WriteProperty(options, PropDocCount, value.DocCount);
-		writer.WriteProperty(options, PropKey, value.Key);
-		writer.WriteProperty(options, PropKeyAsString, value.KeyAsString);
-		writer.WriteProperty(options, PropScore, value.Score);
+		writer.WriteProperty(options, PropBgCount, value.BgCount, null, null);
+		writer.WriteProperty(options, PropDocCount, value.DocCount, null, null);
+		writer.WriteProperty(options, PropKey, value.Key, null, null);
+		writer.WriteProperty(options, PropKeyAsString, value.KeyAsString, null, null);
+		writer.WriteProperty(options, PropScore, value.Score, null, null);
 		if (value.Aggregations is not null)
 		{
 			foreach (var item in value.Aggregations)

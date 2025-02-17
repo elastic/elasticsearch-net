@@ -48,32 +48,32 @@ internal sealed partial class GetAsyncStatusResponseConverter : System.Text.Json
 		LocalJsonValue<long> propStartTimeInMillis = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCompletionStatus.TryRead(ref reader, options, PropCompletionStatus))
+			if (propCompletionStatus.TryReadProperty(ref reader, options, PropCompletionStatus, null))
 			{
 				continue;
 			}
 
-			if (propExpirationTimeInMillis.TryRead(ref reader, options, PropExpirationTimeInMillis))
+			if (propExpirationTimeInMillis.TryReadProperty(ref reader, options, PropExpirationTimeInMillis, null))
 			{
 				continue;
 			}
 
-			if (propId.TryRead(ref reader, options, PropId))
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
 			{
 				continue;
 			}
 
-			if (propIsPartial.TryRead(ref reader, options, PropIsPartial))
+			if (propIsPartial.TryReadProperty(ref reader, options, PropIsPartial, null))
 			{
 				continue;
 			}
 
-			if (propIsRunning.TryRead(ref reader, options, PropIsRunning))
+			if (propIsRunning.TryReadProperty(ref reader, options, PropIsRunning, null))
 			{
 				continue;
 			}
 
-			if (propStartTimeInMillis.TryRead(ref reader, options, PropStartTimeInMillis))
+			if (propStartTimeInMillis.TryReadProperty(ref reader, options, PropStartTimeInMillis, null))
 			{
 				continue;
 			}
@@ -101,12 +101,12 @@ internal sealed partial class GetAsyncStatusResponseConverter : System.Text.Json
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetAsyncStatusResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCompletionStatus, value.CompletionStatus);
-		writer.WriteProperty(options, PropExpirationTimeInMillis, value.ExpirationTimeInMillis);
-		writer.WriteProperty(options, PropId, value.Id);
-		writer.WriteProperty(options, PropIsPartial, value.IsPartial);
-		writer.WriteProperty(options, PropIsRunning, value.IsRunning);
-		writer.WriteProperty(options, PropStartTimeInMillis, value.StartTimeInMillis);
+		writer.WriteProperty(options, PropCompletionStatus, value.CompletionStatus, null, null);
+		writer.WriteProperty(options, PropExpirationTimeInMillis, value.ExpirationTimeInMillis, null, null);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropIsPartial, value.IsPartial, null, null);
+		writer.WriteProperty(options, PropIsRunning, value.IsRunning, null, null);
+		writer.WriteProperty(options, PropStartTimeInMillis, value.StartTimeInMillis, null, null);
 		writer.WriteEndObject();
 	}
 }

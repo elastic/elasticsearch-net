@@ -38,12 +38,12 @@ internal sealed partial class ValidateDetectorRequestConverter : System.Text.Jso
 {
 	public override ValidateDetectorRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		return new ValidateDetectorRequest { Detector = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.Detector>(options) };
+		return new ValidateDetectorRequest { Detector = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.Detector>(options, null) };
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ValidateDetectorRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
-		writer.WriteValue(options, value.Detector);
+		writer.WriteValue(options, value.Detector, null);
 	}
 }
 

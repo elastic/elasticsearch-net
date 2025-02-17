@@ -83,7 +83,7 @@ internal sealed partial class RescoreConverter : System.Text.Json.Serialization.
 		object? variant = null;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propWindowSize.TryRead(ref reader, options, PropWindowSize))
+			if (propWindowSize.TryReadProperty(ref reader, options, PropWindowSize, null))
 			{
 				continue;
 			}
@@ -92,7 +92,7 @@ internal sealed partial class RescoreConverter : System.Text.Json.Serialization.
 			{
 				variantType = VariantLearningToRank.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.LearningToRank?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.LearningToRank?>(options, null);
 				continue;
 			}
 
@@ -100,7 +100,7 @@ internal sealed partial class RescoreConverter : System.Text.Json.Serialization.
 			{
 				variantType = VariantQuery.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery?>(options, null);
 				continue;
 			}
 
@@ -124,16 +124,16 @@ internal sealed partial class RescoreConverter : System.Text.Json.Serialization.
 			case "":
 				break;
 			case "learning_to_rank":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.LearningToRank?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.LearningToRank?)value.Variant, null, null);
 				break;
 			case "query":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery?)value.Variant, null, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Rescore)}'.");
 		}
 
-		writer.WriteProperty(options, PropWindowSize, value.WindowSize);
+		writer.WriteProperty(options, PropWindowSize, value.WindowSize, null, null);
 		writer.WriteEndObject();
 	}
 }

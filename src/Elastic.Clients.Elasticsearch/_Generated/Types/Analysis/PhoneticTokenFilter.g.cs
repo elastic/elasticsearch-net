@@ -50,32 +50,32 @@ internal sealed partial class PhoneticTokenFilterConverter : System.Text.Json.Se
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propEncoder.TryRead(ref reader, options, PropEncoder))
+			if (propEncoder.TryReadProperty(ref reader, options, PropEncoder, null))
 			{
 				continue;
 			}
 
-			if (propLanguageset.TryRead(ref reader, options, PropLanguageset, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage>?, Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage>)))
+			if (propLanguageset.TryReadProperty(ref reader, options, PropLanguageset, static ICollection<Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage>(o, null)))
 			{
 				continue;
 			}
 
-			if (propMaxCodeLen.TryRead(ref reader, options, PropMaxCodeLen))
+			if (propMaxCodeLen.TryReadProperty(ref reader, options, PropMaxCodeLen, null))
 			{
 				continue;
 			}
 
-			if (propNameType.TryRead(ref reader, options, PropNameType))
+			if (propNameType.TryReadProperty(ref reader, options, PropNameType, null))
 			{
 				continue;
 			}
 
-			if (propReplace.TryRead(ref reader, options, PropReplace))
+			if (propReplace.TryReadProperty(ref reader, options, PropReplace, null))
 			{
 				continue;
 			}
 
-			if (propRuleType.TryRead(ref reader, options, PropRuleType))
+			if (propRuleType.TryReadProperty(ref reader, options, PropRuleType, null))
 			{
 				continue;
 			}
@@ -86,7 +86,7 @@ internal sealed partial class PhoneticTokenFilterConverter : System.Text.Json.Se
 				continue;
 			}
 
-			if (propVersion.TryRead(ref reader, options, PropVersion))
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
 			{
 				continue;
 			}
@@ -116,14 +116,14 @@ internal sealed partial class PhoneticTokenFilterConverter : System.Text.Json.Se
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, PhoneticTokenFilter value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropEncoder, value.Encoder);
-		writer.WriteProperty(options, PropLanguageset, value.Languageset, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage>?, Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage>));
-		writer.WriteProperty(options, PropMaxCodeLen, value.MaxCodeLen);
-		writer.WriteProperty(options, PropNameType, value.NameType);
-		writer.WriteProperty(options, PropReplace, value.Replace);
-		writer.WriteProperty(options, PropRuleType, value.RuleType);
-		writer.WriteProperty(options, PropType, value.Type);
-		writer.WriteProperty(options, PropVersion, value.Version);
+		writer.WriteProperty(options, PropEncoder, value.Encoder, null, null);
+		writer.WriteProperty(options, PropLanguageset, value.Languageset, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage>(o, v, null));
+		writer.WriteProperty(options, PropMaxCodeLen, value.MaxCodeLen, null, null);
+		writer.WriteProperty(options, PropNameType, value.NameType, null, null);
+		writer.WriteProperty(options, PropReplace, value.Replace, null, null);
+		writer.WriteProperty(options, PropRuleType, value.RuleType, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();
 	}
 }

@@ -27,300 +27,6 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-internal sealed partial class QueryStringQueryConverter : System.Text.Json.Serialization.JsonConverter<QueryStringQuery>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropAllowLeadingWildcard = System.Text.Json.JsonEncodedText.Encode("allow_leading_wildcard");
-	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer");
-	private static readonly System.Text.Json.JsonEncodedText PropAnalyzeWildcard = System.Text.Json.JsonEncodedText.Encode("analyze_wildcard");
-	private static readonly System.Text.Json.JsonEncodedText PropAutoGenerateSynonymsPhraseQuery = System.Text.Json.JsonEncodedText.Encode("auto_generate_synonyms_phrase_query");
-	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
-	private static readonly System.Text.Json.JsonEncodedText PropDefaultField = System.Text.Json.JsonEncodedText.Encode("default_field");
-	private static readonly System.Text.Json.JsonEncodedText PropDefaultOperator = System.Text.Json.JsonEncodedText.Encode("default_operator");
-	private static readonly System.Text.Json.JsonEncodedText PropEnablePositionIncrements = System.Text.Json.JsonEncodedText.Encode("enable_position_increments");
-	private static readonly System.Text.Json.JsonEncodedText PropEscape = System.Text.Json.JsonEncodedText.Encode("escape");
-	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
-	private static readonly System.Text.Json.JsonEncodedText PropFuzziness = System.Text.Json.JsonEncodedText.Encode("fuzziness");
-	private static readonly System.Text.Json.JsonEncodedText PropFuzzyMaxExpansions = System.Text.Json.JsonEncodedText.Encode("fuzzy_max_expansions");
-	private static readonly System.Text.Json.JsonEncodedText PropFuzzyPrefixLength = System.Text.Json.JsonEncodedText.Encode("fuzzy_prefix_length");
-	private static readonly System.Text.Json.JsonEncodedText PropFuzzyRewrite = System.Text.Json.JsonEncodedText.Encode("fuzzy_rewrite");
-	private static readonly System.Text.Json.JsonEncodedText PropFuzzyTranspositions = System.Text.Json.JsonEncodedText.Encode("fuzzy_transpositions");
-	private static readonly System.Text.Json.JsonEncodedText PropLenient = System.Text.Json.JsonEncodedText.Encode("lenient");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxDeterminizedStates = System.Text.Json.JsonEncodedText.Encode("max_determinized_states");
-	private static readonly System.Text.Json.JsonEncodedText PropMinimumShouldMatch = System.Text.Json.JsonEncodedText.Encode("minimum_should_match");
-	private static readonly System.Text.Json.JsonEncodedText PropPhraseSlop = System.Text.Json.JsonEncodedText.Encode("phrase_slop");
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
-	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
-	private static readonly System.Text.Json.JsonEncodedText PropQuoteAnalyzer = System.Text.Json.JsonEncodedText.Encode("quote_analyzer");
-	private static readonly System.Text.Json.JsonEncodedText PropQuoteFieldSuffix = System.Text.Json.JsonEncodedText.Encode("quote_field_suffix");
-	private static readonly System.Text.Json.JsonEncodedText PropRewrite = System.Text.Json.JsonEncodedText.Encode("rewrite");
-	private static readonly System.Text.Json.JsonEncodedText PropTieBreaker = System.Text.Json.JsonEncodedText.Encode("tie_breaker");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeZone = System.Text.Json.JsonEncodedText.Encode("time_zone");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-
-	public override QueryStringQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<bool?> propAllowLeadingWildcard = default;
-		LocalJsonValue<string?> propAnalyzer = default;
-		LocalJsonValue<bool?> propAnalyzeWildcard = default;
-		LocalJsonValue<bool?> propAutoGenerateSynonymsPhraseQuery = default;
-		LocalJsonValue<float?> propBoost = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propDefaultField = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Operator?> propDefaultOperator = default;
-		LocalJsonValue<bool?> propEnablePositionIncrements = default;
-		LocalJsonValue<bool?> propEscape = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propFields = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Fuzziness?> propFuzziness = default;
-		LocalJsonValue<int?> propFuzzyMaxExpansions = default;
-		LocalJsonValue<int?> propFuzzyPrefixLength = default;
-		LocalJsonValue<string?> propFuzzyRewrite = default;
-		LocalJsonValue<bool?> propFuzzyTranspositions = default;
-		LocalJsonValue<bool?> propLenient = default;
-		LocalJsonValue<int?> propMaxDeterminizedStates = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MinimumShouldMatch?> propMinimumShouldMatch = default;
-		LocalJsonValue<double?> propPhraseSlop = default;
-		LocalJsonValue<string> propQuery = default;
-		LocalJsonValue<string?> propQueryName = default;
-		LocalJsonValue<string?> propQuoteAnalyzer = default;
-		LocalJsonValue<string?> propQuoteFieldSuffix = default;
-		LocalJsonValue<string?> propRewrite = default;
-		LocalJsonValue<double?> propTieBreaker = default;
-		LocalJsonValue<string?> propTimeZone = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType?> propType = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propAllowLeadingWildcard.TryRead(ref reader, options, PropAllowLeadingWildcard))
-			{
-				continue;
-			}
-
-			if (propAnalyzer.TryRead(ref reader, options, PropAnalyzer))
-			{
-				continue;
-			}
-
-			if (propAnalyzeWildcard.TryRead(ref reader, options, PropAnalyzeWildcard))
-			{
-				continue;
-			}
-
-			if (propAutoGenerateSynonymsPhraseQuery.TryRead(ref reader, options, PropAutoGenerateSynonymsPhraseQuery))
-			{
-				continue;
-			}
-
-			if (propBoost.TryRead(ref reader, options, PropBoost))
-			{
-				continue;
-			}
-
-			if (propDefaultField.TryRead(ref reader, options, PropDefaultField))
-			{
-				continue;
-			}
-
-			if (propDefaultOperator.TryRead(ref reader, options, PropDefaultOperator))
-			{
-				continue;
-			}
-
-			if (propEnablePositionIncrements.TryRead(ref reader, options, PropEnablePositionIncrements))
-			{
-				continue;
-			}
-
-			if (propEscape.TryRead(ref reader, options, PropEscape))
-			{
-				continue;
-			}
-
-			if (propFields.TryRead(ref reader, options, PropFields, typeof(FieldsMarker)))
-			{
-				continue;
-			}
-
-			if (propFuzziness.TryRead(ref reader, options, PropFuzziness))
-			{
-				continue;
-			}
-
-			if (propFuzzyMaxExpansions.TryRead(ref reader, options, PropFuzzyMaxExpansions))
-			{
-				continue;
-			}
-
-			if (propFuzzyPrefixLength.TryRead(ref reader, options, PropFuzzyPrefixLength))
-			{
-				continue;
-			}
-
-			if (propFuzzyRewrite.TryRead(ref reader, options, PropFuzzyRewrite))
-			{
-				continue;
-			}
-
-			if (propFuzzyTranspositions.TryRead(ref reader, options, PropFuzzyTranspositions))
-			{
-				continue;
-			}
-
-			if (propLenient.TryRead(ref reader, options, PropLenient))
-			{
-				continue;
-			}
-
-			if (propMaxDeterminizedStates.TryRead(ref reader, options, PropMaxDeterminizedStates))
-			{
-				continue;
-			}
-
-			if (propMinimumShouldMatch.TryRead(ref reader, options, PropMinimumShouldMatch))
-			{
-				continue;
-			}
-
-			if (propPhraseSlop.TryRead(ref reader, options, PropPhraseSlop))
-			{
-				continue;
-			}
-
-			if (propQuery.TryRead(ref reader, options, PropQuery))
-			{
-				continue;
-			}
-
-			if (propQueryName.TryRead(ref reader, options, PropQueryName))
-			{
-				continue;
-			}
-
-			if (propQuoteAnalyzer.TryRead(ref reader, options, PropQuoteAnalyzer))
-			{
-				continue;
-			}
-
-			if (propQuoteFieldSuffix.TryRead(ref reader, options, PropQuoteFieldSuffix))
-			{
-				continue;
-			}
-
-			if (propRewrite.TryRead(ref reader, options, PropRewrite))
-			{
-				continue;
-			}
-
-			if (propTieBreaker.TryRead(ref reader, options, PropTieBreaker))
-			{
-				continue;
-			}
-
-			if (propTimeZone.TryRead(ref reader, options, PropTimeZone))
-			{
-				continue;
-			}
-
-			if (propType.TryRead(ref reader, options, PropType))
-			{
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new QueryStringQuery
-		{
-			AllowLeadingWildcard = propAllowLeadingWildcard.Value
-,
-			Analyzer = propAnalyzer.Value
-,
-			AnalyzeWildcard = propAnalyzeWildcard.Value
-,
-			AutoGenerateSynonymsPhraseQuery = propAutoGenerateSynonymsPhraseQuery.Value
-,
-			Boost = propBoost.Value
-,
-			DefaultField = propDefaultField.Value
-,
-			DefaultOperator = propDefaultOperator.Value
-,
-			EnablePositionIncrements = propEnablePositionIncrements.Value
-,
-			Escape = propEscape.Value
-,
-			Fields = propFields.Value
-,
-			Fuzziness = propFuzziness.Value
-,
-			FuzzyMaxExpansions = propFuzzyMaxExpansions.Value
-,
-			FuzzyPrefixLength = propFuzzyPrefixLength.Value
-,
-			FuzzyRewrite = propFuzzyRewrite.Value
-,
-			FuzzyTranspositions = propFuzzyTranspositions.Value
-,
-			Lenient = propLenient.Value
-,
-			MaxDeterminizedStates = propMaxDeterminizedStates.Value
-,
-			MinimumShouldMatch = propMinimumShouldMatch.Value
-,
-			PhraseSlop = propPhraseSlop.Value
-,
-			Query = propQuery.Value
-,
-			QueryName = propQueryName.Value
-,
-			QuoteAnalyzer = propQuoteAnalyzer.Value
-,
-			QuoteFieldSuffix = propQuoteFieldSuffix.Value
-,
-			Rewrite = propRewrite.Value
-,
-			TieBreaker = propTieBreaker.Value
-,
-			TimeZone = propTimeZone.Value
-,
-			Type = propType.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, QueryStringQuery value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAllowLeadingWildcard, value.AllowLeadingWildcard);
-		writer.WriteProperty(options, PropAnalyzer, value.Analyzer);
-		writer.WriteProperty(options, PropAnalyzeWildcard, value.AnalyzeWildcard);
-		writer.WriteProperty(options, PropAutoGenerateSynonymsPhraseQuery, value.AutoGenerateSynonymsPhraseQuery);
-		writer.WriteProperty(options, PropBoost, value.Boost);
-		writer.WriteProperty(options, PropDefaultField, value.DefaultField);
-		writer.WriteProperty(options, PropDefaultOperator, value.DefaultOperator);
-		writer.WriteProperty(options, PropEnablePositionIncrements, value.EnablePositionIncrements);
-		writer.WriteProperty(options, PropEscape, value.Escape);
-		writer.WriteProperty(options, PropFields, value.Fields, null, typeof(FieldsMarker));
-		writer.WriteProperty(options, PropFuzziness, value.Fuzziness);
-		writer.WriteProperty(options, PropFuzzyMaxExpansions, value.FuzzyMaxExpansions);
-		writer.WriteProperty(options, PropFuzzyPrefixLength, value.FuzzyPrefixLength);
-		writer.WriteProperty(options, PropFuzzyRewrite, value.FuzzyRewrite);
-		writer.WriteProperty(options, PropFuzzyTranspositions, value.FuzzyTranspositions);
-		writer.WriteProperty(options, PropLenient, value.Lenient);
-		writer.WriteProperty(options, PropMaxDeterminizedStates, value.MaxDeterminizedStates);
-		writer.WriteProperty(options, PropMinimumShouldMatch, value.MinimumShouldMatch);
-		writer.WriteProperty(options, PropPhraseSlop, value.PhraseSlop);
-		writer.WriteProperty(options, PropQuery, value.Query);
-		writer.WriteProperty(options, PropQueryName, value.QueryName);
-		writer.WriteProperty(options, PropQuoteAnalyzer, value.QuoteAnalyzer);
-		writer.WriteProperty(options, PropQuoteFieldSuffix, value.QuoteFieldSuffix);
-		writer.WriteProperty(options, PropRewrite, value.Rewrite);
-		writer.WriteProperty(options, PropTieBreaker, value.TieBreaker);
-		writer.WriteProperty(options, PropTimeZone, value.TimeZone);
-		writer.WriteProperty(options, PropType, value.Type);
-		writer.WriteEndObject();
-	}
-}
-
-[JsonConverter(typeof(QueryStringQueryConverter))]
 public sealed partial class QueryStringQuery
 {
 	/// <summary>
@@ -328,6 +34,7 @@ public sealed partial class QueryStringQuery
 	/// If <c>true</c>, the wildcard characters <c>*</c> and <c>?</c> are allowed as the first character of the query string.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("allow_leading_wildcard")]
 	public bool? AllowLeadingWildcard { get; set; }
 
 	/// <summary>
@@ -335,6 +42,7 @@ public sealed partial class QueryStringQuery
 	/// Analyzer used to convert text in the query string into tokens.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
 
 	/// <summary>
@@ -342,6 +50,7 @@ public sealed partial class QueryStringQuery
 	/// If <c>true</c>, the query attempts to analyze wildcard terms in the query string.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("analyze_wildcard")]
 	public bool? AnalyzeWildcard { get; set; }
 
 	/// <summary>
@@ -349,6 +58,7 @@ public sealed partial class QueryStringQuery
 	/// If <c>true</c>, match phrase queries are automatically created for multi-term synonyms.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("auto_generate_synonyms_phrase_query")]
 	public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 
 	/// <summary>
@@ -359,6 +69,7 @@ public sealed partial class QueryStringQuery
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
@@ -368,6 +79,7 @@ public sealed partial class QueryStringQuery
 	/// Defaults to the <c>index.query.default_field</c> index setting, which has a default value of <c>*</c>.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("default_field")]
 	public Elastic.Clients.Elasticsearch.Field? DefaultField { get; set; }
 
 	/// <summary>
@@ -375,6 +87,7 @@ public sealed partial class QueryStringQuery
 	/// Default boolean logic used to interpret text in the query string if no operators are specified.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("default_operator")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get; set; }
 
 	/// <summary>
@@ -382,7 +95,9 @@ public sealed partial class QueryStringQuery
 	/// If <c>true</c>, enable position increments in queries constructed from a <c>query_string</c> search.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("enable_position_increments")]
 	public bool? EnablePositionIncrements { get; set; }
+	[JsonInclude, JsonPropertyName("escape")]
 	public bool? Escape { get; set; }
 
 	/// <summary>
@@ -390,6 +105,7 @@ public sealed partial class QueryStringQuery
 	/// Array of fields to search. Supports wildcards (<c>*</c>).
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
 	/// <summary>
@@ -397,6 +113,7 @@ public sealed partial class QueryStringQuery
 	/// Maximum edit distance allowed for fuzzy matching.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("fuzziness")]
 	public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
 
 	/// <summary>
@@ -404,6 +121,7 @@ public sealed partial class QueryStringQuery
 	/// Maximum number of terms to which the query expands for fuzzy matching.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("fuzzy_max_expansions")]
 	public int? FuzzyMaxExpansions { get; set; }
 
 	/// <summary>
@@ -411,6 +129,7 @@ public sealed partial class QueryStringQuery
 	/// Number of beginning characters left unchanged for fuzzy matching.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("fuzzy_prefix_length")]
 	public int? FuzzyPrefixLength { get; set; }
 
 	/// <summary>
@@ -418,6 +137,7 @@ public sealed partial class QueryStringQuery
 	/// Method used to rewrite the query.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("fuzzy_rewrite")]
 	public string? FuzzyRewrite { get; set; }
 
 	/// <summary>
@@ -425,6 +145,7 @@ public sealed partial class QueryStringQuery
 	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("fuzzy_transpositions")]
 	public bool? FuzzyTranspositions { get; set; }
 
 	/// <summary>
@@ -432,6 +153,7 @@ public sealed partial class QueryStringQuery
 	/// If <c>true</c>, format-based errors, such as providing a text value for a numeric field, are ignored.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("lenient")]
 	public bool? Lenient { get; set; }
 
 	/// <summary>
@@ -439,6 +161,7 @@ public sealed partial class QueryStringQuery
 	/// Maximum number of automaton states required for the query.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("max_determinized_states")]
 	public int? MaxDeterminizedStates { get; set; }
 
 	/// <summary>
@@ -446,6 +169,7 @@ public sealed partial class QueryStringQuery
 	/// Minimum number of clauses that must match for a document to be returned.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("minimum_should_match")]
 	public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
 	/// <summary>
@@ -453,6 +177,7 @@ public sealed partial class QueryStringQuery
 	/// Maximum number of positions allowed between matching tokens for phrases.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("phrase_slop")]
 	public double? PhraseSlop { get; set; }
 
 	/// <summary>
@@ -460,7 +185,9 @@ public sealed partial class QueryStringQuery
 	/// Query string you wish to parse and use for search.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("query")]
 	public string Query { get; set; }
+	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
 
 	/// <summary>
@@ -469,6 +196,7 @@ public sealed partial class QueryStringQuery
 	/// For quoted text, this parameter overrides the analyzer specified in the <c>analyzer</c> parameter.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("quote_analyzer")]
 	public string? QuoteAnalyzer { get; set; }
 
 	/// <summary>
@@ -477,6 +205,7 @@ public sealed partial class QueryStringQuery
 	/// You can use this suffix to use a different analysis method for exact matches.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("quote_field_suffix")]
 	public string? QuoteFieldSuffix { get; set; }
 
 	/// <summary>
@@ -484,6 +213,7 @@ public sealed partial class QueryStringQuery
 	/// Method used to rewrite the query.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("rewrite")]
 	public string? Rewrite { get; set; }
 
 	/// <summary>
@@ -491,6 +221,7 @@ public sealed partial class QueryStringQuery
 	/// How to combine the queries generated from the individual search terms in the resulting <c>dis_max</c> query.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("tie_breaker")]
 	public double? TieBreaker { get; set; }
 
 	/// <summary>
@@ -498,6 +229,7 @@ public sealed partial class QueryStringQuery
 	/// Coordinated Universal Time (UTC) offset or IANA time zone used to convert date values in the query string to UTC.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("time_zone")]
 	public string? TimeZone { get; set; }
 
 	/// <summary>
@@ -505,6 +237,7 @@ public sealed partial class QueryStringQuery
 	/// Determines how the query matches and scores documents.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? Type { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(QueryStringQuery queryStringQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.QueryString(queryStringQuery);

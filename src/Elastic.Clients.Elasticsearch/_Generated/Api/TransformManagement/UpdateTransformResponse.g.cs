@@ -64,72 +64,72 @@ internal sealed partial class UpdateTransformResponseConverter : System.Text.Jso
 		LocalJsonValue<string> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAuthorization.TryRead(ref reader, options, PropAuthorization))
+			if (propAuthorization.TryReadProperty(ref reader, options, PropAuthorization, null))
 			{
 				continue;
 			}
 
-			if (propCreateTime.TryRead(ref reader, options, PropCreateTime))
+			if (propCreateTime.TryReadProperty(ref reader, options, PropCreateTime, null))
 			{
 				continue;
 			}
 
-			if (propDescription.TryRead(ref reader, options, PropDescription))
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
 			{
 				continue;
 			}
 
-			if (propDest.TryRead(ref reader, options, PropDest))
+			if (propDest.TryReadProperty(ref reader, options, PropDest, null))
 			{
 				continue;
 			}
 
-			if (propFrequency.TryRead(ref reader, options, PropFrequency))
+			if (propFrequency.TryReadProperty(ref reader, options, PropFrequency, null))
 			{
 				continue;
 			}
 
-			if (propId.TryRead(ref reader, options, PropId))
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
 			{
 				continue;
 			}
 
-			if (propLatest.TryRead(ref reader, options, PropLatest))
+			if (propLatest.TryReadProperty(ref reader, options, PropLatest, null))
 			{
 				continue;
 			}
 
-			if (propMeta.TryRead(ref reader, options, PropMeta))
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static IReadOnlyDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propPivot.TryRead(ref reader, options, PropPivot))
+			if (propPivot.TryReadProperty(ref reader, options, PropPivot, null))
 			{
 				continue;
 			}
 
-			if (propRetentionPolicy.TryRead(ref reader, options, PropRetentionPolicy))
+			if (propRetentionPolicy.TryReadProperty(ref reader, options, PropRetentionPolicy, null))
 			{
 				continue;
 			}
 
-			if (propSettings.TryRead(ref reader, options, PropSettings))
+			if (propSettings.TryReadProperty(ref reader, options, PropSettings, null))
 			{
 				continue;
 			}
 
-			if (propSource.TryRead(ref reader, options, PropSource))
+			if (propSource.TryReadProperty(ref reader, options, PropSource, null))
 			{
 				continue;
 			}
 
-			if (propSync.TryRead(ref reader, options, PropSync))
+			if (propSync.TryReadProperty(ref reader, options, PropSync, null))
 			{
 				continue;
 			}
 
-			if (propVersion.TryRead(ref reader, options, PropVersion))
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
 			{
 				continue;
 			}
@@ -173,20 +173,20 @@ internal sealed partial class UpdateTransformResponseConverter : System.Text.Jso
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, UpdateTransformResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAuthorization, value.Authorization);
-		writer.WriteProperty(options, PropCreateTime, value.CreateTime);
-		writer.WriteProperty(options, PropDescription, value.Description);
-		writer.WriteProperty(options, PropDest, value.Dest);
-		writer.WriteProperty(options, PropFrequency, value.Frequency);
-		writer.WriteProperty(options, PropId, value.Id);
-		writer.WriteProperty(options, PropLatest, value.Latest);
-		writer.WriteProperty(options, PropMeta, value.Meta);
-		writer.WriteProperty(options, PropPivot, value.Pivot);
-		writer.WriteProperty(options, PropRetentionPolicy, value.RetentionPolicy);
-		writer.WriteProperty(options, PropSettings, value.Settings);
-		writer.WriteProperty(options, PropSource, value.Source);
-		writer.WriteProperty(options, PropSync, value.Sync);
-		writer.WriteProperty(options, PropVersion, value.Version);
+		writer.WriteProperty(options, PropAuthorization, value.Authorization, null, null);
+		writer.WriteProperty(options, PropCreateTime, value.CreateTime, null, null);
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropDest, value.Dest, null, null);
+		writer.WriteProperty(options, PropFrequency, value.Frequency, null, null);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropLatest, value.Latest, null, null);
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropPivot, value.Pivot, null, null);
+		writer.WriteProperty(options, PropRetentionPolicy, value.RetentionPolicy, null, null);
+		writer.WriteProperty(options, PropSettings, value.Settings, null, null);
+		writer.WriteProperty(options, PropSource, value.Source, null, null);
+		writer.WriteProperty(options, PropSync, value.Sync, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();
 	}
 }

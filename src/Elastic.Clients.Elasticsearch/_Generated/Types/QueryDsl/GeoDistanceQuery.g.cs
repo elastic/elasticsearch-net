@@ -49,38 +49,38 @@ internal sealed partial class GeoDistanceQueryConverter : System.Text.Json.Seria
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod?> propValidationMethod = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBoost.TryRead(ref reader, options, PropBoost))
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
 			{
 				continue;
 			}
 
-			if (propDistance.TryRead(ref reader, options, PropDistance))
+			if (propDistance.TryReadProperty(ref reader, options, PropDistance, null))
 			{
 				continue;
 			}
 
-			if (propDistanceType.TryRead(ref reader, options, PropDistanceType))
+			if (propDistanceType.TryReadProperty(ref reader, options, PropDistanceType, null))
 			{
 				continue;
 			}
 
-			if (propIgnoreUnmapped.TryRead(ref reader, options, PropIgnoreUnmapped))
+			if (propIgnoreUnmapped.TryReadProperty(ref reader, options, PropIgnoreUnmapped, null))
 			{
 				continue;
 			}
 
-			if (propQueryName.TryRead(ref reader, options, PropQueryName))
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
 			{
 				continue;
 			}
 
-			if (propValidationMethod.TryRead(ref reader, options, PropValidationMethod))
+			if (propValidationMethod.TryReadProperty(ref reader, options, PropValidationMethod, null))
 			{
 				continue;
 			}
 
 			propField.Initialized = propLocation.Initialized = true;
-			reader.ReadProperty(options, out propField.Value, out propLocation.Value);
+			reader.ReadProperty(options, out propField.Value, out propLocation.Value, null, null);
 		}
 
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
@@ -107,13 +107,13 @@ internal sealed partial class GeoDistanceQueryConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GeoDistanceQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBoost, value.Boost);
-		writer.WriteProperty(options, PropDistance, value.Distance);
-		writer.WriteProperty(options, PropDistanceType, value.DistanceType);
-		writer.WriteProperty(options, PropIgnoreUnmapped, value.IgnoreUnmapped);
-		writer.WriteProperty(options, PropQueryName, value.QueryName);
-		writer.WriteProperty(options, PropValidationMethod, value.ValidationMethod);
-		writer.WriteProperty(options, value.Field, value.Location);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropDistance, value.Distance, null, null);
+		writer.WriteProperty(options, PropDistanceType, value.DistanceType, null, null);
+		writer.WriteProperty(options, PropIgnoreUnmapped, value.IgnoreUnmapped, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteProperty(options, PropValidationMethod, value.ValidationMethod, null, null);
+		writer.WriteProperty(options, value.Field, value.Location, null, null);
 		writer.WriteEndObject();
 	}
 }

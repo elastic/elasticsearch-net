@@ -39,12 +39,12 @@ internal sealed partial class HistogramGroupingConverter : System.Text.Json.Seri
 		LocalJsonValue<long> propInterval = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propFields.TryRead(ref reader, options, PropFields, typeof(SingleOrManyFieldsMarker)))
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static Elastic.Clients.Elasticsearch.Fields (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields>(o, typeof(SingleOrManyFieldsMarker))!))
 			{
 				continue;
 			}
 
-			if (propInterval.TryRead(ref reader, options, PropInterval))
+			if (propInterval.TryReadProperty(ref reader, options, PropInterval, null))
 			{
 				continue;
 			}
@@ -64,8 +64,8 @@ internal sealed partial class HistogramGroupingConverter : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, HistogramGrouping value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFields, value.Fields, null, typeof(SingleOrManyFieldsMarker));
-		writer.WriteProperty(options, PropInterval, value.Interval);
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields>(o, v, typeof(SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropInterval, value.Interval, null, null);
 		writer.WriteEndObject();
 	}
 }

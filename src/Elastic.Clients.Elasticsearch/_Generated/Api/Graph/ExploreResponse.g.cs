@@ -46,27 +46,27 @@ internal sealed partial class ExploreResponseConverter : System.Text.Json.Serial
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Graph.Vertex>> propVertices = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propConnections.TryRead(ref reader, options, PropConnections))
+			if (propConnections.TryReadProperty(ref reader, options, PropConnections, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Graph.Connection> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Graph.Connection>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propFailures.TryRead(ref reader, options, PropFailures))
+			if (propFailures.TryReadProperty(ref reader, options, PropFailures, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.ShardFailure>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propTimedOut.TryRead(ref reader, options, PropTimedOut))
+			if (propTimedOut.TryReadProperty(ref reader, options, PropTimedOut, null))
 			{
 				continue;
 			}
 
-			if (propTook.TryRead(ref reader, options, PropTook))
+			if (propTook.TryReadProperty(ref reader, options, PropTook, null))
 			{
 				continue;
 			}
 
-			if (propVertices.TryRead(ref reader, options, PropVertices))
+			if (propVertices.TryReadProperty(ref reader, options, PropVertices, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Graph.Vertex> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Graph.Vertex>(o, null)!))
 			{
 				continue;
 			}
@@ -92,11 +92,11 @@ internal sealed partial class ExploreResponseConverter : System.Text.Json.Serial
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ExploreResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropConnections, value.Connections);
-		writer.WriteProperty(options, PropFailures, value.Failures);
-		writer.WriteProperty(options, PropTimedOut, value.TimedOut);
-		writer.WriteProperty(options, PropTook, value.Took);
-		writer.WriteProperty(options, PropVertices, value.Vertices);
+		writer.WriteProperty(options, PropConnections, value.Connections, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Graph.Connection> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Graph.Connection>(o, v, null));
+		writer.WriteProperty(options, PropFailures, value.Failures, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.ShardFailure>(o, v, null));
+		writer.WriteProperty(options, PropTimedOut, value.TimedOut, null, null);
+		writer.WriteProperty(options, PropTook, value.Took, null, null);
+		writer.WriteProperty(options, PropVertices, value.Vertices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Graph.Vertex> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Graph.Vertex>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

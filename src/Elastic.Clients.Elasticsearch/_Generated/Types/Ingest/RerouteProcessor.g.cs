@@ -51,42 +51,42 @@ internal sealed partial class RerouteProcessorConverter : System.Text.Json.Seria
 		LocalJsonValue<string?> propTag = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDataset.TryRead(ref reader, options, PropDataset, typeof(SingleOrManyMarker<ICollection<string>?, string>)))
+			if (propDataset.TryReadProperty(ref reader, options, PropDataset, static ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propDescription.TryRead(ref reader, options, PropDescription))
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
 			{
 				continue;
 			}
 
-			if (propDestination.TryRead(ref reader, options, PropDestination))
+			if (propDestination.TryReadProperty(ref reader, options, PropDestination, null))
 			{
 				continue;
 			}
 
-			if (propIf.TryRead(ref reader, options, PropIf))
+			if (propIf.TryReadProperty(ref reader, options, PropIf, null))
 			{
 				continue;
 			}
 
-			if (propIgnoreFailure.TryRead(ref reader, options, PropIgnoreFailure))
+			if (propIgnoreFailure.TryReadProperty(ref reader, options, PropIgnoreFailure, null))
 			{
 				continue;
 			}
 
-			if (propNamespace.TryRead(ref reader, options, PropNamespace, typeof(SingleOrManyMarker<ICollection<string>?, string>)))
+			if (propNamespace.TryReadProperty(ref reader, options, PropNamespace, static ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propOnFailure.TryRead(ref reader, options, PropOnFailure))
+			if (propOnFailure.TryReadProperty(ref reader, options, PropOnFailure, static ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, null)))
 			{
 				continue;
 			}
 
-			if (propTag.TryRead(ref reader, options, PropTag))
+			if (propTag.TryReadProperty(ref reader, options, PropTag, null))
 			{
 				continue;
 			}
@@ -118,14 +118,14 @@ internal sealed partial class RerouteProcessorConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, RerouteProcessor value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDataset, value.Dataset, null, typeof(SingleOrManyMarker<ICollection<string>?, string>));
-		writer.WriteProperty(options, PropDescription, value.Description);
-		writer.WriteProperty(options, PropDestination, value.Destination);
-		writer.WriteProperty(options, PropIf, value.If);
-		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure);
-		writer.WriteProperty(options, PropNamespace, value.Namespace, null, typeof(SingleOrManyMarker<ICollection<string>?, string>));
-		writer.WriteProperty(options, PropOnFailure, value.OnFailure);
-		writer.WriteProperty(options, PropTag, value.Tag);
+		writer.WriteProperty(options, PropDataset, value.Dataset, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropDestination, value.Destination, null, null);
+		writer.WriteProperty(options, PropIf, value.If, null, null);
+		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure, null, null);
+		writer.WriteProperty(options, PropNamespace, value.Namespace, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropOnFailure, value.OnFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));
+		writer.WriteProperty(options, PropTag, value.Tag, null, null);
 		writer.WriteEndObject();
 	}
 }

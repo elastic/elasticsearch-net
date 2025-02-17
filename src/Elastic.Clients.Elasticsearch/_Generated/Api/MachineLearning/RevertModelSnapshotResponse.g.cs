@@ -38,7 +38,7 @@ internal sealed partial class RevertModelSnapshotResponseConverter : System.Text
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshot> propModel = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propModel.TryRead(ref reader, options, PropModel))
+			if (propModel.TryReadProperty(ref reader, options, PropModel, null))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class RevertModelSnapshotResponseConverter : System.Text
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, RevertModelSnapshotResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropModel, value.Model);
+		writer.WriteProperty(options, PropModel, value.Model, null, null);
 		writer.WriteEndObject();
 	}
 }

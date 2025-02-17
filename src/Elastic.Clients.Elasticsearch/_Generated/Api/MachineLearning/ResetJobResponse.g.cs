@@ -38,7 +38,7 @@ internal sealed partial class ResetJobResponseConverter : System.Text.Json.Seria
 		LocalJsonValue<bool> propAcknowledged = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAcknowledged.TryRead(ref reader, options, PropAcknowledged))
+			if (propAcknowledged.TryReadProperty(ref reader, options, PropAcknowledged, null))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class ResetJobResponseConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ResetJobResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged);
+		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged, null, null);
 		writer.WriteEndObject();
 	}
 }

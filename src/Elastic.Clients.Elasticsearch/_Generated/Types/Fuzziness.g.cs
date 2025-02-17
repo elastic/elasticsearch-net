@@ -33,13 +33,52 @@ namespace Elastic.Clients.Elasticsearch;
 /// <summary>
 /// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/common-options.html#fuzziness">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
+[JsonConverter(typeof(FuzzinessConverter))]
 public sealed partial class Fuzziness : Union<string, int>
 {
-	public Fuzziness(string Fuzziness) : base(Fuzziness)
+	public Fuzziness(string fuzziness) : base(fuzziness)
 	{
 	}
 
-	public Fuzziness(int Fuzziness) : base(Fuzziness)
+	public Fuzziness(int fuzziness) : base(fuzziness)
 	{
+	}
+
+	public static implicit operator Fuzziness(string fuzziness) => new Fuzziness(fuzziness);
+	public static implicit operator Fuzziness(int fuzziness) => new Fuzziness(fuzziness);
+}
+
+internal sealed partial class FuzzinessConverter : System.Text.Json.Serialization.JsonConverter<Fuzziness>
+{
+	public override Fuzziness Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var selector = static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.Number);
+		return selector(ref reader, options) switch
+		{
+			Elastic.Clients.Elasticsearch.UnionTag.T1 => new Fuzziness(reader.ReadValue<string>(options, null)),
+			Elastic.Clients.Elasticsearch.UnionTag.T2 => new Fuzziness(reader.ReadValue<int>(options, null)),
+			_ => throw new System.InvalidOperationException($"Failed to select a union variant for type '{nameof(Fuzziness)}")
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Fuzziness value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value.Tag)
+		{
+			case Elastic.Clients.Elasticsearch.UnionTag.T1:
+				{
+					writer.WriteValue(options, value.Value1, null);
+					break;
+				}
+
+			case Elastic.Clients.Elasticsearch.UnionTag.T2:
+				{
+					writer.WriteValue(options, value.Value2, null);
+					break;
+				}
+
+			default:
+				throw new System.InvalidOperationException($"Unrecognized tag value: {value.Tag}");
+		}
 	}
 }

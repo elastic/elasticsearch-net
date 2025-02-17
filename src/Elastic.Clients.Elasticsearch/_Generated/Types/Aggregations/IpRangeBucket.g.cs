@@ -44,22 +44,22 @@ internal sealed partial class IpRangeBucketConverter : System.Text.Json.Serializ
 		LocalJsonValue<string?> propTo = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDocCount.TryRead(ref reader, options, PropDocCount))
+			if (propDocCount.TryReadProperty(ref reader, options, PropDocCount, null))
 			{
 				continue;
 			}
 
-			if (propFrom.TryRead(ref reader, options, PropFrom))
+			if (propFrom.TryReadProperty(ref reader, options, PropFrom, null))
 			{
 				continue;
 			}
 
-			if (propKey.TryRead(ref reader, options, PropKey))
+			if (propKey.TryReadProperty(ref reader, options, PropKey, null))
 			{
 				continue;
 			}
 
-			if (propTo.TryRead(ref reader, options, PropTo))
+			if (propTo.TryReadProperty(ref reader, options, PropTo, null))
 			{
 				continue;
 			}
@@ -87,10 +87,10 @@ internal sealed partial class IpRangeBucketConverter : System.Text.Json.Serializ
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, IpRangeBucket value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDocCount, value.DocCount);
-		writer.WriteProperty(options, PropFrom, value.From);
-		writer.WriteProperty(options, PropKey, value.Key);
-		writer.WriteProperty(options, PropTo, value.To);
+		writer.WriteProperty(options, PropDocCount, value.DocCount, null, null);
+		writer.WriteProperty(options, PropFrom, value.From, null, null);
+		writer.WriteProperty(options, PropKey, value.Key, null, null);
+		writer.WriteProperty(options, PropTo, value.To, null, null);
 		if (value.Aggregations is not null)
 		{
 			foreach (var item in value.Aggregations)

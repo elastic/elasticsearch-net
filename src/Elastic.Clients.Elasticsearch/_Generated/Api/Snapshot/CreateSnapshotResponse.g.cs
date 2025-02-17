@@ -40,12 +40,12 @@ internal sealed partial class CreateSnapshotResponseConverter : System.Text.Json
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo?> propSnapshot = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAccepted.TryRead(ref reader, options, PropAccepted))
+			if (propAccepted.TryReadProperty(ref reader, options, PropAccepted, null))
 			{
 				continue;
 			}
 
-			if (propSnapshot.TryRead(ref reader, options, PropSnapshot))
+			if (propSnapshot.TryReadProperty(ref reader, options, PropSnapshot, null))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class CreateSnapshotResponseConverter : System.Text.Json
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, CreateSnapshotResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAccepted, value.Accepted);
-		writer.WriteProperty(options, PropSnapshot, value.Snapshot);
+		writer.WriteProperty(options, PropAccepted, value.Accepted, null, null);
+		writer.WriteProperty(options, PropSnapshot, value.Snapshot, null, null);
 		writer.WriteEndObject();
 	}
 }

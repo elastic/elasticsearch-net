@@ -84,7 +84,7 @@ internal sealed partial class IndexUpdateAliasesActionConverter : System.Text.Js
 			{
 				variantType = VariantAdd.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.AddAction?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.AddAction?>(options, null);
 				continue;
 			}
 
@@ -92,7 +92,7 @@ internal sealed partial class IndexUpdateAliasesActionConverter : System.Text.Js
 			{
 				variantType = VariantRemove.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction?>(options, null);
 				continue;
 			}
 
@@ -100,7 +100,7 @@ internal sealed partial class IndexUpdateAliasesActionConverter : System.Text.Js
 			{
 				variantType = VariantRemoveIndex.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexAction?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexAction?>(options, null);
 				continue;
 			}
 
@@ -119,13 +119,13 @@ internal sealed partial class IndexUpdateAliasesActionConverter : System.Text.Js
 			case "":
 				break;
 			case "add":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.IndexManagement.AddAction?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.IndexManagement.AddAction?)value.Variant, null, null);
 				break;
 			case "remove":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction?)value.Variant, null, null);
 				break;
 			case "remove_index":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexAction?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexAction?)value.Variant, null, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(IndexUpdateAliasesAction)}'.");

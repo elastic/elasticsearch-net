@@ -61,7 +61,6 @@ internal sealed class DefaultRequestResponseSerializer : SystemTextJsonSerialize
 	{
 		if (typeof(IStreamSerializable).IsAssignableFrom(typeof(T)))
 		{
-			
 		}
 
 		return base.Deserialize<T>(stream);
@@ -71,7 +70,6 @@ internal sealed class DefaultRequestResponseSerializer : SystemTextJsonSerialize
 	{
 		if (typeof(IStreamSerializable).IsAssignableFrom(type))
 		{
-			
 		}
 
 		return base.Deserialize(type, stream);
@@ -81,7 +79,6 @@ internal sealed class DefaultRequestResponseSerializer : SystemTextJsonSerialize
 	{
 		if (typeof(IStreamSerializable).IsAssignableFrom(typeof(T)))
 		{
-			
 		}
 
 		return base.DeserializeAsync<T>(stream, cancellationToken);
@@ -91,7 +88,6 @@ internal sealed class DefaultRequestResponseSerializer : SystemTextJsonSerialize
 	{
 		if (typeof(IStreamSerializable).IsAssignableFrom(type))
 		{
-			
 		}
 
 		return base.DeserializeAsync(type, stream, cancellationToken);
@@ -149,8 +145,6 @@ internal sealed class DefaultRequestResponseSerializerOptionsProvider :
 
 		// Marker types
 		new SourceMarkerConverterFactory(settings),
-		new SingleOrManyMarkerConverterFactory(),
-		new FieldsMarkerConverter(),
 		new SingleOrManyFieldsMarkerConverter(),
 
 		// Explicitly registered before `IsADictionaryConverterFactory` as we want this specialised converter to match
@@ -158,9 +152,8 @@ internal sealed class DefaultRequestResponseSerializerOptionsProvider :
 		new IsADictionaryConverterFactory(),
 		new ResponseItemConverterFactory(),
 		new DictionaryResponseConverterFactory(settings),
-		new UnionConverter(),
-		// TODO: Remove after https://github.com/elastic/elasticsearch-specification/issues/2238 is implemented
 
+		// TODO: Remove after https://github.com/elastic/elasticsearch-specification/issues/2238 is implemented
 		new StringifiedBoolConverter(),
 		new StringifiedIntConverter(),
 		new StringifiedLongConverter(),

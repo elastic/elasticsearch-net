@@ -40,12 +40,12 @@ internal sealed partial class SearchableSnapshotsStatsResponseConverter : System
 		LocalJsonValue<object> propTotal = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propStats.TryRead(ref reader, options, PropStats))
+			if (propStats.TryReadProperty(ref reader, options, PropStats, null))
 			{
 				continue;
 			}
 
-			if (propTotal.TryRead(ref reader, options, PropTotal))
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class SearchableSnapshotsStatsResponseConverter : System
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, SearchableSnapshotsStatsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropStats, value.Stats);
-		writer.WriteProperty(options, PropTotal, value.Total);
+		writer.WriteProperty(options, PropStats, value.Stats, null, null);
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
 		writer.WriteEndObject();
 	}
 }

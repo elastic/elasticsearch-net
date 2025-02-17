@@ -55,52 +55,52 @@ internal sealed partial class IndexTemplateConverter : System.Text.Json.Serializ
 		LocalJsonValue<long?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAllowAutoCreate.TryRead(ref reader, options, PropAllowAutoCreate))
+			if (propAllowAutoCreate.TryReadProperty(ref reader, options, PropAllowAutoCreate, null))
 			{
 				continue;
 			}
 
-			if (propComposedOf.TryRead(ref reader, options, PropComposedOf))
+			if (propComposedOf.TryReadProperty(ref reader, options, PropComposedOf, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propDataStream.TryRead(ref reader, options, PropDataStream))
+			if (propDataStream.TryReadProperty(ref reader, options, PropDataStream, null))
 			{
 				continue;
 			}
 
-			if (propDeprecated.TryRead(ref reader, options, PropDeprecated))
+			if (propDeprecated.TryReadProperty(ref reader, options, PropDeprecated, null))
 			{
 				continue;
 			}
 
-			if (propIgnoreMissingComponentTemplates.TryRead(ref reader, options, PropIgnoreMissingComponentTemplates, typeof(SingleOrManyMarker<IReadOnlyCollection<string>?, string>)))
+			if (propIgnoreMissingComponentTemplates.TryReadProperty(ref reader, options, PropIgnoreMissingComponentTemplates, static IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propIndexPatterns.TryRead(ref reader, options, PropIndexPatterns, typeof(SingleOrManyMarker<IReadOnlyCollection<string>, string>)))
+			if (propIndexPatterns.TryReadProperty(ref reader, options, PropIndexPatterns, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propMeta.TryRead(ref reader, options, PropMeta))
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static IReadOnlyDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propPriority.TryRead(ref reader, options, PropPriority))
+			if (propPriority.TryReadProperty(ref reader, options, PropPriority, null))
 			{
 				continue;
 			}
 
-			if (propTemplate.TryRead(ref reader, options, PropTemplate))
+			if (propTemplate.TryReadProperty(ref reader, options, PropTemplate, null))
 			{
 				continue;
 			}
 
-			if (propVersion.TryRead(ref reader, options, PropVersion))
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
 			{
 				continue;
 			}
@@ -136,16 +136,16 @@ internal sealed partial class IndexTemplateConverter : System.Text.Json.Serializ
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, IndexTemplate value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAllowAutoCreate, value.AllowAutoCreate);
-		writer.WriteProperty(options, PropComposedOf, value.ComposedOf);
-		writer.WriteProperty(options, PropDataStream, value.DataStream);
-		writer.WriteProperty(options, PropDeprecated, value.Deprecated);
-		writer.WriteProperty(options, PropIgnoreMissingComponentTemplates, value.IgnoreMissingComponentTemplates, null, typeof(SingleOrManyMarker<IReadOnlyCollection<string>?, string>));
-		writer.WriteProperty(options, PropIndexPatterns, value.IndexPatterns, null, typeof(SingleOrManyMarker<IReadOnlyCollection<string>, string>));
-		writer.WriteProperty(options, PropMeta, value.Meta);
-		writer.WriteProperty(options, PropPriority, value.Priority);
-		writer.WriteProperty(options, PropTemplate, value.Template);
-		writer.WriteProperty(options, PropVersion, value.Version);
+		writer.WriteProperty(options, PropAllowAutoCreate, value.AllowAutoCreate, null, null);
+		writer.WriteProperty(options, PropComposedOf, value.ComposedOf, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropDataStream, value.DataStream, null, null);
+		writer.WriteProperty(options, PropDeprecated, value.Deprecated, null, null);
+		writer.WriteProperty(options, PropIgnoreMissingComponentTemplates, value.IgnoreMissingComponentTemplates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropIndexPatterns, value.IndexPatterns, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropPriority, value.Priority, null, null);
+		writer.WriteProperty(options, PropTemplate, value.Template, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();
 	}
 }

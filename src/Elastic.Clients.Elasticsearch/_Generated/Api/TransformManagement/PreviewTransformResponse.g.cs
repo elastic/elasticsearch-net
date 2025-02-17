@@ -40,12 +40,12 @@ internal sealed partial class PreviewTransformResponseConverter<TTransform> : Sy
 		LocalJsonValue<IReadOnlyCollection<TTransform>> propPreview = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propGeneratedDestIndex.TryRead(ref reader, options, PropGeneratedDestIndex))
+			if (propGeneratedDestIndex.TryReadProperty(ref reader, options, PropGeneratedDestIndex, null))
 			{
 				continue;
 			}
 
-			if (propPreview.TryRead(ref reader, options, PropPreview))
+			if (propPreview.TryReadProperty(ref reader, options, PropPreview, static IReadOnlyCollection<TTransform> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<TTransform>(o, static TTransform (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<TTransform>(o, typeof(SourceMarker<TTransform>))!)!))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class PreviewTransformResponseConverter<TTransform> : Sy
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, PreviewTransformResponse<TTransform> value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropGeneratedDestIndex, value.GeneratedDestIndex);
-		writer.WriteProperty(options, PropPreview, value.Preview);
+		writer.WriteProperty(options, PropGeneratedDestIndex, value.GeneratedDestIndex, null, null);
+		writer.WriteProperty(options, PropPreview, value.Preview, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<TTransform> v) => w.WriteCollectionValue<TTransform>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, TTransform v) => w.WriteValueEx<TTransform>(o, v, typeof(SourceMarker<TTransform>))));
 		writer.WriteEndObject();
 	}
 }

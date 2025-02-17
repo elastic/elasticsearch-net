@@ -50,37 +50,37 @@ internal sealed partial class MigrateToDataTiersResponseConverter : System.Text.
 		LocalJsonValue<string> propRemovedLegacyTemplate = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDryRun.TryRead(ref reader, options, PropDryRun))
+			if (propDryRun.TryReadProperty(ref reader, options, PropDryRun, null))
 			{
 				continue;
 			}
 
-			if (propMigratedComponentTemplates.TryRead(ref reader, options, PropMigratedComponentTemplates))
+			if (propMigratedComponentTemplates.TryReadProperty(ref reader, options, PropMigratedComponentTemplates, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propMigratedComposableTemplates.TryRead(ref reader, options, PropMigratedComposableTemplates))
+			if (propMigratedComposableTemplates.TryReadProperty(ref reader, options, PropMigratedComposableTemplates, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propMigratedIlmPolicies.TryRead(ref reader, options, PropMigratedIlmPolicies))
+			if (propMigratedIlmPolicies.TryReadProperty(ref reader, options, PropMigratedIlmPolicies, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propMigratedIndices.TryRead(ref reader, options, PropMigratedIndices, typeof(SingleOrManyMarker<IReadOnlyCollection<string>, string>)))
+			if (propMigratedIndices.TryReadProperty(ref reader, options, PropMigratedIndices, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propMigratedLegacyTemplates.TryRead(ref reader, options, PropMigratedLegacyTemplates))
+			if (propMigratedLegacyTemplates.TryReadProperty(ref reader, options, PropMigratedLegacyTemplates, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propRemovedLegacyTemplate.TryRead(ref reader, options, PropRemovedLegacyTemplate))
+			if (propRemovedLegacyTemplate.TryReadProperty(ref reader, options, PropRemovedLegacyTemplate, null))
 			{
 				continue;
 			}
@@ -110,13 +110,13 @@ internal sealed partial class MigrateToDataTiersResponseConverter : System.Text.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, MigrateToDataTiersResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDryRun, value.DryRun);
-		writer.WriteProperty(options, PropMigratedComponentTemplates, value.MigratedComponentTemplates);
-		writer.WriteProperty(options, PropMigratedComposableTemplates, value.MigratedComposableTemplates);
-		writer.WriteProperty(options, PropMigratedIlmPolicies, value.MigratedIlmPolicies);
-		writer.WriteProperty(options, PropMigratedIndices, value.MigratedIndices, null, typeof(SingleOrManyMarker<IReadOnlyCollection<string>, string>));
-		writer.WriteProperty(options, PropMigratedLegacyTemplates, value.MigratedLegacyTemplates);
-		writer.WriteProperty(options, PropRemovedLegacyTemplate, value.RemovedLegacyTemplate);
+		writer.WriteProperty(options, PropDryRun, value.DryRun, null, null);
+		writer.WriteProperty(options, PropMigratedComponentTemplates, value.MigratedComponentTemplates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropMigratedComposableTemplates, value.MigratedComposableTemplates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropMigratedIlmPolicies, value.MigratedIlmPolicies, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropMigratedIndices, value.MigratedIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropMigratedLegacyTemplates, value.MigratedLegacyTemplates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropRemovedLegacyTemplate, value.RemovedLegacyTemplate, null, null);
 		writer.WriteEndObject();
 	}
 }

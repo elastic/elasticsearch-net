@@ -50,37 +50,37 @@ internal sealed partial class GetTokenResponseConverter : System.Text.Json.Seria
 		LocalJsonValue<string> propType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAccessToken.TryRead(ref reader, options, PropAccessToken))
+			if (propAccessToken.TryReadProperty(ref reader, options, PropAccessToken, null))
 			{
 				continue;
 			}
 
-			if (propAuthentication.TryRead(ref reader, options, PropAuthentication))
+			if (propAuthentication.TryReadProperty(ref reader, options, PropAuthentication, null))
 			{
 				continue;
 			}
 
-			if (propExpiresIn.TryRead(ref reader, options, PropExpiresIn))
+			if (propExpiresIn.TryReadProperty(ref reader, options, PropExpiresIn, null))
 			{
 				continue;
 			}
 
-			if (propKerberosAuthenticationResponseToken.TryRead(ref reader, options, PropKerberosAuthenticationResponseToken))
+			if (propKerberosAuthenticationResponseToken.TryReadProperty(ref reader, options, PropKerberosAuthenticationResponseToken, null))
 			{
 				continue;
 			}
 
-			if (propRefreshToken.TryRead(ref reader, options, PropRefreshToken))
+			if (propRefreshToken.TryReadProperty(ref reader, options, PropRefreshToken, null))
 			{
 				continue;
 			}
 
-			if (propScope.TryRead(ref reader, options, PropScope))
+			if (propScope.TryReadProperty(ref reader, options, PropScope, null))
 			{
 				continue;
 			}
 
-			if (propType.TryRead(ref reader, options, PropType))
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
 			{
 				continue;
 			}
@@ -110,13 +110,13 @@ internal sealed partial class GetTokenResponseConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetTokenResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAccessToken, value.AccessToken);
-		writer.WriteProperty(options, PropAuthentication, value.Authentication);
-		writer.WriteProperty(options, PropExpiresIn, value.ExpiresIn);
-		writer.WriteProperty(options, PropKerberosAuthenticationResponseToken, value.KerberosAuthenticationResponseToken);
-		writer.WriteProperty(options, PropRefreshToken, value.RefreshToken);
-		writer.WriteProperty(options, PropScope, value.Scope);
-		writer.WriteProperty(options, PropType, value.Type);
+		writer.WriteProperty(options, PropAccessToken, value.AccessToken, null, null);
+		writer.WriteProperty(options, PropAuthentication, value.Authentication, null, null);
+		writer.WriteProperty(options, PropExpiresIn, value.ExpiresIn, null, null);
+		writer.WriteProperty(options, PropKerberosAuthenticationResponseToken, value.KerberosAuthenticationResponseToken, null, null);
+		writer.WriteProperty(options, PropRefreshToken, value.RefreshToken, null, null);
+		writer.WriteProperty(options, PropScope, value.Scope, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
 	}
 }

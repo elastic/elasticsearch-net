@@ -38,7 +38,7 @@ internal sealed partial class GetScriptContextResponseConverter : System.Text.Js
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.GetScriptContext.Context>> propContexts = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propContexts.TryRead(ref reader, options, PropContexts))
+			if (propContexts.TryReadProperty(ref reader, options, PropContexts, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.GetScriptContext.Context> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.GetScriptContext.Context>(o, null)!))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class GetScriptContextResponseConverter : System.Text.Js
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetScriptContextResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropContexts, value.Contexts);
+		writer.WriteProperty(options, PropContexts, value.Contexts, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.GetScriptContext.Context> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.GetScriptContext.Context>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

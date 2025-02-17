@@ -40,12 +40,12 @@ internal sealed partial class ClosePointInTimeResponseConverter : System.Text.Js
 		LocalJsonValue<bool> propSucceeded = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propNumFreed.TryRead(ref reader, options, PropNumFreed))
+			if (propNumFreed.TryReadProperty(ref reader, options, PropNumFreed, null))
 			{
 				continue;
 			}
 
-			if (propSucceeded.TryRead(ref reader, options, PropSucceeded))
+			if (propSucceeded.TryReadProperty(ref reader, options, PropSucceeded, null))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class ClosePointInTimeResponseConverter : System.Text.Js
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ClosePointInTimeResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropNumFreed, value.NumFreed);
-		writer.WriteProperty(options, PropSucceeded, value.Succeeded);
+		writer.WriteProperty(options, PropNumFreed, value.NumFreed, null, null);
+		writer.WriteProperty(options, PropSucceeded, value.Succeeded, null, null);
 		writer.WriteEndObject();
 	}
 }

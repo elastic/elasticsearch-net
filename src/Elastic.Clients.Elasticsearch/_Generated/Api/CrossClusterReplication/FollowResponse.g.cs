@@ -42,17 +42,17 @@ internal sealed partial class FollowResponseConverter : System.Text.Json.Seriali
 		LocalJsonValue<bool> propIndexFollowingStarted = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propFollowIndexCreated.TryRead(ref reader, options, PropFollowIndexCreated))
+			if (propFollowIndexCreated.TryReadProperty(ref reader, options, PropFollowIndexCreated, null))
 			{
 				continue;
 			}
 
-			if (propFollowIndexShardsAcked.TryRead(ref reader, options, PropFollowIndexShardsAcked))
+			if (propFollowIndexShardsAcked.TryReadProperty(ref reader, options, PropFollowIndexShardsAcked, null))
 			{
 				continue;
 			}
 
-			if (propIndexFollowingStarted.TryRead(ref reader, options, PropIndexFollowingStarted))
+			if (propIndexFollowingStarted.TryReadProperty(ref reader, options, PropIndexFollowingStarted, null))
 			{
 				continue;
 			}
@@ -74,9 +74,9 @@ internal sealed partial class FollowResponseConverter : System.Text.Json.Seriali
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, FollowResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFollowIndexCreated, value.FollowIndexCreated);
-		writer.WriteProperty(options, PropFollowIndexShardsAcked, value.FollowIndexShardsAcked);
-		writer.WriteProperty(options, PropIndexFollowingStarted, value.IndexFollowingStarted);
+		writer.WriteProperty(options, PropFollowIndexCreated, value.FollowIndexCreated, null, null);
+		writer.WriteProperty(options, PropFollowIndexShardsAcked, value.FollowIndexShardsAcked, null, null);
+		writer.WriteProperty(options, PropIndexFollowingStarted, value.IndexFollowingStarted, null, null);
 		writer.WriteEndObject();
 	}
 }

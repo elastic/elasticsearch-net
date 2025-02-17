@@ -45,27 +45,27 @@ internal sealed partial class RRFRetrieverConverter : System.Text.Json.Serializa
 		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.Retriever>> propRetrievers = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propFilter.TryRead(ref reader, options, PropFilter, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?, Elastic.Clients.Elasticsearch.QueryDsl.Query>)))
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, static ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, null)))
 			{
 				continue;
 			}
 
-			if (propMinScore.TryRead(ref reader, options, PropMinScore))
+			if (propMinScore.TryReadProperty(ref reader, options, PropMinScore, null))
 			{
 				continue;
 			}
 
-			if (propRankConstant.TryRead(ref reader, options, PropRankConstant))
+			if (propRankConstant.TryReadProperty(ref reader, options, PropRankConstant, null))
 			{
 				continue;
 			}
 
-			if (propRankWindowSize.TryRead(ref reader, options, PropRankWindowSize))
+			if (propRankWindowSize.TryReadProperty(ref reader, options, PropRankWindowSize, null))
 			{
 				continue;
 			}
 
-			if (propRetrievers.TryRead(ref reader, options, PropRetrievers))
+			if (propRetrievers.TryReadProperty(ref reader, options, PropRetrievers, static ICollection<Elastic.Clients.Elasticsearch.Retriever> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Retriever>(o, null)!))
 			{
 				continue;
 			}
@@ -91,11 +91,11 @@ internal sealed partial class RRFRetrieverConverter : System.Text.Json.Serializa
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, RRFRetriever value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFilter, value.Filter, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?, Elastic.Clients.Elasticsearch.QueryDsl.Query>));
-		writer.WriteProperty(options, PropMinScore, value.MinScore);
-		writer.WriteProperty(options, PropRankConstant, value.RankConstant);
-		writer.WriteProperty(options, PropRankWindowSize, value.RankWindowSize);
-		writer.WriteProperty(options, PropRetrievers, value.Retrievers);
+		writer.WriteProperty(options, PropFilter, value.Filter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, v, null));
+		writer.WriteProperty(options, PropMinScore, value.MinScore, null, null);
+		writer.WriteProperty(options, PropRankConstant, value.RankConstant, null, null);
+		writer.WriteProperty(options, PropRankWindowSize, value.RankWindowSize, null, null);
+		writer.WriteProperty(options, PropRetrievers, value.Retrievers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.Retriever> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Retriever>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

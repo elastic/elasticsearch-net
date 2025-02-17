@@ -54,47 +54,47 @@ internal sealed partial class ExplainAnalyzeTokenConverter : System.Text.Json.Se
 		LocalJsonValue<string> propType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBytes.TryRead(ref reader, options, PropBytes))
+			if (propBytes.TryReadProperty(ref reader, options, PropBytes, null))
 			{
 				continue;
 			}
 
-			if (propEndOffset.TryRead(ref reader, options, PropEndOffset))
+			if (propEndOffset.TryReadProperty(ref reader, options, PropEndOffset, null))
 			{
 				continue;
 			}
 
-			if (propKeyword.TryRead(ref reader, options, PropKeyword))
+			if (propKeyword.TryReadProperty(ref reader, options, PropKeyword, null))
 			{
 				continue;
 			}
 
-			if (propPosition.TryRead(ref reader, options, PropPosition))
+			if (propPosition.TryReadProperty(ref reader, options, PropPosition, null))
 			{
 				continue;
 			}
 
-			if (propPositionlength.TryRead(ref reader, options, PropPositionlength))
+			if (propPositionlength.TryReadProperty(ref reader, options, PropPositionlength, null))
 			{
 				continue;
 			}
 
-			if (propStartOffset.TryRead(ref reader, options, PropStartOffset))
+			if (propStartOffset.TryReadProperty(ref reader, options, PropStartOffset, null))
 			{
 				continue;
 			}
 
-			if (propTermfrequency.TryRead(ref reader, options, PropTermfrequency))
+			if (propTermfrequency.TryReadProperty(ref reader, options, PropTermfrequency, null))
 			{
 				continue;
 			}
 
-			if (propToken.TryRead(ref reader, options, PropToken))
+			if (propToken.TryReadProperty(ref reader, options, PropToken, null))
 			{
 				continue;
 			}
 
-			if (propType.TryRead(ref reader, options, PropType))
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
 			{
 				continue;
 			}
@@ -132,15 +132,15 @@ internal sealed partial class ExplainAnalyzeTokenConverter : System.Text.Json.Se
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ExplainAnalyzeToken value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBytes, value.Bytes);
-		writer.WriteProperty(options, PropEndOffset, value.EndOffset);
-		writer.WriteProperty(options, PropKeyword, value.Keyword);
-		writer.WriteProperty(options, PropPosition, value.Position);
-		writer.WriteProperty(options, PropPositionlength, value.Positionlength);
-		writer.WriteProperty(options, PropStartOffset, value.StartOffset);
-		writer.WriteProperty(options, PropTermfrequency, value.Termfrequency);
-		writer.WriteProperty(options, PropToken, value.Token);
-		writer.WriteProperty(options, PropType, value.Type);
+		writer.WriteProperty(options, PropBytes, value.Bytes, null, null);
+		writer.WriteProperty(options, PropEndOffset, value.EndOffset, null, null);
+		writer.WriteProperty(options, PropKeyword, value.Keyword, null, null);
+		writer.WriteProperty(options, PropPosition, value.Position, null, null);
+		writer.WriteProperty(options, PropPositionlength, value.Positionlength, null, null);
+		writer.WriteProperty(options, PropStartOffset, value.StartOffset, null, null);
+		writer.WriteProperty(options, PropTermfrequency, value.Termfrequency, null, null);
+		writer.WriteProperty(options, PropToken, value.Token, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
 		if (value.Attributes is not null)
 		{
 			foreach (var item in value.Attributes)

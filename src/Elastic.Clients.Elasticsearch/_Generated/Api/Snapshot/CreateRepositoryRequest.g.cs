@@ -58,12 +58,12 @@ internal sealed partial class CreateRepositoryRequestConverter : System.Text.Jso
 {
 	public override CreateRepositoryRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		return new CreateRepositoryRequest { Repository = reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.IRepository>(options) };
+		return new CreateRepositoryRequest { Repository = reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.IRepository>(options, null) };
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, CreateRepositoryRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
-		writer.WriteValue(options, value.Repository);
+		writer.WriteValue(options, value.Repository, null);
 	}
 }
 

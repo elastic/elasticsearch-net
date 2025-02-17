@@ -86,7 +86,7 @@ internal sealed partial class RoleMappingRuleConverter : System.Text.Json.Serial
 			{
 				variantType = VariantAll.Value;
 				reader.Read();
-				variant = reader.ReadValue<ICollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>?>(options);
+				variant = reader.ReadValue<ICollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>?>(options, static ICollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>(o, null));
 				continue;
 			}
 
@@ -94,7 +94,7 @@ internal sealed partial class RoleMappingRuleConverter : System.Text.Json.Serial
 			{
 				variantType = VariantAny.Value;
 				reader.Read();
-				variant = reader.ReadValue<ICollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>?>(options);
+				variant = reader.ReadValue<ICollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>?>(options, static ICollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>(o, null));
 				continue;
 			}
 
@@ -102,7 +102,7 @@ internal sealed partial class RoleMappingRuleConverter : System.Text.Json.Serial
 			{
 				variantType = VariantExcept.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Security.RoleMappingRule?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Security.RoleMappingRule?>(options, null);
 				continue;
 			}
 
@@ -110,7 +110,7 @@ internal sealed partial class RoleMappingRuleConverter : System.Text.Json.Serial
 			{
 				variantType = VariantField.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Security.FieldRule?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Security.FieldRule?>(options, null);
 				continue;
 			}
 
@@ -129,16 +129,16 @@ internal sealed partial class RoleMappingRuleConverter : System.Text.Json.Serial
 			case "":
 				break;
 			case "all":
-				writer.WriteProperty(options, value.VariantType, (ICollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (ICollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>?)value.Variant, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>(o, v, null));
 				break;
 			case "any":
-				writer.WriteProperty(options, value.VariantType, (ICollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (ICollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>?)value.Variant, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>(o, v, null));
 				break;
 			case "except":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Security.RoleMappingRule?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Security.RoleMappingRule?)value.Variant, null, null);
 				break;
 			case "field":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Security.FieldRule?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Security.FieldRule?)value.Variant, null, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(RoleMappingRule)}'.");

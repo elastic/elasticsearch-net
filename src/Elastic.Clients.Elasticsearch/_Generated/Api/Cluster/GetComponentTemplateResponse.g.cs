@@ -38,7 +38,7 @@ internal sealed partial class GetComponentTemplateResponseConverter : System.Tex
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ComponentTemplate>> propComponentTemplates = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propComponentTemplates.TryRead(ref reader, options, PropComponentTemplates))
+			if (propComponentTemplates.TryReadProperty(ref reader, options, PropComponentTemplates, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ComponentTemplate> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Cluster.ComponentTemplate>(o, null)!))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class GetComponentTemplateResponseConverter : System.Tex
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetComponentTemplateResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropComponentTemplates, value.ComponentTemplates);
+		writer.WriteProperty(options, PropComponentTemplates, value.ComponentTemplates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ComponentTemplate> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Cluster.ComponentTemplate>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

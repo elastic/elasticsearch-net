@@ -55,52 +55,52 @@ internal sealed partial class FingerprintProcessorConverter : System.Text.Json.S
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propTargetField = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDescription.TryRead(ref reader, options, PropDescription))
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
 			{
 				continue;
 			}
 
-			if (propFields.TryRead(ref reader, options, PropFields, typeof(SingleOrManyFieldsMarker)))
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static Elastic.Clients.Elasticsearch.Fields (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields>(o, typeof(SingleOrManyFieldsMarker))!))
 			{
 				continue;
 			}
 
-			if (propIf.TryRead(ref reader, options, PropIf))
+			if (propIf.TryReadProperty(ref reader, options, PropIf, null))
 			{
 				continue;
 			}
 
-			if (propIgnoreFailure.TryRead(ref reader, options, PropIgnoreFailure))
+			if (propIgnoreFailure.TryReadProperty(ref reader, options, PropIgnoreFailure, null))
 			{
 				continue;
 			}
 
-			if (propIgnoreMissing.TryRead(ref reader, options, PropIgnoreMissing))
+			if (propIgnoreMissing.TryReadProperty(ref reader, options, PropIgnoreMissing, null))
 			{
 				continue;
 			}
 
-			if (propMethod.TryRead(ref reader, options, PropMethod))
+			if (propMethod.TryReadProperty(ref reader, options, PropMethod, null))
 			{
 				continue;
 			}
 
-			if (propOnFailure.TryRead(ref reader, options, PropOnFailure))
+			if (propOnFailure.TryReadProperty(ref reader, options, PropOnFailure, static ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, null)))
 			{
 				continue;
 			}
 
-			if (propSalt.TryRead(ref reader, options, PropSalt))
+			if (propSalt.TryReadProperty(ref reader, options, PropSalt, null))
 			{
 				continue;
 			}
 
-			if (propTag.TryRead(ref reader, options, PropTag))
+			if (propTag.TryReadProperty(ref reader, options, PropTag, null))
 			{
 				continue;
 			}
 
-			if (propTargetField.TryRead(ref reader, options, PropTargetField))
+			if (propTargetField.TryReadProperty(ref reader, options, PropTargetField, null))
 			{
 				continue;
 			}
@@ -136,16 +136,16 @@ internal sealed partial class FingerprintProcessorConverter : System.Text.Json.S
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, FingerprintProcessor value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDescription, value.Description);
-		writer.WriteProperty(options, PropFields, value.Fields, null, typeof(SingleOrManyFieldsMarker));
-		writer.WriteProperty(options, PropIf, value.If);
-		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure);
-		writer.WriteProperty(options, PropIgnoreMissing, value.IgnoreMissing);
-		writer.WriteProperty(options, PropMethod, value.Method);
-		writer.WriteProperty(options, PropOnFailure, value.OnFailure);
-		writer.WriteProperty(options, PropSalt, value.Salt);
-		writer.WriteProperty(options, PropTag, value.Tag);
-		writer.WriteProperty(options, PropTargetField, value.TargetField);
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields>(o, v, typeof(SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropIf, value.If, null, null);
+		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure, null, null);
+		writer.WriteProperty(options, PropIgnoreMissing, value.IgnoreMissing, null, null);
+		writer.WriteProperty(options, PropMethod, value.Method, null, null);
+		writer.WriteProperty(options, PropOnFailure, value.OnFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));
+		writer.WriteProperty(options, PropSalt, value.Salt, null, null);
+		writer.WriteProperty(options, PropTag, value.Tag, null, null);
+		writer.WriteProperty(options, PropTargetField, value.TargetField, null, null);
 		writer.WriteEndObject();
 	}
 }

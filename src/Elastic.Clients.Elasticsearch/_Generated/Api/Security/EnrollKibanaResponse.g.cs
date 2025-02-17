@@ -40,12 +40,12 @@ internal sealed partial class EnrollKibanaResponseConverter : System.Text.Json.S
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.KibanaToken> propToken = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propHttpCa.TryRead(ref reader, options, PropHttpCa))
+			if (propHttpCa.TryReadProperty(ref reader, options, PropHttpCa, null))
 			{
 				continue;
 			}
 
-			if (propToken.TryRead(ref reader, options, PropToken))
+			if (propToken.TryReadProperty(ref reader, options, PropToken, null))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class EnrollKibanaResponseConverter : System.Text.Json.S
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, EnrollKibanaResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropHttpCa, value.HttpCa);
-		writer.WriteProperty(options, PropToken, value.Token);
+		writer.WriteProperty(options, PropHttpCa, value.HttpCa, null, null);
+		writer.WriteProperty(options, PropToken, value.Token, null, null);
 		writer.WriteEndObject();
 	}
 }

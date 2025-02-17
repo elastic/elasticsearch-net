@@ -57,57 +57,57 @@ internal sealed partial class MultisearchHeaderConverter : System.Text.Json.Seri
 		LocalJsonValue<Elastic.Clients.Elasticsearch.SearchType?> propSearchType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAllowNoIndices.TryRead(ref reader, options, PropAllowNoIndices))
+			if (propAllowNoIndices.TryReadProperty(ref reader, options, PropAllowNoIndices, null))
 			{
 				continue;
 			}
 
-			if (propAllowPartialSearchResults.TryRead(ref reader, options, PropAllowPartialSearchResults))
+			if (propAllowPartialSearchResults.TryReadProperty(ref reader, options, PropAllowPartialSearchResults, null))
 			{
 				continue;
 			}
 
-			if (propCcsMinimizeRoundtrips.TryRead(ref reader, options, PropCcsMinimizeRoundtrips))
+			if (propCcsMinimizeRoundtrips.TryReadProperty(ref reader, options, PropCcsMinimizeRoundtrips, null))
 			{
 				continue;
 			}
 
-			if (propExpandWildcards.TryRead(ref reader, options, PropExpandWildcards, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?, Elastic.Clients.Elasticsearch.ExpandWildcard>)))
+			if (propExpandWildcards.TryReadProperty(ref reader, options, PropExpandWildcards, static ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.ExpandWildcard>(o, null)))
 			{
 				continue;
 			}
 
-			if (propIgnoreThrottled.TryRead(ref reader, options, PropIgnoreThrottled))
+			if (propIgnoreThrottled.TryReadProperty(ref reader, options, PropIgnoreThrottled, null))
 			{
 				continue;
 			}
 
-			if (propIgnoreUnavailable.TryRead(ref reader, options, PropIgnoreUnavailable))
+			if (propIgnoreUnavailable.TryReadProperty(ref reader, options, PropIgnoreUnavailable, null))
 			{
 				continue;
 			}
 
-			if (propIndices.TryRead(ref reader, options, PropIndices))
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, null))
 			{
 				continue;
 			}
 
-			if (propPreference.TryRead(ref reader, options, PropPreference))
+			if (propPreference.TryReadProperty(ref reader, options, PropPreference, null))
 			{
 				continue;
 			}
 
-			if (propRequestCache.TryRead(ref reader, options, PropRequestCache))
+			if (propRequestCache.TryReadProperty(ref reader, options, PropRequestCache, null))
 			{
 				continue;
 			}
 
-			if (propRouting.TryRead(ref reader, options, PropRouting))
+			if (propRouting.TryReadProperty(ref reader, options, PropRouting, null))
 			{
 				continue;
 			}
 
-			if (propSearchType.TryRead(ref reader, options, PropSearchType))
+			if (propSearchType.TryReadProperty(ref reader, options, PropSearchType, null))
 			{
 				continue;
 			}
@@ -145,17 +145,17 @@ internal sealed partial class MultisearchHeaderConverter : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, MultisearchHeader value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAllowNoIndices, value.AllowNoIndices);
-		writer.WriteProperty(options, PropAllowPartialSearchResults, value.AllowPartialSearchResults);
-		writer.WriteProperty(options, PropCcsMinimizeRoundtrips, value.CcsMinimizeRoundtrips);
-		writer.WriteProperty(options, PropExpandWildcards, value.ExpandWildcards, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?, Elastic.Clients.Elasticsearch.ExpandWildcard>));
-		writer.WriteProperty(options, PropIgnoreThrottled, value.IgnoreThrottled);
-		writer.WriteProperty(options, PropIgnoreUnavailable, value.IgnoreUnavailable);
-		writer.WriteProperty(options, PropIndices, value.Indices);
-		writer.WriteProperty(options, PropPreference, value.Preference);
-		writer.WriteProperty(options, PropRequestCache, value.RequestCache);
-		writer.WriteProperty(options, PropRouting, value.Routing);
-		writer.WriteProperty(options, PropSearchType, value.SearchType);
+		writer.WriteProperty(options, PropAllowNoIndices, value.AllowNoIndices, null, null);
+		writer.WriteProperty(options, PropAllowPartialSearchResults, value.AllowPartialSearchResults, null, null);
+		writer.WriteProperty(options, PropCcsMinimizeRoundtrips, value.CcsMinimizeRoundtrips, null, null);
+		writer.WriteProperty(options, PropExpandWildcards, value.ExpandWildcards, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.ExpandWildcard>(o, v, null));
+		writer.WriteProperty(options, PropIgnoreThrottled, value.IgnoreThrottled, null, null);
+		writer.WriteProperty(options, PropIgnoreUnavailable, value.IgnoreUnavailable, null, null);
+		writer.WriteProperty(options, PropIndices, value.Indices, null, null);
+		writer.WriteProperty(options, PropPreference, value.Preference, null, null);
+		writer.WriteProperty(options, PropRequestCache, value.RequestCache, null, null);
+		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
+		writer.WriteProperty(options, PropSearchType, value.SearchType, null, null);
 		writer.WriteEndObject();
 	}
 }

@@ -38,7 +38,7 @@ internal sealed partial class StartTrainedModelDeploymentResponseConverter : Sys
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignment> propAssignment = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAssignment.TryRead(ref reader, options, PropAssignment))
+			if (propAssignment.TryReadProperty(ref reader, options, PropAssignment, null))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class StartTrainedModelDeploymentResponseConverter : Sys
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, StartTrainedModelDeploymentResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAssignment, value.Assignment);
+		writer.WriteProperty(options, PropAssignment, value.Assignment, null, null);
 		writer.WriteEndObject();
 	}
 }

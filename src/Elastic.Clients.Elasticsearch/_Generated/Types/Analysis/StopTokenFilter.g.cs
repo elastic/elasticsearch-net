@@ -46,22 +46,22 @@ internal sealed partial class StopTokenFilterConverter : System.Text.Json.Serial
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propIgnoreCase.TryRead(ref reader, options, PropIgnoreCase))
+			if (propIgnoreCase.TryReadProperty(ref reader, options, PropIgnoreCase, null))
 			{
 				continue;
 			}
 
-			if (propRemoveTrailing.TryRead(ref reader, options, PropRemoveTrailing))
+			if (propRemoveTrailing.TryReadProperty(ref reader, options, PropRemoveTrailing, null))
 			{
 				continue;
 			}
 
-			if (propStopwords.TryRead(ref reader, options, PropStopwords, typeof(SingleOrManyMarker<ICollection<string>?, string>)))
+			if (propStopwords.TryReadProperty(ref reader, options, PropStopwords, static ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propStopwordsPath.TryRead(ref reader, options, PropStopwordsPath))
+			if (propStopwordsPath.TryReadProperty(ref reader, options, PropStopwordsPath, null))
 			{
 				continue;
 			}
@@ -72,7 +72,7 @@ internal sealed partial class StopTokenFilterConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propVersion.TryRead(ref reader, options, PropVersion))
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
 			{
 				continue;
 			}
@@ -98,12 +98,12 @@ internal sealed partial class StopTokenFilterConverter : System.Text.Json.Serial
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, StopTokenFilter value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropIgnoreCase, value.IgnoreCase);
-		writer.WriteProperty(options, PropRemoveTrailing, value.RemoveTrailing);
-		writer.WriteProperty(options, PropStopwords, value.Stopwords, null, typeof(SingleOrManyMarker<ICollection<string>?, string>));
-		writer.WriteProperty(options, PropStopwordsPath, value.StopwordsPath);
-		writer.WriteProperty(options, PropType, value.Type);
-		writer.WriteProperty(options, PropVersion, value.Version);
+		writer.WriteProperty(options, PropIgnoreCase, value.IgnoreCase, null, null);
+		writer.WriteProperty(options, PropRemoveTrailing, value.RemoveTrailing, null, null);
+		writer.WriteProperty(options, PropStopwords, value.Stopwords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropStopwordsPath, value.StopwordsPath, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();
 	}
 }

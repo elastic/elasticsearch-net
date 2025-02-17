@@ -46,27 +46,27 @@ internal sealed partial class InfoResponseConverter : System.Text.Json.Serializa
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ElasticsearchVersionInfo> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propClusterName.TryRead(ref reader, options, PropClusterName))
+			if (propClusterName.TryReadProperty(ref reader, options, PropClusterName, null))
 			{
 				continue;
 			}
 
-			if (propClusterUuid.TryRead(ref reader, options, PropClusterUuid))
+			if (propClusterUuid.TryReadProperty(ref reader, options, PropClusterUuid, null))
 			{
 				continue;
 			}
 
-			if (propName.TryRead(ref reader, options, PropName))
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
 			{
 				continue;
 			}
 
-			if (propTagline.TryRead(ref reader, options, PropTagline))
+			if (propTagline.TryReadProperty(ref reader, options, PropTagline, null))
 			{
 				continue;
 			}
 
-			if (propVersion.TryRead(ref reader, options, PropVersion))
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
 			{
 				continue;
 			}
@@ -92,11 +92,11 @@ internal sealed partial class InfoResponseConverter : System.Text.Json.Serializa
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, InfoResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropClusterName, value.ClusterName);
-		writer.WriteProperty(options, PropClusterUuid, value.ClusterUuid);
-		writer.WriteProperty(options, PropName, value.Name);
-		writer.WriteProperty(options, PropTagline, value.Tagline);
-		writer.WriteProperty(options, PropVersion, value.Version);
+		writer.WriteProperty(options, PropClusterName, value.ClusterName, null, null);
+		writer.WriteProperty(options, PropClusterUuid, value.ClusterUuid, null, null);
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropTagline, value.Tagline, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();
 	}
 }

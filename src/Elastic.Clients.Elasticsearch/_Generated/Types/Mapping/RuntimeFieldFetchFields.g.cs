@@ -36,7 +36,7 @@ internal sealed partial class RuntimeFieldFetchFieldsConverter : System.Text.Jso
 	{
 		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
 		{
-			var value = reader.ReadValue<Elastic.Clients.Elasticsearch.Field>(options);
+			var value = reader.ReadValue<Elastic.Clients.Elasticsearch.Field>(options, null);
 			return new RuntimeFieldFetchFields { Field = value };
 		}
 
@@ -45,12 +45,12 @@ internal sealed partial class RuntimeFieldFetchFieldsConverter : System.Text.Jso
 		LocalJsonValue<string?> propFormat = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propField.TryRead(ref reader, options, PropField))
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
 			{
 				continue;
 			}
 
-			if (propFormat.TryRead(ref reader, options, PropFormat))
+			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
 			{
 				continue;
 			}
@@ -70,8 +70,8 @@ internal sealed partial class RuntimeFieldFetchFieldsConverter : System.Text.Jso
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, RuntimeFieldFetchFields value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropField, value.Field);
-		writer.WriteProperty(options, PropFormat, value.Format);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropFormat, value.Format, null, null);
 		writer.WriteEndObject();
 	}
 }

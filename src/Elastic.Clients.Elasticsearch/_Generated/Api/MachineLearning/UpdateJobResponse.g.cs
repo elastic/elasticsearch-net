@@ -78,107 +78,107 @@ internal sealed partial class UpdateJobResponseConverter : System.Text.Json.Seri
 		LocalJsonValue<long?> propResultsRetentionDays = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAllowLazyOpen.TryRead(ref reader, options, PropAllowLazyOpen))
+			if (propAllowLazyOpen.TryReadProperty(ref reader, options, PropAllowLazyOpen, null))
 			{
 				continue;
 			}
 
-			if (propAnalysisConfig.TryRead(ref reader, options, PropAnalysisConfig))
+			if (propAnalysisConfig.TryReadProperty(ref reader, options, PropAnalysisConfig, null))
 			{
 				continue;
 			}
 
-			if (propAnalysisLimits.TryRead(ref reader, options, PropAnalysisLimits))
+			if (propAnalysisLimits.TryReadProperty(ref reader, options, PropAnalysisLimits, null))
 			{
 				continue;
 			}
 
-			if (propBackgroundPersistInterval.TryRead(ref reader, options, PropBackgroundPersistInterval))
+			if (propBackgroundPersistInterval.TryReadProperty(ref reader, options, PropBackgroundPersistInterval, null))
 			{
 				continue;
 			}
 
-			if (propCreateTime.TryRead(ref reader, options, PropCreateTime))
+			if (propCreateTime.TryReadProperty(ref reader, options, PropCreateTime, null))
 			{
 				continue;
 			}
 
-			if (propCustomSettings.TryRead(ref reader, options, PropCustomSettings))
+			if (propCustomSettings.TryReadProperty(ref reader, options, PropCustomSettings, static IReadOnlyDictionary<string, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propDailyModelSnapshotRetentionAfterDays.TryRead(ref reader, options, PropDailyModelSnapshotRetentionAfterDays))
+			if (propDailyModelSnapshotRetentionAfterDays.TryReadProperty(ref reader, options, PropDailyModelSnapshotRetentionAfterDays, null))
 			{
 				continue;
 			}
 
-			if (propDataDescription.TryRead(ref reader, options, PropDataDescription))
+			if (propDataDescription.TryReadProperty(ref reader, options, PropDataDescription, null))
 			{
 				continue;
 			}
 
-			if (propDatafeedConfig.TryRead(ref reader, options, PropDatafeedConfig))
+			if (propDatafeedConfig.TryReadProperty(ref reader, options, PropDatafeedConfig, null))
 			{
 				continue;
 			}
 
-			if (propDescription.TryRead(ref reader, options, PropDescription))
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
 			{
 				continue;
 			}
 
-			if (propFinishedTime.TryRead(ref reader, options, PropFinishedTime))
+			if (propFinishedTime.TryReadProperty(ref reader, options, PropFinishedTime, null))
 			{
 				continue;
 			}
 
-			if (propGroups.TryRead(ref reader, options, PropGroups))
+			if (propGroups.TryReadProperty(ref reader, options, PropGroups, static IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propJobId.TryRead(ref reader, options, PropJobId))
+			if (propJobId.TryReadProperty(ref reader, options, PropJobId, null))
 			{
 				continue;
 			}
 
-			if (propJobType.TryRead(ref reader, options, PropJobType))
+			if (propJobType.TryReadProperty(ref reader, options, PropJobType, null))
 			{
 				continue;
 			}
 
-			if (propJobVersion.TryRead(ref reader, options, PropJobVersion))
+			if (propJobVersion.TryReadProperty(ref reader, options, PropJobVersion, null))
 			{
 				continue;
 			}
 
-			if (propModelPlotConfig.TryRead(ref reader, options, PropModelPlotConfig))
+			if (propModelPlotConfig.TryReadProperty(ref reader, options, PropModelPlotConfig, null))
 			{
 				continue;
 			}
 
-			if (propModelSnapshotId.TryRead(ref reader, options, PropModelSnapshotId))
+			if (propModelSnapshotId.TryReadProperty(ref reader, options, PropModelSnapshotId, null))
 			{
 				continue;
 			}
 
-			if (propModelSnapshotRetentionDays.TryRead(ref reader, options, PropModelSnapshotRetentionDays))
+			if (propModelSnapshotRetentionDays.TryReadProperty(ref reader, options, PropModelSnapshotRetentionDays, null))
 			{
 				continue;
 			}
 
-			if (propRenormalizationWindowDays.TryRead(ref reader, options, PropRenormalizationWindowDays))
+			if (propRenormalizationWindowDays.TryReadProperty(ref reader, options, PropRenormalizationWindowDays, null))
 			{
 				continue;
 			}
 
-			if (propResultsIndexName.TryRead(ref reader, options, PropResultsIndexName))
+			if (propResultsIndexName.TryReadProperty(ref reader, options, PropResultsIndexName, null))
 			{
 				continue;
 			}
 
-			if (propResultsRetentionDays.TryRead(ref reader, options, PropResultsRetentionDays))
+			if (propResultsRetentionDays.TryReadProperty(ref reader, options, PropResultsRetentionDays, null))
 			{
 				continue;
 			}
@@ -236,27 +236,27 @@ internal sealed partial class UpdateJobResponseConverter : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, UpdateJobResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAllowLazyOpen, value.AllowLazyOpen);
-		writer.WriteProperty(options, PropAnalysisConfig, value.AnalysisConfig);
-		writer.WriteProperty(options, PropAnalysisLimits, value.AnalysisLimits);
-		writer.WriteProperty(options, PropBackgroundPersistInterval, value.BackgroundPersistInterval);
-		writer.WriteProperty(options, PropCreateTime, value.CreateTime);
-		writer.WriteProperty(options, PropCustomSettings, value.CustomSettings);
-		writer.WriteProperty(options, PropDailyModelSnapshotRetentionAfterDays, value.DailyModelSnapshotRetentionAfterDays);
-		writer.WriteProperty(options, PropDataDescription, value.DataDescription);
-		writer.WriteProperty(options, PropDatafeedConfig, value.DatafeedConfig);
-		writer.WriteProperty(options, PropDescription, value.Description);
-		writer.WriteProperty(options, PropFinishedTime, value.FinishedTime);
-		writer.WriteProperty(options, PropGroups, value.Groups);
-		writer.WriteProperty(options, PropJobId, value.JobId);
-		writer.WriteProperty(options, PropJobType, value.JobType);
-		writer.WriteProperty(options, PropJobVersion, value.JobVersion);
-		writer.WriteProperty(options, PropModelPlotConfig, value.ModelPlotConfig);
-		writer.WriteProperty(options, PropModelSnapshotId, value.ModelSnapshotId);
-		writer.WriteProperty(options, PropModelSnapshotRetentionDays, value.ModelSnapshotRetentionDays);
-		writer.WriteProperty(options, PropRenormalizationWindowDays, value.RenormalizationWindowDays);
-		writer.WriteProperty(options, PropResultsIndexName, value.ResultsIndexName);
-		writer.WriteProperty(options, PropResultsRetentionDays, value.ResultsRetentionDays);
+		writer.WriteProperty(options, PropAllowLazyOpen, value.AllowLazyOpen, null, null);
+		writer.WriteProperty(options, PropAnalysisConfig, value.AnalysisConfig, null, null);
+		writer.WriteProperty(options, PropAnalysisLimits, value.AnalysisLimits, null, null);
+		writer.WriteProperty(options, PropBackgroundPersistInterval, value.BackgroundPersistInterval, null, null);
+		writer.WriteProperty(options, PropCreateTime, value.CreateTime, null, null);
+		writer.WriteProperty(options, PropCustomSettings, value.CustomSettings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropDailyModelSnapshotRetentionAfterDays, value.DailyModelSnapshotRetentionAfterDays, null, null);
+		writer.WriteProperty(options, PropDataDescription, value.DataDescription, null, null);
+		writer.WriteProperty(options, PropDatafeedConfig, value.DatafeedConfig, null, null);
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropFinishedTime, value.FinishedTime, null, null);
+		writer.WriteProperty(options, PropGroups, value.Groups, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropJobId, value.JobId, null, null);
+		writer.WriteProperty(options, PropJobType, value.JobType, null, null);
+		writer.WriteProperty(options, PropJobVersion, value.JobVersion, null, null);
+		writer.WriteProperty(options, PropModelPlotConfig, value.ModelPlotConfig, null, null);
+		writer.WriteProperty(options, PropModelSnapshotId, value.ModelSnapshotId, null, null);
+		writer.WriteProperty(options, PropModelSnapshotRetentionDays, value.ModelSnapshotRetentionDays, null, null);
+		writer.WriteProperty(options, PropRenormalizationWindowDays, value.RenormalizationWindowDays, null, null);
+		writer.WriteProperty(options, PropResultsIndexName, value.ResultsIndexName, null, null);
+		writer.WriteProperty(options, PropResultsRetentionDays, value.ResultsRetentionDays, null, null);
 		writer.WriteEndObject();
 	}
 }

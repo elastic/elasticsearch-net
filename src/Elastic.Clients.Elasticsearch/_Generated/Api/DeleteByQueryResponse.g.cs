@@ -68,82 +68,82 @@ internal sealed partial class DeleteByQueryResponseConverter : System.Text.Json.
 		LocalJsonValue<long?> propVersionConflicts = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBatches.TryRead(ref reader, options, PropBatches))
+			if (propBatches.TryReadProperty(ref reader, options, PropBatches, null))
 			{
 				continue;
 			}
 
-			if (propDeleted.TryRead(ref reader, options, PropDeleted))
+			if (propDeleted.TryReadProperty(ref reader, options, PropDeleted, null))
 			{
 				continue;
 			}
 
-			if (propFailures.TryRead(ref reader, options, PropFailures))
+			if (propFailures.TryReadProperty(ref reader, options, PropFailures, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure>(o, null)))
 			{
 				continue;
 			}
 
-			if (propNoops.TryRead(ref reader, options, PropNoops))
+			if (propNoops.TryReadProperty(ref reader, options, PropNoops, null))
 			{
 				continue;
 			}
 
-			if (propRequestsPerSecond.TryRead(ref reader, options, PropRequestsPerSecond))
+			if (propRequestsPerSecond.TryReadProperty(ref reader, options, PropRequestsPerSecond, null))
 			{
 				continue;
 			}
 
-			if (propRetries.TryRead(ref reader, options, PropRetries))
+			if (propRetries.TryReadProperty(ref reader, options, PropRetries, null))
 			{
 				continue;
 			}
 
-			if (propSliceId.TryRead(ref reader, options, PropSliceId))
+			if (propSliceId.TryReadProperty(ref reader, options, PropSliceId, null))
 			{
 				continue;
 			}
 
-			if (propTask.TryRead(ref reader, options, PropTask))
+			if (propTask.TryReadProperty(ref reader, options, PropTask, null))
 			{
 				continue;
 			}
 
-			if (propThrottled.TryRead(ref reader, options, PropThrottled))
+			if (propThrottled.TryReadProperty(ref reader, options, PropThrottled, null))
 			{
 				continue;
 			}
 
-			if (propThrottledMillis.TryRead(ref reader, options, PropThrottledMillis))
+			if (propThrottledMillis.TryReadProperty(ref reader, options, PropThrottledMillis, null))
 			{
 				continue;
 			}
 
-			if (propThrottledUntil.TryRead(ref reader, options, PropThrottledUntil))
+			if (propThrottledUntil.TryReadProperty(ref reader, options, PropThrottledUntil, null))
 			{
 				continue;
 			}
 
-			if (propThrottledUntilMillis.TryRead(ref reader, options, PropThrottledUntilMillis))
+			if (propThrottledUntilMillis.TryReadProperty(ref reader, options, PropThrottledUntilMillis, null))
 			{
 				continue;
 			}
 
-			if (propTimedOut.TryRead(ref reader, options, PropTimedOut))
+			if (propTimedOut.TryReadProperty(ref reader, options, PropTimedOut, null))
 			{
 				continue;
 			}
 
-			if (propTook.TryRead(ref reader, options, PropTook))
+			if (propTook.TryReadProperty(ref reader, options, PropTook, null))
 			{
 				continue;
 			}
 
-			if (propTotal.TryRead(ref reader, options, PropTotal))
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
 			{
 				continue;
 			}
 
-			if (propVersionConflicts.TryRead(ref reader, options, PropVersionConflicts))
+			if (propVersionConflicts.TryReadProperty(ref reader, options, PropVersionConflicts, null))
 			{
 				continue;
 			}
@@ -191,22 +191,22 @@ internal sealed partial class DeleteByQueryResponseConverter : System.Text.Json.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, DeleteByQueryResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBatches, value.Batches);
-		writer.WriteProperty(options, PropDeleted, value.Deleted);
-		writer.WriteProperty(options, PropFailures, value.Failures);
-		writer.WriteProperty(options, PropNoops, value.Noops);
-		writer.WriteProperty(options, PropRequestsPerSecond, value.RequestsPerSecond);
-		writer.WriteProperty(options, PropRetries, value.Retries);
-		writer.WriteProperty(options, PropSliceId, value.SliceId);
-		writer.WriteProperty(options, PropTask, value.Task);
-		writer.WriteProperty(options, PropThrottled, value.Throttled);
-		writer.WriteProperty(options, PropThrottledMillis, value.ThrottledMillis);
-		writer.WriteProperty(options, PropThrottledUntil, value.ThrottledUntil);
-		writer.WriteProperty(options, PropThrottledUntilMillis, value.ThrottledUntilMillis);
-		writer.WriteProperty(options, PropTimedOut, value.TimedOut);
-		writer.WriteProperty(options, PropTook, value.Took);
-		writer.WriteProperty(options, PropTotal, value.Total);
-		writer.WriteProperty(options, PropVersionConflicts, value.VersionConflicts);
+		writer.WriteProperty(options, PropBatches, value.Batches, null, null);
+		writer.WriteProperty(options, PropDeleted, value.Deleted, null, null);
+		writer.WriteProperty(options, PropFailures, value.Failures, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure>(o, v, null));
+		writer.WriteProperty(options, PropNoops, value.Noops, null, null);
+		writer.WriteProperty(options, PropRequestsPerSecond, value.RequestsPerSecond, null, null);
+		writer.WriteProperty(options, PropRetries, value.Retries, null, null);
+		writer.WriteProperty(options, PropSliceId, value.SliceId, null, null);
+		writer.WriteProperty(options, PropTask, value.Task, null, null);
+		writer.WriteProperty(options, PropThrottled, value.Throttled, null, null);
+		writer.WriteProperty(options, PropThrottledMillis, value.ThrottledMillis, null, null);
+		writer.WriteProperty(options, PropThrottledUntil, value.ThrottledUntil, null, null);
+		writer.WriteProperty(options, PropThrottledUntilMillis, value.ThrottledUntilMillis, null, null);
+		writer.WriteProperty(options, PropTimedOut, value.TimedOut, null, null);
+		writer.WriteProperty(options, PropTook, value.Took, null, null);
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
+		writer.WriteProperty(options, PropVersionConflicts, value.VersionConflicts, null, null);
 		writer.WriteEndObject();
 	}
 }

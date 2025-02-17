@@ -40,12 +40,12 @@ internal sealed partial class ListRulesetsResponseConverter : System.Text.Json.S
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRulesetListItem>> propResults = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCount.TryRead(ref reader, options, PropCount))
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
 			{
 				continue;
 			}
 
-			if (propResults.TryRead(ref reader, options, PropResults))
+			if (propResults.TryReadProperty(ref reader, options, PropResults, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRulesetListItem> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.QueryRules.QueryRulesetListItem>(o, null)!))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class ListRulesetsResponseConverter : System.Text.Json.S
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ListRulesetsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCount, value.Count);
-		writer.WriteProperty(options, PropResults, value.Results);
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropResults, value.Results, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRulesetListItem> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.QueryRules.QueryRulesetListItem>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

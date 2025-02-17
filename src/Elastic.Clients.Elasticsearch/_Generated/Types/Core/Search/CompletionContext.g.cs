@@ -46,27 +46,27 @@ internal sealed partial class CompletionContextConverter : System.Text.Json.Seri
 		LocalJsonValue<bool?> propPrefix = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBoost.TryRead(ref reader, options, PropBoost))
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
 			{
 				continue;
 			}
 
-			if (propContext.TryRead(ref reader, options, PropContext))
+			if (propContext.TryReadProperty(ref reader, options, PropContext, null))
 			{
 				continue;
 			}
 
-			if (propNeighbours.TryRead(ref reader, options, PropNeighbours))
+			if (propNeighbours.TryReadProperty(ref reader, options, PropNeighbours, static ICollection<Elastic.Clients.Elasticsearch.GeohashPrecision>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.GeohashPrecision>(o, null)))
 			{
 				continue;
 			}
 
-			if (propPrecision.TryRead(ref reader, options, PropPrecision))
+			if (propPrecision.TryReadProperty(ref reader, options, PropPrecision, null))
 			{
 				continue;
 			}
 
-			if (propPrefix.TryRead(ref reader, options, PropPrefix))
+			if (propPrefix.TryReadProperty(ref reader, options, PropPrefix, null))
 			{
 				continue;
 			}
@@ -74,7 +74,7 @@ internal sealed partial class CompletionContextConverter : System.Text.Json.Seri
 			try
 			{
 				reader = readerSnapshot;
-				var result = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.Context>(options);
+				var result = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.Context>(options, null);
 				return new CompletionContext { Context = result };
 			}
 			catch (System.Text.Json.JsonException)
@@ -101,11 +101,11 @@ internal sealed partial class CompletionContextConverter : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, CompletionContext value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBoost, value.Boost);
-		writer.WriteProperty(options, PropContext, value.Context);
-		writer.WriteProperty(options, PropNeighbours, value.Neighbours);
-		writer.WriteProperty(options, PropPrecision, value.Precision);
-		writer.WriteProperty(options, PropPrefix, value.Prefix);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropContext, value.Context, null, null);
+		writer.WriteProperty(options, PropNeighbours, value.Neighbours, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.GeohashPrecision>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.GeohashPrecision>(o, v, null));
+		writer.WriteProperty(options, PropPrecision, value.Precision, null, null);
+		writer.WriteProperty(options, PropPrefix, value.Prefix, null, null);
 		writer.WriteEndObject();
 	}
 }

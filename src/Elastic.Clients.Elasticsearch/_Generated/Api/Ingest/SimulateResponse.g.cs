@@ -38,7 +38,7 @@ internal sealed partial class SimulateResponseConverter : System.Text.Json.Seria
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.SimulateDocumentResult>> propDocs = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDocs.TryRead(ref reader, options, PropDocs))
+			if (propDocs.TryReadProperty(ref reader, options, PropDocs, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.SimulateDocumentResult> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Ingest.SimulateDocumentResult>(o, null)!))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class SimulateResponseConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, SimulateResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDocs, value.Docs);
+		writer.WriteProperty(options, PropDocs, value.Docs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.SimulateDocumentResult> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.SimulateDocumentResult>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

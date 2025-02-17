@@ -27,110 +27,6 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-internal sealed partial class LikeDocumentConverter : System.Text.Json.Serialization.JsonConverter<LikeDocument>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropDoc = System.Text.Json.JsonEncodedText.Encode("doc");
-	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
-	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id");
-	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("_index");
-	private static readonly System.Text.Json.JsonEncodedText PropPerFieldAnalyzer = System.Text.Json.JsonEncodedText.Encode("per_field_analyzer");
-	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
-	private static readonly System.Text.Json.JsonEncodedText PropVersionType = System.Text.Json.JsonEncodedText.Encode("version_type");
-
-	public override LikeDocument Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<object?> propDoc = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propFields = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propId = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName?> propIndex = default;
-		LocalJsonValue<IDictionary<Elastic.Clients.Elasticsearch.Field, string>?> propPerFieldAnalyzer = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Routing?> propRouting = default;
-		LocalJsonValue<long?> propVersion = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.VersionType?> propVersionType = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propDoc.TryRead(ref reader, options, PropDoc))
-			{
-				continue;
-			}
-
-			if (propFields.TryRead(ref reader, options, PropFields, typeof(FieldsMarker)))
-			{
-				continue;
-			}
-
-			if (propId.TryRead(ref reader, options, PropId))
-			{
-				continue;
-			}
-
-			if (propIndex.TryRead(ref reader, options, PropIndex))
-			{
-				continue;
-			}
-
-			if (propPerFieldAnalyzer.TryRead(ref reader, options, PropPerFieldAnalyzer))
-			{
-				continue;
-			}
-
-			if (propRouting.TryRead(ref reader, options, PropRouting))
-			{
-				continue;
-			}
-
-			if (propVersion.TryRead(ref reader, options, PropVersion))
-			{
-				continue;
-			}
-
-			if (propVersionType.TryRead(ref reader, options, PropVersionType))
-			{
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new LikeDocument
-		{
-			Doc = propDoc.Value
-,
-			Fields = propFields.Value
-,
-			Id = propId.Value
-,
-			Index = propIndex.Value
-,
-			PerFieldAnalyzer = propPerFieldAnalyzer.Value
-,
-			Routing = propRouting.Value
-,
-			Version = propVersion.Value
-,
-			VersionType = propVersionType.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, LikeDocument value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDoc, value.Doc);
-		writer.WriteProperty(options, PropFields, value.Fields, null, typeof(FieldsMarker));
-		writer.WriteProperty(options, PropId, value.Id);
-		writer.WriteProperty(options, PropIndex, value.Index);
-		writer.WriteProperty(options, PropPerFieldAnalyzer, value.PerFieldAnalyzer);
-		writer.WriteProperty(options, PropRouting, value.Routing);
-		writer.WriteProperty(options, PropVersion, value.Version);
-		writer.WriteProperty(options, PropVersionType, value.VersionType);
-		writer.WriteEndObject();
-	}
-}
-
-[JsonConverter(typeof(LikeDocumentConverter))]
 public sealed partial class LikeDocument
 {
 	/// <summary>
@@ -138,7 +34,9 @@ public sealed partial class LikeDocument
 	/// A document not present in the index.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("doc")]
 	public object? Doc { get; set; }
+	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
 	/// <summary>
@@ -146,6 +44,7 @@ public sealed partial class LikeDocument
 	/// ID of a document.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("_id")]
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
 	/// <summary>
@@ -153,6 +52,7 @@ public sealed partial class LikeDocument
 	/// Index of a document.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("_index")]
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
 	/// <summary>
@@ -160,9 +60,13 @@ public sealed partial class LikeDocument
 	/// Overrides the default analyzer.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("per_field_analyzer")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzer { get; set; }
+	[JsonInclude, JsonPropertyName("routing")]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
+	[JsonInclude, JsonPropertyName("version")]
 	public long? Version { get; set; }
+	[JsonInclude, JsonPropertyName("version_type")]
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
 }
 

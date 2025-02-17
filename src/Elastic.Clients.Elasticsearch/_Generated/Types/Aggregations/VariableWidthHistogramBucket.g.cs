@@ -50,37 +50,37 @@ internal sealed partial class VariableWidthHistogramBucketConverter : System.Tex
 		LocalJsonValue<string?> propMinAsString = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDocCount.TryRead(ref reader, options, PropDocCount))
+			if (propDocCount.TryReadProperty(ref reader, options, PropDocCount, null))
 			{
 				continue;
 			}
 
-			if (propKey.TryRead(ref reader, options, PropKey))
+			if (propKey.TryReadProperty(ref reader, options, PropKey, null))
 			{
 				continue;
 			}
 
-			if (propKeyAsString.TryRead(ref reader, options, PropKeyAsString))
+			if (propKeyAsString.TryReadProperty(ref reader, options, PropKeyAsString, null))
 			{
 				continue;
 			}
 
-			if (propMax.TryRead(ref reader, options, PropMax))
+			if (propMax.TryReadProperty(ref reader, options, PropMax, null))
 			{
 				continue;
 			}
 
-			if (propMaxAsString.TryRead(ref reader, options, PropMaxAsString))
+			if (propMaxAsString.TryReadProperty(ref reader, options, PropMaxAsString, null))
 			{
 				continue;
 			}
 
-			if (propMin.TryRead(ref reader, options, PropMin))
+			if (propMin.TryReadProperty(ref reader, options, PropMin, null))
 			{
 				continue;
 			}
 
-			if (propMinAsString.TryRead(ref reader, options, PropMinAsString))
+			if (propMinAsString.TryReadProperty(ref reader, options, PropMinAsString, null))
 			{
 				continue;
 			}
@@ -114,13 +114,13 @@ internal sealed partial class VariableWidthHistogramBucketConverter : System.Tex
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, VariableWidthHistogramBucket value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDocCount, value.DocCount);
-		writer.WriteProperty(options, PropKey, value.Key);
-		writer.WriteProperty(options, PropKeyAsString, value.KeyAsString);
-		writer.WriteProperty(options, PropMax, value.Max);
-		writer.WriteProperty(options, PropMaxAsString, value.MaxAsString);
-		writer.WriteProperty(options, PropMin, value.Min);
-		writer.WriteProperty(options, PropMinAsString, value.MinAsString);
+		writer.WriteProperty(options, PropDocCount, value.DocCount, null, null);
+		writer.WriteProperty(options, PropKey, value.Key, null, null);
+		writer.WriteProperty(options, PropKeyAsString, value.KeyAsString, null, null);
+		writer.WriteProperty(options, PropMax, value.Max, null, null);
+		writer.WriteProperty(options, PropMaxAsString, value.MaxAsString, null, null);
+		writer.WriteProperty(options, PropMin, value.Min, null, null);
+		writer.WriteProperty(options, PropMinAsString, value.MinAsString, null, null);
 		if (value.Aggregations is not null)
 		{
 			foreach (var item in value.Aggregations)

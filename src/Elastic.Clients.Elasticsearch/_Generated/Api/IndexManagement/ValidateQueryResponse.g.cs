@@ -44,22 +44,22 @@ internal sealed partial class ValidateQueryResponseConverter : System.Text.Json.
 		LocalJsonValue<bool> propValid = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propError.TryRead(ref reader, options, PropError))
+			if (propError.TryReadProperty(ref reader, options, PropError, null))
 			{
 				continue;
 			}
 
-			if (propExplanations.TryRead(ref reader, options, PropExplanations))
+			if (propExplanations.TryReadProperty(ref reader, options, PropExplanations, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.IndicesValidationExplanation>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.IndicesValidationExplanation>(o, null)))
 			{
 				continue;
 			}
 
-			if (propShards.TryRead(ref reader, options, PropShards))
+			if (propShards.TryReadProperty(ref reader, options, PropShards, null))
 			{
 				continue;
 			}
 
-			if (propValid.TryRead(ref reader, options, PropValid))
+			if (propValid.TryReadProperty(ref reader, options, PropValid, null))
 			{
 				continue;
 			}
@@ -83,10 +83,10 @@ internal sealed partial class ValidateQueryResponseConverter : System.Text.Json.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ValidateQueryResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropError, value.Error);
-		writer.WriteProperty(options, PropExplanations, value.Explanations);
-		writer.WriteProperty(options, PropShards, value.Shards);
-		writer.WriteProperty(options, PropValid, value.Valid);
+		writer.WriteProperty(options, PropError, value.Error, null, null);
+		writer.WriteProperty(options, PropExplanations, value.Explanations, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.IndicesValidationExplanation>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.IndicesValidationExplanation>(o, v, null));
+		writer.WriteProperty(options, PropShards, value.Shards, null, null);
+		writer.WriteProperty(options, PropValid, value.Valid, null, null);
 		writer.WriteEndObject();
 	}
 }

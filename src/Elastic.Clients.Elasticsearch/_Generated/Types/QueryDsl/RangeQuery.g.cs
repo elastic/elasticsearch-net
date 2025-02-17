@@ -37,7 +37,7 @@ internal sealed partial class RangeQueryConverter : System.Text.Json.Serializati
 {
 	public override IRangeQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		return reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery>(options);
+		return reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery>(options, null);
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, IRangeQuery value, System.Text.Json.JsonSerializerOptions options)
@@ -45,16 +45,16 @@ internal sealed partial class RangeQueryConverter : System.Text.Json.Serializati
 		switch (value)
 		{
 			case Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery v:
-				writer.WriteValue(options, v);
+				writer.WriteValue(options, v, null);
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery v:
-				writer.WriteValue(options, v);
+				writer.WriteValue(options, v, null);
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery v:
-				writer.WriteValue(options, v);
+				writer.WriteValue(options, v, null);
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery v:
-				writer.WriteValue(options, v);
+				writer.WriteValue(options, v, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.Type}' is not supported for type '{nameof(IRangeQuery)}'.");

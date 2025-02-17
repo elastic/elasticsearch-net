@@ -55,12 +55,12 @@ internal sealed partial class PutIpLocationDatabaseRequestConverter : System.Tex
 {
 	public override PutIpLocationDatabaseRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		return new PutIpLocationDatabaseRequest { Configuration = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration>(options) };
+		return new PutIpLocationDatabaseRequest { Configuration = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration>(options, null) };
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, PutIpLocationDatabaseRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
-		writer.WriteValue(options, value.Configuration);
+		writer.WriteValue(options, value.Configuration, null);
 	}
 }
 

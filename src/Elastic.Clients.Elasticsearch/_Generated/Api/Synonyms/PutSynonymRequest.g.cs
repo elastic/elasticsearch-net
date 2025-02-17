@@ -44,7 +44,7 @@ internal sealed partial class PutSynonymRequestConverter : System.Text.Json.Seri
 		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.Synonyms.SynonymRule>> propSynonymsSet = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propSynonymsSet.TryRead(ref reader, options, PropSynonymsSet, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.Synonyms.SynonymRule>, Elastic.Clients.Elasticsearch.Synonyms.SynonymRule>)))
+			if (propSynonymsSet.TryReadProperty(ref reader, options, PropSynonymsSet, static ICollection<Elastic.Clients.Elasticsearch.Synonyms.SynonymRule> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Synonyms.SynonymRule>(o, null)!))
 			{
 				continue;
 			}
@@ -62,7 +62,7 @@ internal sealed partial class PutSynonymRequestConverter : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, PutSynonymRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropSynonymsSet, value.SynonymsSet, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.Synonyms.SynonymRule>, Elastic.Clients.Elasticsearch.Synonyms.SynonymRule>));
+		writer.WriteProperty(options, PropSynonymsSet, value.SynonymsSet, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.Synonyms.SynonymRule> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Synonyms.SynonymRule>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

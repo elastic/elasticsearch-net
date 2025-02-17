@@ -38,7 +38,7 @@ internal sealed partial class ExplainDataLifecycleResponseConverter : System.Tex
 		LocalJsonValue<IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleExplain>> propIndices = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propIndices.TryRead(ref reader, options, PropIndices))
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, static IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleExplain> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleExplain>(o, null, null)!))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class ExplainDataLifecycleResponseConverter : System.Tex
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ExplainDataLifecycleResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropIndices, value.Indices);
+		writer.WriteProperty(options, PropIndices, value.Indices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleExplain> v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleExplain>(o, v, null, null));
 		writer.WriteEndObject();
 	}
 }

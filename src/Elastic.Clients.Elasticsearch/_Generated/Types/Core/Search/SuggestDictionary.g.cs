@@ -78,7 +78,7 @@ internal sealed partial class SuggestDictionaryConverter<TDocument> : System.Tex
 
 	internal static void ReadItem(ref System.Text.Json.Utf8JsonReader reader, System.Text.Json.JsonSerializerOptions options, out string name, out IReadOnlyCollection<ISuggest> value)
 	{
-		var key = reader.ReadPropertyName<string>(options);
+		var key = reader.ReadPropertyName<string>(options, null);
 		reader.Read();
 		var parts = key.Split('#');
 		if (parts.Length != 2)
@@ -90,9 +90,9 @@ internal sealed partial class SuggestDictionaryConverter<TDocument> : System.Tex
 		name = parts[1];
 		value = discriminator switch
 		{
-			"completion" => reader.ReadValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggest<TDocument>>>(options),
-			"phrase" => reader.ReadValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggest>>(options),
-			"term" => reader.ReadValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.TermSuggest>>(options),
+			"completion" => reader.ReadValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggest<TDocument>>>(options, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggest<TDocument>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggest<TDocument>>(o, null)!),
+			"phrase" => reader.ReadValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggest>>(options, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggest> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggest>(o, null)!),
+			"term" => reader.ReadValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.TermSuggest>>(options, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.TermSuggest> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.TermSuggest>(o, null)!),
 			_ => throw new System.Text.Json.JsonException($"Variant '{discriminator}' is not supported for type '{nameof(IReadOnlyCollection<ISuggest>)}'.")
 		};
 	}
@@ -103,13 +103,13 @@ internal sealed partial class SuggestDictionaryConverter<TDocument> : System.Tex
 		switch (value)
 		{
 			case IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggest<TDocument>> v:
-				writer.WriteProperty(options, key, v);
+				writer.WriteProperty(options, key, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggest<TDocument>> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggest<TDocument>>(o, v, null));
 				break;
 			case IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggest> v:
-				writer.WriteProperty(options, key, v);
+				writer.WriteProperty(options, key, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggest> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggest>(o, v, null));
 				break;
 			case IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.TermSuggest> v:
-				writer.WriteProperty(options, key, v);
+				writer.WriteProperty(options, key, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.TermSuggest> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.TermSuggest>(o, v, null));
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{0}' is not supported for type '{nameof(IReadOnlyCollection<ISuggest>)}'.");

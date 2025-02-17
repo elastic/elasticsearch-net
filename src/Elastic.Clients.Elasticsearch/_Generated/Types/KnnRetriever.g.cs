@@ -51,42 +51,42 @@ internal sealed partial class KnnRetrieverConverter : System.Text.Json.Serializa
 		LocalJsonValue<float?> propSimilarity = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propField.TryRead(ref reader, options, PropField))
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
 			{
 				continue;
 			}
 
-			if (propFilter.TryRead(ref reader, options, PropFilter, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?, Elastic.Clients.Elasticsearch.QueryDsl.Query>)))
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, static ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, null)))
 			{
 				continue;
 			}
 
-			if (propk.TryRead(ref reader, options, Propk))
+			if (propk.TryReadProperty(ref reader, options, Propk, null))
 			{
 				continue;
 			}
 
-			if (propMinScore.TryRead(ref reader, options, PropMinScore))
+			if (propMinScore.TryReadProperty(ref reader, options, PropMinScore, null))
 			{
 				continue;
 			}
 
-			if (propNumCandidates.TryRead(ref reader, options, PropNumCandidates))
+			if (propNumCandidates.TryReadProperty(ref reader, options, PropNumCandidates, null))
 			{
 				continue;
 			}
 
-			if (propQueryVector.TryRead(ref reader, options, PropQueryVector))
+			if (propQueryVector.TryReadProperty(ref reader, options, PropQueryVector, static ICollection<float>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<float>(o, null)))
 			{
 				continue;
 			}
 
-			if (propQueryVectorBuilder.TryRead(ref reader, options, PropQueryVectorBuilder))
+			if (propQueryVectorBuilder.TryReadProperty(ref reader, options, PropQueryVectorBuilder, null))
 			{
 				continue;
 			}
 
-			if (propSimilarity.TryRead(ref reader, options, PropSimilarity))
+			if (propSimilarity.TryReadProperty(ref reader, options, PropSimilarity, null))
 			{
 				continue;
 			}
@@ -118,14 +118,14 @@ internal sealed partial class KnnRetrieverConverter : System.Text.Json.Serializa
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, KnnRetriever value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropField, value.Field);
-		writer.WriteProperty(options, PropFilter, value.Filter, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?, Elastic.Clients.Elasticsearch.QueryDsl.Query>));
-		writer.WriteProperty(options, Propk, value.k);
-		writer.WriteProperty(options, PropMinScore, value.MinScore);
-		writer.WriteProperty(options, PropNumCandidates, value.NumCandidates);
-		writer.WriteProperty(options, PropQueryVector, value.QueryVector);
-		writer.WriteProperty(options, PropQueryVectorBuilder, value.QueryVectorBuilder);
-		writer.WriteProperty(options, PropSimilarity, value.Similarity);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropFilter, value.Filter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, v, null));
+		writer.WriteProperty(options, Propk, value.k, null, null);
+		writer.WriteProperty(options, PropMinScore, value.MinScore, null, null);
+		writer.WriteProperty(options, PropNumCandidates, value.NumCandidates, null, null);
+		writer.WriteProperty(options, PropQueryVector, value.QueryVector, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<float>? v) => w.WriteCollectionValue<float>(o, v, null));
+		writer.WriteProperty(options, PropQueryVectorBuilder, value.QueryVectorBuilder, null, null);
+		writer.WriteProperty(options, PropSimilarity, value.Similarity, null, null);
 		writer.WriteEndObject();
 	}
 }

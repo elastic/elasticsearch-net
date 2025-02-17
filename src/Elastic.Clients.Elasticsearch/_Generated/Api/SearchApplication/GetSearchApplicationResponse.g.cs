@@ -46,27 +46,27 @@ internal sealed partial class GetSearchApplicationResponseConverter : System.Tex
 		LocalJsonValue<long> propUpdatedAtMillis = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAnalyticsCollectionName.TryRead(ref reader, options, PropAnalyticsCollectionName))
+			if (propAnalyticsCollectionName.TryReadProperty(ref reader, options, PropAnalyticsCollectionName, null))
 			{
 				continue;
 			}
 
-			if (propIndices.TryRead(ref reader, options, PropIndices))
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propName.TryRead(ref reader, options, PropName))
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
 			{
 				continue;
 			}
 
-			if (propTemplate.TryRead(ref reader, options, PropTemplate))
+			if (propTemplate.TryReadProperty(ref reader, options, PropTemplate, null))
 			{
 				continue;
 			}
 
-			if (propUpdatedAtMillis.TryRead(ref reader, options, PropUpdatedAtMillis))
+			if (propUpdatedAtMillis.TryReadProperty(ref reader, options, PropUpdatedAtMillis, null))
 			{
 				continue;
 			}
@@ -92,11 +92,11 @@ internal sealed partial class GetSearchApplicationResponseConverter : System.Tex
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetSearchApplicationResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAnalyticsCollectionName, value.AnalyticsCollectionName);
-		writer.WriteProperty(options, PropIndices, value.Indices);
-		writer.WriteProperty(options, PropName, value.Name);
-		writer.WriteProperty(options, PropTemplate, value.Template);
-		writer.WriteProperty(options, PropUpdatedAtMillis, value.UpdatedAtMillis);
+		writer.WriteProperty(options, PropAnalyticsCollectionName, value.AnalyticsCollectionName, null, null);
+		writer.WriteProperty(options, PropIndices, value.Indices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropTemplate, value.Template, null, null);
+		writer.WriteProperty(options, PropUpdatedAtMillis, value.UpdatedAtMillis, null, null);
 		writer.WriteEndObject();
 	}
 }

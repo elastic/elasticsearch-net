@@ -41,17 +41,17 @@ internal sealed partial class ResolveIndexDataStreamsItemConverter : System.Text
 		LocalJsonValue<string> propTimestampField = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBackingIndices.TryRead(ref reader, options, PropBackingIndices, typeof(SingleOrManyMarker<IReadOnlyCollection<string>, string>)))
+			if (propBackingIndices.TryReadProperty(ref reader, options, PropBackingIndices, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propName.TryRead(ref reader, options, PropName))
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
 			{
 				continue;
 			}
 
-			if (propTimestampField.TryRead(ref reader, options, PropTimestampField))
+			if (propTimestampField.TryReadProperty(ref reader, options, PropTimestampField, null))
 			{
 				continue;
 			}
@@ -73,9 +73,9 @@ internal sealed partial class ResolveIndexDataStreamsItemConverter : System.Text
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ResolveIndexDataStreamsItem value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBackingIndices, value.BackingIndices, null, typeof(SingleOrManyMarker<IReadOnlyCollection<string>, string>));
-		writer.WriteProperty(options, PropName, value.Name);
-		writer.WriteProperty(options, PropTimestampField, value.TimestampField);
+		writer.WriteProperty(options, PropBackingIndices, value.BackingIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropTimestampField, value.TimestampField, null, null);
 		writer.WriteEndObject();
 	}
 }

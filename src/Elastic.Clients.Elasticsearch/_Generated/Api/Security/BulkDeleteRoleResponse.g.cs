@@ -42,17 +42,17 @@ internal sealed partial class BulkDeleteRoleResponseConverter : System.Text.Json
 		LocalJsonValue<IReadOnlyCollection<string>?> propNotFound = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDeleted.TryRead(ref reader, options, PropDeleted))
+			if (propDeleted.TryReadProperty(ref reader, options, PropDeleted, static IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propErrors.TryRead(ref reader, options, PropErrors))
+			if (propErrors.TryReadProperty(ref reader, options, PropErrors, null))
 			{
 				continue;
 			}
 
-			if (propNotFound.TryRead(ref reader, options, PropNotFound))
+			if (propNotFound.TryReadProperty(ref reader, options, PropNotFound, static IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
@@ -74,9 +74,9 @@ internal sealed partial class BulkDeleteRoleResponseConverter : System.Text.Json
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, BulkDeleteRoleResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDeleted, value.Deleted);
-		writer.WriteProperty(options, PropErrors, value.Errors);
-		writer.WriteProperty(options, PropNotFound, value.NotFound);
+		writer.WriteProperty(options, PropDeleted, value.Deleted, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropErrors, value.Errors, null, null);
+		writer.WriteProperty(options, PropNotFound, value.NotFound, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

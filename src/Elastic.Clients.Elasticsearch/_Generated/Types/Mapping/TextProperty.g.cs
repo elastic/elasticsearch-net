@@ -80,112 +80,112 @@ internal sealed partial class TextPropertyConverter : System.Text.Json.Serializa
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.TermVectorOption?> propTermVector = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAnalyzer.TryRead(ref reader, options, PropAnalyzer))
+			if (propAnalyzer.TryReadProperty(ref reader, options, PropAnalyzer, null))
 			{
 				continue;
 			}
 
-			if (propBoost.TryRead(ref reader, options, PropBoost))
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
 			{
 				continue;
 			}
 
-			if (propCopyTo.TryRead(ref reader, options, PropCopyTo, typeof(SingleOrManyFieldsMarker)))
+			if (propCopyTo.TryReadProperty(ref reader, options, PropCopyTo, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(SingleOrManyFieldsMarker))))
 			{
 				continue;
 			}
 
-			if (propDynamic.TryRead(ref reader, options, PropDynamic))
+			if (propDynamic.TryReadProperty(ref reader, options, PropDynamic, null))
 			{
 				continue;
 			}
 
-			if (propEagerGlobalOrdinals.TryRead(ref reader, options, PropEagerGlobalOrdinals))
+			if (propEagerGlobalOrdinals.TryReadProperty(ref reader, options, PropEagerGlobalOrdinals, null))
 			{
 				continue;
 			}
 
-			if (propFielddata.TryRead(ref reader, options, PropFielddata))
+			if (propFielddata.TryReadProperty(ref reader, options, PropFielddata, null))
 			{
 				continue;
 			}
 
-			if (propFielddataFrequencyFilter.TryRead(ref reader, options, PropFielddataFrequencyFilter))
+			if (propFielddataFrequencyFilter.TryReadProperty(ref reader, options, PropFielddataFrequencyFilter, null))
 			{
 				continue;
 			}
 
-			if (propFields.TryRead(ref reader, options, PropFields))
+			if (propFields.TryReadProperty(ref reader, options, PropFields, null))
 			{
 				continue;
 			}
 
-			if (propIgnoreAbove.TryRead(ref reader, options, PropIgnoreAbove))
+			if (propIgnoreAbove.TryReadProperty(ref reader, options, PropIgnoreAbove, null))
 			{
 				continue;
 			}
 
-			if (propIndex.TryRead(ref reader, options, PropIndex))
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
 			{
 				continue;
 			}
 
-			if (propIndexOptions.TryRead(ref reader, options, PropIndexOptions))
+			if (propIndexOptions.TryReadProperty(ref reader, options, PropIndexOptions, null))
 			{
 				continue;
 			}
 
-			if (propIndexPhrases.TryRead(ref reader, options, PropIndexPhrases))
+			if (propIndexPhrases.TryReadProperty(ref reader, options, PropIndexPhrases, null))
 			{
 				continue;
 			}
 
-			if (propIndexPrefixes.TryRead(ref reader, options, PropIndexPrefixes))
+			if (propIndexPrefixes.TryReadProperty(ref reader, options, PropIndexPrefixes, null))
 			{
 				continue;
 			}
 
-			if (propMeta.TryRead(ref reader, options, PropMeta))
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static IDictionary<string, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propNorms.TryRead(ref reader, options, PropNorms))
+			if (propNorms.TryReadProperty(ref reader, options, PropNorms, null))
 			{
 				continue;
 			}
 
-			if (propPositionIncrementGap.TryRead(ref reader, options, PropPositionIncrementGap))
+			if (propPositionIncrementGap.TryReadProperty(ref reader, options, PropPositionIncrementGap, null))
 			{
 				continue;
 			}
 
-			if (propProperties.TryRead(ref reader, options, PropProperties))
+			if (propProperties.TryReadProperty(ref reader, options, PropProperties, null))
 			{
 				continue;
 			}
 
-			if (propSearchAnalyzer.TryRead(ref reader, options, PropSearchAnalyzer))
+			if (propSearchAnalyzer.TryReadProperty(ref reader, options, PropSearchAnalyzer, null))
 			{
 				continue;
 			}
 
-			if (propSearchQuoteAnalyzer.TryRead(ref reader, options, PropSearchQuoteAnalyzer))
+			if (propSearchQuoteAnalyzer.TryReadProperty(ref reader, options, PropSearchQuoteAnalyzer, null))
 			{
 				continue;
 			}
 
-			if (propSimilarity.TryRead(ref reader, options, PropSimilarity))
+			if (propSimilarity.TryReadProperty(ref reader, options, PropSimilarity, null))
 			{
 				continue;
 			}
 
-			if (propStore.TryRead(ref reader, options, PropStore))
+			if (propStore.TryReadProperty(ref reader, options, PropStore, null))
 			{
 				continue;
 			}
 
-			if (propTermVector.TryRead(ref reader, options, PropTermVector))
+			if (propTermVector.TryReadProperty(ref reader, options, PropTermVector, null))
 			{
 				continue;
 			}
@@ -251,29 +251,29 @@ internal sealed partial class TextPropertyConverter : System.Text.Json.Serializa
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, TextProperty value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAnalyzer, value.Analyzer);
-		writer.WriteProperty(options, PropBoost, value.Boost);
-		writer.WriteProperty(options, PropCopyTo, value.CopyTo, null, typeof(SingleOrManyFieldsMarker));
-		writer.WriteProperty(options, PropDynamic, value.Dynamic);
-		writer.WriteProperty(options, PropEagerGlobalOrdinals, value.EagerGlobalOrdinals);
-		writer.WriteProperty(options, PropFielddata, value.Fielddata);
-		writer.WriteProperty(options, PropFielddataFrequencyFilter, value.FielddataFrequencyFilter);
-		writer.WriteProperty(options, PropFields, value.Fields);
-		writer.WriteProperty(options, PropIgnoreAbove, value.IgnoreAbove);
-		writer.WriteProperty(options, PropIndex, value.Index);
-		writer.WriteProperty(options, PropIndexOptions, value.IndexOptions);
-		writer.WriteProperty(options, PropIndexPhrases, value.IndexPhrases);
-		writer.WriteProperty(options, PropIndexPrefixes, value.IndexPrefixes);
-		writer.WriteProperty(options, PropMeta, value.Meta);
-		writer.WriteProperty(options, PropNorms, value.Norms);
-		writer.WriteProperty(options, PropPositionIncrementGap, value.PositionIncrementGap);
-		writer.WriteProperty(options, PropProperties, value.Properties);
-		writer.WriteProperty(options, PropSearchAnalyzer, value.SearchAnalyzer);
-		writer.WriteProperty(options, PropSearchQuoteAnalyzer, value.SearchQuoteAnalyzer);
-		writer.WriteProperty(options, PropSimilarity, value.Similarity);
-		writer.WriteProperty(options, PropStore, value.Store);
-		writer.WriteProperty(options, PropTermVector, value.TermVector);
-		writer.WriteProperty(options, PropType, value.Type);
+		writer.WriteProperty(options, PropAnalyzer, value.Analyzer, null, null);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropCopyTo, value.CopyTo, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropDynamic, value.Dynamic, null, null);
+		writer.WriteProperty(options, PropEagerGlobalOrdinals, value.EagerGlobalOrdinals, null, null);
+		writer.WriteProperty(options, PropFielddata, value.Fielddata, null, null);
+		writer.WriteProperty(options, PropFielddataFrequencyFilter, value.FielddataFrequencyFilter, null, null);
+		writer.WriteProperty(options, PropFields, value.Fields, null, null);
+		writer.WriteProperty(options, PropIgnoreAbove, value.IgnoreAbove, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropIndexOptions, value.IndexOptions, null, null);
+		writer.WriteProperty(options, PropIndexPhrases, value.IndexPhrases, null, null);
+		writer.WriteProperty(options, PropIndexPrefixes, value.IndexPrefixes, null, null);
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropNorms, value.Norms, null, null);
+		writer.WriteProperty(options, PropPositionIncrementGap, value.PositionIncrementGap, null, null);
+		writer.WriteProperty(options, PropProperties, value.Properties, null, null);
+		writer.WriteProperty(options, PropSearchAnalyzer, value.SearchAnalyzer, null, null);
+		writer.WriteProperty(options, PropSearchQuoteAnalyzer, value.SearchQuoteAnalyzer, null, null);
+		writer.WriteProperty(options, PropSimilarity, value.Similarity, null, null);
+		writer.WriteProperty(options, PropStore, value.Store, null, null);
+		writer.WriteProperty(options, PropTermVector, value.TermVector, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
 	}
 }

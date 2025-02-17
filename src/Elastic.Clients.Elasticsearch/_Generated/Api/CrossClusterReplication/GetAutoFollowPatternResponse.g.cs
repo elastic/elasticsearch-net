@@ -38,7 +38,7 @@ internal sealed partial class GetAutoFollowPatternResponseConverter : System.Tex
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowPattern>> propPatterns = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propPatterns.TryRead(ref reader, options, PropPatterns))
+			if (propPatterns.TryReadProperty(ref reader, options, PropPatterns, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowPattern> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowPattern>(o, null)!))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class GetAutoFollowPatternResponseConverter : System.Tex
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetAutoFollowPatternResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropPatterns, value.Patterns);
+		writer.WriteProperty(options, PropPatterns, value.Patterns, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowPattern> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowPattern>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

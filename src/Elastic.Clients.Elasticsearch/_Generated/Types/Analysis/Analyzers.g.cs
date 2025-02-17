@@ -229,7 +229,7 @@ internal sealed partial class AnalyzerInterfaceConverter : System.Text.Json.Seri
 		string? discriminator = "custom";
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TryReadProperty(options, PropDiscriminator, ref discriminator))
+			if (reader.TryReadProperty(options, PropDiscriminator, ref discriminator, null))
 			{
 				break;
 			}
@@ -240,56 +240,56 @@ internal sealed partial class AnalyzerInterfaceConverter : System.Text.Json.Seri
 		reader = readerSnapshot;
 		return discriminator switch
 		{
-			"arabic" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ArabicAnalyzer>(options),
-			"armenian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ArmenianAnalyzer>(options),
-			"basque" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.BasqueAnalyzer>(options),
-			"bengali" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.BengaliAnalyzer>(options),
-			"brazilian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.BrazilianAnalyzer>(options),
-			"bulgarian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.BulgarianAnalyzer>(options),
-			"catalan" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.CatalanAnalyzer>(options),
-			"chinese" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ChineseAnalyzer>(options),
-			"cjk" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.CjkAnalyzer>(options),
-			"custom" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.CustomAnalyzer>(options),
-			"czech" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.CzechAnalyzer>(options),
-			"danish" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.DanishAnalyzer>(options),
-			"dutch" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.DutchAnalyzer>(options),
-			"english" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.EnglishAnalyzer>(options),
-			"estonian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.EstonianAnalyzer>(options),
-			"fingerprint" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer>(options),
-			"finnish" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.FinnishAnalyzer>(options),
-			"french" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.FrenchAnalyzer>(options),
-			"galician" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.GalicianAnalyzer>(options),
-			"german" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.GermanAnalyzer>(options),
-			"greek" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.GreekAnalyzer>(options),
-			"hindi" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.HindiAnalyzer>(options),
-			"hungarian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.HungarianAnalyzer>(options),
-			"icu_analyzer" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzer>(options),
-			"indonesian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzer>(options),
-			"irish" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.IrishAnalyzer>(options),
-			"italian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzer>(options),
-			"keyword" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer>(options),
-			"kuromoji" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer>(options),
-			"language" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.LanguageAnalyzer>(options),
-			"latvian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.LatvianAnalyzer>(options),
-			"lithuanian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.LithuanianAnalyzer>(options),
-			"nori" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.NoriAnalyzer>(options),
-			"norwegian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.NorwegianAnalyzer>(options),
-			"pattern" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzer>(options),
-			"persian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PersianAnalyzer>(options),
-			"portuguese" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PortugueseAnalyzer>(options),
-			"romanian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.RomanianAnalyzer>(options),
-			"russian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.RussianAnalyzer>(options),
-			"serbian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SerbianAnalyzer>(options),
-			"simple" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SimpleAnalyzer>(options),
-			"snowball" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzer>(options),
-			"sorani" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SoraniAnalyzer>(options),
-			"spanish" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SpanishAnalyzer>(options),
-			"standard" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzer>(options),
-			"stop" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.StopAnalyzer>(options),
-			"swedish" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SwedishAnalyzer>(options),
-			"thai" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ThaiAnalyzer>(options),
-			"turkish" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.TurkishAnalyzer>(options),
-			"whitespace" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.WhitespaceAnalyzer>(options),
+			"arabic" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ArabicAnalyzer>(options, null),
+			"armenian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ArmenianAnalyzer>(options, null),
+			"basque" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.BasqueAnalyzer>(options, null),
+			"bengali" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.BengaliAnalyzer>(options, null),
+			"brazilian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.BrazilianAnalyzer>(options, null),
+			"bulgarian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.BulgarianAnalyzer>(options, null),
+			"catalan" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.CatalanAnalyzer>(options, null),
+			"chinese" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ChineseAnalyzer>(options, null),
+			"cjk" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.CjkAnalyzer>(options, null),
+			"custom" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.CustomAnalyzer>(options, null),
+			"czech" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.CzechAnalyzer>(options, null),
+			"danish" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.DanishAnalyzer>(options, null),
+			"dutch" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.DutchAnalyzer>(options, null),
+			"english" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.EnglishAnalyzer>(options, null),
+			"estonian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.EstonianAnalyzer>(options, null),
+			"fingerprint" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer>(options, null),
+			"finnish" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.FinnishAnalyzer>(options, null),
+			"french" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.FrenchAnalyzer>(options, null),
+			"galician" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.GalicianAnalyzer>(options, null),
+			"german" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.GermanAnalyzer>(options, null),
+			"greek" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.GreekAnalyzer>(options, null),
+			"hindi" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.HindiAnalyzer>(options, null),
+			"hungarian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.HungarianAnalyzer>(options, null),
+			"icu_analyzer" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzer>(options, null),
+			"indonesian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzer>(options, null),
+			"irish" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.IrishAnalyzer>(options, null),
+			"italian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzer>(options, null),
+			"keyword" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer>(options, null),
+			"kuromoji" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer>(options, null),
+			"language" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.LanguageAnalyzer>(options, null),
+			"latvian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.LatvianAnalyzer>(options, null),
+			"lithuanian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.LithuanianAnalyzer>(options, null),
+			"nori" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.NoriAnalyzer>(options, null),
+			"norwegian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.NorwegianAnalyzer>(options, null),
+			"pattern" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzer>(options, null),
+			"persian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PersianAnalyzer>(options, null),
+			"portuguese" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PortugueseAnalyzer>(options, null),
+			"romanian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.RomanianAnalyzer>(options, null),
+			"russian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.RussianAnalyzer>(options, null),
+			"serbian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SerbianAnalyzer>(options, null),
+			"simple" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SimpleAnalyzer>(options, null),
+			"snowball" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzer>(options, null),
+			"sorani" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SoraniAnalyzer>(options, null),
+			"spanish" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SpanishAnalyzer>(options, null),
+			"standard" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzer>(options, null),
+			"stop" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.StopAnalyzer>(options, null),
+			"swedish" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SwedishAnalyzer>(options, null),
+			"thai" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ThaiAnalyzer>(options, null),
+			"turkish" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.TurkishAnalyzer>(options, null),
+			"whitespace" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.WhitespaceAnalyzer>(options, null),
 			_ => throw new System.Text.Json.JsonException($"Variant '{discriminator}' is not supported for type '{nameof(IAnalyzer)}'.")
 		};
 	}
@@ -299,154 +299,154 @@ internal sealed partial class AnalyzerInterfaceConverter : System.Text.Json.Seri
 		switch (value.Type)
 		{
 			case "arabic":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ArabicAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ArabicAnalyzer)value, null);
 				break;
 			case "armenian":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ArmenianAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ArmenianAnalyzer)value, null);
 				break;
 			case "basque":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.BasqueAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.BasqueAnalyzer)value, null);
 				break;
 			case "bengali":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.BengaliAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.BengaliAnalyzer)value, null);
 				break;
 			case "brazilian":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.BrazilianAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.BrazilianAnalyzer)value, null);
 				break;
 			case "bulgarian":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.BulgarianAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.BulgarianAnalyzer)value, null);
 				break;
 			case "catalan":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.CatalanAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.CatalanAnalyzer)value, null);
 				break;
 			case "chinese":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ChineseAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ChineseAnalyzer)value, null);
 				break;
 			case "cjk":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.CjkAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.CjkAnalyzer)value, null);
 				break;
 			case "custom":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.CustomAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.CustomAnalyzer)value, null);
 				break;
 			case "czech":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.CzechAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.CzechAnalyzer)value, null);
 				break;
 			case "danish":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.DanishAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.DanishAnalyzer)value, null);
 				break;
 			case "dutch":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.DutchAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.DutchAnalyzer)value, null);
 				break;
 			case "english":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.EnglishAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.EnglishAnalyzer)value, null);
 				break;
 			case "estonian":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.EstonianAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.EstonianAnalyzer)value, null);
 				break;
 			case "fingerprint":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer)value, null);
 				break;
 			case "finnish":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.FinnishAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.FinnishAnalyzer)value, null);
 				break;
 			case "french":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.FrenchAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.FrenchAnalyzer)value, null);
 				break;
 			case "galician":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.GalicianAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.GalicianAnalyzer)value, null);
 				break;
 			case "german":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.GermanAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.GermanAnalyzer)value, null);
 				break;
 			case "greek":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.GreekAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.GreekAnalyzer)value, null);
 				break;
 			case "hindi":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.HindiAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.HindiAnalyzer)value, null);
 				break;
 			case "hungarian":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.HungarianAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.HungarianAnalyzer)value, null);
 				break;
 			case "icu_analyzer":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzer)value, null);
 				break;
 			case "indonesian":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzer)value, null);
 				break;
 			case "irish":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.IrishAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.IrishAnalyzer)value, null);
 				break;
 			case "italian":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzer)value, null);
 				break;
 			case "keyword":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer)value, null);
 				break;
 			case "kuromoji":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer)value, null);
 				break;
 			case "language":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.LanguageAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.LanguageAnalyzer)value, null);
 				break;
 			case "latvian":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.LatvianAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.LatvianAnalyzer)value, null);
 				break;
 			case "lithuanian":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.LithuanianAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.LithuanianAnalyzer)value, null);
 				break;
 			case "nori":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.NoriAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.NoriAnalyzer)value, null);
 				break;
 			case "norwegian":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.NorwegianAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.NorwegianAnalyzer)value, null);
 				break;
 			case "pattern":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzer)value, null);
 				break;
 			case "persian":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PersianAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PersianAnalyzer)value, null);
 				break;
 			case "portuguese":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PortugueseAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PortugueseAnalyzer)value, null);
 				break;
 			case "romanian":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.RomanianAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.RomanianAnalyzer)value, null);
 				break;
 			case "russian":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.RussianAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.RussianAnalyzer)value, null);
 				break;
 			case "serbian":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.SerbianAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.SerbianAnalyzer)value, null);
 				break;
 			case "simple":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.SimpleAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.SimpleAnalyzer)value, null);
 				break;
 			case "snowball":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzer)value, null);
 				break;
 			case "sorani":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.SoraniAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.SoraniAnalyzer)value, null);
 				break;
 			case "spanish":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.SpanishAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.SpanishAnalyzer)value, null);
 				break;
 			case "standard":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzer)value, null);
 				break;
 			case "stop":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.StopAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.StopAnalyzer)value, null);
 				break;
 			case "swedish":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.SwedishAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.SwedishAnalyzer)value, null);
 				break;
 			case "thai":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ThaiAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ThaiAnalyzer)value, null);
 				break;
 			case "turkish":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.TurkishAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.TurkishAnalyzer)value, null);
 				break;
 			case "whitespace":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.WhitespaceAnalyzer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.WhitespaceAnalyzer)value, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.Type}' is not supported for type '{nameof(IAnalyzer)}'.");

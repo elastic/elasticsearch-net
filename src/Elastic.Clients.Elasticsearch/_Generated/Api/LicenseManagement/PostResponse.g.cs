@@ -42,17 +42,17 @@ internal sealed partial class PostResponseConverter : System.Text.Json.Serializa
 		LocalJsonValue<Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus> propLicenseStatus = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAcknowledge.TryRead(ref reader, options, PropAcknowledge))
+			if (propAcknowledge.TryReadProperty(ref reader, options, PropAcknowledge, null))
 			{
 				continue;
 			}
 
-			if (propAcknowledged.TryRead(ref reader, options, PropAcknowledged))
+			if (propAcknowledged.TryReadProperty(ref reader, options, PropAcknowledged, null))
 			{
 				continue;
 			}
 
-			if (propLicenseStatus.TryRead(ref reader, options, PropLicenseStatus))
+			if (propLicenseStatus.TryReadProperty(ref reader, options, PropLicenseStatus, null))
 			{
 				continue;
 			}
@@ -74,9 +74,9 @@ internal sealed partial class PostResponseConverter : System.Text.Json.Serializa
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, PostResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAcknowledge, value.Acknowledge);
-		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged);
-		writer.WriteProperty(options, PropLicenseStatus, value.LicenseStatus);
+		writer.WriteProperty(options, PropAcknowledge, value.Acknowledge, null, null);
+		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged, null, null);
+		writer.WriteProperty(options, PropLicenseStatus, value.LicenseStatus, null, null);
 		writer.WriteEndObject();
 	}
 }

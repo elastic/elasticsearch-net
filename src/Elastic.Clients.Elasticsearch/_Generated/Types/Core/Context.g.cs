@@ -36,13 +36,52 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 /// </para>
 /// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/query-dsl-mlt-query.html#_document_input_parameters">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
+[JsonConverter(typeof(ContextConverter))]
 public sealed partial class Context : Union<string, Elastic.Clients.Elasticsearch.GeoLocation>
 {
-	public Context(string Category) : base(Category)
+	public Context(string category) : base(category)
 	{
 	}
 
-	public Context(Elastic.Clients.Elasticsearch.GeoLocation Location) : base(Location)
+	public Context(Elastic.Clients.Elasticsearch.GeoLocation location) : base(location)
 	{
+	}
+
+	public static implicit operator Context(string category) => new Context(category);
+	public static implicit operator Context(Elastic.Clients.Elasticsearch.GeoLocation location) => new Context(location);
+}
+
+internal sealed partial class ContextConverter : System.Text.Json.Serialization.JsonConverter<Context>
+{
+	public override Context Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var selector = static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByPropertyOfT1(ref r, o, "dummy");
+		return selector(ref reader, options) switch
+		{
+			Elastic.Clients.Elasticsearch.UnionTag.T1 => new Context(reader.ReadValue<string>(options, null)),
+			Elastic.Clients.Elasticsearch.UnionTag.T2 => new Context(reader.ReadValue<Elastic.Clients.Elasticsearch.GeoLocation>(options, null)),
+			_ => throw new System.InvalidOperationException($"Failed to select a union variant for type '{nameof(Context)}")
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Context value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value.Tag)
+		{
+			case Elastic.Clients.Elasticsearch.UnionTag.T1:
+				{
+					writer.WriteValue(options, value.Value1, null);
+					break;
+				}
+
+			case Elastic.Clients.Elasticsearch.UnionTag.T2:
+				{
+					writer.WriteValue(options, value.Value2, null);
+					break;
+				}
+
+			default:
+				throw new System.InvalidOperationException($"Unrecognized tag value: {value.Tag}");
+		}
 	}
 }

@@ -41,17 +41,17 @@ internal sealed partial class EqlHitsConverter<TEvent> : System.Text.Json.Serial
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.TotalHits?> propTotal = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propEvents.TryRead(ref reader, options, PropEvents))
+			if (propEvents.TryReadProperty(ref reader, options, PropEvents, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Eql.HitsEvent<TEvent>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Eql.HitsEvent<TEvent>>(o, null)))
 			{
 				continue;
 			}
 
-			if (propSequences.TryRead(ref reader, options, PropSequences))
+			if (propSequences.TryReadProperty(ref reader, options, PropSequences, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Eql.HitsSequence<TEvent>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Eql.HitsSequence<TEvent>>(o, null)))
 			{
 				continue;
 			}
 
-			if (propTotal.TryRead(ref reader, options, PropTotal))
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
 			{
 				continue;
 			}
@@ -73,9 +73,9 @@ internal sealed partial class EqlHitsConverter<TEvent> : System.Text.Json.Serial
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, EqlHits<TEvent> value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropEvents, value.Events);
-		writer.WriteProperty(options, PropSequences, value.Sequences);
-		writer.WriteProperty(options, PropTotal, value.Total);
+		writer.WriteProperty(options, PropEvents, value.Events, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Eql.HitsEvent<TEvent>>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Eql.HitsEvent<TEvent>>(o, v, null));
+		writer.WriteProperty(options, PropSequences, value.Sequences, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Eql.HitsSequence<TEvent>>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Eql.HitsSequence<TEvent>>(o, v, null));
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
 		writer.WriteEndObject();
 	}
 }

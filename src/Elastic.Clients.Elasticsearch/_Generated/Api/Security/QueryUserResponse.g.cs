@@ -42,17 +42,17 @@ internal sealed partial class QueryUserResponseConverter : System.Text.Json.Seri
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.QueryUser>> propUsers = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCount.TryRead(ref reader, options, PropCount))
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
 			{
 				continue;
 			}
 
-			if (propTotal.TryRead(ref reader, options, PropTotal))
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
 			{
 				continue;
 			}
 
-			if (propUsers.TryRead(ref reader, options, PropUsers))
+			if (propUsers.TryReadProperty(ref reader, options, PropUsers, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.QueryUser> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.QueryUser>(o, null)!))
 			{
 				continue;
 			}
@@ -74,9 +74,9 @@ internal sealed partial class QueryUserResponseConverter : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, QueryUserResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCount, value.Count);
-		writer.WriteProperty(options, PropTotal, value.Total);
-		writer.WriteProperty(options, PropUsers, value.Users);
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
+		writer.WriteProperty(options, PropUsers, value.Users, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.QueryUser> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.QueryUser>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

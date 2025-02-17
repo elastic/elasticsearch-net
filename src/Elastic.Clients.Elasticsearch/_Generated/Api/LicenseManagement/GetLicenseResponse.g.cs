@@ -38,7 +38,7 @@ internal sealed partial class GetLicenseResponseConverter : System.Text.Json.Ser
 		LocalJsonValue<Elastic.Clients.Elasticsearch.LicenseManagement.LicenseInformation> propLicense = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propLicense.TryRead(ref reader, options, PropLicense))
+			if (propLicense.TryReadProperty(ref reader, options, PropLicense, null))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class GetLicenseResponseConverter : System.Text.Json.Ser
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetLicenseResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropLicense, value.License);
+		writer.WriteProperty(options, PropLicense, value.License, null, null);
 		writer.WriteEndObject();
 	}
 }

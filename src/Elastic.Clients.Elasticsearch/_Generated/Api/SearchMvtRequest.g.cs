@@ -70,72 +70,72 @@ internal sealed partial class SearchMvtRequestConverter : System.Text.Json.Seria
 		LocalJsonValue<bool?> propWithLabels = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAggs.TryRead(ref reader, options, PropAggs))
+			if (propAggs.TryReadProperty(ref reader, options, PropAggs, static IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propBuffer.TryRead(ref reader, options, PropBuffer))
+			if (propBuffer.TryReadProperty(ref reader, options, PropBuffer, null))
 			{
 				continue;
 			}
 
-			if (propExactBounds.TryRead(ref reader, options, PropExactBounds))
+			if (propExactBounds.TryReadProperty(ref reader, options, PropExactBounds, null))
 			{
 				continue;
 			}
 
-			if (propExtent.TryRead(ref reader, options, PropExtent))
+			if (propExtent.TryReadProperty(ref reader, options, PropExtent, null))
 			{
 				continue;
 			}
 
-			if (propFields.TryRead(ref reader, options, PropFields, typeof(SingleOrManyFieldsMarker)))
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(SingleOrManyFieldsMarker))))
 			{
 				continue;
 			}
 
-			if (propGridAgg.TryRead(ref reader, options, PropGridAgg))
+			if (propGridAgg.TryReadProperty(ref reader, options, PropGridAgg, null))
 			{
 				continue;
 			}
 
-			if (propGridPrecision.TryRead(ref reader, options, PropGridPrecision))
+			if (propGridPrecision.TryReadProperty(ref reader, options, PropGridPrecision, null))
 			{
 				continue;
 			}
 
-			if (propGridType.TryRead(ref reader, options, PropGridType))
+			if (propGridType.TryReadProperty(ref reader, options, PropGridType, null))
 			{
 				continue;
 			}
 
-			if (propQuery.TryRead(ref reader, options, PropQuery))
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
 			{
 				continue;
 			}
 
-			if (propRuntimeMappings.TryRead(ref reader, options, PropRuntimeMappings))
+			if (propRuntimeMappings.TryReadProperty(ref reader, options, PropRuntimeMappings, static IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propSize.TryRead(ref reader, options, PropSize))
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
 			{
 				continue;
 			}
 
-			if (propSort.TryRead(ref reader, options, PropSort, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.SortOptions>?, Elastic.Clients.Elasticsearch.SortOptions>)))
+			if (propSort.TryReadProperty(ref reader, options, PropSort, static ICollection<Elastic.Clients.Elasticsearch.SortOptions>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.SortOptions>(o, null)))
 			{
 				continue;
 			}
 
-			if (propTrackTotalHits.TryRead(ref reader, options, PropTrackTotalHits))
+			if (propTrackTotalHits.TryReadProperty(ref reader, options, PropTrackTotalHits, null))
 			{
 				continue;
 			}
 
-			if (propWithLabels.TryRead(ref reader, options, PropWithLabels))
+			if (propWithLabels.TryReadProperty(ref reader, options, PropWithLabels, null))
 			{
 				continue;
 			}
@@ -179,20 +179,20 @@ internal sealed partial class SearchMvtRequestConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, SearchMvtRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAggs, value.Aggs);
-		writer.WriteProperty(options, PropBuffer, value.Buffer);
-		writer.WriteProperty(options, PropExactBounds, value.ExactBounds);
-		writer.WriteProperty(options, PropExtent, value.Extent);
-		writer.WriteProperty(options, PropFields, value.Fields, null, typeof(SingleOrManyFieldsMarker));
-		writer.WriteProperty(options, PropGridAgg, value.GridAgg);
-		writer.WriteProperty(options, PropGridPrecision, value.GridPrecision);
-		writer.WriteProperty(options, PropGridType, value.GridType);
-		writer.WriteProperty(options, PropQuery, value.Query);
-		writer.WriteProperty(options, PropRuntimeMappings, value.RuntimeMappings);
-		writer.WriteProperty(options, PropSize, value.Size);
-		writer.WriteProperty(options, PropSort, value.Sort, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.SortOptions>?, Elastic.Clients.Elasticsearch.SortOptions>));
-		writer.WriteProperty(options, PropTrackTotalHits, value.TrackTotalHits);
-		writer.WriteProperty(options, PropWithLabels, value.WithLabels);
+		writer.WriteProperty(options, PropAggs, value.Aggs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>(o, v, null, null));
+		writer.WriteProperty(options, PropBuffer, value.Buffer, null, null);
+		writer.WriteProperty(options, PropExactBounds, value.ExactBounds, null, null);
+		writer.WriteProperty(options, PropExtent, value.Extent, null, null);
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropGridAgg, value.GridAgg, null, null);
+		writer.WriteProperty(options, PropGridPrecision, value.GridPrecision, null, null);
+		writer.WriteProperty(options, PropGridType, value.GridType, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropRuntimeMappings, value.RuntimeMappings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, v, null, null));
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropSort, value.Sort, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.SortOptions>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.SortOptions>(o, v, null));
+		writer.WriteProperty(options, PropTrackTotalHits, value.TrackTotalHits, null, null);
+		writer.WriteProperty(options, PropWithLabels, value.WithLabels, null, null);
 		writer.WriteEndObject();
 	}
 }

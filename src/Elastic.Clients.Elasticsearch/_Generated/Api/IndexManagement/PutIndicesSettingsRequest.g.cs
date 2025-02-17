@@ -96,12 +96,12 @@ internal sealed partial class PutIndicesSettingsRequestConverter : System.Text.J
 {
 	public override PutIndicesSettingsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		return new PutIndicesSettingsRequest { Settings = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings>(options) };
+		return new PutIndicesSettingsRequest { Settings = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings>(options, null) };
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, PutIndicesSettingsRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
-		writer.WriteValue(options, value.Settings);
+		writer.WriteValue(options, value.Settings, null);
 	}
 }
 

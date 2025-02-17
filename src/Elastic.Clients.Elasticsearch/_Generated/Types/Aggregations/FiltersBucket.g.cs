@@ -38,7 +38,7 @@ internal sealed partial class FiltersBucketConverter : System.Text.Json.Serializ
 		LocalJsonValue<long> propDocCount = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDocCount.TryRead(ref reader, options, PropDocCount))
+			if (propDocCount.TryReadProperty(ref reader, options, PropDocCount, null))
 			{
 				continue;
 			}
@@ -60,7 +60,7 @@ internal sealed partial class FiltersBucketConverter : System.Text.Json.Serializ
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, FiltersBucket value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDocCount, value.DocCount);
+		writer.WriteProperty(options, PropDocCount, value.DocCount, null, null);
 		if (value.Aggregations is not null)
 		{
 			foreach (var item in value.Aggregations)

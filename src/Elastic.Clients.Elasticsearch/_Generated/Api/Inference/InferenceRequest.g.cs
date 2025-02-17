@@ -54,17 +54,17 @@ internal sealed partial class InferenceRequestConverter : System.Text.Json.Seria
 		LocalJsonValue<object?> propTaskSettings = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propInput.TryRead(ref reader, options, PropInput, typeof(SingleOrManyMarker<ICollection<string>, string>)))
+			if (propInput.TryReadProperty(ref reader, options, PropInput, static ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propQuery.TryRead(ref reader, options, PropQuery))
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
 			{
 				continue;
 			}
 
-			if (propTaskSettings.TryRead(ref reader, options, PropTaskSettings))
+			if (propTaskSettings.TryReadProperty(ref reader, options, PropTaskSettings, null))
 			{
 				continue;
 			}
@@ -86,9 +86,9 @@ internal sealed partial class InferenceRequestConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, InferenceRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropInput, value.Input, null, typeof(SingleOrManyMarker<ICollection<string>, string>));
-		writer.WriteProperty(options, PropQuery, value.Query);
-		writer.WriteProperty(options, PropTaskSettings, value.TaskSettings);
+		writer.WriteProperty(options, PropInput, value.Input, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string> v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropTaskSettings, value.TaskSettings, null, null);
 		writer.WriteEndObject();
 	}
 }

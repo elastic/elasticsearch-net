@@ -46,27 +46,27 @@ internal sealed partial class CustomAnalyzerConverter : System.Text.Json.Seriali
 		LocalJsonValue<string> propTokenizer = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCharFilter.TryRead(ref reader, options, PropCharFilter, typeof(SingleOrManyMarker<ICollection<string>?, string>)))
+			if (propCharFilter.TryReadProperty(ref reader, options, PropCharFilter, static ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propFilter.TryRead(ref reader, options, PropFilter, typeof(SingleOrManyMarker<ICollection<string>?, string>)))
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, static ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propPositionIncrementGap.TryRead(ref reader, options, PropPositionIncrementGap))
+			if (propPositionIncrementGap.TryReadProperty(ref reader, options, PropPositionIncrementGap, null))
 			{
 				continue;
 			}
 
-			if (propPositionOffsetGap.TryRead(ref reader, options, PropPositionOffsetGap))
+			if (propPositionOffsetGap.TryReadProperty(ref reader, options, PropPositionOffsetGap, null))
 			{
 				continue;
 			}
 
-			if (propTokenizer.TryRead(ref reader, options, PropTokenizer))
+			if (propTokenizer.TryReadProperty(ref reader, options, PropTokenizer, null))
 			{
 				continue;
 			}
@@ -98,12 +98,12 @@ internal sealed partial class CustomAnalyzerConverter : System.Text.Json.Seriali
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, CustomAnalyzer value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCharFilter, value.CharFilter, null, typeof(SingleOrManyMarker<ICollection<string>?, string>));
-		writer.WriteProperty(options, PropFilter, value.Filter, null, typeof(SingleOrManyMarker<ICollection<string>?, string>));
-		writer.WriteProperty(options, PropPositionIncrementGap, value.PositionIncrementGap);
-		writer.WriteProperty(options, PropPositionOffsetGap, value.PositionOffsetGap);
-		writer.WriteProperty(options, PropTokenizer, value.Tokenizer);
-		writer.WriteProperty(options, PropType, value.Type);
+		writer.WriteProperty(options, PropCharFilter, value.CharFilter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropFilter, value.Filter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropPositionIncrementGap, value.PositionIncrementGap, null, null);
+		writer.WriteProperty(options, PropPositionOffsetGap, value.PositionOffsetGap, null, null);
+		writer.WriteProperty(options, PropTokenizer, value.Tokenizer, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
 	}
 }

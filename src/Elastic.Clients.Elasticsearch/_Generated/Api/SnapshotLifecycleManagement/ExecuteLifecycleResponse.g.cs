@@ -38,7 +38,7 @@ internal sealed partial class ExecuteLifecycleResponseConverter : System.Text.Js
 		LocalJsonValue<string> propSnapshotName = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propSnapshotName.TryRead(ref reader, options, PropSnapshotName))
+			if (propSnapshotName.TryReadProperty(ref reader, options, PropSnapshotName, null))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class ExecuteLifecycleResponseConverter : System.Text.Js
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ExecuteLifecycleResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropSnapshotName, value.SnapshotName);
+		writer.WriteProperty(options, PropSnapshotName, value.SnapshotName, null, null);
 		writer.WriteEndObject();
 	}
 }

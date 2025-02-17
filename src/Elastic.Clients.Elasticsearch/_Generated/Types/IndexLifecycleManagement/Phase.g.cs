@@ -27,11 +27,53 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+internal sealed partial class PhaseConverter : System.Text.Json.Serialization.JsonConverter<Phase>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropActions = System.Text.Json.JsonEncodedText.Encode("actions");
+	private static readonly System.Text.Json.JsonEncodedText PropMinAge = System.Text.Json.JsonEncodedText.Encode("min_age");
+
+	public override Phase Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions?> propActions = default;
+		LocalJsonValue<Union<Elastic.Clients.Elasticsearch.Duration, long>?> propMinAge = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propActions.TryReadProperty(ref reader, options, PropActions, null))
+			{
+				continue;
+			}
+
+			if (propMinAge.TryReadProperty(ref reader, options, PropMinAge, static Union<Elastic.Clients.Elasticsearch.Duration, long>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<Elastic.Clients.Elasticsearch.Duration, long>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByPropertyOfT1(ref r, o, "dummy"), null, null)))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Phase
+		{
+			Actions = propActions.Value
+,
+			MinAge = propMinAge.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Phase value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropActions, value.Actions, null, null);
+		writer.WriteProperty(options, PropMinAge, value.MinAge, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Union<Elastic.Clients.Elasticsearch.Duration, long>? v) => w.WriteUnionValue<Elastic.Clients.Elasticsearch.Duration, long>(o, v, null, null));
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(PhaseConverter))]
 public sealed partial class Phase
 {
-	[JsonInclude, JsonPropertyName("actions")]
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions? Actions { get; set; }
-	[JsonInclude, JsonPropertyName("min_age")]
 	public Union<Elastic.Clients.Elasticsearch.Duration, long>? MinAge { get; set; }
 }
 

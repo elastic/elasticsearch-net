@@ -38,7 +38,7 @@ internal sealed partial class StartJobResponseConverter : System.Text.Json.Seria
 		LocalJsonValue<bool> propStarted = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propStarted.TryRead(ref reader, options, PropStarted))
+			if (propStarted.TryReadProperty(ref reader, options, PropStarted, null))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class StartJobResponseConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, StartJobResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropStarted, value.Started);
+		writer.WriteProperty(options, PropStarted, value.Started, null, null);
 		writer.WriteEndObject();
 	}
 }

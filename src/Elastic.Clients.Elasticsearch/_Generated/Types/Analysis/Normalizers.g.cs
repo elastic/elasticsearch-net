@@ -85,7 +85,7 @@ internal sealed partial class NormalizerInterfaceConverter : System.Text.Json.Se
 		string? discriminator = "custom";
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TryReadProperty(options, PropDiscriminator, ref discriminator))
+			if (reader.TryReadProperty(options, PropDiscriminator, ref discriminator, null))
 			{
 				break;
 			}
@@ -96,8 +96,8 @@ internal sealed partial class NormalizerInterfaceConverter : System.Text.Json.Se
 		reader = readerSnapshot;
 		return discriminator switch
 		{
-			"custom" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer>(options),
-			"lowercase" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizer>(options),
+			"custom" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer>(options, null),
+			"lowercase" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizer>(options, null),
 			_ => throw new System.Text.Json.JsonException($"Variant '{discriminator}' is not supported for type '{nameof(INormalizer)}'.")
 		};
 	}
@@ -107,10 +107,10 @@ internal sealed partial class NormalizerInterfaceConverter : System.Text.Json.Se
 		switch (value.Type)
 		{
 			case "custom":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer)value, null);
 				break;
 			case "lowercase":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizer)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizer)value, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.Type}' is not supported for type '{nameof(INormalizer)}'.");

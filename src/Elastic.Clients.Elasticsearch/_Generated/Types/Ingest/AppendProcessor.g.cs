@@ -51,42 +51,42 @@ internal sealed partial class AppendProcessorConverter : System.Text.Json.Serial
 		LocalJsonValue<ICollection<object>> propValue = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAllowDuplicates.TryRead(ref reader, options, PropAllowDuplicates))
+			if (propAllowDuplicates.TryReadProperty(ref reader, options, PropAllowDuplicates, null))
 			{
 				continue;
 			}
 
-			if (propDescription.TryRead(ref reader, options, PropDescription))
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
 			{
 				continue;
 			}
 
-			if (propField.TryRead(ref reader, options, PropField))
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
 			{
 				continue;
 			}
 
-			if (propIf.TryRead(ref reader, options, PropIf))
+			if (propIf.TryReadProperty(ref reader, options, PropIf, null))
 			{
 				continue;
 			}
 
-			if (propIgnoreFailure.TryRead(ref reader, options, PropIgnoreFailure))
+			if (propIgnoreFailure.TryReadProperty(ref reader, options, PropIgnoreFailure, null))
 			{
 				continue;
 			}
 
-			if (propOnFailure.TryRead(ref reader, options, PropOnFailure))
+			if (propOnFailure.TryReadProperty(ref reader, options, PropOnFailure, static ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, null)))
 			{
 				continue;
 			}
 
-			if (propTag.TryRead(ref reader, options, PropTag))
+			if (propTag.TryReadProperty(ref reader, options, PropTag, null))
 			{
 				continue;
 			}
 
-			if (propValue.TryRead(ref reader, options, PropValue, typeof(SingleOrManyMarker<ICollection<object>, object>)))
+			if (propValue.TryReadProperty(ref reader, options, PropValue, static ICollection<object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<object>(o, null)!))
 			{
 				continue;
 			}
@@ -118,14 +118,14 @@ internal sealed partial class AppendProcessorConverter : System.Text.Json.Serial
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, AppendProcessor value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAllowDuplicates, value.AllowDuplicates);
-		writer.WriteProperty(options, PropDescription, value.Description);
-		writer.WriteProperty(options, PropField, value.Field);
-		writer.WriteProperty(options, PropIf, value.If);
-		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure);
-		writer.WriteProperty(options, PropOnFailure, value.OnFailure);
-		writer.WriteProperty(options, PropTag, value.Tag);
-		writer.WriteProperty(options, PropValue, value.Value, null, typeof(SingleOrManyMarker<ICollection<object>, object>));
+		writer.WriteProperty(options, PropAllowDuplicates, value.AllowDuplicates, null, null);
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropIf, value.If, null, null);
+		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure, null, null);
+		writer.WriteProperty(options, PropOnFailure, value.OnFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));
+		writer.WriteProperty(options, PropTag, value.Tag, null, null);
+		writer.WriteProperty(options, PropValue, value.Value, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<object> v) => w.WriteSingleOrManyCollectionValue<object>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

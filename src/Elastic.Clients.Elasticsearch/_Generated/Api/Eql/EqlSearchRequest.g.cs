@@ -85,87 +85,87 @@ internal sealed partial class EqlSearchRequestConverter : System.Text.Json.Seria
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propWaitForCompletionTimeout = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAllowPartialSearchResults.TryRead(ref reader, options, PropAllowPartialSearchResults))
+			if (propAllowPartialSearchResults.TryReadProperty(ref reader, options, PropAllowPartialSearchResults, null))
 			{
 				continue;
 			}
 
-			if (propAllowPartialSequenceResults.TryRead(ref reader, options, PropAllowPartialSequenceResults))
+			if (propAllowPartialSequenceResults.TryReadProperty(ref reader, options, PropAllowPartialSequenceResults, null))
 			{
 				continue;
 			}
 
-			if (propCaseSensitive.TryRead(ref reader, options, PropCaseSensitive))
+			if (propCaseSensitive.TryReadProperty(ref reader, options, PropCaseSensitive, null))
 			{
 				continue;
 			}
 
-			if (propEventCategoryField.TryRead(ref reader, options, PropEventCategoryField))
+			if (propEventCategoryField.TryReadProperty(ref reader, options, PropEventCategoryField, null))
 			{
 				continue;
 			}
 
-			if (propFetchSize.TryRead(ref reader, options, PropFetchSize))
+			if (propFetchSize.TryReadProperty(ref reader, options, PropFetchSize, null))
 			{
 				continue;
 			}
 
-			if (propFields.TryRead(ref reader, options, PropFields, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?, Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>)))
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>(o, null)))
 			{
 				continue;
 			}
 
-			if (propFilter.TryRead(ref reader, options, PropFilter, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?, Elastic.Clients.Elasticsearch.QueryDsl.Query>)))
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, static ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, null)))
 			{
 				continue;
 			}
 
-			if (propKeepAlive.TryRead(ref reader, options, PropKeepAlive))
+			if (propKeepAlive.TryReadProperty(ref reader, options, PropKeepAlive, null))
 			{
 				continue;
 			}
 
-			if (propKeepOnCompletion.TryRead(ref reader, options, PropKeepOnCompletion))
+			if (propKeepOnCompletion.TryReadProperty(ref reader, options, PropKeepOnCompletion, null))
 			{
 				continue;
 			}
 
-			if (propMaxSamplesPerKey.TryRead(ref reader, options, PropMaxSamplesPerKey))
+			if (propMaxSamplesPerKey.TryReadProperty(ref reader, options, PropMaxSamplesPerKey, null))
 			{
 				continue;
 			}
 
-			if (propQuery.TryRead(ref reader, options, PropQuery))
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
 			{
 				continue;
 			}
 
-			if (propResultPosition.TryRead(ref reader, options, PropResultPosition))
+			if (propResultPosition.TryReadProperty(ref reader, options, PropResultPosition, null))
 			{
 				continue;
 			}
 
-			if (propRuntimeMappings.TryRead(ref reader, options, PropRuntimeMappings))
+			if (propRuntimeMappings.TryReadProperty(ref reader, options, PropRuntimeMappings, static IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propSize.TryRead(ref reader, options, PropSize))
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
 			{
 				continue;
 			}
 
-			if (propTiebreakerField.TryRead(ref reader, options, PropTiebreakerField))
+			if (propTiebreakerField.TryReadProperty(ref reader, options, PropTiebreakerField, null))
 			{
 				continue;
 			}
 
-			if (propTimestampField.TryRead(ref reader, options, PropTimestampField))
+			if (propTimestampField.TryReadProperty(ref reader, options, PropTimestampField, null))
 			{
 				continue;
 			}
 
-			if (propWaitForCompletionTimeout.TryRead(ref reader, options, PropWaitForCompletionTimeout))
+			if (propWaitForCompletionTimeout.TryReadProperty(ref reader, options, PropWaitForCompletionTimeout, null))
 			{
 				continue;
 			}
@@ -215,23 +215,23 @@ internal sealed partial class EqlSearchRequestConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, EqlSearchRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAllowPartialSearchResults, value.AllowPartialSearchResults);
-		writer.WriteProperty(options, PropAllowPartialSequenceResults, value.AllowPartialSequenceResults);
-		writer.WriteProperty(options, PropCaseSensitive, value.CaseSensitive);
-		writer.WriteProperty(options, PropEventCategoryField, value.EventCategoryField);
-		writer.WriteProperty(options, PropFetchSize, value.FetchSize);
-		writer.WriteProperty(options, PropFields, value.Fields, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?, Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>));
-		writer.WriteProperty(options, PropFilter, value.Filter, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?, Elastic.Clients.Elasticsearch.QueryDsl.Query>));
-		writer.WriteProperty(options, PropKeepAlive, value.KeepAlive);
-		writer.WriteProperty(options, PropKeepOnCompletion, value.KeepOnCompletion);
-		writer.WriteProperty(options, PropMaxSamplesPerKey, value.MaxSamplesPerKey);
-		writer.WriteProperty(options, PropQuery, value.Query);
-		writer.WriteProperty(options, PropResultPosition, value.ResultPosition);
-		writer.WriteProperty(options, PropRuntimeMappings, value.RuntimeMappings);
-		writer.WriteProperty(options, PropSize, value.Size);
-		writer.WriteProperty(options, PropTiebreakerField, value.TiebreakerField);
-		writer.WriteProperty(options, PropTimestampField, value.TimestampField);
-		writer.WriteProperty(options, PropWaitForCompletionTimeout, value.WaitForCompletionTimeout);
+		writer.WriteProperty(options, PropAllowPartialSearchResults, value.AllowPartialSearchResults, null, null);
+		writer.WriteProperty(options, PropAllowPartialSequenceResults, value.AllowPartialSequenceResults, null, null);
+		writer.WriteProperty(options, PropCaseSensitive, value.CaseSensitive, null, null);
+		writer.WriteProperty(options, PropEventCategoryField, value.EventCategoryField, null, null);
+		writer.WriteProperty(options, PropFetchSize, value.FetchSize, null, null);
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>(o, v, null));
+		writer.WriteProperty(options, PropFilter, value.Filter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, v, null));
+		writer.WriteProperty(options, PropKeepAlive, value.KeepAlive, null, null);
+		writer.WriteProperty(options, PropKeepOnCompletion, value.KeepOnCompletion, null, null);
+		writer.WriteProperty(options, PropMaxSamplesPerKey, value.MaxSamplesPerKey, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropResultPosition, value.ResultPosition, null, null);
+		writer.WriteProperty(options, PropRuntimeMappings, value.RuntimeMappings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, v, null, null));
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropTiebreakerField, value.TiebreakerField, null, null);
+		writer.WriteProperty(options, PropTimestampField, value.TimestampField, null, null);
+		writer.WriteProperty(options, PropWaitForCompletionTimeout, value.WaitForCompletionTimeout, null, null);
 		writer.WriteEndObject();
 	}
 }

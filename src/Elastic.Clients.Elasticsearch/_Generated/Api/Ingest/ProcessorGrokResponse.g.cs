@@ -38,7 +38,7 @@ internal sealed partial class ProcessorGrokResponseConverter : System.Text.Json.
 		LocalJsonValue<IReadOnlyDictionary<string, string>> propPatterns = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propPatterns.TryRead(ref reader, options, PropPatterns))
+			if (propPatterns.TryReadProperty(ref reader, options, PropPatterns, static IReadOnlyDictionary<string, string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)!))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class ProcessorGrokResponseConverter : System.Text.Json.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ProcessorGrokResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropPatterns, value.Patterns);
+		writer.WriteProperty(options, PropPatterns, value.Patterns, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, string> v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
 		writer.WriteEndObject();
 	}
 }

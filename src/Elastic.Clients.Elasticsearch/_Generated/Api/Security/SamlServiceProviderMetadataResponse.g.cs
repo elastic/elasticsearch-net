@@ -38,7 +38,7 @@ internal sealed partial class SamlServiceProviderMetadataResponseConverter : Sys
 		LocalJsonValue<string> propMetadata = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propMetadata.TryRead(ref reader, options, PropMetadata))
+			if (propMetadata.TryReadProperty(ref reader, options, PropMetadata, null))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class SamlServiceProviderMetadataResponseConverter : Sys
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, SamlServiceProviderMetadataResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMetadata, value.Metadata);
+		writer.WriteProperty(options, PropMetadata, value.Metadata, null, null);
 		writer.WriteEndObject();
 	}
 }

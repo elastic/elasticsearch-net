@@ -39,12 +39,12 @@ internal sealed partial class HitsSequenceConverter<TEvent> : System.Text.Json.S
 		LocalJsonValue<IReadOnlyCollection<object>?> propJoinKeys = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propEvents.TryRead(ref reader, options, PropEvents))
+			if (propEvents.TryReadProperty(ref reader, options, PropEvents, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Eql.HitsEvent<TEvent>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Eql.HitsEvent<TEvent>>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propJoinKeys.TryRead(ref reader, options, PropJoinKeys))
+			if (propJoinKeys.TryReadProperty(ref reader, options, PropJoinKeys, static IReadOnlyCollection<object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<object>(o, null)))
 			{
 				continue;
 			}
@@ -64,8 +64,8 @@ internal sealed partial class HitsSequenceConverter<TEvent> : System.Text.Json.S
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, HitsSequence<TEvent> value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropEvents, value.Events);
-		writer.WriteProperty(options, PropJoinKeys, value.JoinKeys);
+		writer.WriteProperty(options, PropEvents, value.Events, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Eql.HitsEvent<TEvent>> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Eql.HitsEvent<TEvent>>(o, v, null));
+		writer.WriteProperty(options, PropJoinKeys, value.JoinKeys, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<object>? v) => w.WriteCollectionValue<object>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

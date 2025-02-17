@@ -46,27 +46,27 @@ internal sealed partial class GetUserPrivilegesResponseConverter : System.Text.J
 		LocalJsonValue<IReadOnlyCollection<string>> propRunAs = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propApplications.TryRead(ref reader, options, PropApplications))
+			if (propApplications.TryReadProperty(ref reader, options, PropApplications, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propCluster.TryRead(ref reader, options, PropCluster))
+			if (propCluster.TryReadProperty(ref reader, options, PropCluster, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propGlobal.TryRead(ref reader, options, PropGlobal))
+			if (propGlobal.TryReadProperty(ref reader, options, PropGlobal, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propIndices.TryRead(ref reader, options, PropIndices))
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserIndicesPrivileges> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.UserIndicesPrivileges>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propRunAs.TryRead(ref reader, options, PropRunAs))
+			if (propRunAs.TryReadProperty(ref reader, options, PropRunAs, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
@@ -92,11 +92,11 @@ internal sealed partial class GetUserPrivilegesResponseConverter : System.Text.J
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetUserPrivilegesResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropApplications, value.Applications);
-		writer.WriteProperty(options, PropCluster, value.Cluster);
-		writer.WriteProperty(options, PropGlobal, value.Global);
-		writer.WriteProperty(options, PropIndices, value.Indices);
-		writer.WriteProperty(options, PropRunAs, value.RunAs);
+		writer.WriteProperty(options, PropApplications, value.Applications, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>(o, v, null));
+		writer.WriteProperty(options, PropCluster, value.Cluster, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropGlobal, value.Global, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>(o, v, null));
+		writer.WriteProperty(options, PropIndices, value.Indices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserIndicesPrivileges> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.UserIndicesPrivileges>(o, v, null));
+		writer.WriteProperty(options, PropRunAs, value.RunAs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

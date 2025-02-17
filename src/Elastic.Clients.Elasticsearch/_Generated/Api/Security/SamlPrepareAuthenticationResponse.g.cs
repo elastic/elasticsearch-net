@@ -42,17 +42,17 @@ internal sealed partial class SamlPrepareAuthenticationResponseConverter : Syste
 		LocalJsonValue<string> propRedirect = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propId.TryRead(ref reader, options, PropId))
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
 			{
 				continue;
 			}
 
-			if (propRealm.TryRead(ref reader, options, PropRealm))
+			if (propRealm.TryReadProperty(ref reader, options, PropRealm, null))
 			{
 				continue;
 			}
 
-			if (propRedirect.TryRead(ref reader, options, PropRedirect))
+			if (propRedirect.TryReadProperty(ref reader, options, PropRedirect, null))
 			{
 				continue;
 			}
@@ -74,9 +74,9 @@ internal sealed partial class SamlPrepareAuthenticationResponseConverter : Syste
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, SamlPrepareAuthenticationResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropId, value.Id);
-		writer.WriteProperty(options, PropRealm, value.Realm);
-		writer.WriteProperty(options, PropRedirect, value.Redirect);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropRealm, value.Realm, null, null);
+		writer.WriteProperty(options, PropRedirect, value.Redirect, null, null);
 		writer.WriteEndObject();
 	}
 }

@@ -101,7 +101,7 @@ internal sealed partial class IntervalsQueryConverter : System.Text.Json.Seriali
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
 		reader.Read();
-		propField.ReadPropertyName(ref reader, options);
+		propField.ReadPropertyName(ref reader, options, null);
 		reader.Read();
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<float?> propBoost = default;
@@ -110,12 +110,12 @@ internal sealed partial class IntervalsQueryConverter : System.Text.Json.Seriali
 		object? variant = null;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBoost.TryRead(ref reader, options, PropBoost))
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
 			{
 				continue;
 			}
 
-			if (propQueryName.TryRead(ref reader, options, PropQueryName))
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
 			{
 				continue;
 			}
@@ -124,7 +124,7 @@ internal sealed partial class IntervalsQueryConverter : System.Text.Json.Seriali
 			{
 				variantType = VariantAllOf.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf?>(options, null);
 				continue;
 			}
 
@@ -132,7 +132,7 @@ internal sealed partial class IntervalsQueryConverter : System.Text.Json.Seriali
 			{
 				variantType = VariantAnyOf.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf?>(options, null);
 				continue;
 			}
 
@@ -140,7 +140,7 @@ internal sealed partial class IntervalsQueryConverter : System.Text.Json.Seriali
 			{
 				variantType = VariantFuzzy.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy?>(options, null);
 				continue;
 			}
 
@@ -148,7 +148,7 @@ internal sealed partial class IntervalsQueryConverter : System.Text.Json.Seriali
 			{
 				variantType = VariantMatch.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch?>(options, null);
 				continue;
 			}
 
@@ -156,7 +156,7 @@ internal sealed partial class IntervalsQueryConverter : System.Text.Json.Seriali
 			{
 				variantType = VariantPrefix.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix?>(options, null);
 				continue;
 			}
 
@@ -164,7 +164,7 @@ internal sealed partial class IntervalsQueryConverter : System.Text.Json.Seriali
 			{
 				variantType = VariantWildcard.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard?>(options, null);
 				continue;
 			}
 
@@ -189,36 +189,36 @@ internal sealed partial class IntervalsQueryConverter : System.Text.Json.Seriali
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, IntervalsQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName(options, value.Field);
+		writer.WritePropertyName(options, value.Field, null);
 		writer.WriteStartObject();
 		switch (value.VariantType)
 		{
 			case "":
 				break;
 			case "all_of":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf?)value.Variant, null, null);
 				break;
 			case "any_of":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf?)value.Variant, null, null);
 				break;
 			case "fuzzy":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy?)value.Variant, null, null);
 				break;
 			case "match":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch?)value.Variant, null, null);
 				break;
 			case "prefix":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix?)value.Variant, null, null);
 				break;
 			case "wildcard":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard?)value.Variant, null, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(IntervalsQuery)}'.");
 		}
 
-		writer.WriteProperty(options, PropBoost, value.Boost);
-		writer.WriteProperty(options, PropQueryName, value.QueryName);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
 		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}

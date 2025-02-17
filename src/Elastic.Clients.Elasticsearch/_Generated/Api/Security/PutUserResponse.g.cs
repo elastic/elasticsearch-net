@@ -38,7 +38,7 @@ internal sealed partial class PutUserResponseConverter : System.Text.Json.Serial
 		LocalJsonValue<bool> propCreated = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCreated.TryRead(ref reader, options, PropCreated))
+			if (propCreated.TryReadProperty(ref reader, options, PropCreated, null))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class PutUserResponseConverter : System.Text.Json.Serial
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, PutUserResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCreated, value.Created);
+		writer.WriteProperty(options, PropCreated, value.Created, null, null);
 		writer.WriteEndObject();
 	}
 }

@@ -40,12 +40,12 @@ internal sealed partial class PutRoleMappingResponseConverter : System.Text.Json
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.CreatedStatus> propRoleMapping = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCreated.TryRead(ref reader, options, PropCreated))
+			if (propCreated.TryReadProperty(ref reader, options, PropCreated, null))
 			{
 				continue;
 			}
 
-			if (propRoleMapping.TryRead(ref reader, options, PropRoleMapping))
+			if (propRoleMapping.TryReadProperty(ref reader, options, PropRoleMapping, null))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class PutRoleMappingResponseConverter : System.Text.Json
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, PutRoleMappingResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCreated, value.Created);
-		writer.WriteProperty(options, PropRoleMapping, value.RoleMapping);
+		writer.WriteProperty(options, PropCreated, value.Created, null, null);
+		writer.WriteProperty(options, PropRoleMapping, value.RoleMapping, null, null);
 		writer.WriteEndObject();
 	}
 }

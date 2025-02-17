@@ -17,12 +17,10 @@ public partial class Slices :
 #endif
 {
 	public string GetString(ITransportConfiguration settings) =>
-		Tag switch
-		{
-			0 => Item1.ToString(CultureInfo.InvariantCulture),
-			1 => UrlFormatter.CreateString(Item2, settings)!,
-			_ => throw new InvalidOperationException()
-		};
+		Match(
+			v => v.ToString(CultureInfo.InvariantCulture),
+			v => UrlFormatter.CreateString(v, settings)
+		);
 
 	#region IParsable
 

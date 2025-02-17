@@ -43,22 +43,22 @@ internal sealed partial class DanglingIndexConverter : System.Text.Json.Serializ
 		LocalJsonValue<IReadOnlyCollection<string>> propNodeIds = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCreationDateMillis.TryRead(ref reader, options, PropCreationDateMillis))
+			if (propCreationDateMillis.TryReadProperty(ref reader, options, PropCreationDateMillis, null))
 			{
 				continue;
 			}
 
-			if (propIndexName.TryRead(ref reader, options, PropIndexName))
+			if (propIndexName.TryReadProperty(ref reader, options, PropIndexName, null))
 			{
 				continue;
 			}
 
-			if (propIndexUuid.TryRead(ref reader, options, PropIndexUuid))
+			if (propIndexUuid.TryReadProperty(ref reader, options, PropIndexUuid, null))
 			{
 				continue;
 			}
 
-			if (propNodeIds.TryRead(ref reader, options, PropNodeIds, typeof(SingleOrManyMarker<IReadOnlyCollection<string>, string>)))
+			if (propNodeIds.TryReadProperty(ref reader, options, PropNodeIds, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
@@ -82,10 +82,10 @@ internal sealed partial class DanglingIndexConverter : System.Text.Json.Serializ
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, DanglingIndex value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCreationDateMillis, value.CreationDateMillis);
-		writer.WriteProperty(options, PropIndexName, value.IndexName);
-		writer.WriteProperty(options, PropIndexUuid, value.IndexUuid);
-		writer.WriteProperty(options, PropNodeIds, value.NodeIds, null, typeof(SingleOrManyMarker<IReadOnlyCollection<string>, string>));
+		writer.WriteProperty(options, PropCreationDateMillis, value.CreationDateMillis, null, null);
+		writer.WriteProperty(options, PropIndexName, value.IndexName, null, null);
+		writer.WriteProperty(options, PropIndexUuid, value.IndexUuid, null, null);
+		writer.WriteProperty(options, PropNodeIds, value.NodeIds, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

@@ -36,13 +36,52 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 /// according to the target field's precision.
 /// </para>
 /// </summary>
-public sealed partial class FieldDateMath : Union<string, double>
+[JsonConverter(typeof(FieldDateMathConverter))]
+public sealed partial class FieldDateMath : Union<Elastic.Clients.Elasticsearch.DateMath, double>
 {
-	public FieldDateMath(string Expr) : base(Expr)
+	public FieldDateMath(Elastic.Clients.Elasticsearch.DateMath expr) : base(expr)
 	{
 	}
 
-	public FieldDateMath(double Value) : base(Value)
+	public FieldDateMath(double value) : base(value)
 	{
+	}
+
+	public static implicit operator FieldDateMath(Elastic.Clients.Elasticsearch.DateMath expr) => new FieldDateMath(expr);
+	public static implicit operator FieldDateMath(double value) => new FieldDateMath(value);
+}
+
+internal sealed partial class FieldDateMathConverter : System.Text.Json.Serialization.JsonConverter<FieldDateMath>
+{
+	public override FieldDateMath Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var selector = static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.Number);
+		return selector(ref reader, options) switch
+		{
+			Elastic.Clients.Elasticsearch.UnionTag.T1 => new FieldDateMath(reader.ReadValue<Elastic.Clients.Elasticsearch.DateMath>(options, null)),
+			Elastic.Clients.Elasticsearch.UnionTag.T2 => new FieldDateMath(reader.ReadValue<double>(options, null)),
+			_ => throw new System.InvalidOperationException($"Failed to select a union variant for type '{nameof(FieldDateMath)}")
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, FieldDateMath value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value.Tag)
+		{
+			case Elastic.Clients.Elasticsearch.UnionTag.T1:
+				{
+					writer.WriteValue(options, value.Value1, null);
+					break;
+				}
+
+			case Elastic.Clients.Elasticsearch.UnionTag.T2:
+				{
+					writer.WriteValue(options, value.Value2, null);
+					break;
+				}
+
+			default:
+				throw new System.InvalidOperationException($"Unrecognized tag value: {value.Tag}");
+		}
 	}
 }

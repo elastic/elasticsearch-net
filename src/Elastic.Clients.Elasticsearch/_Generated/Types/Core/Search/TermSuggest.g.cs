@@ -43,22 +43,22 @@ internal sealed partial class TermSuggestConverter : System.Text.Json.Serializat
 		LocalJsonValue<string> propText = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propLength.TryRead(ref reader, options, PropLength))
+			if (propLength.TryReadProperty(ref reader, options, PropLength, null))
 			{
 				continue;
 			}
 
-			if (propOffset.TryRead(ref reader, options, PropOffset))
+			if (propOffset.TryReadProperty(ref reader, options, PropOffset, null))
 			{
 				continue;
 			}
 
-			if (propOptions.TryRead(ref reader, options, PropOptions, typeof(SingleOrManyMarker<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.TermSuggestOption>, Elastic.Clients.Elasticsearch.Core.Search.TermSuggestOption>)))
+			if (propOptions.TryReadProperty(ref reader, options, PropOptions, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.TermSuggestOption> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.TermSuggestOption>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propText.TryRead(ref reader, options, PropText))
+			if (propText.TryReadProperty(ref reader, options, PropText, null))
 			{
 				continue;
 			}
@@ -82,10 +82,10 @@ internal sealed partial class TermSuggestConverter : System.Text.Json.Serializat
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, TermSuggest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropLength, value.Length);
-		writer.WriteProperty(options, PropOffset, value.Offset);
-		writer.WriteProperty(options, PropOptions, value.Options, null, typeof(SingleOrManyMarker<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.TermSuggestOption>, Elastic.Clients.Elasticsearch.Core.Search.TermSuggestOption>));
-		writer.WriteProperty(options, PropText, value.Text);
+		writer.WriteProperty(options, PropLength, value.Length, null, null);
+		writer.WriteProperty(options, PropOffset, value.Offset, null, null);
+		writer.WriteProperty(options, PropOptions, value.Options, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.TermSuggestOption> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.TermSuggestOption>(o, v, null));
+		writer.WriteProperty(options, PropText, value.Text, null, null);
 		writer.WriteEndObject();
 	}
 }

@@ -80,7 +80,7 @@ internal sealed partial class SyncConverter : System.Text.Json.Serialization.Jso
 			{
 				variantType = VariantTime.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.TransformManagement.TimeSync?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.TransformManagement.TimeSync?>(options, null);
 				continue;
 			}
 
@@ -99,7 +99,7 @@ internal sealed partial class SyncConverter : System.Text.Json.Serialization.Jso
 			case "":
 				break;
 			case "time":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.TransformManagement.TimeSync?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.TransformManagement.TimeSync?)value.Variant, null, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Sync)}'.");

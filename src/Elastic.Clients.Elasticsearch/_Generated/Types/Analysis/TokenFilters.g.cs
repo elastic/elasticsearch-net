@@ -220,7 +220,7 @@ internal sealed partial class TokenFilterInterfaceConverter : System.Text.Json.S
 		string? discriminator = null;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TryReadProperty(options, PropDiscriminator, ref discriminator))
+			if (reader.TryReadProperty(options, PropDiscriminator, ref discriminator, null))
 			{
 				break;
 			}
@@ -231,53 +231,53 @@ internal sealed partial class TokenFilterInterfaceConverter : System.Text.Json.S
 		reader = readerSnapshot;
 		return discriminator switch
 		{
-			"asciifolding" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilter>(options),
-			"common_grams" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilter>(options),
-			"condition" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilter>(options),
-			"delimited_payload" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilter>(options),
-			"dictionary_decompounder" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilter>(options),
-			"edge_ngram" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilter>(options),
-			"elision" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilter>(options),
-			"fingerprint" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter>(options),
-			"hunspell" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter>(options),
-			"hyphenation_decompounder" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilter>(options),
-			"icu_collation" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.IcuCollationTokenFilter>(options),
-			"icu_folding" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilter>(options),
-			"icu_normalizer" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTokenFilter>(options),
-			"icu_transform" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter>(options),
-			"keep_types" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter>(options),
-			"keep" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter>(options),
-			"keyword_marker" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter>(options),
-			"kstem" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KStemTokenFilter>(options),
-			"kuromoji_part_of_speech" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilter>(options),
-			"kuromoji_readingform" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilter>(options),
-			"kuromoji_stemmer" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilter>(options),
-			"length" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilter>(options),
-			"limit" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilter>(options),
-			"lowercase" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilter>(options),
-			"multiplexer" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilter>(options),
-			"ngram" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.NGramTokenFilter>(options),
-			"nori_part_of_speech" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.NoriPartOfSpeechTokenFilter>(options),
-			"pattern_capture" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter>(options),
-			"pattern_replace" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter>(options),
-			"phonetic" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilter>(options),
-			"porter_stem" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PorterStemTokenFilter>(options),
-			"predicate_token_filter" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilter>(options),
-			"remove_duplicates" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.RemoveDuplicatesTokenFilter>(options),
-			"reverse" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ReverseTokenFilter>(options),
-			"shingle" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter>(options),
-			"snowball" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilter>(options),
-			"stemmer_override" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilter>(options),
-			"stemmer" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilter>(options),
-			"stop" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.StopTokenFilter>(options),
-			"synonym_graph" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilter>(options),
-			"synonym" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilter>(options),
-			"trim" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.TrimTokenFilter>(options),
-			"truncate" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilter>(options),
-			"unique" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter>(options),
-			"uppercase" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.UppercaseTokenFilter>(options),
-			"word_delimiter_graph" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.WordDelimiterGraphTokenFilter>(options),
-			"word_delimiter" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilter>(options),
+			"asciifolding" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilter>(options, null),
+			"common_grams" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilter>(options, null),
+			"condition" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilter>(options, null),
+			"delimited_payload" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilter>(options, null),
+			"dictionary_decompounder" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilter>(options, null),
+			"edge_ngram" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilter>(options, null),
+			"elision" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilter>(options, null),
+			"fingerprint" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter>(options, null),
+			"hunspell" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter>(options, null),
+			"hyphenation_decompounder" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilter>(options, null),
+			"icu_collation" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.IcuCollationTokenFilter>(options, null),
+			"icu_folding" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilter>(options, null),
+			"icu_normalizer" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTokenFilter>(options, null),
+			"icu_transform" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter>(options, null),
+			"keep_types" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter>(options, null),
+			"keep" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter>(options, null),
+			"keyword_marker" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter>(options, null),
+			"kstem" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KStemTokenFilter>(options, null),
+			"kuromoji_part_of_speech" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilter>(options, null),
+			"kuromoji_readingform" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilter>(options, null),
+			"kuromoji_stemmer" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilter>(options, null),
+			"length" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilter>(options, null),
+			"limit" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilter>(options, null),
+			"lowercase" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilter>(options, null),
+			"multiplexer" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilter>(options, null),
+			"ngram" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.NGramTokenFilter>(options, null),
+			"nori_part_of_speech" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.NoriPartOfSpeechTokenFilter>(options, null),
+			"pattern_capture" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter>(options, null),
+			"pattern_replace" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter>(options, null),
+			"phonetic" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilter>(options, null),
+			"porter_stem" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PorterStemTokenFilter>(options, null),
+			"predicate_token_filter" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilter>(options, null),
+			"remove_duplicates" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.RemoveDuplicatesTokenFilter>(options, null),
+			"reverse" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ReverseTokenFilter>(options, null),
+			"shingle" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter>(options, null),
+			"snowball" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilter>(options, null),
+			"stemmer_override" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilter>(options, null),
+			"stemmer" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilter>(options, null),
+			"stop" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.StopTokenFilter>(options, null),
+			"synonym_graph" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilter>(options, null),
+			"synonym" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilter>(options, null),
+			"trim" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.TrimTokenFilter>(options, null),
+			"truncate" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilter>(options, null),
+			"unique" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter>(options, null),
+			"uppercase" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.UppercaseTokenFilter>(options, null),
+			"word_delimiter_graph" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.WordDelimiterGraphTokenFilter>(options, null),
+			"word_delimiter" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilter>(options, null),
 			_ => throw new System.Text.Json.JsonException($"Variant '{discriminator}' is not supported for type '{nameof(ITokenFilter)}'.")
 		};
 	}
@@ -287,145 +287,145 @@ internal sealed partial class TokenFilterInterfaceConverter : System.Text.Json.S
 		switch (value.Type)
 		{
 			case "asciifolding":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilter)value, null);
 				break;
 			case "common_grams":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilter)value, null);
 				break;
 			case "condition":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilter)value, null);
 				break;
 			case "delimited_payload":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilter)value, null);
 				break;
 			case "dictionary_decompounder":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilter)value, null);
 				break;
 			case "edge_ngram":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilter)value, null);
 				break;
 			case "elision":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilter)value, null);
 				break;
 			case "fingerprint":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter)value, null);
 				break;
 			case "hunspell":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter)value, null);
 				break;
 			case "hyphenation_decompounder":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilter)value, null);
 				break;
 			case "icu_collation":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.IcuCollationTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.IcuCollationTokenFilter)value, null);
 				break;
 			case "icu_folding":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilter)value, null);
 				break;
 			case "icu_normalizer":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTokenFilter)value, null);
 				break;
 			case "icu_transform":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter)value, null);
 				break;
 			case "keep_types":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter)value, null);
 				break;
 			case "keep":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter)value, null);
 				break;
 			case "keyword_marker":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter)value, null);
 				break;
 			case "kstem":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KStemTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KStemTokenFilter)value, null);
 				break;
 			case "kuromoji_part_of_speech":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilter)value, null);
 				break;
 			case "kuromoji_readingform":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilter)value, null);
 				break;
 			case "kuromoji_stemmer":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilter)value, null);
 				break;
 			case "length":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilter)value, null);
 				break;
 			case "limit":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilter)value, null);
 				break;
 			case "lowercase":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilter)value, null);
 				break;
 			case "multiplexer":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilter)value, null);
 				break;
 			case "ngram":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.NGramTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.NGramTokenFilter)value, null);
 				break;
 			case "nori_part_of_speech":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.NoriPartOfSpeechTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.NoriPartOfSpeechTokenFilter)value, null);
 				break;
 			case "pattern_capture":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter)value, null);
 				break;
 			case "pattern_replace":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter)value, null);
 				break;
 			case "phonetic":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilter)value, null);
 				break;
 			case "porter_stem":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PorterStemTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PorterStemTokenFilter)value, null);
 				break;
 			case "predicate_token_filter":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilter)value, null);
 				break;
 			case "remove_duplicates":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.RemoveDuplicatesTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.RemoveDuplicatesTokenFilter)value, null);
 				break;
 			case "reverse":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ReverseTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ReverseTokenFilter)value, null);
 				break;
 			case "shingle":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter)value, null);
 				break;
 			case "snowball":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilter)value, null);
 				break;
 			case "stemmer_override":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilter)value, null);
 				break;
 			case "stemmer":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilter)value, null);
 				break;
 			case "stop":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.StopTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.StopTokenFilter)value, null);
 				break;
 			case "synonym_graph":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilter)value, null);
 				break;
 			case "synonym":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilter)value, null);
 				break;
 			case "trim":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.TrimTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.TrimTokenFilter)value, null);
 				break;
 			case "truncate":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilter)value, null);
 				break;
 			case "unique":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter)value, null);
 				break;
 			case "uppercase":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.UppercaseTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.UppercaseTokenFilter)value, null);
 				break;
 			case "word_delimiter_graph":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.WordDelimiterGraphTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.WordDelimiterGraphTokenFilter)value, null);
 				break;
 			case "word_delimiter":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilter)value);
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilter)value, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.Type}' is not supported for type '{nameof(ITokenFilter)}'.");

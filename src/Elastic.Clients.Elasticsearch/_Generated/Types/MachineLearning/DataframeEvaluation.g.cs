@@ -84,7 +84,7 @@ internal sealed partial class DataframeEvaluationConverter : System.Text.Json.Se
 			{
 				variantType = VariantClassification.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification?>(options, null);
 				continue;
 			}
 
@@ -92,7 +92,7 @@ internal sealed partial class DataframeEvaluationConverter : System.Text.Json.Se
 			{
 				variantType = VariantOutlierDetection.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection?>(options, null);
 				continue;
 			}
 
@@ -100,7 +100,7 @@ internal sealed partial class DataframeEvaluationConverter : System.Text.Json.Se
 			{
 				variantType = VariantRegression.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression?>(options, null);
 				continue;
 			}
 
@@ -119,13 +119,13 @@ internal sealed partial class DataframeEvaluationConverter : System.Text.Json.Se
 			case "":
 				break;
 			case "classification":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification?)value.Variant, null, null);
 				break;
 			case "outlier_detection":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection?)value.Variant, null, null);
 				break;
 			case "regression":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression?)value.Variant, null, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(DataframeEvaluation)}'.");

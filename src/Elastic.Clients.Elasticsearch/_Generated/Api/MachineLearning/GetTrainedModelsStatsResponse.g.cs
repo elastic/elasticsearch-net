@@ -40,12 +40,12 @@ internal sealed partial class GetTrainedModelsStatsResponseConverter : System.Te
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelStats>> propTrainedModelStats = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCount.TryRead(ref reader, options, PropCount))
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
 			{
 				continue;
 			}
 
-			if (propTrainedModelStats.TryRead(ref reader, options, PropTrainedModelStats))
+			if (propTrainedModelStats.TryReadProperty(ref reader, options, PropTrainedModelStats, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelStats> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelStats>(o, null)!))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class GetTrainedModelsStatsResponseConverter : System.Te
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetTrainedModelsStatsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCount, value.Count);
-		writer.WriteProperty(options, PropTrainedModelStats, value.TrainedModelStats);
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropTrainedModelStats, value.TrainedModelStats, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelStats> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelStats>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

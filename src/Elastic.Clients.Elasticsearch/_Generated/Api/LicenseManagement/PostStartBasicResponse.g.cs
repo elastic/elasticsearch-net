@@ -46,27 +46,27 @@ internal sealed partial class PostStartBasicResponseConverter : System.Text.Json
 		LocalJsonValue<Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType?> propType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAcknowledge.TryRead(ref reader, options, PropAcknowledge))
+			if (propAcknowledge.TryReadProperty(ref reader, options, PropAcknowledge, static IReadOnlyDictionary<string, Union<string, IReadOnlyCollection<string>>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Union<string, IReadOnlyCollection<string>>>(o, null, static Union<string, IReadOnlyCollection<string>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<string, IReadOnlyCollection<string>>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartArray), null, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)!)!)))
 			{
 				continue;
 			}
 
-			if (propAcknowledged.TryRead(ref reader, options, PropAcknowledged))
+			if (propAcknowledged.TryReadProperty(ref reader, options, PropAcknowledged, null))
 			{
 				continue;
 			}
 
-			if (propBasicWasStarted.TryRead(ref reader, options, PropBasicWasStarted))
+			if (propBasicWasStarted.TryReadProperty(ref reader, options, PropBasicWasStarted, null))
 			{
 				continue;
 			}
 
-			if (propErrorMessage.TryRead(ref reader, options, PropErrorMessage))
+			if (propErrorMessage.TryReadProperty(ref reader, options, PropErrorMessage, null))
 			{
 				continue;
 			}
 
-			if (propType.TryRead(ref reader, options, PropType))
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
 			{
 				continue;
 			}
@@ -92,11 +92,11 @@ internal sealed partial class PostStartBasicResponseConverter : System.Text.Json
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, PostStartBasicResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAcknowledge, value.Acknowledge);
-		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged);
-		writer.WriteProperty(options, PropBasicWasStarted, value.BasicWasStarted);
-		writer.WriteProperty(options, PropErrorMessage, value.ErrorMessage);
-		writer.WriteProperty(options, PropType, value.Type);
+		writer.WriteProperty(options, PropAcknowledge, value.Acknowledge, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, Union<string, IReadOnlyCollection<string>>>? v) => w.WriteDictionaryValue<string, Union<string, IReadOnlyCollection<string>>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Union<string, IReadOnlyCollection<string>> v) => w.WriteUnionValue<string, IReadOnlyCollection<string>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null))));
+		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged, null, null);
+		writer.WriteProperty(options, PropBasicWasStarted, value.BasicWasStarted, null, null);
+		writer.WriteProperty(options, PropErrorMessage, value.ErrorMessage, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
 	}
 }

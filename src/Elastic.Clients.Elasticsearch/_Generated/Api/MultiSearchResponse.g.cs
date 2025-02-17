@@ -40,12 +40,12 @@ internal sealed partial class MultiSearchResponseConverter<TDocument> : System.T
 		LocalJsonValue<long> propTook = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propResponses.TryRead(ref reader, options, PropResponses))
+			if (propResponses.TryReadProperty(ref reader, options, PropResponses, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchResponseItem<TDocument>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchResponseItem<TDocument>>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propTook.TryRead(ref reader, options, PropTook))
+			if (propTook.TryReadProperty(ref reader, options, PropTook, null))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class MultiSearchResponseConverter<TDocument> : System.T
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, MultiSearchResponse<TDocument> value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropResponses, value.Responses);
-		writer.WriteProperty(options, PropTook, value.Took);
+		writer.WriteProperty(options, PropResponses, value.Responses, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchResponseItem<TDocument>> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchResponseItem<TDocument>>(o, v, null));
+		writer.WriteProperty(options, PropTook, value.Took, null, null);
 		writer.WriteEndObject();
 	}
 }

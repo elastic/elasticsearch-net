@@ -94,147 +94,147 @@ internal sealed partial class XpackUsageResponseConverter : System.Text.Json.Ser
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Watcher> propWatcher = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAggregateMetric.TryRead(ref reader, options, PropAggregateMetric))
+			if (propAggregateMetric.TryReadProperty(ref reader, options, PropAggregateMetric, null))
 			{
 				continue;
 			}
 
-			if (propAnalytics.TryRead(ref reader, options, PropAnalytics))
+			if (propAnalytics.TryReadProperty(ref reader, options, PropAnalytics, null))
 			{
 				continue;
 			}
 
-			if (propArchive.TryRead(ref reader, options, PropArchive))
+			if (propArchive.TryReadProperty(ref reader, options, PropArchive, null))
 			{
 				continue;
 			}
 
-			if (propCcr.TryRead(ref reader, options, PropCcr))
+			if (propCcr.TryReadProperty(ref reader, options, PropCcr, null))
 			{
 				continue;
 			}
 
-			if (propDataFrame.TryRead(ref reader, options, PropDataFrame))
+			if (propDataFrame.TryReadProperty(ref reader, options, PropDataFrame, null))
 			{
 				continue;
 			}
 
-			if (propDataScience.TryRead(ref reader, options, PropDataScience))
+			if (propDataScience.TryReadProperty(ref reader, options, PropDataScience, null))
 			{
 				continue;
 			}
 
-			if (propDataStreams.TryRead(ref reader, options, PropDataStreams))
+			if (propDataStreams.TryReadProperty(ref reader, options, PropDataStreams, null))
 			{
 				continue;
 			}
 
-			if (propDataTiers.TryRead(ref reader, options, PropDataTiers))
+			if (propDataTiers.TryReadProperty(ref reader, options, PropDataTiers, null))
 			{
 				continue;
 			}
 
-			if (propEnrich.TryRead(ref reader, options, PropEnrich))
+			if (propEnrich.TryReadProperty(ref reader, options, PropEnrich, null))
 			{
 				continue;
 			}
 
-			if (propEql.TryRead(ref reader, options, PropEql))
+			if (propEql.TryReadProperty(ref reader, options, PropEql, null))
 			{
 				continue;
 			}
 
-			if (propFlattened.TryRead(ref reader, options, PropFlattened))
+			if (propFlattened.TryReadProperty(ref reader, options, PropFlattened, null))
 			{
 				continue;
 			}
 
-			if (propFrozenIndices.TryRead(ref reader, options, PropFrozenIndices))
+			if (propFrozenIndices.TryReadProperty(ref reader, options, PropFrozenIndices, null))
 			{
 				continue;
 			}
 
-			if (propGraph.TryRead(ref reader, options, PropGraph))
+			if (propGraph.TryReadProperty(ref reader, options, PropGraph, null))
 			{
 				continue;
 			}
 
-			if (propHealthApi.TryRead(ref reader, options, PropHealthApi))
+			if (propHealthApi.TryReadProperty(ref reader, options, PropHealthApi, null))
 			{
 				continue;
 			}
 
-			if (propIlm.TryRead(ref reader, options, PropIlm))
+			if (propIlm.TryReadProperty(ref reader, options, PropIlm, null))
 			{
 				continue;
 			}
 
-			if (propLogstash.TryRead(ref reader, options, PropLogstash))
+			if (propLogstash.TryReadProperty(ref reader, options, PropLogstash, null))
 			{
 				continue;
 			}
 
-			if (propMl.TryRead(ref reader, options, PropMl))
+			if (propMl.TryReadProperty(ref reader, options, PropMl, null))
 			{
 				continue;
 			}
 
-			if (propMonitoring.TryRead(ref reader, options, PropMonitoring))
+			if (propMonitoring.TryReadProperty(ref reader, options, PropMonitoring, null))
 			{
 				continue;
 			}
 
-			if (propRollup.TryRead(ref reader, options, PropRollup))
+			if (propRollup.TryReadProperty(ref reader, options, PropRollup, null))
 			{
 				continue;
 			}
 
-			if (propRuntimeFields.TryRead(ref reader, options, PropRuntimeFields))
+			if (propRuntimeFields.TryReadProperty(ref reader, options, PropRuntimeFields, null))
 			{
 				continue;
 			}
 
-			if (propSearchableSnapshots.TryRead(ref reader, options, PropSearchableSnapshots))
+			if (propSearchableSnapshots.TryReadProperty(ref reader, options, PropSearchableSnapshots, null))
 			{
 				continue;
 			}
 
-			if (propSecurity.TryRead(ref reader, options, PropSecurity))
+			if (propSecurity.TryReadProperty(ref reader, options, PropSecurity, null))
 			{
 				continue;
 			}
 
-			if (propSlm.TryRead(ref reader, options, PropSlm))
+			if (propSlm.TryReadProperty(ref reader, options, PropSlm, null))
 			{
 				continue;
 			}
 
-			if (propSpatial.TryRead(ref reader, options, PropSpatial))
+			if (propSpatial.TryReadProperty(ref reader, options, PropSpatial, null))
 			{
 				continue;
 			}
 
-			if (propSql.TryRead(ref reader, options, PropSql))
+			if (propSql.TryReadProperty(ref reader, options, PropSql, null))
 			{
 				continue;
 			}
 
-			if (propTransform.TryRead(ref reader, options, PropTransform))
+			if (propTransform.TryReadProperty(ref reader, options, PropTransform, null))
 			{
 				continue;
 			}
 
-			if (propVectors.TryRead(ref reader, options, PropVectors))
+			if (propVectors.TryReadProperty(ref reader, options, PropVectors, null))
 			{
 				continue;
 			}
 
-			if (propVotingOnly.TryRead(ref reader, options, PropVotingOnly))
+			if (propVotingOnly.TryReadProperty(ref reader, options, PropVotingOnly, null))
 			{
 				continue;
 			}
 
-			if (propWatcher.TryRead(ref reader, options, PropWatcher))
+			if (propWatcher.TryReadProperty(ref reader, options, PropWatcher, null))
 			{
 				continue;
 			}
@@ -308,35 +308,35 @@ internal sealed partial class XpackUsageResponseConverter : System.Text.Json.Ser
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, XpackUsageResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAggregateMetric, value.AggregateMetric);
-		writer.WriteProperty(options, PropAnalytics, value.Analytics);
-		writer.WriteProperty(options, PropArchive, value.Archive);
-		writer.WriteProperty(options, PropCcr, value.Ccr);
-		writer.WriteProperty(options, PropDataFrame, value.DataFrame);
-		writer.WriteProperty(options, PropDataScience, value.DataScience);
-		writer.WriteProperty(options, PropDataStreams, value.DataStreams);
-		writer.WriteProperty(options, PropDataTiers, value.DataTiers);
-		writer.WriteProperty(options, PropEnrich, value.Enrich);
-		writer.WriteProperty(options, PropEql, value.Eql);
-		writer.WriteProperty(options, PropFlattened, value.Flattened);
-		writer.WriteProperty(options, PropFrozenIndices, value.FrozenIndices);
-		writer.WriteProperty(options, PropGraph, value.Graph);
-		writer.WriteProperty(options, PropHealthApi, value.HealthApi);
-		writer.WriteProperty(options, PropIlm, value.Ilm);
-		writer.WriteProperty(options, PropLogstash, value.Logstash);
-		writer.WriteProperty(options, PropMl, value.Ml);
-		writer.WriteProperty(options, PropMonitoring, value.Monitoring);
-		writer.WriteProperty(options, PropRollup, value.Rollup);
-		writer.WriteProperty(options, PropRuntimeFields, value.RuntimeFields);
-		writer.WriteProperty(options, PropSearchableSnapshots, value.SearchableSnapshots);
-		writer.WriteProperty(options, PropSecurity, value.Security);
-		writer.WriteProperty(options, PropSlm, value.Slm);
-		writer.WriteProperty(options, PropSpatial, value.Spatial);
-		writer.WriteProperty(options, PropSql, value.Sql);
-		writer.WriteProperty(options, PropTransform, value.Transform);
-		writer.WriteProperty(options, PropVectors, value.Vectors);
-		writer.WriteProperty(options, PropVotingOnly, value.VotingOnly);
-		writer.WriteProperty(options, PropWatcher, value.Watcher);
+		writer.WriteProperty(options, PropAggregateMetric, value.AggregateMetric, null, null);
+		writer.WriteProperty(options, PropAnalytics, value.Analytics, null, null);
+		writer.WriteProperty(options, PropArchive, value.Archive, null, null);
+		writer.WriteProperty(options, PropCcr, value.Ccr, null, null);
+		writer.WriteProperty(options, PropDataFrame, value.DataFrame, null, null);
+		writer.WriteProperty(options, PropDataScience, value.DataScience, null, null);
+		writer.WriteProperty(options, PropDataStreams, value.DataStreams, null, null);
+		writer.WriteProperty(options, PropDataTiers, value.DataTiers, null, null);
+		writer.WriteProperty(options, PropEnrich, value.Enrich, null, null);
+		writer.WriteProperty(options, PropEql, value.Eql, null, null);
+		writer.WriteProperty(options, PropFlattened, value.Flattened, null, null);
+		writer.WriteProperty(options, PropFrozenIndices, value.FrozenIndices, null, null);
+		writer.WriteProperty(options, PropGraph, value.Graph, null, null);
+		writer.WriteProperty(options, PropHealthApi, value.HealthApi, null, null);
+		writer.WriteProperty(options, PropIlm, value.Ilm, null, null);
+		writer.WriteProperty(options, PropLogstash, value.Logstash, null, null);
+		writer.WriteProperty(options, PropMl, value.Ml, null, null);
+		writer.WriteProperty(options, PropMonitoring, value.Monitoring, null, null);
+		writer.WriteProperty(options, PropRollup, value.Rollup, null, null);
+		writer.WriteProperty(options, PropRuntimeFields, value.RuntimeFields, null, null);
+		writer.WriteProperty(options, PropSearchableSnapshots, value.SearchableSnapshots, null, null);
+		writer.WriteProperty(options, PropSecurity, value.Security, null, null);
+		writer.WriteProperty(options, PropSlm, value.Slm, null, null);
+		writer.WriteProperty(options, PropSpatial, value.Spatial, null, null);
+		writer.WriteProperty(options, PropSql, value.Sql, null, null);
+		writer.WriteProperty(options, PropTransform, value.Transform, null, null);
+		writer.WriteProperty(options, PropVectors, value.Vectors, null, null);
+		writer.WriteProperty(options, PropVotingOnly, value.VotingOnly, null, null);
+		writer.WriteProperty(options, PropWatcher, value.Watcher, null, null);
 		writer.WriteEndObject();
 	}
 }

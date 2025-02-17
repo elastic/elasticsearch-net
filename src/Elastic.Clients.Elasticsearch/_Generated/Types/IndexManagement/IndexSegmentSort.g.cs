@@ -43,22 +43,22 @@ internal sealed partial class IndexSegmentSortConverter : System.Text.Json.Seria
 		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>?> propOrder = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propField.TryRead(ref reader, options, PropField, typeof(SingleOrManyFieldsMarker)))
+			if (propField.TryReadProperty(ref reader, options, PropField, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(SingleOrManyFieldsMarker))))
 			{
 				continue;
 			}
 
-			if (propMissing.TryRead(ref reader, options, PropMissing, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>?, Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>)))
+			if (propMissing.TryReadProperty(ref reader, options, PropMissing, static ICollection<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>(o, null)))
 			{
 				continue;
 			}
 
-			if (propMode.TryRead(ref reader, options, PropMode, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode>?, Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode>)))
+			if (propMode.TryReadProperty(ref reader, options, PropMode, static ICollection<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode>(o, null)))
 			{
 				continue;
 			}
 
-			if (propOrder.TryRead(ref reader, options, PropOrder, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>?, Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>)))
+			if (propOrder.TryReadProperty(ref reader, options, PropOrder, static ICollection<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>(o, null)))
 			{
 				continue;
 			}
@@ -82,10 +82,10 @@ internal sealed partial class IndexSegmentSortConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, IndexSegmentSort value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropField, value.Field, null, typeof(SingleOrManyFieldsMarker));
-		writer.WriteProperty(options, PropMissing, value.Missing, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>?, Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>));
-		writer.WriteProperty(options, PropMode, value.Mode, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode>?, Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode>));
-		writer.WriteProperty(options, PropOrder, value.Order, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>?, Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>));
+		writer.WriteProperty(options, PropField, value.Field, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropMissing, value.Missing, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>(o, v, null));
+		writer.WriteProperty(options, PropMode, value.Mode, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode>(o, v, null));
+		writer.WriteProperty(options, PropOrder, value.Order, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

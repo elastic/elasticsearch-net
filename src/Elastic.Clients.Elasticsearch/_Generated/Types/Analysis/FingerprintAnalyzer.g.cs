@@ -48,27 +48,27 @@ internal sealed partial class FingerprintAnalyzerConverter : System.Text.Json.Se
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propMaxOutputSize.TryRead(ref reader, options, PropMaxOutputSize))
+			if (propMaxOutputSize.TryReadProperty(ref reader, options, PropMaxOutputSize, null))
 			{
 				continue;
 			}
 
-			if (propPreserveOriginal.TryRead(ref reader, options, PropPreserveOriginal))
+			if (propPreserveOriginal.TryReadProperty(ref reader, options, PropPreserveOriginal, null))
 			{
 				continue;
 			}
 
-			if (propSeparator.TryRead(ref reader, options, PropSeparator))
+			if (propSeparator.TryReadProperty(ref reader, options, PropSeparator, null))
 			{
 				continue;
 			}
 
-			if (propStopwords.TryRead(ref reader, options, PropStopwords, typeof(SingleOrManyMarker<ICollection<string>?, string>)))
+			if (propStopwords.TryReadProperty(ref reader, options, PropStopwords, static ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propStopwordsPath.TryRead(ref reader, options, PropStopwordsPath))
+			if (propStopwordsPath.TryReadProperty(ref reader, options, PropStopwordsPath, null))
 			{
 				continue;
 			}
@@ -79,7 +79,7 @@ internal sealed partial class FingerprintAnalyzerConverter : System.Text.Json.Se
 				continue;
 			}
 
-			if (propVersion.TryRead(ref reader, options, PropVersion))
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
 			{
 				continue;
 			}
@@ -107,13 +107,13 @@ internal sealed partial class FingerprintAnalyzerConverter : System.Text.Json.Se
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, FingerprintAnalyzer value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMaxOutputSize, value.MaxOutputSize);
-		writer.WriteProperty(options, PropPreserveOriginal, value.PreserveOriginal);
-		writer.WriteProperty(options, PropSeparator, value.Separator);
-		writer.WriteProperty(options, PropStopwords, value.Stopwords, null, typeof(SingleOrManyMarker<ICollection<string>?, string>));
-		writer.WriteProperty(options, PropStopwordsPath, value.StopwordsPath);
-		writer.WriteProperty(options, PropType, value.Type);
-		writer.WriteProperty(options, PropVersion, value.Version);
+		writer.WriteProperty(options, PropMaxOutputSize, value.MaxOutputSize, null, null);
+		writer.WriteProperty(options, PropPreserveOriginal, value.PreserveOriginal, null, null);
+		writer.WriteProperty(options, PropSeparator, value.Separator, null, null);
+		writer.WriteProperty(options, PropStopwords, value.Stopwords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropStopwordsPath, value.StopwordsPath, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();
 	}
 }

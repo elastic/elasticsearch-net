@@ -48,32 +48,32 @@ internal sealed partial class RangeBucketConverter : System.Text.Json.Serializat
 		LocalJsonValue<string?> propToAsString = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDocCount.TryRead(ref reader, options, PropDocCount))
+			if (propDocCount.TryReadProperty(ref reader, options, PropDocCount, null))
 			{
 				continue;
 			}
 
-			if (propFrom.TryRead(ref reader, options, PropFrom))
+			if (propFrom.TryReadProperty(ref reader, options, PropFrom, null))
 			{
 				continue;
 			}
 
-			if (propFromAsString.TryRead(ref reader, options, PropFromAsString))
+			if (propFromAsString.TryReadProperty(ref reader, options, PropFromAsString, null))
 			{
 				continue;
 			}
 
-			if (propKey.TryRead(ref reader, options, PropKey))
+			if (propKey.TryReadProperty(ref reader, options, PropKey, null))
 			{
 				continue;
 			}
 
-			if (propTo.TryRead(ref reader, options, PropTo))
+			if (propTo.TryReadProperty(ref reader, options, PropTo, null))
 			{
 				continue;
 			}
 
-			if (propToAsString.TryRead(ref reader, options, PropToAsString))
+			if (propToAsString.TryReadProperty(ref reader, options, PropToAsString, null))
 			{
 				continue;
 			}
@@ -105,12 +105,12 @@ internal sealed partial class RangeBucketConverter : System.Text.Json.Serializat
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, RangeBucket value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDocCount, value.DocCount);
-		writer.WriteProperty(options, PropFrom, value.From);
-		writer.WriteProperty(options, PropFromAsString, value.FromAsString);
-		writer.WriteProperty(options, PropKey, value.Key);
-		writer.WriteProperty(options, PropTo, value.To);
-		writer.WriteProperty(options, PropToAsString, value.ToAsString);
+		writer.WriteProperty(options, PropDocCount, value.DocCount, null, null);
+		writer.WriteProperty(options, PropFrom, value.From, null, null);
+		writer.WriteProperty(options, PropFromAsString, value.FromAsString, null, null);
+		writer.WriteProperty(options, PropKey, value.Key, null, null);
+		writer.WriteProperty(options, PropTo, value.To, null, null);
+		writer.WriteProperty(options, PropToAsString, value.ToAsString, null, null);
 		if (value.Aggregations is not null)
 		{
 			foreach (var item in value.Aggregations)

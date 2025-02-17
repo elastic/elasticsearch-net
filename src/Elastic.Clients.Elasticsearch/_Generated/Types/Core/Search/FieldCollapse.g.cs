@@ -43,22 +43,22 @@ internal sealed partial class FieldCollapseConverter : System.Text.Json.Serializ
 		LocalJsonValue<int?> propMaxConcurrentGroupSearches = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCollapse.TryRead(ref reader, options, PropCollapse))
+			if (propCollapse.TryReadProperty(ref reader, options, PropCollapse, null))
 			{
 				continue;
 			}
 
-			if (propField.TryRead(ref reader, options, PropField))
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
 			{
 				continue;
 			}
 
-			if (propInnerHits.TryRead(ref reader, options, PropInnerHits, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>?, Elastic.Clients.Elasticsearch.Core.Search.InnerHits>)))
+			if (propInnerHits.TryReadProperty(ref reader, options, PropInnerHits, static ICollection<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>(o, null)))
 			{
 				continue;
 			}
 
-			if (propMaxConcurrentGroupSearches.TryRead(ref reader, options, PropMaxConcurrentGroupSearches))
+			if (propMaxConcurrentGroupSearches.TryReadProperty(ref reader, options, PropMaxConcurrentGroupSearches, null))
 			{
 				continue;
 			}
@@ -82,10 +82,10 @@ internal sealed partial class FieldCollapseConverter : System.Text.Json.Serializ
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, FieldCollapse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCollapse, value.Collapse);
-		writer.WriteProperty(options, PropField, value.Field);
-		writer.WriteProperty(options, PropInnerHits, value.InnerHits, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>?, Elastic.Clients.Elasticsearch.Core.Search.InnerHits>));
-		writer.WriteProperty(options, PropMaxConcurrentGroupSearches, value.MaxConcurrentGroupSearches);
+		writer.WriteProperty(options, PropCollapse, value.Collapse, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropInnerHits, value.InnerHits, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>(o, v, null));
+		writer.WriteProperty(options, PropMaxConcurrentGroupSearches, value.MaxConcurrentGroupSearches, null, null);
 		writer.WriteEndObject();
 	}
 }

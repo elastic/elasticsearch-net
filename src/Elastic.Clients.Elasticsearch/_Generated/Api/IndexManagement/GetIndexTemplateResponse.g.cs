@@ -38,7 +38,7 @@ internal sealed partial class GetIndexTemplateResponseConverter : System.Text.Js
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateItem>> propIndexTemplates = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propIndexTemplates.TryRead(ref reader, options, PropIndexTemplates))
+			if (propIndexTemplates.TryReadProperty(ref reader, options, PropIndexTemplates, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateItem> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateItem>(o, null)!))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class GetIndexTemplateResponseConverter : System.Text.Js
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetIndexTemplateResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropIndexTemplates, value.IndexTemplates);
+		writer.WriteProperty(options, PropIndexTemplates, value.IndexTemplates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateItem> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateItem>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

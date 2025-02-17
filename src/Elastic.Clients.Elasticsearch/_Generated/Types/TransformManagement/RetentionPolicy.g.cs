@@ -80,7 +80,7 @@ internal sealed partial class RetentionPolicyConverter : System.Text.Json.Serial
 			{
 				variantType = VariantTime.Value;
 				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy?>(options);
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy?>(options, null);
 				continue;
 			}
 
@@ -99,7 +99,7 @@ internal sealed partial class RetentionPolicyConverter : System.Text.Json.Serial
 			case "":
 				break;
 			case "time":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy?)value.Variant);
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy?)value.Variant, null, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(RetentionPolicy)}'.");

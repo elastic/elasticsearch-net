@@ -40,12 +40,12 @@ internal sealed partial class GetModelSnapshotUpgradeStatsResponseConverter : Sy
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshotUpgrade>> propModelSnapshotUpgrades = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCount.TryRead(ref reader, options, PropCount))
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
 			{
 				continue;
 			}
 
-			if (propModelSnapshotUpgrades.TryRead(ref reader, options, PropModelSnapshotUpgrades))
+			if (propModelSnapshotUpgrades.TryReadProperty(ref reader, options, PropModelSnapshotUpgrades, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshotUpgrade> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshotUpgrade>(o, null)!))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class GetModelSnapshotUpgradeStatsResponseConverter : Sy
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetModelSnapshotUpgradeStatsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCount, value.Count);
-		writer.WriteProperty(options, PropModelSnapshotUpgrades, value.ModelSnapshotUpgrades);
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropModelSnapshotUpgrades, value.ModelSnapshotUpgrades, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshotUpgrade> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshotUpgrade>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

@@ -38,7 +38,7 @@ internal sealed partial class GetGeoipDatabaseResponseConverter : System.Text.Js
 		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.DatabaseConfigurationMetadata>> propDatabases = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDatabases.TryRead(ref reader, options, PropDatabases))
+			if (propDatabases.TryReadProperty(ref reader, options, PropDatabases, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.DatabaseConfigurationMetadata> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Ingest.DatabaseConfigurationMetadata>(o, null)!))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class GetGeoipDatabaseResponseConverter : System.Text.Js
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetGeoipDatabaseResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDatabases, value.Databases);
+		writer.WriteProperty(options, PropDatabases, value.Databases, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.DatabaseConfigurationMetadata> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.DatabaseConfigurationMetadata>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

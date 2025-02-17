@@ -72,92 +72,92 @@ internal sealed partial class HealthResponseConverter : System.Text.Json.Seriali
 		LocalJsonValue<int> propUnassignedShards = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propActivePrimaryShards.TryRead(ref reader, options, PropActivePrimaryShards))
+			if (propActivePrimaryShards.TryReadProperty(ref reader, options, PropActivePrimaryShards, null))
 			{
 				continue;
 			}
 
-			if (propActiveShards.TryRead(ref reader, options, PropActiveShards))
+			if (propActiveShards.TryReadProperty(ref reader, options, PropActiveShards, null))
 			{
 				continue;
 			}
 
-			if (propActiveShardsPercentAsNumber.TryRead(ref reader, options, PropActiveShardsPercentAsNumber))
+			if (propActiveShardsPercentAsNumber.TryReadProperty(ref reader, options, PropActiveShardsPercentAsNumber, null))
 			{
 				continue;
 			}
 
-			if (propClusterName.TryRead(ref reader, options, PropClusterName))
+			if (propClusterName.TryReadProperty(ref reader, options, PropClusterName, null))
 			{
 				continue;
 			}
 
-			if (propDelayedUnassignedShards.TryRead(ref reader, options, PropDelayedUnassignedShards))
+			if (propDelayedUnassignedShards.TryReadProperty(ref reader, options, PropDelayedUnassignedShards, null))
 			{
 				continue;
 			}
 
-			if (propIndices.TryRead(ref reader, options, PropIndices))
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, static IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Cluster.IndexHealthStats>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Cluster.IndexHealthStats>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propInitializingShards.TryRead(ref reader, options, PropInitializingShards))
+			if (propInitializingShards.TryReadProperty(ref reader, options, PropInitializingShards, null))
 			{
 				continue;
 			}
 
-			if (propNumberOfDataNodes.TryRead(ref reader, options, PropNumberOfDataNodes))
+			if (propNumberOfDataNodes.TryReadProperty(ref reader, options, PropNumberOfDataNodes, null))
 			{
 				continue;
 			}
 
-			if (propNumberOfInFlightFetch.TryRead(ref reader, options, PropNumberOfInFlightFetch))
+			if (propNumberOfInFlightFetch.TryReadProperty(ref reader, options, PropNumberOfInFlightFetch, null))
 			{
 				continue;
 			}
 
-			if (propNumberOfNodes.TryRead(ref reader, options, PropNumberOfNodes))
+			if (propNumberOfNodes.TryReadProperty(ref reader, options, PropNumberOfNodes, null))
 			{
 				continue;
 			}
 
-			if (propNumberOfPendingTasks.TryRead(ref reader, options, PropNumberOfPendingTasks))
+			if (propNumberOfPendingTasks.TryReadProperty(ref reader, options, PropNumberOfPendingTasks, null))
 			{
 				continue;
 			}
 
-			if (propRelocatingShards.TryRead(ref reader, options, PropRelocatingShards))
+			if (propRelocatingShards.TryReadProperty(ref reader, options, PropRelocatingShards, null))
 			{
 				continue;
 			}
 
-			if (propStatus.TryRead(ref reader, options, PropStatus))
+			if (propStatus.TryReadProperty(ref reader, options, PropStatus, null))
 			{
 				continue;
 			}
 
-			if (propTaskMaxWaitingInQueue.TryRead(ref reader, options, PropTaskMaxWaitingInQueue))
+			if (propTaskMaxWaitingInQueue.TryReadProperty(ref reader, options, PropTaskMaxWaitingInQueue, null))
 			{
 				continue;
 			}
 
-			if (propTaskMaxWaitingInQueueMillis.TryRead(ref reader, options, PropTaskMaxWaitingInQueueMillis))
+			if (propTaskMaxWaitingInQueueMillis.TryReadProperty(ref reader, options, PropTaskMaxWaitingInQueueMillis, null))
 			{
 				continue;
 			}
 
-			if (propTimedOut.TryRead(ref reader, options, PropTimedOut))
+			if (propTimedOut.TryReadProperty(ref reader, options, PropTimedOut, null))
 			{
 				continue;
 			}
 
-			if (propUnassignedPrimaryShards.TryRead(ref reader, options, PropUnassignedPrimaryShards))
+			if (propUnassignedPrimaryShards.TryReadProperty(ref reader, options, PropUnassignedPrimaryShards, null))
 			{
 				continue;
 			}
 
-			if (propUnassignedShards.TryRead(ref reader, options, PropUnassignedShards))
+			if (propUnassignedShards.TryReadProperty(ref reader, options, PropUnassignedShards, null))
 			{
 				continue;
 			}
@@ -209,24 +209,24 @@ internal sealed partial class HealthResponseConverter : System.Text.Json.Seriali
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, HealthResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropActivePrimaryShards, value.ActivePrimaryShards);
-		writer.WriteProperty(options, PropActiveShards, value.ActiveShards);
-		writer.WriteProperty(options, PropActiveShardsPercentAsNumber, value.ActiveShardsPercentAsNumber);
-		writer.WriteProperty(options, PropClusterName, value.ClusterName);
-		writer.WriteProperty(options, PropDelayedUnassignedShards, value.DelayedUnassignedShards);
-		writer.WriteProperty(options, PropIndices, value.Indices);
-		writer.WriteProperty(options, PropInitializingShards, value.InitializingShards);
-		writer.WriteProperty(options, PropNumberOfDataNodes, value.NumberOfDataNodes);
-		writer.WriteProperty(options, PropNumberOfInFlightFetch, value.NumberOfInFlightFetch);
-		writer.WriteProperty(options, PropNumberOfNodes, value.NumberOfNodes);
-		writer.WriteProperty(options, PropNumberOfPendingTasks, value.NumberOfPendingTasks);
-		writer.WriteProperty(options, PropRelocatingShards, value.RelocatingShards);
-		writer.WriteProperty(options, PropStatus, value.Status);
-		writer.WriteProperty(options, PropTaskMaxWaitingInQueue, value.TaskMaxWaitingInQueue);
-		writer.WriteProperty(options, PropTaskMaxWaitingInQueueMillis, value.TaskMaxWaitingInQueueMillis);
-		writer.WriteProperty(options, PropTimedOut, value.TimedOut);
-		writer.WriteProperty(options, PropUnassignedPrimaryShards, value.UnassignedPrimaryShards);
-		writer.WriteProperty(options, PropUnassignedShards, value.UnassignedShards);
+		writer.WriteProperty(options, PropActivePrimaryShards, value.ActivePrimaryShards, null, null);
+		writer.WriteProperty(options, PropActiveShards, value.ActiveShards, null, null);
+		writer.WriteProperty(options, PropActiveShardsPercentAsNumber, value.ActiveShardsPercentAsNumber, null, null);
+		writer.WriteProperty(options, PropClusterName, value.ClusterName, null, null);
+		writer.WriteProperty(options, PropDelayedUnassignedShards, value.DelayedUnassignedShards, null, null);
+		writer.WriteProperty(options, PropIndices, value.Indices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Cluster.IndexHealthStats>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Cluster.IndexHealthStats>(o, v, null, null));
+		writer.WriteProperty(options, PropInitializingShards, value.InitializingShards, null, null);
+		writer.WriteProperty(options, PropNumberOfDataNodes, value.NumberOfDataNodes, null, null);
+		writer.WriteProperty(options, PropNumberOfInFlightFetch, value.NumberOfInFlightFetch, null, null);
+		writer.WriteProperty(options, PropNumberOfNodes, value.NumberOfNodes, null, null);
+		writer.WriteProperty(options, PropNumberOfPendingTasks, value.NumberOfPendingTasks, null, null);
+		writer.WriteProperty(options, PropRelocatingShards, value.RelocatingShards, null, null);
+		writer.WriteProperty(options, PropStatus, value.Status, null, null);
+		writer.WriteProperty(options, PropTaskMaxWaitingInQueue, value.TaskMaxWaitingInQueue, null, null);
+		writer.WriteProperty(options, PropTaskMaxWaitingInQueueMillis, value.TaskMaxWaitingInQueueMillis, null, null);
+		writer.WriteProperty(options, PropTimedOut, value.TimedOut, null, null);
+		writer.WriteProperty(options, PropUnassignedPrimaryShards, value.UnassignedPrimaryShards, null, null);
+		writer.WriteProperty(options, PropUnassignedShards, value.UnassignedShards, null, null);
 		writer.WriteEndObject();
 	}
 }

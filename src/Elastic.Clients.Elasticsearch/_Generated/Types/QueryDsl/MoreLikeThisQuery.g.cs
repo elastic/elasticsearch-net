@@ -75,102 +75,102 @@ internal sealed partial class MoreLikeThisQueryConverter : System.Text.Json.Seri
 		LocalJsonValue<Elastic.Clients.Elasticsearch.VersionType?> propVersionType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAnalyzer.TryRead(ref reader, options, PropAnalyzer))
+			if (propAnalyzer.TryReadProperty(ref reader, options, PropAnalyzer, null))
 			{
 				continue;
 			}
 
-			if (propBoost.TryRead(ref reader, options, PropBoost))
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
 			{
 				continue;
 			}
 
-			if (propBoostTerms.TryRead(ref reader, options, PropBoostTerms))
+			if (propBoostTerms.TryReadProperty(ref reader, options, PropBoostTerms, null))
 			{
 				continue;
 			}
 
-			if (propFailOnUnsupportedField.TryRead(ref reader, options, PropFailOnUnsupportedField))
+			if (propFailOnUnsupportedField.TryReadProperty(ref reader, options, PropFailOnUnsupportedField, null))
 			{
 				continue;
 			}
 
-			if (propFields.TryRead(ref reader, options, PropFields, typeof(FieldsMarker)))
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(SingleOrManyFieldsMarker))))
 			{
 				continue;
 			}
 
-			if (propInclude.TryRead(ref reader, options, PropInclude))
+			if (propInclude.TryReadProperty(ref reader, options, PropInclude, null))
 			{
 				continue;
 			}
 
-			if (propLike.TryRead(ref reader, options, PropLike, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like>, Elastic.Clients.Elasticsearch.QueryDsl.Like>)))
+			if (propLike.TryReadProperty(ref reader, options, PropLike, static ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Like>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propMaxDocFreq.TryRead(ref reader, options, PropMaxDocFreq))
+			if (propMaxDocFreq.TryReadProperty(ref reader, options, PropMaxDocFreq, null))
 			{
 				continue;
 			}
 
-			if (propMaxQueryTerms.TryRead(ref reader, options, PropMaxQueryTerms))
+			if (propMaxQueryTerms.TryReadProperty(ref reader, options, PropMaxQueryTerms, null))
 			{
 				continue;
 			}
 
-			if (propMaxWordLength.TryRead(ref reader, options, PropMaxWordLength))
+			if (propMaxWordLength.TryReadProperty(ref reader, options, PropMaxWordLength, null))
 			{
 				continue;
 			}
 
-			if (propMinDocFreq.TryRead(ref reader, options, PropMinDocFreq))
+			if (propMinDocFreq.TryReadProperty(ref reader, options, PropMinDocFreq, null))
 			{
 				continue;
 			}
 
-			if (propMinimumShouldMatch.TryRead(ref reader, options, PropMinimumShouldMatch))
+			if (propMinimumShouldMatch.TryReadProperty(ref reader, options, PropMinimumShouldMatch, null))
 			{
 				continue;
 			}
 
-			if (propMinTermFreq.TryRead(ref reader, options, PropMinTermFreq))
+			if (propMinTermFreq.TryReadProperty(ref reader, options, PropMinTermFreq, null))
 			{
 				continue;
 			}
 
-			if (propMinWordLength.TryRead(ref reader, options, PropMinWordLength))
+			if (propMinWordLength.TryReadProperty(ref reader, options, PropMinWordLength, null))
 			{
 				continue;
 			}
 
-			if (propQueryName.TryRead(ref reader, options, PropQueryName))
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
 			{
 				continue;
 			}
 
-			if (propRouting.TryRead(ref reader, options, PropRouting))
+			if (propRouting.TryReadProperty(ref reader, options, PropRouting, null))
 			{
 				continue;
 			}
 
-			if (propStopWords.TryRead(ref reader, options, PropStopWords, typeof(SingleOrManyMarker<ICollection<string>?, string>)))
+			if (propStopWords.TryReadProperty(ref reader, options, PropStopWords, static ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propUnlike.TryRead(ref reader, options, PropUnlike, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like>?, Elastic.Clients.Elasticsearch.QueryDsl.Like>)))
+			if (propUnlike.TryReadProperty(ref reader, options, PropUnlike, static ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Like>(o, null)))
 			{
 				continue;
 			}
 
-			if (propVersion.TryRead(ref reader, options, PropVersion))
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
 			{
 				continue;
 			}
 
-			if (propVersionType.TryRead(ref reader, options, PropVersionType))
+			if (propVersionType.TryReadProperty(ref reader, options, PropVersionType, null))
 			{
 				continue;
 			}
@@ -226,26 +226,26 @@ internal sealed partial class MoreLikeThisQueryConverter : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, MoreLikeThisQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAnalyzer, value.Analyzer);
-		writer.WriteProperty(options, PropBoost, value.Boost);
-		writer.WriteProperty(options, PropBoostTerms, value.BoostTerms);
-		writer.WriteProperty(options, PropFailOnUnsupportedField, value.FailOnUnsupportedField);
-		writer.WriteProperty(options, PropFields, value.Fields, null, typeof(FieldsMarker));
-		writer.WriteProperty(options, PropInclude, value.Include);
-		writer.WriteProperty(options, PropLike, value.Like, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like>, Elastic.Clients.Elasticsearch.QueryDsl.Like>));
-		writer.WriteProperty(options, PropMaxDocFreq, value.MaxDocFreq);
-		writer.WriteProperty(options, PropMaxQueryTerms, value.MaxQueryTerms);
-		writer.WriteProperty(options, PropMaxWordLength, value.MaxWordLength);
-		writer.WriteProperty(options, PropMinDocFreq, value.MinDocFreq);
-		writer.WriteProperty(options, PropMinimumShouldMatch, value.MinimumShouldMatch);
-		writer.WriteProperty(options, PropMinTermFreq, value.MinTermFreq);
-		writer.WriteProperty(options, PropMinWordLength, value.MinWordLength);
-		writer.WriteProperty(options, PropQueryName, value.QueryName);
-		writer.WriteProperty(options, PropRouting, value.Routing);
-		writer.WriteProperty(options, PropStopWords, value.StopWords, null, typeof(SingleOrManyMarker<ICollection<string>?, string>));
-		writer.WriteProperty(options, PropUnlike, value.Unlike, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like>?, Elastic.Clients.Elasticsearch.QueryDsl.Like>));
-		writer.WriteProperty(options, PropVersion, value.Version);
-		writer.WriteProperty(options, PropVersionType, value.VersionType);
+		writer.WriteProperty(options, PropAnalyzer, value.Analyzer, null, null);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropBoostTerms, value.BoostTerms, null, null);
+		writer.WriteProperty(options, PropFailOnUnsupportedField, value.FailOnUnsupportedField, null, null);
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropInclude, value.Include, null, null);
+		writer.WriteProperty(options, PropLike, value.Like, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Like>(o, v, null));
+		writer.WriteProperty(options, PropMaxDocFreq, value.MaxDocFreq, null, null);
+		writer.WriteProperty(options, PropMaxQueryTerms, value.MaxQueryTerms, null, null);
+		writer.WriteProperty(options, PropMaxWordLength, value.MaxWordLength, null, null);
+		writer.WriteProperty(options, PropMinDocFreq, value.MinDocFreq, null, null);
+		writer.WriteProperty(options, PropMinimumShouldMatch, value.MinimumShouldMatch, null, null);
+		writer.WriteProperty(options, PropMinTermFreq, value.MinTermFreq, null, null);
+		writer.WriteProperty(options, PropMinWordLength, value.MinWordLength, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
+		writer.WriteProperty(options, PropStopWords, value.StopWords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropUnlike, value.Unlike, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Like>(o, v, null));
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteProperty(options, PropVersionType, value.VersionType, null, null);
 		writer.WriteEndObject();
 	}
 }

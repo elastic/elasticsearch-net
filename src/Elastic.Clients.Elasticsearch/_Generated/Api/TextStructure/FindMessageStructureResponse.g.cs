@@ -66,77 +66,77 @@ internal sealed partial class FindMessageStructureResponseConverter : System.Tex
 		LocalJsonValue<string?> propTimestampField = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCharset.TryRead(ref reader, options, PropCharset))
+			if (propCharset.TryReadProperty(ref reader, options, PropCharset, null))
 			{
 				continue;
 			}
 
-			if (propEcsCompatibility.TryRead(ref reader, options, PropEcsCompatibility))
+			if (propEcsCompatibility.TryReadProperty(ref reader, options, PropEcsCompatibility, null))
 			{
 				continue;
 			}
 
-			if (propFieldStats.TryRead(ref reader, options, PropFieldStats))
+			if (propFieldStats.TryReadProperty(ref reader, options, PropFieldStats, static IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.TextStructure.FieldStat> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.TextStructure.FieldStat>(o, null, null)!))
 			{
 				continue;
 			}
 
-			if (propFormat.TryRead(ref reader, options, PropFormat))
+			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
 			{
 				continue;
 			}
 
-			if (propGrokPattern.TryRead(ref reader, options, PropGrokPattern))
+			if (propGrokPattern.TryReadProperty(ref reader, options, PropGrokPattern, null))
 			{
 				continue;
 			}
 
-			if (propIngestPipeline.TryRead(ref reader, options, PropIngestPipeline))
+			if (propIngestPipeline.TryReadProperty(ref reader, options, PropIngestPipeline, null))
 			{
 				continue;
 			}
 
-			if (propJavaTimestampFormats.TryRead(ref reader, options, PropJavaTimestampFormats))
+			if (propJavaTimestampFormats.TryReadProperty(ref reader, options, PropJavaTimestampFormats, static IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propJodaTimestampFormats.TryRead(ref reader, options, PropJodaTimestampFormats))
+			if (propJodaTimestampFormats.TryReadProperty(ref reader, options, PropJodaTimestampFormats, static IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
 
-			if (propMappings.TryRead(ref reader, options, PropMappings))
+			if (propMappings.TryReadProperty(ref reader, options, PropMappings, null))
 			{
 				continue;
 			}
 
-			if (propMultilineStartPattern.TryRead(ref reader, options, PropMultilineStartPattern))
+			if (propMultilineStartPattern.TryReadProperty(ref reader, options, PropMultilineStartPattern, null))
 			{
 				continue;
 			}
 
-			if (propNeedClientTimezone.TryRead(ref reader, options, PropNeedClientTimezone))
+			if (propNeedClientTimezone.TryReadProperty(ref reader, options, PropNeedClientTimezone, null))
 			{
 				continue;
 			}
 
-			if (propNumLinesAnalyzed.TryRead(ref reader, options, PropNumLinesAnalyzed))
+			if (propNumLinesAnalyzed.TryReadProperty(ref reader, options, PropNumLinesAnalyzed, null))
 			{
 				continue;
 			}
 
-			if (propNumMessagesAnalyzed.TryRead(ref reader, options, PropNumMessagesAnalyzed))
+			if (propNumMessagesAnalyzed.TryReadProperty(ref reader, options, PropNumMessagesAnalyzed, null))
 			{
 				continue;
 			}
 
-			if (propSampleStart.TryRead(ref reader, options, PropSampleStart))
+			if (propSampleStart.TryReadProperty(ref reader, options, PropSampleStart, null))
 			{
 				continue;
 			}
 
-			if (propTimestampField.TryRead(ref reader, options, PropTimestampField))
+			if (propTimestampField.TryReadProperty(ref reader, options, PropTimestampField, null))
 			{
 				continue;
 			}
@@ -182,21 +182,21 @@ internal sealed partial class FindMessageStructureResponseConverter : System.Tex
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, FindMessageStructureResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCharset, value.Charset);
-		writer.WriteProperty(options, PropEcsCompatibility, value.EcsCompatibility);
-		writer.WriteProperty(options, PropFieldStats, value.FieldStats);
-		writer.WriteProperty(options, PropFormat, value.Format);
-		writer.WriteProperty(options, PropGrokPattern, value.GrokPattern);
-		writer.WriteProperty(options, PropIngestPipeline, value.IngestPipeline);
-		writer.WriteProperty(options, PropJavaTimestampFormats, value.JavaTimestampFormats);
-		writer.WriteProperty(options, PropJodaTimestampFormats, value.JodaTimestampFormats);
-		writer.WriteProperty(options, PropMappings, value.Mappings);
-		writer.WriteProperty(options, PropMultilineStartPattern, value.MultilineStartPattern);
-		writer.WriteProperty(options, PropNeedClientTimezone, value.NeedClientTimezone);
-		writer.WriteProperty(options, PropNumLinesAnalyzed, value.NumLinesAnalyzed);
-		writer.WriteProperty(options, PropNumMessagesAnalyzed, value.NumMessagesAnalyzed);
-		writer.WriteProperty(options, PropSampleStart, value.SampleStart);
-		writer.WriteProperty(options, PropTimestampField, value.TimestampField);
+		writer.WriteProperty(options, PropCharset, value.Charset, null, null);
+		writer.WriteProperty(options, PropEcsCompatibility, value.EcsCompatibility, null, null);
+		writer.WriteProperty(options, PropFieldStats, value.FieldStats, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.TextStructure.FieldStat> v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.TextStructure.FieldStat>(o, v, null, null));
+		writer.WriteProperty(options, PropFormat, value.Format, null, null);
+		writer.WriteProperty(options, PropGrokPattern, value.GrokPattern, null, null);
+		writer.WriteProperty(options, PropIngestPipeline, value.IngestPipeline, null, null);
+		writer.WriteProperty(options, PropJavaTimestampFormats, value.JavaTimestampFormats, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropJodaTimestampFormats, value.JodaTimestampFormats, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropMappings, value.Mappings, null, null);
+		writer.WriteProperty(options, PropMultilineStartPattern, value.MultilineStartPattern, null, null);
+		writer.WriteProperty(options, PropNeedClientTimezone, value.NeedClientTimezone, null, null);
+		writer.WriteProperty(options, PropNumLinesAnalyzed, value.NumLinesAnalyzed, null, null);
+		writer.WriteProperty(options, PropNumMessagesAnalyzed, value.NumMessagesAnalyzed, null, null);
+		writer.WriteProperty(options, PropSampleStart, value.SampleStart, null, null);
+		writer.WriteProperty(options, PropTimestampField, value.TimestampField, null, null);
 		writer.WriteEndObject();
 	}
 }

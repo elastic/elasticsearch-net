@@ -41,18 +41,18 @@ internal sealed partial class TermsQueryConverter : System.Text.Json.Serializati
 		LocalJsonValue<string?> propQueryName = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBoost.TryRead(ref reader, options, PropBoost))
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
 			{
 				continue;
 			}
 
-			if (propQueryName.TryRead(ref reader, options, PropQueryName))
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
 			{
 				continue;
 			}
 
 			propField.Initialized = propTerms.Initialized = true;
-			reader.ReadProperty(options, out propField.Value, out propTerms.Value);
+			reader.ReadProperty(options, out propField.Value, out propTerms.Value, null, null);
 		}
 
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
@@ -71,9 +71,9 @@ internal sealed partial class TermsQueryConverter : System.Text.Json.Serializati
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, TermsQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBoost, value.Boost);
-		writer.WriteProperty(options, PropQueryName, value.QueryName);
-		writer.WriteProperty(options, value.Field, value.Terms);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteProperty(options, value.Field, value.Terms, null, null);
 		writer.WriteEndObject();
 	}
 }

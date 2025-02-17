@@ -44,22 +44,22 @@ internal sealed partial class GetSnapshotResponseConverter : System.Text.Json.Se
 		LocalJsonValue<int> propTotal = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propRemaining.TryRead(ref reader, options, PropRemaining))
+			if (propRemaining.TryReadProperty(ref reader, options, PropRemaining, null))
 			{
 				continue;
 			}
 
-			if (propResponses.TryRead(ref reader, options, PropResponses))
+			if (propResponses.TryReadProperty(ref reader, options, PropResponses, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotResponseItem>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Snapshot.SnapshotResponseItem>(o, null)))
 			{
 				continue;
 			}
 
-			if (propSnapshots.TryRead(ref reader, options, PropSnapshots))
+			if (propSnapshots.TryReadProperty(ref reader, options, PropSnapshots, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo>(o, null)))
 			{
 				continue;
 			}
 
-			if (propTotal.TryRead(ref reader, options, PropTotal))
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
 			{
 				continue;
 			}
@@ -83,10 +83,10 @@ internal sealed partial class GetSnapshotResponseConverter : System.Text.Json.Se
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetSnapshotResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropRemaining, value.Remaining);
-		writer.WriteProperty(options, PropResponses, value.Responses);
-		writer.WriteProperty(options, PropSnapshots, value.Snapshots);
-		writer.WriteProperty(options, PropTotal, value.Total);
+		writer.WriteProperty(options, PropRemaining, value.Remaining, null, null);
+		writer.WriteProperty(options, PropResponses, value.Responses, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotResponseItem>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Snapshot.SnapshotResponseItem>(o, v, null));
+		writer.WriteProperty(options, PropSnapshots, value.Snapshots, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo>(o, v, null));
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
 		writer.WriteEndObject();
 	}
 }

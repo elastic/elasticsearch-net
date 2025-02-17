@@ -40,12 +40,12 @@ internal sealed partial class FlushJobResponseConverter : System.Text.Json.Seria
 		LocalJsonValue<int?> propLastFinalizedBucketEnd = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propFlushed.TryRead(ref reader, options, PropFlushed))
+			if (propFlushed.TryReadProperty(ref reader, options, PropFlushed, null))
 			{
 				continue;
 			}
 
-			if (propLastFinalizedBucketEnd.TryRead(ref reader, options, PropLastFinalizedBucketEnd))
+			if (propLastFinalizedBucketEnd.TryReadProperty(ref reader, options, PropLastFinalizedBucketEnd, null))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class FlushJobResponseConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, FlushJobResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFlushed, value.Flushed);
-		writer.WriteProperty(options, PropLastFinalizedBucketEnd, value.LastFinalizedBucketEnd);
+		writer.WriteProperty(options, PropFlushed, value.Flushed, null, null);
+		writer.WriteProperty(options, PropLastFinalizedBucketEnd, value.LastFinalizedBucketEnd, null, null);
 		writer.WriteEndObject();
 	}
 }

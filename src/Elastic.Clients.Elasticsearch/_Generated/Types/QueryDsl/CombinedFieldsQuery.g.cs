@@ -27,110 +27,6 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-internal sealed partial class CombinedFieldsQueryConverter : System.Text.Json.Serialization.JsonConverter<CombinedFieldsQuery>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropAutoGenerateSynonymsPhraseQuery = System.Text.Json.JsonEncodedText.Encode("auto_generate_synonyms_phrase_query");
-	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
-	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
-	private static readonly System.Text.Json.JsonEncodedText PropMinimumShouldMatch = System.Text.Json.JsonEncodedText.Encode("minimum_should_match");
-	private static readonly System.Text.Json.JsonEncodedText PropOperator = System.Text.Json.JsonEncodedText.Encode("operator");
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
-	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
-	private static readonly System.Text.Json.JsonEncodedText PropZeroTermsQuery = System.Text.Json.JsonEncodedText.Encode("zero_terms_query");
-
-	public override CombinedFieldsQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<bool?> propAutoGenerateSynonymsPhraseQuery = default;
-		LocalJsonValue<float?> propBoost = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields> propFields = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MinimumShouldMatch?> propMinimumShouldMatch = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator?> propOperator = default;
-		LocalJsonValue<string> propQuery = default;
-		LocalJsonValue<string?> propQueryName = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms?> propZeroTermsQuery = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propAutoGenerateSynonymsPhraseQuery.TryRead(ref reader, options, PropAutoGenerateSynonymsPhraseQuery))
-			{
-				continue;
-			}
-
-			if (propBoost.TryRead(ref reader, options, PropBoost))
-			{
-				continue;
-			}
-
-			if (propFields.TryRead(ref reader, options, PropFields, typeof(FieldsMarker)))
-			{
-				continue;
-			}
-
-			if (propMinimumShouldMatch.TryRead(ref reader, options, PropMinimumShouldMatch))
-			{
-				continue;
-			}
-
-			if (propOperator.TryRead(ref reader, options, PropOperator))
-			{
-				continue;
-			}
-
-			if (propQuery.TryRead(ref reader, options, PropQuery))
-			{
-				continue;
-			}
-
-			if (propQueryName.TryRead(ref reader, options, PropQueryName))
-			{
-				continue;
-			}
-
-			if (propZeroTermsQuery.TryRead(ref reader, options, PropZeroTermsQuery))
-			{
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new CombinedFieldsQuery
-		{
-			AutoGenerateSynonymsPhraseQuery = propAutoGenerateSynonymsPhraseQuery.Value
-,
-			Boost = propBoost.Value
-,
-			Fields = propFields.Value
-,
-			MinimumShouldMatch = propMinimumShouldMatch.Value
-,
-			Operator = propOperator.Value
-,
-			Query = propQuery.Value
-,
-			QueryName = propQueryName.Value
-,
-			ZeroTermsQuery = propZeroTermsQuery.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, CombinedFieldsQuery value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAutoGenerateSynonymsPhraseQuery, value.AutoGenerateSynonymsPhraseQuery);
-		writer.WriteProperty(options, PropBoost, value.Boost);
-		writer.WriteProperty(options, PropFields, value.Fields, null, typeof(FieldsMarker));
-		writer.WriteProperty(options, PropMinimumShouldMatch, value.MinimumShouldMatch);
-		writer.WriteProperty(options, PropOperator, value.Operator);
-		writer.WriteProperty(options, PropQuery, value.Query);
-		writer.WriteProperty(options, PropQueryName, value.QueryName);
-		writer.WriteProperty(options, PropZeroTermsQuery, value.ZeroTermsQuery);
-		writer.WriteEndObject();
-	}
-}
-
-[JsonConverter(typeof(CombinedFieldsQueryConverter))]
 public sealed partial class CombinedFieldsQuery
 {
 	/// <summary>
@@ -138,6 +34,7 @@ public sealed partial class CombinedFieldsQuery
 	/// If true, match phrase queries are automatically created for multi-term synonyms.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("auto_generate_synonyms_phrase_query")]
 	public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 
 	/// <summary>
@@ -148,6 +45,7 @@ public sealed partial class CombinedFieldsQuery
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
@@ -155,6 +53,7 @@ public sealed partial class CombinedFieldsQuery
 	/// List of fields to search. Field wildcard patterns are allowed. Only <c>text</c> fields are supported, and they must all have the same search <c>analyzer</c>.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Fields Fields { get; set; }
 
 	/// <summary>
@@ -162,6 +61,7 @@ public sealed partial class CombinedFieldsQuery
 	/// Minimum number of clauses that must match for a document to be returned.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("minimum_should_match")]
 	public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
 	/// <summary>
@@ -169,6 +69,7 @@ public sealed partial class CombinedFieldsQuery
 	/// Boolean logic used to interpret text in the query value.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("operator")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? Operator { get; set; }
 
 	/// <summary>
@@ -177,7 +78,9 @@ public sealed partial class CombinedFieldsQuery
 	/// The <c>combined_fields</c> query analyzes the provided text before performing a search.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("query")]
 	public string Query { get; set; }
+	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
 
 	/// <summary>
@@ -185,6 +88,7 @@ public sealed partial class CombinedFieldsQuery
 	/// Indicates whether no documents are returned if the analyzer removes all tokens, such as when using a <c>stop</c> filter.
 	/// </para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("zero_terms_query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? ZeroTermsQuery { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(CombinedFieldsQuery combinedFieldsQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.CombinedFields(combinedFieldsQuery);
