@@ -160,7 +160,7 @@ The following are some of the main features which have not been re-implemented f
 * Visitor pattern support for types such as `Properties`.
 * Support for `JoinField` which affects `ChildrenAggregation`.
 * Conditionless queries.
-* DiagnosticSources have been removed in `Elastic.Transport` to provide a clean-slate for an improved diagnostics story. The Elasticsearch .NET Client emits [OpenTelemetry](https://opentelemetry.io/) compatible `Activity` spans which can be consumed by APM agents such as the [Elastic APM Agent for .NET](apm-agent-dotnet://docs/reference/index.md).
+* DiagnosticSources have been removed in `Elastic.Transport` to provide a clean-slate for an improved diagnostics story. The Elasticsearch .NET Client emits [OpenTelemetry](https://opentelemetry.io/) compatible `Activity` spans which can be consumed by APM agents such as the [Elastic APM Agent for .NET](apm-agent-dotnet://reference/index.md).
 * Documentation is a work in progress, and we will expand on the documented scenarios in future releases.
 
 
