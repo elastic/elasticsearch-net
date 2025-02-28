@@ -16,6 +16,12 @@ internal static partial class JsonSerializerOptionsExtensions
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static JsonConverter<T> GetConverter<T>(this JsonSerializerOptions options, Type? markerType)
 	{
+		// Mimics the internal behavior of `JsonSerializer.Serialize()` and as well seems to be required in order
+		// to directly use converters like we do.
+		// When getting a default generic converter from `JsonSerializerOptions` that are not read-only, a
+		// `NotSupportedException` is thrown as soon as we call `converter.Read()` or `converter.Write()`.
+		options.MakeReadOnly(true);
+
 #pragma warning disable IL2026, IL3050
 		var rawConverter = options.GetConverter(markerType ?? typeof(T));
 #pragma warning restore IL2026, IL3050

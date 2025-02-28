@@ -53,7 +53,6 @@ internal sealed partial class ChildScoreModeConverter : System.Text.Json.Seriali
 
 	public override ChildScoreMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberSum))
 		{
 			return ChildScoreMode.Sum;
@@ -131,6 +130,16 @@ internal sealed partial class ChildScoreModeConverter : System.Text.Json.Seriali
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(ChildScoreMode)}'.");
 		}
 	}
+
+	public override ChildScoreMode ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, ChildScoreMode value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
 }
 
 [JsonConverter(typeof(CombinedFieldsOperatorConverter))]
@@ -149,7 +158,6 @@ internal sealed partial class CombinedFieldsOperatorConverter : System.Text.Json
 
 	public override CombinedFieldsOperator Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberOr))
 		{
 			return CombinedFieldsOperator.Or;
@@ -188,6 +196,16 @@ internal sealed partial class CombinedFieldsOperatorConverter : System.Text.Json
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(CombinedFieldsOperator)}'.");
 		}
 	}
+
+	public override CombinedFieldsOperator ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, CombinedFieldsOperator value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
 }
 
 [JsonConverter(typeof(CombinedFieldsZeroTermsConverter))]
@@ -216,7 +234,6 @@ internal sealed partial class CombinedFieldsZeroTermsConverter : System.Text.Jso
 
 	public override CombinedFieldsZeroTerms Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberNone))
 		{
 			return CombinedFieldsZeroTerms.None;
@@ -254,6 +271,16 @@ internal sealed partial class CombinedFieldsZeroTermsConverter : System.Text.Jso
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(CombinedFieldsZeroTerms)}'.");
 		}
+	}
+
+	public override CombinedFieldsZeroTerms ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, CombinedFieldsZeroTerms value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
 	}
 }
 
@@ -349,7 +376,6 @@ internal sealed partial class FieldValueFactorModifierConverter : System.Text.Js
 
 	public override FieldValueFactorModifier Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberSquare))
 		{
 			return FieldValueFactorModifier.Square;
@@ -492,6 +518,16 @@ internal sealed partial class FieldValueFactorModifierConverter : System.Text.Js
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(FieldValueFactorModifier)}'.");
 		}
 	}
+
+	public override FieldValueFactorModifier ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, FieldValueFactorModifier value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
 }
 
 [JsonConverter(typeof(FunctionBoostModeConverter))]
@@ -553,7 +589,6 @@ internal sealed partial class FunctionBoostModeConverter : System.Text.Json.Seri
 
 	public override FunctionBoostMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberSum))
 		{
 			return FunctionBoostMode.Sum;
@@ -644,6 +679,16 @@ internal sealed partial class FunctionBoostModeConverter : System.Text.Json.Seri
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(FunctionBoostMode)}'.");
 		}
 	}
+
+	public override FunctionBoostMode ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, FunctionBoostMode value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
 }
 
 [JsonConverter(typeof(FunctionScoreModeConverter))]
@@ -704,7 +749,6 @@ internal sealed partial class FunctionScoreModeConverter : System.Text.Json.Seri
 
 	public override FunctionScoreMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberSum))
 		{
 			return FunctionScoreMode.Sum;
@@ -795,6 +839,16 @@ internal sealed partial class FunctionScoreModeConverter : System.Text.Json.Seri
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(FunctionScoreMode)}'.");
 		}
 	}
+
+	public override FunctionScoreMode ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, FunctionScoreMode value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
 }
 
 [JsonConverter(typeof(GeoValidationMethodConverter))]
@@ -826,7 +880,6 @@ internal sealed partial class GeoValidationMethodConverter : System.Text.Json.Se
 
 	public override GeoValidationMethod Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberStrict))
 		{
 			return GeoValidationMethod.Strict;
@@ -878,6 +931,16 @@ internal sealed partial class GeoValidationMethodConverter : System.Text.Json.Se
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(GeoValidationMethod)}'.");
 		}
 	}
+
+	public override GeoValidationMethod ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, GeoValidationMethod value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
 }
 
 [JsonConverter(typeof(MultiValueModeConverter))]
@@ -922,7 +985,6 @@ internal sealed partial class MultiValueModeConverter : System.Text.Json.Seriali
 
 	public override MultiValueMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberSum))
 		{
 			return MultiValueMode.Sum;
@@ -987,6 +1049,16 @@ internal sealed partial class MultiValueModeConverter : System.Text.Json.Seriali
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(MultiValueMode)}'.");
 		}
 	}
+
+	public override MultiValueMode ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, MultiValueMode value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
 }
 
 [JsonConverter(typeof(OperatorConverter))]
@@ -1007,7 +1079,6 @@ internal sealed partial class OperatorConverter : System.Text.Json.Serialization
 
 	public override Operator Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberOr) || reader.ValueTextEquals(MemberOr1))
 		{
 			return Operator.Or;
@@ -1046,6 +1117,16 @@ internal sealed partial class OperatorConverter : System.Text.Json.Serialization
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Operator)}'.");
 		}
 	}
+
+	public override Operator ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Operator value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
 }
 
 [JsonConverter(typeof(RangeRelationConverter))]
@@ -1082,7 +1163,6 @@ internal sealed partial class RangeRelationConverter : System.Text.Json.Serializ
 
 	public override RangeRelation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberWithin))
 		{
 			return RangeRelation.Within;
@@ -1133,6 +1213,16 @@ internal sealed partial class RangeRelationConverter : System.Text.Json.Serializ
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(RangeRelation)}'.");
 		}
+	}
+
+	public override RangeRelation ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, RangeRelation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
 	}
 }
 
@@ -1376,7 +1466,6 @@ internal sealed partial class TextQueryTypeConverter : System.Text.Json.Serializ
 
 	public override TextQueryType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberPhrasePrefix))
 		{
 			return TextQueryType.PhrasePrefix;
@@ -1467,6 +1556,16 @@ internal sealed partial class TextQueryTypeConverter : System.Text.Json.Serializ
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(TextQueryType)}'.");
 		}
 	}
+
+	public override TextQueryType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, TextQueryType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
 }
 
 [JsonConverter(typeof(ZeroTermsQueryConverter))]
@@ -1495,7 +1594,6 @@ internal sealed partial class ZeroTermsQueryConverter : System.Text.Json.Seriali
 
 	public override ZeroTermsQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberNone))
 		{
 			return ZeroTermsQuery.None;
@@ -1533,5 +1631,15 @@ internal sealed partial class ZeroTermsQueryConverter : System.Text.Json.Seriali
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(ZeroTermsQuery)}'.");
 		}
+	}
+
+	public override ZeroTermsQuery ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, ZeroTermsQuery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
 	}
 }

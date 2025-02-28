@@ -50,7 +50,6 @@ internal sealed partial class EnrichPolicyPhaseConverter : System.Text.Json.Seri
 
 	public override EnrichPolicyPhase Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberScheduled))
 		{
 			return EnrichPolicyPhase.Scheduled;
@@ -115,6 +114,16 @@ internal sealed partial class EnrichPolicyPhaseConverter : System.Text.Json.Seri
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(EnrichPolicyPhase)}'.");
 		}
 	}
+
+	public override EnrichPolicyPhase ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, EnrichPolicyPhase value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
 }
 
 [JsonConverter(typeof(PolicyTypeConverter))]
@@ -136,7 +145,6 @@ internal sealed partial class PolicyTypeConverter : System.Text.Json.Serializati
 
 	public override PolicyType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberRange))
 		{
 			return PolicyType.Range;
@@ -187,5 +195,15 @@ internal sealed partial class PolicyTypeConverter : System.Text.Json.Serializati
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(PolicyType)}'.");
 		}
+	}
+
+	public override PolicyType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, PolicyType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
 	}
 }

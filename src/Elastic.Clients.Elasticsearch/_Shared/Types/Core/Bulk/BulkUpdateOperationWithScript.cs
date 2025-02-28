@@ -34,9 +34,10 @@ public class BulkUpdateOperationWithScript : BulkUpdateOperation
 	{
 	}
 
-	protected override void WriteOperation(Utf8JsonWriter writer, JsonSerializerOptions options = null) => JsonSerializer.Serialize<BulkUpdateOperationWithScript>(writer, this, options);
-
-	protected override object GetBody() => new ScriptedBulkUpdateBody { Script = Script };
+	private protected override BulkUpdateBody GetBody() => new ScriptedBulkUpdateBody
+	{
+		Script = Script
+	};
 }
 
 public sealed class BulkUpdateOperationWithScript<TDocument> : BulkUpdateOperationWithScript
@@ -48,5 +49,5 @@ public sealed class BulkUpdateOperationWithScript<TDocument> : BulkUpdateOperati
 	[JsonIgnore]
 	public TDocument Upsert { get; set; }
 
-	protected override object GetBody() => new ScriptedBulkUpdateBody<TDocument> { Script = Script, Upsert = Upsert };
+	private protected override BulkUpdateBody GetBody() => new ScriptedBulkUpdateBody<TDocument> { Script = Script, Upsert = Upsert };
 }

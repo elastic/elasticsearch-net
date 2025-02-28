@@ -47,7 +47,6 @@ internal sealed partial class StatsLevelConverter : System.Text.Json.Serializati
 
 	public override StatsLevel Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberShards))
 		{
 			return StatsLevel.Shards;
@@ -98,5 +97,15 @@ internal sealed partial class StatsLevelConverter : System.Text.Json.Serializati
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(StatsLevel)}'.");
 		}
+	}
+
+	public override StatsLevel ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, StatsLevel value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
 	}
 }

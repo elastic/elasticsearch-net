@@ -50,7 +50,6 @@ internal sealed partial class AccessTokenGrantTypeConverter : System.Text.Json.S
 
 	public override AccessTokenGrantType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberRefreshToken))
 		{
 			return AccessTokenGrantType.RefreshToken;
@@ -115,6 +114,16 @@ internal sealed partial class AccessTokenGrantTypeConverter : System.Text.Json.S
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(AccessTokenGrantType)}'.");
 		}
 	}
+
+	public override AccessTokenGrantType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, AccessTokenGrantType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
 }
 
 [JsonConverter(typeof(ApiKeyGrantTypeConverter))]
@@ -133,7 +142,6 @@ internal sealed partial class ApiKeyGrantTypeConverter : System.Text.Json.Serial
 
 	public override ApiKeyGrantType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberPassword))
 		{
 			return ApiKeyGrantType.Password;
@@ -172,6 +180,16 @@ internal sealed partial class ApiKeyGrantTypeConverter : System.Text.Json.Serial
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(ApiKeyGrantType)}'.");
 		}
 	}
+
+	public override ApiKeyGrantType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, ApiKeyGrantType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
 }
 
 [JsonConverter(typeof(ApiKeyTypeConverter))]
@@ -190,7 +208,6 @@ internal sealed partial class ApiKeyTypeConverter : System.Text.Json.Serializati
 
 	public override ApiKeyType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberRest))
 		{
 			return ApiKeyType.Rest;
@@ -228,6 +245,16 @@ internal sealed partial class ApiKeyTypeConverter : System.Text.Json.Serializati
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(ApiKeyType)}'.");
 		}
+	}
+
+	public override ApiKeyType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, ApiKeyType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
 	}
 }
 
@@ -340,7 +367,6 @@ internal sealed partial class GrantTypeConverter : System.Text.Json.Serializatio
 
 	public override GrantType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberPassword))
 		{
 			return GrantType.Password;
@@ -378,6 +404,16 @@ internal sealed partial class GrantTypeConverter : System.Text.Json.Serializatio
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(GrantType)}'.");
 		}
+	}
+
+	public override GrantType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, GrantType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
 	}
 }
 
@@ -443,7 +479,6 @@ internal sealed partial class RemoteClusterPrivilegeConverter : System.Text.Json
 
 	public override RemoteClusterPrivilege Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberMonitorStats))
 		{
 			return RemoteClusterPrivilege.MonitorStats;
@@ -481,6 +516,16 @@ internal sealed partial class RemoteClusterPrivilegeConverter : System.Text.Json
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(RemoteClusterPrivilege)}'.");
 		}
+	}
+
+	public override RemoteClusterPrivilege ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, RemoteClusterPrivilege value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
 	}
 }
 
@@ -525,7 +570,6 @@ internal sealed partial class TemplateFormatConverter : System.Text.Json.Seriali
 
 	public override TemplateFormat Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberString))
 		{
 			return TemplateFormat.String;
@@ -563,5 +607,15 @@ internal sealed partial class TemplateFormatConverter : System.Text.Json.Seriali
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(TemplateFormat)}'.");
 		}
+	}
+
+	public override TemplateFormat ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, TemplateFormat value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
 	}
 }

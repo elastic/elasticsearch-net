@@ -44,7 +44,6 @@ internal sealed partial class GridAggregationTypeConverter : System.Text.Json.Se
 
 	public override GridAggregationType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberGeotile))
 		{
 			return GridAggregationType.Geotile;
@@ -83,6 +82,16 @@ internal sealed partial class GridAggregationTypeConverter : System.Text.Json.Se
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(GridAggregationType)}'.");
 		}
 	}
+
+	public override GridAggregationType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, GridAggregationType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
 }
 
 [JsonConverter(typeof(GridTypeConverter))]
@@ -104,7 +113,6 @@ internal sealed partial class GridTypeConverter : System.Text.Json.Serialization
 
 	public override GridType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberPoint))
 		{
 			return GridType.Point;
@@ -155,5 +163,15 @@ internal sealed partial class GridTypeConverter : System.Text.Json.Serialization
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(GridType)}'.");
 		}
+	}
+
+	public override GridType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, GridType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
 	}
 }

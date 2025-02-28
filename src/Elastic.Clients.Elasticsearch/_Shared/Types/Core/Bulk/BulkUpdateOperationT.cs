@@ -75,9 +75,8 @@ public sealed class BulkUpdateOperation<TDocument, TPartialDocument> : BulkUpdat
 		}
 	}
 
-	protected override void WriteOperation(Utf8JsonWriter writer, JsonSerializerOptions options = null) => JsonSerializer.Serialize(writer, this, options);
-
-	protected override object GetBody() => new BulkUpdateBody<TDocument, TPartialDocument> {
+	private protected override BulkUpdateBody GetBody() => new BulkUpdateBody<TDocument, TPartialDocument>
+	{
 		PartialUpdate = Doc,
 		Script = Script,
 		Upsert = Upsert,

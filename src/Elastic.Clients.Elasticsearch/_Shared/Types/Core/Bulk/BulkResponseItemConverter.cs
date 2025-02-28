@@ -3,64 +3,43 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+using Elastic.Clients.Elasticsearch.Serialization;
+
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
-internal sealed class BulkResponseItemConverter : JsonConverter<IReadOnlyList<ResponseItem>>
+internal sealed class BulkResponseItemConverter : JsonConverter<ResponseItem>
 {
-	public override IReadOnlyList<ResponseItem>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override ResponseItem Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartArray)
-			throw new JsonException($"Unexpected token in bulk response items. Read {reader.TokenType} but was expecting {JsonTokenType.StartArray}.");
+		reader.ValidateToken(JsonTokenType.StartObject);
 
-		var responseItems = new List<ResponseItem>();
+		ResponseItem? result = null;
 
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
+		while (reader.Read() && reader.TokenType is JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType != JsonTokenType.StartObject)
-				throw new JsonException($"Unexpected token in bulk response items. Read {reader.TokenType} but was expecting {JsonTokenType.StartObject}.");
-
+			var operation = reader.ReadPropertyName<OperationType>(options);
 			reader.Read();
 
-			if (reader.TokenType != JsonTokenType.PropertyName)
-				throw new JsonException($"Unexpected token in bulk response items. Read {reader.TokenType} but was expecting {JsonTokenType.PropertyName}.");
-
-			ResponseItem responseItem;
-
-			if (reader.ValueTextEquals("index"))
+			result = operation switch
 			{
-				responseItem = JsonSerializer.Deserialize<BulkIndexResponseItem>(ref reader, options);
-			}
-			else if (reader.ValueTextEquals("delete"))
-			{
-				responseItem = JsonSerializer.Deserialize<BulkDeleteResponseItem>(ref reader, options);
-			}
-			else if (reader.ValueTextEquals("create"))
-			{
-				responseItem = JsonSerializer.Deserialize<CreateResponseItem>(ref reader, options);
-			}
-			else if (reader.ValueTextEquals("update"))
-			{
-				responseItem = JsonSerializer.Deserialize<BulkUpdateResponseItem>(ref reader, options);
-			}
-			else
-			{
-				throw new JsonException("Unexpected operation type in bulk response items.");
-			}
-
-			responseItems.Add(responseItem);
-
-			reader.Read();
-
-			if (reader.TokenType != JsonTokenType.EndObject)
-				throw new JsonException($"Unexpected token in bulk response items. Read {reader.TokenType} but was expecting {JsonTokenType.EndObject}.");
+				OperationType.Update => reader.ReadValue<BulkUpdateResponseItem>(options),
+				OperationType.Index => reader.ReadValue<BulkIndexResponseItem>(options),
+				OperationType.Delete => reader.ReadValue<BulkDeleteResponseItem>(options),
+				OperationType.Create => reader.ReadValue<CreateResponseItem>(options),
+				_ => throw new InvalidOperationException()
+			};
 		}
 
-		return responseItems;
+		return result!;
 	}
 
-	public override void Write(Utf8JsonWriter writer, IReadOnlyList<ResponseItem> value, JsonSerializerOptions options) => throw new NotImplementedException();
+	public override void Write(Utf8JsonWriter writer, ResponseItem value, JsonSerializerOptions options)
+	{
+		writer.WriteStartObject(value.Operation);
+		writer.WriteValue(options, value);
+		writer.WriteEndObject();
+	}
 }

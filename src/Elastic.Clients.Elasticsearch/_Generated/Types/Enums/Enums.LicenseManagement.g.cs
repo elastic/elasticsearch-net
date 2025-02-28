@@ -50,7 +50,6 @@ internal sealed partial class LicenseStatusConverter : System.Text.Json.Serializ
 
 	public override LicenseStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberValid))
 		{
 			return LicenseStatus.Valid;
@@ -115,6 +114,16 @@ internal sealed partial class LicenseStatusConverter : System.Text.Json.Serializ
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(LicenseStatus)}'.");
 		}
 	}
+
+	public override LicenseStatus ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, LicenseStatus value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
 }
 
 [JsonConverter(typeof(LicenseTypeConverter))]
@@ -154,7 +163,6 @@ internal sealed partial class LicenseTypeConverter : System.Text.Json.Serializat
 
 	public override LicenseType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberTrial))
 		{
 			return LicenseType.Trial;
@@ -283,5 +291,15 @@ internal sealed partial class LicenseTypeConverter : System.Text.Json.Serializat
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(LicenseType)}'.");
 		}
+	}
+
+	public override LicenseType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, LicenseType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
 	}
 }

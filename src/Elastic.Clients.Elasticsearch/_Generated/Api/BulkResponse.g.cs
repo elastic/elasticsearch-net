@@ -32,6 +32,7 @@ internal sealed partial class BulkResponseConverter : System.Text.Json.Serializa
 {
 	private static readonly System.Text.Json.JsonEncodedText PropErrors = System.Text.Json.JsonEncodedText.Encode("errors");
 	private static readonly System.Text.Json.JsonEncodedText PropIngestTook = System.Text.Json.JsonEncodedText.Encode("ingest_took");
+	private static readonly System.Text.Json.JsonEncodedText PropItems = System.Text.Json.JsonEncodedText.Encode("items");
 	private static readonly System.Text.Json.JsonEncodedText PropTook = System.Text.Json.JsonEncodedText.Encode("took");
 
 	public override BulkResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -39,6 +40,7 @@ internal sealed partial class BulkResponseConverter : System.Text.Json.Serializa
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<bool> propErrors = default;
 		LocalJsonValue<long?> propIngestTook = default;
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem>> propItems = default;
 		LocalJsonValue<long> propTook = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -52,9 +54,19 @@ internal sealed partial class BulkResponseConverter : System.Text.Json.Serializa
 				continue;
 			}
 
+			if (propItems.TryReadProperty(ref reader, options, PropItems, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem>(o, null)!))
+			{
+				continue;
+			}
+
 			if (propTook.TryReadProperty(ref reader, options, PropTook, null))
 			{
 				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
 			}
 
 			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
@@ -67,6 +79,8 @@ internal sealed partial class BulkResponseConverter : System.Text.Json.Serializa
 ,
 			IngestTook = propIngestTook.Value
 ,
+			Items = propItems.Value
+,
 			Took = propTook.Value
 		};
 	}
@@ -76,6 +90,7 @@ internal sealed partial class BulkResponseConverter : System.Text.Json.Serializa
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropErrors, value.Errors, null, null);
 		writer.WriteProperty(options, PropIngestTook, value.IngestTook, null, null);
+		writer.WriteProperty(options, PropItems, value.Items, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem>(o, v, null));
 		writer.WriteProperty(options, PropTook, value.Took, null, null);
 		writer.WriteEndObject();
 	}
@@ -86,5 +101,6 @@ public sealed partial class BulkResponse : ElasticsearchResponse
 {
 	public bool Errors { get; init; }
 	public long? IngestTook { get; init; }
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem> Items { get; init; }
 	public long Took { get; init; }
 }

@@ -50,7 +50,6 @@ internal sealed partial class ImpactAreaConverter : System.Text.Json.Serializati
 
 	public override ImpactArea Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberSearch))
 		{
 			return ImpactArea.Search;
@@ -115,6 +114,16 @@ internal sealed partial class ImpactAreaConverter : System.Text.Json.Serializati
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(ImpactArea)}'.");
 		}
 	}
+
+	public override ImpactArea ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, ImpactArea value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
 }
 
 [JsonConverter(typeof(IndicatorHealthStatusConverter))]
@@ -139,7 +148,6 @@ internal sealed partial class IndicatorHealthStatusConverter : System.Text.Json.
 
 	public override IndicatorHealthStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberYellow))
 		{
 			return IndicatorHealthStatus.Yellow;
@@ -203,5 +211,15 @@ internal sealed partial class IndicatorHealthStatusConverter : System.Text.Json.
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(IndicatorHealthStatus)}'.");
 		}
+	}
+
+	public override IndicatorHealthStatus ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, IndicatorHealthStatus value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
 	}
 }

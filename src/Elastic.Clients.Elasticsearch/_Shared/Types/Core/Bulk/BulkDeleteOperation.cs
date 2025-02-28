@@ -16,36 +16,42 @@ public class BulkDeleteOperation : BulkOperation
 {
 	public BulkDeleteOperation(Id id) => Id = id;
 
+	/// <inheritdoc />
 	protected override void Serialize(Stream stream, IElasticsearchClientSettings settings)
 	{
 		SetValues(settings);
 		using var writer = new Utf8JsonWriter(stream);
-		SerializeInternal(settings, writer);
+		SerializeOperationAction(settings, writer);
 		writer.Flush();
 	}
 
+	/// <inheritdoc />
 	protected override async Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings)
 	{
 		SetValues(settings);
 		var writer = new Utf8JsonWriter(stream);
 		await using (writer.ConfigureAwait(false))
 		{
-			SerializeInternal(settings, writer);
+			SerializeOperationAction(settings, writer);
 			await writer.FlushAsync().ConfigureAwait(false);
 		}
 	}
 
-	protected virtual void SetValues(IElasticsearchClientSettings settings)
+	private void SerializeOperationAction(IElasticsearchClientSettings settings, Utf8JsonWriter writer)
 	{
-	}
+		if (!settings.RequestResponseSerializer.TryGetJsonSerializerOptions(out var options))
+		{
+			throw new InvalidOperationException("unreachable");
+		}
 
-	private void SerializeInternal(IElasticsearchClientSettings settings, Utf8JsonWriter writer)
-	{
-		var requestResponseSerializer = settings.RequestResponseSerializer;
 		writer.WriteStartObject();
 		writer.WritePropertyName(Operation);
-		requestResponseSerializer.Serialize(this, writer, settings.MemoryStreamFactory);
+		writer.WriteValue(options, this);
 		writer.WriteEndObject();
+	}
+
+	protected virtual void SetValues(IElasticsearchClientSettings settings)
+	{
 	}
 
 	protected override string Operation => "delete";
@@ -55,10 +61,12 @@ public class BulkDeleteOperation : BulkOperation
 
 public sealed class BulkDeleteOperation<T> : BulkDeleteOperation
 {
-	public BulkDeleteOperation(T document) : base (new Id(document))
+	public BulkDeleteOperation(T document) : base(new Id(document))
 		=> Document = document;
 
-	public BulkDeleteOperation(Id id) : base(id) { }
+	public BulkDeleteOperation(Id id) : base(id)
+	{
+	}
 
 	[JsonIgnore]
 	public T Document { get; set; }

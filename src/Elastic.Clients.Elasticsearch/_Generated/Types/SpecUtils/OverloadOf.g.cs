@@ -34,6 +34,11 @@ internal sealed partial class OverloadOfConverter<TDefinition> : System.Text.Jso
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
 			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 

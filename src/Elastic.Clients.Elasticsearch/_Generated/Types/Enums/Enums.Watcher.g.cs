@@ -50,7 +50,6 @@ internal sealed partial class ActionStatusOptionsConverter : System.Text.Json.Se
 
 	public override ActionStatusOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberThrottled))
 		{
 			return ActionStatusOptions.Throttled;
@@ -114,5 +113,15 @@ internal sealed partial class ActionStatusOptionsConverter : System.Text.Json.Se
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(ActionStatusOptions)}'.");
 		}
+	}
+
+	public override ActionStatusOptions ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, ActionStatusOptions value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
 	}
 }

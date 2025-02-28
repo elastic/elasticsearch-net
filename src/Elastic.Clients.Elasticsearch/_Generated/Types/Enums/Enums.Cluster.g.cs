@@ -50,7 +50,6 @@ internal sealed partial class AllocationExplainDecisionConverter : System.Text.J
 
 	public override AllocationExplainDecision Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberYes))
 		{
 			return AllocationExplainDecision.Yes;
@@ -115,6 +114,16 @@ internal sealed partial class AllocationExplainDecisionConverter : System.Text.J
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(AllocationExplainDecision)}'.");
 		}
 	}
+
+	public override AllocationExplainDecision ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, AllocationExplainDecision value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
 }
 
 [JsonConverter(typeof(DecisionConverter))]
@@ -151,7 +160,6 @@ internal sealed partial class DecisionConverter : System.Text.Json.Serialization
 
 	public override Decision Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberYes))
 		{
 			return Decision.Yes;
@@ -268,6 +276,16 @@ internal sealed partial class DecisionConverter : System.Text.Json.Serialization
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Decision)}'.");
 		}
 	}
+
+	public override Decision ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Decision value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
 }
 
 [JsonConverter(typeof(UnassignedInformationReasonConverter))]
@@ -325,7 +343,6 @@ internal sealed partial class UnassignedInformationReasonConverter : System.Text
 
 	public override UnassignedInformationReason Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberRerouteCancelled))
 		{
 			return UnassignedInformationReason.RerouteCancelled;
@@ -532,5 +549,15 @@ internal sealed partial class UnassignedInformationReasonConverter : System.Text
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(UnassignedInformationReason)}'.");
 		}
+	}
+
+	public override UnassignedInformationReason ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, UnassignedInformationReason value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
 	}
 }

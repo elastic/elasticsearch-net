@@ -47,7 +47,6 @@ internal sealed partial class XPackCategoryConverter : System.Text.Json.Serializ
 
 	public override XPackCategory Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberLicense))
 		{
 			return XPackCategory.License;
@@ -98,5 +97,15 @@ internal sealed partial class XPackCategoryConverter : System.Text.Json.Serializ
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(XPackCategory)}'.");
 		}
+	}
+
+	public override XPackCategory ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, XPackCategory value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
 	}
 }

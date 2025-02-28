@@ -53,7 +53,6 @@ internal sealed partial class IndexingJobStateConverter : System.Text.Json.Seria
 
 	public override IndexingJobState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberStopping))
 		{
 			return IndexingJobState.Stopping;
@@ -131,6 +130,16 @@ internal sealed partial class IndexingJobStateConverter : System.Text.Json.Seria
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(IndexingJobState)}'.");
 		}
 	}
+
+	public override IndexingJobState ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, IndexingJobState value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
 }
 
 [JsonConverter(typeof(MetricConverter))]
@@ -158,7 +167,6 @@ internal sealed partial class MetricConverter : System.Text.Json.Serialization.J
 
 	public override Metric Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberValueCount))
 		{
 			return Metric.ValueCount;
@@ -235,5 +243,15 @@ internal sealed partial class MetricConverter : System.Text.Json.Serialization.J
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Metric)}'.");
 		}
+	}
+
+	public override Metric ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Metric value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
 	}
 }

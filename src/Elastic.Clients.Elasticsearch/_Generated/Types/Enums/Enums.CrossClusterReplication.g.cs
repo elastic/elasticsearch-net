@@ -44,7 +44,6 @@ internal sealed partial class FollowerIndexStatusConverter : System.Text.Json.Se
 
 	public override FollowerIndexStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberPaused))
 		{
 			return FollowerIndexStatus.Paused;
@@ -82,5 +81,15 @@ internal sealed partial class FollowerIndexStatusConverter : System.Text.Json.Se
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(FollowerIndexStatus)}'.");
 		}
+	}
+
+	public override FollowerIndexStatus ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, FollowerIndexStatus value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
 	}
 }

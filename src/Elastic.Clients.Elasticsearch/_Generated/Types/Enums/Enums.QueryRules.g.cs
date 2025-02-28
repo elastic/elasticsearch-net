@@ -74,7 +74,6 @@ internal sealed partial class QueryRuleCriteriaTypeConverter : System.Text.Json.
 
 	public override QueryRuleCriteriaType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberSuffix))
 		{
 			return QueryRuleCriteriaType.Suffix;
@@ -243,6 +242,16 @@ internal sealed partial class QueryRuleCriteriaTypeConverter : System.Text.Json.
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(QueryRuleCriteriaType)}'.");
 		}
 	}
+
+	public override QueryRuleCriteriaType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, QueryRuleCriteriaType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
 }
 
 [JsonConverter(typeof(QueryRuleTypeConverter))]
@@ -261,7 +270,6 @@ internal sealed partial class QueryRuleTypeConverter : System.Text.Json.Serializ
 
 	public override QueryRuleType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberPinned))
 		{
 			return QueryRuleType.Pinned;
@@ -299,5 +307,15 @@ internal sealed partial class QueryRuleTypeConverter : System.Text.Json.Serializ
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(QueryRuleType)}'.");
 		}
+	}
+
+	public override QueryRuleType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, QueryRuleType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
 	}
 }

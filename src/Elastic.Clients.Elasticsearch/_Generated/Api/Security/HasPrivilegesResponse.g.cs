@@ -71,6 +71,11 @@ internal sealed partial class HasPrivilegesResponseConverter : System.Text.Json.
 				continue;
 			}
 
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
 			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 

@@ -62,7 +62,6 @@ internal sealed partial class GroupByConverter : System.Text.Json.Serialization.
 
 	public override GroupBy Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberParents))
 		{
 			return GroupBy.Parents;
@@ -113,5 +112,15 @@ internal sealed partial class GroupByConverter : System.Text.Json.Serialization.
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(GroupBy)}'.");
 		}
+	}
+
+	public override GroupBy ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, GroupBy value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
 	}
 }

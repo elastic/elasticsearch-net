@@ -7,6 +7,7 @@ using System.IO;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using Elastic.Transport.Extensions;
@@ -15,7 +16,8 @@ namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
 public class BulkDeleteOperationDescriptor : BulkOperationDescriptor<BulkDeleteOperationDescriptor>
 {
-	public BulkDeleteOperationDescriptor() { }
+	public BulkDeleteOperationDescriptor()
+	{ }
 
 	public BulkDeleteOperationDescriptor(Id id) => Id(id);
 
@@ -27,24 +29,32 @@ public class BulkDeleteOperationDescriptor : BulkOperationDescriptor<BulkDeleteO
 
 	protected override void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
 	{
-		var requestResponseSerializer = settings.RequestResponseSerializer;
-		var internalWriter = new Utf8JsonWriter(stream);
-		internalWriter.WriteStartObject();
-		internalWriter.WritePropertyName(Operation);
-		requestResponseSerializer.Serialize(this, internalWriter, settings.MemoryStreamFactory, formatting);
-		internalWriter.WriteEndObject();
-		internalWriter.Flush();
+		if (!settings.RequestResponseSerializer.TryGetJsonSerializerOptions(out var options))
+		{
+			throw new InvalidOperationException("unreachable");
+		}
+
+		var writer = new Utf8JsonWriter(stream);
+		writer.WriteStartObject();
+		writer.WritePropertyName(Operation);
+		writer.WriteValue(options, this);
+		writer.WriteEndObject();
+		writer.Flush();
 	}
 
 	protected override async Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting, CancellationToken cancellationToken = default)
 	{
-		var requestResponseSerializer = settings.RequestResponseSerializer;
-		var internalWriter = new Utf8JsonWriter(stream);
-		internalWriter.WriteStartObject();
-		internalWriter.WritePropertyName(Operation);
-		requestResponseSerializer.Serialize(this, internalWriter, settings.MemoryStreamFactory, formatting);
-		internalWriter.WriteEndObject();
-		await internalWriter.FlushAsync(cancellationToken).ConfigureAwait(false);
+		if (!settings.RequestResponseSerializer.TryGetJsonSerializerOptions(out var options))
+		{
+			throw new InvalidOperationException("unreachable");
+		}
+
+		var writer = new Utf8JsonWriter(stream);
+		writer.WriteStartObject();
+		writer.WritePropertyName(Operation);
+		writer.WriteValue(options, this);
+		writer.WriteEndObject();
+		await writer.FlushAsync(cancellationToken).ConfigureAwait(false);
 	}
 
 	protected override void SerializeInternal(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
@@ -54,7 +64,7 @@ public class BulkDeleteOperationDescriptor : BulkOperationDescriptor<BulkDeleteO
 
 public sealed class BulkDeleteOperationDescriptor<TDocument> : BulkDeleteOperationDescriptor
 {
-	public BulkDeleteOperationDescriptor(TDocument documentToDelete) : base (new Id(documentToDelete))
+	public BulkDeleteOperationDescriptor(TDocument documentToDelete) : base(new Id(documentToDelete))
 	{
 		RoutingValue = new Routing(documentToDelete);
 		IndexNameValue = IndexName.From<TDocument>();

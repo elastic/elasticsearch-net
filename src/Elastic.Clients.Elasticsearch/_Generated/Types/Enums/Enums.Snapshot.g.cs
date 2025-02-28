@@ -78,7 +78,6 @@ internal sealed partial class ShardsStatsStageConverter : System.Text.Json.Seria
 
 	public override ShardsStatsStage Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberStarted))
 		{
 			return ShardsStatsStage.Started;
@@ -156,6 +155,16 @@ internal sealed partial class ShardsStatsStageConverter : System.Text.Json.Seria
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(ShardsStatsStage)}'.");
 		}
 	}
+
+	public override ShardsStatsStage ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, ShardsStatsStage value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
 }
 
 [JsonConverter(typeof(SnapshotSortConverter))]
@@ -189,7 +198,6 @@ internal sealed partial class SnapshotSortConverter : System.Text.Json.Serializa
 
 	public override SnapshotSort Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberStartTime))
 		{
 			return SnapshotSort.StartTime;
@@ -292,5 +300,15 @@ internal sealed partial class SnapshotSortConverter : System.Text.Json.Serializa
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(SnapshotSort)}'.");
 		}
+	}
+
+	public override SnapshotSort ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, SnapshotSort value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
 	}
 }

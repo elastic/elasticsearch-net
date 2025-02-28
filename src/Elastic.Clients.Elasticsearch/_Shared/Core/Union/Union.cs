@@ -13,6 +13,8 @@ public enum UnionTag
 	T2
 }
 
+// TODO: Add default JsonConverter that only handles serialization?
+
 /// <summary>
 /// Represents the union of two types, <typeparamref name="T1"/> and <typeparamref name="T2"/>.
 /// </summary>

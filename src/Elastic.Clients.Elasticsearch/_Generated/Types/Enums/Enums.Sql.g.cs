@@ -59,7 +59,6 @@ internal sealed partial class SqlFormatConverter : System.Text.Json.Serializatio
 
 	public override SqlFormat Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberYaml))
 		{
 			return SqlFormat.Yaml;
@@ -162,5 +161,15 @@ internal sealed partial class SqlFormatConverter : System.Text.Json.Serializatio
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(SqlFormat)}'.");
 		}
+	}
+
+	public override SqlFormat ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, SqlFormat value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
 	}
 }

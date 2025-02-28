@@ -71,6 +71,11 @@ internal sealed partial class ClusterInfoResponseConverter : System.Text.Json.Se
 				continue;
 			}
 
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
 			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 

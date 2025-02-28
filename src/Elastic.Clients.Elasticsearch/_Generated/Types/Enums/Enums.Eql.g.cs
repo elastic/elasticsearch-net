@@ -54,7 +54,6 @@ internal sealed partial class ResultPositionConverter : System.Text.Json.Seriali
 
 	public override ResultPosition Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberTail))
 		{
 			return ResultPosition.Tail;
@@ -92,5 +91,15 @@ internal sealed partial class ResultPositionConverter : System.Text.Json.Seriali
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(ResultPosition)}'.");
 		}
+	}
+
+	public override ResultPosition ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, ResultPosition value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
 	}
 }

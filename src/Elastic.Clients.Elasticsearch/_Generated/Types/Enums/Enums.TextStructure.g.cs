@@ -44,7 +44,6 @@ internal sealed partial class EcsCompatibilityTypeConverter : System.Text.Json.S
 
 	public override EcsCompatibilityType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberV1))
 		{
 			return EcsCompatibilityType.V1;
@@ -83,6 +82,16 @@ internal sealed partial class EcsCompatibilityTypeConverter : System.Text.Json.S
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(EcsCompatibilityType)}'.");
 		}
 	}
+
+	public override EcsCompatibilityType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, EcsCompatibilityType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
 }
 
 [JsonConverter(typeof(FormatTypeConverter))]
@@ -107,7 +116,6 @@ internal sealed partial class FormatTypeConverter : System.Text.Json.Serializati
 
 	public override FormatType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
 		if (reader.ValueTextEquals(MemberXml))
 		{
 			return FormatType.Xml;
@@ -171,5 +179,15 @@ internal sealed partial class FormatTypeConverter : System.Text.Json.Serializati
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(FormatType)}'.");
 		}
+	}
+
+	public override FormatType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, FormatType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
 	}
 }

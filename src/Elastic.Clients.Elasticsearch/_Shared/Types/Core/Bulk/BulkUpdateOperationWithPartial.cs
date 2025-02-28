@@ -36,8 +36,8 @@ public sealed class BulkUpdateOperationWithPartial<TPartialDocument> : BulkUpdat
 			Index = settings.Inferrer.IndexName<TPartialDocument>();
 	}
 
-	protected override void WriteOperation(Utf8JsonWriter writer, JsonSerializerOptions options = null) =>
-		JsonSerializer.Serialize<BulkUpdateOperationWithPartial<TPartialDocument>>(writer, this, options);
-
-	protected override object GetBody() => new PartialBulkUpdateBody<TPartialDocument> { PartialUpdate = PartialDocument };
+	private protected override BulkUpdateBody GetBody() => new PartialBulkUpdateBody<TPartialDocument>
+	{
+		PartialUpdate = PartialDocument
+	};
 }

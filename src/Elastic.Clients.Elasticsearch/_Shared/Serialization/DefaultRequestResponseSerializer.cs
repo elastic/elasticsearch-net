@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Text.Json.Serialization.Metadata;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -103,6 +104,9 @@ internal sealed class DefaultRequestResponseSerializer : SystemTextJsonSerialize
 		var options = GetJsonSerializerOptions(SerializationFormatting.None);
 		var indentedOptions = GetJsonSerializerOptions(SerializationFormatting.Indented);
 
+		//options.MakeReadOnly();
+		//indentedOptions.MakeReadOnly();
+
 #if NET8_0_OR_GREATER
 		ElasticsearchClient.SettingsTable.TryAdd(options, settings);
 		ElasticsearchClient.SettingsTable.TryAdd(indentedOptions, settings);
@@ -132,6 +136,7 @@ internal sealed class DefaultRequestResponseSerializerOptionsProvider :
 	internal DefaultRequestResponseSerializerOptionsProvider(IElasticsearchClientSettings settings) :
 		base(CreateDefaultBuiltInConverters(settings), null, MutateOptions)
 	{
+		
 	}
 
 	private static IReadOnlyCollection<JsonConverter> CreateDefaultBuiltInConverters(IElasticsearchClientSettings settings) =>
@@ -163,6 +168,7 @@ internal sealed class DefaultRequestResponseSerializerOptionsProvider :
 
 	private static void MutateOptions(JsonSerializerOptions options)
 	{
+		options.TypeInfoResolver = new DefaultJsonTypeInfoResolver();
 		options.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
 		options.IncludeFields = true;
 		options.NumberHandling = JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.AllowNamedFloatingPointLiterals;
