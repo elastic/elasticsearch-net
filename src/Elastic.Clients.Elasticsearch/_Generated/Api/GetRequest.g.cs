@@ -126,6 +126,11 @@ public sealed partial class GetRequest : PlainRequest<GetRequestParameters>
 	{
 	}
 
+	[JsonConstructor]
+	internal GetRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceGet;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
@@ -133,6 +138,22 @@ public sealed partial class GetRequest : PlainRequest<GetRequestParameters>
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "get";
+
+	/// <summary>
+	/// <para>
+	/// Unique identifier of the document.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
+
+	/// <summary>
+	/// <para>
+	/// Name of the index that contains the document.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 
 	/// <summary>
 	/// <para>

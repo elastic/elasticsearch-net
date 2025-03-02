@@ -5,27 +5,25 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Elastic.Clients.Elasticsearch.Core;
+
+using Elastic.Transport.Extensions;
 
 namespace Elastic.Clients.Elasticsearch.Serialization;
 
-internal sealed class EnumStructConverter<T> : JsonConverter<T> where T : struct, IEnumStruct<T>
+public sealed class RequestResponseConverter<T> :
+	JsonConverter<T>
 {
 	public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		var value = reader.GetString();
-		var instance = default(T).Create(value);
+		var settings = options.GetContext<IElasticsearchClientSettings>();
 
-		return instance;
+		return settings.RequestResponseSerializer.Deserialize<T>(ref reader);
 	}
 
 	public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
 	{
-		var enumValue = value.ToString();
+		var settings = options.GetContext<IElasticsearchClientSettings>();
 
-		if (!string.IsNullOrEmpty(enumValue))
-			writer.WriteStringValue(enumValue);
-		else
-			writer.WriteNullValue();
+		settings.RequestResponseSerializer.Serialize(value, writer);
 	}
 }

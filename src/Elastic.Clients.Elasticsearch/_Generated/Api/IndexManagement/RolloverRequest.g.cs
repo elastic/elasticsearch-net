@@ -80,6 +80,11 @@ public sealed partial class RolloverRequest : PlainRequest<RolloverRequestParame
 	{
 	}
 
+	[JsonConstructor]
+	internal RolloverRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementRollover;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -87,6 +92,24 @@ public sealed partial class RolloverRequest : PlainRequest<RolloverRequestParame
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "indices.rollover";
+
+	/// <summary>
+	/// <para>
+	/// Name of the data stream or index alias to roll over.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.IndexAlias Alias { get => P<Elastic.Clients.Elasticsearch.IndexAlias>("alias"); set => PR("alias", value); }
+
+	/// <summary>
+	/// <para>
+	/// Name of the index to create.
+	/// Supports date math.
+	/// Data streams do not support this parameter.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.IndexName? NewIndex { get => P<Elastic.Clients.Elasticsearch.IndexName?>("new_index"); set => PO("new_index", value); }
 
 	/// <summary>
 	/// <para>

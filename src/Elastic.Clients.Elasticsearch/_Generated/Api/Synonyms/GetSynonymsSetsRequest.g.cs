@@ -55,6 +55,11 @@ public sealed partial class GetSynonymsSetsRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class GetSynonymsSetsRequest : PlainRequest<GetSynonymsSetsRequestParameters>
 {
+	[JsonConstructor]
+	internal GetSynonymsSetsRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SynonymsGetSynonymsSets;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;

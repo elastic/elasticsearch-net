@@ -122,130 +122,110 @@ public sealed partial class TokenizersDescriptor : IsADictionaryDescriptor<Token
 	public TokenizersDescriptor Whitespace(string tokenizerName, WhitespaceTokenizer whitespaceTokenizer) => AssignVariant(tokenizerName, whitespaceTokenizer);
 }
 
-internal sealed partial class TokenizerInterfaceConverter : JsonConverter<ITokenizer>
+internal sealed partial class TokenizerInterfaceConverter : System.Text.Json.Serialization.JsonConverter<ITokenizer>
 {
-	public override ITokenizer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropDiscriminator = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override ITokenizer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var copiedReader = reader;
-		string? type = null;
-		using var jsonDoc = JsonDocument.ParseValue(ref copiedReader);
-		if (jsonDoc is not null && jsonDoc.RootElement.TryGetProperty("type", out var readType) && readType.ValueKind == JsonValueKind.String)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var readerSnapshot = reader;
+		string? discriminator = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			type = readType.ToString();
+			if (reader.TryReadProperty(options, PropDiscriminator, ref discriminator, null))
+			{
+				break;
+			}
+
+			reader.Skip();
 		}
 
-		switch (type)
+		reader = readerSnapshot;
+		return discriminator switch
 		{
-			case "char_group":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.CharGroupTokenizer>(ref reader, options);
-			case "classic":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizer>(ref reader, options);
-			case "edge_ngram":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizer>(ref reader, options);
-			case "icu_tokenizer":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.IcuTokenizer>(ref reader, options);
-			case "keyword":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizer>(ref reader, options);
-			case "kuromoji_tokenizer":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizer>(ref reader, options);
-			case "letter":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.LetterTokenizer>(ref reader, options);
-			case "lowercase":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenizer>(ref reader, options);
-			case "ngram":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.NGramTokenizer>(ref reader, options);
-			case "nori_tokenizer":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer>(ref reader, options);
-			case "path_hierarchy":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer>(ref reader, options);
-			case "pattern":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.PatternTokenizer>(ref reader, options);
-			case "simple_pattern_split":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.SimplePatternSplitTokenizer>(ref reader, options);
-			case "simple_pattern":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizer>(ref reader, options);
-			case "standard":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.StandardTokenizer>(ref reader, options);
-			case "thai":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizer>(ref reader, options);
-			case "uax_url_email":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.UaxEmailUrlTokenizer>(ref reader, options);
-			case "whitespace":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.WhitespaceTokenizer>(ref reader, options);
-			default:
-				ThrowHelper.ThrowUnknownTaggedUnionVariantJsonException(type, typeof(ITokenizer));
-				return null;
-		}
+			"char_group" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.CharGroupTokenizer>(options, null),
+			"classic" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizer>(options, null),
+			"edge_ngram" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizer>(options, null),
+			"icu_tokenizer" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.IcuTokenizer>(options, null),
+			"keyword" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizer>(options, null),
+			"kuromoji_tokenizer" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizer>(options, null),
+			"letter" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.LetterTokenizer>(options, null),
+			"lowercase" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenizer>(options, null),
+			"ngram" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.NGramTokenizer>(options, null),
+			"nori_tokenizer" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer>(options, null),
+			"path_hierarchy" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer>(options, null),
+			"pattern" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PatternTokenizer>(options, null),
+			"simple_pattern_split" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SimplePatternSplitTokenizer>(options, null),
+			"simple_pattern" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizer>(options, null),
+			"standard" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.StandardTokenizer>(options, null),
+			"thai" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizer>(options, null),
+			"uax_url_email" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.UaxEmailUrlTokenizer>(options, null),
+			"whitespace" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.WhitespaceTokenizer>(options, null),
+			_ => throw new System.Text.Json.JsonException($"Variant '{discriminator}' is not supported for type '{nameof(ITokenizer)}'.")
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, ITokenizer value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ITokenizer value, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (value is null)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
 		switch (value.Type)
 		{
 			case "char_group":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.CharGroupTokenizer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.CharGroupTokenizer)value, null);
+				break;
 			case "classic":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizer)value, null);
+				break;
 			case "edge_ngram":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizer)value, null);
+				break;
 			case "icu_tokenizer":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.IcuTokenizer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.IcuTokenizer)value, null);
+				break;
 			case "keyword":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizer)value, null);
+				break;
 			case "kuromoji_tokenizer":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizer)value, null);
+				break;
 			case "letter":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.LetterTokenizer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.LetterTokenizer)value, null);
+				break;
 			case "lowercase":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenizer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenizer)value, null);
+				break;
 			case "ngram":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.NGramTokenizer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.NGramTokenizer)value, null);
+				break;
 			case "nori_tokenizer":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer)value, null);
+				break;
 			case "path_hierarchy":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer)value, null);
+				break;
 			case "pattern":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.PatternTokenizer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PatternTokenizer)value, null);
+				break;
 			case "simple_pattern_split":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.SimplePatternSplitTokenizer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.SimplePatternSplitTokenizer)value, null);
+				break;
 			case "simple_pattern":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizer)value, null);
+				break;
 			case "standard":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.StandardTokenizer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.StandardTokenizer)value, null);
+				break;
 			case "thai":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizer)value, null);
+				break;
 			case "uax_url_email":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.UaxEmailUrlTokenizer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.UaxEmailUrlTokenizer)value, null);
+				break;
 			case "whitespace":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.WhitespaceTokenizer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.WhitespaceTokenizer)value, null);
+				break;
 			default:
-				var type = value.GetType();
-				JsonSerializer.Serialize(writer, value, type, options);
-				return;
+				throw new System.Text.Json.JsonException($"Variant '{value.Type}' is not supported for type '{nameof(ITokenizer)}'.");
 		}
 	}
 }

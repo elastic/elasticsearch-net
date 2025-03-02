@@ -2,11 +2,13 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using Elastic.Transport.Extensions;
@@ -15,9 +17,9 @@ namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
 public abstract class BulkUpdateOperation : BulkOperation
 {
-	protected internal BulkUpdateOperation() : base() { }
-
-	private static byte _newline => (byte)'\n';
+	protected internal BulkUpdateOperation() : base()
+	{
+	}
 
 	[JsonPropertyName("retry_on_conflict")]
 	public int? RetryOnConflict { get; set; }
@@ -26,32 +28,25 @@ public abstract class BulkUpdateOperation : BulkOperation
 
 	protected abstract void BeforeSerialize(IElasticsearchClientSettings settings);
 
-	/// <summary>
-	/// Serialise the operation action line for the NDJSON stream.
-	/// </summary>
-	/// <param name="writer"></param>
-	/// <param name="options"></param>
-	protected abstract void WriteOperation(Utf8JsonWriter writer, JsonSerializerOptions options = null);
-
 	protected override void Serialize(Stream stream, IElasticsearchClientSettings settings)
 	{
 		BeforeSerialize(settings);
 
-		var requestResponseSerializer = settings.RequestResponseSerializer;
+		if (!settings.RequestResponseSerializer.TryGetJsonSerializerOptions(out var options))
+		{
+			throw new InvalidOperationException("unreachable");
+		}
 
-		var internalWriter = new Utf8JsonWriter(stream);
+		using var writer = new Utf8JsonWriter(stream);
+		SerializeOperationAction(writer, options);
+		writer.Flush();
 
-		internalWriter.WriteStartObject();
-		internalWriter.WritePropertyName(Operation);
-		requestResponseSerializer.TryGetJsonSerializerOptions(out var options);
-		WriteOperation(internalWriter, options);
-		internalWriter.WriteEndObject();
-		internalWriter.Flush();
-
-		stream.WriteByte(_newline);
+		stream.WriteByte(SerializationConstants.Newline);
 
 		var body = GetBody();
-		settings.RequestResponseSerializer.Serialize(body, stream);
+		body.Serialize(writer, options, settings);
+		writer.Flush();
+
 		stream.Flush();
 	}
 
@@ -59,28 +54,36 @@ public abstract class BulkUpdateOperation : BulkOperation
 	{
 		BeforeSerialize(settings);
 
-		var internalWriter = new Utf8JsonWriter(stream);
-		SerializeOperationAction(settings, internalWriter);
-		internalWriter.Flush();
+		if (!settings.RequestResponseSerializer.TryGetJsonSerializerOptions(out var options))
+		{
+			throw new InvalidOperationException("unreachable");
+		}
 
-		stream.WriteByte(_newline);
+		var writer = new Utf8JsonWriter(stream);
+		await using (writer.ConfigureAwait(false))
+		{
+			SerializeOperationAction(writer, options);
+			await writer.FlushAsync().ConfigureAwait(false);
 
-		var body = GetBody();
-		await settings.RequestResponseSerializer.SerializeAsync(body, stream).ConfigureAwait(false);
+			stream.WriteByte(SerializationConstants.Newline);
+
+			var body = GetBody();
+			body.Serialize(writer, options, settings);
+			await writer.FlushAsync().ConfigureAwait(false);
+		}
+
 		await stream.FlushAsync().ConfigureAwait(false);
 	}
 
-	private void SerializeOperationAction(IElasticsearchClientSettings settings, Utf8JsonWriter writer)
+	private void SerializeOperationAction(Utf8JsonWriter writer, JsonSerializerOptions options)
 	{
-		var requestResponseSerializer = settings.RequestResponseSerializer;
 		writer.WriteStartObject();
 		writer.WritePropertyName(Operation);
-		requestResponseSerializer.TryGetJsonSerializerOptions(out var options);
-		WriteOperation(writer, options);
+		writer.WriteValue(options, this);
 		writer.WriteEndObject();
 	}
 
-	protected abstract object GetBody();
+	private protected abstract BulkUpdateBody GetBody();
 }
 
 public abstract class BulkUpdateOperationDescriptorBase<TSource> : BulkOperationDescriptor<BulkUpdateOperationDescriptorBase<TSource>>

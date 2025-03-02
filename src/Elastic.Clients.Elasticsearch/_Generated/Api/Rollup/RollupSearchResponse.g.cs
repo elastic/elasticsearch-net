@@ -22,22 +22,124 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
+internal sealed partial class RollupSearchResponseConverter<TDocument> : System.Text.Json.Serialization.JsonConverter<RollupSearchResponse<TDocument>>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations");
+	private static readonly System.Text.Json.JsonEncodedText PropHits = System.Text.Json.JsonEncodedText.Encode("hits");
+	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("_shards");
+	private static readonly System.Text.Json.JsonEncodedText PropTerminatedEarly = System.Text.Json.JsonEncodedText.Encode("terminated_early");
+	private static readonly System.Text.Json.JsonEncodedText PropTimedOut = System.Text.Json.JsonEncodedText.Encode("timed_out");
+	private static readonly System.Text.Json.JsonEncodedText PropTook = System.Text.Json.JsonEncodedText.Encode("took");
+
+	public override RollupSearchResponse<TDocument> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary?> propAggregations = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.HitsMetadata<TDocument>> propHits = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ShardStatistics> propShards = default;
+		LocalJsonValue<bool?> propTerminatedEarly = default;
+		LocalJsonValue<bool> propTimedOut = default;
+		LocalJsonValue<long> propTook = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAggregations.TryReadProperty(ref reader, options, PropAggregations, null))
+			{
+				continue;
+			}
+
+			if (propHits.TryReadProperty(ref reader, options, PropHits, null))
+			{
+				continue;
+			}
+
+			if (propShards.TryReadProperty(ref reader, options, PropShards, null))
+			{
+				continue;
+			}
+
+			if (propTerminatedEarly.TryReadProperty(ref reader, options, PropTerminatedEarly, null))
+			{
+				continue;
+			}
+
+			if (propTimedOut.TryReadProperty(ref reader, options, PropTimedOut, null))
+			{
+				continue;
+			}
+
+			if (propTook.TryReadProperty(ref reader, options, PropTook, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new RollupSearchResponse<TDocument>
+		{
+			Aggregations = propAggregations.Value
+,
+			Hits = propHits.Value
+,
+			Shards = propShards.Value
+,
+			TerminatedEarly = propTerminatedEarly.Value
+,
+			TimedOut = propTimedOut.Value
+,
+			Took = propTook.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, RollupSearchResponse<TDocument> value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAggregations, value.Aggregations, null, null);
+		writer.WriteProperty(options, PropHits, value.Hits, null, null);
+		writer.WriteProperty(options, PropShards, value.Shards, null, null);
+		writer.WriteProperty(options, PropTerminatedEarly, value.TerminatedEarly, null, null);
+		writer.WriteProperty(options, PropTimedOut, value.TimedOut, null, null);
+		writer.WriteProperty(options, PropTook, value.Took, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+internal sealed partial class RollupSearchResponseConverterFactory : System.Text.Json.Serialization.JsonConverterFactory
+{
+	public override bool CanConvert(System.Type typeToConvert)
+	{
+		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(RollupSearchResponse<>);
+	}
+
+	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var args = typeToConvert.GetGenericArguments();
+#pragma warning disable IL3050
+		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(RollupSearchResponseConverter<>).MakeGenericType(args[0]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
+#pragma warning restore IL3050
+		return converter;
+	}
+}
+
+[JsonConverter(typeof(RollupSearchResponseConverterFactory))]
 public sealed partial class RollupSearchResponse<TDocument> : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("aggregations")]
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary? Aggregations { get; init; }
-	[JsonInclude, JsonPropertyName("hits")]
 	public Elastic.Clients.Elasticsearch.Core.Search.HitsMetadata<TDocument> Hits { get; init; }
-	[JsonInclude, JsonPropertyName("_shards")]
 	public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
-	[JsonInclude, JsonPropertyName("terminated_early")]
 	public bool? TerminatedEarly { get; init; }
-	[JsonInclude, JsonPropertyName("timed_out")]
 	public bool TimedOut { get; init; }
-	[JsonInclude, JsonPropertyName("took")]
 	public long Took { get; init; }
 }

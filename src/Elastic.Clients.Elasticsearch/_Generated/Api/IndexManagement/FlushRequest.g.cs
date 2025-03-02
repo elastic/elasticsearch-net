@@ -92,6 +92,7 @@ public sealed partial class FlushRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class FlushRequest : PlainRequest<FlushRequestParameters>
 {
+	[JsonConstructor]
 	public FlushRequest()
 	{
 	}
@@ -107,6 +108,16 @@ public sealed partial class FlushRequest : PlainRequest<FlushRequestParameters>
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.flush";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and aliases to flush.
+	/// Supports wildcards (<c>*</c>).
+	/// To flush all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
 	/// <summary>
 	/// <para>

@@ -101,6 +101,7 @@ public sealed partial class ShardStoresRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class ShardStoresRequest : PlainRequest<ShardStoresRequestParameters>
 {
+	[JsonConstructor]
 	public ShardStoresRequest()
 	{
 	}
@@ -116,6 +117,14 @@ public sealed partial class ShardStoresRequest : PlainRequest<ShardStoresRequest
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.shard_stores";
+
+	/// <summary>
+	/// <para>
+	/// List of data streams, indices, and aliases used to limit the request.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
 	/// <summary>
 	/// <para>

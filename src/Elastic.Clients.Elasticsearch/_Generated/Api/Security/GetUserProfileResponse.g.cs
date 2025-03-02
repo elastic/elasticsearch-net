@@ -22,14 +22,63 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class GetUserProfileResponseConverter : System.Text.Json.Serialization.JsonConverter<GetUserProfileResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropErrors = System.Text.Json.JsonEncodedText.Encode("errors");
+	private static readonly System.Text.Json.JsonEncodedText PropProfiles = System.Text.Json.JsonEncodedText.Encode("profiles");
+
+	public override GetUserProfileResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.GetUserProfileErrors?> propErrors = default;
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserProfileWithMetadata>> propProfiles = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propErrors.TryReadProperty(ref reader, options, PropErrors, null))
+			{
+				continue;
+			}
+
+			if (propProfiles.TryReadProperty(ref reader, options, PropProfiles, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserProfileWithMetadata> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.UserProfileWithMetadata>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new GetUserProfileResponse
+		{
+			Errors = propErrors.Value
+,
+			Profiles = propProfiles.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetUserProfileResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropErrors, value.Errors, null, null);
+		writer.WriteProperty(options, PropProfiles, value.Profiles, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserProfileWithMetadata> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.UserProfileWithMetadata>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(GetUserProfileResponseConverter))]
 public sealed partial class GetUserProfileResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("errors")]
 	public Elastic.Clients.Elasticsearch.Security.GetUserProfileErrors? Errors { get; init; }
-	[JsonInclude, JsonPropertyName("profiles")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserProfileWithMetadata> Profiles { get; init; }
 }

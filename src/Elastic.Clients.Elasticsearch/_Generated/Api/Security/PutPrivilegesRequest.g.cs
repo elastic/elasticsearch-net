@@ -47,8 +47,13 @@ public sealed partial class PutPrivilegesRequestParameters : RequestParameters
 /// Create or update application privileges.
 /// </para>
 /// </summary>
-public sealed partial class PutPrivilegesRequest : PlainRequest<PutPrivilegesRequestParameters>, ISelfSerializable
+public sealed partial class PutPrivilegesRequest : PlainRequest<PutPrivilegesRequestParameters>
 {
+	[JsonConstructor]
+	internal PutPrivilegesRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityPutPrivileges;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -65,11 +70,6 @@ public sealed partial class PutPrivilegesRequest : PlainRequest<PutPrivilegesReq
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 	public Dictionary<string, Dictionary<string, Elastic.Clients.Elasticsearch.Security.PrivilegeActions>> Privileges { get; set; }
-
-	void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		JsonSerializer.Serialize(writer, Privileges, options);
-	}
 }
 
 /// <summary>

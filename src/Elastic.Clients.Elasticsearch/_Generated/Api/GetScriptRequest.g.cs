@@ -52,6 +52,11 @@ public sealed partial class GetScriptRequest : PlainRequest<GetScriptRequestPara
 	{
 	}
 
+	[JsonConstructor]
+	internal GetScriptRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceGetScript;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
@@ -59,6 +64,14 @@ public sealed partial class GetScriptRequest : PlainRequest<GetScriptRequestPara
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "get_script";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the stored script or search template.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
 	/// <summary>
 	/// <para>

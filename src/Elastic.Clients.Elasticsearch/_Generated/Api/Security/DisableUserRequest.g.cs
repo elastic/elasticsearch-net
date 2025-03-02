@@ -54,6 +54,11 @@ public sealed partial class DisableUserRequest : PlainRequest<DisableUserRequest
 	{
 	}
 
+	[JsonConstructor]
+	internal DisableUserRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityDisableUser;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -61,6 +66,14 @@ public sealed partial class DisableUserRequest : PlainRequest<DisableUserRequest
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "security.disable_user";
+
+	/// <summary>
+	/// <para>
+	/// The username of the user to disable
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Username Username { get => P<Elastic.Clients.Elasticsearch.Username>("username"); set => PR("username", value); }
 
 	/// <summary>
 	/// <para>

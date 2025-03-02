@@ -27,6 +27,55 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class ReplicationAccessConverter : System.Text.Json.Serialization.JsonConverter<ReplicationAccess>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAllowRestrictedIndices = System.Text.Json.JsonEncodedText.Encode("allow_restricted_indices");
+	private static readonly System.Text.Json.JsonEncodedText PropNames = System.Text.Json.JsonEncodedText.Encode("names");
+
+	public override ReplicationAccess Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propAllowRestrictedIndices = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.IndexName>> propNames = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAllowRestrictedIndices.TryReadProperty(ref reader, options, PropAllowRestrictedIndices, null))
+			{
+				continue;
+			}
+
+			if (propNames.TryReadProperty(ref reader, options, PropNames, static ICollection<Elastic.Clients.Elasticsearch.IndexName> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.IndexName>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new ReplicationAccess
+		{
+			AllowRestrictedIndices = propAllowRestrictedIndices.Value
+,
+			Names = propNames.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ReplicationAccess value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAllowRestrictedIndices, value.AllowRestrictedIndices, null, null);
+		writer.WriteProperty(options, PropNames, value.Names, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.IndexName> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.IndexName>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(ReplicationAccessConverter))]
 public sealed partial class ReplicationAccess
 {
 	/// <summary>
@@ -34,7 +83,6 @@ public sealed partial class ReplicationAccess
 	/// This needs to be set to true if the patterns in the names field should cover system indices.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("allow_restricted_indices")]
 	public bool? AllowRestrictedIndices { get; set; }
 
 	/// <summary>
@@ -42,8 +90,6 @@ public sealed partial class ReplicationAccess
 	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("names")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.IndexName))]
 	public ICollection<Elastic.Clients.Elasticsearch.IndexName> Names { get; set; }
 }
 

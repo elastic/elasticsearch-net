@@ -54,6 +54,11 @@ public sealed partial class EnableUserRequest : PlainRequest<EnableUserRequestPa
 	{
 	}
 
+	[JsonConstructor]
+	internal EnableUserRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityEnableUser;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -61,6 +66,14 @@ public sealed partial class EnableUserRequest : PlainRequest<EnableUserRequestPa
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "security.enable_user";
+
+	/// <summary>
+	/// <para>
+	/// The username of the user to enable
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Username Username { get => P<Elastic.Clients.Elasticsearch.Username>("username"); set => PR("username", value); }
 
 	/// <summary>
 	/// <para>

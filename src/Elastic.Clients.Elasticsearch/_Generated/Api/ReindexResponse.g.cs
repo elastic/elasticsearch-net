@@ -22,42 +22,217 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class ReindexResponseConverter : System.Text.Json.Serialization.JsonConverter<ReindexResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBatches = System.Text.Json.JsonEncodedText.Encode("batches");
+	private static readonly System.Text.Json.JsonEncodedText PropCreated = System.Text.Json.JsonEncodedText.Encode("created");
+	private static readonly System.Text.Json.JsonEncodedText PropDeleted = System.Text.Json.JsonEncodedText.Encode("deleted");
+	private static readonly System.Text.Json.JsonEncodedText PropFailures = System.Text.Json.JsonEncodedText.Encode("failures");
+	private static readonly System.Text.Json.JsonEncodedText PropNoops = System.Text.Json.JsonEncodedText.Encode("noops");
+	private static readonly System.Text.Json.JsonEncodedText PropRequestsPerSecond = System.Text.Json.JsonEncodedText.Encode("requests_per_second");
+	private static readonly System.Text.Json.JsonEncodedText PropRetries = System.Text.Json.JsonEncodedText.Encode("retries");
+	private static readonly System.Text.Json.JsonEncodedText PropSliceId = System.Text.Json.JsonEncodedText.Encode("slice_id");
+	private static readonly System.Text.Json.JsonEncodedText PropTask = System.Text.Json.JsonEncodedText.Encode("task");
+	private static readonly System.Text.Json.JsonEncodedText PropThrottledMillis = System.Text.Json.JsonEncodedText.Encode("throttled_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropThrottledUntilMillis = System.Text.Json.JsonEncodedText.Encode("throttled_until_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropTimedOut = System.Text.Json.JsonEncodedText.Encode("timed_out");
+	private static readonly System.Text.Json.JsonEncodedText PropTook = System.Text.Json.JsonEncodedText.Encode("took");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+	private static readonly System.Text.Json.JsonEncodedText PropUpdated = System.Text.Json.JsonEncodedText.Encode("updated");
+	private static readonly System.Text.Json.JsonEncodedText PropVersionConflicts = System.Text.Json.JsonEncodedText.Encode("version_conflicts");
+
+	public override ReindexResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long?> propBatches = default;
+		LocalJsonValue<long?> propCreated = default;
+		LocalJsonValue<long?> propDeleted = default;
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure>?> propFailures = default;
+		LocalJsonValue<long?> propNoops = default;
+		LocalJsonValue<float?> propRequestsPerSecond = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Retries?> propRetries = default;
+		LocalJsonValue<int?> propSliceId = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.TaskId?> propTask = default;
+		LocalJsonValue<long?> propThrottledMillis = default;
+		LocalJsonValue<long?> propThrottledUntilMillis = default;
+		LocalJsonValue<bool?> propTimedOut = default;
+		LocalJsonValue<long?> propTook = default;
+		LocalJsonValue<long?> propTotal = default;
+		LocalJsonValue<long?> propUpdated = default;
+		LocalJsonValue<long?> propVersionConflicts = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBatches.TryReadProperty(ref reader, options, PropBatches, null))
+			{
+				continue;
+			}
+
+			if (propCreated.TryReadProperty(ref reader, options, PropCreated, null))
+			{
+				continue;
+			}
+
+			if (propDeleted.TryReadProperty(ref reader, options, PropDeleted, null))
+			{
+				continue;
+			}
+
+			if (propFailures.TryReadProperty(ref reader, options, PropFailures, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure>(o, null)))
+			{
+				continue;
+			}
+
+			if (propNoops.TryReadProperty(ref reader, options, PropNoops, null))
+			{
+				continue;
+			}
+
+			if (propRequestsPerSecond.TryReadProperty(ref reader, options, PropRequestsPerSecond, null))
+			{
+				continue;
+			}
+
+			if (propRetries.TryReadProperty(ref reader, options, PropRetries, null))
+			{
+				continue;
+			}
+
+			if (propSliceId.TryReadProperty(ref reader, options, PropSliceId, null))
+			{
+				continue;
+			}
+
+			if (propTask.TryReadProperty(ref reader, options, PropTask, null))
+			{
+				continue;
+			}
+
+			if (propThrottledMillis.TryReadProperty(ref reader, options, PropThrottledMillis, null))
+			{
+				continue;
+			}
+
+			if (propThrottledUntilMillis.TryReadProperty(ref reader, options, PropThrottledUntilMillis, null))
+			{
+				continue;
+			}
+
+			if (propTimedOut.TryReadProperty(ref reader, options, PropTimedOut, null))
+			{
+				continue;
+			}
+
+			if (propTook.TryReadProperty(ref reader, options, PropTook, null))
+			{
+				continue;
+			}
+
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
+			{
+				continue;
+			}
+
+			if (propUpdated.TryReadProperty(ref reader, options, PropUpdated, null))
+			{
+				continue;
+			}
+
+			if (propVersionConflicts.TryReadProperty(ref reader, options, PropVersionConflicts, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new ReindexResponse
+		{
+			Batches = propBatches.Value
+,
+			Created = propCreated.Value
+,
+			Deleted = propDeleted.Value
+,
+			Failures = propFailures.Value
+,
+			Noops = propNoops.Value
+,
+			RequestsPerSecond = propRequestsPerSecond.Value
+,
+			Retries = propRetries.Value
+,
+			SliceId = propSliceId.Value
+,
+			Task = propTask.Value
+,
+			ThrottledMillis = propThrottledMillis.Value
+,
+			ThrottledUntilMillis = propThrottledUntilMillis.Value
+,
+			TimedOut = propTimedOut.Value
+,
+			Took = propTook.Value
+,
+			Total = propTotal.Value
+,
+			Updated = propUpdated.Value
+,
+			VersionConflicts = propVersionConflicts.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ReindexResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBatches, value.Batches, null, null);
+		writer.WriteProperty(options, PropCreated, value.Created, null, null);
+		writer.WriteProperty(options, PropDeleted, value.Deleted, null, null);
+		writer.WriteProperty(options, PropFailures, value.Failures, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure>(o, v, null));
+		writer.WriteProperty(options, PropNoops, value.Noops, null, null);
+		writer.WriteProperty(options, PropRequestsPerSecond, value.RequestsPerSecond, null, null);
+		writer.WriteProperty(options, PropRetries, value.Retries, null, null);
+		writer.WriteProperty(options, PropSliceId, value.SliceId, null, null);
+		writer.WriteProperty(options, PropTask, value.Task, null, null);
+		writer.WriteProperty(options, PropThrottledMillis, value.ThrottledMillis, null, null);
+		writer.WriteProperty(options, PropThrottledUntilMillis, value.ThrottledUntilMillis, null, null);
+		writer.WriteProperty(options, PropTimedOut, value.TimedOut, null, null);
+		writer.WriteProperty(options, PropTook, value.Took, null, null);
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
+		writer.WriteProperty(options, PropUpdated, value.Updated, null, null);
+		writer.WriteProperty(options, PropVersionConflicts, value.VersionConflicts, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(ReindexResponseConverter))]
 public sealed partial class ReindexResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("batches")]
 	public long? Batches { get; init; }
-	[JsonInclude, JsonPropertyName("created")]
 	public long? Created { get; init; }
-	[JsonInclude, JsonPropertyName("deleted")]
 	public long? Deleted { get; init; }
-	[JsonInclude, JsonPropertyName("failures")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure>? Failures { get; init; }
-	[JsonInclude, JsonPropertyName("noops")]
 	public long? Noops { get; init; }
-	[JsonInclude, JsonPropertyName("requests_per_second")]
 	public float? RequestsPerSecond { get; init; }
-	[JsonInclude, JsonPropertyName("retries")]
 	public Elastic.Clients.Elasticsearch.Retries? Retries { get; init; }
-	[JsonInclude, JsonPropertyName("slice_id")]
 	public int? SliceId { get; init; }
-	[JsonInclude, JsonPropertyName("task")]
 	public Elastic.Clients.Elasticsearch.TaskId? Task { get; init; }
-	[JsonInclude, JsonPropertyName("throttled_millis")]
 	public long? ThrottledMillis { get; init; }
-	[JsonInclude, JsonPropertyName("throttled_until_millis")]
 	public long? ThrottledUntilMillis { get; init; }
-	[JsonInclude, JsonPropertyName("timed_out")]
 	public bool? TimedOut { get; init; }
-	[JsonInclude, JsonPropertyName("took")]
 	public long? Took { get; init; }
-	[JsonInclude, JsonPropertyName("total")]
 	public long? Total { get; init; }
-	[JsonInclude, JsonPropertyName("updated")]
 	public long? Updated { get; init; }
-	[JsonInclude, JsonPropertyName("version_conflicts")]
 	public long? VersionConflicts { get; init; }
 }

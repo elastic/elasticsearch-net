@@ -57,6 +57,11 @@ public sealed partial class UpdateAliasesRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class UpdateAliasesRequest : PlainRequest<UpdateAliasesRequestParameters>
 {
+	[JsonConstructor]
+	internal UpdateAliasesRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementUpdateAliases;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

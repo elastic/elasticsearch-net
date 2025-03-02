@@ -47,6 +47,11 @@ public sealed partial class StopDatafeedRequest : PlainRequest<StopDatafeedReque
 	{
 	}
 
+	[JsonConstructor]
+	internal StopDatafeedRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningStopDatafeed;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -54,6 +59,16 @@ public sealed partial class StopDatafeedRequest : PlainRequest<StopDatafeedReque
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.stop_datafeed";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the datafeed. You can stop multiple datafeeds in a single API request by using a comma-separated
+	/// list of datafeeds or a wildcard expression. You can close all datafeeds by using <c>_all</c> or by specifying <c>*</c> as
+	/// the identifier.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id DatafeedId { get => P<Elastic.Clients.Elasticsearch.Id>("datafeed_id"); set => PR("datafeed_id", value); }
 
 	/// <summary>
 	/// <para>

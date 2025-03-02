@@ -45,6 +45,11 @@ public sealed partial class PutCalendarRequest : PlainRequest<PutCalendarRequest
 	{
 	}
 
+	[JsonConstructor]
+	internal PutCalendarRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPutCalendar;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -52,6 +57,14 @@ public sealed partial class PutCalendarRequest : PlainRequest<PutCalendarRequest
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.put_calendar";
+
+	/// <summary>
+	/// <para>
+	/// A string that uniquely identifies a calendar.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id CalendarId { get => P<Elastic.Clients.Elasticsearch.Id>("calendar_id"); set => PR("calendar_id", value); }
 
 	/// <summary>
 	/// <para>

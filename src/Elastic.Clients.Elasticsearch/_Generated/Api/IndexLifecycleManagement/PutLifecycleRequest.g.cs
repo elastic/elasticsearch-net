@@ -62,6 +62,11 @@ public sealed partial class PutLifecycleRequest : PlainRequest<PutLifecycleReque
 	{
 	}
 
+	[JsonConstructor]
+	internal PutLifecycleRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexLifecycleManagementPutLifecycle;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -69,6 +74,14 @@ public sealed partial class PutLifecycleRequest : PlainRequest<PutLifecycleReque
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ilm.put_lifecycle";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the policy.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("policy"); set => PR("policy", value); }
 
 	/// <summary>
 	/// <para>

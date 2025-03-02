@@ -44,6 +44,11 @@ public sealed partial class SamlAuthenticateRequestParameters : RequestParameter
 /// </summary>
 public sealed partial class SamlAuthenticateRequest : PlainRequest<SamlAuthenticateRequestParameters>
 {
+	[JsonConstructor]
+	internal SamlAuthenticateRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecuritySamlAuthenticate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

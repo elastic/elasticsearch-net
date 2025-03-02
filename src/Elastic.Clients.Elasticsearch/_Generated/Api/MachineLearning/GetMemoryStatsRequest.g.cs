@@ -58,6 +58,7 @@ public sealed partial class GetMemoryStatsRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class GetMemoryStatsRequest : PlainRequest<GetMemoryStatsRequestParameters>
 {
+	[JsonConstructor]
 	public GetMemoryStatsRequest()
 	{
 	}
@@ -73,6 +74,15 @@ public sealed partial class GetMemoryStatsRequest : PlainRequest<GetMemoryStatsR
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ml.get_memory_stats";
+
+	/// <summary>
+	/// <para>
+	/// The names of particular nodes in the cluster to target. For example, <c>nodeId1,nodeId2</c> or
+	/// <c>ml:true</c>
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id? NodeId { get => P<Elastic.Clients.Elasticsearch.Id?>("node_id"); set => PO("node_id", value); }
 
 	/// <summary>
 	/// <para>

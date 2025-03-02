@@ -22,21 +22,96 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class HasPrivilegesResponseConverter : System.Text.Json.Serialization.JsonConverter<HasPrivilegesResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropApplication = System.Text.Json.JsonEncodedText.Encode("application");
+	private static readonly System.Text.Json.JsonEncodedText PropCluster = System.Text.Json.JsonEncodedText.Encode("cluster");
+	private static readonly System.Text.Json.JsonEncodedText PropHasAllRequested = System.Text.Json.JsonEncodedText.Encode("has_all_requested");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropUsername = System.Text.Json.JsonEncodedText.Encode("username");
+
+	public override HasPrivilegesResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyDictionary<string, IReadOnlyDictionary<string, IReadOnlyDictionary<string, bool>>>> propApplication = default;
+		LocalJsonValue<IReadOnlyDictionary<string, bool>> propCluster = default;
+		LocalJsonValue<bool> propHasAllRequested = default;
+		LocalJsonValue<IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, IReadOnlyDictionary<string, bool>>> propIndex = default;
+		LocalJsonValue<string> propUsername = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propApplication.TryReadProperty(ref reader, options, PropApplication, static IReadOnlyDictionary<string, IReadOnlyDictionary<string, IReadOnlyDictionary<string, bool>>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, IReadOnlyDictionary<string, IReadOnlyDictionary<string, bool>>>(o, null, static IReadOnlyDictionary<string, IReadOnlyDictionary<string, bool>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, IReadOnlyDictionary<string, bool>>(o, null, static IReadOnlyDictionary<string, bool> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, bool>(o, null, null)!)!)!))
+			{
+				continue;
+			}
+
+			if (propCluster.TryReadProperty(ref reader, options, PropCluster, static IReadOnlyDictionary<string, bool> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, bool>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propHasAllRequested.TryReadProperty(ref reader, options, PropHasAllRequested, null))
+			{
+				continue;
+			}
+
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, static IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, IReadOnlyDictionary<string, bool>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.IndexName, IReadOnlyDictionary<string, bool>>(o, null, static IReadOnlyDictionary<string, bool> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, bool>(o, null, null)!)!))
+			{
+				continue;
+			}
+
+			if (propUsername.TryReadProperty(ref reader, options, PropUsername, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new HasPrivilegesResponse
+		{
+			Application = propApplication.Value
+,
+			Cluster = propCluster.Value
+,
+			HasAllRequested = propHasAllRequested.Value
+,
+			Index = propIndex.Value
+,
+			Username = propUsername.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, HasPrivilegesResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropApplication, value.Application, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, IReadOnlyDictionary<string, IReadOnlyDictionary<string, bool>>> v) => w.WriteDictionaryValue<string, IReadOnlyDictionary<string, IReadOnlyDictionary<string, bool>>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, IReadOnlyDictionary<string, bool>> v) => w.WriteDictionaryValue<string, IReadOnlyDictionary<string, bool>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, bool> v) => w.WriteDictionaryValue<string, bool>(o, v, null, null))));
+		writer.WriteProperty(options, PropCluster, value.Cluster, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, bool> v) => w.WriteDictionaryValue<string, bool>(o, v, null, null));
+		writer.WriteProperty(options, PropHasAllRequested, value.HasAllRequested, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, IReadOnlyDictionary<string, bool>> v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.IndexName, IReadOnlyDictionary<string, bool>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, bool> v) => w.WriteDictionaryValue<string, bool>(o, v, null, null)));
+		writer.WriteProperty(options, PropUsername, value.Username, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(HasPrivilegesResponseConverter))]
 public sealed partial class HasPrivilegesResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("application")]
 	public IReadOnlyDictionary<string, IReadOnlyDictionary<string, IReadOnlyDictionary<string, bool>>> Application { get; init; }
-	[JsonInclude, JsonPropertyName("cluster")]
 	public IReadOnlyDictionary<string, bool> Cluster { get; init; }
-	[JsonInclude, JsonPropertyName("has_all_requested")]
 	public bool HasAllRequested { get; init; }
-	[JsonInclude, JsonPropertyName("index")]
-	[ReadOnlyIndexNameDictionaryConverter(typeof(IReadOnlyDictionary<string, bool>))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, IReadOnlyDictionary<string, bool>> Index { get; init; }
-	[JsonInclude, JsonPropertyName("username")]
 	public string Username { get; init; }
 }

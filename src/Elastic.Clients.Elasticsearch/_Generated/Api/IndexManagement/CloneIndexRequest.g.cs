@@ -120,6 +120,11 @@ public sealed partial class CloneIndexRequest : PlainRequest<CloneIndexRequestPa
 	{
 	}
 
+	[JsonConstructor]
+	internal CloneIndexRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementClone;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -127,6 +132,22 @@ public sealed partial class CloneIndexRequest : PlainRequest<CloneIndexRequestPa
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "indices.clone";
+
+	/// <summary>
+	/// <para>
+	/// Name of the source index to clone.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
+
+	/// <summary>
+	/// <para>
+	/// Name of the target index to create.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Target { get => P<Elastic.Clients.Elasticsearch.Name>("target"); set => PR("target", value); }
 
 	/// <summary>
 	/// <para>

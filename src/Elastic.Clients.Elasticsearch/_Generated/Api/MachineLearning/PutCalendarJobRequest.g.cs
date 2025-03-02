@@ -45,6 +45,11 @@ public sealed partial class PutCalendarJobRequest : PlainRequest<PutCalendarJobR
 	{
 	}
 
+	[JsonConstructor]
+	internal PutCalendarJobRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPutCalendarJob;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -52,6 +57,22 @@ public sealed partial class PutCalendarJobRequest : PlainRequest<PutCalendarJobR
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ml.put_calendar_job";
+
+	/// <summary>
+	/// <para>
+	/// A string that uniquely identifies a calendar.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id CalendarId { get => P<Elastic.Clients.Elasticsearch.Id>("calendar_id"); set => PR("calendar_id", value); }
+
+	/// <summary>
+	/// <para>
+	/// An identifier for the anomaly detection jobs. It can be a job identifier, a group name, or a comma-separated list of jobs or groups.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Ids JobId { get => P<Elastic.Clients.Elasticsearch.Ids>("job_id"); set => PR("job_id", value); }
 }
 
 /// <summary>

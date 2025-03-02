@@ -76,7 +76,6 @@ public sealed partial class AnalysisConfig
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("influencers")]
-	[JsonConverter(typeof(FieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? Influencers { get; set; }
 
 	/// <summary>

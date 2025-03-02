@@ -65,6 +65,11 @@ public sealed partial class ExploreRequest : PlainRequest<ExploreRequestParamete
 	{
 	}
 
+	[JsonConstructor]
+	internal ExploreRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.GraphExplore;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -72,6 +77,14 @@ public sealed partial class ExploreRequest : PlainRequest<ExploreRequestParamete
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "graph.explore";
+
+	/// <summary>
+	/// <para>
+	/// Name of the index.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
 	/// <summary>
 	/// <para>

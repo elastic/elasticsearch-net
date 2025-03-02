@@ -30,12 +30,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class MatrixStatsFields
 {
 	[JsonInclude, JsonPropertyName("correlation")]
-	[ReadOnlyFieldDictionaryConverter(typeof(double))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, double> Correlation { get; init; }
 	[JsonInclude, JsonPropertyName("count")]
 	public long Count { get; init; }
 	[JsonInclude, JsonPropertyName("covariance")]
-	[ReadOnlyFieldDictionaryConverter(typeof(double))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, double> Covariance { get; init; }
 	[JsonInclude, JsonPropertyName("kurtosis")]
 	public double Kurtosis { get; init; }

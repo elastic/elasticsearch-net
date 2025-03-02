@@ -27,8 +27,52 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class NodeInfoSettingsTransportTypeConverter : System.Text.Json.Serialization.JsonConverter<NodeInfoSettingsTransportType>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDefault = System.Text.Json.JsonEncodedText.Encode("default");
+
+	public override NodeInfoSettingsTransportType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
+		{
+			var value = reader.ReadValue<string>(options, null);
+			return new NodeInfoSettingsTransportType { Default = value };
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propDefault = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDefault.TryReadProperty(ref reader, options, PropDefault, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new NodeInfoSettingsTransportType
+		{
+			Default = propDefault.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, NodeInfoSettingsTransportType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDefault, value.Default, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(NodeInfoSettingsTransportTypeConverter))]
 public sealed partial class NodeInfoSettingsTransportType
 {
-	[JsonInclude, JsonPropertyName("default")]
 	public string Default { get; init; }
 }

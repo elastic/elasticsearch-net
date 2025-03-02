@@ -5,7 +5,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-
+using System.Text.Json.Serialization.Metadata;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch.Serialization;
@@ -76,7 +76,8 @@ public class DefaultSourceSerializerOptionsProvider :
 	[
 		new JsonStringEnumConverter(),
 		new DoubleWithFractionalPortionConverter(),
-		new SingleWithFractionalPortionConverter()
+		new SingleWithFractionalPortionConverter(),
+		// TODO: Add RequestResponseSerializer
 	];
 
 	public DefaultSourceSerializerOptionsProvider(Action<JsonSerializerOptions>? configureOptions = null) :
@@ -91,6 +92,8 @@ public class DefaultSourceSerializerOptionsProvider :
 
 	private static void MutateOptions(JsonSerializerOptions options, Action<JsonSerializerOptions>? configureOptions)
 	{
+		options.TypeInfoResolver = new DefaultJsonTypeInfoResolver();
+
 		options.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
 		options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
 

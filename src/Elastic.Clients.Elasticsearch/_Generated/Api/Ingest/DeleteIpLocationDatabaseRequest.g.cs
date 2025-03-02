@@ -62,6 +62,11 @@ public sealed partial class DeleteIpLocationDatabaseRequest : PlainRequest<Delet
 	{
 	}
 
+	[JsonConstructor]
+	internal DeleteIpLocationDatabaseRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestDeleteIpLocationDatabase;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -69,6 +74,14 @@ public sealed partial class DeleteIpLocationDatabaseRequest : PlainRequest<Delet
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ingest.delete_ip_location_database";
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of IP location database configurations.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Ids Id { get => P<Elastic.Clients.Elasticsearch.Ids>("id"); set => PR("id", value); }
 
 	/// <summary>
 	/// <para>

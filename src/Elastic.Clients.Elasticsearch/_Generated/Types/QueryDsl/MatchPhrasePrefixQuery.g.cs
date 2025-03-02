@@ -27,116 +27,118 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-internal sealed partial class MatchPhrasePrefixQueryConverter : JsonConverter<MatchPhrasePrefixQuery>
+internal sealed partial class MatchPhrasePrefixQueryConverter : System.Text.Json.Serialization.JsonConverter<MatchPhrasePrefixQuery>
 {
-	public override MatchPhrasePrefixQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer");
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxExpansions = System.Text.Json.JsonEncodedText.Encode("max_expansions");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+	private static readonly System.Text.Json.JsonEncodedText PropSlop = System.Text.Json.JsonEncodedText.Encode("slop");
+	private static readonly System.Text.Json.JsonEncodedText PropZeroTermsQuery = System.Text.Json.JsonEncodedText.Encode("zero_terms_query");
+
+	public override MatchPhrasePrefixQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
 		reader.Read();
-		var fieldName = reader.GetString();
+		propField.ReadPropertyName(ref reader, options, null);
 		reader.Read();
-		var variant = new MatchPhrasePrefixQuery(fieldName);
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				var property = reader.GetString();
-				if (property == "analyzer")
-				{
-					variant.Analyzer = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "boost")
-				{
-					variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "max_expansions")
-				{
-					variant.MaxExpansions = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "query")
-				{
-					variant.Query = JsonSerializer.Deserialize<string>(ref reader, options);
-					continue;
-				}
-
-				if (property == "_name")
-				{
-					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "slop")
-				{
-					variant.Slop = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "zero_terms_query")
-				{
-					variant.ZeroTermsQuery = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery?>(ref reader, options);
-					continue;
-				}
-			}
+			var value = reader.ReadValue<string>(options, null);
+			reader.Read();
+			return new MatchPhrasePrefixQuery { Query = value };
 		}
 
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propAnalyzer = default;
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<int?> propMaxExpansions = default;
+		LocalJsonValue<string> propQuery = default;
+		LocalJsonValue<string?> propQueryName = default;
+		LocalJsonValue<int?> propSlop = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery?> propZeroTermsQuery = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAnalyzer.TryReadProperty(ref reader, options, PropAnalyzer, null))
+			{
+				continue;
+			}
+
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propMaxExpansions.TryReadProperty(ref reader, options, PropMaxExpansions, null))
+			{
+				continue;
+			}
+
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
+			{
+				continue;
+			}
+
+			if (propSlop.TryReadProperty(ref reader, options, PropSlop, null))
+			{
+				continue;
+			}
+
+			if (propZeroTermsQuery.TryReadProperty(ref reader, options, PropZeroTermsQuery, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		reader.Read();
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new MatchPhrasePrefixQuery
+		{
+			Analyzer = propAnalyzer.Value
+,
+			Boost = propBoost.Value
+,
+			Field = propField.Value
+,
+			MaxExpansions = propMaxExpansions.Value
+,
+			Query = propQuery.Value
+,
+			QueryName = propQueryName.Value
+,
+			Slop = propSlop.Value
+,
+			ZeroTermsQuery = propZeroTermsQuery.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, MatchPhrasePrefixQuery value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, MatchPhrasePrefixQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (value.Field is null)
-			throw new JsonException("Unable to serialize MatchPhrasePrefixQuery because the `Field` property is not set. Field name queries must include a valid field name.");
-		if (!options.TryGetClientSettings(out var settings))
-			throw new JsonException("Unable to retrieve client settings required to infer field.");
 		writer.WriteStartObject();
-		writer.WritePropertyName(settings.Inferrer.Field(value.Field));
+		writer.WritePropertyName(options, value.Field, null);
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(value.Analyzer))
-		{
-			writer.WritePropertyName("analyzer");
-			writer.WriteStringValue(value.Analyzer);
-		}
-
-		if (value.Boost.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(value.Boost.Value);
-		}
-
-		if (value.MaxExpansions.HasValue)
-		{
-			writer.WritePropertyName("max_expansions");
-			writer.WriteNumberValue(value.MaxExpansions.Value);
-		}
-
-		writer.WritePropertyName("query");
-		writer.WriteStringValue(value.Query);
-		if (!string.IsNullOrEmpty(value.QueryName))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(value.QueryName);
-		}
-
-		if (value.Slop.HasValue)
-		{
-			writer.WritePropertyName("slop");
-			writer.WriteNumberValue(value.Slop.Value);
-		}
-
-		if (value.ZeroTermsQuery is not null)
-		{
-			writer.WritePropertyName("zero_terms_query");
-			JsonSerializer.Serialize(writer, value.ZeroTermsQuery, options);
-		}
-
+		writer.WriteProperty(options, PropAnalyzer, value.Analyzer, null, null);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropMaxExpansions, value.MaxExpansions, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteProperty(options, PropSlop, value.Slop, null, null);
+		writer.WriteProperty(options, PropZeroTermsQuery, value.ZeroTermsQuery, null, null);
 		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}
@@ -150,6 +152,10 @@ public sealed partial class MatchPhrasePrefixQuery
 		if (field is null)
 			throw new ArgumentNullException(nameof(field));
 		Field = field;
+	}
+
+	internal MatchPhrasePrefixQuery()
+	{
 	}
 
 	/// <summary>

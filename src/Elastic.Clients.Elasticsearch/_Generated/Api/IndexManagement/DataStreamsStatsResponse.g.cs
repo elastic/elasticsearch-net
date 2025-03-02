@@ -22,10 +22,101 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class DataStreamsStatsResponseConverter : System.Text.Json.Serialization.JsonConverter<DataStreamsStatsResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBackingIndices = System.Text.Json.JsonEncodedText.Encode("backing_indices");
+	private static readonly System.Text.Json.JsonEncodedText PropDataStreamCount = System.Text.Json.JsonEncodedText.Encode("data_stream_count");
+	private static readonly System.Text.Json.JsonEncodedText PropDataStreams = System.Text.Json.JsonEncodedText.Encode("data_streams");
+	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("_shards");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalStoreSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_store_size_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalStoreSizes = System.Text.Json.JsonEncodedText.Encode("total_store_sizes");
+
+	public override DataStreamsStatsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propBackingIndices = default;
+		LocalJsonValue<int> propDataStreamCount = default;
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsItem>> propDataStreams = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ShardStatistics> propShards = default;
+		LocalJsonValue<long> propTotalStoreSizeBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propTotalStoreSizes = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBackingIndices.TryReadProperty(ref reader, options, PropBackingIndices, null))
+			{
+				continue;
+			}
+
+			if (propDataStreamCount.TryReadProperty(ref reader, options, PropDataStreamCount, null))
+			{
+				continue;
+			}
+
+			if (propDataStreams.TryReadProperty(ref reader, options, PropDataStreams, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsItem> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsItem>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propShards.TryReadProperty(ref reader, options, PropShards, null))
+			{
+				continue;
+			}
+
+			if (propTotalStoreSizeBytes.TryReadProperty(ref reader, options, PropTotalStoreSizeBytes, null))
+			{
+				continue;
+			}
+
+			if (propTotalStoreSizes.TryReadProperty(ref reader, options, PropTotalStoreSizes, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new DataStreamsStatsResponse
+		{
+			BackingIndices = propBackingIndices.Value
+,
+			DataStreamCount = propDataStreamCount.Value
+,
+			DataStreams = propDataStreams.Value
+,
+			Shards = propShards.Value
+,
+			TotalStoreSizeBytes = propTotalStoreSizeBytes.Value
+,
+			TotalStoreSizes = propTotalStoreSizes.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, DataStreamsStatsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBackingIndices, value.BackingIndices, null, null);
+		writer.WriteProperty(options, PropDataStreamCount, value.DataStreamCount, null, null);
+		writer.WriteProperty(options, PropDataStreams, value.DataStreams, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsItem> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsItem>(o, v, null));
+		writer.WriteProperty(options, PropShards, value.Shards, null, null);
+		writer.WriteProperty(options, PropTotalStoreSizeBytes, value.TotalStoreSizeBytes, null, null);
+		writer.WriteProperty(options, PropTotalStoreSizes, value.TotalStoreSizes, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(DataStreamsStatsResponseConverter))]
 public sealed partial class DataStreamsStatsResponse : ElasticsearchResponse
 {
 	/// <summary>
@@ -33,7 +124,6 @@ public sealed partial class DataStreamsStatsResponse : ElasticsearchResponse
 	/// Total number of backing indices for the selected data streams.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("backing_indices")]
 	public int BackingIndices { get; init; }
 
 	/// <summary>
@@ -41,7 +131,6 @@ public sealed partial class DataStreamsStatsResponse : ElasticsearchResponse
 	/// Total number of selected data streams.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("data_stream_count")]
 	public int DataStreamCount { get; init; }
 
 	/// <summary>
@@ -49,7 +138,6 @@ public sealed partial class DataStreamsStatsResponse : ElasticsearchResponse
 	/// Contains statistics for the selected data streams.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("data_streams")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsItem> DataStreams { get; init; }
 
 	/// <summary>
@@ -57,7 +145,6 @@ public sealed partial class DataStreamsStatsResponse : ElasticsearchResponse
 	/// Contains information about shards that attempted to execute the request.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_shards")]
 	public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
 
 	/// <summary>
@@ -65,7 +152,6 @@ public sealed partial class DataStreamsStatsResponse : ElasticsearchResponse
 	/// Total size, in bytes, of all shards for the selected data streams.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total_store_size_bytes")]
 	public long TotalStoreSizeBytes { get; init; }
 
 	/// <summary>
@@ -74,6 +160,5 @@ public sealed partial class DataStreamsStatsResponse : ElasticsearchResponse
 	/// This property is included only if the <c>human</c> query parameter is <c>true</c>
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total_store_sizes")]
 	public Elastic.Clients.Elasticsearch.ByteSize? TotalStoreSizes { get; init; }
 }

@@ -83,6 +83,7 @@ public sealed partial class GetJobsRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class GetJobsRequest : PlainRequest<GetJobsRequestParameters>
 {
+	[JsonConstructor]
 	public GetJobsRequest()
 	{
 	}
@@ -98,6 +99,16 @@ public sealed partial class GetJobsRequest : PlainRequest<GetJobsRequestParamete
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ml.get_jobs";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the anomaly detection job. It can be a job identifier, a
+	/// group name, or a wildcard expression. If you do not specify one of these
+	/// options, the API returns information for all anomaly detection jobs.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Ids? JobId { get => P<Elastic.Clients.Elasticsearch.Ids?>("job_id"); set => PO("job_id", value); }
 
 	/// <summary>
 	/// <para>

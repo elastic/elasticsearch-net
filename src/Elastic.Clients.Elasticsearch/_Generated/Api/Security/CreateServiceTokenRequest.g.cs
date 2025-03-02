@@ -58,6 +58,11 @@ public sealed partial class CreateServiceTokenRequest : PlainRequest<CreateServi
 	{
 	}
 
+	[JsonConstructor]
+	internal CreateServiceTokenRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityCreateServiceToken;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -65,6 +70,30 @@ public sealed partial class CreateServiceTokenRequest : PlainRequest<CreateServi
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "security.create_service_token";
+
+	/// <summary>
+	/// <para>
+	/// An identifier for the token name
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name? Name { get => P<Elastic.Clients.Elasticsearch.Name?>("name"); set => PO("name", value); }
+
+	/// <summary>
+	/// <para>
+	/// An identifier for the namespace
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public string Namespace { get => P<string>("namespace"); set => PR("namespace", value); }
+
+	/// <summary>
+	/// <para>
+	/// An identifier for the service name
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public string Service { get => P<string>("service"); set => PR("service", value); }
 
 	/// <summary>
 	/// <para>

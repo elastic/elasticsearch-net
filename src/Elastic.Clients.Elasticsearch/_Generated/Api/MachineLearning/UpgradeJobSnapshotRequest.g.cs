@@ -68,6 +68,11 @@ public sealed partial class UpgradeJobSnapshotRequest : PlainRequest<UpgradeJobS
 	{
 	}
 
+	[JsonConstructor]
+	internal UpgradeJobSnapshotRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningUpgradeJobSnapshot;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -75,6 +80,22 @@ public sealed partial class UpgradeJobSnapshotRequest : PlainRequest<UpgradeJobS
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ml.upgrade_job_snapshot";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
+
+	/// <summary>
+	/// <para>
+	/// A numerical character string that uniquely identifies the model snapshot.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id SnapshotId { get => P<Elastic.Clients.Elasticsearch.Id>("snapshot_id"); set => PR("snapshot_id", value); }
 
 	/// <summary>
 	/// <para>

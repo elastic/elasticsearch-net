@@ -52,6 +52,11 @@ public sealed partial class ExecutePolicyRequest : PlainRequest<ExecutePolicyReq
 	{
 	}
 
+	[JsonConstructor]
+	internal ExecutePolicyRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.EnrichExecutePolicy;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -59,6 +64,14 @@ public sealed partial class ExecutePolicyRequest : PlainRequest<ExecutePolicyReq
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "enrich.execute_policy";
+
+	/// <summary>
+	/// <para>
+	/// Enrich policy to execute.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>

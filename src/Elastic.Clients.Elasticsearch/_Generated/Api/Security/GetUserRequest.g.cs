@@ -50,6 +50,7 @@ public sealed partial class GetUserRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class GetUserRequest : PlainRequest<GetUserRequestParameters>
 {
+	[JsonConstructor]
 	public GetUserRequest()
 	{
 	}
@@ -65,6 +66,14 @@ public sealed partial class GetUserRequest : PlainRequest<GetUserRequestParamete
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "security.get_user";
+
+	/// <summary>
+	/// <para>
+	/// An identifier for the user. You can specify multiple usernames as a comma-separated list. If you omit this parameter, the API retrieves information about all users.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public ICollection<Elastic.Clients.Elasticsearch.Username>? Username { get => P<ICollection<Elastic.Clients.Elasticsearch.Username>?>("username"); set => PO("username", value); }
 
 	/// <summary>
 	/// <para>

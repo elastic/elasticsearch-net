@@ -74,49 +74,46 @@ public sealed partial class NormalizersDescriptor : IsADictionaryDescriptor<Norm
 	public NormalizersDescriptor Lowercase(string normalizerName, LowercaseNormalizer lowercaseNormalizer) => AssignVariant(normalizerName, lowercaseNormalizer);
 }
 
-internal sealed partial class NormalizerInterfaceConverter : JsonConverter<INormalizer>
+internal sealed partial class NormalizerInterfaceConverter : System.Text.Json.Serialization.JsonConverter<INormalizer>
 {
-	public override INormalizer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropDiscriminator = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override INormalizer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var copiedReader = reader;
-		string? type = null;
-		using var jsonDoc = JsonDocument.ParseValue(ref copiedReader);
-		if (jsonDoc is not null && jsonDoc.RootElement.TryGetProperty("type", out var readType) && readType.ValueKind == JsonValueKind.String)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var readerSnapshot = reader;
+		string? discriminator = "custom";
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			type = readType.ToString();
+			if (reader.TryReadProperty(options, PropDiscriminator, ref discriminator, null))
+			{
+				break;
+			}
+
+			reader.Skip();
 		}
 
-		switch (type)
+		reader = readerSnapshot;
+		return discriminator switch
 		{
-			case "custom":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer>(ref reader, options);
-			case "lowercase":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizer>(ref reader, options);
-			default:
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer>(ref reader, options);
-		}
+			"custom" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer>(options, null),
+			"lowercase" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizer>(options, null),
+			_ => throw new System.Text.Json.JsonException($"Variant '{discriminator}' is not supported for type '{nameof(INormalizer)}'.")
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, INormalizer value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, INormalizer value, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (value is null)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
 		switch (value.Type)
 		{
 			case "custom":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer)value, null);
+				break;
 			case "lowercase":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizer)value, null);
+				break;
 			default:
-				var type = value.GetType();
-				JsonSerializer.Serialize(writer, value, type, options);
-				return;
+				throw new System.Text.Json.JsonException($"Variant '{value.Type}' is not supported for type '{nameof(INormalizer)}'.");
 		}
 	}
 }

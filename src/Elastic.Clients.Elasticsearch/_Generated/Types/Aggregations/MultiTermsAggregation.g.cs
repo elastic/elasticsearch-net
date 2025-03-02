@@ -27,6 +27,115 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class MultiTermsAggregationConverter : System.Text.Json.Serialization.JsonConverter<MultiTermsAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCollectMode = System.Text.Json.JsonEncodedText.Encode("collect_mode");
+	private static readonly System.Text.Json.JsonEncodedText PropMinDocCount = System.Text.Json.JsonEncodedText.Encode("min_doc_count");
+	private static readonly System.Text.Json.JsonEncodedText PropOrder = System.Text.Json.JsonEncodedText.Encode("order");
+	private static readonly System.Text.Json.JsonEncodedText PropShardMinDocCount = System.Text.Json.JsonEncodedText.Encode("shard_min_doc_count");
+	private static readonly System.Text.Json.JsonEncodedText PropShardSize = System.Text.Json.JsonEncodedText.Encode("shard_size");
+	private static readonly System.Text.Json.JsonEncodedText PropShowTermDocCountError = System.Text.Json.JsonEncodedText.Encode("show_term_doc_count_error");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropTerms = System.Text.Json.JsonEncodedText.Encode("terms");
+
+	public override MultiTermsAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode?> propCollectMode = default;
+		LocalJsonValue<long?> propMinDocCount = default;
+		LocalJsonValue<ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>?> propOrder = default;
+		LocalJsonValue<long?> propShardMinDocCount = default;
+		LocalJsonValue<int?> propShardSize = default;
+		LocalJsonValue<bool?> propShowTermDocCountError = default;
+		LocalJsonValue<int?> propSize = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup>> propTerms = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCollectMode.TryReadProperty(ref reader, options, PropCollectMode, null))
+			{
+				continue;
+			}
+
+			if (propMinDocCount.TryReadProperty(ref reader, options, PropMinDocCount, null))
+			{
+				continue;
+			}
+
+			if (propOrder.TryReadProperty(ref reader, options, PropOrder, static ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(o, null)))
+			{
+				continue;
+			}
+
+			if (propShardMinDocCount.TryReadProperty(ref reader, options, PropShardMinDocCount, null))
+			{
+				continue;
+			}
+
+			if (propShardSize.TryReadProperty(ref reader, options, PropShardSize, null))
+			{
+				continue;
+			}
+
+			if (propShowTermDocCountError.TryReadProperty(ref reader, options, PropShowTermDocCountError, null))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
+			if (propTerms.TryReadProperty(ref reader, options, PropTerms, static ICollection<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new MultiTermsAggregation
+		{
+			CollectMode = propCollectMode.Value
+,
+			MinDocCount = propMinDocCount.Value
+,
+			Order = propOrder.Value
+,
+			ShardMinDocCount = propShardMinDocCount.Value
+,
+			ShardSize = propShardSize.Value
+,
+			ShowTermDocCountError = propShowTermDocCountError.Value
+,
+			Size = propSize.Value
+,
+			Terms = propTerms.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, MultiTermsAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCollectMode, value.CollectMode, null, null);
+		writer.WriteProperty(options, PropMinDocCount, value.MinDocCount, null, null);
+		writer.WriteProperty(options, PropOrder, value.Order, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? v) => w.WriteSingleOrManyCollectionValue<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(o, v, null));
+		writer.WriteProperty(options, PropShardMinDocCount, value.ShardMinDocCount, null, null);
+		writer.WriteProperty(options, PropShardSize, value.ShardSize, null, null);
+		writer.WriteProperty(options, PropShowTermDocCountError, value.ShowTermDocCountError, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropTerms, value.Terms, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(MultiTermsAggregationConverter))]
 public sealed partial class MultiTermsAggregation
 {
 	/// <summary>
@@ -34,7 +143,6 @@ public sealed partial class MultiTermsAggregation
 	/// Specifies the strategy for data collection.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("collect_mode")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectMode { get; set; }
 
 	/// <summary>
@@ -42,7 +150,6 @@ public sealed partial class MultiTermsAggregation
 	/// The minimum number of documents in a bucket for it to be returned.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("min_doc_count")]
 	public long? MinDocCount { get; set; }
 
 	/// <summary>
@@ -51,8 +158,6 @@ public sealed partial class MultiTermsAggregation
 	/// Defaults to sorting by descending document count.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("order")]
-	[SingleOrManyCollectionConverter(typeof(KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>))]
 	public ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
 
 	/// <summary>
@@ -60,7 +165,6 @@ public sealed partial class MultiTermsAggregation
 	/// The minimum number of documents in a bucket on each shard for it to be returned.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("shard_min_doc_count")]
 	public long? ShardMinDocCount { get; set; }
 
 	/// <summary>
@@ -69,7 +173,6 @@ public sealed partial class MultiTermsAggregation
 	/// By default, <c>shard_size</c> will be automatically estimated based on the number of shards and the <c>size</c> parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("shard_size")]
 	public int? ShardSize { get; set; }
 
 	/// <summary>
@@ -77,7 +180,6 @@ public sealed partial class MultiTermsAggregation
 	/// Calculates the doc count error on per term basis.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("show_term_doc_count_error")]
 	public bool? ShowTermDocCountError { get; set; }
 
 	/// <summary>
@@ -85,7 +187,6 @@ public sealed partial class MultiTermsAggregation
 	/// The number of term buckets should be returned out of the overall terms list.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
@@ -93,7 +194,6 @@ public sealed partial class MultiTermsAggregation
 	/// The field from which to generate sets of terms.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("terms")]
 	public ICollection<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> Terms { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(MultiTermsAggregation multiTermsAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.MultiTerms(multiTermsAggregation);

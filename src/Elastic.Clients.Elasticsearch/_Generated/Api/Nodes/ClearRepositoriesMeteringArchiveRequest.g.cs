@@ -46,6 +46,11 @@ public sealed partial class ClearRepositoriesMeteringArchiveRequest : PlainReque
 	{
 	}
 
+	[JsonConstructor]
+	internal ClearRepositoriesMeteringArchiveRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NodesClearRepositoriesMeteringArchive;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -53,6 +58,23 @@ public sealed partial class ClearRepositoriesMeteringArchiveRequest : PlainReque
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "nodes.clear_repositories_metering_archive";
+
+	/// <summary>
+	/// <para>
+	/// Specifies the maximum <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html#get-repositories-metering-api-response-body">archive_version</a> to be cleared from the archive.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public long MaxArchiveVersion { get => P<long>("max_archive_version"); set => PR("max_archive_version", value); }
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of node IDs or names used to limit returned information.
+	/// All the nodes selective options are explained <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster.html#cluster-nodes">here</a>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.NodeIds NodeId { get => P<Elastic.Clients.Elasticsearch.NodeIds>("node_id"); set => PR("node_id", value); }
 }
 
 /// <summary>

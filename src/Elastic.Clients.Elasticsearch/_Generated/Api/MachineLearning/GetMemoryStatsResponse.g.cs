@@ -22,16 +22,74 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class GetMemoryStatsResponseConverter : System.Text.Json.Serialization.JsonConverter<GetMemoryStatsResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropClusterName = System.Text.Json.JsonEncodedText.Encode("cluster_name");
+	private static readonly System.Text.Json.JsonEncodedText PropNodes = System.Text.Json.JsonEncodedText.Encode("nodes");
+	private static readonly System.Text.Json.JsonEncodedText PropNodeStatistics = System.Text.Json.JsonEncodedText.Encode("_nodes");
+
+	public override GetMemoryStatsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propClusterName = default;
+		LocalJsonValue<IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.Memory>> propNodes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.NodeStatistics> propNodeStatistics = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propClusterName.TryReadProperty(ref reader, options, PropClusterName, null))
+			{
+				continue;
+			}
+
+			if (propNodes.TryReadProperty(ref reader, options, PropNodes, static IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.Memory> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.MachineLearning.Memory>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propNodeStatistics.TryReadProperty(ref reader, options, PropNodeStatistics, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new GetMemoryStatsResponse
+		{
+			ClusterName = propClusterName.Value
+,
+			Nodes = propNodes.Value
+,
+			NodeStatistics = propNodeStatistics.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetMemoryStatsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropClusterName, value.ClusterName, null, null);
+		writer.WriteProperty(options, PropNodes, value.Nodes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.Memory> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.MachineLearning.Memory>(o, v, null, null));
+		writer.WriteProperty(options, PropNodeStatistics, value.NodeStatistics, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(GetMemoryStatsResponseConverter))]
 public sealed partial class GetMemoryStatsResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("cluster_name")]
 	public string ClusterName { get; init; }
-	[JsonInclude, JsonPropertyName("nodes")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.Memory> Nodes { get; init; }
-	[JsonInclude, JsonPropertyName("_nodes")]
 	public Elastic.Clients.Elasticsearch.NodeStatistics NodeStatistics { get; init; }
 }

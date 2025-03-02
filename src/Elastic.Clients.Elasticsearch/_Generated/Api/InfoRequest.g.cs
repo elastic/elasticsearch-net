@@ -42,6 +42,11 @@ public sealed partial class InfoRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class InfoRequest : PlainRequest<InfoRequestParameters>
 {
+	[JsonConstructor]
+	internal InfoRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceInfo;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;

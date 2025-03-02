@@ -104,6 +104,11 @@ public partial class DeleteRequest : PlainRequest<DeleteRequestParameters>
 	{
 	}
 
+	[JsonConstructor]
+	internal DeleteRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceDelete;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -111,6 +116,22 @@ public partial class DeleteRequest : PlainRequest<DeleteRequestParameters>
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "delete";
+
+	/// <summary>
+	/// <para>
+	/// Unique identifier for the document.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
+
+	/// <summary>
+	/// <para>
+	/// Name of the target index.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 
 	/// <summary>
 	/// <para>

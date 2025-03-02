@@ -4,15 +4,22 @@
 
 using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
 [JsonConverter(typeof(DataStreamNameConverter))]
 [DebuggerDisplay("{DebugDisplay,nq}")]
-public sealed class DataStreamName : IEquatable<DataStreamName>, IUrlParameter
+public sealed class DataStreamName :
+	IEquatable<DataStreamName>,
+	IUrlParameter
+#if NET7_0_OR_GREATER
+	, IParsable<DataStreamName>
+#endif
 {
 	internal DataStreamName(string dataStreamName) => Name = dataStreamName;
 
@@ -53,6 +60,26 @@ public sealed class DataStreamName : IEquatable<DataStreamName>, IUrlParameter
 			return (TypeHashCode * 23) ^ (Name.GetHashCode());
 		}
 	}
+
+	#region IParsable
+
+	public static DataStreamName Parse(string s, IFormatProvider? provider) =>
+		TryParse(s, provider, out var result) ? result : throw new FormatException();
+
+	public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider,
+		[NotNullWhen(true)] out DataStreamName? result)
+	{
+		if (s is null)
+		{
+			result = null;
+			return false;
+		}
+
+		result = new DataStreamName(s);
+		return true;
+	}
+
+	#endregion IParsable
 }
 
 internal sealed class DataStreamNameConverter : JsonConverter<DataStreamName>

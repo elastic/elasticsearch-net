@@ -47,6 +47,11 @@ public sealed partial class FollowInfoRequest : PlainRequest<FollowInfoRequestPa
 	{
 	}
 
+	[JsonConstructor]
+	internal FollowInfoRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.CrossClusterReplicationFollowInfo;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
@@ -54,6 +59,14 @@ public sealed partial class FollowInfoRequest : PlainRequest<FollowInfoRequestPa
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ccr.follow_info";
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of index patterns; use <c>_all</c> to perform the operation on all indices
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 }
 
 /// <summary>

@@ -10,7 +10,7 @@
   <ItemGroup>
     <PackageReference Include="Moq" Version="4.18.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="Elastic.Transport" Version="0.5.7" />
+    <PackageReference Include="Elastic.Transport" Version="0.5.8" />
     <PackageReference Include="System.Text.Json" Version="8.0.5" />
   </ItemGroup>
 

@@ -118,6 +118,7 @@ public sealed partial class IndicesStatsRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class IndicesStatsRequest : PlainRequest<IndicesStatsRequestParameters>
 {
+	[JsonConstructor]
 	public IndicesStatsRequest()
 	{
 	}
@@ -141,6 +142,22 @@ public sealed partial class IndicesStatsRequest : PlainRequest<IndicesStatsReque
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.stats";
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of index names; use <c>_all</c> or empty string to perform the operation on all indices
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
+
+	/// <summary>
+	/// <para>
+	/// Limit the information returned the specific metrics.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Metrics? Metric { get => P<Elastic.Clients.Elasticsearch.Metrics?>("metric"); set => PO("metric", value); }
 
 	/// <summary>
 	/// <para>

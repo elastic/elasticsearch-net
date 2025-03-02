@@ -27,49 +27,59 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-internal sealed partial class UnmappedSamplerAggregateConverter : JsonConverter<UnmappedSamplerAggregate>
+internal sealed partial class UnmappedSamplerAggregateConverter : System.Text.Json.Serialization.JsonConverter<UnmappedSamplerAggregate>
 {
-	public override UnmappedSamplerAggregate Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropDocCount = System.Text.Json.JsonEncodedText.Encode("doc_count");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
+
+	public override UnmappedSamplerAggregate Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		long docCount = default;
-		IReadOnlyDictionary<string, object>? meta = default;
-		Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate> additionalProperties = null;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate> propAggregations = default;
+		LocalJsonValue<long> propDocCount = default;
+		LocalJsonValue<IReadOnlyDictionary<string, object>?> propMeta = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propDocCount.TryReadProperty(ref reader, options, PropDocCount, null))
 			{
-				var property = reader.GetString();
-				if (property == "doc_count")
-				{
-					docCount = JsonSerializer.Deserialize<long>(ref reader, options);
-					continue;
-				}
+				continue;
+			}
 
-				if (property == "meta")
-				{
-					meta = JsonSerializer.Deserialize<IReadOnlyDictionary<string, object>?>(ref reader, options);
-					continue;
-				}
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static IReadOnlyDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
 
-				if (property.Contains("#"))
-				{
-					additionalProperties ??= new Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate>();
-					AggregateDictionaryConverter.ReadItem(ref reader, options, additionalProperties, property);
-					continue;
-				}
+			propAggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate>();
+			Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionaryConverter.ReadItem(ref reader, options, out string key, out Elastic.Clients.Elasticsearch.Aggregations.IAggregate value);
+			propAggregations[key] = value;
+		}
 
-				throw new JsonException("Unknown property read from JSON.");
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new UnmappedSamplerAggregate
+		{
+			Aggregations = new Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary(propAggregations)
+,
+			DocCount = propDocCount.Value
+,
+			Meta = propMeta.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, UnmappedSamplerAggregate value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDocCount, value.DocCount, null, null);
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		if (value.Aggregations is not null)
+		{
+			foreach (var item in value.Aggregations)
+			{
+				Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionaryConverter.WriteItem(writer, options, item.Key, item.Value);
 			}
 		}
 
-		return new UnmappedSamplerAggregate { Aggregations = new Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary(additionalProperties), DocCount = docCount, Meta = meta };
-	}
-
-	public override void Write(Utf8JsonWriter writer, UnmappedSamplerAggregate value, JsonSerializerOptions options)
-	{
-		throw new NotImplementedException("'UnmappedSamplerAggregate' is a readonly type, used only on responses and does not support being written to JSON.");
+		writer.WriteEndObject();
 	}
 }
 
@@ -84,4 +94,6 @@ public sealed partial class UnmappedSamplerAggregate : IAggregate
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary Aggregations { get; init; }
 	public long DocCount { get; init; }
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
+
+	string IAggregate.Type => "unmapped_sampler";
 }

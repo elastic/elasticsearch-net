@@ -17,5 +17,5 @@ public partial class ScrollResponse<TDocument>
 	public IReadOnlyCollection<TDocument> Documents => HitsMetadata.Hits.Select(s => s.Source).ToReadOnlyCollection();
 
 	[JsonIgnore]
-	public long Total => HitsMetadata?.Total?.Item1?.Value ?? HitsMetadata?.Total?.Item2 ?? -1;
+	public long Total => HitsMetadata?.Total?.Value1?.Value ?? HitsMetadata?.Total?.Value2 ?? -1;
 }

@@ -76,6 +76,11 @@ public sealed partial class MigrateToDataTiersRequestParameters : RequestParamet
 /// </summary>
 public sealed partial class MigrateToDataTiersRequest : PlainRequest<MigrateToDataTiersRequestParameters>
 {
+	[JsonConstructor]
+	internal MigrateToDataTiersRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexLifecycleManagementMigrateToDataTiers;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

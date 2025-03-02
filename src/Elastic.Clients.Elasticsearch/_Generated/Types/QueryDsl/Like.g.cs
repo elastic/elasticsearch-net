@@ -36,13 +36,52 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 /// </para>
 /// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/query-dsl-mlt-query.html#_document_input_parameters">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
+[JsonConverter(typeof(LikeConverter))]
 public sealed partial class Like : Union<string, Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument>
 {
-	public Like(string Text) : base(Text)
+	public Like(string text) : base(text)
 	{
 	}
 
-	public Like(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument Document) : base(Document)
+	public Like(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument document) : base(document)
 	{
+	}
+
+	public static implicit operator Like(string text) => new Like(text);
+	public static implicit operator Like(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument document) => new Like(document);
+}
+
+internal sealed partial class LikeConverter : System.Text.Json.Serialization.JsonConverter<Like>
+{
+	public override Like Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var selector = static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartObject);
+		return selector(ref reader, options) switch
+		{
+			Elastic.Clients.Elasticsearch.UnionTag.T1 => new Like(reader.ReadValue<string>(options, null)),
+			Elastic.Clients.Elasticsearch.UnionTag.T2 => new Like(reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument>(options, null)),
+			_ => throw new System.InvalidOperationException($"Failed to select a union variant for type '{nameof(Like)}")
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Like value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value.Tag)
+		{
+			case Elastic.Clients.Elasticsearch.UnionTag.T1:
+				{
+					writer.WriteValue(options, value.Value1, null);
+					break;
+				}
+
+			case Elastic.Clients.Elasticsearch.UnionTag.T2:
+				{
+					writer.WriteValue(options, value.Value2, null);
+					break;
+				}
+
+			default:
+				throw new System.InvalidOperationException($"Unrecognized tag value: {value.Tag}");
+		}
 	}
 }

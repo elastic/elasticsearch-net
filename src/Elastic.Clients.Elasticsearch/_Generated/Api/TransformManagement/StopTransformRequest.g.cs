@@ -93,6 +93,11 @@ public sealed partial class StopTransformRequest : PlainRequest<StopTransformReq
 	{
 	}
 
+	[JsonConstructor]
+	internal StopTransformRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.TransformManagementStopTransform;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -100,6 +105,15 @@ public sealed partial class StopTransformRequest : PlainRequest<StopTransformReq
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "transform.stop_transform";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the transform. To stop multiple transforms, use a comma-separated list or a wildcard expression.
+	/// To stop all transforms, use <c>_all</c> or <c>*</c> as the identifier.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name TransformId { get => P<Elastic.Clients.Elasticsearch.Name>("transform_id"); set => PR("transform_id", value); }
 
 	/// <summary>
 	/// <para>

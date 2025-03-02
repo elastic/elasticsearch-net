@@ -116,6 +116,7 @@ public sealed partial class GetTrainedModelsRequestParameters : RequestParameter
 /// </summary>
 public sealed partial class GetTrainedModelsRequest : PlainRequest<GetTrainedModelsRequestParameters>
 {
+	[JsonConstructor]
 	public GetTrainedModelsRequest()
 	{
 	}
@@ -131,6 +132,19 @@ public sealed partial class GetTrainedModelsRequest : PlainRequest<GetTrainedMod
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ml.get_trained_models";
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the trained model or a model alias.
+	/// </para>
+	/// <para>
+	/// You can get information for multiple trained models in a single API
+	/// request by using a comma-separated list of model IDs or a wildcard
+	/// expression.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Ids? ModelId { get => P<Elastic.Clients.Elasticsearch.Ids?>("model_id"); set => PO("model_id", value); }
 
 	/// <summary>
 	/// <para>

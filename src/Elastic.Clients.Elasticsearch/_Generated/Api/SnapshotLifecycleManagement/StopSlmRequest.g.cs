@@ -49,6 +49,11 @@ public sealed partial class StopSlmRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class StopSlmRequest : PlainRequest<StopSlmRequestParameters>
 {
+	[JsonConstructor]
+	internal StopSlmRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotLifecycleManagementStop;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

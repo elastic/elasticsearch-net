@@ -61,6 +61,11 @@ public sealed partial class PutLifecycleRequest : PlainRequest<PutLifecycleReque
 	{
 	}
 
+	[JsonConstructor]
+	internal PutLifecycleRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotLifecycleManagementPutLifecycle;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -68,6 +73,14 @@ public sealed partial class PutLifecycleRequest : PlainRequest<PutLifecycleReque
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "slm.put_lifecycle";
+
+	/// <summary>
+	/// <para>
+	/// The identifier for the snapshot lifecycle policy you want to create or update.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name PolicyId { get => P<Elastic.Clients.Elasticsearch.Name>("policy_id"); set => PR("policy_id", value); }
 
 	/// <summary>
 	/// <para>

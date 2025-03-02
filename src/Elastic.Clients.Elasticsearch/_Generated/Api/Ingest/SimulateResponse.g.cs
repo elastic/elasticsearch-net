@@ -22,12 +22,52 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+internal sealed partial class SimulateResponseConverter : System.Text.Json.Serialization.JsonConverter<SimulateResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDocs = System.Text.Json.JsonEncodedText.Encode("docs");
+
+	public override SimulateResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.SimulateDocumentResult>> propDocs = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDocs.TryReadProperty(ref reader, options, PropDocs, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.SimulateDocumentResult> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Ingest.SimulateDocumentResult>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new SimulateResponse
+		{
+			Docs = propDocs.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, SimulateResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDocs, value.Docs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.SimulateDocumentResult> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.SimulateDocumentResult>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(SimulateResponseConverter))]
 public sealed partial class SimulateResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("docs")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.SimulateDocumentResult> Docs { get; init; }
 }

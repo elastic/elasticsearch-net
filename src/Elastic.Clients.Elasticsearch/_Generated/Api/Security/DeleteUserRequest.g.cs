@@ -54,6 +54,11 @@ public sealed partial class DeleteUserRequest : PlainRequest<DeleteUserRequestPa
 	{
 	}
 
+	[JsonConstructor]
+	internal DeleteUserRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityDeleteUser;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -61,6 +66,14 @@ public sealed partial class DeleteUserRequest : PlainRequest<DeleteUserRequestPa
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "security.delete_user";
+
+	/// <summary>
+	/// <para>
+	/// username
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Username Username { get => P<Elastic.Clients.Elasticsearch.Username>("username"); set => PR("username", value); }
 
 	/// <summary>
 	/// <para>

@@ -22,16 +22,74 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 
+internal sealed partial class PostResponseConverter : System.Text.Json.Serialization.JsonConverter<PostResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAcknowledge = System.Text.Json.JsonEncodedText.Encode("acknowledge");
+	private static readonly System.Text.Json.JsonEncodedText PropAcknowledged = System.Text.Json.JsonEncodedText.Encode("acknowledged");
+	private static readonly System.Text.Json.JsonEncodedText PropLicenseStatus = System.Text.Json.JsonEncodedText.Encode("license_status");
+
+	public override PostResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.LicenseManagement.Acknowledgement?> propAcknowledge = default;
+		LocalJsonValue<bool> propAcknowledged = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus> propLicenseStatus = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAcknowledge.TryReadProperty(ref reader, options, PropAcknowledge, null))
+			{
+				continue;
+			}
+
+			if (propAcknowledged.TryReadProperty(ref reader, options, PropAcknowledged, null))
+			{
+				continue;
+			}
+
+			if (propLicenseStatus.TryReadProperty(ref reader, options, PropLicenseStatus, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new PostResponse
+		{
+			Acknowledge = propAcknowledge.Value
+,
+			Acknowledged = propAcknowledged.Value
+,
+			LicenseStatus = propLicenseStatus.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, PostResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAcknowledge, value.Acknowledge, null, null);
+		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged, null, null);
+		writer.WriteProperty(options, PropLicenseStatus, value.LicenseStatus, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(PostResponseConverter))]
 public sealed partial class PostResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("acknowledge")]
 	public Elastic.Clients.Elasticsearch.LicenseManagement.Acknowledgement? Acknowledge { get; init; }
-	[JsonInclude, JsonPropertyName("acknowledged")]
 	public bool Acknowledged { get; init; }
-	[JsonInclude, JsonPropertyName("license_status")]
 	public Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus LicenseStatus { get; init; }
 }

@@ -22,10 +22,71 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class ClearRepositoriesMeteringArchiveResponseConverter : System.Text.Json.Serialization.JsonConverter<ClearRepositoriesMeteringArchiveResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropClusterName = System.Text.Json.JsonEncodedText.Encode("cluster_name");
+	private static readonly System.Text.Json.JsonEncodedText PropNodes = System.Text.Json.JsonEncodedText.Encode("nodes");
+	private static readonly System.Text.Json.JsonEncodedText PropNodeStats = System.Text.Json.JsonEncodedText.Encode("_nodes");
+
+	public override ClearRepositoriesMeteringArchiveResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propClusterName = default;
+		LocalJsonValue<IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.RepositoryMeteringInformation>> propNodes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.NodeStatistics?> propNodeStats = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propClusterName.TryReadProperty(ref reader, options, PropClusterName, null))
+			{
+				continue;
+			}
+
+			if (propNodes.TryReadProperty(ref reader, options, PropNodes, static IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.RepositoryMeteringInformation> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.RepositoryMeteringInformation>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propNodeStats.TryReadProperty(ref reader, options, PropNodeStats, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new ClearRepositoriesMeteringArchiveResponse
+		{
+			ClusterName = propClusterName.Value
+,
+			Nodes = propNodes.Value
+,
+			NodeStats = propNodeStats.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ClearRepositoriesMeteringArchiveResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropClusterName, value.ClusterName, null, null);
+		writer.WriteProperty(options, PropNodes, value.Nodes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.RepositoryMeteringInformation> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.RepositoryMeteringInformation>(o, v, null, null));
+		writer.WriteProperty(options, PropNodeStats, value.NodeStats, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(ClearRepositoriesMeteringArchiveResponseConverter))]
 public sealed partial class ClearRepositoriesMeteringArchiveResponse : ElasticsearchResponse
 {
 	/// <summary>
@@ -33,7 +94,6 @@ public sealed partial class ClearRepositoriesMeteringArchiveResponse : Elasticse
 	/// Name of the cluster. Based on the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/important-settings.html#cluster-name">Cluster name setting</a>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("cluster_name")]
 	public string ClusterName { get; init; }
 
 	/// <summary>
@@ -41,7 +101,6 @@ public sealed partial class ClearRepositoriesMeteringArchiveResponse : Elasticse
 	/// Contains repositories metering information for the nodes selected by the request.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("nodes")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.RepositoryMeteringInformation> Nodes { get; init; }
 
 	/// <summary>
@@ -49,6 +108,5 @@ public sealed partial class ClearRepositoriesMeteringArchiveResponse : Elasticse
 	/// Contains statistics about the number of nodes selected by the request’s node filters.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_nodes")]
 	public Elastic.Clients.Elasticsearch.NodeStatistics? NodeStats { get; init; }
 }

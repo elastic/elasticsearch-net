@@ -22,10 +22,71 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class QueryRoleResponseConverter : System.Text.Json.Serialization.JsonConverter<QueryRoleResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropRoles = System.Text.Json.JsonEncodedText.Encode("roles");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+
+	public override QueryRoleResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propCount = default;
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.QueryRole>> propRoles = default;
+		LocalJsonValue<int> propTotal = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			{
+				continue;
+			}
+
+			if (propRoles.TryReadProperty(ref reader, options, PropRoles, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.QueryRole> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.QueryRole>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new QueryRoleResponse
+		{
+			Count = propCount.Value
+,
+			Roles = propRoles.Value
+,
+			Total = propTotal.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, QueryRoleResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropRoles, value.Roles, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.QueryRole> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.QueryRole>(o, v, null));
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(QueryRoleResponseConverter))]
 public sealed partial class QueryRoleResponse : ElasticsearchResponse
 {
 	/// <summary>
@@ -33,7 +94,6 @@ public sealed partial class QueryRoleResponse : ElasticsearchResponse
 	/// The number of roles returned in the response.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("count")]
 	public int Count { get; init; }
 
 	/// <summary>
@@ -41,7 +101,6 @@ public sealed partial class QueryRoleResponse : ElasticsearchResponse
 	/// The list of roles.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("roles")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.QueryRole> Roles { get; init; }
 
 	/// <summary>
@@ -49,6 +108,5 @@ public sealed partial class QueryRoleResponse : ElasticsearchResponse
 	/// The total number of roles found.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total")]
 	public int Total { get; init; }
 }

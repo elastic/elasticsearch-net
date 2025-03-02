@@ -22,10 +22,61 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class UpgradeJobSnapshotResponseConverter : System.Text.Json.Serialization.JsonConverter<UpgradeJobSnapshotResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCompleted = System.Text.Json.JsonEncodedText.Encode("completed");
+	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node");
+
+	public override UpgradeJobSnapshotResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propCompleted = default;
+		LocalJsonValue<string> propNode = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCompleted.TryReadProperty(ref reader, options, PropCompleted, null))
+			{
+				continue;
+			}
+
+			if (propNode.TryReadProperty(ref reader, options, PropNode, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new UpgradeJobSnapshotResponse
+		{
+			Completed = propCompleted.Value
+,
+			Node = propNode.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, UpgradeJobSnapshotResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCompleted, value.Completed, null, null);
+		writer.WriteProperty(options, PropNode, value.Node, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(UpgradeJobSnapshotResponseConverter))]
 public sealed partial class UpgradeJobSnapshotResponse : ElasticsearchResponse
 {
 	/// <summary>
@@ -33,7 +84,6 @@ public sealed partial class UpgradeJobSnapshotResponse : ElasticsearchResponse
 	/// When true, this means the task is complete. When false, it is still running.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("completed")]
 	public bool Completed { get; init; }
 
 	/// <summary>
@@ -41,6 +91,5 @@ public sealed partial class UpgradeJobSnapshotResponse : ElasticsearchResponse
 	/// The ID of the node that the upgrade task was started on if it is still running. In serverless this will be the "serverless".
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("node")]
 	public string Node { get; init; }
 }

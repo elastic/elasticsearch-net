@@ -41,6 +41,11 @@ public sealed partial class GetTrialStatusRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class GetTrialStatusRequest : PlainRequest<GetTrialStatusRequestParameters>
 {
+	[JsonConstructor]
+	internal GetTrialStatusRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.LicenseManagementGetTrialStatus;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;

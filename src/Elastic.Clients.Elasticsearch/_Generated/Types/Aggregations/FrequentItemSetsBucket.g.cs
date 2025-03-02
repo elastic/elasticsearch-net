@@ -27,56 +27,69 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-internal sealed partial class FrequentItemSetsBucketConverter : JsonConverter<FrequentItemSetsBucket>
+internal sealed partial class FrequentItemSetsBucketConverter : System.Text.Json.Serialization.JsonConverter<FrequentItemSetsBucket>
 {
-	public override FrequentItemSetsBucket Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropDocCount = System.Text.Json.JsonEncodedText.Encode("doc_count");
+	private static readonly System.Text.Json.JsonEncodedText PropKey = System.Text.Json.JsonEncodedText.Encode("key");
+	private static readonly System.Text.Json.JsonEncodedText PropSupport = System.Text.Json.JsonEncodedText.Encode("support");
+
+	public override FrequentItemSetsBucket Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		long docCount = default;
-		IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<string>> key = default;
-		double support = default;
-		Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate> additionalProperties = null;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate> propAggregations = default;
+		LocalJsonValue<long> propDocCount = default;
+		LocalJsonValue<IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<string>>> propKey = default;
+		LocalJsonValue<double> propSupport = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propDocCount.TryReadProperty(ref reader, options, PropDocCount, null))
 			{
-				var property = reader.GetString();
-				if (property == "doc_count")
-				{
-					docCount = JsonSerializer.Deserialize<long>(ref reader, options);
-					continue;
-				}
+				continue;
+			}
 
-				if (property == "key")
-				{
-					key = JsonSerializer.Deserialize<IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<string>>>(ref reader, options);
-					continue;
-				}
+			if (propKey.TryReadProperty(ref reader, options, PropKey, static IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<string>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<string>>(o, null, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!)!))
+			{
+				continue;
+			}
 
-				if (property == "support")
-				{
-					support = JsonSerializer.Deserialize<double>(ref reader, options);
-					continue;
-				}
+			if (propSupport.TryReadProperty(ref reader, options, PropSupport, null))
+			{
+				continue;
+			}
 
-				if (property.Contains("#"))
-				{
-					additionalProperties ??= new Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate>();
-					AggregateDictionaryConverter.ReadItem(ref reader, options, additionalProperties, property);
-					continue;
-				}
+			propAggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate>();
+			Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionaryConverter.ReadItem(ref reader, options, out string key, out Elastic.Clients.Elasticsearch.Aggregations.IAggregate value);
+			propAggregations[key] = value;
+		}
 
-				throw new JsonException("Unknown property read from JSON.");
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new FrequentItemSetsBucket
+		{
+			Aggregations = new Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary(propAggregations)
+,
+			DocCount = propDocCount.Value
+,
+			Key = propKey.Value
+,
+			Support = propSupport.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, FrequentItemSetsBucket value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDocCount, value.DocCount, null, null);
+		writer.WriteProperty(options, PropKey, value.Key, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<string>> v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<string>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null)));
+		writer.WriteProperty(options, PropSupport, value.Support, null, null);
+		if (value.Aggregations is not null)
+		{
+			foreach (var item in value.Aggregations)
+			{
+				Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionaryConverter.WriteItem(writer, options, item.Key, item.Value);
 			}
 		}
 
-		return new FrequentItemSetsBucket { Aggregations = new Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary(additionalProperties), DocCount = docCount, Key = key, Support = support };
-	}
-
-	public override void Write(Utf8JsonWriter writer, FrequentItemSetsBucket value, JsonSerializerOptions options)
-	{
-		throw new NotImplementedException("'FrequentItemSetsBucket' is a readonly type, used only on responses and does not support being written to JSON.");
+		writer.WriteEndObject();
 	}
 }
 

@@ -27,6 +27,235 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+internal sealed partial class MoreLikeThisQueryConverter : System.Text.Json.Serialization.JsonConverter<MoreLikeThisQuery>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer");
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropBoostTerms = System.Text.Json.JsonEncodedText.Encode("boost_terms");
+	private static readonly System.Text.Json.JsonEncodedText PropFailOnUnsupportedField = System.Text.Json.JsonEncodedText.Encode("fail_on_unsupported_field");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropInclude = System.Text.Json.JsonEncodedText.Encode("include");
+	private static readonly System.Text.Json.JsonEncodedText PropLike = System.Text.Json.JsonEncodedText.Encode("like");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxDocFreq = System.Text.Json.JsonEncodedText.Encode("max_doc_freq");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxQueryTerms = System.Text.Json.JsonEncodedText.Encode("max_query_terms");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxWordLength = System.Text.Json.JsonEncodedText.Encode("max_word_length");
+	private static readonly System.Text.Json.JsonEncodedText PropMinDocFreq = System.Text.Json.JsonEncodedText.Encode("min_doc_freq");
+	private static readonly System.Text.Json.JsonEncodedText PropMinimumShouldMatch = System.Text.Json.JsonEncodedText.Encode("minimum_should_match");
+	private static readonly System.Text.Json.JsonEncodedText PropMinTermFreq = System.Text.Json.JsonEncodedText.Encode("min_term_freq");
+	private static readonly System.Text.Json.JsonEncodedText PropMinWordLength = System.Text.Json.JsonEncodedText.Encode("min_word_length");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing");
+	private static readonly System.Text.Json.JsonEncodedText PropStopWords = System.Text.Json.JsonEncodedText.Encode("stop_words");
+	private static readonly System.Text.Json.JsonEncodedText PropUnlike = System.Text.Json.JsonEncodedText.Encode("unlike");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropVersionType = System.Text.Json.JsonEncodedText.Encode("version_type");
+
+	public override MoreLikeThisQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propAnalyzer = default;
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<double?> propBoostTerms = default;
+		LocalJsonValue<bool?> propFailOnUnsupportedField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propFields = default;
+		LocalJsonValue<bool?> propInclude = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like>> propLike = default;
+		LocalJsonValue<int?> propMaxDocFreq = default;
+		LocalJsonValue<int?> propMaxQueryTerms = default;
+		LocalJsonValue<int?> propMaxWordLength = default;
+		LocalJsonValue<int?> propMinDocFreq = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MinimumShouldMatch?> propMinimumShouldMatch = default;
+		LocalJsonValue<int?> propMinTermFreq = default;
+		LocalJsonValue<int?> propMinWordLength = default;
+		LocalJsonValue<string?> propQueryName = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Routing?> propRouting = default;
+		LocalJsonValue<ICollection<string>?> propStopWords = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like>?> propUnlike = default;
+		LocalJsonValue<long?> propVersion = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.VersionType?> propVersionType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAnalyzer.TryReadProperty(ref reader, options, PropAnalyzer, null))
+			{
+				continue;
+			}
+
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propBoostTerms.TryReadProperty(ref reader, options, PropBoostTerms, null))
+			{
+				continue;
+			}
+
+			if (propFailOnUnsupportedField.TryReadProperty(ref reader, options, PropFailOnUnsupportedField, null))
+			{
+				continue;
+			}
+
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(SingleOrManyFieldsMarker))))
+			{
+				continue;
+			}
+
+			if (propInclude.TryReadProperty(ref reader, options, PropInclude, null))
+			{
+				continue;
+			}
+
+			if (propLike.TryReadProperty(ref reader, options, PropLike, static ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Like>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propMaxDocFreq.TryReadProperty(ref reader, options, PropMaxDocFreq, null))
+			{
+				continue;
+			}
+
+			if (propMaxQueryTerms.TryReadProperty(ref reader, options, PropMaxQueryTerms, null))
+			{
+				continue;
+			}
+
+			if (propMaxWordLength.TryReadProperty(ref reader, options, PropMaxWordLength, null))
+			{
+				continue;
+			}
+
+			if (propMinDocFreq.TryReadProperty(ref reader, options, PropMinDocFreq, null))
+			{
+				continue;
+			}
+
+			if (propMinimumShouldMatch.TryReadProperty(ref reader, options, PropMinimumShouldMatch, null))
+			{
+				continue;
+			}
+
+			if (propMinTermFreq.TryReadProperty(ref reader, options, PropMinTermFreq, null))
+			{
+				continue;
+			}
+
+			if (propMinWordLength.TryReadProperty(ref reader, options, PropMinWordLength, null))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
+			{
+				continue;
+			}
+
+			if (propRouting.TryReadProperty(ref reader, options, PropRouting, null))
+			{
+				continue;
+			}
+
+			if (propStopWords.TryReadProperty(ref reader, options, PropStopWords, static ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propUnlike.TryReadProperty(ref reader, options, PropUnlike, static ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Like>(o, null)))
+			{
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (propVersionType.TryReadProperty(ref reader, options, PropVersionType, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new MoreLikeThisQuery
+		{
+			Analyzer = propAnalyzer.Value
+,
+			Boost = propBoost.Value
+,
+			BoostTerms = propBoostTerms.Value
+,
+			FailOnUnsupportedField = propFailOnUnsupportedField.Value
+,
+			Fields = propFields.Value
+,
+			Include = propInclude.Value
+,
+			Like = propLike.Value
+,
+			MaxDocFreq = propMaxDocFreq.Value
+,
+			MaxQueryTerms = propMaxQueryTerms.Value
+,
+			MaxWordLength = propMaxWordLength.Value
+,
+			MinDocFreq = propMinDocFreq.Value
+,
+			MinimumShouldMatch = propMinimumShouldMatch.Value
+,
+			MinTermFreq = propMinTermFreq.Value
+,
+			MinWordLength = propMinWordLength.Value
+,
+			QueryName = propQueryName.Value
+,
+			Routing = propRouting.Value
+,
+			StopWords = propStopWords.Value
+,
+			Unlike = propUnlike.Value
+,
+			Version = propVersion.Value
+,
+			VersionType = propVersionType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, MoreLikeThisQuery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAnalyzer, value.Analyzer, null, null);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropBoostTerms, value.BoostTerms, null, null);
+		writer.WriteProperty(options, PropFailOnUnsupportedField, value.FailOnUnsupportedField, null, null);
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropInclude, value.Include, null, null);
+		writer.WriteProperty(options, PropLike, value.Like, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Like>(o, v, null));
+		writer.WriteProperty(options, PropMaxDocFreq, value.MaxDocFreq, null, null);
+		writer.WriteProperty(options, PropMaxQueryTerms, value.MaxQueryTerms, null, null);
+		writer.WriteProperty(options, PropMaxWordLength, value.MaxWordLength, null, null);
+		writer.WriteProperty(options, PropMinDocFreq, value.MinDocFreq, null, null);
+		writer.WriteProperty(options, PropMinimumShouldMatch, value.MinimumShouldMatch, null, null);
+		writer.WriteProperty(options, PropMinTermFreq, value.MinTermFreq, null, null);
+		writer.WriteProperty(options, PropMinWordLength, value.MinWordLength, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
+		writer.WriteProperty(options, PropStopWords, value.StopWords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropUnlike, value.Unlike, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Like>(o, v, null));
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteProperty(options, PropVersionType, value.VersionType, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(MoreLikeThisQueryConverter))]
 public sealed partial class MoreLikeThisQuery
 {
 	/// <summary>
@@ -35,7 +264,6 @@ public sealed partial class MoreLikeThisQuery
 	/// Defaults to the analyzer associated with the first field in fields.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
 
 	/// <summary>
@@ -46,7 +274,6 @@ public sealed partial class MoreLikeThisQuery
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
@@ -56,7 +283,6 @@ public sealed partial class MoreLikeThisQuery
 	/// Defaults to deactivated (0).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boost_terms")]
 	public double? BoostTerms { get; set; }
 
 	/// <summary>
@@ -64,7 +290,6 @@ public sealed partial class MoreLikeThisQuery
 	/// Controls whether the query should fail (throw an exception) if any of the specified fields are not of the supported types (<c>text</c> or <c>keyword</c>).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fail_on_unsupported_field")]
 	public bool? FailOnUnsupportedField { get; set; }
 
 	/// <summary>
@@ -73,8 +298,6 @@ public sealed partial class MoreLikeThisQuery
 	/// Defaults to the <c>index.query.default_field</c> index setting, which has a default value of <c>*</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fields")]
-	[JsonConverter(typeof(FieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
 	/// <summary>
@@ -82,7 +305,6 @@ public sealed partial class MoreLikeThisQuery
 	/// Specifies whether the input documents should also be included in the search results returned.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("include")]
 	public bool? Include { get; set; }
 
 	/// <summary>
@@ -90,8 +312,6 @@ public sealed partial class MoreLikeThisQuery
 	/// Specifies free form text and/or a single or multiple documents for which you want to find similar documents.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("like")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Like))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like> Like { get; set; }
 
 	/// <summary>
@@ -99,7 +319,6 @@ public sealed partial class MoreLikeThisQuery
 	/// The maximum document frequency above which the terms are ignored from the input document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_doc_freq")]
 	public int? MaxDocFreq { get; set; }
 
 	/// <summary>
@@ -107,7 +326,6 @@ public sealed partial class MoreLikeThisQuery
 	/// The maximum number of query terms that can be selected.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_query_terms")]
 	public int? MaxQueryTerms { get; set; }
 
 	/// <summary>
@@ -116,7 +334,6 @@ public sealed partial class MoreLikeThisQuery
 	/// Defaults to unbounded (<c>0</c>).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_word_length")]
 	public int? MaxWordLength { get; set; }
 
 	/// <summary>
@@ -124,7 +341,6 @@ public sealed partial class MoreLikeThisQuery
 	/// The minimum document frequency below which the terms are ignored from the input document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("min_doc_freq")]
 	public int? MinDocFreq { get; set; }
 
 	/// <summary>
@@ -132,7 +348,6 @@ public sealed partial class MoreLikeThisQuery
 	/// After the disjunctive query has been formed, this parameter controls the number of terms that must match.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("minimum_should_match")]
 	public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
 	/// <summary>
@@ -140,7 +355,6 @@ public sealed partial class MoreLikeThisQuery
 	/// The minimum term frequency below which the terms are ignored from the input document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("min_term_freq")]
 	public int? MinTermFreq { get; set; }
 
 	/// <summary>
@@ -148,11 +362,8 @@ public sealed partial class MoreLikeThisQuery
 	/// The minimum word length below which the terms are ignored.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("min_word_length")]
 	public int? MinWordLength { get; set; }
-	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
-	[JsonInclude, JsonPropertyName("routing")]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
 	/// <summary>
@@ -161,8 +372,6 @@ public sealed partial class MoreLikeThisQuery
 	/// Any word in this set is ignored.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("stop_words")]
-	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? StopWords { get; set; }
 
 	/// <summary>
@@ -170,12 +379,8 @@ public sealed partial class MoreLikeThisQuery
 	/// Used in combination with <c>like</c> to exclude documents that match a set of terms.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("unlike")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Like))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like>? Unlike { get; set; }
-	[JsonInclude, JsonPropertyName("version")]
 	public long? Version { get; set; }
-	[JsonInclude, JsonPropertyName("version_type")]
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(MoreLikeThisQuery moreLikeThisQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.MoreLikeThis(moreLikeThisQuery);

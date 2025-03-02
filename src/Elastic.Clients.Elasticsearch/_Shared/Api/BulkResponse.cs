@@ -2,6 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using System.Text;
@@ -10,11 +11,10 @@ using Elastic.Clients.Elasticsearch.Core.Bulk;
 
 namespace Elastic.Clients.Elasticsearch;
 
+// TODO: BulkRequest requires refactoring prior to 9.x release
+
 public partial class BulkResponse
 {
-	[JsonConverter(typeof(BulkResponseItemConverter)), JsonPropertyName("items")]
-	public IReadOnlyList<ResponseItem> Items { get; init; }
-
 	[JsonIgnore]
 	public IEnumerable<ResponseItem> ItemsWithErrors => !Items.HasAny()
 		? Enumerable.Empty<ResponseItem>()

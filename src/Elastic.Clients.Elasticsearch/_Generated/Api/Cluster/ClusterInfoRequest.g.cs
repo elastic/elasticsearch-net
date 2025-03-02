@@ -46,6 +46,11 @@ public sealed partial class ClusterInfoRequest : PlainRequest<ClusterInfoRequest
 	{
 	}
 
+	[JsonConstructor]
+	internal ClusterInfoRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.ClusterInfo;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
@@ -53,6 +58,14 @@ public sealed partial class ClusterInfoRequest : PlainRequest<ClusterInfoRequest
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "cluster.info";
+
+	/// <summary>
+	/// <para>
+	/// Limits the information returned to the specific target. Supports a comma-separated list, such as http,ingest.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public ICollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget> Target { get => P<ICollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget>>("target"); set => PR("target", value); }
 }
 
 /// <summary>

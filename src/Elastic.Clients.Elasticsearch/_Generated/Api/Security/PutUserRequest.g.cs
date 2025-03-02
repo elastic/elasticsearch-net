@@ -55,6 +55,11 @@ public sealed partial class PutUserRequest : PlainRequest<PutUserRequestParamete
 	{
 	}
 
+	[JsonConstructor]
+	internal PutUserRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityPutUser;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;

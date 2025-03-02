@@ -46,6 +46,11 @@ public sealed partial class PutSynonymRuleRequest : PlainRequest<PutSynonymRuleR
 	{
 	}
 
+	[JsonConstructor]
+	internal PutSynonymRuleRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SynonymsPutSynonymRule;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -54,6 +59,21 @@ public sealed partial class PutSynonymRuleRequest : PlainRequest<PutSynonymRuleR
 
 	internal override string OperationName => "synonyms.put_synonym_rule";
 
+	/// <summary>
+	/// <para>
+	/// The id of the synonym rule to be updated or created
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id RuleId { get => P<Elastic.Clients.Elasticsearch.Id>("rule_id"); set => PR("rule_id", value); }
+
+	/// <summary>
+	/// <para>
+	/// The id of the synonym set to be updated with the synonym rule
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id SetId { get => P<Elastic.Clients.Elasticsearch.Id>("set_id"); set => PR("set_id", value); }
 	[JsonInclude, JsonPropertyName("synonyms")]
 	public string Synonyms { get; set; }
 }

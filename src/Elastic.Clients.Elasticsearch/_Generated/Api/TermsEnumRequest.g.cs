@@ -56,6 +56,11 @@ public sealed partial class TermsEnumRequest : PlainRequest<TermsEnumRequestPara
 	{
 	}
 
+	[JsonConstructor]
+	internal TermsEnumRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceTermsEnum;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -63,6 +68,14 @@ public sealed partial class TermsEnumRequest : PlainRequest<TermsEnumRequestPara
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "terms_enum";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and index aliases to search. Wildcard (*) expressions are supported.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 
 	/// <summary>
 	/// <para>

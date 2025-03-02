@@ -83,6 +83,7 @@ public sealed partial class HealthReportRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class HealthReportRequest : PlainRequest<HealthReportRequestParameters>
 {
+	[JsonConstructor]
 	public HealthReportRequest()
 	{
 	}
@@ -98,6 +99,14 @@ public sealed partial class HealthReportRequest : PlainRequest<HealthReportReque
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "health_report";
+
+	/// <summary>
+	/// <para>
+	/// A feature of the cluster, as returned by the top-level health report API.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public ICollection<string>? Feature { get => P<ICollection<string>?>("feature"); set => PO("feature", value); }
 
 	/// <summary>
 	/// <para>

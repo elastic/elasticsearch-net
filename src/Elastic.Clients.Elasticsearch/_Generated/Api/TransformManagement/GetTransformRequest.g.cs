@@ -92,6 +92,7 @@ public sealed partial class GetTransformRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class GetTransformRequest : PlainRequest<GetTransformRequestParameters>
 {
+	[JsonConstructor]
 	public GetTransformRequest()
 	{
 	}
@@ -107,6 +108,17 @@ public sealed partial class GetTransformRequest : PlainRequest<GetTransformReque
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "transform.get_transform";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the transform. It can be a transform identifier or a
+	/// wildcard expression. You can get information for all transforms by using
+	/// <c>_all</c>, by specifying <c>*</c> as the <c>&lt;transform_id></c>, or by omitting the
+	/// <c>&lt;transform_id></c>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Names? TransformId { get => P<Elastic.Clients.Elasticsearch.Names?>("transform_id"); set => PO("transform_id", value); }
 
 	/// <summary>
 	/// <para>

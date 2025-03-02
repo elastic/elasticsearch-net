@@ -27,70 +27,89 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-internal sealed partial class SignificantLongTermsBucketConverter : JsonConverter<SignificantLongTermsBucket>
+internal sealed partial class SignificantLongTermsBucketConverter : System.Text.Json.Serialization.JsonConverter<SignificantLongTermsBucket>
 {
-	public override SignificantLongTermsBucket Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropBgCount = System.Text.Json.JsonEncodedText.Encode("bg_count");
+	private static readonly System.Text.Json.JsonEncodedText PropDocCount = System.Text.Json.JsonEncodedText.Encode("doc_count");
+	private static readonly System.Text.Json.JsonEncodedText PropKey = System.Text.Json.JsonEncodedText.Encode("key");
+	private static readonly System.Text.Json.JsonEncodedText PropKeyAsString = System.Text.Json.JsonEncodedText.Encode("key_as_string");
+	private static readonly System.Text.Json.JsonEncodedText PropScore = System.Text.Json.JsonEncodedText.Encode("score");
+
+	public override SignificantLongTermsBucket Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		long bgCount = default;
-		long docCount = default;
-		long key = default;
-		string? keyAsString = default;
-		double score = default;
-		Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate> additionalProperties = null;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate> propAggregations = default;
+		LocalJsonValue<long> propBgCount = default;
+		LocalJsonValue<long> propDocCount = default;
+		LocalJsonValue<long> propKey = default;
+		LocalJsonValue<string?> propKeyAsString = default;
+		LocalJsonValue<double> propScore = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propBgCount.TryReadProperty(ref reader, options, PropBgCount, null))
 			{
-				var property = reader.GetString();
-				if (property == "bg_count")
-				{
-					bgCount = JsonSerializer.Deserialize<long>(ref reader, options);
-					continue;
-				}
+				continue;
+			}
 
-				if (property == "doc_count")
-				{
-					docCount = JsonSerializer.Deserialize<long>(ref reader, options);
-					continue;
-				}
+			if (propDocCount.TryReadProperty(ref reader, options, PropDocCount, null))
+			{
+				continue;
+			}
 
-				if (property == "key")
-				{
-					key = JsonSerializer.Deserialize<long>(ref reader, options);
-					continue;
-				}
+			if (propKey.TryReadProperty(ref reader, options, PropKey, null))
+			{
+				continue;
+			}
 
-				if (property == "key_as_string")
-				{
-					keyAsString = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
+			if (propKeyAsString.TryReadProperty(ref reader, options, PropKeyAsString, null))
+			{
+				continue;
+			}
 
-				if (property == "score")
-				{
-					score = JsonSerializer.Deserialize<double>(ref reader, options);
-					continue;
-				}
+			if (propScore.TryReadProperty(ref reader, options, PropScore, null))
+			{
+				continue;
+			}
 
-				if (property.Contains("#"))
-				{
-					additionalProperties ??= new Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate>();
-					AggregateDictionaryConverter.ReadItem(ref reader, options, additionalProperties, property);
-					continue;
-				}
+			propAggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate>();
+			Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionaryConverter.ReadItem(ref reader, options, out string key, out Elastic.Clients.Elasticsearch.Aggregations.IAggregate value);
+			propAggregations[key] = value;
+		}
 
-				throw new JsonException("Unknown property read from JSON.");
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new SignificantLongTermsBucket
+		{
+			Aggregations = new Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary(propAggregations)
+,
+			BgCount = propBgCount.Value
+,
+			DocCount = propDocCount.Value
+,
+			Key = propKey.Value
+,
+			KeyAsString = propKeyAsString.Value
+,
+			Score = propScore.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, SignificantLongTermsBucket value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBgCount, value.BgCount, null, null);
+		writer.WriteProperty(options, PropDocCount, value.DocCount, null, null);
+		writer.WriteProperty(options, PropKey, value.Key, null, null);
+		writer.WriteProperty(options, PropKeyAsString, value.KeyAsString, null, null);
+		writer.WriteProperty(options, PropScore, value.Score, null, null);
+		if (value.Aggregations is not null)
+		{
+			foreach (var item in value.Aggregations)
+			{
+				Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionaryConverter.WriteItem(writer, options, item.Key, item.Value);
 			}
 		}
 
-		return new SignificantLongTermsBucket { Aggregations = new Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary(additionalProperties), BgCount = bgCount, DocCount = docCount, Key = key, KeyAsString = keyAsString, Score = score };
-	}
-
-	public override void Write(Utf8JsonWriter writer, SignificantLongTermsBucket value, JsonSerializerOptions options)
-	{
-		throw new NotImplementedException("'SignificantLongTermsBucket' is a readonly type, used only on responses and does not support being written to JSON.");
+		writer.WriteEndObject();
 	}
 }
 

@@ -60,6 +60,11 @@ public sealed partial class GetTasksRequest : PlainRequest<GetTasksRequestParame
 	{
 	}
 
+	[JsonConstructor]
+	internal GetTasksRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.TasksGet;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
@@ -67,6 +72,14 @@ public sealed partial class GetTasksRequest : PlainRequest<GetTasksRequestParame
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "tasks.get";
+
+	/// <summary>
+	/// <para>
+	/// ID of the task.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id TaskId { get => P<Elastic.Clients.Elasticsearch.Id>("task_id"); set => PR("task_id", value); }
 
 	/// <summary>
 	/// <para>

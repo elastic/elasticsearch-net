@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-public sealed partial class DateDistanceFeatureQuery
+public sealed partial class DateDistanceFeatureQuery : IDistanceFeatureQuery
 {
 	/// <summary>
 	/// <para>
@@ -72,6 +72,9 @@ public sealed partial class DateDistanceFeatureQuery
 	public Elastic.Clients.Elasticsearch.Duration Pivot { get; set; }
 	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
+
+	[JsonInclude, JsonPropertyName("")]
+	public string Type => "datedistancefeaturequery";
 }
 
 public sealed partial class DateDistanceFeatureQueryDescriptor<TDocument> : SerializableDescriptor<DateDistanceFeatureQueryDescriptor<TDocument>>

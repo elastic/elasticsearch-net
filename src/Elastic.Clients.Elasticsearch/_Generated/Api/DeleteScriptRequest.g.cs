@@ -61,6 +61,11 @@ public sealed partial class DeleteScriptRequest : PlainRequest<DeleteScriptReque
 	{
 	}
 
+	[JsonConstructor]
+	internal DeleteScriptRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceDeleteScript;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -68,6 +73,14 @@ public sealed partial class DeleteScriptRequest : PlainRequest<DeleteScriptReque
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "delete_script";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the stored script or search template.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
 	/// <summary>
 	/// <para>

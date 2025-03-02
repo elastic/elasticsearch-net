@@ -33,4 +33,6 @@ public sealed partial class PercentilesBucketAggregate : IAggregate
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 	[JsonInclude, JsonPropertyName("values")]
 	public Elastic.Clients.Elasticsearch.Aggregations.Percentiles Values { get; init; }
+
+	string IAggregate.Type => "percentiles_bucket";
 }

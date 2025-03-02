@@ -22,16 +22,74 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class ResolveIndexResponseConverter : System.Text.Json.Serialization.JsonConverter<ResolveIndexResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAliases = System.Text.Json.JsonEncodedText.Encode("aliases");
+	private static readonly System.Text.Json.JsonEncodedText PropDataStreams = System.Text.Json.JsonEncodedText.Encode("data_streams");
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
+
+	public override ResolveIndexResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexAliasItem>> propAliases = default;
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexDataStreamsItem>> propDataStreams = default;
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexItem>> propIndices = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAliases.TryReadProperty(ref reader, options, PropAliases, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexAliasItem> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexAliasItem>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propDataStreams.TryReadProperty(ref reader, options, PropDataStreams, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexDataStreamsItem> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexDataStreamsItem>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexItem> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexItem>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new ResolveIndexResponse
+		{
+			Aliases = propAliases.Value
+,
+			DataStreams = propDataStreams.Value
+,
+			Indices = propIndices.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ResolveIndexResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAliases, value.Aliases, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexAliasItem> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexAliasItem>(o, v, null));
+		writer.WriteProperty(options, PropDataStreams, value.DataStreams, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexDataStreamsItem> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexDataStreamsItem>(o, v, null));
+		writer.WriteProperty(options, PropIndices, value.Indices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexItem> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexItem>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(ResolveIndexResponseConverter))]
 public sealed partial class ResolveIndexResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("aliases")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexAliasItem> Aliases { get; init; }
-	[JsonInclude, JsonPropertyName("data_streams")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexDataStreamsItem> DataStreams { get; init; }
-	[JsonInclude, JsonPropertyName("indices")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexItem> Indices { get; init; }
 }

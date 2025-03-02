@@ -48,6 +48,11 @@ public sealed partial class QueryRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 {
+	[JsonConstructor]
+	internal QueryRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SqlQuery;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

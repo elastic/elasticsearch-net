@@ -22,12 +22,52 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
+internal sealed partial class FollowInfoResponseConverter : System.Text.Json.Serialization.JsonConverter<FollowInfoResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFollowerIndices = System.Text.Json.JsonEncodedText.Encode("follower_indices");
+
+	public override FollowInfoResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndex>> propFollowerIndices = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFollowerIndices.TryReadProperty(ref reader, options, PropFollowerIndices, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndex> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndex>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new FollowInfoResponse
+		{
+			FollowerIndices = propFollowerIndices.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, FollowInfoResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFollowerIndices, value.FollowerIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndex> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndex>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(FollowInfoResponseConverter))]
 public sealed partial class FollowInfoResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("follower_indices")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndex> FollowerIndices { get; init; }
 }

@@ -318,289 +318,238 @@ public sealed partial class PropertiesDescriptor<TDocument> : IsADictionaryDescr
 	public PropertiesDescriptor<TDocument> Wildcard(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor<TDocument>, WildcardProperty>(propertyName, configure);
 }
 
-internal sealed partial class PropertyInterfaceConverter : JsonConverter<IProperty>
+internal sealed partial class PropertyInterfaceConverter : System.Text.Json.Serialization.JsonConverter<IProperty>
 {
-	public override IProperty Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropDiscriminator = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override IProperty Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var copiedReader = reader;
-		string? type = null;
-		using var jsonDoc = JsonDocument.ParseValue(ref copiedReader);
-		if (jsonDoc is not null && jsonDoc.RootElement.TryGetProperty("type", out var readType) && readType.ValueKind == JsonValueKind.String)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var readerSnapshot = reader;
+		string? discriminator = "object";
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			type = readType.ToString();
+			if (reader.TryReadProperty(options, PropDiscriminator, ref discriminator, null))
+			{
+				break;
+			}
+
+			reader.Skip();
 		}
 
-		switch (type)
+		reader = readerSnapshot;
+		return discriminator switch
 		{
-			case "aggregate_metric_double":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoubleProperty>(ref reader, options);
-			case "binary":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.BinaryProperty>(ref reader, options);
-			case "boolean":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.BooleanProperty>(ref reader, options);
-			case "byte":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.ByteNumberProperty>(ref reader, options);
-			case "completion":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.CompletionProperty>(ref reader, options);
-			case "constant_keyword":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty>(ref reader, options);
-			case "date_nanos":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.DateNanosProperty>(ref reader, options);
-			case "date":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.DateProperty>(ref reader, options);
-			case "date_range":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.DateRangeProperty>(ref reader, options);
-			case "dense_vector":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty>(ref reader, options);
-			case "double":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.DoubleNumberProperty>(ref reader, options);
-			case "double_range":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.DoubleRangeProperty>(ref reader, options);
-			case "{dynamic_type}":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.DynamicProperty>(ref reader, options);
-			case "alias":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.FieldAliasProperty>(ref reader, options);
-			case "flattened":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty>(ref reader, options);
-			case "float":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.FloatNumberProperty>(ref reader, options);
-			case "float_range":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.FloatRangeProperty>(ref reader, options);
-			case "geo_point":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.GeoPointProperty>(ref reader, options);
-			case "geo_shape":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty>(ref reader, options);
-			case "half_float":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberProperty>(ref reader, options);
-			case "histogram":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.HistogramProperty>(ref reader, options);
-			case "icu_collation_keyword":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty>(ref reader, options);
-			case "integer":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty>(ref reader, options);
-			case "integer_range":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.IntegerRangeProperty>(ref reader, options);
-			case "ip":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.IpProperty>(ref reader, options);
-			case "ip_range":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.IpRangeProperty>(ref reader, options);
-			case "join":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.JoinProperty>(ref reader, options);
-			case "keyword":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.KeywordProperty>(ref reader, options);
-			case "long":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.LongNumberProperty>(ref reader, options);
-			case "long_range":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.LongRangeProperty>(ref reader, options);
-			case "match_only_text":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty>(ref reader, options);
-			case "murmur3":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.Murmur3HashProperty>(ref reader, options);
-			case "nested":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.NestedProperty>(ref reader, options);
-			case "object":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.ObjectProperty>(ref reader, options);
-			case "passthrough":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectProperty>(ref reader, options);
-			case "percolator":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.PercolatorProperty>(ref reader, options);
-			case "point":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.PointProperty>(ref reader, options);
-			case "rank_feature":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty>(ref reader, options);
-			case "rank_features":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.RankFeaturesProperty>(ref reader, options);
-			case "scaled_float":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty>(ref reader, options);
-			case "search_as_you_type":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypeProperty>(ref reader, options);
-			case "semantic_text":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty>(ref reader, options);
-			case "shape":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.ShapeProperty>(ref reader, options);
-			case "short":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.ShortNumberProperty>(ref reader, options);
-			case "sparse_vector":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.SparseVectorProperty>(ref reader, options);
-			case "text":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.TextProperty>(ref reader, options);
-			case "token_count":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.TokenCountProperty>(ref reader, options);
-			case "unsigned_long":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberProperty>(ref reader, options);
-			case "version":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.VersionProperty>(ref reader, options);
-			case "wildcard":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.WildcardProperty>(ref reader, options);
-			default:
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.ObjectProperty>(ref reader, options);
-		}
+			"aggregate_metric_double" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoubleProperty>(options, null),
+			"binary" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.BinaryProperty>(options, null),
+			"boolean" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.BooleanProperty>(options, null),
+			"byte" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.ByteNumberProperty>(options, null),
+			"completion" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.CompletionProperty>(options, null),
+			"constant_keyword" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty>(options, null),
+			"date_nanos" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.DateNanosProperty>(options, null),
+			"date" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.DateProperty>(options, null),
+			"date_range" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.DateRangeProperty>(options, null),
+			"dense_vector" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty>(options, null),
+			"double" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.DoubleNumberProperty>(options, null),
+			"double_range" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.DoubleRangeProperty>(options, null),
+			"{dynamic_type}" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.DynamicProperty>(options, null),
+			"alias" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.FieldAliasProperty>(options, null),
+			"flattened" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty>(options, null),
+			"float" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.FloatNumberProperty>(options, null),
+			"float_range" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.FloatRangeProperty>(options, null),
+			"geo_point" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.GeoPointProperty>(options, null),
+			"geo_shape" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty>(options, null),
+			"half_float" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberProperty>(options, null),
+			"histogram" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.HistogramProperty>(options, null),
+			"icu_collation_keyword" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty>(options, null),
+			"integer" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty>(options, null),
+			"integer_range" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.IntegerRangeProperty>(options, null),
+			"ip" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.IpProperty>(options, null),
+			"ip_range" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.IpRangeProperty>(options, null),
+			"join" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.JoinProperty>(options, null),
+			"keyword" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.KeywordProperty>(options, null),
+			"long" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.LongNumberProperty>(options, null),
+			"long_range" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.LongRangeProperty>(options, null),
+			"match_only_text" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty>(options, null),
+			"murmur3" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.Murmur3HashProperty>(options, null),
+			"nested" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.NestedProperty>(options, null),
+			"object" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.ObjectProperty>(options, null),
+			"passthrough" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectProperty>(options, null),
+			"percolator" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.PercolatorProperty>(options, null),
+			"point" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.PointProperty>(options, null),
+			"rank_feature" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty>(options, null),
+			"rank_features" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.RankFeaturesProperty>(options, null),
+			"scaled_float" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty>(options, null),
+			"search_as_you_type" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypeProperty>(options, null),
+			"semantic_text" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty>(options, null),
+			"shape" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.ShapeProperty>(options, null),
+			"short" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.ShortNumberProperty>(options, null),
+			"sparse_vector" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.SparseVectorProperty>(options, null),
+			"text" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.TextProperty>(options, null),
+			"token_count" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.TokenCountProperty>(options, null),
+			"unsigned_long" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberProperty>(options, null),
+			"version" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.VersionProperty>(options, null),
+			"wildcard" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.WildcardProperty>(options, null),
+			_ => throw new System.Text.Json.JsonException($"Variant '{discriminator}' is not supported for type '{nameof(IProperty)}'.")
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, IProperty value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, IProperty value, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (value is null)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
 		switch (value.Type)
 		{
 			case "aggregate_metric_double":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoubleProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoubleProperty)value, null);
+				break;
 			case "binary":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.BinaryProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.BinaryProperty)value, null);
+				break;
 			case "boolean":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.BooleanProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.BooleanProperty)value, null);
+				break;
 			case "byte":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.ByteNumberProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.ByteNumberProperty)value, null);
+				break;
 			case "completion":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.CompletionProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.CompletionProperty)value, null);
+				break;
 			case "constant_keyword":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty)value, null);
+				break;
 			case "date_nanos":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.DateNanosProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.DateNanosProperty)value, null);
+				break;
 			case "date":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.DateProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.DateProperty)value, null);
+				break;
 			case "date_range":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.DateRangeProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.DateRangeProperty)value, null);
+				break;
 			case "dense_vector":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty)value, null);
+				break;
 			case "double":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.DoubleNumberProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.DoubleNumberProperty)value, null);
+				break;
 			case "double_range":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.DoubleRangeProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.DoubleRangeProperty)value, null);
+				break;
 			case "{dynamic_type}":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.DynamicProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.DynamicProperty)value, null);
+				break;
 			case "alias":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.FieldAliasProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.FieldAliasProperty)value, null);
+				break;
 			case "flattened":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty)value, null);
+				break;
 			case "float":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.FloatNumberProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.FloatNumberProperty)value, null);
+				break;
 			case "float_range":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.FloatRangeProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.FloatRangeProperty)value, null);
+				break;
 			case "geo_point":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.GeoPointProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.GeoPointProperty)value, null);
+				break;
 			case "geo_shape":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty)value, null);
+				break;
 			case "half_float":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberProperty)value, null);
+				break;
 			case "histogram":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.HistogramProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.HistogramProperty)value, null);
+				break;
 			case "icu_collation_keyword":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty)value, null);
+				break;
 			case "integer":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty)value, null);
+				break;
 			case "integer_range":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.IntegerRangeProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.IntegerRangeProperty)value, null);
+				break;
 			case "ip":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.IpProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.IpProperty)value, null);
+				break;
 			case "ip_range":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.IpRangeProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.IpRangeProperty)value, null);
+				break;
 			case "join":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.JoinProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.JoinProperty)value, null);
+				break;
 			case "keyword":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.KeywordProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.KeywordProperty)value, null);
+				break;
 			case "long":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.LongNumberProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.LongNumberProperty)value, null);
+				break;
 			case "long_range":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.LongRangeProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.LongRangeProperty)value, null);
+				break;
 			case "match_only_text":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty)value, null);
+				break;
 			case "murmur3":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.Murmur3HashProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.Murmur3HashProperty)value, null);
+				break;
 			case "nested":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.NestedProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.NestedProperty)value, null);
+				break;
 			case "object":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.ObjectProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.ObjectProperty)value, null);
+				break;
 			case "passthrough":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectProperty)value, null);
+				break;
 			case "percolator":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.PercolatorProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.PercolatorProperty)value, null);
+				break;
 			case "point":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.PointProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.PointProperty)value, null);
+				break;
 			case "rank_feature":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty)value, null);
+				break;
 			case "rank_features":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.RankFeaturesProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.RankFeaturesProperty)value, null);
+				break;
 			case "scaled_float":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty)value, null);
+				break;
 			case "search_as_you_type":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypeProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypeProperty)value, null);
+				break;
 			case "semantic_text":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty)value, null);
+				break;
 			case "shape":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.ShapeProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.ShapeProperty)value, null);
+				break;
 			case "short":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.ShortNumberProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.ShortNumberProperty)value, null);
+				break;
 			case "sparse_vector":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.SparseVectorProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.SparseVectorProperty)value, null);
+				break;
 			case "text":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.TextProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.TextProperty)value, null);
+				break;
 			case "token_count":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.TokenCountProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.TokenCountProperty)value, null);
+				break;
 			case "unsigned_long":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberProperty)value, null);
+				break;
 			case "version":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.VersionProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.VersionProperty)value, null);
+				break;
 			case "wildcard":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.WildcardProperty), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.WildcardProperty)value, null);
+				break;
 			default:
-				var type = value.GetType();
-				JsonSerializer.Serialize(writer, value, type, options);
-				return;
+				throw new System.Text.Json.JsonException($"Variant '{value.Type}' is not supported for type '{nameof(IProperty)}'.");
 		}
 	}
 }

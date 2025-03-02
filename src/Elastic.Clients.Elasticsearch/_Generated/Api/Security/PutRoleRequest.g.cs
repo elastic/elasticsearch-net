@@ -56,6 +56,11 @@ public sealed partial class PutRoleRequest : PlainRequest<PutRoleRequestParamete
 	{
 	}
 
+	[JsonConstructor]
+	internal PutRoleRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityPutRole;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -63,6 +68,14 @@ public sealed partial class PutRoleRequest : PlainRequest<PutRoleRequestParamete
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "security.put_role";
+
+	/// <summary>
+	/// <para>
+	/// The name of the role that is being created or updated. On Elasticsearch Serverless, the role name must begin with a letter or digit and can only contain letters, digits and the characters '_', '-', and '.'. Each role must have a unique name, as this will serve as the identifier for that role.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>

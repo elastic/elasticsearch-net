@@ -92,6 +92,19 @@ public sealed partial class PutIndicesSettingsRequestParameters : RequestParamet
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+internal sealed partial class PutIndicesSettingsRequestConverter : System.Text.Json.Serialization.JsonConverter<PutIndicesSettingsRequest>
+{
+	public override PutIndicesSettingsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return new PutIndicesSettingsRequest { Settings = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings>(options, null) };
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, PutIndicesSettingsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteValue(options, value.Settings, null);
+	}
+}
+
 /// <summary>
 /// <para>
 /// Update index settings.
@@ -99,8 +112,10 @@ public sealed partial class PutIndicesSettingsRequestParameters : RequestParamet
 /// changes are applied to all backing indices by default.
 /// </para>
 /// </summary>
-public sealed partial class PutIndicesSettingsRequest : PlainRequest<PutIndicesSettingsRequestParameters>, ISelfSerializable
+[JsonConverter(typeof(PutIndicesSettingsRequestConverter))]
+public sealed partial class PutIndicesSettingsRequest : PlainRequest<PutIndicesSettingsRequestParameters>
 {
+	[JsonConstructor]
 	public PutIndicesSettingsRequest()
 	{
 	}
@@ -119,6 +134,15 @@ public sealed partial class PutIndicesSettingsRequest : PlainRequest<PutIndicesS
 
 	/// <summary>
 	/// <para>
+	/// Comma-separated list of data streams, indices, and aliases used to limit
+	/// the request. Supports wildcards (<c>*</c>). To target all data streams and
+	/// indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
+
+	/// <summary>
+	/// <para>
 	/// If <c>false</c>, the request returns an error if any wildcard expression, index
 	/// alias, or <c>_all</c> value targets only missing or closed indices. This
 	/// behavior applies even if the request targets other open indices. For
@@ -126,7 +150,6 @@ public sealed partial class PutIndicesSettingsRequest : PlainRequest<PutIndicesS
 	/// starts with <c>foo</c> but no index starts with <c>bar</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
@@ -137,7 +160,6 @@ public sealed partial class PutIndicesSettingsRequest : PlainRequest<PutIndicesS
 	/// <c>open,hidden</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
@@ -145,7 +167,6 @@ public sealed partial class PutIndicesSettingsRequest : PlainRequest<PutIndicesS
 	/// If <c>true</c>, returns settings in flat format.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 	/// <summary>
@@ -153,7 +174,6 @@ public sealed partial class PutIndicesSettingsRequest : PlainRequest<PutIndicesS
 	/// If <c>true</c>, returns settings in flat format.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
@@ -163,7 +183,6 @@ public sealed partial class PutIndicesSettingsRequest : PlainRequest<PutIndicesS
 	/// error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
@@ -171,7 +190,6 @@ public sealed partial class PutIndicesSettingsRequest : PlainRequest<PutIndicesS
 	/// If <c>true</c>, existing index settings remain unchanged.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? PreserveExisting { get => Q<bool?>("preserve_existing"); set => Q("preserve_existing", value); }
 
 	/// <summary>
@@ -180,15 +198,8 @@ public sealed partial class PutIndicesSettingsRequest : PlainRequest<PutIndicesS
 	/// timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings Settings { get; set; }
-
-	void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		JsonSerializer.Serialize(writer, Settings, options);
-	}
 }
 
 /// <summary>

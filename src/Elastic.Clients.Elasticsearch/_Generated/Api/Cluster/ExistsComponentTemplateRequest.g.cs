@@ -62,6 +62,11 @@ public sealed partial class ExistsComponentTemplateRequest : PlainRequest<Exists
 	{
 	}
 
+	[JsonConstructor]
+	internal ExistsComponentTemplateRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.ClusterExistsComponentTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
@@ -69,6 +74,15 @@ public sealed partial class ExistsComponentTemplateRequest : PlainRequest<Exists
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "cluster.exists_component_template";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of component template names used to limit the request.
+	/// Wildcard (*) expressions are supported.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Names Name { get => P<Elastic.Clients.Elasticsearch.Names>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>

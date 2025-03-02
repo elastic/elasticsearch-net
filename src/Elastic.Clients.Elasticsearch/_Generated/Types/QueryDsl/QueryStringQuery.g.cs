@@ -106,7 +106,6 @@ public sealed partial class QueryStringQuery
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
-	[JsonConverter(typeof(FieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
 	/// <summary>

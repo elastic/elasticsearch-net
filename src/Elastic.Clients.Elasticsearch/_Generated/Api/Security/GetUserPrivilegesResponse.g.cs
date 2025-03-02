@@ -22,20 +22,96 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class GetUserPrivilegesResponseConverter : System.Text.Json.Serialization.JsonConverter<GetUserPrivilegesResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropApplications = System.Text.Json.JsonEncodedText.Encode("applications");
+	private static readonly System.Text.Json.JsonEncodedText PropCluster = System.Text.Json.JsonEncodedText.Encode("cluster");
+	private static readonly System.Text.Json.JsonEncodedText PropGlobal = System.Text.Json.JsonEncodedText.Encode("global");
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
+	private static readonly System.Text.Json.JsonEncodedText PropRunAs = System.Text.Json.JsonEncodedText.Encode("run_as");
+
+	public override GetUserPrivilegesResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>> propApplications = default;
+		LocalJsonValue<IReadOnlyCollection<string>> propCluster = default;
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>> propGlobal = default;
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserIndicesPrivileges>> propIndices = default;
+		LocalJsonValue<IReadOnlyCollection<string>> propRunAs = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propApplications.TryReadProperty(ref reader, options, PropApplications, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propCluster.TryReadProperty(ref reader, options, PropCluster, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propGlobal.TryReadProperty(ref reader, options, PropGlobal, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserIndicesPrivileges> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.UserIndicesPrivileges>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propRunAs.TryReadProperty(ref reader, options, PropRunAs, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new GetUserPrivilegesResponse
+		{
+			Applications = propApplications.Value
+,
+			Cluster = propCluster.Value
+,
+			Global = propGlobal.Value
+,
+			Indices = propIndices.Value
+,
+			RunAs = propRunAs.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetUserPrivilegesResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropApplications, value.Applications, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>(o, v, null));
+		writer.WriteProperty(options, PropCluster, value.Cluster, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropGlobal, value.Global, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>(o, v, null));
+		writer.WriteProperty(options, PropIndices, value.Indices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserIndicesPrivileges> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.UserIndicesPrivileges>(o, v, null));
+		writer.WriteProperty(options, PropRunAs, value.RunAs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(GetUserPrivilegesResponseConverter))]
 public sealed partial class GetUserPrivilegesResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("applications")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges> Applications { get; init; }
-	[JsonInclude, JsonPropertyName("cluster")]
 	public IReadOnlyCollection<string> Cluster { get; init; }
-	[JsonInclude, JsonPropertyName("global")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege> Global { get; init; }
-	[JsonInclude, JsonPropertyName("indices")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserIndicesPrivileges> Indices { get; init; }
-	[JsonInclude, JsonPropertyName("run_as")]
 	public IReadOnlyCollection<string> RunAs { get; init; }
 }

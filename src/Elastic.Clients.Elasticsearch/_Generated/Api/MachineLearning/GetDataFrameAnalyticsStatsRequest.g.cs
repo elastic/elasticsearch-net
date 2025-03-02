@@ -92,6 +92,7 @@ public sealed partial class GetDataFrameAnalyticsStatsRequestParameters : Reques
 /// </summary>
 public sealed partial class GetDataFrameAnalyticsStatsRequest : PlainRequest<GetDataFrameAnalyticsStatsRequestParameters>
 {
+	[JsonConstructor]
 	public GetDataFrameAnalyticsStatsRequest()
 	{
 	}
@@ -107,6 +108,16 @@ public sealed partial class GetDataFrameAnalyticsStatsRequest : PlainRequest<Get
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ml.get_data_frame_analytics_stats";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the data frame analytics job. If you do not specify this
+	/// option, the API returns information for the first hundred data frame
+	/// analytics jobs.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id? Id { get => P<Elastic.Clients.Elasticsearch.Id?>("id"); set => PO("id", value); }
 
 	/// <summary>
 	/// <para>

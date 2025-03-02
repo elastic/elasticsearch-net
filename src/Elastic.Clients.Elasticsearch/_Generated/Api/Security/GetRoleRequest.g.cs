@@ -44,6 +44,7 @@ public sealed partial class GetRoleRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class GetRoleRequest : PlainRequest<GetRoleRequestParameters>
 {
+	[JsonConstructor]
 	public GetRoleRequest()
 	{
 	}
@@ -59,6 +60,14 @@ public sealed partial class GetRoleRequest : PlainRequest<GetRoleRequestParamete
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "security.get_role";
+
+	/// <summary>
+	/// <para>
+	/// The name of the role. You can specify multiple roles as a comma-separated list. If you do not specify this parameter, the API returns information about all roles.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Names? Name { get => P<Elastic.Clients.Elasticsearch.Names?>("name"); set => PO("name", value); }
 }
 
 /// <summary>

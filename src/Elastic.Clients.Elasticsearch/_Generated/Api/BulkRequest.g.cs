@@ -123,6 +123,7 @@ public sealed partial class BulkRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class BulkRequest : PlainRequest<BulkRequestParameters>
 {
+	[JsonConstructor]
 	public BulkRequest()
 	{
 	}
@@ -138,6 +139,14 @@ public sealed partial class BulkRequest : PlainRequest<BulkRequestParameters>
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "bulk";
+
+	/// <summary>
+	/// <para>
+	/// Name of the data stream, index, or index alias to perform bulk actions on.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.IndexName? Index { get => P<Elastic.Clients.Elasticsearch.IndexName?>("index"); set => PO("index", value); }
 
 	/// <summary>
 	/// <para>

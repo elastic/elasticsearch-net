@@ -52,6 +52,11 @@ public sealed partial class GetFeaturesRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class GetFeaturesRequest : PlainRequest<GetFeaturesRequestParameters>
 {
+	[JsonConstructor]
+	internal GetFeaturesRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.FeaturesGetFeatures;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;

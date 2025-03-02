@@ -62,6 +62,7 @@ public sealed partial class NodesInfoRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class NodesInfoRequest : PlainRequest<NodesInfoRequestParameters>
 {
+	[JsonConstructor]
 	public NodesInfoRequest()
 	{
 	}
@@ -85,6 +86,22 @@ public sealed partial class NodesInfoRequest : PlainRequest<NodesInfoRequestPara
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "nodes.info";
+
+	/// <summary>
+	/// <para>
+	/// Limits the information returned to the specific metrics. Supports a comma-separated list, such as http,ingest.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Metrics? Metric { get => P<Elastic.Clients.Elasticsearch.Metrics?>("metric"); set => PO("metric", value); }
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of node IDs or names used to limit returned information.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.NodeIds? NodeId { get => P<Elastic.Clients.Elasticsearch.NodeIds?>("node_id"); set => PO("node_id", value); }
 
 	/// <summary>
 	/// <para>

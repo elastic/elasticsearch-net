@@ -46,6 +46,11 @@ public sealed partial class DeleteBehavioralAnalyticsRequest : PlainRequest<Dele
 	{
 	}
 
+	[JsonConstructor]
+	internal DeleteBehavioralAnalyticsRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SearchApplicationDeleteBehavioralAnalytics;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -53,6 +58,14 @@ public sealed partial class DeleteBehavioralAnalyticsRequest : PlainRequest<Dele
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "search_application.delete_behavioral_analytics";
+
+	/// <summary>
+	/// <para>
+	/// The name of the analytics collection to be deleted
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 }
 
 /// <summary>

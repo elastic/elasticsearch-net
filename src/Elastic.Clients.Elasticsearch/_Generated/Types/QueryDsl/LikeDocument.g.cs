@@ -37,7 +37,6 @@ public sealed partial class LikeDocument
 	[JsonInclude, JsonPropertyName("doc")]
 	public object? Doc { get; set; }
 	[JsonInclude, JsonPropertyName("fields")]
-	[JsonConverter(typeof(FieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
 	/// <summary>

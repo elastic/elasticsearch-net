@@ -65,6 +65,11 @@ public sealed partial class GetOverallBucketsRequest : PlainRequest<GetOverallBu
 	{
 	}
 
+	[JsonConstructor]
+	internal GetOverallBucketsRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningGetOverallBuckets;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -72,6 +77,20 @@ public sealed partial class GetOverallBucketsRequest : PlainRequest<GetOverallBu
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.get_overall_buckets";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the anomaly detection job. It can be a job identifier, a
+	/// group name, a comma-separated list of jobs or groups, or a wildcard
+	/// expression.
+	/// </para>
+	/// <para>
+	/// You can summarize the bucket results for all anomaly detection jobs by
+	/// using <c>_all</c> or by specifying <c>*</c> as the <c>&lt;job_id></c>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
 	/// <summary>
 	/// <para>

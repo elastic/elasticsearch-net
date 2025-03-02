@@ -5,30 +5,42 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
 [DebuggerDisplay("{DebugDisplay,nq}")]
-public sealed class NodeIds : IEquatable<NodeIds>, IUrlParameter
+public sealed class NodeIds :
+	IEquatable<NodeIds>,
+	IUrlParameter
+#if NET7_0_OR_GREATER
+	, IParsable<NodeIds>
+#endif
 {
+	public NodeIds()
+	{
+		Values = [];
+	}
+
 	public NodeIds(IEnumerable<string> nodeIds)
 	{
-		Value = nodeIds?.ToList();
-		if (!Value.HasAny())
+		Values = nodeIds?.ToList();
+		if (!Values.HasAny())
 			throw new ArgumentException($"Can not create {nameof(NodeIds)} on an empty enumerable of ", nameof(nodeIds));
 	}
 
-	internal IList<string> Value { get; }
+	internal IList<string> Values { get; }
 
 	private string DebugDisplay => ((IUrlParameter)this).GetString(null);
 
 	public override string ToString() => DebugDisplay;
 
-	public bool Equals(NodeIds other) => EqualsAllIds(Value, other.Value);
+	public bool Equals(NodeIds other) => EqualsAllIds(Values, other.Values);
 
-	string IUrlParameter.GetString(ITransportConfiguration? settings) => string.Join(",", Value);
+	string IUrlParameter.GetString(ITransportConfiguration? settings) => string.Join(",", Values);
 
 	public static NodeIds Parse(string nodeIds) => nodeIds.IsNullOrEmptyCommaSeparatedList(out var nodes) ? null : new NodeIds(nodes);
 
@@ -54,5 +66,31 @@ public sealed class NodeIds : IEquatable<NodeIds>, IUrlParameter
 
 	public override bool Equals(object obj) => obj is string s ? Equals(Parse(s)) : obj is NodeIds i && Equals(i);
 
-	public override int GetHashCode() => Value.GetHashCode();
+	public override int GetHashCode() => Values.GetHashCode();
+
+	#region IParsable
+
+	public static NodeIds Parse(string s, IFormatProvider? provider) =>
+		TryParse(s, provider, out var result) ? result : throw new FormatException();
+
+	public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider,
+		[NotNullWhen(true)] out NodeIds? result)
+	{
+		if (s is null)
+		{
+			result = null;
+			return false;
+		}
+
+		if (s.IsNullOrEmptyCommaSeparatedList(out var list))
+		{
+			result = new NodeIds();
+			return true;
+		}
+
+		result = new NodeIds(list);
+		return true;
+	}
+
+	#endregion IParsable
 }

@@ -22,13 +22,63 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class GetTrainedModelsResponseConverter : System.Text.Json.Serialization.JsonConverter<GetTrainedModelsResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropTrainedModelConfigs = System.Text.Json.JsonEncodedText.Encode("trained_model_configs");
+
+	public override GetTrainedModelsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propCount = default;
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelConfig>> propTrainedModelConfigs = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			{
+				continue;
+			}
+
+			if (propTrainedModelConfigs.TryReadProperty(ref reader, options, PropTrainedModelConfigs, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelConfig> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelConfig>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new GetTrainedModelsResponse
+		{
+			Count = propCount.Value
+,
+			TrainedModelConfigs = propTrainedModelConfigs.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetTrainedModelsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropTrainedModelConfigs, value.TrainedModelConfigs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelConfig> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelConfig>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(GetTrainedModelsResponseConverter))]
 public sealed partial class GetTrainedModelsResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("count")]
 	public int Count { get; init; }
 
 	/// <summary>
@@ -36,6 +86,5 @@ public sealed partial class GetTrainedModelsResponse : ElasticsearchResponse
 	/// An array of trained model resources, which are sorted by the model_id value in ascending order.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("trained_model_configs")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelConfig> TrainedModelConfigs { get; init; }
 }

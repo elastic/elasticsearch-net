@@ -45,6 +45,11 @@ public sealed partial class PutBehavioralAnalyticsRequest : PlainRequest<PutBeha
 	{
 	}
 
+	[JsonConstructor]
+	internal PutBehavioralAnalyticsRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SearchApplicationPutBehavioralAnalytics;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -52,6 +57,14 @@ public sealed partial class PutBehavioralAnalyticsRequest : PlainRequest<PutBeha
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "search_application.put_behavioral_analytics";
+
+	/// <summary>
+	/// <para>
+	/// The name of the analytics collection to be created or updated.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 }
 
 /// <summary>

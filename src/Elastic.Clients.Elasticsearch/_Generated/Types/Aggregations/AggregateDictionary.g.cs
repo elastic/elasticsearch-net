@@ -33,6 +33,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial interface IAggregate
 {
+	public string? Type { get; }
 }
 
 [JsonConverter(typeof(AggregateDictionaryConverter))]
@@ -115,530 +116,338 @@ public partial class AggregateDictionary : IsAReadOnlyDictionary<string, IAggreg
 	private T? TryGet<T>(string key) where T : class, IAggregate => BackingDictionary.TryGetValue(key, out var value) ? value as T : null;
 }
 
-internal sealed partial class AggregateDictionaryConverter : JsonConverter<AggregateDictionary>
+internal sealed partial class AggregateDictionaryConverter : System.Text.Json.Serialization.JsonConverter<AggregateDictionary>
 {
-	public override AggregateDictionary Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override AggregateDictionary Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var dictionary = new Dictionary<string, IAggregate>();
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException($"Expected {JsonTokenType.StartObject} but read {reader.TokenType}.");
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var dictionary = new System.Collections.Generic.Dictionary<string, IAggregate>();
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-				throw new JsonException($"Expected {JsonTokenType.PropertyName} but read {reader.TokenType}.");
-			var name = reader.GetString();
-			reader.Read();
-			ReadItem(ref reader, options, dictionary, name);
+			ReadItem(ref reader, options, out string name, out IAggregate value);
+			dictionary[name] = value;
 		}
 
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new AggregateDictionary(dictionary);
 	}
 
-	public override void Write(Utf8JsonWriter writer, AggregateDictionary value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, AggregateDictionary value, System.Text.Json.JsonSerializerOptions options)
 	{
-		throw new NotImplementedException("'AggregateDictionary' is a readonly type, used only on responses and does not support being written to JSON.");
+		writer.WriteStartObject();
+		foreach (var pair in value)
+		{
+			WriteItem(writer, options, pair.Key, pair.Value);
+		}
+
+		writer.WriteEndObject();
 	}
 
-	public static void ReadItem(ref Utf8JsonReader reader, JsonSerializerOptions options, Dictionary<string, IAggregate> dictionary, string name)
+	internal static void ReadItem(ref System.Text.Json.Utf8JsonReader reader, System.Text.Json.JsonSerializerOptions options, out string name, out IAggregate value)
 	{
-		var nameParts = name.Split('#');
-		if (nameParts.Length != 2)
-			throw new JsonException($"Unable to parse typed-key '{name}'.");
-		var type = nameParts[0];
-		switch (type)
+		var key = reader.ReadPropertyName<string>(options, null);
+		reader.Read();
+		var parts = key.Split('#');
+		if (parts.Length != 2)
 		{
-			case "adjacency_matrix":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "auto_date_histogram":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "avg":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.AverageAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "boxplot":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "bucket_metric_value":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.BucketMetricValueAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "cardinality":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "children":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "composite":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "simple_long_value":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "date_histogram":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "date_range":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "derivative":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "dterms":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.DoubleTermsAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "extended_stats":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "extended_stats_bucket":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "filter":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.FilterAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "filters":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "frequent_item_sets":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "geo_bounds":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "geo_centroid":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "geo_distance":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "geohash_grid":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "geohex_grid":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "geo_line":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "geotile_grid":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "global":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "hdr_percentile_ranks":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.HdrPercentileRanksAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "hdr_percentiles":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.HdrPercentilesAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "histogram":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "inference":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "ip_prefix":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "ip_range":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "lrareterms":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.LongRareTermsAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "lterms":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.LongTermsAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "matrix_stats":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "max":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MaxAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "median_absolute_deviation":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "min":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MinAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "missing":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MissingAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "multi_terms":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "nested":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.NestedAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "parent":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.ParentAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "percentiles_bucket":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "range":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "rate":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.RateAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "reverse_nested":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "sampler":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "scripted_metric":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "siglterms":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.SignificantLongTermsAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "sigsterms":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.SignificantStringTermsAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "simple_value":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.SimpleValueAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "stats":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.StatsAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "stats_bucket":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "srareterms":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.StringRareTermsAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "string_stats":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "sterms":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.StringTermsAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "sum":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.SumAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "tdigest_percentile_ranks":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TDigestPercentileRanksAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "tdigest_percentiles":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TDigestPercentilesAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "time_series":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "top_hits":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "top_metrics":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "t_test":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TTestAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "umrareterms":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.UnmappedRareTermsAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "unmapped_sampler":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.UnmappedSamplerAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "umsigterms":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.UnmappedSignificantTermsAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "umterms":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.UnmappedTermsAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "value_count":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "variable_width_histogram":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
-			case "weighted_avg":
-				{
-					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
-
+			throw new System.Text.Json.JsonException($"Unable to parse typed-key '{key}' for variant '{nameof(IAggregate)}'.");
+		}
+
+		var discriminator = parts[0];
+		name = parts[1];
+		value = discriminator switch
+		{
+			"adjacency_matrix" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregate>(options, null),
+			"auto_date_histogram" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregate>(options, null),
+			"avg" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.AverageAggregate>(options, null),
+			"boxplot" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregate>(options, null),
+			"bucket_metric_value" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.BucketMetricValueAggregate>(options, null),
+			"cardinality" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregate>(options, null),
+			"children" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregate>(options, null),
+			"composite" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregate>(options, null),
+			"simple_long_value" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregate>(options, null),
+			"date_histogram" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregate>(options, null),
+			"date_range" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregate>(options, null),
+			"derivative" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregate>(options, null),
+			"dterms" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.DoubleTermsAggregate>(options, null),
+			"extended_stats" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregate>(options, null),
+			"extended_stats_bucket" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregate>(options, null),
+			"filter" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.FilterAggregate>(options, null),
+			"filters" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregate>(options, null),
+			"frequent_item_sets" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregate>(options, null),
+			"geo_bounds" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregate>(options, null),
+			"geo_centroid" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregate>(options, null),
+			"geo_distance" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregate>(options, null),
+			"geohash_grid" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregate>(options, null),
+			"geohex_grid" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregate>(options, null),
+			"geo_line" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregate>(options, null),
+			"geotile_grid" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregate>(options, null),
+			"global" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregate>(options, null),
+			"hdr_percentile_ranks" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.HdrPercentileRanksAggregate>(options, null),
+			"hdr_percentiles" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.HdrPercentilesAggregate>(options, null),
+			"histogram" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregate>(options, null),
+			"inference" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregate>(options, null),
+			"ip_prefix" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregate>(options, null),
+			"ip_range" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregate>(options, null),
+			"lrareterms" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.LongRareTermsAggregate>(options, null),
+			"lterms" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.LongTermsAggregate>(options, null),
+			"matrix_stats" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregate>(options, null),
+			"max" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.MaxAggregate>(options, null),
+			"median_absolute_deviation" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregate>(options, null),
+			"min" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.MinAggregate>(options, null),
+			"missing" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.MissingAggregate>(options, null),
+			"multi_terms" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregate>(options, null),
+			"nested" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.NestedAggregate>(options, null),
+			"parent" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.ParentAggregate>(options, null),
+			"percentiles_bucket" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregate>(options, null),
+			"range" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregate>(options, null),
+			"rate" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.RateAggregate>(options, null),
+			"reverse_nested" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregate>(options, null),
+			"sampler" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregate>(options, null),
+			"scripted_metric" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregate>(options, null),
+			"siglterms" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.SignificantLongTermsAggregate>(options, null),
+			"sigsterms" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.SignificantStringTermsAggregate>(options, null),
+			"simple_value" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.SimpleValueAggregate>(options, null),
+			"stats" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.StatsAggregate>(options, null),
+			"stats_bucket" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregate>(options, null),
+			"srareterms" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.StringRareTermsAggregate>(options, null),
+			"string_stats" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregate>(options, null),
+			"sterms" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.StringTermsAggregate>(options, null),
+			"sum" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.SumAggregate>(options, null),
+			"tdigest_percentile_ranks" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.TDigestPercentileRanksAggregate>(options, null),
+			"tdigest_percentiles" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.TDigestPercentilesAggregate>(options, null),
+			"time_series" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregate>(options, null),
+			"top_hits" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregate>(options, null),
+			"top_metrics" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregate>(options, null),
+			"t_test" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.TTestAggregate>(options, null),
+			"umrareterms" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.UnmappedRareTermsAggregate>(options, null),
+			"unmapped_sampler" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.UnmappedSamplerAggregate>(options, null),
+			"umsigterms" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.UnmappedSignificantTermsAggregate>(options, null),
+			"umterms" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.UnmappedTermsAggregate>(options, null),
+			"value_count" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregate>(options, null),
+			"variable_width_histogram" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregate>(options, null),
+			"weighted_avg" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregate>(options, null),
+			_ => throw new System.Text.Json.JsonException($"Variant '{discriminator}' is not supported for type '{nameof(IAggregate)}'.")
+		};
+	}
+
+	internal static void WriteItem(System.Text.Json.Utf8JsonWriter writer, System.Text.Json.JsonSerializerOptions options, string name, IAggregate value)
+	{
+		var key = value.Type + '#' + name;
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.AverageAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.BucketMetricValueAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.DoubleTermsAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.FilterAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.HdrPercentileRanksAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.HdrPercentilesAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.LongRareTermsAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.LongTermsAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.MaxAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.MinAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.MissingAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.NestedAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.ParentAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.RangeAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.RateAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.SignificantLongTermsAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.SignificantStringTermsAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.SimpleValueAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.StatsAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.StringRareTermsAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.StringTermsAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.SumAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.TDigestPercentileRanksAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.TDigestPercentilesAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.TTestAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.UnmappedRareTermsAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.UnmappedSamplerAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.UnmappedSignificantTermsAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.UnmappedTermsAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregate v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
 			default:
-				throw new NotSupportedException($"The tagged variant '{type}' is currently not supported.");
+				throw new System.Text.Json.JsonException($"Variant '{0}' is not supported for type '{nameof(IAggregate)}'.");
 		}
 	}
 }

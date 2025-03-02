@@ -27,6 +27,61 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class DataframeAnalysisAnalyzedFieldsConverter : System.Text.Json.Serialization.JsonConverter<DataframeAnalysisAnalyzedFields>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropExcludes = System.Text.Json.JsonEncodedText.Encode("excludes");
+	private static readonly System.Text.Json.JsonEncodedText PropIncludes = System.Text.Json.JsonEncodedText.Encode("includes");
+
+	public override DataframeAnalysisAnalyzedFields Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
+		{
+			var value = reader.ReadValue<ICollection<string>>(options, static ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!);
+			return new DataframeAnalysisAnalyzedFields { Includes = value };
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<ICollection<string>> propExcludes = default;
+		LocalJsonValue<ICollection<string>> propIncludes = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propExcludes.TryReadProperty(ref reader, options, PropExcludes, static ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propIncludes.TryReadProperty(ref reader, options, PropIncludes, static ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new DataframeAnalysisAnalyzedFields
+		{
+			Excludes = propExcludes.Value
+,
+			Includes = propIncludes.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, DataframeAnalysisAnalyzedFields value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropExcludes, value.Excludes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropIncludes, value.Includes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(DataframeAnalysisAnalyzedFieldsConverter))]
 public sealed partial class DataframeAnalysisAnalyzedFields
 {
 	/// <summary>
@@ -34,7 +89,6 @@ public sealed partial class DataframeAnalysisAnalyzedFields
 	/// An array of strings that defines the fields that will be included in the analysis.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("excludes")]
 	public ICollection<string> Excludes { get; set; }
 
 	/// <summary>
@@ -42,7 +96,6 @@ public sealed partial class DataframeAnalysisAnalyzedFields
 	/// An array of strings that defines the fields that will be excluded from the analysis. You do not need to add fields with unsupported data types to excludes, these fields are excluded from the analysis automatically.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("includes")]
 	public ICollection<string> Includes { get; set; }
 }
 
