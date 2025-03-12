@@ -1,6 +1,7 @@
 project: '.NET client'
 cross_links:
   - apm-agent-dotnet
+  - docs-content
   - elasticsearch
 toc:
   - toc: reference
