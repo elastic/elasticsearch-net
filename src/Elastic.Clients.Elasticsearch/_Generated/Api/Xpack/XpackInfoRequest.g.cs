@@ -72,6 +72,11 @@ public sealed partial class XpackInfoRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class XpackInfoRequest : PlainRequest<XpackInfoRequestParameters>
 {
+	[JsonConstructor]
+	internal XpackInfoRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.XpackInfo;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;

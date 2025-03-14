@@ -27,52 +27,64 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-internal sealed partial class ShardStoreConverter : JsonConverter<ShardStore>
+internal sealed partial class ShardStoreConverter : System.Text.Json.Serialization.JsonConverter<ShardStore>
 {
-	public override ShardStore Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropAllocation = System.Text.Json.JsonEncodedText.Encode("allocation");
+	private static readonly System.Text.Json.JsonEncodedText PropAllocationId = System.Text.Json.JsonEncodedText.Encode("allocation_id");
+	private static readonly System.Text.Json.JsonEncodedText PropStoreException = System.Text.Json.JsonEncodedText.Encode("store_exception");
+
+	public override ShardStore Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation allocation = default;
-		string? allocationId = default;
-		Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreException? storeException = default;
-		string nodeId = default;
-		Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreNode node = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreNode> propNode = default;
+		LocalJsonValue<string> propNodeId = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation> propAllocation = default;
+		LocalJsonValue<string?> propAllocationId = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreException?> propStoreException = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propAllocation.TryReadProperty(ref reader, options, PropAllocation, null))
 			{
-				var property = reader.GetString();
-				if (property == "allocation")
-				{
-					allocation = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation>(ref reader, options);
-					continue;
-				}
-
-				if (property == "allocation_id")
-				{
-					allocationId = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "store_exception")
-				{
-					storeException = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreException?>(ref reader, options);
-					continue;
-				}
-
-				nodeId = property;
-				reader.Read();
-				node = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreNode>(ref reader, options);
+				continue;
 			}
+
+			if (propAllocationId.TryReadProperty(ref reader, options, PropAllocationId, null))
+			{
+				continue;
+			}
+
+			if (propStoreException.TryReadProperty(ref reader, options, PropStoreException, null))
+			{
+				continue;
+			}
+
+			propNodeId.Initialized = propNode.Initialized = true;
+			reader.ReadProperty(options, out propNodeId.Value, out propNode.Value, null, null);
 		}
 
-		return new ShardStore { Allocation = allocation, AllocationId = allocationId, Node = node, NodeId = nodeId, StoreException = storeException };
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new ShardStore
+		{
+			Node = propNode.Value
+,
+			NodeId = propNodeId.Value
+,
+			Allocation = propAllocation.Value
+,
+			AllocationId = propAllocationId.Value
+,
+			StoreException = propStoreException.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, ShardStore value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ShardStore value, System.Text.Json.JsonSerializerOptions options)
 	{
-		throw new NotImplementedException("'ShardStore' is a readonly type, used only on responses and does not support being written to JSON.");
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAllocation, value.Allocation, null, null);
+		writer.WriteProperty(options, PropAllocationId, value.AllocationId, null, null);
+		writer.WriteProperty(options, PropStoreException, value.StoreException, null, null);
+		writer.WriteProperty(options, value.NodeId, value.Node, null, null);
+		writer.WriteEndObject();
 	}
 }
 

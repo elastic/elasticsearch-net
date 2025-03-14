@@ -19,7 +19,7 @@ internal interface IStreamSerializable
 	/// <param name="stream"></param>
 	/// <param name="settings"></param>
 	/// <param name="formatting"></param>
-	void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None);
+	public void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None);
 
 	/// <summary>
 	/// Asynchronously serialize the object into the supplied <see cref="Stream"/>.
@@ -28,5 +28,5 @@ internal interface IStreamSerializable
 	/// <param name="settings"></param>
 	/// <param name="formatting"></param>
 	/// <returns></returns>
-	Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None);
+	public Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None);
 }

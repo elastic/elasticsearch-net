@@ -22,14 +22,63 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class GetCalendarsResponseConverter : System.Text.Json.Serialization.JsonConverter<GetCalendarsResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCalendars = System.Text.Json.JsonEncodedText.Encode("calendars");
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+
+	public override GetCalendarsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Calendar>> propCalendars = default;
+		LocalJsonValue<long> propCount = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCalendars.TryReadProperty(ref reader, options, PropCalendars, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Calendar> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.Calendar>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new GetCalendarsResponse
+		{
+			Calendars = propCalendars.Value
+,
+			Count = propCount.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetCalendarsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCalendars, value.Calendars, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Calendar> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.Calendar>(o, v, null));
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(GetCalendarsResponseConverter))]
 public sealed partial class GetCalendarsResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("calendars")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Calendar> Calendars { get; init; }
-	[JsonInclude, JsonPropertyName("count")]
 	public long Count { get; init; }
 }

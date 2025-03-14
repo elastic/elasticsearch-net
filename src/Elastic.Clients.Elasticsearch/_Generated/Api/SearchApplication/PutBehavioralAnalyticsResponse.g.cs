@@ -22,10 +22,61 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
+internal sealed partial class PutBehavioralAnalyticsResponseConverter : System.Text.Json.Serialization.JsonConverter<PutBehavioralAnalyticsResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAcknowledged = System.Text.Json.JsonEncodedText.Encode("acknowledged");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+
+	public override PutBehavioralAnalyticsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propAcknowledged = default;
+		LocalJsonValue<string> propName = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAcknowledged.TryReadProperty(ref reader, options, PropAcknowledged, null))
+			{
+				continue;
+			}
+
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new PutBehavioralAnalyticsResponse
+		{
+			Acknowledged = propAcknowledged.Value
+,
+			Name = propName.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, PutBehavioralAnalyticsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged, null, null);
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(PutBehavioralAnalyticsResponseConverter))]
 public sealed partial class PutBehavioralAnalyticsResponse : ElasticsearchResponse
 {
 	/// <summary>
@@ -33,7 +84,6 @@ public sealed partial class PutBehavioralAnalyticsResponse : ElasticsearchRespon
 	/// For a successful response, this value is always true. On failure, an exception is returned instead.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("acknowledged")]
 	public bool Acknowledged { get; init; }
 
 	/// <summary>
@@ -41,6 +91,5 @@ public sealed partial class PutBehavioralAnalyticsResponse : ElasticsearchRespon
 	/// The name of the analytics collection created or updated
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }
 }

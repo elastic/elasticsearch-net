@@ -42,6 +42,11 @@ public sealed partial class CcrStatsRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class CcrStatsRequest : PlainRequest<CcrStatsRequestParameters>
 {
+	[JsonConstructor]
+	internal CcrStatsRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.CrossClusterReplicationStats;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;

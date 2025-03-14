@@ -120,6 +120,36 @@ public sealed partial class IndexRequestParameters : RequestParameters
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
+internal sealed partial class IndexRequestConverter<TDocument> : System.Text.Json.Serialization.JsonConverter<IndexRequest<TDocument>>
+{
+	public override IndexRequest<TDocument> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return new IndexRequest<TDocument> { Document = reader.ReadValue<TDocument>(options, static TDocument (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<TDocument>(o, typeof(SourceMarker<TDocument>))!) };
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, IndexRequest<TDocument> value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteValue(options, value.Document, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, TDocument v) => w.WriteValueEx<TDocument>(o, v, typeof(SourceMarker<TDocument>)));
+	}
+}
+
+internal sealed partial class IndexRequestConverterFactory : System.Text.Json.Serialization.JsonConverterFactory
+{
+	public override bool CanConvert(System.Type typeToConvert)
+	{
+		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(IndexRequest<>);
+	}
+
+	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var args = typeToConvert.GetGenericArguments();
+#pragma warning disable IL3050
+		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(IndexRequestConverter<>).MakeGenericType(args[0]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
+#pragma warning restore IL3050
+		return converter;
+	}
+}
+
 /// <summary>
 /// <para>
 /// Index a document.
@@ -127,13 +157,19 @@ public sealed partial class IndexRequestParameters : RequestParameters
 /// If the target is an index and the document already exists, the request updates the document and increments its version.
 /// </para>
 /// </summary>
-public sealed partial class IndexRequest<TDocument> : PlainRequest<IndexRequestParameters>, ISelfSerializable
+[JsonConverter(typeof(IndexRequestConverterFactory))]
+public sealed partial class IndexRequest<TDocument> : PlainRequest<IndexRequestParameters>
 {
 	public IndexRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Required("index", index).Optional("id", id))
 	{
 	}
 
 	public IndexRequest(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
+	{
+	}
+
+	[JsonConstructor]
+	public IndexRequest() : this(typeof(TDocument))
 	{
 	}
 
@@ -147,10 +183,23 @@ public sealed partial class IndexRequest<TDocument> : PlainRequest<IndexRequestP
 
 	/// <summary>
 	/// <para>
+	/// Unique identifier for the document.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Id? Id { get => P<Elastic.Clients.Elasticsearch.Id?>("id"); set => PO("id", value); }
+
+	/// <summary>
+	/// <para>
+	/// Name of the data stream or index to target.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
+
+	/// <summary>
+	/// <para>
 	/// Only perform the operation if the document has this primary term.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 
 	/// <summary>
@@ -158,7 +207,6 @@ public sealed partial class IndexRequest<TDocument> : PlainRequest<IndexRequestP
 	/// Only perform the operation if the document has this sequence number.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
 
 	/// <summary>
@@ -171,7 +219,6 @@ public sealed partial class IndexRequest<TDocument> : PlainRequest<IndexRequestP
 	/// Otherwise, it defaults to <c>create</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.OpType? OpType { get => Q<Elastic.Clients.Elasticsearch.OpType?>("op_type"); set => Q("op_type", value); }
 
 	/// <summary>
@@ -181,7 +228,6 @@ public sealed partial class IndexRequest<TDocument> : PlainRequest<IndexRequestP
 	/// If a final pipeline is configured it will always run, regardless of the value of this parameter.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
 
 	/// <summary>
@@ -190,7 +236,6 @@ public sealed partial class IndexRequest<TDocument> : PlainRequest<IndexRequestP
 	/// Valid values: <c>true</c>, <c>false</c>, <c>wait_for</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
 	/// <summary>
@@ -198,7 +243,6 @@ public sealed partial class IndexRequest<TDocument> : PlainRequest<IndexRequestP
 	/// If <c>true</c>, the destination must be an index alias.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
 
 	/// <summary>
@@ -206,7 +250,6 @@ public sealed partial class IndexRequest<TDocument> : PlainRequest<IndexRequestP
 	/// Custom value used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
@@ -214,7 +257,6 @@ public sealed partial class IndexRequest<TDocument> : PlainRequest<IndexRequestP
 	/// Period the request waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
@@ -223,7 +265,6 @@ public sealed partial class IndexRequest<TDocument> : PlainRequest<IndexRequestP
 	/// The specified version must match the current version of the document for the request to succeed.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 
 	/// <summary>
@@ -231,7 +272,6 @@ public sealed partial class IndexRequest<TDocument> : PlainRequest<IndexRequestP
 	/// Specific version type: <c>external</c>, <c>external_gte</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
 
 	/// <summary>
@@ -240,15 +280,8 @@ public sealed partial class IndexRequest<TDocument> : PlainRequest<IndexRequestP
 	/// Set to all or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-	[JsonIgnore]
 	public TDocument Document { get; set; }
-
-	void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		settings.SourceSerializer.Serialize(Document, writer);
-	}
 }
 
 /// <summary>

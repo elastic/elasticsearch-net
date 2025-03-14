@@ -58,6 +58,11 @@ public sealed partial class ForgetFollowerRequest : PlainRequest<ForgetFollowerR
 	{
 	}
 
+	[JsonConstructor]
+	internal ForgetFollowerRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.CrossClusterReplicationForgetFollower;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -66,6 +71,13 @@ public sealed partial class ForgetFollowerRequest : PlainRequest<ForgetFollowerR
 
 	internal override string OperationName => "ccr.forget_follower";
 
+	/// <summary>
+	/// <para>
+	/// the name of the leader index for which specified follower retention leases should be removed
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 	[JsonInclude, JsonPropertyName("follower_cluster")]
 	public string? FollowerCluster { get; set; }
 	[JsonInclude, JsonPropertyName("follower_index")]

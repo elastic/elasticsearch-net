@@ -27,26 +27,124 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+internal sealed partial class PhoneticTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<PhoneticTokenFilter>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropEncoder = System.Text.Json.JsonEncodedText.Encode("encoder");
+	private static readonly System.Text.Json.JsonEncodedText PropLanguageset = System.Text.Json.JsonEncodedText.Encode("languageset");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxCodeLen = System.Text.Json.JsonEncodedText.Encode("max_code_len");
+	private static readonly System.Text.Json.JsonEncodedText PropNameType = System.Text.Json.JsonEncodedText.Encode("name_type");
+	private static readonly System.Text.Json.JsonEncodedText PropReplace = System.Text.Json.JsonEncodedText.Encode("replace");
+	private static readonly System.Text.Json.JsonEncodedText PropRuleType = System.Text.Json.JsonEncodedText.Encode("rule_type");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override PhoneticTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder> propEncoder = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage>?> propLanguageset = default;
+		LocalJsonValue<int?> propMaxCodeLen = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType?> propNameType = default;
+		LocalJsonValue<bool?> propReplace = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType?> propRuleType = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propEncoder.TryReadProperty(ref reader, options, PropEncoder, null))
+			{
+				continue;
+			}
+
+			if (propLanguageset.TryReadProperty(ref reader, options, PropLanguageset, static ICollection<Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage>(o, null)))
+			{
+				continue;
+			}
+
+			if (propMaxCodeLen.TryReadProperty(ref reader, options, PropMaxCodeLen, null))
+			{
+				continue;
+			}
+
+			if (propNameType.TryReadProperty(ref reader, options, PropNameType, null))
+			{
+				continue;
+			}
+
+			if (propReplace.TryReadProperty(ref reader, options, PropReplace, null))
+			{
+				continue;
+			}
+
+			if (propRuleType.TryReadProperty(ref reader, options, PropRuleType, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new PhoneticTokenFilter
+		{
+			Encoder = propEncoder.Value
+,
+			Languageset = propLanguageset.Value
+,
+			MaxCodeLen = propMaxCodeLen.Value
+,
+			NameType = propNameType.Value
+,
+			Replace = propReplace.Value
+,
+			RuleType = propRuleType.Value
+,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, PhoneticTokenFilter value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropEncoder, value.Encoder, null, null);
+		writer.WriteProperty(options, PropLanguageset, value.Languageset, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage>(o, v, null));
+		writer.WriteProperty(options, PropMaxCodeLen, value.MaxCodeLen, null, null);
+		writer.WriteProperty(options, PropNameType, value.NameType, null, null);
+		writer.WriteProperty(options, PropReplace, value.Replace, null, null);
+		writer.WriteProperty(options, PropRuleType, value.RuleType, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(PhoneticTokenFilterConverter))]
 public sealed partial class PhoneticTokenFilter : ITokenFilter
 {
-	[JsonInclude, JsonPropertyName("encoder")]
 	public Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder Encoder { get; set; }
-	[JsonInclude, JsonPropertyName("languageset")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage))]
 	public ICollection<Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage>? Languageset { get; set; }
-	[JsonInclude, JsonPropertyName("max_code_len")]
 	public int? MaxCodeLen { get; set; }
-	[JsonInclude, JsonPropertyName("name_type")]
 	public Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType? NameType { get; set; }
-	[JsonInclude, JsonPropertyName("replace")]
 	public bool? Replace { get; set; }
-	[JsonInclude, JsonPropertyName("rule_type")]
 	public Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType? RuleType { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "phonetic";
 
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 

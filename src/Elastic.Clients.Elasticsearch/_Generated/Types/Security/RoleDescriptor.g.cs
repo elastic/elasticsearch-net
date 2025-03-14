@@ -27,158 +27,141 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-internal sealed partial class RoleDescriptorConverter : JsonConverter<RoleDescriptor>
+internal sealed partial class RoleDescriptorConverter : System.Text.Json.Serialization.JsonConverter<RoleDescriptor>
 {
-	public override RoleDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropApplications = System.Text.Json.JsonEncodedText.Encode("applications");
+	private static readonly System.Text.Json.JsonEncodedText PropCluster = System.Text.Json.JsonEncodedText.Encode("cluster");
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropGlobal = System.Text.Json.JsonEncodedText.Encode("global");
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
+	private static readonly System.Text.Json.JsonEncodedText PropIndices1 = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata");
+	private static readonly System.Text.Json.JsonEncodedText PropRemoteCluster = System.Text.Json.JsonEncodedText.Encode("remote_cluster");
+	private static readonly System.Text.Json.JsonEncodedText PropRemoteIndices = System.Text.Json.JsonEncodedText.Encode("remote_indices");
+	private static readonly System.Text.Json.JsonEncodedText PropRestriction = System.Text.Json.JsonEncodedText.Encode("restriction");
+	private static readonly System.Text.Json.JsonEncodedText PropRunAs = System.Text.Json.JsonEncodedText.Encode("run_as");
+	private static readonly System.Text.Json.JsonEncodedText PropTransientMetadata = System.Text.Json.JsonEncodedText.Encode("transient_metadata");
+
+	public override RoleDescriptor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		var variant = new RoleDescriptor();
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>?> propApplications = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>?> propCluster = default;
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>?> propGlobal = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>?> propIndices = default;
+		LocalJsonValue<IDictionary<string, object>?> propMetadata = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>?> propRemoteCluster = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>?> propRemoteIndices = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.Restriction?> propRestriction = default;
+		LocalJsonValue<ICollection<string>?> propRunAs = default;
+		LocalJsonValue<IDictionary<string, object>?> propTransientMetadata = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propApplications.TryReadProperty(ref reader, options, PropApplications, static ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>(o, null)))
 			{
-				var property = reader.GetString();
-				if (property == "applications")
-				{
-					variant.Applications = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "cluster")
-				{
-					variant.Cluster = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "description")
-				{
-					variant.Description = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "global")
-				{
-					variant.Global = SingleOrManySerializationHelper.Deserialize<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>(ref reader, options);
-					continue;
-				}
-
-				if (property == "indices" || property == "index")
-				{
-					variant.Indices = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "metadata")
-				{
-					variant.Metadata = JsonSerializer.Deserialize<IDictionary<string, object>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "remote_cluster")
-				{
-					variant.RemoteCluster = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "remote_indices")
-				{
-					variant.RemoteIndices = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "restriction")
-				{
-					variant.Restriction = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Security.Restriction?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "run_as")
-				{
-					variant.RunAs = JsonSerializer.Deserialize<ICollection<string>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "transient_metadata")
-				{
-					variant.TransientMetadata = JsonSerializer.Deserialize<IDictionary<string, object>?>(ref reader, options);
-					continue;
-				}
+				continue;
 			}
+
+			if (propCluster.TryReadProperty(ref reader, options, PropCluster, static ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>(o, null)))
+			{
+				continue;
+			}
+
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propGlobal.TryReadProperty(ref reader, options, PropGlobal, static ICollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>(o, null)))
+			{
+				continue;
+			}
+
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, static ICollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>(o, null)) || propIndices.TryReadProperty(ref reader, options, PropIndices1, static ICollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>(o, null)))
+			{
+				continue;
+			}
+
+			if (propMetadata.TryReadProperty(ref reader, options, PropMetadata, static IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propRemoteCluster.TryReadProperty(ref reader, options, PropRemoteCluster, static ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>(o, null)))
+			{
+				continue;
+			}
+
+			if (propRemoteIndices.TryReadProperty(ref reader, options, PropRemoteIndices, static ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>(o, null)))
+			{
+				continue;
+			}
+
+			if (propRestriction.TryReadProperty(ref reader, options, PropRestriction, null))
+			{
+				continue;
+			}
+
+			if (propRunAs.TryReadProperty(ref reader, options, PropRunAs, static ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propTransientMetadata.TryReadProperty(ref reader, options, PropTransientMetadata, static IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new RoleDescriptor
+		{
+			Applications = propApplications.Value
+,
+			Cluster = propCluster.Value
+,
+			Description = propDescription.Value
+,
+			Global = propGlobal.Value
+,
+			Indices = propIndices.Value
+,
+			Metadata = propMetadata.Value
+,
+			RemoteCluster = propRemoteCluster.Value
+,
+			RemoteIndices = propRemoteIndices.Value
+,
+			Restriction = propRestriction.Value
+,
+			RunAs = propRunAs.Value
+,
+			TransientMetadata = propTransientMetadata.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, RoleDescriptor value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, RoleDescriptor value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.Applications is not null)
-		{
-			writer.WritePropertyName("applications");
-			JsonSerializer.Serialize(writer, value.Applications, options);
-		}
-
-		if (value.Cluster is not null)
-		{
-			writer.WritePropertyName("cluster");
-			JsonSerializer.Serialize(writer, value.Cluster, options);
-		}
-
-		if (!string.IsNullOrEmpty(value.Description))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(value.Description);
-		}
-
-		if (value.Global is not null)
-		{
-			writer.WritePropertyName("global");
-			JsonSerializer.Serialize(writer, value.Global, options);
-		}
-
-		if (value.Indices is not null)
-		{
-			writer.WritePropertyName("indices");
-			JsonSerializer.Serialize(writer, value.Indices, options);
-		}
-
-		if (value.Metadata is not null)
-		{
-			writer.WritePropertyName("metadata");
-			JsonSerializer.Serialize(writer, value.Metadata, options);
-		}
-
-		if (value.RemoteCluster is not null)
-		{
-			writer.WritePropertyName("remote_cluster");
-			JsonSerializer.Serialize(writer, value.RemoteCluster, options);
-		}
-
-		if (value.RemoteIndices is not null)
-		{
-			writer.WritePropertyName("remote_indices");
-			JsonSerializer.Serialize(writer, value.RemoteIndices, options);
-		}
-
-		if (value.Restriction is not null)
-		{
-			writer.WritePropertyName("restriction");
-			JsonSerializer.Serialize(writer, value.Restriction, options);
-		}
-
-		if (value.RunAs is not null)
-		{
-			writer.WritePropertyName("run_as");
-			JsonSerializer.Serialize(writer, value.RunAs, options);
-		}
-
-		if (value.TransientMetadata is not null)
-		{
-			writer.WritePropertyName("transient_metadata");
-			JsonSerializer.Serialize(writer, value.TransientMetadata, options);
-		}
-
+		writer.WriteProperty(options, PropApplications, value.Applications, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>(o, v, null));
+		writer.WriteProperty(options, PropCluster, value.Cluster, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>(o, v, null));
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropGlobal, value.Global, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>(o, v, null));
+		writer.WriteProperty(options, PropIndices, value.Indices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>(o, v, null));
+		writer.WriteProperty(options, PropMetadata, value.Metadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropRemoteCluster, value.RemoteCluster, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>(o, v, null));
+		writer.WriteProperty(options, PropRemoteIndices, value.RemoteIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>(o, v, null));
+		writer.WriteProperty(options, PropRestriction, value.Restriction, null, null);
+		writer.WriteProperty(options, PropRunAs, value.RunAs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropTransientMetadata, value.TransientMetadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
 		writer.WriteEndObject();
 	}
 }

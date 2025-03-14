@@ -49,6 +49,11 @@ public sealed partial class CloseJobRequest : PlainRequest<CloseJobRequestParame
 	{
 	}
 
+	[JsonConstructor]
+	internal CloseJobRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningCloseJob;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -56,6 +61,14 @@ public sealed partial class CloseJobRequest : PlainRequest<CloseJobRequestParame
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.close_job";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the anomaly detection job. It can be a job identifier, a group name, or a wildcard expression. You can close multiple anomaly detection jobs in a single API request by using a group name, a comma-separated list of jobs, or a wildcard expression. You can close all jobs by using <c>_all</c> or by specifying <c>*</c> as the job identifier.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
 	/// <summary>
 	/// <para>

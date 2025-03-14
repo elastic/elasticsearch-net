@@ -27,6 +27,65 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class MatrixStatsAggregationConverter : System.Text.Json.Serialization.JsonConverter<MatrixStatsAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropMissing = System.Text.Json.JsonEncodedText.Encode("missing");
+	private static readonly System.Text.Json.JsonEncodedText PropMode = System.Text.Json.JsonEncodedText.Encode("mode");
+
+	public override MatrixStatsAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propFields = default;
+		LocalJsonValue<IDictionary<Elastic.Clients.Elasticsearch.Field, double>?> propMissing = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SortMode?> propMode = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(SingleOrManyFieldsMarker))))
+			{
+				continue;
+			}
+
+			if (propMissing.TryReadProperty(ref reader, options, PropMissing, static IDictionary<Elastic.Clients.Elasticsearch.Field, double>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Field, double>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propMode.TryReadProperty(ref reader, options, PropMode, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new MatrixStatsAggregation
+		{
+			Fields = propFields.Value
+,
+			Missing = propMissing.Value
+,
+			Mode = propMode.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, MatrixStatsAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropMissing, value.Missing, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IDictionary<Elastic.Clients.Elasticsearch.Field, double>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, double>(o, v, null, null));
+		writer.WriteProperty(options, PropMode, value.Mode, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(MatrixStatsAggregationConverter))]
 public sealed partial class MatrixStatsAggregation
 {
 	/// <summary>
@@ -34,8 +93,6 @@ public sealed partial class MatrixStatsAggregation
 	/// An array of fields for computing the statistics.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fields")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
 	/// <summary>
@@ -44,7 +101,6 @@ public sealed partial class MatrixStatsAggregation
 	/// By default, documents without a value are ignored.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("missing")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, double>? Missing { get; set; }
 
 	/// <summary>
@@ -52,7 +108,6 @@ public sealed partial class MatrixStatsAggregation
 	/// Array value the aggregation will use for array or multi-valued fields.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("mode")]
 	public Elastic.Clients.Elasticsearch.SortMode? Mode { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(MatrixStatsAggregation matrixStatsAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.MatrixStats(matrixStatsAggregation);

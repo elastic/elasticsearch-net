@@ -22,14 +22,63 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class ReloadSearchAnalyzersResponseConverter : System.Text.Json.Serialization.JsonConverter<ReloadSearchAnalyzersResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropReloadDetails = System.Text.Json.JsonEncodedText.Encode("reload_details");
+	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("_shards");
+
+	public override ReloadSearchAnalyzersResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ReloadDetails>> propReloadDetails = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ShardStatistics> propShards = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propReloadDetails.TryReadProperty(ref reader, options, PropReloadDetails, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ReloadDetails> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.ReloadDetails>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propShards.TryReadProperty(ref reader, options, PropShards, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new ReloadSearchAnalyzersResponse
+		{
+			ReloadDetails = propReloadDetails.Value
+,
+			Shards = propShards.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ReloadSearchAnalyzersResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropReloadDetails, value.ReloadDetails, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ReloadDetails> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.ReloadDetails>(o, v, null));
+		writer.WriteProperty(options, PropShards, value.Shards, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(ReloadSearchAnalyzersResponseConverter))]
 public sealed partial class ReloadSearchAnalyzersResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("reload_details")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ReloadDetails> ReloadDetails { get; init; }
-	[JsonInclude, JsonPropertyName("_shards")]
 	public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
 }

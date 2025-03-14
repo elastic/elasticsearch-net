@@ -135,6 +135,11 @@ public sealed partial class GetSnapshotRequest : PlainRequest<GetSnapshotRequest
 	{
 	}
 
+	[JsonConstructor]
+	internal GetSnapshotRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotGet;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
@@ -142,6 +147,34 @@ public sealed partial class GetSnapshotRequest : PlainRequest<GetSnapshotRequest
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "snapshot.get";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of snapshot repository names used to limit the request. Wildcard (*) expressions are supported.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Repository { get => P<Elastic.Clients.Elasticsearch.Name>("repository"); set => PR("repository", value); }
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of snapshot names to retrieve. Also accepts wildcards (*).
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// To get information about all snapshots in a registered repository, use a wildcard (*) or _all.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// To get information about any snapshots that are currently running, use _current.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Names Snapshot { get => P<Elastic.Clients.Elasticsearch.Names>("snapshot"); set => PR("snapshot", value); }
 
 	/// <summary>
 	/// <para>

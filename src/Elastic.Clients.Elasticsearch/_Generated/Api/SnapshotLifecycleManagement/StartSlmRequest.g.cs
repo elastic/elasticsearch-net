@@ -43,6 +43,11 @@ public sealed partial class StartSlmRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class StartSlmRequest : PlainRequest<StartSlmRequestParameters>
 {
+	[JsonConstructor]
+	internal StartSlmRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotLifecycleManagementStart;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

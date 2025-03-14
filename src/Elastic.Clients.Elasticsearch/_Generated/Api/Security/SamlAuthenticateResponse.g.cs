@@ -22,20 +22,96 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class SamlAuthenticateResponseConverter : System.Text.Json.Serialization.JsonConverter<SamlAuthenticateResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAccessToken = System.Text.Json.JsonEncodedText.Encode("access_token");
+	private static readonly System.Text.Json.JsonEncodedText PropExpiresIn = System.Text.Json.JsonEncodedText.Encode("expires_in");
+	private static readonly System.Text.Json.JsonEncodedText PropRealm = System.Text.Json.JsonEncodedText.Encode("realm");
+	private static readonly System.Text.Json.JsonEncodedText PropRefreshToken = System.Text.Json.JsonEncodedText.Encode("refresh_token");
+	private static readonly System.Text.Json.JsonEncodedText PropUsername = System.Text.Json.JsonEncodedText.Encode("username");
+
+	public override SamlAuthenticateResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propAccessToken = default;
+		LocalJsonValue<int> propExpiresIn = default;
+		LocalJsonValue<string> propRealm = default;
+		LocalJsonValue<string> propRefreshToken = default;
+		LocalJsonValue<string> propUsername = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAccessToken.TryReadProperty(ref reader, options, PropAccessToken, null))
+			{
+				continue;
+			}
+
+			if (propExpiresIn.TryReadProperty(ref reader, options, PropExpiresIn, null))
+			{
+				continue;
+			}
+
+			if (propRealm.TryReadProperty(ref reader, options, PropRealm, null))
+			{
+				continue;
+			}
+
+			if (propRefreshToken.TryReadProperty(ref reader, options, PropRefreshToken, null))
+			{
+				continue;
+			}
+
+			if (propUsername.TryReadProperty(ref reader, options, PropUsername, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new SamlAuthenticateResponse
+		{
+			AccessToken = propAccessToken.Value
+,
+			ExpiresIn = propExpiresIn.Value
+,
+			Realm = propRealm.Value
+,
+			RefreshToken = propRefreshToken.Value
+,
+			Username = propUsername.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, SamlAuthenticateResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAccessToken, value.AccessToken, null, null);
+		writer.WriteProperty(options, PropExpiresIn, value.ExpiresIn, null, null);
+		writer.WriteProperty(options, PropRealm, value.Realm, null, null);
+		writer.WriteProperty(options, PropRefreshToken, value.RefreshToken, null, null);
+		writer.WriteProperty(options, PropUsername, value.Username, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(SamlAuthenticateResponseConverter))]
 public sealed partial class SamlAuthenticateResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("access_token")]
 	public string AccessToken { get; init; }
-	[JsonInclude, JsonPropertyName("expires_in")]
 	public int ExpiresIn { get; init; }
-	[JsonInclude, JsonPropertyName("realm")]
 	public string Realm { get; init; }
-	[JsonInclude, JsonPropertyName("refresh_token")]
 	public string RefreshToken { get; init; }
-	[JsonInclude, JsonPropertyName("username")]
 	public string Username { get; init; }
 }

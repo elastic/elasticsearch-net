@@ -27,51 +27,69 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
-internal sealed partial class NodeInfoDiscoverConverter : JsonConverter<NodeInfoDiscover>
+internal sealed partial class NodeInfoDiscoverConverter : System.Text.Json.Serialization.JsonConverter<NodeInfoDiscover>
 {
-	public override NodeInfoDiscover Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropSeedHosts = System.Text.Json.JsonEncodedText.Encode("seed_hosts");
+	private static readonly System.Text.Json.JsonEncodedText PropSeedProviders = System.Text.Json.JsonEncodedText.Encode("seed_providers");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override NodeInfoDiscover Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		IReadOnlyCollection<string>? seedHosts = default;
-		IReadOnlyCollection<string>? seedProviders = default;
-		string? type = default;
-		Dictionary<string, object> additionalProperties = null;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		System.Collections.Generic.Dictionary<string, object> propSettings = default;
+		LocalJsonValue<IReadOnlyCollection<string>?> propSeedHosts = default;
+		LocalJsonValue<IReadOnlyCollection<string>?> propSeedProviders = default;
+		LocalJsonValue<string?> propType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propSeedHosts.TryReadProperty(ref reader, options, PropSeedHosts, static IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
 			{
-				var property = reader.GetString();
-				if (property == "seed_hosts")
-				{
-					seedHosts = JsonSerializer.Deserialize<IReadOnlyCollection<string>?>(ref reader, options);
-					continue;
-				}
+				continue;
+			}
 
-				if (property == "seed_providers")
-				{
-					seedProviders = JsonSerializer.Deserialize<IReadOnlyCollection<string>?>(ref reader, options);
-					continue;
-				}
+			if (propSeedProviders.TryReadProperty(ref reader, options, PropSeedProviders, static IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
 
-				if (property == "type")
-				{
-					type = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
+			{
+				continue;
+			}
 
-				additionalProperties ??= new Dictionary<string, object>();
-				var additionalValue = JsonSerializer.Deserialize<object>(ref reader, options);
-				additionalProperties.Add(property, additionalValue);
+			propSettings ??= new System.Collections.Generic.Dictionary<string, object>();
+			reader.ReadProperty(options, out string key, out object value);
+			propSettings[key] = value;
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new NodeInfoDiscover
+		{
+			Settings = propSettings
+,
+			SeedHosts = propSeedHosts.Value
+,
+			SeedProviders = propSeedProviders.Value
+,
+			Type = propType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, NodeInfoDiscover value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropSeedHosts, value.SeedHosts, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropSeedProviders, value.SeedProviders, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		if (value.Settings is not null)
+		{
+			foreach (var item in value.Settings)
+			{
+				writer.WriteProperty(options, item.Key, item.Value);
 			}
 		}
 
-		return new NodeInfoDiscover { SeedHosts = seedHosts, SeedProviders = seedProviders, Settings = additionalProperties, Type = type };
-	}
-
-	public override void Write(Utf8JsonWriter writer, NodeInfoDiscover value, JsonSerializerOptions options)
-	{
-		throw new NotImplementedException("'NodeInfoDiscover' is a readonly type, used only on responses and does not support being written to JSON.");
+		writer.WriteEndObject();
 	}
 }
 

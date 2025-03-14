@@ -59,4 +59,6 @@ public sealed partial class BoxplotAggregate : IAggregate
 	public double Upper { get; init; }
 	[JsonInclude, JsonPropertyName("upper_as_string")]
 	public string? UpperAsString { get; init; }
+
+	string IAggregate.Type => "boxplot";
 }

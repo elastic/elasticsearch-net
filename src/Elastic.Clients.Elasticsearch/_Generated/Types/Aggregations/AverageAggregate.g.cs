@@ -42,4 +42,6 @@ public sealed partial class AverageAggregate : IAggregate
 	public double? Value { get; init; }
 	[JsonInclude, JsonPropertyName("value_as_string")]
 	public string? ValueAsString { get; init; }
+
+	string IAggregate.Type => "avg";
 }

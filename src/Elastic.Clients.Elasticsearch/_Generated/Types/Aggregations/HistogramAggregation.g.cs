@@ -27,6 +27,135 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class HistogramAggregationConverter : System.Text.Json.Serialization.JsonConverter<HistogramAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropExtendedBounds = System.Text.Json.JsonEncodedText.Encode("extended_bounds");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
+	private static readonly System.Text.Json.JsonEncodedText PropHardBounds = System.Text.Json.JsonEncodedText.Encode("hard_bounds");
+	private static readonly System.Text.Json.JsonEncodedText PropInterval = System.Text.Json.JsonEncodedText.Encode("interval");
+	private static readonly System.Text.Json.JsonEncodedText PropMinDocCount = System.Text.Json.JsonEncodedText.Encode("min_doc_count");
+	private static readonly System.Text.Json.JsonEncodedText PropMissing = System.Text.Json.JsonEncodedText.Encode("missing");
+	private static readonly System.Text.Json.JsonEncodedText PropOffset = System.Text.Json.JsonEncodedText.Encode("offset");
+	private static readonly System.Text.Json.JsonEncodedText PropOrder = System.Text.Json.JsonEncodedText.Encode("order");
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
+
+	public override HistogramAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloat?> propExtendedBounds = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propField = default;
+		LocalJsonValue<string?> propFormat = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloat?> propHardBounds = default;
+		LocalJsonValue<double?> propInterval = default;
+		LocalJsonValue<int?> propMinDocCount = default;
+		LocalJsonValue<double?> propMissing = default;
+		LocalJsonValue<double?> propOffset = default;
+		LocalJsonValue<ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>?> propOrder = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propExtendedBounds.TryReadProperty(ref reader, options, PropExtendedBounds, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
+			{
+				continue;
+			}
+
+			if (propHardBounds.TryReadProperty(ref reader, options, PropHardBounds, null))
+			{
+				continue;
+			}
+
+			if (propInterval.TryReadProperty(ref reader, options, PropInterval, null))
+			{
+				continue;
+			}
+
+			if (propMinDocCount.TryReadProperty(ref reader, options, PropMinDocCount, null))
+			{
+				continue;
+			}
+
+			if (propMissing.TryReadProperty(ref reader, options, PropMissing, null))
+			{
+				continue;
+			}
+
+			if (propOffset.TryReadProperty(ref reader, options, PropOffset, null))
+			{
+				continue;
+			}
+
+			if (propOrder.TryReadProperty(ref reader, options, PropOrder, static ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(o, null)))
+			{
+				continue;
+			}
+
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new HistogramAggregation
+		{
+			ExtendedBounds = propExtendedBounds.Value
+,
+			Field = propField.Value
+,
+			Format = propFormat.Value
+,
+			HardBounds = propHardBounds.Value
+,
+			Interval = propInterval.Value
+,
+			MinDocCount = propMinDocCount.Value
+,
+			Missing = propMissing.Value
+,
+			Offset = propOffset.Value
+,
+			Order = propOrder.Value
+,
+			Script = propScript.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, HistogramAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropExtendedBounds, value.ExtendedBounds, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropFormat, value.Format, null, null);
+		writer.WriteProperty(options, PropHardBounds, value.HardBounds, null, null);
+		writer.WriteProperty(options, PropInterval, value.Interval, null, null);
+		writer.WriteProperty(options, PropMinDocCount, value.MinDocCount, null, null);
+		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
+		writer.WriteProperty(options, PropOffset, value.Offset, null, null);
+		writer.WriteProperty(options, PropOrder, value.Order, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? v) => w.WriteSingleOrManyCollectionValue<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(o, v, null));
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(HistogramAggregationConverter))]
 public sealed partial class HistogramAggregation
 {
 	/// <summary>
@@ -34,7 +163,6 @@ public sealed partial class HistogramAggregation
 	/// Enables extending the bounds of the histogram beyond the data itself.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("extended_bounds")]
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloat? ExtendedBounds { get; set; }
 
 	/// <summary>
@@ -42,9 +170,7 @@ public sealed partial class HistogramAggregation
 	/// The name of the field to aggregate on.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
 
 	/// <summary>
@@ -53,7 +179,6 @@ public sealed partial class HistogramAggregation
 	/// It is particularly useful in the case of open data ranges that can result in a very large number of buckets.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("hard_bounds")]
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloat? HardBounds { get; set; }
 
 	/// <summary>
@@ -62,7 +187,6 @@ public sealed partial class HistogramAggregation
 	/// Must be a positive decimal.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("interval")]
 	public double? Interval { get; set; }
 
 	/// <summary>
@@ -71,7 +195,6 @@ public sealed partial class HistogramAggregation
 	/// By default, the response will fill gaps in the histogram with empty buckets.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("min_doc_count")]
 	public int? MinDocCount { get; set; }
 
 	/// <summary>
@@ -80,7 +203,6 @@ public sealed partial class HistogramAggregation
 	/// By default, documents without a value are ignored.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("missing")]
 	public double? Missing { get; set; }
 
 	/// <summary>
@@ -89,7 +211,6 @@ public sealed partial class HistogramAggregation
 	/// The bucket boundaries can be shifted by using the <c>offset</c> option.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("offset")]
 	public double? Offset { get; set; }
 
 	/// <summary>
@@ -98,10 +219,7 @@ public sealed partial class HistogramAggregation
 	/// By default, the returned buckets are sorted by their key ascending.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("order")]
-	[SingleOrManyCollectionConverter(typeof(KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>))]
 	public ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
-	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(HistogramAggregation histogramAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Histogram(histogramAggregation);

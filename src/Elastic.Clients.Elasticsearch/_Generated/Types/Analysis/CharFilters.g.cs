@@ -83,65 +83,58 @@ public sealed partial class CharFiltersDescriptor : IsADictionaryDescriptor<Char
 	public CharFiltersDescriptor PatternReplace(string charFilterName, PatternReplaceCharFilter patternReplaceCharFilter) => AssignVariant(charFilterName, patternReplaceCharFilter);
 }
 
-internal sealed partial class CharFilterInterfaceConverter : JsonConverter<ICharFilter>
+internal sealed partial class CharFilterInterfaceConverter : System.Text.Json.Serialization.JsonConverter<ICharFilter>
 {
-	public override ICharFilter Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropDiscriminator = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override ICharFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var copiedReader = reader;
-		string? type = null;
-		using var jsonDoc = JsonDocument.ParseValue(ref copiedReader);
-		if (jsonDoc is not null && jsonDoc.RootElement.TryGetProperty("type", out var readType) && readType.ValueKind == JsonValueKind.String)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var readerSnapshot = reader;
+		string? discriminator = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			type = readType.ToString();
+			if (reader.TryReadProperty(options, PropDiscriminator, ref discriminator, null))
+			{
+				break;
+			}
+
+			reader.Skip();
 		}
 
-		switch (type)
+		reader = readerSnapshot;
+		return discriminator switch
 		{
-			case "html_strip":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilter>(ref reader, options);
-			case "icu_normalizer":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationCharFilter>(ref reader, options);
-			case "kuromoji_iteration_mark":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilter>(ref reader, options);
-			case "mapping":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.MappingCharFilter>(ref reader, options);
-			case "pattern_replace":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilter>(ref reader, options);
-			default:
-				ThrowHelper.ThrowUnknownTaggedUnionVariantJsonException(type, typeof(ICharFilter));
-				return null;
-		}
+			"html_strip" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilter>(options, null),
+			"icu_normalizer" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationCharFilter>(options, null),
+			"kuromoji_iteration_mark" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilter>(options, null),
+			"mapping" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.MappingCharFilter>(options, null),
+			"pattern_replace" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilter>(options, null),
+			_ => throw new System.Text.Json.JsonException($"Variant '{discriminator}' is not supported for type '{nameof(ICharFilter)}'.")
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, ICharFilter value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ICharFilter value, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (value is null)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
 		switch (value.Type)
 		{
 			case "html_strip":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilter)value, null);
+				break;
 			case "icu_normalizer":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationCharFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationCharFilter)value, null);
+				break;
 			case "kuromoji_iteration_mark":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilter)value, null);
+				break;
 			case "mapping":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.MappingCharFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.MappingCharFilter)value, null);
+				break;
 			case "pattern_replace":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilter)value, null);
+				break;
 			default:
-				var type = value.GetType();
-				JsonSerializer.Serialize(writer, value, type, options);
-				return;
+				throw new System.Text.Json.JsonException($"Variant '{value.Type}' is not supported for type '{nameof(ICharFilter)}'.");
 		}
 	}
 }

@@ -131,6 +131,11 @@ public sealed partial class ExplainRequest : PlainRequest<ExplainRequestParamete
 	{
 	}
 
+	[JsonConstructor]
+	internal ExplainRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceExplain;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -138,6 +143,23 @@ public sealed partial class ExplainRequest : PlainRequest<ExplainRequestParamete
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "explain";
+
+	/// <summary>
+	/// <para>
+	/// Defines the document ID.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
+
+	/// <summary>
+	/// <para>
+	/// Index names used to limit the request.
+	/// Only a single index name can be provided to this parameter.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 
 	/// <summary>
 	/// <para>

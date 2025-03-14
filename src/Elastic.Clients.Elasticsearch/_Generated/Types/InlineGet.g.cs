@@ -27,76 +27,120 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-internal sealed partial class InlineGetConverter<TDocument> : JsonConverter<InlineGet<TDocument>>
+internal sealed partial class InlineGetConverter<TDocument> : System.Text.Json.Serialization.JsonConverter<InlineGet<TDocument>>
 {
-	public override InlineGet<TDocument> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropFound = System.Text.Json.JsonEncodedText.Encode("found");
+	private static readonly System.Text.Json.JsonEncodedText PropPrimaryTerm = System.Text.Json.JsonEncodedText.Encode("_primary_term");
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("_routing");
+	private static readonly System.Text.Json.JsonEncodedText PropSeqNo = System.Text.Json.JsonEncodedText.Encode("_seq_no");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("_source");
+
+	public override InlineGet<TDocument> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		IReadOnlyDictionary<string, object>? fields = default;
-		bool found = default;
-		long? primaryTerm = default;
-		string? routing = default;
-		long? seqNo = default;
-		TDocument? source = default;
-		Dictionary<string, object> additionalProperties = null;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		System.Collections.Generic.Dictionary<string, object> propMetadata = default;
+		LocalJsonValue<IReadOnlyDictionary<string, object>?> propFields = default;
+		LocalJsonValue<bool> propFound = default;
+		LocalJsonValue<long?> propPrimaryTerm = default;
+		LocalJsonValue<string?> propRouting = default;
+		LocalJsonValue<long?> propSeqNo = default;
+		LocalJsonValue<TDocument?> propSource = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static IReadOnlyDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
 			{
-				var property = reader.GetString();
-				if (property == "fields")
-				{
-					fields = JsonSerializer.Deserialize<IReadOnlyDictionary<string, object>?>(ref reader, options);
-					continue;
-				}
+				continue;
+			}
 
-				if (property == "found")
-				{
-					found = JsonSerializer.Deserialize<bool>(ref reader, options);
-					continue;
-				}
+			if (propFound.TryReadProperty(ref reader, options, PropFound, null))
+			{
+				continue;
+			}
 
-				if (property == "_primary_term")
-				{
-					primaryTerm = JsonSerializer.Deserialize<long?>(ref reader, options);
-					continue;
-				}
+			if (propPrimaryTerm.TryReadProperty(ref reader, options, PropPrimaryTerm, null))
+			{
+				continue;
+			}
 
-				if (property == "_routing")
-				{
-					routing = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
+			if (propRouting.TryReadProperty(ref reader, options, PropRouting, null))
+			{
+				continue;
+			}
 
-				if (property == "_seq_no")
-				{
-					seqNo = JsonSerializer.Deserialize<long?>(ref reader, options);
-					continue;
-				}
+			if (propSeqNo.TryReadProperty(ref reader, options, PropSeqNo, null))
+			{
+				continue;
+			}
 
-				if (property == "_source")
-				{
-					source = JsonSerializer.Deserialize<TDocument?>(ref reader, options);
-					continue;
-				}
+			if (propSource.TryReadProperty(ref reader, options, PropSource, static TDocument? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<TDocument?>(o, typeof(SourceMarker<TDocument?>))))
+			{
+				continue;
+			}
 
-				additionalProperties ??= new Dictionary<string, object>();
-				var additionalValue = JsonSerializer.Deserialize<object>(ref reader, options);
-				additionalProperties.Add(property, additionalValue);
+			propMetadata ??= new System.Collections.Generic.Dictionary<string, object>();
+			reader.ReadProperty(options, out string key, out object value);
+			propMetadata[key] = value;
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new InlineGet<TDocument>
+		{
+			Metadata = propMetadata
+,
+			Fields = propFields.Value
+,
+			Found = propFound.Value
+,
+			PrimaryTerm = propPrimaryTerm.Value
+,
+			Routing = propRouting.Value
+,
+			SeqNo = propSeqNo.Value
+,
+			Source = propSource.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, InlineGet<TDocument> value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropFound, value.Found, null, null);
+		writer.WriteProperty(options, PropPrimaryTerm, value.PrimaryTerm, null, null);
+		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
+		writer.WriteProperty(options, PropSeqNo, value.SeqNo, null, null);
+		writer.WriteProperty(options, PropSource, value.Source, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, TDocument? v) => w.WriteValueEx<TDocument?>(o, v, typeof(SourceMarker<TDocument?>)));
+		if (value.Metadata is not null)
+		{
+			foreach (var item in value.Metadata)
+			{
+				writer.WriteProperty(options, item.Key, item.Value);
 			}
 		}
 
-		return new InlineGet<TDocument> { Fields = fields, Found = found, Metadata = additionalProperties, PrimaryTerm = primaryTerm, Routing = routing, SeqNo = seqNo, Source = source };
-	}
-
-	public override void Write(Utf8JsonWriter writer, InlineGet<TDocument> value, JsonSerializerOptions options)
-	{
-		throw new NotImplementedException("'InlineGet' is a readonly type, used only on responses and does not support being written to JSON.");
+		writer.WriteEndObject();
 	}
 }
 
-[GenericConverter(typeof(InlineGetConverter<>), unwrap: true)]
+internal sealed partial class InlineGetConverterFactory : System.Text.Json.Serialization.JsonConverterFactory
+{
+	public override bool CanConvert(System.Type typeToConvert)
+	{
+		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(InlineGet<>);
+	}
+
+	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var args = typeToConvert.GetGenericArguments();
+#pragma warning disable IL3050
+		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(InlineGetConverter<>).MakeGenericType(args[0]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
+#pragma warning restore IL3050
+		return converter;
+	}
+}
+
+[JsonConverter(typeof(InlineGetConverterFactory))]
 public sealed partial class InlineGet<TDocument>
 {
 	public IReadOnlyDictionary<string, object>? Fields { get; init; }

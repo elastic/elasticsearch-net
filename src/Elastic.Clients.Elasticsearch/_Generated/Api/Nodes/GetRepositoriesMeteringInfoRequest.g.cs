@@ -48,6 +48,11 @@ public sealed partial class GetRepositoriesMeteringInfoRequest : PlainRequest<Ge
 	{
 	}
 
+	[JsonConstructor]
+	internal GetRepositoriesMeteringInfoRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NodesGetRepositoriesMeteringInfo;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
@@ -55,6 +60,15 @@ public sealed partial class GetRepositoriesMeteringInfoRequest : PlainRequest<Ge
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "nodes.get_repositories_metering_info";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of node IDs or names used to limit returned information.
+	/// All the nodes selective options are explained <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster.html#cluster-nodes">here</a>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.NodeIds NodeId { get => P<Elastic.Clients.Elasticsearch.NodeIds>("node_id"); set => PR("node_id", value); }
 }
 
 /// <summary>

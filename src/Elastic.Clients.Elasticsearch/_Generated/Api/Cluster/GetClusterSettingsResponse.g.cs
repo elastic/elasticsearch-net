@@ -22,16 +22,74 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+internal sealed partial class GetClusterSettingsResponseConverter : System.Text.Json.Serialization.JsonConverter<GetClusterSettingsResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDefaults = System.Text.Json.JsonEncodedText.Encode("defaults");
+	private static readonly System.Text.Json.JsonEncodedText PropPersistent = System.Text.Json.JsonEncodedText.Encode("persistent");
+	private static readonly System.Text.Json.JsonEncodedText PropTransient = System.Text.Json.JsonEncodedText.Encode("transient");
+
+	public override GetClusterSettingsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyDictionary<string, object>?> propDefaults = default;
+		LocalJsonValue<IReadOnlyDictionary<string, object>> propPersistent = default;
+		LocalJsonValue<IReadOnlyDictionary<string, object>> propTransient = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDefaults.TryReadProperty(ref reader, options, PropDefaults, static IReadOnlyDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propPersistent.TryReadProperty(ref reader, options, PropPersistent, static IReadOnlyDictionary<string, object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propTransient.TryReadProperty(ref reader, options, PropTransient, static IReadOnlyDictionary<string, object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new GetClusterSettingsResponse
+		{
+			Defaults = propDefaults.Value
+,
+			Persistent = propPersistent.Value
+,
+			Transient = propTransient.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetClusterSettingsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDefaults, value.Defaults, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropPersistent, value.Persistent, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, object> v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropTransient, value.Transient, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, object> v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(GetClusterSettingsResponseConverter))]
 public sealed partial class GetClusterSettingsResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("defaults")]
 	public IReadOnlyDictionary<string, object>? Defaults { get; init; }
-	[JsonInclude, JsonPropertyName("persistent")]
 	public IReadOnlyDictionary<string, object> Persistent { get; init; }
-	[JsonInclude, JsonPropertyName("transient")]
 	public IReadOnlyDictionary<string, object> Transient { get; init; }
 }

@@ -88,6 +88,19 @@ public sealed class BulkCreateOperation<T> : BulkOperation
 		}
 	}
 
+	private void SerializeOperationAction(IElasticsearchClientSettings settings, Utf8JsonWriter writer)
+	{
+		if (!settings.RequestResponseSerializer.TryGetJsonSerializerOptions(out var options))
+		{
+			throw new InvalidOperationException("unreachable");
+		}
+
+		writer.WriteStartObject();
+		writer.WritePropertyName(Operation);
+		writer.WriteValue(options, this);
+		writer.WriteEndObject();
+	}
+
 	private void SetValues(IElasticsearchClientSettings settings)
 	{
 		// This allocates but avoids serialising "routing":null etc. into the operation action
@@ -115,14 +128,5 @@ public sealed class BulkCreateOperation<T> : BulkOperation
 			if (!string.IsNullOrEmpty(id.GetString(settings)))
 				Id = id;
 		}
-	}
-
-	private void SerializeOperationAction(IElasticsearchClientSettings settings, Utf8JsonWriter writer)
-	{
-		var requestResponseSerializer = settings.RequestResponseSerializer;
-		writer.WriteStartObject();
-		writer.WritePropertyName(Operation);
-		requestResponseSerializer.Serialize(this, writer, settings.MemoryStreamFactory);
-		writer.WriteEndObject();
 	}
 }

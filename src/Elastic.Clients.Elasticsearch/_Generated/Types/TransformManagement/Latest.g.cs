@@ -43,7 +43,6 @@ public sealed partial class Latest
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("unique_key")]
-	[JsonConverter(typeof(FieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields UniqueKey { get; set; }
 }
 

@@ -47,6 +47,44 @@ public sealed class BulkIndexOperation<T> : BulkOperation
 
 	protected override Type ClrType => typeof(T);
 
+	/// <inheritdoc />
+	protected override void Serialize(Stream stream, IElasticsearchClientSettings settings)
+	{
+		SetValues(settings);
+		using var writer = new Utf8JsonWriter(stream);
+		SerializeOperationAction(settings, writer);
+		writer.Flush();
+		stream.WriteByte(SerializationConstants.Newline);
+		settings.SourceSerializer.Serialize(Document, stream);
+	}
+
+	/// <inheritdoc />
+	protected override async Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings)
+	{
+		SetValues(settings);
+		var writer = new Utf8JsonWriter(stream);
+		await using (writer.ConfigureAwait(false))
+		{
+			SerializeOperationAction(settings, writer);
+			await writer.FlushAsync().ConfigureAwait(false);
+			stream.WriteByte(SerializationConstants.Newline);
+			await settings.SourceSerializer.SerializeAsync(Document, stream).ConfigureAwait(false);
+		}
+	}
+
+	private void SerializeOperationAction(IElasticsearchClientSettings settings, Utf8JsonWriter writer)
+	{
+		if (!settings.RequestResponseSerializer.TryGetJsonSerializerOptions(out var options))
+		{
+			throw new InvalidOperationException("unreachable");
+		}
+
+		writer.WriteStartObject();
+		writer.WritePropertyName(Operation);
+		writer.WriteValue(options, this);
+		writer.WriteEndObject();
+	}
+
 	private void SetValues(IElasticsearchClientSettings settings)
 	{
 		// This allocates but avoids serialising "routing":null etc. into the operation action
@@ -75,37 +113,9 @@ public sealed class BulkIndexOperation<T> : BulkOperation
 				Id = id;
 		}
 	}
+}
 
-	protected override void Serialize(Stream stream, IElasticsearchClientSettings settings)
-	{
-		SetValues(settings);
-		var writer = new Utf8JsonWriter(stream);
-		SerializeOperationAction(writer, settings);
-		writer.Flush();
-		stream.WriteByte(SerializationConstants.Newline);
-		settings.SourceSerializer.Serialize(Document, stream);
-	}
-
-	protected override async Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings)
-	{
-		SetValues(settings);
-		var writer = new Utf8JsonWriter(stream);
-		await using (writer.ConfigureAwait(false))
-		{
-			SerializeOperationAction(writer, settings);
-			await writer.FlushAsync().ConfigureAwait(false);
-			stream.WriteByte(SerializationConstants.Newline);
-			await settings.SourceSerializer.SerializeAsync(Document, stream).ConfigureAwait(false);
-		}
-	}
-
-	private void SerializeOperationAction(Utf8JsonWriter writer, IElasticsearchClientSettings settings)
-	{
-		var requestResponseSerializer = settings.RequestResponseSerializer;
-
-		writer.WriteStartObject();
-		writer.WritePropertyName(Operation);
-		requestResponseSerializer.Serialize(this, writer);
-		writer.WriteEndObject();
-	}
+public class TestA
+{
+	public string X { get; set; }
 }

@@ -61,6 +61,11 @@ public sealed partial class DeleteIndexTemplateRequest : PlainRequest<DeleteInde
 	{
 	}
 
+	[JsonConstructor]
+	internal DeleteIndexTemplateRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementDeleteIndexTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -68,6 +73,14 @@ public sealed partial class DeleteIndexTemplateRequest : PlainRequest<DeleteInde
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.delete_index_template";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of index template names used to limit the request. Wildcard (*) expressions are supported.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Names Name { get => P<Elastic.Clients.Elasticsearch.Names>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>

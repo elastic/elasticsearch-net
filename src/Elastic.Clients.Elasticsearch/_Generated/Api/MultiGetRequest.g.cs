@@ -113,6 +113,7 @@ public sealed partial class MultiGetRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class MultiGetRequest : PlainRequest<MultiGetRequestParameters>
 {
+	[JsonConstructor]
 	public MultiGetRequest()
 	{
 	}
@@ -128,6 +129,14 @@ public sealed partial class MultiGetRequest : PlainRequest<MultiGetRequestParame
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "mget";
+
+	/// <summary>
+	/// <para>
+	/// Name of the index to retrieve documents from when <c>ids</c> are specified, or when a document in the <c>docs</c> array does not specify an index.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.IndexName? Index { get => P<Elastic.Clients.Elasticsearch.IndexName?>("index"); set => PO("index", value); }
 
 	/// <summary>
 	/// <para>

@@ -37,4 +37,6 @@ public sealed partial class MultiTermsAggregate : IAggregate
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 	[JsonInclude, JsonPropertyName("sum_other_doc_count")]
 	public long? SumOtherDocCount { get; init; }
+
+	string IAggregate.Type => "multi_terms";
 }

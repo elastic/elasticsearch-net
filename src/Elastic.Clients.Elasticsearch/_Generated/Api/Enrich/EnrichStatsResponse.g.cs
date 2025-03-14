@@ -22,10 +22,71 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Enrich;
 
+internal sealed partial class EnrichStatsResponseConverter : System.Text.Json.Serialization.JsonConverter<EnrichStatsResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCacheStats = System.Text.Json.JsonEncodedText.Encode("cache_stats");
+	private static readonly System.Text.Json.JsonEncodedText PropCoordinatorStats = System.Text.Json.JsonEncodedText.Encode("coordinator_stats");
+	private static readonly System.Text.Json.JsonEncodedText PropExecutingPolicies = System.Text.Json.JsonEncodedText.Encode("executing_policies");
+
+	public override EnrichStatsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.CacheStats>?> propCacheStats = default;
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.CoordinatorStats>> propCoordinatorStats = default;
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.ExecutingPolicy>> propExecutingPolicies = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCacheStats.TryReadProperty(ref reader, options, PropCacheStats, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.CacheStats>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Enrich.CacheStats>(o, null)))
+			{
+				continue;
+			}
+
+			if (propCoordinatorStats.TryReadProperty(ref reader, options, PropCoordinatorStats, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.CoordinatorStats> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Enrich.CoordinatorStats>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propExecutingPolicies.TryReadProperty(ref reader, options, PropExecutingPolicies, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.ExecutingPolicy> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Enrich.ExecutingPolicy>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new EnrichStatsResponse
+		{
+			CacheStats = propCacheStats.Value
+,
+			CoordinatorStats = propCoordinatorStats.Value
+,
+			ExecutingPolicies = propExecutingPolicies.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, EnrichStatsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCacheStats, value.CacheStats, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.CacheStats>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Enrich.CacheStats>(o, v, null));
+		writer.WriteProperty(options, PropCoordinatorStats, value.CoordinatorStats, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.CoordinatorStats> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Enrich.CoordinatorStats>(o, v, null));
+		writer.WriteProperty(options, PropExecutingPolicies, value.ExecutingPolicies, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.ExecutingPolicy> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Enrich.ExecutingPolicy>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(EnrichStatsResponseConverter))]
 public sealed partial class EnrichStatsResponse : ElasticsearchResponse
 {
 	/// <summary>
@@ -33,7 +94,6 @@ public sealed partial class EnrichStatsResponse : ElasticsearchResponse
 	/// Objects containing information about the enrich cache stats on each ingest node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("cache_stats")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.CacheStats>? CacheStats { get; init; }
 
 	/// <summary>
@@ -41,7 +101,6 @@ public sealed partial class EnrichStatsResponse : ElasticsearchResponse
 	/// Objects containing information about each coordinating ingest node for configured enrich processors.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("coordinator_stats")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.CoordinatorStats> CoordinatorStats { get; init; }
 
 	/// <summary>
@@ -49,6 +108,5 @@ public sealed partial class EnrichStatsResponse : ElasticsearchResponse
 	/// Objects containing information about each enrich policy that is currently executing.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("executing_policies")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.ExecutingPolicy> ExecutingPolicies { get; init; }
 }

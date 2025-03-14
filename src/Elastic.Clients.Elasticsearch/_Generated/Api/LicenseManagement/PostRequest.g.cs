@@ -55,6 +55,11 @@ public sealed partial class PostRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class PostRequest : PlainRequest<PostRequestParameters>
 {
+	[JsonConstructor]
+	internal PostRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.LicenseManagementPost;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;

@@ -22,15 +22,74 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class ReloadSecureSettingsResponseConverter : System.Text.Json.Serialization.JsonConverter<ReloadSecureSettingsResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropClusterName = System.Text.Json.JsonEncodedText.Encode("cluster_name");
+	private static readonly System.Text.Json.JsonEncodedText PropNodes = System.Text.Json.JsonEncodedText.Encode("nodes");
+	private static readonly System.Text.Json.JsonEncodedText PropNodeStats = System.Text.Json.JsonEncodedText.Encode("_nodes");
+
+	public override ReloadSecureSettingsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propClusterName = default;
+		LocalJsonValue<IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeReloadResult>> propNodes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.NodeStatistics?> propNodeStats = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propClusterName.TryReadProperty(ref reader, options, PropClusterName, null))
+			{
+				continue;
+			}
+
+			if (propNodes.TryReadProperty(ref reader, options, PropNodes, static IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeReloadResult> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.NodeReloadResult>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propNodeStats.TryReadProperty(ref reader, options, PropNodeStats, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new ReloadSecureSettingsResponse
+		{
+			ClusterName = propClusterName.Value
+,
+			Nodes = propNodes.Value
+,
+			NodeStats = propNodeStats.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ReloadSecureSettingsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropClusterName, value.ClusterName, null, null);
+		writer.WriteProperty(options, PropNodes, value.Nodes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeReloadResult> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.NodeReloadResult>(o, v, null, null));
+		writer.WriteProperty(options, PropNodeStats, value.NodeStats, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(ReloadSecureSettingsResponseConverter))]
 public sealed partial class ReloadSecureSettingsResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("cluster_name")]
 	public string ClusterName { get; init; }
-	[JsonInclude, JsonPropertyName("nodes")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeReloadResult> Nodes { get; init; }
 
 	/// <summary>
@@ -38,6 +97,5 @@ public sealed partial class ReloadSecureSettingsResponse : ElasticsearchResponse
 	/// Contains statistics about the number of nodes selected by the request’s node filters.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_nodes")]
 	public Elastic.Clients.Elasticsearch.NodeStatistics? NodeStats { get; init; }
 }

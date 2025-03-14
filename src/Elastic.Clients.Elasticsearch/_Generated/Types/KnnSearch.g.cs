@@ -27,6 +27,125 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class KnnSearchConverter : System.Text.Json.Serialization.JsonConverter<KnnSearch>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
+	private static readonly System.Text.Json.JsonEncodedText PropInnerHits = System.Text.Json.JsonEncodedText.Encode("inner_hits");
+	private static readonly System.Text.Json.JsonEncodedText Propk = System.Text.Json.JsonEncodedText.Encode("k");
+	private static readonly System.Text.Json.JsonEncodedText PropNumCandidates = System.Text.Json.JsonEncodedText.Encode("num_candidates");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryVector = System.Text.Json.JsonEncodedText.Encode("query_vector");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryVectorBuilder = System.Text.Json.JsonEncodedText.Encode("query_vector_builder");
+	private static readonly System.Text.Json.JsonEncodedText PropSimilarity = System.Text.Json.JsonEncodedText.Encode("similarity");
+
+	public override KnnSearch Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?> propFilter = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.InnerHits?> propInnerHits = default;
+		LocalJsonValue<int?> propk = default;
+		LocalJsonValue<int?> propNumCandidates = default;
+		LocalJsonValue<ICollection<float>?> propQueryVector = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryVectorBuilder?> propQueryVectorBuilder = default;
+		LocalJsonValue<float?> propSimilarity = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, static ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, null)))
+			{
+				continue;
+			}
+
+			if (propInnerHits.TryReadProperty(ref reader, options, PropInnerHits, null))
+			{
+				continue;
+			}
+
+			if (propk.TryReadProperty(ref reader, options, Propk, null))
+			{
+				continue;
+			}
+
+			if (propNumCandidates.TryReadProperty(ref reader, options, PropNumCandidates, null))
+			{
+				continue;
+			}
+
+			if (propQueryVector.TryReadProperty(ref reader, options, PropQueryVector, static ICollection<float>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<float>(o, null)))
+			{
+				continue;
+			}
+
+			if (propQueryVectorBuilder.TryReadProperty(ref reader, options, PropQueryVectorBuilder, null))
+			{
+				continue;
+			}
+
+			if (propSimilarity.TryReadProperty(ref reader, options, PropSimilarity, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new KnnSearch
+		{
+			Boost = propBoost.Value
+,
+			Field = propField.Value
+,
+			Filter = propFilter.Value
+,
+			InnerHits = propInnerHits.Value
+,
+			k = propk.Value
+,
+			NumCandidates = propNumCandidates.Value
+,
+			QueryVector = propQueryVector.Value
+,
+			QueryVectorBuilder = propQueryVectorBuilder.Value
+,
+			Similarity = propSimilarity.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, KnnSearch value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropFilter, value.Filter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, v, null));
+		writer.WriteProperty(options, PropInnerHits, value.InnerHits, null, null);
+		writer.WriteProperty(options, Propk, value.k, null, null);
+		writer.WriteProperty(options, PropNumCandidates, value.NumCandidates, null, null);
+		writer.WriteProperty(options, PropQueryVector, value.QueryVector, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<float>? v) => w.WriteCollectionValue<float>(o, v, null));
+		writer.WriteProperty(options, PropQueryVectorBuilder, value.QueryVectorBuilder, null, null);
+		writer.WriteProperty(options, PropSimilarity, value.Similarity, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(KnnSearchConverter))]
 public sealed partial class KnnSearch
 {
 	/// <summary>
@@ -34,7 +153,6 @@ public sealed partial class KnnSearch
 	/// Boost value to apply to kNN scores
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
@@ -42,7 +160,6 @@ public sealed partial class KnnSearch
 	/// The name of the vector field to search against
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
@@ -50,8 +167,6 @@ public sealed partial class KnnSearch
 	/// Filters for the kNN search query
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("filter")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
 
 	/// <summary>
@@ -59,7 +174,6 @@ public sealed partial class KnnSearch
 	/// If defined, each search hit will contain inner hits.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("inner_hits")]
 	public Elastic.Clients.Elasticsearch.Core.Search.InnerHits? InnerHits { get; set; }
 
 	/// <summary>
@@ -67,7 +181,6 @@ public sealed partial class KnnSearch
 	/// The final number of nearest neighbors to return as top hits
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("k")]
 	public int? k { get; set; }
 
 	/// <summary>
@@ -75,7 +188,6 @@ public sealed partial class KnnSearch
 	/// The number of nearest neighbor candidates to consider per shard
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("num_candidates")]
 	public int? NumCandidates { get; set; }
 
 	/// <summary>
@@ -83,7 +195,6 @@ public sealed partial class KnnSearch
 	/// The query vector
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query_vector")]
 	public ICollection<float>? QueryVector { get; set; }
 
 	/// <summary>
@@ -91,7 +202,6 @@ public sealed partial class KnnSearch
 	/// The query vector builder. You must provide a query_vector_builder or query_vector, but not both.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query_vector_builder")]
 	public Elastic.Clients.Elasticsearch.QueryVectorBuilder? QueryVectorBuilder { get; set; }
 
 	/// <summary>
@@ -99,7 +209,6 @@ public sealed partial class KnnSearch
 	/// The minimum similarity for a vector to be considered a match
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("similarity")]
 	public float? Similarity { get; set; }
 }
 

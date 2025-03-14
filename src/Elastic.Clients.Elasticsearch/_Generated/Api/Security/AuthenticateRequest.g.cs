@@ -47,6 +47,11 @@ public sealed partial class AuthenticateRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class AuthenticateRequest : PlainRequest<AuthenticateRequestParameters>
 {
+	[JsonConstructor]
+	internal AuthenticateRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityAuthenticate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;

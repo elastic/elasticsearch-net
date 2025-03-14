@@ -60,6 +60,11 @@ public sealed partial class PutGeoipDatabaseRequest : PlainRequest<PutGeoipDatab
 	{
 	}
 
+	[JsonConstructor]
+	internal PutGeoipDatabaseRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestPutGeoipDatabase;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -67,6 +72,14 @@ public sealed partial class PutGeoipDatabaseRequest : PlainRequest<PutGeoipDatab
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ingest.put_geoip_database";
+
+	/// <summary>
+	/// <para>
+	/// ID of the database configuration to create or update.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
 	/// <summary>
 	/// <para>

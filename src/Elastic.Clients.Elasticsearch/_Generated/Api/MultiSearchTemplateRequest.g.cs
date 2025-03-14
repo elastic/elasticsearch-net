@@ -77,8 +77,9 @@ public sealed partial class MultiSearchTemplateRequestParameters : RequestParame
 /// Run multiple templated searches.
 /// </para>
 /// </summary>
-public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearchTemplateRequestParameters>, IStreamSerializable
+public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearchTemplateRequestParameters>
 {
+	[JsonConstructor]
 	public MultiSearchTemplateRequest()
 	{
 	}
@@ -94,6 +95,16 @@ public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearc
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "msearch_template";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and aliases to search.
+	/// Supports wildcards (<c>*</c>).
+	/// To search all data streams and indices, omit this parameter or use <c>*</c>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
 	/// <summary>
 	/// <para>
@@ -137,28 +148,6 @@ public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearc
 	[JsonIgnore]
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 	public List<Elastic.Clients.Elasticsearch.Core.MSearchTemplate.SearchTemplateRequestItem> SearchTemplates { get; set; }
-
-	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
-	{
-		if (SearchTemplates is null)
-			return;
-		foreach (var item in SearchTemplates)
-		{
-			if (item is IStreamSerializable serializable)
-				serializable.Serialize(stream, settings, formatting);
-		}
-	}
-
-	async Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
-	{
-		if (SearchTemplates is null)
-			return;
-		foreach (var item in SearchTemplates)
-		{
-			if (item is IStreamSerializable serializable)
-				await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
-		}
-	}
 }
 
 /// <summary>

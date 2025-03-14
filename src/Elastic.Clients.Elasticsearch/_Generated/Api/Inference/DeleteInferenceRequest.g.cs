@@ -62,6 +62,11 @@ public sealed partial class DeleteInferenceRequest : PlainRequest<DeleteInferenc
 	{
 	}
 
+	[JsonConstructor]
+	internal DeleteInferenceRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.InferenceDelete;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -69,6 +74,22 @@ public sealed partial class DeleteInferenceRequest : PlainRequest<DeleteInferenc
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "inference.delete";
+
+	/// <summary>
+	/// <para>
+	/// The inference Id
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id InferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("inference_id"); set => PR("inference_id", value); }
+
+	/// <summary>
+	/// <para>
+	/// The task type
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Inference.TaskType? TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.TaskType?>("task_type"); set => PO("task_type", value); }
 
 	/// <summary>
 	/// <para>

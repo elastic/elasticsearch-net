@@ -47,6 +47,11 @@ public sealed partial class ClosePointInTimeRequestParameters : RequestParameter
 /// </summary>
 public sealed partial class ClosePointInTimeRequest : PlainRequest<ClosePointInTimeRequestParameters>
 {
+	[JsonConstructor]
+	internal ClosePointInTimeRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceClosePointInTime;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;

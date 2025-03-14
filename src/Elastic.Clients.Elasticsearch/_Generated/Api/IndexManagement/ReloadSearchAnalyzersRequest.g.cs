@@ -81,6 +81,11 @@ public sealed partial class ReloadSearchAnalyzersRequest : PlainRequest<ReloadSe
 	{
 	}
 
+	[JsonConstructor]
+	internal ReloadSearchAnalyzersRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementReloadSearchAnalyzers;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -88,6 +93,14 @@ public sealed partial class ReloadSearchAnalyzersRequest : PlainRequest<ReloadSe
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.reload_search_analyzers";
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of index names to reload analyzers for
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
 	/// <summary>
 	/// <para>

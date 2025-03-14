@@ -27,114 +27,93 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-internal sealed partial class GeoDistanceSortConverter : JsonConverter<GeoDistanceSort>
+internal sealed partial class GeoDistanceSortConverter : System.Text.Json.Serialization.JsonConverter<GeoDistanceSort>
 {
-	public override GeoDistanceSort Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropDistanceType = System.Text.Json.JsonEncodedText.Encode("distance_type");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreUnmapped = System.Text.Json.JsonEncodedText.Encode("ignore_unmapped");
+	private static readonly System.Text.Json.JsonEncodedText PropMode = System.Text.Json.JsonEncodedText.Encode("mode");
+	private static readonly System.Text.Json.JsonEncodedText PropNested = System.Text.Json.JsonEncodedText.Encode("nested");
+	private static readonly System.Text.Json.JsonEncodedText PropOrder = System.Text.Json.JsonEncodedText.Encode("order");
+	private static readonly System.Text.Json.JsonEncodedText PropUnit = System.Text.Json.JsonEncodedText.Encode("unit");
+
+	public override GeoDistanceSort Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		var variant = new GeoDistanceSort();
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.GeoLocation>> propLocation = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.GeoDistanceType?> propDistanceType = default;
+		LocalJsonValue<bool?> propIgnoreUnmapped = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SortMode?> propMode = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.NestedSortValue?> propNested = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SortOrder?> propOrder = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.DistanceUnit?> propUnit = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propDistanceType.TryReadProperty(ref reader, options, PropDistanceType, null))
 			{
-				var property = reader.GetString();
-				if (property == "distance_type")
-				{
-					variant.DistanceType = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.GeoDistanceType?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "ignore_unmapped")
-				{
-					variant.IgnoreUnmapped = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "mode")
-				{
-					variant.Mode = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.SortMode?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "nested")
-				{
-					variant.Nested = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.NestedSortValue?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "order")
-				{
-					variant.Order = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.SortOrder?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "unit")
-				{
-					variant.Unit = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.DistanceUnit?>(ref reader, options);
-					continue;
-				}
-
-				variant.Field = property;
-				reader.Read();
-				variant.Location = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.GeoLocation>>(ref reader, options);
+				continue;
 			}
+
+			if (propIgnoreUnmapped.TryReadProperty(ref reader, options, PropIgnoreUnmapped, null))
+			{
+				continue;
+			}
+
+			if (propMode.TryReadProperty(ref reader, options, PropMode, null))
+			{
+				continue;
+			}
+
+			if (propNested.TryReadProperty(ref reader, options, PropNested, null))
+			{
+				continue;
+			}
+
+			if (propOrder.TryReadProperty(ref reader, options, PropOrder, null))
+			{
+				continue;
+			}
+
+			if (propUnit.TryReadProperty(ref reader, options, PropUnit, null))
+			{
+				continue;
+			}
+
+			propField.Initialized = propLocation.Initialized = true;
+			reader.ReadProperty(options, out propField.Value, out propLocation.Value, null, static ICollection<Elastic.Clients.Elasticsearch.GeoLocation> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.GeoLocation>(o, null)!);
 		}
 
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new GeoDistanceSort
+		{
+			Field = propField.Value
+,
+			Location = propLocation.Value
+,
+			DistanceType = propDistanceType.Value
+,
+			IgnoreUnmapped = propIgnoreUnmapped.Value
+,
+			Mode = propMode.Value
+,
+			Nested = propNested.Value
+,
+			Order = propOrder.Value
+,
+			Unit = propUnit.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, GeoDistanceSort value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GeoDistanceSort value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.Field is not null && value.Location is not null)
-		{
-			if (!options.TryGetClientSettings(out var settings))
-			{
-				ThrowHelper.ThrowJsonExceptionForMissingSettings();
-			}
-
-			var propertyName = settings.Inferrer.Field(value.Field);
-			writer.WritePropertyName(propertyName);
-			JsonSerializer.Serialize(writer, value.Location, options);
-		}
-
-		if (value.DistanceType is not null)
-		{
-			writer.WritePropertyName("distance_type");
-			JsonSerializer.Serialize(writer, value.DistanceType, options);
-		}
-
-		if (value.IgnoreUnmapped.HasValue)
-		{
-			writer.WritePropertyName("ignore_unmapped");
-			writer.WriteBooleanValue(value.IgnoreUnmapped.Value);
-		}
-
-		if (value.Mode is not null)
-		{
-			writer.WritePropertyName("mode");
-			JsonSerializer.Serialize(writer, value.Mode, options);
-		}
-
-		if (value.Nested is not null)
-		{
-			writer.WritePropertyName("nested");
-			JsonSerializer.Serialize(writer, value.Nested, options);
-		}
-
-		if (value.Order is not null)
-		{
-			writer.WritePropertyName("order");
-			JsonSerializer.Serialize(writer, value.Order, options);
-		}
-
-		if (value.Unit is not null)
-		{
-			writer.WritePropertyName("unit");
-			JsonSerializer.Serialize(writer, value.Unit, options);
-		}
-
+		writer.WriteProperty(options, PropDistanceType, value.DistanceType, null, null);
+		writer.WriteProperty(options, PropIgnoreUnmapped, value.IgnoreUnmapped, null, null);
+		writer.WriteProperty(options, PropMode, value.Mode, null, null);
+		writer.WriteProperty(options, PropNested, value.Nested, null, null);
+		writer.WriteProperty(options, PropOrder, value.Order, null, null);
+		writer.WriteProperty(options, PropUnit, value.Unit, null, null);
+		writer.WriteProperty(options, value.Field, value.Location, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.GeoLocation> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.GeoLocation>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

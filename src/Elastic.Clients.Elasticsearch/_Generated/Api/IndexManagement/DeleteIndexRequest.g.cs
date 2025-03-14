@@ -86,6 +86,11 @@ public sealed partial class DeleteIndexRequest : PlainRequest<DeleteIndexRequest
 	{
 	}
 
+	[JsonConstructor]
+	internal DeleteIndexRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementDelete;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -93,6 +98,17 @@ public sealed partial class DeleteIndexRequest : PlainRequest<DeleteIndexRequest
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.delete";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of indices to delete.
+	/// You cannot specify index aliases.
+	/// By default, this parameter does not support wildcards (<c>*</c>) or <c>_all</c>.
+	/// To use wildcards or <c>_all</c>, set the <c>action.destructive_requires_name</c> cluster setting to <c>false</c>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
 	/// <summary>
 	/// <para>

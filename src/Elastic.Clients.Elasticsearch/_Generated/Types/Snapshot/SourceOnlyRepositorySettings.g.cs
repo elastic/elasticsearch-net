@@ -27,110 +27,101 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
-internal sealed partial class SourceOnlyRepositorySettingsConverter : JsonConverter<SourceOnlyRepositorySettings>
+internal sealed partial class SourceOnlyRepositorySettingsConverter : System.Text.Json.Serialization.JsonConverter<SourceOnlyRepositorySettings>
 {
-	public override SourceOnlyRepositorySettings Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropChunkSize = System.Text.Json.JsonEncodedText.Encode("chunk_size");
+	private static readonly System.Text.Json.JsonEncodedText PropCompress = System.Text.Json.JsonEncodedText.Encode("compress");
+	private static readonly System.Text.Json.JsonEncodedText PropDelegateType = System.Text.Json.JsonEncodedText.Encode("delegate_type");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxNumberOfSnapshots = System.Text.Json.JsonEncodedText.Encode("max_number_of_snapshots");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxRestoreBytesPerSec = System.Text.Json.JsonEncodedText.Encode("max_restore_bytes_per_sec");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxSnapshotBytesPerSec = System.Text.Json.JsonEncodedText.Encode("max_snapshot_bytes_per_sec");
+	private static readonly System.Text.Json.JsonEncodedText PropReadOnly = System.Text.Json.JsonEncodedText.Encode("read_only");
+	private static readonly System.Text.Json.JsonEncodedText PropReadOnly1 = System.Text.Json.JsonEncodedText.Encode("readonly");
+
+	public override SourceOnlyRepositorySettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		var variant = new SourceOnlyRepositorySettings();
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propChunkSize = default;
+		LocalJsonValue<bool?> propCompress = default;
+		LocalJsonValue<string?> propDelegateType = default;
+		LocalJsonValue<int?> propMaxNumberOfSnapshots = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propMaxRestoreBytesPerSec = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propMaxSnapshotBytesPerSec = default;
+		LocalJsonValue<bool?> propReadOnly = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propChunkSize.TryReadProperty(ref reader, options, PropChunkSize, null))
 			{
-				var property = reader.GetString();
-				if (property == "chunk_size")
-				{
-					variant.ChunkSize = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.ByteSize?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "compress")
-				{
-					variant.Compress = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "delegate_type")
-				{
-					variant.DelegateType = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "max_number_of_snapshots")
-				{
-					variant.MaxNumberOfSnapshots = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "max_restore_bytes_per_sec")
-				{
-					variant.MaxRestoreBytesPerSec = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.ByteSize?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "max_snapshot_bytes_per_sec")
-				{
-					variant.MaxSnapshotBytesPerSec = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.ByteSize?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "read_only" || property == "readonly")
-				{
-					variant.ReadOnly = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					continue;
-				}
+				continue;
 			}
+
+			if (propCompress.TryReadProperty(ref reader, options, PropCompress, null))
+			{
+				continue;
+			}
+
+			if (propDelegateType.TryReadProperty(ref reader, options, PropDelegateType, null))
+			{
+				continue;
+			}
+
+			if (propMaxNumberOfSnapshots.TryReadProperty(ref reader, options, PropMaxNumberOfSnapshots, null))
+			{
+				continue;
+			}
+
+			if (propMaxRestoreBytesPerSec.TryReadProperty(ref reader, options, PropMaxRestoreBytesPerSec, null))
+			{
+				continue;
+			}
+
+			if (propMaxSnapshotBytesPerSec.TryReadProperty(ref reader, options, PropMaxSnapshotBytesPerSec, null))
+			{
+				continue;
+			}
+
+			if (propReadOnly.TryReadProperty(ref reader, options, PropReadOnly, null) || propReadOnly.TryReadProperty(ref reader, options, PropReadOnly1, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new SourceOnlyRepositorySettings
+		{
+			ChunkSize = propChunkSize.Value
+,
+			Compress = propCompress.Value
+,
+			DelegateType = propDelegateType.Value
+,
+			MaxNumberOfSnapshots = propMaxNumberOfSnapshots.Value
+,
+			MaxRestoreBytesPerSec = propMaxRestoreBytesPerSec.Value
+,
+			MaxSnapshotBytesPerSec = propMaxSnapshotBytesPerSec.Value
+,
+			ReadOnly = propReadOnly.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, SourceOnlyRepositorySettings value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, SourceOnlyRepositorySettings value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.ChunkSize is not null)
-		{
-			writer.WritePropertyName("chunk_size");
-			JsonSerializer.Serialize(writer, value.ChunkSize, options);
-		}
-
-		if (value.Compress.HasValue)
-		{
-			writer.WritePropertyName("compress");
-			writer.WriteBooleanValue(value.Compress.Value);
-		}
-
-		if (!string.IsNullOrEmpty(value.DelegateType))
-		{
-			writer.WritePropertyName("delegate_type");
-			writer.WriteStringValue(value.DelegateType);
-		}
-
-		if (value.MaxNumberOfSnapshots.HasValue)
-		{
-			writer.WritePropertyName("max_number_of_snapshots");
-			writer.WriteNumberValue(value.MaxNumberOfSnapshots.Value);
-		}
-
-		if (value.MaxRestoreBytesPerSec is not null)
-		{
-			writer.WritePropertyName("max_restore_bytes_per_sec");
-			JsonSerializer.Serialize(writer, value.MaxRestoreBytesPerSec, options);
-		}
-
-		if (value.MaxSnapshotBytesPerSec is not null)
-		{
-			writer.WritePropertyName("max_snapshot_bytes_per_sec");
-			JsonSerializer.Serialize(writer, value.MaxSnapshotBytesPerSec, options);
-		}
-
-		if (value.ReadOnly.HasValue)
-		{
-			writer.WritePropertyName("read_only");
-			writer.WriteBooleanValue(value.ReadOnly.Value);
-		}
-
+		writer.WriteProperty(options, PropChunkSize, value.ChunkSize, null, null);
+		writer.WriteProperty(options, PropCompress, value.Compress, null, null);
+		writer.WriteProperty(options, PropDelegateType, value.DelegateType, null, null);
+		writer.WriteProperty(options, PropMaxNumberOfSnapshots, value.MaxNumberOfSnapshots, null, null);
+		writer.WriteProperty(options, PropMaxRestoreBytesPerSec, value.MaxRestoreBytesPerSec, null, null);
+		writer.WriteProperty(options, PropMaxSnapshotBytesPerSec, value.MaxSnapshotBytesPerSec, null, null);
+		writer.WriteProperty(options, PropReadOnly, value.ReadOnly, null, null);
 		writer.WriteEndObject();
 	}
 }

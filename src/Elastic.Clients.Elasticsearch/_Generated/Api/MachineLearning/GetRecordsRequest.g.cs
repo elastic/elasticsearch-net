@@ -68,6 +68,11 @@ public sealed partial class GetRecordsRequest : PlainRequest<GetRecordsRequestPa
 	{
 	}
 
+	[JsonConstructor]
+	internal GetRecordsRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningGetRecords;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -75,6 +80,14 @@ public sealed partial class GetRecordsRequest : PlainRequest<GetRecordsRequestPa
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.get_records";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
 	/// <summary>
 	/// <para>

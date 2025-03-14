@@ -22,14 +22,63 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class PutRoleMappingResponseConverter : System.Text.Json.Serialization.JsonConverter<PutRoleMappingResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCreated = System.Text.Json.JsonEncodedText.Encode("created");
+	private static readonly System.Text.Json.JsonEncodedText PropRoleMapping = System.Text.Json.JsonEncodedText.Encode("role_mapping");
+
+	public override PutRoleMappingResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propCreated = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.CreatedStatus> propRoleMapping = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCreated.TryReadProperty(ref reader, options, PropCreated, null))
+			{
+				continue;
+			}
+
+			if (propRoleMapping.TryReadProperty(ref reader, options, PropRoleMapping, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new PutRoleMappingResponse
+		{
+			Created = propCreated.Value
+,
+			RoleMapping = propRoleMapping.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, PutRoleMappingResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCreated, value.Created, null, null);
+		writer.WriteProperty(options, PropRoleMapping, value.RoleMapping, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(PutRoleMappingResponseConverter))]
 public sealed partial class PutRoleMappingResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("created")]
 	public bool? Created { get; init; }
-	[JsonInclude, JsonPropertyName("role_mapping")]
 	public Elastic.Clients.Elasticsearch.Security.CreatedStatus RoleMapping { get; init; }
 }

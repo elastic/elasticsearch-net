@@ -27,21 +27,119 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class FieldSortConverter : System.Text.Json.Serialization.JsonConverter<FieldSort>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
+	private static readonly System.Text.Json.JsonEncodedText PropMissing = System.Text.Json.JsonEncodedText.Encode("missing");
+	private static readonly System.Text.Json.JsonEncodedText PropMode = System.Text.Json.JsonEncodedText.Encode("mode");
+	private static readonly System.Text.Json.JsonEncodedText PropNested = System.Text.Json.JsonEncodedText.Encode("nested");
+	private static readonly System.Text.Json.JsonEncodedText PropNumericType = System.Text.Json.JsonEncodedText.Encode("numeric_type");
+	private static readonly System.Text.Json.JsonEncodedText PropOrder = System.Text.Json.JsonEncodedText.Encode("order");
+	private static readonly System.Text.Json.JsonEncodedText PropUnmappedType = System.Text.Json.JsonEncodedText.Encode("unmapped_type");
+
+	public override FieldSort Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
+		{
+			var value = reader.ReadValue<Elastic.Clients.Elasticsearch.SortOrder?>(options, null);
+			return new FieldSort { Order = value };
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propFormat = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.FieldValue?> propMissing = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SortMode?> propMode = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.NestedSortValue?> propNested = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.FieldSortNumericType?> propNumericType = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SortOrder?> propOrder = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.FieldType?> propUnmappedType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
+			{
+				continue;
+			}
+
+			if (propMissing.TryReadProperty(ref reader, options, PropMissing, null))
+			{
+				continue;
+			}
+
+			if (propMode.TryReadProperty(ref reader, options, PropMode, null))
+			{
+				continue;
+			}
+
+			if (propNested.TryReadProperty(ref reader, options, PropNested, null))
+			{
+				continue;
+			}
+
+			if (propNumericType.TryReadProperty(ref reader, options, PropNumericType, null))
+			{
+				continue;
+			}
+
+			if (propOrder.TryReadProperty(ref reader, options, PropOrder, null))
+			{
+				continue;
+			}
+
+			if (propUnmappedType.TryReadProperty(ref reader, options, PropUnmappedType, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new FieldSort
+		{
+			Format = propFormat.Value
+,
+			Missing = propMissing.Value
+,
+			Mode = propMode.Value
+,
+			Nested = propNested.Value
+,
+			NumericType = propNumericType.Value
+,
+			Order = propOrder.Value
+,
+			UnmappedType = propUnmappedType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, FieldSort value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFormat, value.Format, null, null);
+		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
+		writer.WriteProperty(options, PropMode, value.Mode, null, null);
+		writer.WriteProperty(options, PropNested, value.Nested, null, null);
+		writer.WriteProperty(options, PropNumericType, value.NumericType, null, null);
+		writer.WriteProperty(options, PropOrder, value.Order, null, null);
+		writer.WriteProperty(options, PropUnmappedType, value.UnmappedType, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(FieldSortConverter))]
 public sealed partial class FieldSort
 {
-	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
-	[JsonInclude, JsonPropertyName("missing")]
 	public Elastic.Clients.Elasticsearch.FieldValue? Missing { get; set; }
-	[JsonInclude, JsonPropertyName("mode")]
 	public Elastic.Clients.Elasticsearch.SortMode? Mode { get; set; }
-	[JsonInclude, JsonPropertyName("nested")]
 	public Elastic.Clients.Elasticsearch.NestedSortValue? Nested { get; set; }
-	[JsonInclude, JsonPropertyName("numeric_type")]
 	public Elastic.Clients.Elasticsearch.FieldSortNumericType? NumericType { get; set; }
-	[JsonInclude, JsonPropertyName("order")]
 	public Elastic.Clients.Elasticsearch.SortOrder? Order { get; set; }
-	[JsonInclude, JsonPropertyName("unmapped_type")]
 	public Elastic.Clients.Elasticsearch.Mapping.FieldType? UnmappedType { get; set; }
 }
 

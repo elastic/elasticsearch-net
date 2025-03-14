@@ -22,16 +22,74 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class UpdateFilterResponseConverter : System.Text.Json.Serialization.JsonConverter<UpdateFilterResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropFilterId = System.Text.Json.JsonEncodedText.Encode("filter_id");
+	private static readonly System.Text.Json.JsonEncodedText PropItems = System.Text.Json.JsonEncodedText.Encode("items");
+
+	public override UpdateFilterResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propDescription = default;
+		LocalJsonValue<string> propFilterId = default;
+		LocalJsonValue<IReadOnlyCollection<string>> propItems = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propFilterId.TryReadProperty(ref reader, options, PropFilterId, null))
+			{
+				continue;
+			}
+
+			if (propItems.TryReadProperty(ref reader, options, PropItems, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new UpdateFilterResponse
+		{
+			Description = propDescription.Value
+,
+			FilterId = propFilterId.Value
+,
+			Items = propItems.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, UpdateFilterResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropFilterId, value.FilterId, null, null);
+		writer.WriteProperty(options, PropItems, value.Items, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(UpdateFilterResponseConverter))]
 public sealed partial class UpdateFilterResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("description")]
 	public string Description { get; init; }
-	[JsonInclude, JsonPropertyName("filter_id")]
 	public string FilterId { get; init; }
-	[JsonInclude, JsonPropertyName("items")]
 	public IReadOnlyCollection<string> Items { get; init; }
 }

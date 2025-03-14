@@ -63,6 +63,11 @@ public sealed partial class ResetFeaturesRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class ResetFeaturesRequest : PlainRequest<ResetFeaturesRequestParameters>
 {
+	[JsonConstructor]
+	internal ResetFeaturesRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.FeaturesResetFeatures;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

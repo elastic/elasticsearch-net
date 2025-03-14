@@ -218,289 +218,238 @@ public sealed partial class AnalyzersDescriptor : IsADictionaryDescriptor<Analyz
 	public AnalyzersDescriptor Whitespace(string analyzerName, WhitespaceAnalyzer whitespaceAnalyzer) => AssignVariant(analyzerName, whitespaceAnalyzer);
 }
 
-internal sealed partial class AnalyzerInterfaceConverter : JsonConverter<IAnalyzer>
+internal sealed partial class AnalyzerInterfaceConverter : System.Text.Json.Serialization.JsonConverter<IAnalyzer>
 {
-	public override IAnalyzer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropDiscriminator = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override IAnalyzer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var copiedReader = reader;
-		string? type = null;
-		using var jsonDoc = JsonDocument.ParseValue(ref copiedReader);
-		if (jsonDoc is not null && jsonDoc.RootElement.TryGetProperty("type", out var readType) && readType.ValueKind == JsonValueKind.String)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var readerSnapshot = reader;
+		string? discriminator = "custom";
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			type = readType.ToString();
+			if (reader.TryReadProperty(options, PropDiscriminator, ref discriminator, null))
+			{
+				break;
+			}
+
+			reader.Skip();
 		}
 
-		switch (type)
+		reader = readerSnapshot;
+		return discriminator switch
 		{
-			case "arabic":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.ArabicAnalyzer>(ref reader, options);
-			case "armenian":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.ArmenianAnalyzer>(ref reader, options);
-			case "basque":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.BasqueAnalyzer>(ref reader, options);
-			case "bengali":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.BengaliAnalyzer>(ref reader, options);
-			case "brazilian":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.BrazilianAnalyzer>(ref reader, options);
-			case "bulgarian":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.BulgarianAnalyzer>(ref reader, options);
-			case "catalan":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.CatalanAnalyzer>(ref reader, options);
-			case "chinese":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.ChineseAnalyzer>(ref reader, options);
-			case "cjk":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.CjkAnalyzer>(ref reader, options);
-			case "custom":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.CustomAnalyzer>(ref reader, options);
-			case "czech":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.CzechAnalyzer>(ref reader, options);
-			case "danish":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.DanishAnalyzer>(ref reader, options);
-			case "dutch":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.DutchAnalyzer>(ref reader, options);
-			case "english":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.EnglishAnalyzer>(ref reader, options);
-			case "estonian":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.EstonianAnalyzer>(ref reader, options);
-			case "fingerprint":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer>(ref reader, options);
-			case "finnish":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.FinnishAnalyzer>(ref reader, options);
-			case "french":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.FrenchAnalyzer>(ref reader, options);
-			case "galician":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.GalicianAnalyzer>(ref reader, options);
-			case "german":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.GermanAnalyzer>(ref reader, options);
-			case "greek":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.GreekAnalyzer>(ref reader, options);
-			case "hindi":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.HindiAnalyzer>(ref reader, options);
-			case "hungarian":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.HungarianAnalyzer>(ref reader, options);
-			case "icu_analyzer":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzer>(ref reader, options);
-			case "indonesian":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzer>(ref reader, options);
-			case "irish":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.IrishAnalyzer>(ref reader, options);
-			case "italian":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzer>(ref reader, options);
-			case "keyword":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer>(ref reader, options);
-			case "kuromoji":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer>(ref reader, options);
-			case "language":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.LanguageAnalyzer>(ref reader, options);
-			case "latvian":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.LatvianAnalyzer>(ref reader, options);
-			case "lithuanian":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.LithuanianAnalyzer>(ref reader, options);
-			case "nori":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.NoriAnalyzer>(ref reader, options);
-			case "norwegian":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.NorwegianAnalyzer>(ref reader, options);
-			case "pattern":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzer>(ref reader, options);
-			case "persian":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.PersianAnalyzer>(ref reader, options);
-			case "portuguese":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.PortugueseAnalyzer>(ref reader, options);
-			case "romanian":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.RomanianAnalyzer>(ref reader, options);
-			case "russian":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.RussianAnalyzer>(ref reader, options);
-			case "serbian":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.SerbianAnalyzer>(ref reader, options);
-			case "simple":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.SimpleAnalyzer>(ref reader, options);
-			case "snowball":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzer>(ref reader, options);
-			case "sorani":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.SoraniAnalyzer>(ref reader, options);
-			case "spanish":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.SpanishAnalyzer>(ref reader, options);
-			case "standard":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzer>(ref reader, options);
-			case "stop":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.StopAnalyzer>(ref reader, options);
-			case "swedish":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.SwedishAnalyzer>(ref reader, options);
-			case "thai":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.ThaiAnalyzer>(ref reader, options);
-			case "turkish":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.TurkishAnalyzer>(ref reader, options);
-			case "whitespace":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.WhitespaceAnalyzer>(ref reader, options);
-			default:
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.CustomAnalyzer>(ref reader, options);
-		}
+			"arabic" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ArabicAnalyzer>(options, null),
+			"armenian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ArmenianAnalyzer>(options, null),
+			"basque" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.BasqueAnalyzer>(options, null),
+			"bengali" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.BengaliAnalyzer>(options, null),
+			"brazilian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.BrazilianAnalyzer>(options, null),
+			"bulgarian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.BulgarianAnalyzer>(options, null),
+			"catalan" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.CatalanAnalyzer>(options, null),
+			"chinese" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ChineseAnalyzer>(options, null),
+			"cjk" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.CjkAnalyzer>(options, null),
+			"custom" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.CustomAnalyzer>(options, null),
+			"czech" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.CzechAnalyzer>(options, null),
+			"danish" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.DanishAnalyzer>(options, null),
+			"dutch" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.DutchAnalyzer>(options, null),
+			"english" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.EnglishAnalyzer>(options, null),
+			"estonian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.EstonianAnalyzer>(options, null),
+			"fingerprint" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer>(options, null),
+			"finnish" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.FinnishAnalyzer>(options, null),
+			"french" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.FrenchAnalyzer>(options, null),
+			"galician" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.GalicianAnalyzer>(options, null),
+			"german" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.GermanAnalyzer>(options, null),
+			"greek" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.GreekAnalyzer>(options, null),
+			"hindi" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.HindiAnalyzer>(options, null),
+			"hungarian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.HungarianAnalyzer>(options, null),
+			"icu_analyzer" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzer>(options, null),
+			"indonesian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzer>(options, null),
+			"irish" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.IrishAnalyzer>(options, null),
+			"italian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzer>(options, null),
+			"keyword" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer>(options, null),
+			"kuromoji" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer>(options, null),
+			"language" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.LanguageAnalyzer>(options, null),
+			"latvian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.LatvianAnalyzer>(options, null),
+			"lithuanian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.LithuanianAnalyzer>(options, null),
+			"nori" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.NoriAnalyzer>(options, null),
+			"norwegian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.NorwegianAnalyzer>(options, null),
+			"pattern" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzer>(options, null),
+			"persian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PersianAnalyzer>(options, null),
+			"portuguese" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PortugueseAnalyzer>(options, null),
+			"romanian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.RomanianAnalyzer>(options, null),
+			"russian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.RussianAnalyzer>(options, null),
+			"serbian" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SerbianAnalyzer>(options, null),
+			"simple" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SimpleAnalyzer>(options, null),
+			"snowball" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzer>(options, null),
+			"sorani" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SoraniAnalyzer>(options, null),
+			"spanish" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SpanishAnalyzer>(options, null),
+			"standard" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzer>(options, null),
+			"stop" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.StopAnalyzer>(options, null),
+			"swedish" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SwedishAnalyzer>(options, null),
+			"thai" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ThaiAnalyzer>(options, null),
+			"turkish" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.TurkishAnalyzer>(options, null),
+			"whitespace" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.WhitespaceAnalyzer>(options, null),
+			_ => throw new System.Text.Json.JsonException($"Variant '{discriminator}' is not supported for type '{nameof(IAnalyzer)}'.")
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, IAnalyzer value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, IAnalyzer value, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (value is null)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
 		switch (value.Type)
 		{
 			case "arabic":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.ArabicAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ArabicAnalyzer)value, null);
+				break;
 			case "armenian":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.ArmenianAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ArmenianAnalyzer)value, null);
+				break;
 			case "basque":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.BasqueAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.BasqueAnalyzer)value, null);
+				break;
 			case "bengali":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.BengaliAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.BengaliAnalyzer)value, null);
+				break;
 			case "brazilian":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.BrazilianAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.BrazilianAnalyzer)value, null);
+				break;
 			case "bulgarian":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.BulgarianAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.BulgarianAnalyzer)value, null);
+				break;
 			case "catalan":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.CatalanAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.CatalanAnalyzer)value, null);
+				break;
 			case "chinese":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.ChineseAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ChineseAnalyzer)value, null);
+				break;
 			case "cjk":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.CjkAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.CjkAnalyzer)value, null);
+				break;
 			case "custom":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.CustomAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.CustomAnalyzer)value, null);
+				break;
 			case "czech":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.CzechAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.CzechAnalyzer)value, null);
+				break;
 			case "danish":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.DanishAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.DanishAnalyzer)value, null);
+				break;
 			case "dutch":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.DutchAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.DutchAnalyzer)value, null);
+				break;
 			case "english":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.EnglishAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.EnglishAnalyzer)value, null);
+				break;
 			case "estonian":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.EstonianAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.EstonianAnalyzer)value, null);
+				break;
 			case "fingerprint":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer)value, null);
+				break;
 			case "finnish":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.FinnishAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.FinnishAnalyzer)value, null);
+				break;
 			case "french":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.FrenchAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.FrenchAnalyzer)value, null);
+				break;
 			case "galician":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.GalicianAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.GalicianAnalyzer)value, null);
+				break;
 			case "german":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.GermanAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.GermanAnalyzer)value, null);
+				break;
 			case "greek":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.GreekAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.GreekAnalyzer)value, null);
+				break;
 			case "hindi":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.HindiAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.HindiAnalyzer)value, null);
+				break;
 			case "hungarian":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.HungarianAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.HungarianAnalyzer)value, null);
+				break;
 			case "icu_analyzer":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzer)value, null);
+				break;
 			case "indonesian":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzer)value, null);
+				break;
 			case "irish":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.IrishAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.IrishAnalyzer)value, null);
+				break;
 			case "italian":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzer)value, null);
+				break;
 			case "keyword":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer)value, null);
+				break;
 			case "kuromoji":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer)value, null);
+				break;
 			case "language":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.LanguageAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.LanguageAnalyzer)value, null);
+				break;
 			case "latvian":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.LatvianAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.LatvianAnalyzer)value, null);
+				break;
 			case "lithuanian":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.LithuanianAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.LithuanianAnalyzer)value, null);
+				break;
 			case "nori":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.NoriAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.NoriAnalyzer)value, null);
+				break;
 			case "norwegian":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.NorwegianAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.NorwegianAnalyzer)value, null);
+				break;
 			case "pattern":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzer)value, null);
+				break;
 			case "persian":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.PersianAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PersianAnalyzer)value, null);
+				break;
 			case "portuguese":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.PortugueseAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PortugueseAnalyzer)value, null);
+				break;
 			case "romanian":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.RomanianAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.RomanianAnalyzer)value, null);
+				break;
 			case "russian":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.RussianAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.RussianAnalyzer)value, null);
+				break;
 			case "serbian":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.SerbianAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.SerbianAnalyzer)value, null);
+				break;
 			case "simple":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.SimpleAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.SimpleAnalyzer)value, null);
+				break;
 			case "snowball":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzer)value, null);
+				break;
 			case "sorani":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.SoraniAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.SoraniAnalyzer)value, null);
+				break;
 			case "spanish":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.SpanishAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.SpanishAnalyzer)value, null);
+				break;
 			case "standard":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzer)value, null);
+				break;
 			case "stop":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.StopAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.StopAnalyzer)value, null);
+				break;
 			case "swedish":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.SwedishAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.SwedishAnalyzer)value, null);
+				break;
 			case "thai":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.ThaiAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ThaiAnalyzer)value, null);
+				break;
 			case "turkish":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.TurkishAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.TurkishAnalyzer)value, null);
+				break;
 			case "whitespace":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.WhitespaceAnalyzer), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.WhitespaceAnalyzer)value, null);
+				break;
 			default:
-				var type = value.GetType();
-				JsonSerializer.Serialize(writer, value, type, options);
-				return;
+				throw new System.Text.Json.JsonException($"Variant '{value.Type}' is not supported for type '{nameof(IAnalyzer)}'.");
 		}
 	}
 }

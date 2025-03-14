@@ -27,6 +27,90 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+internal sealed partial class CompletionContextConverter : System.Text.Json.Serialization.JsonConverter<CompletionContext>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropContext = System.Text.Json.JsonEncodedText.Encode("context");
+	private static readonly System.Text.Json.JsonEncodedText PropNeighbours = System.Text.Json.JsonEncodedText.Encode("neighbours");
+	private static readonly System.Text.Json.JsonEncodedText PropPrecision = System.Text.Json.JsonEncodedText.Encode("precision");
+	private static readonly System.Text.Json.JsonEncodedText PropPrefix = System.Text.Json.JsonEncodedText.Encode("prefix");
+
+	public override CompletionContext Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var readerSnapshot = reader;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<double?> propBoost = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.Context> propContext = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.GeohashPrecision>?> propNeighbours = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.GeohashPrecision?> propPrecision = default;
+		LocalJsonValue<bool?> propPrefix = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propContext.TryReadProperty(ref reader, options, PropContext, null))
+			{
+				continue;
+			}
+
+			if (propNeighbours.TryReadProperty(ref reader, options, PropNeighbours, static ICollection<Elastic.Clients.Elasticsearch.GeohashPrecision>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.GeohashPrecision>(o, null)))
+			{
+				continue;
+			}
+
+			if (propPrecision.TryReadProperty(ref reader, options, PropPrecision, null))
+			{
+				continue;
+			}
+
+			if (propPrefix.TryReadProperty(ref reader, options, PropPrefix, null))
+			{
+				continue;
+			}
+
+			try
+			{
+				reader = readerSnapshot;
+				var result = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.Context>(options, null);
+				return new CompletionContext { Context = result };
+			}
+			catch (System.Text.Json.JsonException)
+			{
+				throw;
+			}
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new CompletionContext
+		{
+			Boost = propBoost.Value
+,
+			Context = propContext.Value
+,
+			Neighbours = propNeighbours.Value
+,
+			Precision = propPrecision.Value
+,
+			Prefix = propPrefix.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, CompletionContext value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropContext, value.Context, null, null);
+		writer.WriteProperty(options, PropNeighbours, value.Neighbours, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.GeohashPrecision>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.GeohashPrecision>(o, v, null));
+		writer.WriteProperty(options, PropPrecision, value.Precision, null, null);
+		writer.WriteProperty(options, PropPrefix, value.Prefix, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(CompletionContextConverter))]
 public sealed partial class CompletionContext
 {
 	/// <summary>
@@ -35,7 +119,6 @@ public sealed partial class CompletionContext
 	/// The score is computed by multiplying the boost with the suggestion weight.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boost")]
 	public double? Boost { get; set; }
 
 	/// <summary>
@@ -43,7 +126,6 @@ public sealed partial class CompletionContext
 	/// The value of the category to filter/boost on.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("context")]
 	public Elastic.Clients.Elasticsearch.Core.Search.Context Context { get; set; }
 
 	/// <summary>
@@ -53,7 +135,6 @@ public sealed partial class CompletionContext
 	/// Defaults to generating neighbors for index time precision level.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("neighbours")]
 	public ICollection<Elastic.Clients.Elasticsearch.GeohashPrecision>? Neighbours { get; set; }
 
 	/// <summary>
@@ -63,7 +144,6 @@ public sealed partial class CompletionContext
 	/// Defaults to index time precision level.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("precision")]
 	public Elastic.Clients.Elasticsearch.GeohashPrecision? Precision { get; set; }
 
 	/// <summary>
@@ -71,7 +151,6 @@ public sealed partial class CompletionContext
 	/// Whether the category value should be treated as a prefix or not.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("prefix")]
 	public bool? Prefix { get; set; }
 }
 

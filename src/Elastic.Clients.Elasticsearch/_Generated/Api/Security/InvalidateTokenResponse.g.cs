@@ -22,18 +22,85 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class InvalidateTokenResponseConverter : System.Text.Json.Serialization.JsonConverter<InvalidateTokenResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropErrorCount = System.Text.Json.JsonEncodedText.Encode("error_count");
+	private static readonly System.Text.Json.JsonEncodedText PropErrorDetails = System.Text.Json.JsonEncodedText.Encode("error_details");
+	private static readonly System.Text.Json.JsonEncodedText PropInvalidatedTokens = System.Text.Json.JsonEncodedText.Encode("invalidated_tokens");
+	private static readonly System.Text.Json.JsonEncodedText PropPreviouslyInvalidatedTokens = System.Text.Json.JsonEncodedText.Encode("previously_invalidated_tokens");
+
+	public override InvalidateTokenResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propErrorCount = default;
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>?> propErrorDetails = default;
+		LocalJsonValue<long> propInvalidatedTokens = default;
+		LocalJsonValue<long> propPreviouslyInvalidatedTokens = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propErrorCount.TryReadProperty(ref reader, options, PropErrorCount, null))
+			{
+				continue;
+			}
+
+			if (propErrorDetails.TryReadProperty(ref reader, options, PropErrorDetails, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.ErrorCause>(o, null)))
+			{
+				continue;
+			}
+
+			if (propInvalidatedTokens.TryReadProperty(ref reader, options, PropInvalidatedTokens, null))
+			{
+				continue;
+			}
+
+			if (propPreviouslyInvalidatedTokens.TryReadProperty(ref reader, options, PropPreviouslyInvalidatedTokens, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new InvalidateTokenResponse
+		{
+			ErrorCount = propErrorCount.Value
+,
+			ErrorDetails = propErrorDetails.Value
+,
+			InvalidatedTokens = propInvalidatedTokens.Value
+,
+			PreviouslyInvalidatedTokens = propPreviouslyInvalidatedTokens.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, InvalidateTokenResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropErrorCount, value.ErrorCount, null, null);
+		writer.WriteProperty(options, PropErrorDetails, value.ErrorDetails, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.ErrorCause>(o, v, null));
+		writer.WriteProperty(options, PropInvalidatedTokens, value.InvalidatedTokens, null, null);
+		writer.WriteProperty(options, PropPreviouslyInvalidatedTokens, value.PreviouslyInvalidatedTokens, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(InvalidateTokenResponseConverter))]
 public sealed partial class InvalidateTokenResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("error_count")]
 	public long ErrorCount { get; init; }
-	[JsonInclude, JsonPropertyName("error_details")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? ErrorDetails { get; init; }
-	[JsonInclude, JsonPropertyName("invalidated_tokens")]
 	public long InvalidatedTokens { get; init; }
-	[JsonInclude, JsonPropertyName("previously_invalidated_tokens")]
 	public long PreviouslyInvalidatedTokens { get; init; }
 }

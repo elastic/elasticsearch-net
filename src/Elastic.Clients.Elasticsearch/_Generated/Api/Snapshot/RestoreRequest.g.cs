@@ -79,6 +79,11 @@ public sealed partial class RestoreRequest : PlainRequest<RestoreRequestParamete
 	{
 	}
 
+	[JsonConstructor]
+	internal RestoreRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotRestore;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -86,6 +91,22 @@ public sealed partial class RestoreRequest : PlainRequest<RestoreRequestParamete
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "snapshot.restore";
+
+	/// <summary>
+	/// <para>
+	/// A repository name
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Repository { get => P<Elastic.Clients.Elasticsearch.Name>("repository"); set => PR("repository", value); }
+
+	/// <summary>
+	/// <para>
+	/// A snapshot name
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Snapshot { get => P<Elastic.Clients.Elasticsearch.Name>("snapshot"); set => PR("snapshot", value); }
 
 	/// <summary>
 	/// <para>

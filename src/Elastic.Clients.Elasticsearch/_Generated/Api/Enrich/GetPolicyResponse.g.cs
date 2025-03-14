@@ -22,12 +22,52 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Enrich;
 
+internal sealed partial class GetPolicyResponseConverter : System.Text.Json.Serialization.JsonConverter<GetPolicyResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropPolicies = System.Text.Json.JsonEncodedText.Encode("policies");
+
+	public override GetPolicyResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.EnrichSummary>> propPolicies = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propPolicies.TryReadProperty(ref reader, options, PropPolicies, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.EnrichSummary> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Enrich.EnrichSummary>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new GetPolicyResponse
+		{
+			Policies = propPolicies.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetPolicyResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropPolicies, value.Policies, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.EnrichSummary> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Enrich.EnrichSummary>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(GetPolicyResponseConverter))]
 public sealed partial class GetPolicyResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("policies")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.EnrichSummary> Policies { get; init; }
 }

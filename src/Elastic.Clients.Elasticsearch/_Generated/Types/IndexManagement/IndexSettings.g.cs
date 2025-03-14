@@ -27,711 +27,596 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-internal sealed partial class IndexSettingsConverter : JsonConverter<IndexSettings>
+internal sealed partial class IndexSettingsConverter : System.Text.Json.Serialization.JsonConverter<IndexSettings>
 {
-	public override IndexSettings Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropAnalysis = System.Text.Json.JsonEncodedText.Encode("analysis");
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyze = System.Text.Json.JsonEncodedText.Encode("analyze");
+	private static readonly System.Text.Json.JsonEncodedText PropAutoExpandReplicas = System.Text.Json.JsonEncodedText.Encode("auto_expand_replicas");
+	private static readonly System.Text.Json.JsonEncodedText PropBlocks = System.Text.Json.JsonEncodedText.Encode("blocks");
+	private static readonly System.Text.Json.JsonEncodedText PropCheckOnStartup = System.Text.Json.JsonEncodedText.Encode("check_on_startup");
+	private static readonly System.Text.Json.JsonEncodedText PropCodec = System.Text.Json.JsonEncodedText.Encode("codec");
+	private static readonly System.Text.Json.JsonEncodedText PropCreationDate = System.Text.Json.JsonEncodedText.Encode("creation_date");
+	private static readonly System.Text.Json.JsonEncodedText PropCreationDateString = System.Text.Json.JsonEncodedText.Encode("creation_date_string");
+	private static readonly System.Text.Json.JsonEncodedText PropDefaultPipeline = System.Text.Json.JsonEncodedText.Encode("default_pipeline");
+	private static readonly System.Text.Json.JsonEncodedText PropFinalPipeline = System.Text.Json.JsonEncodedText.Encode("final_pipeline");
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
+	private static readonly System.Text.Json.JsonEncodedText PropGcDeletes = System.Text.Json.JsonEncodedText.Encode("gc_deletes");
+	private static readonly System.Text.Json.JsonEncodedText PropHidden = System.Text.Json.JsonEncodedText.Encode("hidden");
+	private static readonly System.Text.Json.JsonEncodedText PropHighlight = System.Text.Json.JsonEncodedText.Encode("highlight");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexingPressure = System.Text.Json.JsonEncodedText.Encode("indexing_pressure");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexingSlowlog = System.Text.Json.JsonEncodedText.Encode("indexing.slowlog");
+	private static readonly System.Text.Json.JsonEncodedText PropLifecycle = System.Text.Json.JsonEncodedText.Encode("lifecycle");
+	private static readonly System.Text.Json.JsonEncodedText PropLoadFixedBitsetFiltersEagerly = System.Text.Json.JsonEncodedText.Encode("load_fixed_bitset_filters_eagerly");
+	private static readonly System.Text.Json.JsonEncodedText PropMapping = System.Text.Json.JsonEncodedText.Encode("mapping");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxDocvalueFieldsSearch = System.Text.Json.JsonEncodedText.Encode("max_docvalue_fields_search");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxInnerResultWindow = System.Text.Json.JsonEncodedText.Encode("max_inner_result_window");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxNgramDiff = System.Text.Json.JsonEncodedText.Encode("max_ngram_diff");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxRefreshListeners = System.Text.Json.JsonEncodedText.Encode("max_refresh_listeners");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxRegexLength = System.Text.Json.JsonEncodedText.Encode("max_regex_length");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxRescoreWindow = System.Text.Json.JsonEncodedText.Encode("max_rescore_window");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxResultWindow = System.Text.Json.JsonEncodedText.Encode("max_result_window");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxScriptFields = System.Text.Json.JsonEncodedText.Encode("max_script_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxShingleDiff = System.Text.Json.JsonEncodedText.Encode("max_shingle_diff");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxSlicesPerScroll = System.Text.Json.JsonEncodedText.Encode("max_slices_per_scroll");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxTermsCount = System.Text.Json.JsonEncodedText.Encode("max_terms_count");
+	private static readonly System.Text.Json.JsonEncodedText PropMerge = System.Text.Json.JsonEncodedText.Encode("merge");
+	private static readonly System.Text.Json.JsonEncodedText PropMode = System.Text.Json.JsonEncodedText.Encode("mode");
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfReplicas = System.Text.Json.JsonEncodedText.Encode("number_of_replicas");
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfRoutingShards = System.Text.Json.JsonEncodedText.Encode("number_of_routing_shards");
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfShards = System.Text.Json.JsonEncodedText.Encode("number_of_shards");
+	private static readonly System.Text.Json.JsonEncodedText PropPriority = System.Text.Json.JsonEncodedText.Encode("priority");
+	private static readonly System.Text.Json.JsonEncodedText PropProvidedName = System.Text.Json.JsonEncodedText.Encode("provided_name");
+	private static readonly System.Text.Json.JsonEncodedText PropQueries = System.Text.Json.JsonEncodedText.Encode("queries");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryString = System.Text.Json.JsonEncodedText.Encode("query_string");
+	private static readonly System.Text.Json.JsonEncodedText PropRefreshInterval = System.Text.Json.JsonEncodedText.Encode("refresh_interval");
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing");
+	private static readonly System.Text.Json.JsonEncodedText PropRoutingPartitionSize = System.Text.Json.JsonEncodedText.Encode("routing_partition_size");
+	private static readonly System.Text.Json.JsonEncodedText PropRoutingPath = System.Text.Json.JsonEncodedText.Encode("routing_path");
+	private static readonly System.Text.Json.JsonEncodedText PropSearch = System.Text.Json.JsonEncodedText.Encode("search");
+	private static readonly System.Text.Json.JsonEncodedText PropSettings = System.Text.Json.JsonEncodedText.Encode("settings");
+	private static readonly System.Text.Json.JsonEncodedText PropSimilarity = System.Text.Json.JsonEncodedText.Encode("similarity");
+	private static readonly System.Text.Json.JsonEncodedText PropSoftDeletes = System.Text.Json.JsonEncodedText.Encode("soft_deletes");
+	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort");
+	private static readonly System.Text.Json.JsonEncodedText PropStore = System.Text.Json.JsonEncodedText.Encode("store");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeSeries = System.Text.Json.JsonEncodedText.Encode("time_series");
+	private static readonly System.Text.Json.JsonEncodedText PropTopMetricsMaxSize = System.Text.Json.JsonEncodedText.Encode("top_metrics_max_size");
+	private static readonly System.Text.Json.JsonEncodedText PropTranslog = System.Text.Json.JsonEncodedText.Encode("translog");
+	private static readonly System.Text.Json.JsonEncodedText PropUuid = System.Text.Json.JsonEncodedText.Encode("uuid");
+	private static readonly System.Text.Json.JsonEncodedText PropVerifiedBeforeClose = System.Text.Json.JsonEncodedText.Encode("verified_before_close");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override IndexSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		var variant = new IndexSettings();
-		Dictionary<string, object> additionalProperties = null;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		System.Collections.Generic.Dictionary<string, object> propOtherSettings = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysis?> propAnalysis = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze?> propAnalyze = default;
+		LocalJsonValue<string?> propAutoExpandReplicas = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks?> propBlocks = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup?> propCheckOnStartup = default;
+		LocalJsonValue<string?> propCodec = default;
+		LocalJsonValue<long?> propCreationDate = default;
+		LocalJsonValue<DateTimeOffset?> propCreationDateString = default;
+		LocalJsonValue<string?> propDefaultPipeline = default;
+		LocalJsonValue<string?> propFinalPipeline = default;
+		LocalJsonValue<object?> propFormat = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propGcDeletes = default;
+		LocalJsonValue<object?> propHidden = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight?> propHighlight = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings?> propIndex = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure?> propIndexingPressure = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettings?> propIndexingSlowlog = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle?> propLifecycle = default;
+		LocalJsonValue<bool?> propLoadFixedBitsetFiltersEagerly = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings?> propMapping = default;
+		LocalJsonValue<int?> propMaxDocvalueFieldsSearch = default;
+		LocalJsonValue<int?> propMaxInnerResultWindow = default;
+		LocalJsonValue<int?> propMaxNgramDiff = default;
+		LocalJsonValue<int?> propMaxRefreshListeners = default;
+		LocalJsonValue<int?> propMaxRegexLength = default;
+		LocalJsonValue<int?> propMaxRescoreWindow = default;
+		LocalJsonValue<int?> propMaxResultWindow = default;
+		LocalJsonValue<int?> propMaxScriptFields = default;
+		LocalJsonValue<int?> propMaxShingleDiff = default;
+		LocalJsonValue<int?> propMaxSlicesPerScroll = default;
+		LocalJsonValue<int?> propMaxTermsCount = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.Merge?> propMerge = default;
+		LocalJsonValue<string?> propMode = default;
+		LocalJsonValue<object?> propNumberOfReplicas = default;
+		LocalJsonValue<int?> propNumberOfRoutingShards = default;
+		LocalJsonValue<object?> propNumberOfShards = default;
+		LocalJsonValue<object?> propPriority = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Name?> propProvidedName = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.Queries?> propQueries = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.SettingsQueryString?> propQueryString = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propRefreshInterval = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting?> propRouting = default;
+		LocalJsonValue<int?> propRoutingPartitionSize = default;
+		LocalJsonValue<ICollection<string>?> propRoutingPath = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch?> propSearch = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings?> propSettings = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarities?> propSimilarity = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes?> propSoftDeletes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSort?> propSort = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.Storage?> propStore = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries?> propTimeSeries = default;
+		LocalJsonValue<int?> propTopMetricsMaxSize = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.Translog?> propTranslog = default;
+		LocalJsonValue<string?> propUuid = default;
+		LocalJsonValue<object?> propVerifiedBeforeClose = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propAnalysis.TryReadProperty(ref reader, options, PropAnalysis, null))
 			{
-				var property = reader.GetString();
-				if (property == "analysis")
-				{
-					variant.Analysis = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysis?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "analyze")
-				{
-					variant.Analyze = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "auto_expand_replicas")
-				{
-					variant.AutoExpandReplicas = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "blocks")
-				{
-					variant.Blocks = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "check_on_startup")
-				{
-					variant.CheckOnStartup = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "codec")
-				{
-					variant.Codec = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "creation_date")
-				{
-					variant.CreationDate = JsonSerializer.Deserialize<long?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "creation_date_string")
-				{
-					variant.CreationDateString = JsonSerializer.Deserialize<DateTimeOffset?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "default_pipeline")
-				{
-					variant.DefaultPipeline = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "final_pipeline")
-				{
-					variant.FinalPipeline = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "format")
-				{
-					variant.Format = JsonSerializer.Deserialize<object?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "gc_deletes")
-				{
-					variant.GcDeletes = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Duration?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "hidden")
-				{
-					variant.Hidden = JsonSerializer.Deserialize<object?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "highlight")
-				{
-					variant.Highlight = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "index")
-				{
-					variant.Index = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "indexing_pressure")
-				{
-					variant.IndexingPressure = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "indexing.slowlog")
-				{
-					variant.IndexingSlowlog = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettings?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "lifecycle")
-				{
-					variant.Lifecycle = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "load_fixed_bitset_filters_eagerly")
-				{
-					variant.LoadFixedBitsetFiltersEagerly = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "mapping")
-				{
-					variant.Mapping = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "max_docvalue_fields_search")
-				{
-					variant.MaxDocvalueFieldsSearch = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "max_inner_result_window")
-				{
-					variant.MaxInnerResultWindow = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "max_ngram_diff")
-				{
-					variant.MaxNgramDiff = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "max_refresh_listeners")
-				{
-					variant.MaxRefreshListeners = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "max_regex_length")
-				{
-					variant.MaxRegexLength = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "max_rescore_window")
-				{
-					variant.MaxRescoreWindow = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "max_result_window")
-				{
-					variant.MaxResultWindow = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "max_script_fields")
-				{
-					variant.MaxScriptFields = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "max_shingle_diff")
-				{
-					variant.MaxShingleDiff = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "max_slices_per_scroll")
-				{
-					variant.MaxSlicesPerScroll = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "max_terms_count")
-				{
-					variant.MaxTermsCount = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "merge")
-				{
-					variant.Merge = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.Merge?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "mode")
-				{
-					variant.Mode = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "number_of_replicas")
-				{
-					variant.NumberOfReplicas = JsonSerializer.Deserialize<object?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "number_of_routing_shards")
-				{
-					variant.NumberOfRoutingShards = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "number_of_shards")
-				{
-					variant.NumberOfShards = JsonSerializer.Deserialize<object?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "priority")
-				{
-					variant.Priority = JsonSerializer.Deserialize<object?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "provided_name")
-				{
-					variant.ProvidedName = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Name?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "queries")
-				{
-					variant.Queries = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.Queries?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "query_string")
-				{
-					variant.QueryString = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.SettingsQueryString?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "refresh_interval")
-				{
-					variant.RefreshInterval = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Duration?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "routing")
-				{
-					variant.Routing = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "routing_partition_size")
-				{
-					variant.RoutingPartitionSize = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "routing_path")
-				{
-					variant.RoutingPath = SingleOrManySerializationHelper.Deserialize<string>(ref reader, options);
-					continue;
-				}
-
-				if (property == "search")
-				{
-					variant.Search = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "settings")
-				{
-					variant.Settings = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "similarity")
-				{
-					variant.Similarity = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarities?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "soft_deletes")
-				{
-					variant.SoftDeletes = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "sort")
-				{
-					variant.Sort = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSort?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "store")
-				{
-					variant.Store = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.Storage?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "time_series")
-				{
-					variant.TimeSeries = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "top_metrics_max_size")
-				{
-					variant.TopMetricsMaxSize = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "translog")
-				{
-					variant.Translog = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.Translog?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "uuid")
-				{
-					variant.Uuid = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "verified_before_close")
-				{
-					variant.VerifiedBeforeClose = JsonSerializer.Deserialize<object?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "version")
-				{
-					variant.Version = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning?>(ref reader, options);
-					continue;
-				}
-
-				additionalProperties ??= new Dictionary<string, object>();
-				var additionalValue = JsonSerializer.Deserialize<object>(ref reader, options);
-				additionalProperties.Add(property, additionalValue);
+				continue;
 			}
+
+			if (propAnalyze.TryReadProperty(ref reader, options, PropAnalyze, null))
+			{
+				continue;
+			}
+
+			if (propAutoExpandReplicas.TryReadProperty(ref reader, options, PropAutoExpandReplicas, null))
+			{
+				continue;
+			}
+
+			if (propBlocks.TryReadProperty(ref reader, options, PropBlocks, null))
+			{
+				continue;
+			}
+
+			if (propCheckOnStartup.TryReadProperty(ref reader, options, PropCheckOnStartup, null))
+			{
+				continue;
+			}
+
+			if (propCodec.TryReadProperty(ref reader, options, PropCodec, null))
+			{
+				continue;
+			}
+
+			if (propCreationDate.TryReadProperty(ref reader, options, PropCreationDate, null))
+			{
+				continue;
+			}
+
+			if (propCreationDateString.TryReadProperty(ref reader, options, PropCreationDateString, null))
+			{
+				continue;
+			}
+
+			if (propDefaultPipeline.TryReadProperty(ref reader, options, PropDefaultPipeline, null))
+			{
+				continue;
+			}
+
+			if (propFinalPipeline.TryReadProperty(ref reader, options, PropFinalPipeline, null))
+			{
+				continue;
+			}
+
+			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
+			{
+				continue;
+			}
+
+			if (propGcDeletes.TryReadProperty(ref reader, options, PropGcDeletes, null))
+			{
+				continue;
+			}
+
+			if (propHidden.TryReadProperty(ref reader, options, PropHidden, null))
+			{
+				continue;
+			}
+
+			if (propHighlight.TryReadProperty(ref reader, options, PropHighlight, null))
+			{
+				continue;
+			}
+
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propIndexingPressure.TryReadProperty(ref reader, options, PropIndexingPressure, null))
+			{
+				continue;
+			}
+
+			if (propIndexingSlowlog.TryReadProperty(ref reader, options, PropIndexingSlowlog, null))
+			{
+				continue;
+			}
+
+			if (propLifecycle.TryReadProperty(ref reader, options, PropLifecycle, null))
+			{
+				continue;
+			}
+
+			if (propLoadFixedBitsetFiltersEagerly.TryReadProperty(ref reader, options, PropLoadFixedBitsetFiltersEagerly, null))
+			{
+				continue;
+			}
+
+			if (propMapping.TryReadProperty(ref reader, options, PropMapping, null))
+			{
+				continue;
+			}
+
+			if (propMaxDocvalueFieldsSearch.TryReadProperty(ref reader, options, PropMaxDocvalueFieldsSearch, null))
+			{
+				continue;
+			}
+
+			if (propMaxInnerResultWindow.TryReadProperty(ref reader, options, PropMaxInnerResultWindow, null))
+			{
+				continue;
+			}
+
+			if (propMaxNgramDiff.TryReadProperty(ref reader, options, PropMaxNgramDiff, null))
+			{
+				continue;
+			}
+
+			if (propMaxRefreshListeners.TryReadProperty(ref reader, options, PropMaxRefreshListeners, null))
+			{
+				continue;
+			}
+
+			if (propMaxRegexLength.TryReadProperty(ref reader, options, PropMaxRegexLength, null))
+			{
+				continue;
+			}
+
+			if (propMaxRescoreWindow.TryReadProperty(ref reader, options, PropMaxRescoreWindow, null))
+			{
+				continue;
+			}
+
+			if (propMaxResultWindow.TryReadProperty(ref reader, options, PropMaxResultWindow, null))
+			{
+				continue;
+			}
+
+			if (propMaxScriptFields.TryReadProperty(ref reader, options, PropMaxScriptFields, null))
+			{
+				continue;
+			}
+
+			if (propMaxShingleDiff.TryReadProperty(ref reader, options, PropMaxShingleDiff, null))
+			{
+				continue;
+			}
+
+			if (propMaxSlicesPerScroll.TryReadProperty(ref reader, options, PropMaxSlicesPerScroll, null))
+			{
+				continue;
+			}
+
+			if (propMaxTermsCount.TryReadProperty(ref reader, options, PropMaxTermsCount, null))
+			{
+				continue;
+			}
+
+			if (propMerge.TryReadProperty(ref reader, options, PropMerge, null))
+			{
+				continue;
+			}
+
+			if (propMode.TryReadProperty(ref reader, options, PropMode, null))
+			{
+				continue;
+			}
+
+			if (propNumberOfReplicas.TryReadProperty(ref reader, options, PropNumberOfReplicas, null))
+			{
+				continue;
+			}
+
+			if (propNumberOfRoutingShards.TryReadProperty(ref reader, options, PropNumberOfRoutingShards, null))
+			{
+				continue;
+			}
+
+			if (propNumberOfShards.TryReadProperty(ref reader, options, PropNumberOfShards, null))
+			{
+				continue;
+			}
+
+			if (propPriority.TryReadProperty(ref reader, options, PropPriority, null))
+			{
+				continue;
+			}
+
+			if (propProvidedName.TryReadProperty(ref reader, options, PropProvidedName, null))
+			{
+				continue;
+			}
+
+			if (propQueries.TryReadProperty(ref reader, options, PropQueries, null))
+			{
+				continue;
+			}
+
+			if (propQueryString.TryReadProperty(ref reader, options, PropQueryString, null))
+			{
+				continue;
+			}
+
+			if (propRefreshInterval.TryReadProperty(ref reader, options, PropRefreshInterval, null))
+			{
+				continue;
+			}
+
+			if (propRouting.TryReadProperty(ref reader, options, PropRouting, null))
+			{
+				continue;
+			}
+
+			if (propRoutingPartitionSize.TryReadProperty(ref reader, options, PropRoutingPartitionSize, null))
+			{
+				continue;
+			}
+
+			if (propRoutingPath.TryReadProperty(ref reader, options, PropRoutingPath, static ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propSearch.TryReadProperty(ref reader, options, PropSearch, null))
+			{
+				continue;
+			}
+
+			if (propSettings.TryReadProperty(ref reader, options, PropSettings, null))
+			{
+				continue;
+			}
+
+			if (propSimilarity.TryReadProperty(ref reader, options, PropSimilarity, null))
+			{
+				continue;
+			}
+
+			if (propSoftDeletes.TryReadProperty(ref reader, options, PropSoftDeletes, null))
+			{
+				continue;
+			}
+
+			if (propSort.TryReadProperty(ref reader, options, PropSort, null))
+			{
+				continue;
+			}
+
+			if (propStore.TryReadProperty(ref reader, options, PropStore, null))
+			{
+				continue;
+			}
+
+			if (propTimeSeries.TryReadProperty(ref reader, options, PropTimeSeries, null))
+			{
+				continue;
+			}
+
+			if (propTopMetricsMaxSize.TryReadProperty(ref reader, options, PropTopMetricsMaxSize, null))
+			{
+				continue;
+			}
+
+			if (propTranslog.TryReadProperty(ref reader, options, PropTranslog, null))
+			{
+				continue;
+			}
+
+			if (propUuid.TryReadProperty(ref reader, options, PropUuid, null))
+			{
+				continue;
+			}
+
+			if (propVerifiedBeforeClose.TryReadProperty(ref reader, options, PropVerifiedBeforeClose, null))
+			{
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			propOtherSettings ??= new System.Collections.Generic.Dictionary<string, object>();
+			reader.ReadProperty(options, out string key, out object value);
+			propOtherSettings[key] = value;
 		}
 
-		variant.OtherSettings = additionalProperties;
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new IndexSettings
+		{
+			OtherSettings = propOtherSettings
+,
+			Analysis = propAnalysis.Value
+,
+			Analyze = propAnalyze.Value
+,
+			AutoExpandReplicas = propAutoExpandReplicas.Value
+,
+			Blocks = propBlocks.Value
+,
+			CheckOnStartup = propCheckOnStartup.Value
+,
+			Codec = propCodec.Value
+,
+			CreationDate = propCreationDate.Value
+,
+			CreationDateString = propCreationDateString.Value
+,
+			DefaultPipeline = propDefaultPipeline.Value
+,
+			FinalPipeline = propFinalPipeline.Value
+,
+			Format = propFormat.Value
+,
+			GcDeletes = propGcDeletes.Value
+,
+			Hidden = propHidden.Value
+,
+			Highlight = propHighlight.Value
+,
+			Index = propIndex.Value
+,
+			IndexingPressure = propIndexingPressure.Value
+,
+			IndexingSlowlog = propIndexingSlowlog.Value
+,
+			Lifecycle = propLifecycle.Value
+,
+			LoadFixedBitsetFiltersEagerly = propLoadFixedBitsetFiltersEagerly.Value
+,
+			Mapping = propMapping.Value
+,
+			MaxDocvalueFieldsSearch = propMaxDocvalueFieldsSearch.Value
+,
+			MaxInnerResultWindow = propMaxInnerResultWindow.Value
+,
+			MaxNgramDiff = propMaxNgramDiff.Value
+,
+			MaxRefreshListeners = propMaxRefreshListeners.Value
+,
+			MaxRegexLength = propMaxRegexLength.Value
+,
+			MaxRescoreWindow = propMaxRescoreWindow.Value
+,
+			MaxResultWindow = propMaxResultWindow.Value
+,
+			MaxScriptFields = propMaxScriptFields.Value
+,
+			MaxShingleDiff = propMaxShingleDiff.Value
+,
+			MaxSlicesPerScroll = propMaxSlicesPerScroll.Value
+,
+			MaxTermsCount = propMaxTermsCount.Value
+,
+			Merge = propMerge.Value
+,
+			Mode = propMode.Value
+,
+			NumberOfReplicas = propNumberOfReplicas.Value
+,
+			NumberOfRoutingShards = propNumberOfRoutingShards.Value
+,
+			NumberOfShards = propNumberOfShards.Value
+,
+			Priority = propPriority.Value
+,
+			ProvidedName = propProvidedName.Value
+,
+			Queries = propQueries.Value
+,
+			QueryString = propQueryString.Value
+,
+			RefreshInterval = propRefreshInterval.Value
+,
+			Routing = propRouting.Value
+,
+			RoutingPartitionSize = propRoutingPartitionSize.Value
+,
+			RoutingPath = propRoutingPath.Value
+,
+			Search = propSearch.Value
+,
+			Settings = propSettings.Value
+,
+			Similarity = propSimilarity.Value
+,
+			SoftDeletes = propSoftDeletes.Value
+,
+			Sort = propSort.Value
+,
+			Store = propStore.Value
+,
+			TimeSeries = propTimeSeries.Value
+,
+			TopMetricsMaxSize = propTopMetricsMaxSize.Value
+,
+			Translog = propTranslog.Value
+,
+			Uuid = propUuid.Value
+,
+			VerifiedBeforeClose = propVerifiedBeforeClose.Value
+,
+			Version = propVersion.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, IndexSettings value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, IndexSettings value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAnalysis, value.Analysis, null, null);
+		writer.WriteProperty(options, PropAnalyze, value.Analyze, null, null);
+		writer.WriteProperty(options, PropAutoExpandReplicas, value.AutoExpandReplicas, null, null);
+		writer.WriteProperty(options, PropBlocks, value.Blocks, null, null);
+		writer.WriteProperty(options, PropCheckOnStartup, value.CheckOnStartup, null, null);
+		writer.WriteProperty(options, PropCodec, value.Codec, null, null);
+		writer.WriteProperty(options, PropCreationDate, value.CreationDate, null, null);
+		writer.WriteProperty(options, PropCreationDateString, value.CreationDateString, null, null);
+		writer.WriteProperty(options, PropDefaultPipeline, value.DefaultPipeline, null, null);
+		writer.WriteProperty(options, PropFinalPipeline, value.FinalPipeline, null, null);
+		writer.WriteProperty(options, PropFormat, value.Format, null, null);
+		writer.WriteProperty(options, PropGcDeletes, value.GcDeletes, null, null);
+		writer.WriteProperty(options, PropHidden, value.Hidden, null, null);
+		writer.WriteProperty(options, PropHighlight, value.Highlight, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropIndexingPressure, value.IndexingPressure, null, null);
+		writer.WriteProperty(options, PropIndexingSlowlog, value.IndexingSlowlog, null, null);
+		writer.WriteProperty(options, PropLifecycle, value.Lifecycle, null, null);
+		writer.WriteProperty(options, PropLoadFixedBitsetFiltersEagerly, value.LoadFixedBitsetFiltersEagerly, null, null);
+		writer.WriteProperty(options, PropMapping, value.Mapping, null, null);
+		writer.WriteProperty(options, PropMaxDocvalueFieldsSearch, value.MaxDocvalueFieldsSearch, null, null);
+		writer.WriteProperty(options, PropMaxInnerResultWindow, value.MaxInnerResultWindow, null, null);
+		writer.WriteProperty(options, PropMaxNgramDiff, value.MaxNgramDiff, null, null);
+		writer.WriteProperty(options, PropMaxRefreshListeners, value.MaxRefreshListeners, null, null);
+		writer.WriteProperty(options, PropMaxRegexLength, value.MaxRegexLength, null, null);
+		writer.WriteProperty(options, PropMaxRescoreWindow, value.MaxRescoreWindow, null, null);
+		writer.WriteProperty(options, PropMaxResultWindow, value.MaxResultWindow, null, null);
+		writer.WriteProperty(options, PropMaxScriptFields, value.MaxScriptFields, null, null);
+		writer.WriteProperty(options, PropMaxShingleDiff, value.MaxShingleDiff, null, null);
+		writer.WriteProperty(options, PropMaxSlicesPerScroll, value.MaxSlicesPerScroll, null, null);
+		writer.WriteProperty(options, PropMaxTermsCount, value.MaxTermsCount, null, null);
+		writer.WriteProperty(options, PropMerge, value.Merge, null, null);
+		writer.WriteProperty(options, PropMode, value.Mode, null, null);
+		writer.WriteProperty(options, PropNumberOfReplicas, value.NumberOfReplicas, null, null);
+		writer.WriteProperty(options, PropNumberOfRoutingShards, value.NumberOfRoutingShards, null, null);
+		writer.WriteProperty(options, PropNumberOfShards, value.NumberOfShards, null, null);
+		writer.WriteProperty(options, PropPriority, value.Priority, null, null);
+		writer.WriteProperty(options, PropProvidedName, value.ProvidedName, null, null);
+		writer.WriteProperty(options, PropQueries, value.Queries, null, null);
+		writer.WriteProperty(options, PropQueryString, value.QueryString, null, null);
+		writer.WriteProperty(options, PropRefreshInterval, value.RefreshInterval, null, null);
+		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
+		writer.WriteProperty(options, PropRoutingPartitionSize, value.RoutingPartitionSize, null, null);
+		writer.WriteProperty(options, PropRoutingPath, value.RoutingPath, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropSearch, value.Search, null, null);
+		writer.WriteProperty(options, PropSettings, value.Settings, null, null);
+		writer.WriteProperty(options, PropSimilarity, value.Similarity, null, null);
+		writer.WriteProperty(options, PropSoftDeletes, value.SoftDeletes, null, null);
+		writer.WriteProperty(options, PropSort, value.Sort, null, null);
+		writer.WriteProperty(options, PropStore, value.Store, null, null);
+		writer.WriteProperty(options, PropTimeSeries, value.TimeSeries, null, null);
+		writer.WriteProperty(options, PropTopMetricsMaxSize, value.TopMetricsMaxSize, null, null);
+		writer.WriteProperty(options, PropTranslog, value.Translog, null, null);
+		writer.WriteProperty(options, PropUuid, value.Uuid, null, null);
+		writer.WriteProperty(options, PropVerifiedBeforeClose, value.VerifiedBeforeClose, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		if (value.OtherSettings is not null)
 		{
-			foreach (var additionalProperty in value.OtherSettings)
+			foreach (var item in value.OtherSettings)
 			{
-				writer.WritePropertyName(additionalProperty.Key);
-				JsonSerializer.Serialize(writer, additionalProperty.Value, options);
+				writer.WriteProperty(options, item.Key, item.Value);
 			}
-		}
-
-		if (value.Analysis is not null)
-		{
-			writer.WritePropertyName("analysis");
-			JsonSerializer.Serialize(writer, value.Analysis, options);
-		}
-
-		if (value.Analyze is not null)
-		{
-			writer.WritePropertyName("analyze");
-			JsonSerializer.Serialize(writer, value.Analyze, options);
-		}
-
-		if (!string.IsNullOrEmpty(value.AutoExpandReplicas))
-		{
-			writer.WritePropertyName("auto_expand_replicas");
-			writer.WriteStringValue(value.AutoExpandReplicas);
-		}
-
-		if (value.Blocks is not null)
-		{
-			writer.WritePropertyName("blocks");
-			JsonSerializer.Serialize(writer, value.Blocks, options);
-		}
-
-		if (value.CheckOnStartup is not null)
-		{
-			writer.WritePropertyName("check_on_startup");
-			JsonSerializer.Serialize(writer, value.CheckOnStartup, options);
-		}
-
-		if (!string.IsNullOrEmpty(value.Codec))
-		{
-			writer.WritePropertyName("codec");
-			writer.WriteStringValue(value.Codec);
-		}
-
-		if (value.CreationDate.HasValue)
-		{
-			writer.WritePropertyName("creation_date");
-			writer.WriteNumberValue(value.CreationDate.Value);
-		}
-
-		if (value.CreationDateString is not null)
-		{
-			writer.WritePropertyName("creation_date_string");
-			JsonSerializer.Serialize(writer, value.CreationDateString, options);
-		}
-
-		if (!string.IsNullOrEmpty(value.DefaultPipeline))
-		{
-			writer.WritePropertyName("default_pipeline");
-			writer.WriteStringValue(value.DefaultPipeline);
-		}
-
-		if (!string.IsNullOrEmpty(value.FinalPipeline))
-		{
-			writer.WritePropertyName("final_pipeline");
-			writer.WriteStringValue(value.FinalPipeline);
-		}
-
-		if (value.Format is not null)
-		{
-			writer.WritePropertyName("format");
-			JsonSerializer.Serialize(writer, value.Format, options);
-		}
-
-		if (value.GcDeletes is not null)
-		{
-			writer.WritePropertyName("gc_deletes");
-			JsonSerializer.Serialize(writer, value.GcDeletes, options);
-		}
-
-		if (value.Hidden is not null)
-		{
-			writer.WritePropertyName("hidden");
-			JsonSerializer.Serialize(writer, value.Hidden, options);
-		}
-
-		if (value.Highlight is not null)
-		{
-			writer.WritePropertyName("highlight");
-			JsonSerializer.Serialize(writer, value.Highlight, options);
-		}
-
-		if (value.Index is not null)
-		{
-			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, value.Index, options);
-		}
-
-		if (value.IndexingPressure is not null)
-		{
-			writer.WritePropertyName("indexing_pressure");
-			JsonSerializer.Serialize(writer, value.IndexingPressure, options);
-		}
-
-		if (value.IndexingSlowlog is not null)
-		{
-			writer.WritePropertyName("indexing.slowlog");
-			JsonSerializer.Serialize(writer, value.IndexingSlowlog, options);
-		}
-
-		if (value.Lifecycle is not null)
-		{
-			writer.WritePropertyName("lifecycle");
-			JsonSerializer.Serialize(writer, value.Lifecycle, options);
-		}
-
-		if (value.LoadFixedBitsetFiltersEagerly.HasValue)
-		{
-			writer.WritePropertyName("load_fixed_bitset_filters_eagerly");
-			writer.WriteBooleanValue(value.LoadFixedBitsetFiltersEagerly.Value);
-		}
-
-		if (value.Mapping is not null)
-		{
-			writer.WritePropertyName("mapping");
-			JsonSerializer.Serialize(writer, value.Mapping, options);
-		}
-
-		if (value.MaxDocvalueFieldsSearch.HasValue)
-		{
-			writer.WritePropertyName("max_docvalue_fields_search");
-			writer.WriteNumberValue(value.MaxDocvalueFieldsSearch.Value);
-		}
-
-		if (value.MaxInnerResultWindow.HasValue)
-		{
-			writer.WritePropertyName("max_inner_result_window");
-			writer.WriteNumberValue(value.MaxInnerResultWindow.Value);
-		}
-
-		if (value.MaxNgramDiff.HasValue)
-		{
-			writer.WritePropertyName("max_ngram_diff");
-			writer.WriteNumberValue(value.MaxNgramDiff.Value);
-		}
-
-		if (value.MaxRefreshListeners.HasValue)
-		{
-			writer.WritePropertyName("max_refresh_listeners");
-			writer.WriteNumberValue(value.MaxRefreshListeners.Value);
-		}
-
-		if (value.MaxRegexLength.HasValue)
-		{
-			writer.WritePropertyName("max_regex_length");
-			writer.WriteNumberValue(value.MaxRegexLength.Value);
-		}
-
-		if (value.MaxRescoreWindow.HasValue)
-		{
-			writer.WritePropertyName("max_rescore_window");
-			writer.WriteNumberValue(value.MaxRescoreWindow.Value);
-		}
-
-		if (value.MaxResultWindow.HasValue)
-		{
-			writer.WritePropertyName("max_result_window");
-			writer.WriteNumberValue(value.MaxResultWindow.Value);
-		}
-
-		if (value.MaxScriptFields.HasValue)
-		{
-			writer.WritePropertyName("max_script_fields");
-			writer.WriteNumberValue(value.MaxScriptFields.Value);
-		}
-
-		if (value.MaxShingleDiff.HasValue)
-		{
-			writer.WritePropertyName("max_shingle_diff");
-			writer.WriteNumberValue(value.MaxShingleDiff.Value);
-		}
-
-		if (value.MaxSlicesPerScroll.HasValue)
-		{
-			writer.WritePropertyName("max_slices_per_scroll");
-			writer.WriteNumberValue(value.MaxSlicesPerScroll.Value);
-		}
-
-		if (value.MaxTermsCount.HasValue)
-		{
-			writer.WritePropertyName("max_terms_count");
-			writer.WriteNumberValue(value.MaxTermsCount.Value);
-		}
-
-		if (value.Merge is not null)
-		{
-			writer.WritePropertyName("merge");
-			JsonSerializer.Serialize(writer, value.Merge, options);
-		}
-
-		if (!string.IsNullOrEmpty(value.Mode))
-		{
-			writer.WritePropertyName("mode");
-			writer.WriteStringValue(value.Mode);
-		}
-
-		if (value.NumberOfReplicas is not null)
-		{
-			writer.WritePropertyName("number_of_replicas");
-			JsonSerializer.Serialize(writer, value.NumberOfReplicas, options);
-		}
-
-		if (value.NumberOfRoutingShards.HasValue)
-		{
-			writer.WritePropertyName("number_of_routing_shards");
-			writer.WriteNumberValue(value.NumberOfRoutingShards.Value);
-		}
-
-		if (value.NumberOfShards is not null)
-		{
-			writer.WritePropertyName("number_of_shards");
-			JsonSerializer.Serialize(writer, value.NumberOfShards, options);
-		}
-
-		if (value.Priority is not null)
-		{
-			writer.WritePropertyName("priority");
-			JsonSerializer.Serialize(writer, value.Priority, options);
-		}
-
-		if (value.ProvidedName is not null)
-		{
-			writer.WritePropertyName("provided_name");
-			JsonSerializer.Serialize(writer, value.ProvidedName, options);
-		}
-
-		if (value.Queries is not null)
-		{
-			writer.WritePropertyName("queries");
-			JsonSerializer.Serialize(writer, value.Queries, options);
-		}
-
-		if (value.QueryString is not null)
-		{
-			writer.WritePropertyName("query_string");
-			JsonSerializer.Serialize(writer, value.QueryString, options);
-		}
-
-		if (value.RefreshInterval is not null)
-		{
-			writer.WritePropertyName("refresh_interval");
-			JsonSerializer.Serialize(writer, value.RefreshInterval, options);
-		}
-
-		if (value.Routing is not null)
-		{
-			writer.WritePropertyName("routing");
-			JsonSerializer.Serialize(writer, value.Routing, options);
-		}
-
-		if (value.RoutingPartitionSize.HasValue)
-		{
-			writer.WritePropertyName("routing_partition_size");
-			writer.WriteNumberValue(value.RoutingPartitionSize.Value);
-		}
-
-		if (value.RoutingPath is not null)
-		{
-			writer.WritePropertyName("routing_path");
-			JsonSerializer.Serialize(writer, value.RoutingPath, options);
-		}
-
-		if (value.Search is not null)
-		{
-			writer.WritePropertyName("search");
-			JsonSerializer.Serialize(writer, value.Search, options);
-		}
-
-		if (value.Settings is not null)
-		{
-			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, value.Settings, options);
-		}
-
-		if (value.Similarity is not null)
-		{
-			writer.WritePropertyName("similarity");
-			JsonSerializer.Serialize(writer, value.Similarity, options);
-		}
-
-		if (value.SoftDeletes is not null)
-		{
-			writer.WritePropertyName("soft_deletes");
-			JsonSerializer.Serialize(writer, value.SoftDeletes, options);
-		}
-
-		if (value.Sort is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, value.Sort, options);
-		}
-
-		if (value.Store is not null)
-		{
-			writer.WritePropertyName("store");
-			JsonSerializer.Serialize(writer, value.Store, options);
-		}
-
-		if (value.TimeSeries is not null)
-		{
-			writer.WritePropertyName("time_series");
-			JsonSerializer.Serialize(writer, value.TimeSeries, options);
-		}
-
-		if (value.TopMetricsMaxSize.HasValue)
-		{
-			writer.WritePropertyName("top_metrics_max_size");
-			writer.WriteNumberValue(value.TopMetricsMaxSize.Value);
-		}
-
-		if (value.Translog is not null)
-		{
-			writer.WritePropertyName("translog");
-			JsonSerializer.Serialize(writer, value.Translog, options);
-		}
-
-		if (!string.IsNullOrEmpty(value.Uuid))
-		{
-			writer.WritePropertyName("uuid");
-			writer.WriteStringValue(value.Uuid);
-		}
-
-		if (value.VerifiedBeforeClose is not null)
-		{
-			writer.WritePropertyName("verified_before_close");
-			JsonSerializer.Serialize(writer, value.VerifiedBeforeClose, options);
-		}
-
-		if (value.Version is not null)
-		{
-			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, value.Version, options);
 		}
 
 		writer.WriteEndObject();

@@ -27,262 +27,231 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-internal sealed partial class DataframeAnalysisClassificationConverter : JsonConverter<DataframeAnalysisClassification>
+internal sealed partial class DataframeAnalysisClassificationConverter : System.Text.Json.Serialization.JsonConverter<DataframeAnalysisClassification>
 {
-	public override DataframeAnalysisClassification Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropAlpha = System.Text.Json.JsonEncodedText.Encode("alpha");
+	private static readonly System.Text.Json.JsonEncodedText PropClassAssignmentObjective = System.Text.Json.JsonEncodedText.Encode("class_assignment_objective");
+	private static readonly System.Text.Json.JsonEncodedText PropDependentVariable = System.Text.Json.JsonEncodedText.Encode("dependent_variable");
+	private static readonly System.Text.Json.JsonEncodedText PropDownsampleFactor = System.Text.Json.JsonEncodedText.Encode("downsample_factor");
+	private static readonly System.Text.Json.JsonEncodedText PropEarlyStoppingEnabled = System.Text.Json.JsonEncodedText.Encode("early_stopping_enabled");
+	private static readonly System.Text.Json.JsonEncodedText PropEta = System.Text.Json.JsonEncodedText.Encode("eta");
+	private static readonly System.Text.Json.JsonEncodedText PropEtaGrowthRatePerTree = System.Text.Json.JsonEncodedText.Encode("eta_growth_rate_per_tree");
+	private static readonly System.Text.Json.JsonEncodedText PropFeatureBagFraction = System.Text.Json.JsonEncodedText.Encode("feature_bag_fraction");
+	private static readonly System.Text.Json.JsonEncodedText PropFeatureProcessors = System.Text.Json.JsonEncodedText.Encode("feature_processors");
+	private static readonly System.Text.Json.JsonEncodedText PropGamma = System.Text.Json.JsonEncodedText.Encode("gamma");
+	private static readonly System.Text.Json.JsonEncodedText PropLambda = System.Text.Json.JsonEncodedText.Encode("lambda");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxOptimizationRoundsPerHyperparameter = System.Text.Json.JsonEncodedText.Encode("max_optimization_rounds_per_hyperparameter");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxTrees = System.Text.Json.JsonEncodedText.Encode("max_trees");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxTrees1 = System.Text.Json.JsonEncodedText.Encode("maximum_number_trees");
+	private static readonly System.Text.Json.JsonEncodedText PropNumTopClasses = System.Text.Json.JsonEncodedText.Encode("num_top_classes");
+	private static readonly System.Text.Json.JsonEncodedText PropNumTopFeatureImportanceValues = System.Text.Json.JsonEncodedText.Encode("num_top_feature_importance_values");
+	private static readonly System.Text.Json.JsonEncodedText PropPredictionFieldName = System.Text.Json.JsonEncodedText.Encode("prediction_field_name");
+	private static readonly System.Text.Json.JsonEncodedText PropRandomizeSeed = System.Text.Json.JsonEncodedText.Encode("randomize_seed");
+	private static readonly System.Text.Json.JsonEncodedText PropSoftTreeDepthLimit = System.Text.Json.JsonEncodedText.Encode("soft_tree_depth_limit");
+	private static readonly System.Text.Json.JsonEncodedText PropSoftTreeDepthTolerance = System.Text.Json.JsonEncodedText.Encode("soft_tree_depth_tolerance");
+	private static readonly System.Text.Json.JsonEncodedText PropTrainingPercent = System.Text.Json.JsonEncodedText.Encode("training_percent");
+
+	public override DataframeAnalysisClassification Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		var variant = new DataframeAnalysisClassification();
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<double?> propAlpha = default;
+		LocalJsonValue<string?> propClassAssignmentObjective = default;
+		LocalJsonValue<string> propDependentVariable = default;
+		LocalJsonValue<double?> propDownsampleFactor = default;
+		LocalJsonValue<bool?> propEarlyStoppingEnabled = default;
+		LocalJsonValue<double?> propEta = default;
+		LocalJsonValue<double?> propEtaGrowthRatePerTree = default;
+		LocalJsonValue<double?> propFeatureBagFraction = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>?> propFeatureProcessors = default;
+		LocalJsonValue<double?> propGamma = default;
+		LocalJsonValue<double?> propLambda = default;
+		LocalJsonValue<int?> propMaxOptimizationRoundsPerHyperparameter = default;
+		LocalJsonValue<int?> propMaxTrees = default;
+		LocalJsonValue<int?> propNumTopClasses = default;
+		LocalJsonValue<int?> propNumTopFeatureImportanceValues = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propPredictionFieldName = default;
+		LocalJsonValue<double?> propRandomizeSeed = default;
+		LocalJsonValue<int?> propSoftTreeDepthLimit = default;
+		LocalJsonValue<double?> propSoftTreeDepthTolerance = default;
+		LocalJsonValue<double?> propTrainingPercent = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propAlpha.TryReadProperty(ref reader, options, PropAlpha, null))
 			{
-				var property = reader.GetString();
-				if (property == "alpha")
-				{
-					variant.Alpha = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "class_assignment_objective")
-				{
-					variant.ClassAssignmentObjective = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "dependent_variable")
-				{
-					variant.DependentVariable = JsonSerializer.Deserialize<string>(ref reader, options);
-					continue;
-				}
-
-				if (property == "downsample_factor")
-				{
-					variant.DownsampleFactor = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "early_stopping_enabled")
-				{
-					variant.EarlyStoppingEnabled = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "eta")
-				{
-					variant.Eta = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "eta_growth_rate_per_tree")
-				{
-					variant.EtaGrowthRatePerTree = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "feature_bag_fraction")
-				{
-					variant.FeatureBagFraction = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "feature_processors")
-				{
-					variant.FeatureProcessors = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "gamma")
-				{
-					variant.Gamma = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "lambda")
-				{
-					variant.Lambda = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "max_optimization_rounds_per_hyperparameter")
-				{
-					variant.MaxOptimizationRoundsPerHyperparameter = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "max_trees" || property == "maximum_number_trees")
-				{
-					variant.MaxTrees = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "num_top_classes")
-				{
-					variant.NumTopClasses = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "num_top_feature_importance_values")
-				{
-					variant.NumTopFeatureImportanceValues = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "prediction_field_name")
-				{
-					variant.PredictionFieldName = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "randomize_seed")
-				{
-					variant.RandomizeSeed = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "soft_tree_depth_limit")
-				{
-					variant.SoftTreeDepthLimit = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "soft_tree_depth_tolerance")
-				{
-					variant.SoftTreeDepthTolerance = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "training_percent")
-				{
-					variant.TrainingPercent = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
+				continue;
 			}
+
+			if (propClassAssignmentObjective.TryReadProperty(ref reader, options, PropClassAssignmentObjective, null))
+			{
+				continue;
+			}
+
+			if (propDependentVariable.TryReadProperty(ref reader, options, PropDependentVariable, null))
+			{
+				continue;
+			}
+
+			if (propDownsampleFactor.TryReadProperty(ref reader, options, PropDownsampleFactor, null))
+			{
+				continue;
+			}
+
+			if (propEarlyStoppingEnabled.TryReadProperty(ref reader, options, PropEarlyStoppingEnabled, null))
+			{
+				continue;
+			}
+
+			if (propEta.TryReadProperty(ref reader, options, PropEta, null))
+			{
+				continue;
+			}
+
+			if (propEtaGrowthRatePerTree.TryReadProperty(ref reader, options, PropEtaGrowthRatePerTree, null))
+			{
+				continue;
+			}
+
+			if (propFeatureBagFraction.TryReadProperty(ref reader, options, PropFeatureBagFraction, null))
+			{
+				continue;
+			}
+
+			if (propFeatureProcessors.TryReadProperty(ref reader, options, PropFeatureProcessors, static ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>(o, null)))
+			{
+				continue;
+			}
+
+			if (propGamma.TryReadProperty(ref reader, options, PropGamma, null))
+			{
+				continue;
+			}
+
+			if (propLambda.TryReadProperty(ref reader, options, PropLambda, null))
+			{
+				continue;
+			}
+
+			if (propMaxOptimizationRoundsPerHyperparameter.TryReadProperty(ref reader, options, PropMaxOptimizationRoundsPerHyperparameter, null))
+			{
+				continue;
+			}
+
+			if (propMaxTrees.TryReadProperty(ref reader, options, PropMaxTrees, null) || propMaxTrees.TryReadProperty(ref reader, options, PropMaxTrees1, null))
+			{
+				continue;
+			}
+
+			if (propNumTopClasses.TryReadProperty(ref reader, options, PropNumTopClasses, null))
+			{
+				continue;
+			}
+
+			if (propNumTopFeatureImportanceValues.TryReadProperty(ref reader, options, PropNumTopFeatureImportanceValues, null))
+			{
+				continue;
+			}
+
+			if (propPredictionFieldName.TryReadProperty(ref reader, options, PropPredictionFieldName, null))
+			{
+				continue;
+			}
+
+			if (propRandomizeSeed.TryReadProperty(ref reader, options, PropRandomizeSeed, null))
+			{
+				continue;
+			}
+
+			if (propSoftTreeDepthLimit.TryReadProperty(ref reader, options, PropSoftTreeDepthLimit, null))
+			{
+				continue;
+			}
+
+			if (propSoftTreeDepthTolerance.TryReadProperty(ref reader, options, PropSoftTreeDepthTolerance, null))
+			{
+				continue;
+			}
+
+			if (propTrainingPercent.TryReadProperty(ref reader, options, PropTrainingPercent, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new DataframeAnalysisClassification
+		{
+			Alpha = propAlpha.Value
+,
+			ClassAssignmentObjective = propClassAssignmentObjective.Value
+,
+			DependentVariable = propDependentVariable.Value
+,
+			DownsampleFactor = propDownsampleFactor.Value
+,
+			EarlyStoppingEnabled = propEarlyStoppingEnabled.Value
+,
+			Eta = propEta.Value
+,
+			EtaGrowthRatePerTree = propEtaGrowthRatePerTree.Value
+,
+			FeatureBagFraction = propFeatureBagFraction.Value
+,
+			FeatureProcessors = propFeatureProcessors.Value
+,
+			Gamma = propGamma.Value
+,
+			Lambda = propLambda.Value
+,
+			MaxOptimizationRoundsPerHyperparameter = propMaxOptimizationRoundsPerHyperparameter.Value
+,
+			MaxTrees = propMaxTrees.Value
+,
+			NumTopClasses = propNumTopClasses.Value
+,
+			NumTopFeatureImportanceValues = propNumTopFeatureImportanceValues.Value
+,
+			PredictionFieldName = propPredictionFieldName.Value
+,
+			RandomizeSeed = propRandomizeSeed.Value
+,
+			SoftTreeDepthLimit = propSoftTreeDepthLimit.Value
+,
+			SoftTreeDepthTolerance = propSoftTreeDepthTolerance.Value
+,
+			TrainingPercent = propTrainingPercent.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, DataframeAnalysisClassification value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, DataframeAnalysisClassification value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.Alpha.HasValue)
-		{
-			writer.WritePropertyName("alpha");
-			writer.WriteNumberValue(value.Alpha.Value);
-		}
-
-		if (!string.IsNullOrEmpty(value.ClassAssignmentObjective))
-		{
-			writer.WritePropertyName("class_assignment_objective");
-			writer.WriteStringValue(value.ClassAssignmentObjective);
-		}
-
-		writer.WritePropertyName("dependent_variable");
-		writer.WriteStringValue(value.DependentVariable);
-		if (value.DownsampleFactor.HasValue)
-		{
-			writer.WritePropertyName("downsample_factor");
-			writer.WriteNumberValue(value.DownsampleFactor.Value);
-		}
-
-		if (value.EarlyStoppingEnabled.HasValue)
-		{
-			writer.WritePropertyName("early_stopping_enabled");
-			writer.WriteBooleanValue(value.EarlyStoppingEnabled.Value);
-		}
-
-		if (value.Eta.HasValue)
-		{
-			writer.WritePropertyName("eta");
-			writer.WriteNumberValue(value.Eta.Value);
-		}
-
-		if (value.EtaGrowthRatePerTree.HasValue)
-		{
-			writer.WritePropertyName("eta_growth_rate_per_tree");
-			writer.WriteNumberValue(value.EtaGrowthRatePerTree.Value);
-		}
-
-		if (value.FeatureBagFraction.HasValue)
-		{
-			writer.WritePropertyName("feature_bag_fraction");
-			writer.WriteNumberValue(value.FeatureBagFraction.Value);
-		}
-
-		if (value.FeatureProcessors is not null)
-		{
-			writer.WritePropertyName("feature_processors");
-			JsonSerializer.Serialize(writer, value.FeatureProcessors, options);
-		}
-
-		if (value.Gamma.HasValue)
-		{
-			writer.WritePropertyName("gamma");
-			writer.WriteNumberValue(value.Gamma.Value);
-		}
-
-		if (value.Lambda.HasValue)
-		{
-			writer.WritePropertyName("lambda");
-			writer.WriteNumberValue(value.Lambda.Value);
-		}
-
-		if (value.MaxOptimizationRoundsPerHyperparameter.HasValue)
-		{
-			writer.WritePropertyName("max_optimization_rounds_per_hyperparameter");
-			writer.WriteNumberValue(value.MaxOptimizationRoundsPerHyperparameter.Value);
-		}
-
-		if (value.MaxTrees.HasValue)
-		{
-			writer.WritePropertyName("max_trees");
-			writer.WriteNumberValue(value.MaxTrees.Value);
-		}
-
-		if (value.NumTopClasses.HasValue)
-		{
-			writer.WritePropertyName("num_top_classes");
-			writer.WriteNumberValue(value.NumTopClasses.Value);
-		}
-
-		if (value.NumTopFeatureImportanceValues.HasValue)
-		{
-			writer.WritePropertyName("num_top_feature_importance_values");
-			writer.WriteNumberValue(value.NumTopFeatureImportanceValues.Value);
-		}
-
-		if (value.PredictionFieldName is not null)
-		{
-			writer.WritePropertyName("prediction_field_name");
-			JsonSerializer.Serialize(writer, value.PredictionFieldName, options);
-		}
-
-		if (value.RandomizeSeed.HasValue)
-		{
-			writer.WritePropertyName("randomize_seed");
-			writer.WriteNumberValue(value.RandomizeSeed.Value);
-		}
-
-		if (value.SoftTreeDepthLimit.HasValue)
-		{
-			writer.WritePropertyName("soft_tree_depth_limit");
-			writer.WriteNumberValue(value.SoftTreeDepthLimit.Value);
-		}
-
-		if (value.SoftTreeDepthTolerance.HasValue)
-		{
-			writer.WritePropertyName("soft_tree_depth_tolerance");
-			writer.WriteNumberValue(value.SoftTreeDepthTolerance.Value);
-		}
-
-		if (value.TrainingPercent.HasValue)
-		{
-			writer.WritePropertyName("training_percent");
-			writer.WriteNumberValue(value.TrainingPercent.Value);
-		}
-
+		writer.WriteProperty(options, PropAlpha, value.Alpha, null, null);
+		writer.WriteProperty(options, PropClassAssignmentObjective, value.ClassAssignmentObjective, null, null);
+		writer.WriteProperty(options, PropDependentVariable, value.DependentVariable, null, null);
+		writer.WriteProperty(options, PropDownsampleFactor, value.DownsampleFactor, null, null);
+		writer.WriteProperty(options, PropEarlyStoppingEnabled, value.EarlyStoppingEnabled, null, null);
+		writer.WriteProperty(options, PropEta, value.Eta, null, null);
+		writer.WriteProperty(options, PropEtaGrowthRatePerTree, value.EtaGrowthRatePerTree, null, null);
+		writer.WriteProperty(options, PropFeatureBagFraction, value.FeatureBagFraction, null, null);
+		writer.WriteProperty(options, PropFeatureProcessors, value.FeatureProcessors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>(o, v, null));
+		writer.WriteProperty(options, PropGamma, value.Gamma, null, null);
+		writer.WriteProperty(options, PropLambda, value.Lambda, null, null);
+		writer.WriteProperty(options, PropMaxOptimizationRoundsPerHyperparameter, value.MaxOptimizationRoundsPerHyperparameter, null, null);
+		writer.WriteProperty(options, PropMaxTrees, value.MaxTrees, null, null);
+		writer.WriteProperty(options, PropNumTopClasses, value.NumTopClasses, null, null);
+		writer.WriteProperty(options, PropNumTopFeatureImportanceValues, value.NumTopFeatureImportanceValues, null, null);
+		writer.WriteProperty(options, PropPredictionFieldName, value.PredictionFieldName, null, null);
+		writer.WriteProperty(options, PropRandomizeSeed, value.RandomizeSeed, null, null);
+		writer.WriteProperty(options, PropSoftTreeDepthLimit, value.SoftTreeDepthLimit, null, null);
+		writer.WriteProperty(options, PropSoftTreeDepthTolerance, value.SoftTreeDepthTolerance, null, null);
+		writer.WriteProperty(options, PropTrainingPercent, value.TrainingPercent, null, null);
 		writer.WriteEndObject();
 	}
 }

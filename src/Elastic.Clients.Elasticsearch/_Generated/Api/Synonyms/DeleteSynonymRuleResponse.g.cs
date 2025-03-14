@@ -22,10 +22,61 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Synonyms;
 
+internal sealed partial class DeleteSynonymRuleResponseConverter : System.Text.Json.Serialization.JsonConverter<DeleteSynonymRuleResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropReloadAnalyzersDetails = System.Text.Json.JsonEncodedText.Encode("reload_analyzers_details");
+	private static readonly System.Text.Json.JsonEncodedText PropResult = System.Text.Json.JsonEncodedText.Encode("result");
+
+	public override DeleteSynonymRuleResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.ReloadResult> propReloadAnalyzersDetails = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Result> propResult = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propReloadAnalyzersDetails.TryReadProperty(ref reader, options, PropReloadAnalyzersDetails, null))
+			{
+				continue;
+			}
+
+			if (propResult.TryReadProperty(ref reader, options, PropResult, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new DeleteSynonymRuleResponse
+		{
+			ReloadAnalyzersDetails = propReloadAnalyzersDetails.Value
+,
+			Result = propResult.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, DeleteSynonymRuleResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropReloadAnalyzersDetails, value.ReloadAnalyzersDetails, null, null);
+		writer.WriteProperty(options, PropResult, value.Result, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(DeleteSynonymRuleResponseConverter))]
 public sealed partial class DeleteSynonymRuleResponse : ElasticsearchResponse
 {
 	/// <summary>
@@ -34,7 +85,6 @@ public sealed partial class DeleteSynonymRuleResponse : ElasticsearchResponse
 	/// This is the analyzers reloading result
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("reload_analyzers_details")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadResult ReloadAnalyzersDetails { get; init; }
 
 	/// <summary>
@@ -42,6 +92,5 @@ public sealed partial class DeleteSynonymRuleResponse : ElasticsearchResponse
 	/// Update operation result
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("result")]
 	public Elastic.Clients.Elasticsearch.Result Result { get; init; }
 }

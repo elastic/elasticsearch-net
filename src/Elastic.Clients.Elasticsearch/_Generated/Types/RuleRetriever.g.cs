@@ -27,6 +27,95 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class RuleRetrieverConverter : System.Text.Json.Serialization.JsonConverter<RuleRetriever>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
+	private static readonly System.Text.Json.JsonEncodedText PropMatchCriteria = System.Text.Json.JsonEncodedText.Encode("match_criteria");
+	private static readonly System.Text.Json.JsonEncodedText PropMinScore = System.Text.Json.JsonEncodedText.Encode("min_score");
+	private static readonly System.Text.Json.JsonEncodedText PropRankWindowSize = System.Text.Json.JsonEncodedText.Encode("rank_window_size");
+	private static readonly System.Text.Json.JsonEncodedText PropRetriever = System.Text.Json.JsonEncodedText.Encode("retriever");
+	private static readonly System.Text.Json.JsonEncodedText PropRulesetIds = System.Text.Json.JsonEncodedText.Encode("ruleset_ids");
+
+	public override RuleRetriever Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?> propFilter = default;
+		LocalJsonValue<object> propMatchCriteria = default;
+		LocalJsonValue<float?> propMinScore = default;
+		LocalJsonValue<int?> propRankWindowSize = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Retriever> propRetriever = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.Id>> propRulesetIds = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, static ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, null)))
+			{
+				continue;
+			}
+
+			if (propMatchCriteria.TryReadProperty(ref reader, options, PropMatchCriteria, null))
+			{
+				continue;
+			}
+
+			if (propMinScore.TryReadProperty(ref reader, options, PropMinScore, null))
+			{
+				continue;
+			}
+
+			if (propRankWindowSize.TryReadProperty(ref reader, options, PropRankWindowSize, null))
+			{
+				continue;
+			}
+
+			if (propRetriever.TryReadProperty(ref reader, options, PropRetriever, null))
+			{
+				continue;
+			}
+
+			if (propRulesetIds.TryReadProperty(ref reader, options, PropRulesetIds, static ICollection<Elastic.Clients.Elasticsearch.Id> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Id>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new RuleRetriever
+		{
+			Filter = propFilter.Value
+,
+			MatchCriteria = propMatchCriteria.Value
+,
+			MinScore = propMinScore.Value
+,
+			RankWindowSize = propRankWindowSize.Value
+,
+			Retriever = propRetriever.Value
+,
+			RulesetIds = propRulesetIds.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, RuleRetriever value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFilter, value.Filter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, v, null));
+		writer.WriteProperty(options, PropMatchCriteria, value.MatchCriteria, null, null);
+		writer.WriteProperty(options, PropMinScore, value.MinScore, null, null);
+		writer.WriteProperty(options, PropRankWindowSize, value.RankWindowSize, null, null);
+		writer.WriteProperty(options, PropRetriever, value.Retriever, null, null);
+		writer.WriteProperty(options, PropRulesetIds, value.RulesetIds, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.Id> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Id>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(RuleRetrieverConverter))]
 public sealed partial class RuleRetriever
 {
 	/// <summary>
@@ -34,8 +123,6 @@ public sealed partial class RuleRetriever
 	/// Query to filter the documents that can match.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("filter")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
 
 	/// <summary>
@@ -43,7 +130,6 @@ public sealed partial class RuleRetriever
 	/// The match criteria that will determine if a rule in the provided rulesets should be applied.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("match_criteria")]
 	public object MatchCriteria { get; set; }
 
 	/// <summary>
@@ -51,7 +137,6 @@ public sealed partial class RuleRetriever
 	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("min_score")]
 	public float? MinScore { get; set; }
 
 	/// <summary>
@@ -59,7 +144,6 @@ public sealed partial class RuleRetriever
 	/// This value determines the size of the individual result set.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("rank_window_size")]
 	public int? RankWindowSize { get; set; }
 
 	/// <summary>
@@ -67,7 +151,6 @@ public sealed partial class RuleRetriever
 	/// The retriever whose results rules should be applied to.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("retriever")]
 	public Elastic.Clients.Elasticsearch.Retriever Retriever { get; set; }
 
 	/// <summary>
@@ -75,7 +158,6 @@ public sealed partial class RuleRetriever
 	/// The ruleset IDs containing the rules this retriever is evaluating against.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ruleset_ids")]
 	public ICollection<Elastic.Clients.Elasticsearch.Id> RulesetIds { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Retriever(RuleRetriever ruleRetriever) => Elastic.Clients.Elasticsearch.Retriever.Rule(ruleRetriever);

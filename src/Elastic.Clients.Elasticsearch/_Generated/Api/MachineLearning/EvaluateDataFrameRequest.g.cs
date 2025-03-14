@@ -45,6 +45,11 @@ public sealed partial class EvaluateDataFrameRequestParameters : RequestParamete
 /// </summary>
 public sealed partial class EvaluateDataFrameRequest : PlainRequest<EvaluateDataFrameRequestParameters>
 {
+	[JsonConstructor]
+	internal EvaluateDataFrameRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningEvaluateDataFrame;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch.Requests;
@@ -16,7 +17,8 @@ public abstract class Request
 {
 	// This internal ctor ensures that only types defined within the Elastic.Clients.Elasticsearch assembly can derive from this base class.
 	// We don't expect consumers to derive from this public base class.
-	internal Request() { }
+	internal Request()
+	{ }
 
 	[JsonIgnore] protected internal virtual IRequestConfiguration? RequestConfig { get; set; }
 
@@ -30,7 +32,7 @@ public abstract class Request
 	internal abstract bool SupportsBody { get; }
 
 	[JsonIgnore]
-	protected RouteValues RouteValues { get; } = new();
+	protected internal RouteValues RouteValues { get; } = new();
 
 	/// <summary>
 	/// Allows for per request replacement of the specified HTTP method, including scenarios such as indexing which
@@ -50,12 +52,19 @@ public abstract class Request
 	protected virtual (string ResolvedUrl, string UrlTemplate, Dictionary<string, string>? resolvedRouteValues) ResolveUrl(RouteValues routeValues, IElasticsearchClientSettings settings) =>
 		ApiUrls.Resolve(routeValues, settings);
 
-	internal virtual void BeforeRequest() { }
+	internal virtual void BeforeRequest()
+	{ }
 
 	internal (string ResolvedUrl, string UrlTemplate, Dictionary<string, string>? resolvedRouteValues) GetUrl(IElasticsearchClientSettings settings) => ResolveUrl(RouteValues, settings);
 
 	[JsonIgnore]
 	internal virtual string? OperationName { get; }
+
+	protected TOut? P<TOut>(string route) => RouteValues.Get<TOut>(route);
+
+	protected void PR(string route, object? value) => RouteValues.Required(route, value);
+
+	protected void PO(string route, object? value) => RouteValues.Optional(route, value);
 }
 
 public abstract class Request<TParameters> : Request

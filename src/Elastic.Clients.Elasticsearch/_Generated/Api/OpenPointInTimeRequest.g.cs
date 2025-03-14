@@ -102,6 +102,11 @@ public sealed partial class OpenPointInTimeRequest : PlainRequest<OpenPointInTim
 	{
 	}
 
+	[JsonConstructor]
+	internal OpenPointInTimeRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceOpenPointInTime;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -109,6 +114,14 @@ public sealed partial class OpenPointInTimeRequest : PlainRequest<OpenPointInTim
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "open_point_in_time";
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of index names to open point in time; use <c>_all</c> or empty string to perform the operation on all indices
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
 	/// <summary>
 	/// <para>

@@ -92,80 +92,70 @@ public sealed partial class SettingsSimilaritiesDescriptor : IsADictionaryDescri
 	public SettingsSimilaritiesDescriptor Scripted(string settingsSimilarityName, SettingsSimilarityScripted settingsSimilarityScripted) => AssignVariant(settingsSimilarityName, settingsSimilarityScripted);
 }
 
-internal sealed partial class SettingsSimilarityInterfaceConverter : JsonConverter<ISettingsSimilarity>
+internal sealed partial class SettingsSimilarityInterfaceConverter : System.Text.Json.Serialization.JsonConverter<ISettingsSimilarity>
 {
-	public override ISettingsSimilarity Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropDiscriminator = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override ISettingsSimilarity Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var copiedReader = reader;
-		string? type = null;
-		using var jsonDoc = JsonDocument.ParseValue(ref copiedReader);
-		if (jsonDoc is not null && jsonDoc.RootElement.TryGetProperty("type", out var readType) && readType.ValueKind == JsonValueKind.String)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var readerSnapshot = reader;
+		string? discriminator = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			type = readType.ToString();
+			if (reader.TryReadProperty(options, PropDiscriminator, ref discriminator, null))
+			{
+				break;
+			}
+
+			reader.Skip();
 		}
 
-		switch (type)
+		reader = readerSnapshot;
+		return discriminator switch
 		{
-			case "BM25":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25>(ref reader, options);
-			case "boolean":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBoolean>(ref reader, options);
-			case "DFI":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi>(ref reader, options);
-			case "DFR":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfr>(ref reader, options);
-			case "IB":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIb>(ref reader, options);
-			case "LMDirichlet":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmd>(ref reader, options);
-			case "LMJelinekMercer":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj>(ref reader, options);
-			case "scripted":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScripted>(ref reader, options);
-			default:
-				ThrowHelper.ThrowUnknownTaggedUnionVariantJsonException(type, typeof(ISettingsSimilarity));
-				return null;
-		}
+			"BM25" => reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25>(options, null),
+			"boolean" => reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBoolean>(options, null),
+			"DFI" => reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi>(options, null),
+			"DFR" => reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfr>(options, null),
+			"IB" => reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIb>(options, null),
+			"LMDirichlet" => reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmd>(options, null),
+			"LMJelinekMercer" => reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj>(options, null),
+			"scripted" => reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScripted>(options, null),
+			_ => throw new System.Text.Json.JsonException($"Variant '{discriminator}' is not supported for type '{nameof(ISettingsSimilarity)}'.")
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, ISettingsSimilarity value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ISettingsSimilarity value, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (value is null)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
 		switch (value.Type)
 		{
 			case "BM25":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25)value, null);
+				break;
 			case "boolean":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBoolean), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBoolean)value, null);
+				break;
 			case "DFI":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi)value, null);
+				break;
 			case "DFR":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfr), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfr)value, null);
+				break;
 			case "IB":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIb), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIb)value, null);
+				break;
 			case "LMDirichlet":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmd), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmd)value, null);
+				break;
 			case "LMJelinekMercer":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj)value, null);
+				break;
 			case "scripted":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScripted), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScripted)value, null);
+				break;
 			default:
-				var type = value.GetType();
-				JsonSerializer.Serialize(writer, value, type, options);
-				return;
+				throw new System.Text.Json.JsonException($"Variant '{value.Type}' is not supported for type '{nameof(ISettingsSimilarity)}'.");
 		}
 	}
 }

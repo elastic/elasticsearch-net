@@ -27,110 +27,93 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-internal sealed partial class GeoDistanceQueryConverter : JsonConverter<GeoDistanceQuery>
+internal sealed partial class GeoDistanceQueryConverter : System.Text.Json.Serialization.JsonConverter<GeoDistanceQuery>
 {
-	public override GeoDistanceQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropDistance = System.Text.Json.JsonEncodedText.Encode("distance");
+	private static readonly System.Text.Json.JsonEncodedText PropDistanceType = System.Text.Json.JsonEncodedText.Encode("distance_type");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreUnmapped = System.Text.Json.JsonEncodedText.Encode("ignore_unmapped");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+	private static readonly System.Text.Json.JsonEncodedText PropValidationMethod = System.Text.Json.JsonEncodedText.Encode("validation_method");
+
+	public override GeoDistanceQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		var variant = new GeoDistanceQuery();
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.GeoLocation> propLocation = default;
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<string> propDistance = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.GeoDistanceType?> propDistanceType = default;
+		LocalJsonValue<bool?> propIgnoreUnmapped = default;
+		LocalJsonValue<string?> propQueryName = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod?> propValidationMethod = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
 			{
-				var property = reader.GetString();
-				if (property == "boost")
-				{
-					variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "distance")
-				{
-					variant.Distance = JsonSerializer.Deserialize<string>(ref reader, options);
-					continue;
-				}
-
-				if (property == "distance_type")
-				{
-					variant.DistanceType = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.GeoDistanceType?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "ignore_unmapped")
-				{
-					variant.IgnoreUnmapped = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "_name")
-				{
-					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "validation_method")
-				{
-					variant.ValidationMethod = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod?>(ref reader, options);
-					continue;
-				}
-
-				variant.Field = property;
-				reader.Read();
-				variant.Location = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.GeoLocation>(ref reader, options);
+				continue;
 			}
+
+			if (propDistance.TryReadProperty(ref reader, options, PropDistance, null))
+			{
+				continue;
+			}
+
+			if (propDistanceType.TryReadProperty(ref reader, options, PropDistanceType, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreUnmapped.TryReadProperty(ref reader, options, PropIgnoreUnmapped, null))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
+			{
+				continue;
+			}
+
+			if (propValidationMethod.TryReadProperty(ref reader, options, PropValidationMethod, null))
+			{
+				continue;
+			}
+
+			propField.Initialized = propLocation.Initialized = true;
+			reader.ReadProperty(options, out propField.Value, out propLocation.Value, null, null);
 		}
 
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new GeoDistanceQuery
+		{
+			Field = propField.Value
+,
+			Location = propLocation.Value
+,
+			Boost = propBoost.Value
+,
+			Distance = propDistance.Value
+,
+			DistanceType = propDistanceType.Value
+,
+			IgnoreUnmapped = propIgnoreUnmapped.Value
+,
+			QueryName = propQueryName.Value
+,
+			ValidationMethod = propValidationMethod.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, GeoDistanceQuery value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GeoDistanceQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.Field is not null && value.Location is not null)
-		{
-			if (!options.TryGetClientSettings(out var settings))
-			{
-				ThrowHelper.ThrowJsonExceptionForMissingSettings();
-			}
-
-			var propertyName = settings.Inferrer.Field(value.Field);
-			writer.WritePropertyName(propertyName);
-			JsonSerializer.Serialize(writer, value.Location, options);
-		}
-
-		if (value.Boost.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(value.Boost.Value);
-		}
-
-		writer.WritePropertyName("distance");
-		writer.WriteStringValue(value.Distance);
-		if (value.DistanceType is not null)
-		{
-			writer.WritePropertyName("distance_type");
-			JsonSerializer.Serialize(writer, value.DistanceType, options);
-		}
-
-		if (value.IgnoreUnmapped.HasValue)
-		{
-			writer.WritePropertyName("ignore_unmapped");
-			writer.WriteBooleanValue(value.IgnoreUnmapped.Value);
-		}
-
-		if (!string.IsNullOrEmpty(value.QueryName))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(value.QueryName);
-		}
-
-		if (value.ValidationMethod is not null)
-		{
-			writer.WritePropertyName("validation_method");
-			JsonSerializer.Serialize(writer, value.ValidationMethod, options);
-		}
-
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropDistance, value.Distance, null, null);
+		writer.WriteProperty(options, PropDistanceType, value.DistanceType, null, null);
+		writer.WriteProperty(options, PropIgnoreUnmapped, value.IgnoreUnmapped, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteProperty(options, PropValidationMethod, value.ValidationMethod, null, null);
+		writer.WriteProperty(options, value.Field, value.Location, null, null);
 		writer.WriteEndObject();
 	}
 }

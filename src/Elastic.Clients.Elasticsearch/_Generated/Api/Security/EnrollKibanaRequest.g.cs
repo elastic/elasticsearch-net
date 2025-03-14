@@ -44,6 +44,11 @@ public sealed partial class EnrollKibanaRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class EnrollKibanaRequest : PlainRequest<EnrollKibanaRequestParameters>
 {
+	[JsonConstructor]
+	internal EnrollKibanaRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityEnrollKibana;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;

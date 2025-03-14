@@ -8,8 +8,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class FunctionScore
 {
-	internal FunctionScore() { }
-
 	/// <summary>
 	/// The weight score allows you to multiply the score by the provided weight.
 	/// </summary>

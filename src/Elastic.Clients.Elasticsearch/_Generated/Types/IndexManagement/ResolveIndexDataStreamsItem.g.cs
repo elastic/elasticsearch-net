@@ -27,13 +27,68 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class ResolveIndexDataStreamsItemConverter : System.Text.Json.Serialization.JsonConverter<ResolveIndexDataStreamsItem>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBackingIndices = System.Text.Json.JsonEncodedText.Encode("backing_indices");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropTimestampField = System.Text.Json.JsonEncodedText.Encode("timestamp_field");
+
+	public override ResolveIndexDataStreamsItem Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<string>> propBackingIndices = default;
+		LocalJsonValue<string> propName = default;
+		LocalJsonValue<string> propTimestampField = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBackingIndices.TryReadProperty(ref reader, options, PropBackingIndices, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
+			{
+				continue;
+			}
+
+			if (propTimestampField.TryReadProperty(ref reader, options, PropTimestampField, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new ResolveIndexDataStreamsItem
+		{
+			BackingIndices = propBackingIndices.Value
+,
+			Name = propName.Value
+,
+			TimestampField = propTimestampField.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ResolveIndexDataStreamsItem value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBackingIndices, value.BackingIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropTimestampField, value.TimestampField, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(ResolveIndexDataStreamsItemConverter))]
 public sealed partial class ResolveIndexDataStreamsItem
 {
-	[JsonInclude, JsonPropertyName("backing_indices")]
-	[SingleOrManyCollectionConverter(typeof(string))]
 	public IReadOnlyCollection<string> BackingIndices { get; init; }
-	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }
-	[JsonInclude, JsonPropertyName("timestamp_field")]
 	public string TimestampField { get; init; }
 }

@@ -50,6 +50,11 @@ public sealed partial class InvalidateTokenRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class InvalidateTokenRequest : PlainRequest<InvalidateTokenRequestParameters>
 {
+	[JsonConstructor]
+	internal InvalidateTokenRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityInvalidateToken;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;

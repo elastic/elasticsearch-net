@@ -44,6 +44,11 @@ public sealed partial class SamlLogoutRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class SamlLogoutRequest : PlainRequest<SamlLogoutRequestParameters>
 {
+	[JsonConstructor]
+	internal SamlLogoutRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecuritySamlLogout;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

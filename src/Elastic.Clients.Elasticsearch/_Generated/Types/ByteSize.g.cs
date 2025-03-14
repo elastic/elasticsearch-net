@@ -33,13 +33,52 @@ namespace Elastic.Clients.Elasticsearch;
 /// <summary>
 /// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/api-conventions.html#byte-units">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
+[JsonConverter(typeof(ByteSizeConverter))]
 public sealed partial class ByteSize : Union<long, string>
 {
-	public ByteSize(long Bytesize) : base(Bytesize)
+	public ByteSize(long bytesize) : base(bytesize)
 	{
 	}
 
-	public ByteSize(string Bytesize) : base(Bytesize)
+	public ByteSize(string bytesize) : base(bytesize)
 	{
+	}
+
+	public static implicit operator ByteSize(long bytesize) => new ByteSize(bytesize);
+	public static implicit operator ByteSize(string bytesize) => new ByteSize(bytesize);
+}
+
+internal sealed partial class ByteSizeConverter : System.Text.Json.Serialization.JsonConverter<ByteSize>
+{
+	public override ByteSize Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var selector = static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.Number, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String);
+		return selector(ref reader, options) switch
+		{
+			Elastic.Clients.Elasticsearch.UnionTag.T1 => new ByteSize(reader.ReadValue<long>(options, null)),
+			Elastic.Clients.Elasticsearch.UnionTag.T2 => new ByteSize(reader.ReadValue<string>(options, null)),
+			_ => throw new System.InvalidOperationException($"Failed to select a union variant for type '{nameof(ByteSize)}")
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ByteSize value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value.Tag)
+		{
+			case Elastic.Clients.Elasticsearch.UnionTag.T1:
+				{
+					writer.WriteValue(options, value.Value1, null);
+					break;
+				}
+
+			case Elastic.Clients.Elasticsearch.UnionTag.T2:
+				{
+					writer.WriteValue(options, value.Value2, null);
+					break;
+				}
+
+			default:
+				throw new System.InvalidOperationException($"Unrecognized tag value: {value.Tag}");
+		}
 	}
 }

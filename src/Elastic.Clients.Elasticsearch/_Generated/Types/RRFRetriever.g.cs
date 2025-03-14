@@ -27,6 +27,85 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class RRFRetrieverConverter : System.Text.Json.Serialization.JsonConverter<RRFRetriever>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
+	private static readonly System.Text.Json.JsonEncodedText PropMinScore = System.Text.Json.JsonEncodedText.Encode("min_score");
+	private static readonly System.Text.Json.JsonEncodedText PropRankConstant = System.Text.Json.JsonEncodedText.Encode("rank_constant");
+	private static readonly System.Text.Json.JsonEncodedText PropRankWindowSize = System.Text.Json.JsonEncodedText.Encode("rank_window_size");
+	private static readonly System.Text.Json.JsonEncodedText PropRetrievers = System.Text.Json.JsonEncodedText.Encode("retrievers");
+
+	public override RRFRetriever Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?> propFilter = default;
+		LocalJsonValue<float?> propMinScore = default;
+		LocalJsonValue<int?> propRankConstant = default;
+		LocalJsonValue<int?> propRankWindowSize = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.Retriever>> propRetrievers = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, static ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, null)))
+			{
+				continue;
+			}
+
+			if (propMinScore.TryReadProperty(ref reader, options, PropMinScore, null))
+			{
+				continue;
+			}
+
+			if (propRankConstant.TryReadProperty(ref reader, options, PropRankConstant, null))
+			{
+				continue;
+			}
+
+			if (propRankWindowSize.TryReadProperty(ref reader, options, PropRankWindowSize, null))
+			{
+				continue;
+			}
+
+			if (propRetrievers.TryReadProperty(ref reader, options, PropRetrievers, static ICollection<Elastic.Clients.Elasticsearch.Retriever> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Retriever>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new RRFRetriever
+		{
+			Filter = propFilter.Value
+,
+			MinScore = propMinScore.Value
+,
+			RankConstant = propRankConstant.Value
+,
+			RankWindowSize = propRankWindowSize.Value
+,
+			Retrievers = propRetrievers.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, RRFRetriever value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFilter, value.Filter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, v, null));
+		writer.WriteProperty(options, PropMinScore, value.MinScore, null, null);
+		writer.WriteProperty(options, PropRankConstant, value.RankConstant, null, null);
+		writer.WriteProperty(options, PropRankWindowSize, value.RankWindowSize, null, null);
+		writer.WriteProperty(options, PropRetrievers, value.Retrievers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<Elastic.Clients.Elasticsearch.Retriever> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Retriever>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(RRFRetrieverConverter))]
 public sealed partial class RRFRetriever
 {
 	/// <summary>
@@ -34,8 +113,6 @@ public sealed partial class RRFRetriever
 	/// Query to filter the documents that can match.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("filter")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
 
 	/// <summary>
@@ -43,7 +120,6 @@ public sealed partial class RRFRetriever
 	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("min_score")]
 	public float? MinScore { get; set; }
 
 	/// <summary>
@@ -51,7 +127,6 @@ public sealed partial class RRFRetriever
 	/// This value determines how much influence documents in individual result sets per query have over the final ranked result set.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("rank_constant")]
 	public int? RankConstant { get; set; }
 
 	/// <summary>
@@ -59,7 +134,6 @@ public sealed partial class RRFRetriever
 	/// This value determines the size of the individual result sets per query.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("rank_window_size")]
 	public int? RankWindowSize { get; set; }
 
 	/// <summary>
@@ -67,7 +141,6 @@ public sealed partial class RRFRetriever
 	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("retrievers")]
 	public ICollection<Elastic.Clients.Elasticsearch.Retriever> Retrievers { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Retriever(RRFRetriever rRFRetriever) => Elastic.Clients.Elasticsearch.Retriever.Rrf(rRFRetriever);

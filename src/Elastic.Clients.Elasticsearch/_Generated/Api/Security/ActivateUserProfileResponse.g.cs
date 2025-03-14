@@ -22,24 +22,118 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class ActivateUserProfileResponseConverter : System.Text.Json.Serialization.JsonConverter<ActivateUserProfileResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropData = System.Text.Json.JsonEncodedText.Encode("data");
+	private static readonly System.Text.Json.JsonEncodedText PropDoc = System.Text.Json.JsonEncodedText.Encode("_doc");
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
+	private static readonly System.Text.Json.JsonEncodedText PropLabels = System.Text.Json.JsonEncodedText.Encode("labels");
+	private static readonly System.Text.Json.JsonEncodedText PropLastSynchronized = System.Text.Json.JsonEncodedText.Encode("last_synchronized");
+	private static readonly System.Text.Json.JsonEncodedText PropUid = System.Text.Json.JsonEncodedText.Encode("uid");
+	private static readonly System.Text.Json.JsonEncodedText PropUser = System.Text.Json.JsonEncodedText.Encode("user");
+
+	public override ActivateUserProfileResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyDictionary<string, object>> propData = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.UserProfileHitMetadata> propDoc = default;
+		LocalJsonValue<bool?> propEnabled = default;
+		LocalJsonValue<IReadOnlyDictionary<string, object>> propLabels = default;
+		LocalJsonValue<long> propLastSynchronized = default;
+		LocalJsonValue<string> propUid = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.UserProfileUser> propUser = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propData.TryReadProperty(ref reader, options, PropData, static IReadOnlyDictionary<string, object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propDoc.TryReadProperty(ref reader, options, PropDoc, null))
+			{
+				continue;
+			}
+
+			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
+			{
+				continue;
+			}
+
+			if (propLabels.TryReadProperty(ref reader, options, PropLabels, static IReadOnlyDictionary<string, object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propLastSynchronized.TryReadProperty(ref reader, options, PropLastSynchronized, null))
+			{
+				continue;
+			}
+
+			if (propUid.TryReadProperty(ref reader, options, PropUid, null))
+			{
+				continue;
+			}
+
+			if (propUser.TryReadProperty(ref reader, options, PropUser, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new ActivateUserProfileResponse
+		{
+			Data = propData.Value
+,
+			Doc = propDoc.Value
+,
+			Enabled = propEnabled.Value
+,
+			Labels = propLabels.Value
+,
+			LastSynchronized = propLastSynchronized.Value
+,
+			Uid = propUid.Value
+,
+			User = propUser.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ActivateUserProfileResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropData, value.Data, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, object> v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropDoc, value.Doc, null, null);
+		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
+		writer.WriteProperty(options, PropLabels, value.Labels, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyDictionary<string, object> v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropLastSynchronized, value.LastSynchronized, null, null);
+		writer.WriteProperty(options, PropUid, value.Uid, null, null);
+		writer.WriteProperty(options, PropUser, value.User, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(ActivateUserProfileResponseConverter))]
 public sealed partial class ActivateUserProfileResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("data")]
 	public IReadOnlyDictionary<string, object> Data { get; init; }
-	[JsonInclude, JsonPropertyName("_doc")]
 	public Elastic.Clients.Elasticsearch.Security.UserProfileHitMetadata Doc { get; init; }
-	[JsonInclude, JsonPropertyName("enabled")]
 	public bool? Enabled { get; init; }
-	[JsonInclude, JsonPropertyName("labels")]
 	public IReadOnlyDictionary<string, object> Labels { get; init; }
-	[JsonInclude, JsonPropertyName("last_synchronized")]
 	public long LastSynchronized { get; init; }
-	[JsonInclude, JsonPropertyName("uid")]
 	public string Uid { get; init; }
-	[JsonInclude, JsonPropertyName("user")]
 	public Elastic.Clients.Elasticsearch.Security.UserProfileUser User { get; init; }
 }

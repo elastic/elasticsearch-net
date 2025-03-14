@@ -22,16 +22,74 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class SamlInvalidateResponseConverter : System.Text.Json.Serialization.JsonConverter<SamlInvalidateResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropInvalidated = System.Text.Json.JsonEncodedText.Encode("invalidated");
+	private static readonly System.Text.Json.JsonEncodedText PropRealm = System.Text.Json.JsonEncodedText.Encode("realm");
+	private static readonly System.Text.Json.JsonEncodedText PropRedirect = System.Text.Json.JsonEncodedText.Encode("redirect");
+
+	public override SamlInvalidateResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propInvalidated = default;
+		LocalJsonValue<string> propRealm = default;
+		LocalJsonValue<string> propRedirect = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propInvalidated.TryReadProperty(ref reader, options, PropInvalidated, null))
+			{
+				continue;
+			}
+
+			if (propRealm.TryReadProperty(ref reader, options, PropRealm, null))
+			{
+				continue;
+			}
+
+			if (propRedirect.TryReadProperty(ref reader, options, PropRedirect, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new SamlInvalidateResponse
+		{
+			Invalidated = propInvalidated.Value
+,
+			Realm = propRealm.Value
+,
+			Redirect = propRedirect.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, SamlInvalidateResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropInvalidated, value.Invalidated, null, null);
+		writer.WriteProperty(options, PropRealm, value.Realm, null, null);
+		writer.WriteProperty(options, PropRedirect, value.Redirect, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(SamlInvalidateResponseConverter))]
 public sealed partial class SamlInvalidateResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("invalidated")]
 	public int Invalidated { get; init; }
-	[JsonInclude, JsonPropertyName("realm")]
 	public string Realm { get; init; }
-	[JsonInclude, JsonPropertyName("redirect")]
 	public string Redirect { get; init; }
 }

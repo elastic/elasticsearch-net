@@ -42,6 +42,11 @@ public sealed partial class EnrichStatsRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class EnrichStatsRequest : PlainRequest<EnrichStatsRequestParameters>
 {
+	[JsonConstructor]
+	internal EnrichStatsRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.EnrichStats;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;

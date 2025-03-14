@@ -22,16 +22,74 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class SuggestUserProfilesResponseConverter : System.Text.Json.Serialization.JsonConverter<SuggestUserProfilesResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropProfiles = System.Text.Json.JsonEncodedText.Encode("profiles");
+	private static readonly System.Text.Json.JsonEncodedText PropTook = System.Text.Json.JsonEncodedText.Encode("took");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+
+	public override SuggestUserProfilesResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserProfile>> propProfiles = default;
+		LocalJsonValue<long> propTook = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.TotalUserProfiles> propTotal = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propProfiles.TryReadProperty(ref reader, options, PropProfiles, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserProfile> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.UserProfile>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propTook.TryReadProperty(ref reader, options, PropTook, null))
+			{
+				continue;
+			}
+
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new SuggestUserProfilesResponse
+		{
+			Profiles = propProfiles.Value
+,
+			Took = propTook.Value
+,
+			Total = propTotal.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, SuggestUserProfilesResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropProfiles, value.Profiles, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserProfile> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.UserProfile>(o, v, null));
+		writer.WriteProperty(options, PropTook, value.Took, null, null);
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(SuggestUserProfilesResponseConverter))]
 public sealed partial class SuggestUserProfilesResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("profiles")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserProfile> Profiles { get; init; }
-	[JsonInclude, JsonPropertyName("took")]
 	public long Took { get; init; }
-	[JsonInclude, JsonPropertyName("total")]
 	public Elastic.Clients.Elasticsearch.Security.TotalUserProfiles Total { get; init; }
 }

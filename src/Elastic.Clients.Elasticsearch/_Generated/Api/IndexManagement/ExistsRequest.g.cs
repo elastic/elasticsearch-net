@@ -91,6 +91,11 @@ public sealed partial class ExistsRequest : PlainRequest<ExistsRequestParameters
 	{
 	}
 
+	[JsonConstructor]
+	internal ExistsRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementExists;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
@@ -98,6 +103,14 @@ public sealed partial class ExistsRequest : PlainRequest<ExistsRequestParameters
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.exists";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and aliases. Supports wildcards (<c>*</c>).
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
 	/// <summary>
 	/// <para>

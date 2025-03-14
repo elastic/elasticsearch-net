@@ -54,6 +54,7 @@ public sealed partial class GetCalendarsRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class GetCalendarsRequest : PlainRequest<GetCalendarsRequestParameters>
 {
+	[JsonConstructor]
 	public GetCalendarsRequest()
 	{
 	}
@@ -69,6 +70,14 @@ public sealed partial class GetCalendarsRequest : PlainRequest<GetCalendarsReque
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.get_calendars";
+
+	/// <summary>
+	/// <para>
+	/// A string that uniquely identifies a calendar. You can get information for multiple calendars by using a comma-separated list of ids or a wildcard expression. You can get information for all calendars by using <c>_all</c> or <c>*</c> or by omitting the calendar identifier.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id? CalendarId { get => P<Elastic.Clients.Elasticsearch.Id?>("calendar_id"); set => PO("calendar_id", value); }
 
 	/// <summary>
 	/// <para>

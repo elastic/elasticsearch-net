@@ -22,12 +22,52 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
+internal sealed partial class StopJobResponseConverter : System.Text.Json.Serialization.JsonConverter<StopJobResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropStopped = System.Text.Json.JsonEncodedText.Encode("stopped");
+
+	public override StopJobResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propStopped = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propStopped.TryReadProperty(ref reader, options, PropStopped, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new StopJobResponse
+		{
+			Stopped = propStopped.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, StopJobResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropStopped, value.Stopped, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(StopJobResponseConverter))]
 public sealed partial class StopJobResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("stopped")]
 	public bool Stopped { get; init; }
 }

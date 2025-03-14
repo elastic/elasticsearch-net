@@ -22,10 +22,61 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class HasPrivilegesUserProfileResponseConverter : System.Text.Json.Serialization.JsonConverter<HasPrivilegesUserProfileResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropErrors = System.Text.Json.JsonEncodedText.Encode("errors");
+	private static readonly System.Text.Json.JsonEncodedText PropHasPrivilegeUids = System.Text.Json.JsonEncodedText.Encode("has_privilege_uids");
+
+	public override HasPrivilegesUserProfileResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileErrors?> propErrors = default;
+		LocalJsonValue<IReadOnlyCollection<string>> propHasPrivilegeUids = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propErrors.TryReadProperty(ref reader, options, PropErrors, null))
+			{
+				continue;
+			}
+
+			if (propHasPrivilegeUids.TryReadProperty(ref reader, options, PropHasPrivilegeUids, static IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new HasPrivilegesUserProfileResponse
+		{
+			Errors = propErrors.Value
+,
+			HasPrivilegeUids = propHasPrivilegeUids.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, HasPrivilegesUserProfileResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropErrors, value.Errors, null, null);
+		writer.WriteProperty(options, PropHasPrivilegeUids, value.HasPrivilegeUids, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(HasPrivilegesUserProfileResponseConverter))]
 public sealed partial class HasPrivilegesUserProfileResponse : ElasticsearchResponse
 {
 	/// <summary>
@@ -36,7 +87,6 @@ public sealed partial class HasPrivilegesUserProfileResponse : ElasticsearchResp
 	/// requested privileges. This field is absent if empty.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("errors")]
 	public Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileErrors? Errors { get; init; }
 
 	/// <summary>
@@ -45,6 +95,5 @@ public sealed partial class HasPrivilegesUserProfileResponse : ElasticsearchResp
 	/// have all the requested privileges.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("has_privilege_uids")]
 	public IReadOnlyCollection<string> HasPrivilegeUids { get; init; }
 }

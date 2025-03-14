@@ -62,6 +62,7 @@ public sealed partial class SimulateTemplateRequestParameters : RequestParameter
 /// </summary>
 public sealed partial class SimulateTemplateRequest : PlainRequest<SimulateTemplateRequestParameters>
 {
+	[JsonConstructor]
 	public SimulateTemplateRequest()
 	{
 	}
@@ -77,6 +78,15 @@ public sealed partial class SimulateTemplateRequest : PlainRequest<SimulateTempl
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "indices.simulate_template";
+
+	/// <summary>
+	/// <para>
+	/// Name of the index template to simulate. To test a template configuration before you add it to the cluster, omit
+	/// this parameter and specify the template configuration in the request body.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name? Name { get => P<Elastic.Clients.Elasticsearch.Name?>("name"); set => PO("name", value); }
 
 	/// <summary>
 	/// <para>

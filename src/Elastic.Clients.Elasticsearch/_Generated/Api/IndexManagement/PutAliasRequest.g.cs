@@ -61,6 +61,11 @@ public sealed partial class PutAliasRequest : PlainRequest<PutAliasRequestParame
 	{
 	}
 
+	[JsonConstructor]
+	internal PutAliasRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementPutAlias;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -68,6 +73,26 @@ public sealed partial class PutAliasRequest : PlainRequest<PutAliasRequestParame
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "indices.put_alias";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams or indices to add.
+	/// Supports wildcards (<c>*</c>).
+	/// Wildcard patterns that match both data streams and indices return an error.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
+
+	/// <summary>
+	/// <para>
+	/// Alias to update.
+	/// If the alias doesn’t exist, the request creates it.
+	/// Index alias names support date math.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>

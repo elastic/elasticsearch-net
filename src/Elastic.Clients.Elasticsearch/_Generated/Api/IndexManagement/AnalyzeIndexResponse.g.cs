@@ -22,14 +22,63 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class AnalyzeIndexResponseConverter : System.Text.Json.Serialization.JsonConverter<AnalyzeIndexResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDetail = System.Text.Json.JsonEncodedText.Encode("detail");
+	private static readonly System.Text.Json.JsonEncodedText PropTokens = System.Text.Json.JsonEncodedText.Encode("tokens");
+
+	public override AnalyzeIndexResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeDetail?> propDetail = default;
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeToken>?> propTokens = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDetail.TryReadProperty(ref reader, options, PropDetail, null))
+			{
+				continue;
+			}
+
+			if (propTokens.TryReadProperty(ref reader, options, PropTokens, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeToken>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeToken>(o, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new AnalyzeIndexResponse
+		{
+			Detail = propDetail.Value
+,
+			Tokens = propTokens.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, AnalyzeIndexResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDetail, value.Detail, null, null);
+		writer.WriteProperty(options, PropTokens, value.Tokens, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeToken>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeToken>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(AnalyzeIndexResponseConverter))]
 public sealed partial class AnalyzeIndexResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("detail")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeDetail? Detail { get; init; }
-	[JsonInclude, JsonPropertyName("tokens")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeToken>? Tokens { get; init; }
 }

@@ -37,4 +37,6 @@ public sealed partial class SignificantLongTermsAggregate : IAggregate
 	public long? DocCount { get; init; }
 	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
+
+	string IAggregate.Type => "siglterms";
 }

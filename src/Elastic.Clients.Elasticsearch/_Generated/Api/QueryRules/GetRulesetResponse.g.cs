@@ -22,10 +22,61 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryRules;
 
+internal sealed partial class GetRulesetResponseConverter : System.Text.Json.Serialization.JsonConverter<GetRulesetResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropRules = System.Text.Json.JsonEncodedText.Encode("rules");
+	private static readonly System.Text.Json.JsonEncodedText PropRulesetId = System.Text.Json.JsonEncodedText.Encode("ruleset_id");
+
+	public override GetRulesetResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRule>> propRules = default;
+		LocalJsonValue<string> propRulesetId = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propRules.TryReadProperty(ref reader, options, PropRules, static IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRule> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.QueryRules.QueryRule>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propRulesetId.TryReadProperty(ref reader, options, PropRulesetId, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new GetRulesetResponse
+		{
+			Rules = propRules.Value
+,
+			RulesetId = propRulesetId.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetRulesetResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropRules, value.Rules, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRule> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.QueryRules.QueryRule>(o, v, null));
+		writer.WriteProperty(options, PropRulesetId, value.RulesetId, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(GetRulesetResponseConverter))]
 public sealed partial class GetRulesetResponse : ElasticsearchResponse
 {
 	/// <summary>
@@ -33,7 +84,6 @@ public sealed partial class GetRulesetResponse : ElasticsearchResponse
 	/// Rules associated with the query ruleset
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("rules")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRule> Rules { get; init; }
 
 	/// <summary>
@@ -41,6 +91,5 @@ public sealed partial class GetRulesetResponse : ElasticsearchResponse
 	/// Query Ruleset unique identifier
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ruleset_id")]
 	public string RulesetId { get; init; }
 }

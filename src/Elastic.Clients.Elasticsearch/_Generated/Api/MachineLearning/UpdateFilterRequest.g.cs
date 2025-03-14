@@ -46,6 +46,11 @@ public sealed partial class UpdateFilterRequest : PlainRequest<UpdateFilterReque
 	{
 	}
 
+	[JsonConstructor]
+	internal UpdateFilterRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningUpdateFilter;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -53,6 +58,14 @@ public sealed partial class UpdateFilterRequest : PlainRequest<UpdateFilterReque
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.update_filter";
+
+	/// <summary>
+	/// <para>
+	/// A string that uniquely identifies a filter.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id FilterId { get => P<Elastic.Clients.Elasticsearch.Id>("filter_id"); set => PR("filter_id", value); }
 
 	/// <summary>
 	/// <para>

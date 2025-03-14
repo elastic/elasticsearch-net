@@ -59,6 +59,11 @@ public sealed partial class DeleteDataStreamRequest : PlainRequest<DeleteDataStr
 	{
 	}
 
+	[JsonConstructor]
+	internal DeleteDataStreamRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementDeleteDataStream;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -66,6 +71,14 @@ public sealed partial class DeleteDataStreamRequest : PlainRequest<DeleteDataStr
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.delete_data_stream";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams to delete. Wildcard (<c>*</c>) expressions are supported.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.DataStreamNames Name { get => P<Elastic.Clients.Elasticsearch.DataStreamNames>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>

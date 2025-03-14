@@ -27,22 +27,102 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+internal sealed partial class KeywordMarkerTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<KeywordMarkerTokenFilter>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreCase = System.Text.Json.JsonEncodedText.Encode("ignore_case");
+	private static readonly System.Text.Json.JsonEncodedText PropKeywords = System.Text.Json.JsonEncodedText.Encode("keywords");
+	private static readonly System.Text.Json.JsonEncodedText PropKeywordsPath = System.Text.Json.JsonEncodedText.Encode("keywords_path");
+	private static readonly System.Text.Json.JsonEncodedText PropKeywordsPattern = System.Text.Json.JsonEncodedText.Encode("keywords_pattern");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override KeywordMarkerTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propIgnoreCase = default;
+		LocalJsonValue<ICollection<string>?> propKeywords = default;
+		LocalJsonValue<string?> propKeywordsPath = default;
+		LocalJsonValue<string?> propKeywordsPattern = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propIgnoreCase.TryReadProperty(ref reader, options, PropIgnoreCase, null))
+			{
+				continue;
+			}
+
+			if (propKeywords.TryReadProperty(ref reader, options, PropKeywords, static ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propKeywordsPath.TryReadProperty(ref reader, options, PropKeywordsPath, null))
+			{
+				continue;
+			}
+
+			if (propKeywordsPattern.TryReadProperty(ref reader, options, PropKeywordsPattern, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new KeywordMarkerTokenFilter
+		{
+			IgnoreCase = propIgnoreCase.Value
+,
+			Keywords = propKeywords.Value
+,
+			KeywordsPath = propKeywordsPath.Value
+,
+			KeywordsPattern = propKeywordsPattern.Value
+,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, KeywordMarkerTokenFilter value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropIgnoreCase, value.IgnoreCase, null, null);
+		writer.WriteProperty(options, PropKeywords, value.Keywords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropKeywordsPath, value.KeywordsPath, null, null);
+		writer.WriteProperty(options, PropKeywordsPattern, value.KeywordsPattern, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(KeywordMarkerTokenFilterConverter))]
 public sealed partial class KeywordMarkerTokenFilter : ITokenFilter
 {
-	[JsonInclude, JsonPropertyName("ignore_case")]
 	public bool? IgnoreCase { get; set; }
-	[JsonInclude, JsonPropertyName("keywords")]
-	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? Keywords { get; set; }
-	[JsonInclude, JsonPropertyName("keywords_path")]
 	public string? KeywordsPath { get; set; }
-	[JsonInclude, JsonPropertyName("keywords_pattern")]
 	public string? KeywordsPattern { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "keyword_marker";
 
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 

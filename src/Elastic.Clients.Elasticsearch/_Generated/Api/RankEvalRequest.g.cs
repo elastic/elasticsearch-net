@@ -71,6 +71,7 @@ public sealed partial class RankEvalRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class RankEvalRequest : PlainRequest<RankEvalRequestParameters>
 {
+	[JsonConstructor]
 	public RankEvalRequest()
 	{
 	}
@@ -86,6 +87,15 @@ public sealed partial class RankEvalRequest : PlainRequest<RankEvalRequestParame
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "rank_eval";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and index aliases used to limit the request. Wildcard (<c>*</c>) expressions are supported.
+	/// To target all data streams and indices in a cluster, omit this parameter or use <c>_all</c> or <c>*</c>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
 	/// <summary>
 	/// <para>

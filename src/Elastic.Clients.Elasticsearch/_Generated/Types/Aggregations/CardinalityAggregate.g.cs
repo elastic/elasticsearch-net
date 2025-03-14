@@ -33,4 +33,6 @@ public sealed partial class CardinalityAggregate : IAggregate
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 	[JsonInclude, JsonPropertyName("value")]
 	public long Value { get; init; }
+
+	string IAggregate.Type => "cardinality";
 }

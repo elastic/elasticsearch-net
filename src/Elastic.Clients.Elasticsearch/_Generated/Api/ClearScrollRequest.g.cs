@@ -44,6 +44,11 @@ public sealed partial class ClearScrollRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class ClearScrollRequest : PlainRequest<ClearScrollRequestParameters>
 {
+	[JsonConstructor]
+	internal ClearScrollRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceClearScroll;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;

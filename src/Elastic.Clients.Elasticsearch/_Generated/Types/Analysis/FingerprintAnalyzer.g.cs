@@ -27,24 +27,113 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+internal sealed partial class FingerprintAnalyzerConverter : System.Text.Json.Serialization.JsonConverter<FingerprintAnalyzer>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropMaxOutputSize = System.Text.Json.JsonEncodedText.Encode("max_output_size");
+	private static readonly System.Text.Json.JsonEncodedText PropPreserveOriginal = System.Text.Json.JsonEncodedText.Encode("preserve_original");
+	private static readonly System.Text.Json.JsonEncodedText PropSeparator = System.Text.Json.JsonEncodedText.Encode("separator");
+	private static readonly System.Text.Json.JsonEncodedText PropStopwords = System.Text.Json.JsonEncodedText.Encode("stopwords");
+	private static readonly System.Text.Json.JsonEncodedText PropStopwordsPath = System.Text.Json.JsonEncodedText.Encode("stopwords_path");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override FingerprintAnalyzer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propMaxOutputSize = default;
+		LocalJsonValue<bool> propPreserveOriginal = default;
+		LocalJsonValue<string> propSeparator = default;
+		LocalJsonValue<ICollection<string>?> propStopwords = default;
+		LocalJsonValue<string?> propStopwordsPath = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMaxOutputSize.TryReadProperty(ref reader, options, PropMaxOutputSize, null))
+			{
+				continue;
+			}
+
+			if (propPreserveOriginal.TryReadProperty(ref reader, options, PropPreserveOriginal, null))
+			{
+				continue;
+			}
+
+			if (propSeparator.TryReadProperty(ref reader, options, PropSeparator, null))
+			{
+				continue;
+			}
+
+			if (propStopwords.TryReadProperty(ref reader, options, PropStopwords, static ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propStopwordsPath.TryReadProperty(ref reader, options, PropStopwordsPath, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new FingerprintAnalyzer
+		{
+			MaxOutputSize = propMaxOutputSize.Value
+,
+			PreserveOriginal = propPreserveOriginal.Value
+,
+			Separator = propSeparator.Value
+,
+			Stopwords = propStopwords.Value
+,
+			StopwordsPath = propStopwordsPath.Value
+,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, FingerprintAnalyzer value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMaxOutputSize, value.MaxOutputSize, null, null);
+		writer.WriteProperty(options, PropPreserveOriginal, value.PreserveOriginal, null, null);
+		writer.WriteProperty(options, PropSeparator, value.Separator, null, null);
+		writer.WriteProperty(options, PropStopwords, value.Stopwords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropStopwordsPath, value.StopwordsPath, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(FingerprintAnalyzerConverter))]
 public sealed partial class FingerprintAnalyzer : IAnalyzer
 {
-	[JsonInclude, JsonPropertyName("max_output_size")]
 	public int MaxOutputSize { get; set; }
-	[JsonInclude, JsonPropertyName("preserve_original")]
 	public bool PreserveOriginal { get; set; }
-	[JsonInclude, JsonPropertyName("separator")]
 	public string Separator { get; set; }
-	[JsonInclude, JsonPropertyName("stopwords")]
-	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? Stopwords { get; set; }
-	[JsonInclude, JsonPropertyName("stopwords_path")]
 	public string? StopwordsPath { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "fingerprint";
 
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 

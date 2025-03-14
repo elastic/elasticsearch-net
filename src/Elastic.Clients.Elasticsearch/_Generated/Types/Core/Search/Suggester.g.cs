@@ -27,51 +27,46 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
-internal sealed partial class SuggesterConverter : JsonConverter<Suggester>
+internal sealed partial class SuggesterConverter : System.Text.Json.Serialization.JsonConverter<Suggester>
 {
-	public override Suggester Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		var variant = new Suggester();
-		Dictionary<string, Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester> additionalProperties = null;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				var property = reader.GetString();
-				if (property == "text")
-				{
-					variant.Text = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
+	private static readonly System.Text.Json.JsonEncodedText PropText = System.Text.Json.JsonEncodedText.Encode("text");
 
-				additionalProperties ??= new Dictionary<string, Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester>();
-				var additionalValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester>(ref reader, options);
-				additionalProperties.Add(property, additionalValue);
+	public override Suggester Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester> propSuggesters = default;
+		LocalJsonValue<string?> propText = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propText.TryReadProperty(ref reader, options, PropText, null))
+			{
+				continue;
 			}
+
+			propSuggesters ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester>();
+			reader.ReadProperty(options, out string key, out Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester value);
+			propSuggesters[key] = value;
 		}
 
-		variant.Suggesters = additionalProperties;
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Suggester
+		{
+			Suggesters = propSuggesters
+,
+			Text = propText.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, Suggester value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Suggester value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropText, value.Text, null, null);
 		if (value.Suggesters is not null)
 		{
-			foreach (var additionalProperty in value.Suggesters)
+			foreach (var item in value.Suggesters)
 			{
-				writer.WritePropertyName(additionalProperty.Key);
-				JsonSerializer.Serialize(writer, additionalProperty.Value, options);
+				writer.WriteProperty(options, item.Key, item.Value);
 			}
-		}
-
-		if (!string.IsNullOrEmpty(value.Text))
-		{
-			writer.WritePropertyName("text");
-			writer.WriteStringValue(value.Text);
 		}
 
 		writer.WriteEndObject();

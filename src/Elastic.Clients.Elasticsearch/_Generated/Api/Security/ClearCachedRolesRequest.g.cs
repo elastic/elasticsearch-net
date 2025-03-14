@@ -48,6 +48,11 @@ public sealed partial class ClearCachedRolesRequest : PlainRequest<ClearCachedRo
 	{
 	}
 
+	[JsonConstructor]
+	internal ClearCachedRolesRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityClearCachedRoles;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -55,6 +60,14 @@ public sealed partial class ClearCachedRolesRequest : PlainRequest<ClearCachedRo
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "security.clear_cached_roles";
+
+	/// <summary>
+	/// <para>
+	/// Role name
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Names Name { get => P<Elastic.Clients.Elasticsearch.Names>("name"); set => PR("name", value); }
 }
 
 /// <summary>

@@ -57,6 +57,7 @@ public sealed partial class ClusterStatsRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class ClusterStatsRequest : PlainRequest<ClusterStatsRequestParameters>
 {
+	[JsonConstructor]
 	public ClusterStatsRequest()
 	{
 	}
@@ -72,6 +73,14 @@ public sealed partial class ClusterStatsRequest : PlainRequest<ClusterStatsReque
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "cluster.stats";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of node filters used to limit returned information. Defaults to all nodes in the cluster.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.NodeIds? NodeId { get => P<Elastic.Clients.Elasticsearch.NodeIds?>("node_id"); set => PO("node_id", value); }
 
 	/// <summary>
 	/// <para>

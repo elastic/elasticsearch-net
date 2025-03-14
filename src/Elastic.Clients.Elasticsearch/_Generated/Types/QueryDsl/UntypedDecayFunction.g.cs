@@ -27,60 +27,49 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-internal sealed partial class UntypedDecayFunctionConverter : JsonConverter<UntypedDecayFunction>
+internal sealed partial class UntypedDecayFunctionConverter : System.Text.Json.Serialization.JsonConverter<UntypedDecayFunction>
 {
-	public override UntypedDecayFunction Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		var variant = new UntypedDecayFunction();
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				var property = reader.GetString();
-				if (property == "multi_value_mode")
-				{
-					variant.MultiValueMode = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode?>(ref reader, options);
-					continue;
-				}
+	private static readonly System.Text.Json.JsonEncodedText PropMultiValueMode = System.Text.Json.JsonEncodedText.Encode("multi_value_mode");
 
-				variant.Field = property;
-				reader.Read();
-				variant.Placement = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<object, object>>(ref reader, options);
+	public override UntypedDecayFunction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<object, object>> propPlacement = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode?> propMultiValueMode = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMultiValueMode.TryReadProperty(ref reader, options, PropMultiValueMode, null))
+			{
+				continue;
 			}
+
+			propField.Initialized = propPlacement.Initialized = true;
+			reader.ReadProperty(options, out propField.Value, out propPlacement.Value, null, null);
 		}
 
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new UntypedDecayFunction
+		{
+			Field = propField.Value
+,
+			Placement = propPlacement.Value
+,
+			MultiValueMode = propMultiValueMode.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, UntypedDecayFunction value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, UntypedDecayFunction value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.Field is not null && value.Placement is not null)
-		{
-			if (!options.TryGetClientSettings(out var settings))
-			{
-				ThrowHelper.ThrowJsonExceptionForMissingSettings();
-			}
-
-			var propertyName = settings.Inferrer.Field(value.Field);
-			writer.WritePropertyName(propertyName);
-			JsonSerializer.Serialize(writer, value.Placement, options);
-		}
-
-		if (value.MultiValueMode is not null)
-		{
-			writer.WritePropertyName("multi_value_mode");
-			JsonSerializer.Serialize(writer, value.MultiValueMode, options);
-		}
-
+		writer.WriteProperty(options, PropMultiValueMode, value.MultiValueMode, null, null);
+		writer.WriteProperty(options, value.Field, value.Placement, null, null);
 		writer.WriteEndObject();
 	}
 }
 
 [JsonConverter(typeof(UntypedDecayFunctionConverter))]
-public sealed partial class UntypedDecayFunction
+public sealed partial class UntypedDecayFunction : IDecayFunction
 {
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
@@ -91,6 +80,8 @@ public sealed partial class UntypedDecayFunction
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode? MultiValueMode { get; set; }
 	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<object, object> Placement { get; set; }
+
+	public string Type => "untypeddecayfunction";
 }
 
 public sealed partial class UntypedDecayFunctionDescriptor<TDocument> : SerializableDescriptor<UntypedDecayFunctionDescriptor<TDocument>>
