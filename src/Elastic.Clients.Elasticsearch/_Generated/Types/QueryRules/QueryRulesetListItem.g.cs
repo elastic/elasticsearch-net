@@ -31,7 +31,10 @@ public sealed partial class QueryRulesetListItem
 {
 	/// <summary>
 	/// <para>
-	/// A map of criteria type (e.g. exact) to the number of rules of that type
+	/// A map of criteria type (for example, <c>exact</c>) to the number of rules of that type.
+	/// </para>
+	/// <para>
+	/// NOTE: The counts in <c>rule_criteria_types_counts</c> may be larger than the value of <c>rule_total_count</c> because a rule may have multiple criteria.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("rule_criteria_types_counts")]
@@ -39,7 +42,7 @@ public sealed partial class QueryRulesetListItem
 
 	/// <summary>
 	/// <para>
-	/// Ruleset unique identifier
+	/// A unique identifier for the ruleset.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ruleset_id")]
@@ -47,7 +50,7 @@ public sealed partial class QueryRulesetListItem
 
 	/// <summary>
 	/// <para>
-	/// The number of rules associated with this ruleset
+	/// The number of rules associated with the ruleset.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("rule_total_count")]
@@ -55,7 +58,7 @@ public sealed partial class QueryRulesetListItem
 
 	/// <summary>
 	/// <para>
-	/// A map of rule type (e.g. pinned) to the number of rules of that type
+	/// A map of rule type (for example, <c>pinned</c>) to the number of rules of that type.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("rule_type_counts")]

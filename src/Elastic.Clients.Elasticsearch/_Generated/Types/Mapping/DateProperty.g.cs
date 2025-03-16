@@ -68,6 +68,8 @@ public sealed partial class DateProperty : IProperty
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
+	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
+	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "date";
@@ -99,6 +101,7 @@ public sealed partial class DatePropertyDescriptor<TDocument> : SerializableDesc
 	private int? PrecisionStepValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private bool? StoreValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public DatePropertyDescriptor<TDocument> Boost(double? boost)
 	{
@@ -247,6 +250,12 @@ public sealed partial class DatePropertyDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
+	public DatePropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -356,6 +365,12 @@ public sealed partial class DatePropertyDescriptor<TDocument> : SerializableDesc
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("date");
 		writer.WriteEndObject();
@@ -402,7 +417,8 @@ public sealed partial class DatePropertyDescriptor<TDocument> : SerializableDesc
 		NullValue = NullValueValue,
 		PrecisionStep = PrecisionStepValue,
 		Properties = PropertiesValue,
-		Store = StoreValue
+		Store = StoreValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }
 
@@ -432,6 +448,7 @@ public sealed partial class DatePropertyDescriptor : SerializableDescriptor<Date
 	private int? PrecisionStepValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private bool? StoreValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public DatePropertyDescriptor Boost(double? boost)
 	{
@@ -580,6 +597,12 @@ public sealed partial class DatePropertyDescriptor : SerializableDescriptor<Date
 		return Self;
 	}
 
+	public DatePropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -689,6 +712,12 @@ public sealed partial class DatePropertyDescriptor : SerializableDescriptor<Date
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("date");
 		writer.WriteEndObject();
@@ -735,6 +764,7 @@ public sealed partial class DatePropertyDescriptor : SerializableDescriptor<Date
 		NullValue = NullValueValue,
 		PrecisionStep = PrecisionStepValue,
 		Properties = PropertiesValue,
-		Store = StoreValue
+		Store = StoreValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }

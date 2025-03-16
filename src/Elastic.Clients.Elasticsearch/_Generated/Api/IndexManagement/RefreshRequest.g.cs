@@ -64,6 +64,21 @@ public sealed partial class RefreshRequestParameters : RequestParameters
 /// A refresh makes recent operations performed on one or more indices available for search.
 /// For data streams, the API runs the refresh operation on the stream’s backing indices.
 /// </para>
+/// <para>
+/// By default, Elasticsearch periodically refreshes indices every second, but only on indices that have received one search request or more in the last 30 seconds.
+/// You can change this default interval with the <c>index.refresh_interval</c> setting.
+/// </para>
+/// <para>
+/// Refresh requests are synchronous and do not return a response until the refresh operation completes.
+/// </para>
+/// <para>
+/// Refreshes are resource-intensive.
+/// To ensure good cluster performance, it's recommended to wait for Elasticsearch's periodic refresh rather than performing an explicit refresh when possible.
+/// </para>
+/// <para>
+/// If your application workflow indexes documents and then runs a search to retrieve the indexed document, it's recommended to use the index API's <c>refresh=wait_for</c> query parameter option.
+/// This option ensures the indexing operation waits for a periodic refresh before running the search.
+/// </para>
 /// </summary>
 public sealed partial class RefreshRequest : PlainRequest<RefreshRequestParameters>
 {
@@ -118,6 +133,21 @@ public sealed partial class RefreshRequest : PlainRequest<RefreshRequestParamete
 /// A refresh makes recent operations performed on one or more indices available for search.
 /// For data streams, the API runs the refresh operation on the stream’s backing indices.
 /// </para>
+/// <para>
+/// By default, Elasticsearch periodically refreshes indices every second, but only on indices that have received one search request or more in the last 30 seconds.
+/// You can change this default interval with the <c>index.refresh_interval</c> setting.
+/// </para>
+/// <para>
+/// Refresh requests are synchronous and do not return a response until the refresh operation completes.
+/// </para>
+/// <para>
+/// Refreshes are resource-intensive.
+/// To ensure good cluster performance, it's recommended to wait for Elasticsearch's periodic refresh rather than performing an explicit refresh when possible.
+/// </para>
+/// <para>
+/// If your application workflow indexes documents and then runs a search to retrieve the indexed document, it's recommended to use the index API's <c>refresh=wait_for</c> query parameter option.
+/// This option ensures the indexing operation waits for a periodic refresh before running the search.
+/// </para>
 /// </summary>
 public sealed partial class RefreshRequestDescriptor<TDocument> : RequestDescriptor<RefreshRequestDescriptor<TDocument>, RefreshRequestParameters>
 {
@@ -159,6 +189,21 @@ public sealed partial class RefreshRequestDescriptor<TDocument> : RequestDescrip
 /// Refresh an index.
 /// A refresh makes recent operations performed on one or more indices available for search.
 /// For data streams, the API runs the refresh operation on the stream’s backing indices.
+/// </para>
+/// <para>
+/// By default, Elasticsearch periodically refreshes indices every second, but only on indices that have received one search request or more in the last 30 seconds.
+/// You can change this default interval with the <c>index.refresh_interval</c> setting.
+/// </para>
+/// <para>
+/// Refresh requests are synchronous and do not return a response until the refresh operation completes.
+/// </para>
+/// <para>
+/// Refreshes are resource-intensive.
+/// To ensure good cluster performance, it's recommended to wait for Elasticsearch's periodic refresh rather than performing an explicit refresh when possible.
+/// </para>
+/// <para>
+/// If your application workflow indexes documents and then runs a search to retrieve the indexed document, it's recommended to use the index API's <c>refresh=wait_for</c> query parameter option.
+/// This option ensures the indexing operation waits for a periodic refresh before running the search.
 /// </para>
 /// </summary>
 public sealed partial class RefreshRequestDescriptor : RequestDescriptor<RefreshRequestDescriptor, RefreshRequestParameters>

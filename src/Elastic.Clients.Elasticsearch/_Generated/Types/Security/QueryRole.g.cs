@@ -194,7 +194,8 @@ public sealed partial class QueryRole
 
 	/// <summary>
 	/// <para>
-	/// A list of cluster permissions for remote clusters. Note - this is limited a subset of the cluster permissions.
+	/// A list of cluster permissions for remote clusters.
+	/// NOTE: This is limited a subset of the cluster permissions.
 	/// </para>
 	/// </summary>
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? RemoteCluster { get; init; }
@@ -215,7 +216,9 @@ public sealed partial class QueryRole
 
 	/// <summary>
 	/// <para>
-	/// A list of users that the API keys can impersonate. <em>Note</em>: in Serverless, the run-as feature is disabled. For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
+	/// A list of users that the API keys can impersonate.
+	/// NOTE: In Elastic Cloud Serverless, the run-as feature is disabled.
+	/// For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
 	/// </para>
 	/// </summary>
 	public IReadOnlyCollection<string>? RunAs { get; init; }

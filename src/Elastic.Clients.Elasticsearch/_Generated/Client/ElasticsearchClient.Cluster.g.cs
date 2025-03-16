@@ -180,7 +180,6 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete component templates.
-	/// Deletes component templates.
 	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -195,7 +194,6 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete component templates.
-	/// Deletes component templates.
 	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -209,7 +207,6 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete component templates.
-	/// Deletes component templates.
 	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -224,7 +221,6 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete component templates.
-	/// Deletes component templates.
 	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -240,7 +236,6 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete component templates.
-	/// Deletes component templates.
 	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -257,7 +252,6 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete component templates.
-	/// Deletes component templates.
 	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -271,7 +265,6 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete component templates.
-	/// Deletes component templates.
 	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -286,7 +279,6 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete component templates.
-	/// Deletes component templates.
 	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -530,7 +522,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get component templates.
-	/// Retrieves information about component templates.
+	/// Get information about component templates.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -544,7 +536,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get component templates.
-	/// Retrieves information about component templates.
+	/// Get information about component templates.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -557,7 +549,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get component templates.
-	/// Retrieves information about component templates.
+	/// Get information about component templates.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -571,7 +563,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get component templates.
-	/// Retrieves information about component templates.
+	/// Get information about component templates.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -586,7 +578,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get component templates.
-	/// Retrieves information about component templates.
+	/// Get information about component templates.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -602,7 +594,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get component templates.
-	/// Retrieves information about component templates.
+	/// Get information about component templates.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -617,7 +609,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get component templates.
-	/// Retrieves information about component templates.
+	/// Get information about component templates.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -633,7 +625,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get component templates.
-	/// Retrieves information about component templates.
+	/// Get information about component templates.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -646,7 +638,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get component templates.
-	/// Retrieves information about component templates.
+	/// Get information about component templates.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -660,7 +652,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get component templates.
-	/// Retrieves information about component templates.
+	/// Get information about component templates.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -675,7 +667,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get component templates.
-	/// Retrieves information about component templates.
+	/// Get information about component templates.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -689,7 +681,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get component templates.
-	/// Retrieves information about component templates.
+	/// Get information about component templates.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1893,7 +1885,6 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create or update a component template.
-	/// Creates or updates a component template.
 	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 	/// </para>
 	/// <para>
@@ -1912,6 +1903,13 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// You can use C-style <c>/* *\/</c> block comments in component templates.
 	/// You can include comments anywhere in the request body except before the opening curly bracket.
+	/// </para>
+	/// <para>
+	/// <strong>Applying component templates</strong>
+	/// </para>
+	/// <para>
+	/// You cannot directly apply a component template to a data stream or index.
+	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1925,7 +1923,6 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create or update a component template.
-	/// Creates or updates a component template.
 	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 	/// </para>
 	/// <para>
@@ -1944,6 +1941,13 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// You can use C-style <c>/* *\/</c> block comments in component templates.
 	/// You can include comments anywhere in the request body except before the opening curly bracket.
+	/// </para>
+	/// <para>
+	/// <strong>Applying component templates</strong>
+	/// </para>
+	/// <para>
+	/// You cannot directly apply a component template to a data stream or index.
+	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1956,7 +1960,6 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create or update a component template.
-	/// Creates or updates a component template.
 	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 	/// </para>
 	/// <para>
@@ -1975,6 +1978,13 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// You can use C-style <c>/* *\/</c> block comments in component templates.
 	/// You can include comments anywhere in the request body except before the opening curly bracket.
+	/// </para>
+	/// <para>
+	/// <strong>Applying component templates</strong>
+	/// </para>
+	/// <para>
+	/// You cannot directly apply a component template to a data stream or index.
+	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1988,7 +1998,6 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create or update a component template.
-	/// Creates or updates a component template.
 	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 	/// </para>
 	/// <para>
@@ -2007,6 +2016,13 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// You can use C-style <c>/* *\/</c> block comments in component templates.
 	/// You can include comments anywhere in the request body except before the opening curly bracket.
+	/// </para>
+	/// <para>
+	/// <strong>Applying component templates</strong>
+	/// </para>
+	/// <para>
+	/// You cannot directly apply a component template to a data stream or index.
+	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2021,7 +2037,6 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create or update a component template.
-	/// Creates or updates a component template.
 	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 	/// </para>
 	/// <para>
@@ -2040,6 +2055,13 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// You can use C-style <c>/* *\/</c> block comments in component templates.
 	/// You can include comments anywhere in the request body except before the opening curly bracket.
+	/// </para>
+	/// <para>
+	/// <strong>Applying component templates</strong>
+	/// </para>
+	/// <para>
+	/// You cannot directly apply a component template to a data stream or index.
+	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2055,7 +2077,6 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create or update a component template.
-	/// Creates or updates a component template.
 	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 	/// </para>
 	/// <para>
@@ -2074,6 +2095,13 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// You can use C-style <c>/* *\/</c> block comments in component templates.
 	/// You can include comments anywhere in the request body except before the opening curly bracket.
+	/// </para>
+	/// <para>
+	/// <strong>Applying component templates</strong>
+	/// </para>
+	/// <para>
+	/// You cannot directly apply a component template to a data stream or index.
+	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2087,7 +2115,6 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create or update a component template.
-	/// Creates or updates a component template.
 	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 	/// </para>
 	/// <para>
@@ -2106,6 +2133,13 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// You can use C-style <c>/* *\/</c> block comments in component templates.
 	/// You can include comments anywhere in the request body except before the opening curly bracket.
+	/// </para>
+	/// <para>
+	/// <strong>Applying component templates</strong>
+	/// </para>
+	/// <para>
+	/// You cannot directly apply a component template to a data stream or index.
+	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2120,7 +2154,6 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create or update a component template.
-	/// Creates or updates a component template.
 	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 	/// </para>
 	/// <para>
@@ -2139,6 +2172,13 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// You can use C-style <c>/* *\/</c> block comments in component templates.
 	/// You can include comments anywhere in the request body except before the opening curly bracket.
+	/// </para>
+	/// <para>
+	/// <strong>Applying component templates</strong>
+	/// </para>
+	/// <para>
+	/// You cannot directly apply a component template to a data stream or index.
+	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2154,7 +2194,6 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create or update a component template.
-	/// Creates or updates a component template.
 	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 	/// </para>
 	/// <para>
@@ -2173,6 +2212,13 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// You can use C-style <c>/* *\/</c> block comments in component templates.
 	/// You can include comments anywhere in the request body except before the opening curly bracket.
+	/// </para>
+	/// <para>
+	/// <strong>Applying component templates</strong>
+	/// </para>
+	/// <para>
+	/// You cannot directly apply a component template to a data stream or index.
+	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2185,7 +2231,6 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create or update a component template.
-	/// Creates or updates a component template.
 	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 	/// </para>
 	/// <para>
@@ -2204,6 +2249,13 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// You can use C-style <c>/* *\/</c> block comments in component templates.
 	/// You can include comments anywhere in the request body except before the opening curly bracket.
+	/// </para>
+	/// <para>
+	/// <strong>Applying component templates</strong>
+	/// </para>
+	/// <para>
+	/// You cannot directly apply a component template to a data stream or index.
+	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2217,7 +2269,6 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create or update a component template.
-	/// Creates or updates a component template.
 	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 	/// </para>
 	/// <para>
@@ -2236,6 +2287,13 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// You can use C-style <c>/* *\/</c> block comments in component templates.
 	/// You can include comments anywhere in the request body except before the opening curly bracket.
+	/// </para>
+	/// <para>
+	/// <strong>Applying component templates</strong>
+	/// </para>
+	/// <para>
+	/// You cannot directly apply a component template to a data stream or index.
+	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2250,7 +2308,6 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create or update a component template.
-	/// Creates or updates a component template.
 	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 	/// </para>
 	/// <para>
@@ -2269,6 +2326,13 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// You can use C-style <c>/* *\/</c> block comments in component templates.
 	/// You can include comments anywhere in the request body except before the opening curly bracket.
+	/// </para>
+	/// <para>
+	/// <strong>Applying component templates</strong>
+	/// </para>
+	/// <para>
+	/// You cannot directly apply a component template to a data stream or index.
+	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2281,7 +2345,6 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create or update a component template.
-	/// Creates or updates a component template.
 	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 	/// </para>
 	/// <para>
@@ -2300,6 +2363,13 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// You can use C-style <c>/* *\/</c> block comments in component templates.
 	/// You can include comments anywhere in the request body except before the opening curly bracket.
+	/// </para>
+	/// <para>
+	/// <strong>Applying component templates</strong>
+	/// </para>
+	/// <para>
+	/// You cannot directly apply a component template to a data stream or index.
+	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2313,7 +2383,6 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create or update a component template.
-	/// Creates or updates a component template.
 	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 	/// </para>
 	/// <para>
@@ -2332,6 +2401,13 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// You can use C-style <c>/* *\/</c> block comments in component templates.
 	/// You can include comments anywhere in the request body except before the opening curly bracket.
+	/// </para>
+	/// <para>
+	/// <strong>Applying component templates</strong>
+	/// </para>
+	/// <para>
+	/// You cannot directly apply a component template to a data stream or index.
+	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>

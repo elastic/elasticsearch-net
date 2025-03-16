@@ -112,6 +112,14 @@ public sealed partial class SubmitAsyncSearchRequestParameters : RequestParamete
 
 	/// <summary>
 	/// <para>
+	/// Specifies how long the async search needs to be available.
+	/// Ongoing async searches and any saved search results are deleted after this period.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
+
+	/// <summary>
+	/// <para>
 	/// If <c>true</c>, results are stored for later retrieval when the search completes within the <c>wait_for_completion_timeout</c>.
 	/// </para>
 	/// </summary>
@@ -130,6 +138,7 @@ public sealed partial class SubmitAsyncSearchRequestParameters : RequestParamete
 	/// </para>
 	/// </summary>
 	public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
+	public string? MinCompatibleShardNode { get => Q<string?>("min_compatible_shard_node"); set => Q("min_compatible_shard_node", value); }
 
 	/// <summary>
 	/// <para>
@@ -764,6 +773,15 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 
 	/// <summary>
 	/// <para>
+	/// Specifies how long the async search needs to be available.
+	/// Ongoing async searches and any saved search results are deleted after this period.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
+
+	/// <summary>
+	/// <para>
 	/// If <c>true</c>, results are stored for later retrieval when the search completes within the <c>wait_for_completion_timeout</c>.
 	/// </para>
 	/// </summary>
@@ -785,6 +803,8 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// </summary>
 	[JsonIgnore]
 	public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
+	[JsonIgnore]
+	public string? MinCompatibleShardNode { get => Q<string?>("min_compatible_shard_node"); set => Q("min_compatible_shard_node", value); }
 
 	/// <summary>
 	/// <para>
@@ -1169,9 +1189,11 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	public SubmitAsyncSearchRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+	public SubmitAsyncSearchRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> KeepOnCompletion(bool? keepOnCompletion = true) => Qs("keep_on_completion", keepOnCompletion);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> MaxConcurrentShardRequests(long? maxConcurrentShardRequests) => Qs("max_concurrent_shard_requests", maxConcurrentShardRequests);
+	public SubmitAsyncSearchRequestDescriptor<TDocument> MinCompatibleShardNode(string? minCompatibleShardNode) => Qs("min_compatible_shard_node", minCompatibleShardNode);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> QueryLuceneSyntax(string? queryLuceneSyntax) => Qs("q", queryLuceneSyntax);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
@@ -2290,9 +2312,11 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	public SubmitAsyncSearchRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public SubmitAsyncSearchRequestDescriptor IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
 	public SubmitAsyncSearchRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+	public SubmitAsyncSearchRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
 	public SubmitAsyncSearchRequestDescriptor KeepOnCompletion(bool? keepOnCompletion = true) => Qs("keep_on_completion", keepOnCompletion);
 	public SubmitAsyncSearchRequestDescriptor Lenient(bool? lenient = true) => Qs("lenient", lenient);
 	public SubmitAsyncSearchRequestDescriptor MaxConcurrentShardRequests(long? maxConcurrentShardRequests) => Qs("max_concurrent_shard_requests", maxConcurrentShardRequests);
+	public SubmitAsyncSearchRequestDescriptor MinCompatibleShardNode(string? minCompatibleShardNode) => Qs("min_compatible_shard_node", minCompatibleShardNode);
 	public SubmitAsyncSearchRequestDescriptor Preference(string? preference) => Qs("preference", preference);
 	public SubmitAsyncSearchRequestDescriptor QueryLuceneSyntax(string? queryLuceneSyntax) => Qs("q", queryLuceneSyntax);
 	public SubmitAsyncSearchRequestDescriptor RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);

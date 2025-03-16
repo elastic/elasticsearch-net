@@ -52,6 +52,12 @@ public sealed partial class GetUserPrivilegesRequestParameters : RequestParamete
 /// <para>
 /// Get user privileges.
 /// </para>
+/// <para>
+/// Get the security privileges for the logged in user.
+/// All users can use this API, but only to determine their own privileges.
+/// To check the privileges of other users, you must use the run as feature.
+/// To check whether a user has a specific list of privileges, use the has privileges API.
+/// </para>
 /// </summary>
 public sealed partial class GetUserPrivilegesRequest : PlainRequest<GetUserPrivilegesRequestParameters>
 {
@@ -85,6 +91,12 @@ public sealed partial class GetUserPrivilegesRequest : PlainRequest<GetUserPrivi
 /// <summary>
 /// <para>
 /// Get user privileges.
+/// </para>
+/// <para>
+/// Get the security privileges for the logged in user.
+/// All users can use this API, but only to determine their own privileges.
+/// To check the privileges of other users, you must use the run as feature.
+/// To check whether a user has a specific list of privileges, use the has privileges API.
 /// </para>
 /// </summary>
 public sealed partial class GetUserPrivilegesRequestDescriptor : RequestDescriptor<GetUserPrivilegesRequestDescriptor, GetUserPrivilegesRequestParameters>

@@ -34,7 +34,8 @@ public sealed partial class ClearCachedRealmsRequestParameters : RequestParamete
 {
 	/// <summary>
 	/// <para>
-	/// Comma-separated list of usernames to clear from the cache
+	/// A comma-separated list of the users to clear from the cache.
+	/// If you do not specify this parameter, the API evicts all users from the user cache.
 	/// </para>
 	/// </summary>
 	public ICollection<string>? Usernames { get => Q<ICollection<string>?>("usernames"); set => Q("usernames", value); }
@@ -45,7 +46,13 @@ public sealed partial class ClearCachedRealmsRequestParameters : RequestParamete
 /// Clear the user cache.
 /// </para>
 /// <para>
-/// Evict users from the user cache. You can completely clear the cache or evict specific users.
+/// Evict users from the user cache.
+/// You can completely clear the cache or evict specific users.
+/// </para>
+/// <para>
+/// User credentials are cached in memory on each node to avoid connecting to a remote authentication service or hitting the disk for every incoming request.
+/// There are realm settings that you can use to configure the user cache.
+/// For more information, refer to the documentation about controlling the user cache.
 /// </para>
 /// </summary>
 public sealed partial class ClearCachedRealmsRequest : PlainRequest<ClearCachedRealmsRequestParameters>
@@ -64,7 +71,8 @@ public sealed partial class ClearCachedRealmsRequest : PlainRequest<ClearCachedR
 
 	/// <summary>
 	/// <para>
-	/// Comma-separated list of usernames to clear from the cache
+	/// A comma-separated list of the users to clear from the cache.
+	/// If you do not specify this parameter, the API evicts all users from the user cache.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -76,7 +84,13 @@ public sealed partial class ClearCachedRealmsRequest : PlainRequest<ClearCachedR
 /// Clear the user cache.
 /// </para>
 /// <para>
-/// Evict users from the user cache. You can completely clear the cache or evict specific users.
+/// Evict users from the user cache.
+/// You can completely clear the cache or evict specific users.
+/// </para>
+/// <para>
+/// User credentials are cached in memory on each node to avoid connecting to a remote authentication service or hitting the disk for every incoming request.
+/// There are realm settings that you can use to configure the user cache.
+/// For more information, refer to the documentation about controlling the user cache.
 /// </para>
 /// </summary>
 public sealed partial class ClearCachedRealmsRequestDescriptor : RequestDescriptor<ClearCachedRealmsRequestDescriptor, ClearCachedRealmsRequestParameters>

@@ -29,22 +29,77 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed partial class ElasticsearchVersionInfo
 {
+	/// <summary>
+	/// <para>
+	/// The Elasticsearch Git commit's date.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("build_date")]
 	public DateTimeOffset BuildDate { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The build flavor. For example, <c>default</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("build_flavor")]
 	public string BuildFlavor { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The Elasticsearch Git commit's SHA hash.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("build_hash")]
 	public string BuildHash { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether the Elasticsearch build was a snapshot.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("build_snapshot")]
 	public bool BuildSnapshot { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The build type that corresponds to how Elasticsearch was installed.
+	/// For example, <c>docker</c>, <c>rpm</c>, or <c>tar</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("build_type")]
 	public string BuildType { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The version number of Elasticsearch's underlying Lucene software.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("lucene_version")]
 	public string LuceneVersion { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The minimum index version with which the responding node can read from disk.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("minimum_index_compatibility_version")]
 	public string MinimumIndexCompatibilityVersion { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The minimum node version with which the responding node can communicate.
+	/// Also the minimum version from which you can perform a rolling upgrade.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("minimum_wire_compatibility_version")]
 	public string MinimumWireCompatibilityVersion { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The Elasticsearch version number.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("number")]
 	public string Number { get; init; }
 }

@@ -34,16 +34,18 @@ public sealed partial class PutScriptRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// Period to wait for a connection to the master node.
+	/// The period to wait for a connection to the master node.
 	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for a response.
+	/// The period to wait for a response.
 	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
@@ -75,8 +77,9 @@ public sealed partial class PutScriptRequest : PlainRequest<PutScriptRequestPara
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for a connection to the master node.
+	/// The period to wait for a connection to the master node.
 	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -84,8 +87,9 @@ public sealed partial class PutScriptRequest : PlainRequest<PutScriptRequestPara
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for a response.
+	/// The period to wait for a response.
 	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -93,7 +97,7 @@ public sealed partial class PutScriptRequest : PlainRequest<PutScriptRequestPara
 
 	/// <summary>
 	/// <para>
-	/// Contains the script or search template, its parameters, and its language.
+	/// The script or search template, its parameters, and its language.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("script")]
@@ -147,7 +151,7 @@ public sealed partial class PutScriptRequestDescriptor<TDocument> : RequestDescr
 
 	/// <summary>
 	/// <para>
-	/// Contains the script or search template, its parameters, and its language.
+	/// The script or search template, its parameters, and its language.
 	/// </para>
 	/// </summary>
 	public PutScriptRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.StoredScript script)
@@ -244,7 +248,7 @@ public sealed partial class PutScriptRequestDescriptor : RequestDescriptor<PutSc
 
 	/// <summary>
 	/// <para>
-	/// Contains the script or search template, its parameters, and its language.
+	/// The script or search template, its parameters, and its language.
 	/// </para>
 	/// </summary>
 	public PutScriptRequestDescriptor Script(Elastic.Clients.Elasticsearch.StoredScript script)

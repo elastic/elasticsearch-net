@@ -28,8 +28,19 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed partial class ClosePointInTimeResponse : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>
+	/// The number of search contexts that were successfully closed.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("num_freed")]
 	public int NumFreed { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, all search contexts associated with the point-in-time ID were successfully closed.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("succeeded")]
 	public bool Succeeded { get; init; }
 }

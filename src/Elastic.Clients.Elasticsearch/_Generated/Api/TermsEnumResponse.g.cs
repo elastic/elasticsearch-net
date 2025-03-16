@@ -28,6 +28,12 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed partial class TermsEnumResponse : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the returned terms set may be incomplete and should be treated as approximate.
+	/// This can occur due to a few reasons, such as a request timeout or a node error.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("complete")]
 	public bool Complete { get; init; }
 	[JsonInclude, JsonPropertyName("_shards")]

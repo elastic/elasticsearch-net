@@ -17,22 +17,62 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Core;
 using Elastic.Clients.Elasticsearch.Serialization;
+using Elastic.Transport;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+using System.Runtime.Serialization;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Ingest;
+namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
-public sealed partial class IngestInfo
+[JsonConverter(typeof(EventTypeConverter))]
+public enum EventType
 {
-	[JsonInclude, JsonPropertyName("pipeline")]
-	public string? Pipeline { get; init; }
-	[JsonInclude, JsonPropertyName("_redact")]
-	public Elastic.Clients.Elasticsearch.Ingest.Redact? Redact { get; init; }
-	[JsonInclude, JsonPropertyName("timestamp")]
-	public DateTimeOffset Timestamp { get; init; }
+	[EnumMember(Value = "search_click")]
+	Searchclick,
+	[EnumMember(Value = "search")]
+	Search,
+	[EnumMember(Value = "page_view")]
+	Pageview
+}
+
+internal sealed class EventTypeConverter : JsonConverter<EventType>
+{
+	public override EventType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "search_click":
+				return EventType.Searchclick;
+			case "search":
+				return EventType.Search;
+			case "page_view":
+				return EventType.Pageview;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, EventType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case EventType.Searchclick:
+				writer.WriteStringValue("search_click");
+				return;
+			case EventType.Search:
+				writer.WriteStringValue("search");
+				return;
+			case EventType.Pageview:
+				writer.WriteStringValue("page_view");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
 }

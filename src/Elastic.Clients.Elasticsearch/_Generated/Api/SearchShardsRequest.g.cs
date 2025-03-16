@@ -67,15 +67,15 @@ public sealed partial class SearchShardsRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
-	/// Specifies the node or shard the operation should be performed on.
-	/// Random by default.
+	/// The node or shard the operation should be performed on.
+	/// It is random by default.
 	/// </para>
 	/// </summary>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
 	/// <para>
-	/// Custom value used to route operations to a specific shard.
+	/// A custom value used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
@@ -88,7 +88,10 @@ public sealed partial class SearchShardsRequestParameters : RequestParameters
 /// <para>
 /// Get the indices and shards that a search request would be run against.
 /// This information can be useful for working out issues or planning optimizations with routing and shard preferences.
-/// When filtered aliases are used, the filter is returned as part of the indices section.
+/// When filtered aliases are used, the filter is returned as part of the <c>indices</c> section.
+/// </para>
+/// <para>
+/// If the Elasticsearch security features are enabled, you must have the <c>view_index_metadata</c> or <c>manage</c> index privilege for the target data stream, index, or alias.
 /// </para>
 /// </summary>
 public sealed partial class SearchShardsRequest : PlainRequest<SearchShardsRequestParameters>
@@ -148,8 +151,8 @@ public sealed partial class SearchShardsRequest : PlainRequest<SearchShardsReque
 
 	/// <summary>
 	/// <para>
-	/// Specifies the node or shard the operation should be performed on.
-	/// Random by default.
+	/// The node or shard the operation should be performed on.
+	/// It is random by default.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -157,7 +160,7 @@ public sealed partial class SearchShardsRequest : PlainRequest<SearchShardsReque
 
 	/// <summary>
 	/// <para>
-	/// Custom value used to route operations to a specific shard.
+	/// A custom value used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -171,7 +174,10 @@ public sealed partial class SearchShardsRequest : PlainRequest<SearchShardsReque
 /// <para>
 /// Get the indices and shards that a search request would be run against.
 /// This information can be useful for working out issues or planning optimizations with routing and shard preferences.
-/// When filtered aliases are used, the filter is returned as part of the indices section.
+/// When filtered aliases are used, the filter is returned as part of the <c>indices</c> section.
+/// </para>
+/// <para>
+/// If the Elasticsearch security features are enabled, you must have the <c>view_index_metadata</c> or <c>manage</c> index privilege for the target data stream, index, or alias.
 /// </para>
 /// </summary>
 public sealed partial class SearchShardsRequestDescriptor<TDocument> : RequestDescriptor<SearchShardsRequestDescriptor<TDocument>, SearchShardsRequestParameters>
@@ -219,7 +225,10 @@ public sealed partial class SearchShardsRequestDescriptor<TDocument> : RequestDe
 /// <para>
 /// Get the indices and shards that a search request would be run against.
 /// This information can be useful for working out issues or planning optimizations with routing and shard preferences.
-/// When filtered aliases are used, the filter is returned as part of the indices section.
+/// When filtered aliases are used, the filter is returned as part of the <c>indices</c> section.
+/// </para>
+/// <para>
+/// If the Elasticsearch security features are enabled, you must have the <c>view_index_metadata</c> or <c>manage</c> index privilege for the target data stream, index, or alias.
 /// </para>
 /// </summary>
 public sealed partial class SearchShardsRequestDescriptor : RequestDescriptor<SearchShardsRequestDescriptor, SearchShardsRequestParameters>

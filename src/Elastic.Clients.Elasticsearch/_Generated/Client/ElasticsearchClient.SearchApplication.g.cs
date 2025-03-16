@@ -537,7 +537,8 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the existing search applications.
+	/// Get search applications.
+	/// Get information about search applications.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-search-applications.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -550,7 +551,8 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the existing search applications.
+	/// Get search applications.
+	/// Get information about search applications.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-search-applications.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -562,7 +564,8 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the existing search applications.
+	/// Get search applications.
+	/// Get information about search applications.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-search-applications.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -575,7 +578,8 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the existing search applications.
+	/// Get search applications.
+	/// Get information about search applications.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-search-applications.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -589,7 +593,8 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the existing search applications.
+	/// Get search applications.
+	/// Get information about search applications.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-search-applications.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -604,7 +609,8 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the existing search applications.
+	/// Get search applications.
+	/// Get information about search applications.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-search-applications.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -616,7 +622,8 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the existing search applications.
+	/// Get search applications.
+	/// Get information about search applications.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-search-applications.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -629,7 +636,8 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the existing search applications.
+	/// Get search applications.
+	/// Get information about search applications.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-search-applications.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -639,6 +647,112 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ListRequestDescriptor, ListResponse, ListRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a behavioral analytics collection event.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/post-analytics-collection-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PostBehavioralAnalyticsEventResponse PostBehavioralAnalyticsEvent(PostBehavioralAnalyticsEventRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<PostBehavioralAnalyticsEventRequest, PostBehavioralAnalyticsEventResponse, PostBehavioralAnalyticsEventRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a behavioral analytics collection event.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/post-analytics-collection-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PostBehavioralAnalyticsEventResponse> PostBehavioralAnalyticsEventAsync(PostBehavioralAnalyticsEventRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<PostBehavioralAnalyticsEventRequest, PostBehavioralAnalyticsEventResponse, PostBehavioralAnalyticsEventRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a behavioral analytics collection event.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/post-analytics-collection-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PostBehavioralAnalyticsEventResponse PostBehavioralAnalyticsEvent(PostBehavioralAnalyticsEventRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<PostBehavioralAnalyticsEventRequestDescriptor, PostBehavioralAnalyticsEventResponse, PostBehavioralAnalyticsEventRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a behavioral analytics collection event.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/post-analytics-collection-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PostBehavioralAnalyticsEventResponse PostBehavioralAnalyticsEvent(Elastic.Clients.Elasticsearch.Name collectionName, Elastic.Clients.Elasticsearch.SearchApplication.EventType eventType)
+	{
+		var descriptor = new PostBehavioralAnalyticsEventRequestDescriptor(collectionName, eventType);
+		descriptor.BeforeRequest();
+		return DoRequest<PostBehavioralAnalyticsEventRequestDescriptor, PostBehavioralAnalyticsEventResponse, PostBehavioralAnalyticsEventRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a behavioral analytics collection event.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/post-analytics-collection-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PostBehavioralAnalyticsEventResponse PostBehavioralAnalyticsEvent(Elastic.Clients.Elasticsearch.Name collectionName, Elastic.Clients.Elasticsearch.SearchApplication.EventType eventType, Action<PostBehavioralAnalyticsEventRequestDescriptor> configureRequest)
+	{
+		var descriptor = new PostBehavioralAnalyticsEventRequestDescriptor(collectionName, eventType);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<PostBehavioralAnalyticsEventRequestDescriptor, PostBehavioralAnalyticsEventResponse, PostBehavioralAnalyticsEventRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a behavioral analytics collection event.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/post-analytics-collection-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PostBehavioralAnalyticsEventResponse> PostBehavioralAnalyticsEventAsync(PostBehavioralAnalyticsEventRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PostBehavioralAnalyticsEventRequestDescriptor, PostBehavioralAnalyticsEventResponse, PostBehavioralAnalyticsEventRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a behavioral analytics collection event.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/post-analytics-collection-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PostBehavioralAnalyticsEventResponse> PostBehavioralAnalyticsEventAsync(Elastic.Clients.Elasticsearch.Name collectionName, Elastic.Clients.Elasticsearch.SearchApplication.EventType eventType, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PostBehavioralAnalyticsEventRequestDescriptor(collectionName, eventType);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PostBehavioralAnalyticsEventRequestDescriptor, PostBehavioralAnalyticsEventResponse, PostBehavioralAnalyticsEventRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a behavioral analytics collection event.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/post-analytics-collection-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PostBehavioralAnalyticsEventResponse> PostBehavioralAnalyticsEventAsync(Elastic.Clients.Elasticsearch.Name collectionName, Elastic.Clients.Elasticsearch.SearchApplication.EventType eventType, Action<PostBehavioralAnalyticsEventRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PostBehavioralAnalyticsEventRequestDescriptor(collectionName, eventType);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PostBehavioralAnalyticsEventRequestDescriptor, PostBehavioralAnalyticsEventResponse, PostBehavioralAnalyticsEventRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -686,7 +800,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutSearchApplicationResponse Put(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters searchApplication, Elastic.Clients.Elasticsearch.Name name)
+	public virtual PutSearchApplicationResponse Put(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplication searchApplication, Elastic.Clients.Elasticsearch.Name name)
 	{
 		var descriptor = new PutSearchApplicationRequestDescriptor(searchApplication, name);
 		descriptor.BeforeRequest();
@@ -700,7 +814,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutSearchApplicationResponse Put(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters searchApplication, Elastic.Clients.Elasticsearch.Name name, Action<PutSearchApplicationRequestDescriptor> configureRequest)
+	public virtual PutSearchApplicationResponse Put(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplication searchApplication, Elastic.Clients.Elasticsearch.Name name, Action<PutSearchApplicationRequestDescriptor> configureRequest)
 	{
 		var descriptor = new PutSearchApplicationRequestDescriptor(searchApplication, name);
 		configureRequest?.Invoke(descriptor);
@@ -726,7 +840,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<PutSearchApplicationResponse> PutAsync(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters searchApplication, Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
+	public virtual Task<PutSearchApplicationResponse> PutAsync(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplication searchApplication, Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new PutSearchApplicationRequestDescriptor(searchApplication, name);
 		descriptor.BeforeRequest();
@@ -739,7 +853,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<PutSearchApplicationResponse> PutAsync(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters searchApplication, Elastic.Clients.Elasticsearch.Name name, Action<PutSearchApplicationRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<PutSearchApplicationResponse> PutAsync(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplication searchApplication, Elastic.Clients.Elasticsearch.Name name, Action<PutSearchApplicationRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new PutSearchApplicationRequestDescriptor(searchApplication, name);
 		configureRequest?.Invoke(descriptor);
@@ -851,6 +965,160 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PutBehavioralAnalyticsRequestDescriptor, PutBehavioralAnalyticsResponse, PutBehavioralAnalyticsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Render a search application query.
+	/// Generate an Elasticsearch query using the specified query parameters and the search template associated with the search application or a default template if none is specified.
+	/// If a parameter used in the search template is not specified in <c>params</c>, the parameter's default value will be used.
+	/// The API returns the specific Elasticsearch query that would be generated and run by calling the search application search API.
+	/// </para>
+	/// <para>
+	/// You must have <c>read</c> privileges on the backing alias of the search application.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-application-render-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual RenderQueryResponse RenderQuery(RenderQueryRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<RenderQueryRequest, RenderQueryResponse, RenderQueryRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Render a search application query.
+	/// Generate an Elasticsearch query using the specified query parameters and the search template associated with the search application or a default template if none is specified.
+	/// If a parameter used in the search template is not specified in <c>params</c>, the parameter's default value will be used.
+	/// The API returns the specific Elasticsearch query that would be generated and run by calling the search application search API.
+	/// </para>
+	/// <para>
+	/// You must have <c>read</c> privileges on the backing alias of the search application.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-application-render-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<RenderQueryResponse> RenderQueryAsync(RenderQueryRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<RenderQueryRequest, RenderQueryResponse, RenderQueryRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Render a search application query.
+	/// Generate an Elasticsearch query using the specified query parameters and the search template associated with the search application or a default template if none is specified.
+	/// If a parameter used in the search template is not specified in <c>params</c>, the parameter's default value will be used.
+	/// The API returns the specific Elasticsearch query that would be generated and run by calling the search application search API.
+	/// </para>
+	/// <para>
+	/// You must have <c>read</c> privileges on the backing alias of the search application.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-application-render-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual RenderQueryResponse RenderQuery(RenderQueryRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<RenderQueryRequestDescriptor, RenderQueryResponse, RenderQueryRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Render a search application query.
+	/// Generate an Elasticsearch query using the specified query parameters and the search template associated with the search application or a default template if none is specified.
+	/// If a parameter used in the search template is not specified in <c>params</c>, the parameter's default value will be used.
+	/// The API returns the specific Elasticsearch query that would be generated and run by calling the search application search API.
+	/// </para>
+	/// <para>
+	/// You must have <c>read</c> privileges on the backing alias of the search application.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-application-render-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual RenderQueryResponse RenderQuery(Elastic.Clients.Elasticsearch.Name name)
+	{
+		var descriptor = new RenderQueryRequestDescriptor(name);
+		descriptor.BeforeRequest();
+		return DoRequest<RenderQueryRequestDescriptor, RenderQueryResponse, RenderQueryRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Render a search application query.
+	/// Generate an Elasticsearch query using the specified query parameters and the search template associated with the search application or a default template if none is specified.
+	/// If a parameter used in the search template is not specified in <c>params</c>, the parameter's default value will be used.
+	/// The API returns the specific Elasticsearch query that would be generated and run by calling the search application search API.
+	/// </para>
+	/// <para>
+	/// You must have <c>read</c> privileges on the backing alias of the search application.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-application-render-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual RenderQueryResponse RenderQuery(Elastic.Clients.Elasticsearch.Name name, Action<RenderQueryRequestDescriptor> configureRequest)
+	{
+		var descriptor = new RenderQueryRequestDescriptor(name);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<RenderQueryRequestDescriptor, RenderQueryResponse, RenderQueryRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Render a search application query.
+	/// Generate an Elasticsearch query using the specified query parameters and the search template associated with the search application or a default template if none is specified.
+	/// If a parameter used in the search template is not specified in <c>params</c>, the parameter's default value will be used.
+	/// The API returns the specific Elasticsearch query that would be generated and run by calling the search application search API.
+	/// </para>
+	/// <para>
+	/// You must have <c>read</c> privileges on the backing alias of the search application.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-application-render-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<RenderQueryResponse> RenderQueryAsync(RenderQueryRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<RenderQueryRequestDescriptor, RenderQueryResponse, RenderQueryRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Render a search application query.
+	/// Generate an Elasticsearch query using the specified query parameters and the search template associated with the search application or a default template if none is specified.
+	/// If a parameter used in the search template is not specified in <c>params</c>, the parameter's default value will be used.
+	/// The API returns the specific Elasticsearch query that would be generated and run by calling the search application search API.
+	/// </para>
+	/// <para>
+	/// You must have <c>read</c> privileges on the backing alias of the search application.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-application-render-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<RenderQueryResponse> RenderQueryAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new RenderQueryRequestDescriptor(name);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<RenderQueryRequestDescriptor, RenderQueryResponse, RenderQueryRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Render a search application query.
+	/// Generate an Elasticsearch query using the specified query parameters and the search template associated with the search application or a default template if none is specified.
+	/// If a parameter used in the search template is not specified in <c>params</c>, the parameter's default value will be used.
+	/// The API returns the specific Elasticsearch query that would be generated and run by calling the search application search API.
+	/// </para>
+	/// <para>
+	/// You must have <c>read</c> privileges on the backing alias of the search application.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-application-render-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<RenderQueryResponse> RenderQueryAsync(Elastic.Clients.Elasticsearch.Name name, Action<RenderQueryRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new RenderQueryRequestDescriptor(name);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<RenderQueryRequestDescriptor, RenderQueryResponse, RenderQueryRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>

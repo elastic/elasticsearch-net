@@ -47,6 +47,8 @@ public sealed partial class FieldAliasProperty : IProperty
 	public Elastic.Clients.Elasticsearch.Field? Path { get; set; }
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
+	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
+	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "alias";
@@ -66,6 +68,7 @@ public sealed partial class FieldAliasPropertyDescriptor<TDocument> : Serializab
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? PathValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public FieldAliasPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 	{
@@ -148,6 +151,12 @@ public sealed partial class FieldAliasPropertyDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
+	public FieldAliasPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -187,6 +196,12 @@ public sealed partial class FieldAliasPropertyDescriptor<TDocument> : Serializab
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("alias");
 		writer.WriteEndObject();
@@ -199,7 +214,8 @@ public sealed partial class FieldAliasPropertyDescriptor<TDocument> : Serializab
 		IgnoreAbove = IgnoreAboveValue,
 		Meta = MetaValue,
 		Path = PathValue,
-		Properties = PropertiesValue
+		Properties = PropertiesValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }
 
@@ -217,6 +233,7 @@ public sealed partial class FieldAliasPropertyDescriptor : SerializableDescripto
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? PathValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public FieldAliasPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 	{
@@ -299,6 +316,12 @@ public sealed partial class FieldAliasPropertyDescriptor : SerializableDescripto
 		return Self;
 	}
 
+	public FieldAliasPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -338,6 +361,12 @@ public sealed partial class FieldAliasPropertyDescriptor : SerializableDescripto
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("alias");
 		writer.WriteEndObject();
@@ -350,6 +379,7 @@ public sealed partial class FieldAliasPropertyDescriptor : SerializableDescripto
 		IgnoreAbove = IgnoreAboveValue,
 		Meta = MetaValue,
 		Path = PathValue,
-		Properties = PropertiesValue
+		Properties = PropertiesValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }

@@ -80,6 +80,16 @@ public sealed partial class SplitIndexRequestParameters : RequestParameters
 /// </item>
 /// </list>
 /// <para>
+/// You can do make an index read-only with the following request using the add index block API:
+/// </para>
+/// <code>
+/// PUT /my_source_index/_block/write
+/// </code>
+/// <para>
+/// The current write index on a data stream cannot be split.
+/// In order to split the current write index, the data stream must first be rolled over so that a new write index is created and then the previous write index can be split.
+/// </para>
+/// <para>
 /// The number of times the index can be split (and the number of shards that each original shard can be split into) is determined by the <c>index.number_of_routing_shards</c> setting.
 /// The number of routing shards specifies the hashing space that is used internally to distribute documents across shards with consistent hashing.
 /// For instance, a 5 shard index with <c>number_of_routing_shards</c> set to 30 (5 x 2 x 3) could be split by a factor of 2 or 3.
@@ -215,6 +225,16 @@ public sealed partial class SplitIndexRequest : PlainRequest<SplitIndexRequestPa
 /// </para>
 /// </item>
 /// </list>
+/// <para>
+/// You can do make an index read-only with the following request using the add index block API:
+/// </para>
+/// <code>
+/// PUT /my_source_index/_block/write
+/// </code>
+/// <para>
+/// The current write index on a data stream cannot be split.
+/// In order to split the current write index, the data stream must first be rolled over so that a new write index is created and then the previous write index can be split.
+/// </para>
 /// <para>
 /// The number of times the index can be split (and the number of shards that each original shard can be split into) is determined by the <c>index.number_of_routing_shards</c> setting.
 /// The number of routing shards specifies the hashing space that is used internally to distribute documents across shards with consistent hashing.
@@ -369,6 +389,16 @@ public sealed partial class SplitIndexRequestDescriptor<TDocument> : RequestDesc
 /// </para>
 /// </item>
 /// </list>
+/// <para>
+/// You can do make an index read-only with the following request using the add index block API:
+/// </para>
+/// <code>
+/// PUT /my_source_index/_block/write
+/// </code>
+/// <para>
+/// The current write index on a data stream cannot be split.
+/// In order to split the current write index, the data stream must first be rolled over so that a new write index is created and then the previous write index can be split.
+/// </para>
 /// <para>
 /// The number of times the index can be split (and the number of shards that each original shard can be split into) is determined by the <c>index.number_of_routing_shards</c> setting.
 /// The number of routing shards specifies the hashing space that is used internally to distribute documents across shards with consistent hashing.

@@ -50,8 +50,32 @@ public sealed partial class PutRoleMappingRequestParameters : RequestParameters
 /// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files. The create or update role mappings API cannot update role mappings that are defined in role mapping files.
 /// </para>
 /// <para>
-/// This API does not create roles. Rather, it maps users to existing roles.
+/// NOTE: This API does not create roles. Rather, it maps users to existing roles.
 /// Roles can be created by using the create or update roles API or roles files.
+/// </para>
+/// <para>
+/// <strong>Role templates</strong>
+/// </para>
+/// <para>
+/// The most common use for role mappings is to create a mapping from a known value on the user to a fixed role name.
+/// For example, all users in the <c>cn=admin,dc=example,dc=com</c> LDAP group should be given the superuser role in Elasticsearch.
+/// The <c>roles</c> field is used for this purpose.
+/// </para>
+/// <para>
+/// For more complex needs, it is possible to use Mustache templates to dynamically determine the names of the roles that should be granted to the user.
+/// The <c>role_templates</c> field is used for this purpose.
+/// </para>
+/// <para>
+/// NOTE: To use role templates successfully, the relevant scripting feature must be enabled.
+/// Otherwise, all attempts to create a role mapping with role templates fail.
+/// </para>
+/// <para>
+/// All of the user fields that are available in the role mapping rules are also available in the role templates.
+/// Thus it is possible to assign a user to a role that reflects their username, their groups, or the name of the realm to which they authenticated.
+/// </para>
+/// <para>
+/// By default a template is evaluated to produce a single string that is the name of the role which should be assigned to the user.
+/// If the format of the template is set to "json" then the template is expected to produce a JSON string or an array of JSON strings for the role names.
 /// </para>
 /// </summary>
 public sealed partial class PutRoleMappingRequest : PlainRequest<PutRoleMappingRequestParameters>
@@ -75,14 +99,48 @@ public sealed partial class PutRoleMappingRequest : PlainRequest<PutRoleMappingR
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
+
+	/// <summary>
+	/// <para>
+	/// Mappings that have <c>enabled</c> set to <c>false</c> are ignored when role mapping is performed.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("enabled")]
 	public bool? Enabled { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Additional metadata that helps define which roles are assigned to each user.
+	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("metadata")]
 	public IDictionary<string, object>? Metadata { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// A list of role names that are granted to the users that match the role mapping rules.
+	/// Exactly one of <c>roles</c> or <c>role_templates</c> must be specified.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("roles")]
 	public ICollection<string>? Roles { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// A list of Mustache templates that will be evaluated to determine the roles names that should granted to the users that match the role mapping rules.
+	/// Exactly one of <c>roles</c> or <c>role_templates</c> must be specified.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("role_templates")]
 	public ICollection<Elastic.Clients.Elasticsearch.Security.RoleTemplate>? RoleTemplates { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The rules that determine which users should be matched by the mapping.
+	/// A rule is a logical condition that is expressed by using a JSON DSL.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("rules")]
 	public Elastic.Clients.Elasticsearch.Security.RoleMappingRule? Rules { get; set; }
 	[JsonInclude, JsonPropertyName("run_as")]
@@ -99,8 +157,32 @@ public sealed partial class PutRoleMappingRequest : PlainRequest<PutRoleMappingR
 /// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files. The create or update role mappings API cannot update role mappings that are defined in role mapping files.
 /// </para>
 /// <para>
-/// This API does not create roles. Rather, it maps users to existing roles.
+/// NOTE: This API does not create roles. Rather, it maps users to existing roles.
 /// Roles can be created by using the create or update roles API or roles files.
+/// </para>
+/// <para>
+/// <strong>Role templates</strong>
+/// </para>
+/// <para>
+/// The most common use for role mappings is to create a mapping from a known value on the user to a fixed role name.
+/// For example, all users in the <c>cn=admin,dc=example,dc=com</c> LDAP group should be given the superuser role in Elasticsearch.
+/// The <c>roles</c> field is used for this purpose.
+/// </para>
+/// <para>
+/// For more complex needs, it is possible to use Mustache templates to dynamically determine the names of the roles that should be granted to the user.
+/// The <c>role_templates</c> field is used for this purpose.
+/// </para>
+/// <para>
+/// NOTE: To use role templates successfully, the relevant scripting feature must be enabled.
+/// Otherwise, all attempts to create a role mapping with role templates fail.
+/// </para>
+/// <para>
+/// All of the user fields that are available in the role mapping rules are also available in the role templates.
+/// Thus it is possible to assign a user to a role that reflects their username, their groups, or the name of the realm to which they authenticated.
+/// </para>
+/// <para>
+/// By default a template is evaluated to produce a single string that is the name of the role which should be assigned to the user.
+/// If the format of the template is set to "json" then the template is expected to produce a JSON string or an array of JSON strings for the role names.
 /// </para>
 /// </summary>
 public sealed partial class PutRoleMappingRequestDescriptor : RequestDescriptor<PutRoleMappingRequestDescriptor, PutRoleMappingRequestParameters>
@@ -139,24 +221,47 @@ public sealed partial class PutRoleMappingRequestDescriptor : RequestDescriptor<
 	private Action<Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor> RulesDescriptorAction { get; set; }
 	private ICollection<string>? RunAsValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// Mappings that have <c>enabled</c> set to <c>false</c> are ignored when role mapping is performed.
+	/// </para>
+	/// </summary>
 	public PutRoleMappingRequestDescriptor Enabled(bool? enabled = true)
 	{
 		EnabledValue = enabled;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Additional metadata that helps define which roles are assigned to each user.
+	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
+	/// </para>
+	/// </summary>
 	public PutRoleMappingRequestDescriptor Metadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
 		MetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// A list of role names that are granted to the users that match the role mapping rules.
+	/// Exactly one of <c>roles</c> or <c>role_templates</c> must be specified.
+	/// </para>
+	/// </summary>
 	public PutRoleMappingRequestDescriptor Roles(ICollection<string>? roles)
 	{
 		RolesValue = roles;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// A list of Mustache templates that will be evaluated to determine the roles names that should granted to the users that match the role mapping rules.
+	/// Exactly one of <c>roles</c> or <c>role_templates</c> must be specified.
+	/// </para>
+	/// </summary>
 	public PutRoleMappingRequestDescriptor RoleTemplates(ICollection<Elastic.Clients.Elasticsearch.Security.RoleTemplate>? roleTemplates)
 	{
 		RoleTemplatesDescriptor = null;
@@ -193,6 +298,12 @@ public sealed partial class PutRoleMappingRequestDescriptor : RequestDescriptor<
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The rules that determine which users should be matched by the mapping.
+	/// A rule is a logical condition that is expressed by using a JSON DSL.
+	/// </para>
+	/// </summary>
 	public PutRoleMappingRequestDescriptor Rules(Elastic.Clients.Elasticsearch.Security.RoleMappingRule? rules)
 	{
 		RulesDescriptor = null;

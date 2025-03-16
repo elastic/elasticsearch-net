@@ -39,7 +39,33 @@ public sealed partial class SamlAuthenticateRequestParameters : RequestParameter
 /// Authenticate SAML.
 /// </para>
 /// <para>
-/// Submits a SAML response message to Elasticsearch for consumption.
+/// Submit a SAML response message to Elasticsearch for consumption.
+/// </para>
+/// <para>
+/// NOTE: This API is intended for use by custom web applications other than Kibana.
+/// If you are using Kibana, refer to the documentation for configuring SAML single-sign-on on the Elastic Stack.
+/// </para>
+/// <para>
+/// The SAML message that is submitted can be:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// A response to a SAML authentication request that was previously created using the SAML prepare authentication API.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// An unsolicited SAML message in the case of an IdP-initiated single sign-on (SSO) flow.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// In either case, the SAML message needs to be a base64 encoded XML document with a root element of <c>&lt;Response></c>.
+/// </para>
+/// <para>
+/// After successful validation, Elasticsearch responds with an Elasticsearch internal access token and refresh token that can be subsequently used for authentication.
+/// This API endpoint essentially exchanges SAML responses that indicate successful authentication in the IdP for Elasticsearch access and refresh tokens, which can be used for authentication against Elasticsearch.
 /// </para>
 /// </summary>
 public sealed partial class SamlAuthenticateRequest : PlainRequest<SamlAuthenticateRequestParameters>
@@ -54,7 +80,7 @@ public sealed partial class SamlAuthenticateRequest : PlainRequest<SamlAuthentic
 
 	/// <summary>
 	/// <para>
-	/// The SAML response as it was sent by the user’s browser, usually a Base64 encoded XML document.
+	/// The SAML response as it was sent by the user's browser, usually a Base64 encoded XML document.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("content")]
@@ -62,7 +88,7 @@ public sealed partial class SamlAuthenticateRequest : PlainRequest<SamlAuthentic
 
 	/// <summary>
 	/// <para>
-	/// A json array with all the valid SAML Request Ids that the caller of the API has for the current user.
+	/// A JSON array with all the valid SAML Request Ids that the caller of the API has for the current user.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ids")]
@@ -82,7 +108,33 @@ public sealed partial class SamlAuthenticateRequest : PlainRequest<SamlAuthentic
 /// Authenticate SAML.
 /// </para>
 /// <para>
-/// Submits a SAML response message to Elasticsearch for consumption.
+/// Submit a SAML response message to Elasticsearch for consumption.
+/// </para>
+/// <para>
+/// NOTE: This API is intended for use by custom web applications other than Kibana.
+/// If you are using Kibana, refer to the documentation for configuring SAML single-sign-on on the Elastic Stack.
+/// </para>
+/// <para>
+/// The SAML message that is submitted can be:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// A response to a SAML authentication request that was previously created using the SAML prepare authentication API.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// An unsolicited SAML message in the case of an IdP-initiated single sign-on (SSO) flow.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// In either case, the SAML message needs to be a base64 encoded XML document with a root element of <c>&lt;Response></c>.
+/// </para>
+/// <para>
+/// After successful validation, Elasticsearch responds with an Elasticsearch internal access token and refresh token that can be subsequently used for authentication.
+/// This API endpoint essentially exchanges SAML responses that indicate successful authentication in the IdP for Elasticsearch access and refresh tokens, which can be used for authentication against Elasticsearch.
 /// </para>
 /// </summary>
 public sealed partial class SamlAuthenticateRequestDescriptor : RequestDescriptor<SamlAuthenticateRequestDescriptor, SamlAuthenticateRequestParameters>
@@ -107,7 +159,7 @@ public sealed partial class SamlAuthenticateRequestDescriptor : RequestDescripto
 
 	/// <summary>
 	/// <para>
-	/// The SAML response as it was sent by the user’s browser, usually a Base64 encoded XML document.
+	/// The SAML response as it was sent by the user's browser, usually a Base64 encoded XML document.
 	/// </para>
 	/// </summary>
 	public SamlAuthenticateRequestDescriptor Content(string content)
@@ -118,7 +170,7 @@ public sealed partial class SamlAuthenticateRequestDescriptor : RequestDescripto
 
 	/// <summary>
 	/// <para>
-	/// A json array with all the valid SAML Request Ids that the caller of the API has for the current user.
+	/// A JSON array with all the valid SAML Request Ids that the caller of the API has for the current user.
 	/// </para>
 	/// </summary>
 	public SamlAuthenticateRequestDescriptor Ids(Elastic.Clients.Elasticsearch.Ids ids)

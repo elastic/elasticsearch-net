@@ -49,8 +49,9 @@ public sealed partial class UpdateUserProfileDataRequestParameters : RequestPara
 	/// <summary>
 	/// <para>
 	/// If 'true', Elasticsearch refreshes the affected shards to make this operation
-	/// visible to search, if 'wait_for' then wait for a refresh to make this operation
-	/// visible to search, if 'false' do nothing with refreshes.
+	/// visible to search.
+	/// If 'wait_for', it waits for a refresh to make this operation visible to search.
+	/// If 'false', nothing is done with refreshes.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
@@ -62,6 +63,34 @@ public sealed partial class UpdateUserProfileDataRequestParameters : RequestPara
 /// </para>
 /// <para>
 /// Update specific data for the user profile that is associated with a unique ID.
+/// </para>
+/// <para>
+/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions.
+/// Individual users and external applications should not call this API directly.
+/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
+/// </para>
+/// <para>
+/// To use this API, you must have one of the following privileges:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The <c>manage_user_profile</c> cluster privilege.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The <c>update_profile_data</c> global privilege for the namespaces that are referenced in the request.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// This API updates the <c>labels</c> and <c>data</c> fields of an existing user profile document with JSON objects.
+/// New keys and their values are added to the profile document and conflicting keys are replaced by data that's included in the request.
+/// </para>
+/// <para>
+/// For both labels and data, content is namespaced by the top-level fields.
+/// The <c>update_profile_data</c> global privilege grants privileges for updating only the allowed namespaces.
 /// </para>
 /// </summary>
 public sealed partial class UpdateUserProfileDataRequest : PlainRequest<UpdateUserProfileDataRequestParameters>
@@ -97,8 +126,9 @@ public sealed partial class UpdateUserProfileDataRequest : PlainRequest<UpdateUs
 	/// <summary>
 	/// <para>
 	/// If 'true', Elasticsearch refreshes the affected shards to make this operation
-	/// visible to search, if 'wait_for' then wait for a refresh to make this operation
-	/// visible to search, if 'false' do nothing with refreshes.
+	/// visible to search.
+	/// If 'wait_for', it waits for a refresh to make this operation visible to search.
+	/// If 'false', nothing is done with refreshes.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -108,6 +138,8 @@ public sealed partial class UpdateUserProfileDataRequest : PlainRequest<UpdateUs
 	/// <para>
 	/// Non-searchable data that you want to associate with the user profile.
 	/// This field supports a nested data structure.
+	/// Within the <c>data</c> object, top-level keys cannot begin with an underscore (<c>_</c>) or contain a period (<c>.</c>).
+	/// The data object is not searchable, but can be retrieved with the get user profile API.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("data")]
@@ -115,8 +147,9 @@ public sealed partial class UpdateUserProfileDataRequest : PlainRequest<UpdateUs
 
 	/// <summary>
 	/// <para>
-	/// Searchable data that you want to associate with the user profile. This
-	/// field supports a nested data structure.
+	/// Searchable data that you want to associate with the user profile.
+	/// This field supports a nested data structure.
+	/// Within the labels object, top-level keys cannot begin with an underscore (<c>_</c>) or contain a period (<c>.</c>).
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("labels")]
@@ -129,6 +162,34 @@ public sealed partial class UpdateUserProfileDataRequest : PlainRequest<UpdateUs
 /// </para>
 /// <para>
 /// Update specific data for the user profile that is associated with a unique ID.
+/// </para>
+/// <para>
+/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions.
+/// Individual users and external applications should not call this API directly.
+/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
+/// </para>
+/// <para>
+/// To use this API, you must have one of the following privileges:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The <c>manage_user_profile</c> cluster privilege.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The <c>update_profile_data</c> global privilege for the namespaces that are referenced in the request.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// This API updates the <c>labels</c> and <c>data</c> fields of an existing user profile document with JSON objects.
+/// New keys and their values are added to the profile document and conflicting keys are replaced by data that's included in the request.
+/// </para>
+/// <para>
+/// For both labels and data, content is namespaced by the top-level fields.
+/// The <c>update_profile_data</c> global privilege grants privileges for updating only the allowed namespaces.
 /// </para>
 /// </summary>
 public sealed partial class UpdateUserProfileDataRequestDescriptor : RequestDescriptor<UpdateUserProfileDataRequestDescriptor, UpdateUserProfileDataRequestParameters>
@@ -164,6 +225,8 @@ public sealed partial class UpdateUserProfileDataRequestDescriptor : RequestDesc
 	/// <para>
 	/// Non-searchable data that you want to associate with the user profile.
 	/// This field supports a nested data structure.
+	/// Within the <c>data</c> object, top-level keys cannot begin with an underscore (<c>_</c>) or contain a period (<c>.</c>).
+	/// The data object is not searchable, but can be retrieved with the get user profile API.
 	/// </para>
 	/// </summary>
 	public UpdateUserProfileDataRequestDescriptor Data(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
@@ -174,8 +237,9 @@ public sealed partial class UpdateUserProfileDataRequestDescriptor : RequestDesc
 
 	/// <summary>
 	/// <para>
-	/// Searchable data that you want to associate with the user profile. This
-	/// field supports a nested data structure.
+	/// Searchable data that you want to associate with the user profile.
+	/// This field supports a nested data structure.
+	/// Within the labels object, top-level keys cannot begin with an underscore (<c>_</c>) or contain a period (<c>.</c>).
 	/// </para>
 	/// </summary>
 	public UpdateUserProfileDataRequestDescriptor Labels(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)

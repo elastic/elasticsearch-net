@@ -92,6 +92,8 @@ public sealed partial class DynamicProperty : IProperty
 	public string? SearchQuoteAnalyzer { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
+	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
+	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 	[JsonInclude, JsonPropertyName("term_vector")]
 	public Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVector { get; set; }
 	[JsonInclude, JsonPropertyName("time_series_metric")]
@@ -141,6 +143,7 @@ public sealed partial class DynamicPropertyDescriptor<TDocument> : SerializableD
 	private string? SearchAnalyzerValue { get; set; }
 	private string? SearchQuoteAnalyzerValue { get; set; }
 	private bool? StoreValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVectorValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
 
@@ -381,6 +384,12 @@ public sealed partial class DynamicPropertyDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	public DynamicPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	public DynamicPropertyDescriptor<TDocument> TermVector(Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? termVector)
 	{
 		TermVectorValue = termVector;
@@ -584,6 +593,12 @@ public sealed partial class DynamicPropertyDescriptor<TDocument> : SerializableD
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		if (TermVectorValue is not null)
 		{
 			writer.WritePropertyName("term_vector");
@@ -679,6 +694,7 @@ public sealed partial class DynamicPropertyDescriptor<TDocument> : SerializableD
 		SearchAnalyzer = SearchAnalyzerValue,
 		SearchQuoteAnalyzer = SearchQuoteAnalyzerValue,
 		Store = StoreValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue,
 		TermVector = TermVectorValue,
 		TimeSeriesMetric = TimeSeriesMetricValue
 	};
@@ -724,6 +740,7 @@ public sealed partial class DynamicPropertyDescriptor : SerializableDescriptor<D
 	private string? SearchAnalyzerValue { get; set; }
 	private string? SearchQuoteAnalyzerValue { get; set; }
 	private bool? StoreValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVectorValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
 
@@ -964,6 +981,12 @@ public sealed partial class DynamicPropertyDescriptor : SerializableDescriptor<D
 		return Self;
 	}
 
+	public DynamicPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	public DynamicPropertyDescriptor TermVector(Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? termVector)
 	{
 		TermVectorValue = termVector;
@@ -1167,6 +1190,12 @@ public sealed partial class DynamicPropertyDescriptor : SerializableDescriptor<D
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		if (TermVectorValue is not null)
 		{
 			writer.WritePropertyName("term_vector");
@@ -1262,6 +1291,7 @@ public sealed partial class DynamicPropertyDescriptor : SerializableDescriptor<D
 		SearchAnalyzer = SearchAnalyzerValue,
 		SearchQuoteAnalyzer = SearchQuoteAnalyzerValue,
 		Store = StoreValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue,
 		TermVector = TermVectorValue,
 		TimeSeriesMetric = TimeSeriesMetricValue
 	};

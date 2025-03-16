@@ -34,7 +34,9 @@ public sealed partial class GetScriptRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// Specify timeout for connection to master
+	/// The period to wait for the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
@@ -62,7 +64,9 @@ public sealed partial class GetScriptRequest : PlainRequest<GetScriptRequestPara
 
 	/// <summary>
 	/// <para>
-	/// Specify timeout for connection to master
+	/// The period to wait for the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]

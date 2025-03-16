@@ -17,26 +17,20 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
-public sealed partial class NodeReloadResult : Union<Elastic.Clients.Elasticsearch.Nodes.Stats, Elastic.Clients.Elasticsearch.Nodes.NodeReloadError>
+public sealed partial class NodeReloadResult
 {
-	public NodeReloadResult(Elastic.Clients.Elasticsearch.Nodes.Stats Stats) : base(Stats)
-	{
-	}
-
-	public NodeReloadResult(Elastic.Clients.Elasticsearch.Nodes.NodeReloadError Error) : base(Error)
-	{
-	}
+	[JsonInclude, JsonPropertyName("name")]
+	public string Name { get; init; }
+	[JsonInclude, JsonPropertyName("reload_exception")]
+	public Elastic.Clients.Elasticsearch.ErrorCause? ReloadException { get; init; }
 }

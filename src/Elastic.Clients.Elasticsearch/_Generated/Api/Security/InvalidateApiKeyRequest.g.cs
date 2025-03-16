@@ -41,8 +41,12 @@ public sealed partial class InvalidateApiKeyRequestParameters : RequestParameter
 /// <para>
 /// This API invalidates API keys created by the create API key or grant API key APIs.
 /// Invalidated API keys fail authentication, but they can still be viewed using the get API key information and query API key information APIs, for at least the configured retention period, until they are automatically deleted.
-/// The <c>manage_api_key</c> privilege allows deleting any API keys.
-/// The <c>manage_own_api_key</c> only allows deleting API keys that are owned by the user.
+/// </para>
+/// <para>
+/// To use this API, you must have at least the <c>manage_security</c>, <c>manage_api_key</c>, or <c>manage_own_api_key</c> cluster privileges.
+/// The <c>manage_security</c> privilege allows deleting any API key, including both REST and cross cluster API keys.
+/// The <c>manage_api_key</c> privilege allows deleting any REST API key, but not cross cluster API keys.
+/// The <c>manage_own_api_key</c> only allows deleting REST API keys that are owned by the user.
 /// In addition, with the <c>manage_own_api_key</c> privilege, an invalidation request must be issued in one of the three formats:
 /// </para>
 /// <list type="bullet">
@@ -53,7 +57,7 @@ public sealed partial class InvalidateApiKeyRequestParameters : RequestParameter
 /// </item>
 /// <item>
 /// <para>
-/// Or, set both <c>username</c> and <c>realm_name</c> to match the user’s identity.
+/// Or, set both <c>username</c> and <c>realm_name</c> to match the user's identity.
 /// </para>
 /// </item>
 /// <item>
@@ -96,8 +100,11 @@ public sealed partial class InvalidateApiKeyRequest : PlainRequest<InvalidateApi
 
 	/// <summary>
 	/// <para>
-	/// Can be used to query API keys owned by the currently authenticated user.
+	/// Query API keys owned by the currently authenticated user.
 	/// The <c>realm_name</c> or <c>username</c> parameters cannot be specified when this parameter is set to <c>true</c> as they are assumed to be the currently authenticated ones.
+	/// </para>
+	/// <para>
+	/// NOTE: At least one of <c>ids</c>, <c>name</c>, <c>username</c>, and <c>realm_name</c> must be specified if <c>owner</c> is <c>false</c>.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("owner")]
@@ -115,7 +122,7 @@ public sealed partial class InvalidateApiKeyRequest : PlainRequest<InvalidateApi
 	/// <summary>
 	/// <para>
 	/// The username of a user.
-	/// This parameter cannot be used with either <c>ids</c> or <c>name</c>, or when <c>owner</c> flag is set to <c>true</c>.
+	/// This parameter cannot be used with either <c>ids</c> or <c>name</c> or when <c>owner</c> flag is set to <c>true</c>.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("username")]
@@ -129,8 +136,12 @@ public sealed partial class InvalidateApiKeyRequest : PlainRequest<InvalidateApi
 /// <para>
 /// This API invalidates API keys created by the create API key or grant API key APIs.
 /// Invalidated API keys fail authentication, but they can still be viewed using the get API key information and query API key information APIs, for at least the configured retention period, until they are automatically deleted.
-/// The <c>manage_api_key</c> privilege allows deleting any API keys.
-/// The <c>manage_own_api_key</c> only allows deleting API keys that are owned by the user.
+/// </para>
+/// <para>
+/// To use this API, you must have at least the <c>manage_security</c>, <c>manage_api_key</c>, or <c>manage_own_api_key</c> cluster privileges.
+/// The <c>manage_security</c> privilege allows deleting any API key, including both REST and cross cluster API keys.
+/// The <c>manage_api_key</c> privilege allows deleting any REST API key, but not cross cluster API keys.
+/// The <c>manage_own_api_key</c> only allows deleting REST API keys that are owned by the user.
 /// In addition, with the <c>manage_own_api_key</c> privilege, an invalidation request must be issued in one of the three formats:
 /// </para>
 /// <list type="bullet">
@@ -141,7 +152,7 @@ public sealed partial class InvalidateApiKeyRequest : PlainRequest<InvalidateApi
 /// </item>
 /// <item>
 /// <para>
-/// Or, set both <c>username</c> and <c>realm_name</c> to match the user’s identity.
+/// Or, set both <c>username</c> and <c>realm_name</c> to match the user's identity.
 /// </para>
 /// </item>
 /// <item>
@@ -206,8 +217,11 @@ public sealed partial class InvalidateApiKeyRequestDescriptor : RequestDescripto
 
 	/// <summary>
 	/// <para>
-	/// Can be used to query API keys owned by the currently authenticated user.
+	/// Query API keys owned by the currently authenticated user.
 	/// The <c>realm_name</c> or <c>username</c> parameters cannot be specified when this parameter is set to <c>true</c> as they are assumed to be the currently authenticated ones.
+	/// </para>
+	/// <para>
+	/// NOTE: At least one of <c>ids</c>, <c>name</c>, <c>username</c>, and <c>realm_name</c> must be specified if <c>owner</c> is <c>false</c>.
 	/// </para>
 	/// </summary>
 	public InvalidateApiKeyRequestDescriptor Owner(bool? owner = true)
@@ -231,7 +245,7 @@ public sealed partial class InvalidateApiKeyRequestDescriptor : RequestDescripto
 	/// <summary>
 	/// <para>
 	/// The username of a user.
-	/// This parameter cannot be used with either <c>ids</c> or <c>name</c>, or when <c>owner</c> flag is set to <c>true</c>.
+	/// This parameter cannot be used with either <c>ids</c> or <c>name</c> or when <c>owner</c> flag is set to <c>true</c>.
 	/// </para>
 	/// </summary>
 	public InvalidateApiKeyRequestDescriptor Username(Elastic.Clients.Elasticsearch.Username? username)

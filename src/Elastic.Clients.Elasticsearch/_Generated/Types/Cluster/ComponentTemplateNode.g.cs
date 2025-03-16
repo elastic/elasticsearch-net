@@ -29,10 +29,208 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public sealed partial class ComponentTemplateNode
 {
+	[JsonInclude, JsonPropertyName("deprecated")]
+	public bool? Deprecated { get; set; }
 	[JsonInclude, JsonPropertyName("_meta")]
-	public IReadOnlyDictionary<string, object>? Meta { get; init; }
+	public IDictionary<string, object>? Meta { get; set; }
 	[JsonInclude, JsonPropertyName("template")]
-	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummary Template { get; init; }
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummary Template { get; set; }
 	[JsonInclude, JsonPropertyName("version")]
-	public long? Version { get; init; }
+	public long? Version { get; set; }
+}
+
+public sealed partial class ComponentTemplateNodeDescriptor<TDocument> : SerializableDescriptor<ComponentTemplateNodeDescriptor<TDocument>>
+{
+	internal ComponentTemplateNodeDescriptor(Action<ComponentTemplateNodeDescriptor<TDocument>> configure) => configure.Invoke(this);
+
+	public ComponentTemplateNodeDescriptor() : base()
+	{
+	}
+
+	private bool? DeprecatedValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummary TemplateValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor<TDocument> TemplateDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor<TDocument>> TemplateDescriptorAction { get; set; }
+	private long? VersionValue { get; set; }
+
+	public ComponentTemplateNodeDescriptor<TDocument> Deprecated(bool? deprecated = true)
+	{
+		DeprecatedValue = deprecated;
+		return Self;
+	}
+
+	public ComponentTemplateNodeDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public ComponentTemplateNodeDescriptor<TDocument> Template(Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummary template)
+	{
+		TemplateDescriptor = null;
+		TemplateDescriptorAction = null;
+		TemplateValue = template;
+		return Self;
+	}
+
+	public ComponentTemplateNodeDescriptor<TDocument> Template(Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor<TDocument> descriptor)
+	{
+		TemplateValue = null;
+		TemplateDescriptorAction = null;
+		TemplateDescriptor = descriptor;
+		return Self;
+	}
+
+	public ComponentTemplateNodeDescriptor<TDocument> Template(Action<Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor<TDocument>> configure)
+	{
+		TemplateValue = null;
+		TemplateDescriptor = null;
+		TemplateDescriptorAction = configure;
+		return Self;
+	}
+
+	public ComponentTemplateNodeDescriptor<TDocument> Version(long? version)
+	{
+		VersionValue = version;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (DeprecatedValue.HasValue)
+		{
+			writer.WritePropertyName("deprecated");
+			writer.WriteBooleanValue(DeprecatedValue.Value);
+		}
+
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("_meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
+		if (TemplateDescriptor is not null)
+		{
+			writer.WritePropertyName("template");
+			JsonSerializer.Serialize(writer, TemplateDescriptor, options);
+		}
+		else if (TemplateDescriptorAction is not null)
+		{
+			writer.WritePropertyName("template");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor<TDocument>(TemplateDescriptorAction), options);
+		}
+		else
+		{
+			writer.WritePropertyName("template");
+			JsonSerializer.Serialize(writer, TemplateValue, options);
+		}
+
+		if (VersionValue.HasValue)
+		{
+			writer.WritePropertyName("version");
+			writer.WriteNumberValue(VersionValue.Value);
+		}
+
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class ComponentTemplateNodeDescriptor : SerializableDescriptor<ComponentTemplateNodeDescriptor>
+{
+	internal ComponentTemplateNodeDescriptor(Action<ComponentTemplateNodeDescriptor> configure) => configure.Invoke(this);
+
+	public ComponentTemplateNodeDescriptor() : base()
+	{
+	}
+
+	private bool? DeprecatedValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummary TemplateValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor TemplateDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor> TemplateDescriptorAction { get; set; }
+	private long? VersionValue { get; set; }
+
+	public ComponentTemplateNodeDescriptor Deprecated(bool? deprecated = true)
+	{
+		DeprecatedValue = deprecated;
+		return Self;
+	}
+
+	public ComponentTemplateNodeDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public ComponentTemplateNodeDescriptor Template(Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummary template)
+	{
+		TemplateDescriptor = null;
+		TemplateDescriptorAction = null;
+		TemplateValue = template;
+		return Self;
+	}
+
+	public ComponentTemplateNodeDescriptor Template(Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor descriptor)
+	{
+		TemplateValue = null;
+		TemplateDescriptorAction = null;
+		TemplateDescriptor = descriptor;
+		return Self;
+	}
+
+	public ComponentTemplateNodeDescriptor Template(Action<Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor> configure)
+	{
+		TemplateValue = null;
+		TemplateDescriptor = null;
+		TemplateDescriptorAction = configure;
+		return Self;
+	}
+
+	public ComponentTemplateNodeDescriptor Version(long? version)
+	{
+		VersionValue = version;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (DeprecatedValue.HasValue)
+		{
+			writer.WritePropertyName("deprecated");
+			writer.WriteBooleanValue(DeprecatedValue.Value);
+		}
+
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("_meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
+		if (TemplateDescriptor is not null)
+		{
+			writer.WritePropertyName("template");
+			JsonSerializer.Serialize(writer, TemplateDescriptor, options);
+		}
+		else if (TemplateDescriptorAction is not null)
+		{
+			writer.WritePropertyName("template");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor(TemplateDescriptorAction), options);
+		}
+		else
+		{
+			writer.WritePropertyName("template");
+			JsonSerializer.Serialize(writer, TemplateValue, options);
+		}
+
+		if (VersionValue.HasValue)
+		{
+			writer.WritePropertyName("version");
+			writer.WriteNumberValue(VersionValue.Value);
+		}
+
+		writer.WriteEndObject();
+	}
 }

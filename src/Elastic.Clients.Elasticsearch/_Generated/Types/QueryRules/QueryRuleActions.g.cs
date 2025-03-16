@@ -29,8 +29,35 @@ namespace Elastic.Clients.Elasticsearch.QueryRules;
 
 public sealed partial class QueryRuleActions
 {
+	/// <summary>
+	/// <para>
+	/// The documents to apply the rule to.
+	/// Only one of <c>ids</c> or <c>docs</c> may be specified and at least one must be specified.
+	/// There is a maximum value of 100 documents in a rule.
+	/// You can specify the following attributes for each document:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>_index</c>: The index of the document to pin.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>_id</c>: The unique document ID.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("docs")]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>? Docs { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The unique document IDs of the documents to apply the rule to.
+	/// Only one of <c>ids</c> or <c>docs</c> may be specified and at least one must be specified.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ids")]
 	public ICollection<Elastic.Clients.Elasticsearch.Id>? Ids { get; set; }
 }
@@ -49,6 +76,26 @@ public sealed partial class QueryRuleActionsDescriptor : SerializableDescriptor<
 	private Action<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDocDescriptor>[] DocsDescriptorActions { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Id>? IdsValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// The documents to apply the rule to.
+	/// Only one of <c>ids</c> or <c>docs</c> may be specified and at least one must be specified.
+	/// There is a maximum value of 100 documents in a rule.
+	/// You can specify the following attributes for each document:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>_index</c>: The index of the document to pin.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>_id</c>: The unique document ID.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
 	public QueryRuleActionsDescriptor Docs(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>? docs)
 	{
 		DocsDescriptor = null;
@@ -85,6 +132,12 @@ public sealed partial class QueryRuleActionsDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The unique document IDs of the documents to apply the rule to.
+	/// Only one of <c>ids</c> or <c>docs</c> may be specified and at least one must be specified.
+	/// </para>
+	/// </summary>
 	public QueryRuleActionsDescriptor Ids(ICollection<Elastic.Clients.Elasticsearch.Id>? ids)
 	{
 		IdsValue = ids;

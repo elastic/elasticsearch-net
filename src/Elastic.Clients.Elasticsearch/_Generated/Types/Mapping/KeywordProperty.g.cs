@@ -74,6 +74,8 @@ public sealed partial class KeywordProperty : IProperty
 	public bool? SplitQueriesOnWhitespace { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
+	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
+	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -116,6 +118,7 @@ public sealed partial class KeywordPropertyDescriptor<TDocument> : SerializableD
 	private string? SimilarityValue { get; set; }
 	private bool? SplitQueriesOnWhitespaceValue { get; set; }
 	private bool? StoreValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 	private bool? TimeSeriesDimensionValue { get; set; }
 
 	public KeywordPropertyDescriptor<TDocument> Boost(double? boost)
@@ -283,6 +286,12 @@ public sealed partial class KeywordPropertyDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	public KeywordPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>
 	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
@@ -421,6 +430,12 @@ public sealed partial class KeywordPropertyDescriptor<TDocument> : SerializableD
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		if (TimeSeriesDimensionValue.HasValue)
 		{
 			writer.WritePropertyName("time_series_dimension");
@@ -477,6 +492,7 @@ public sealed partial class KeywordPropertyDescriptor<TDocument> : SerializableD
 		Similarity = SimilarityValue,
 		SplitQueriesOnWhitespace = SplitQueriesOnWhitespaceValue,
 		Store = StoreValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue,
 		TimeSeriesDimension = TimeSeriesDimensionValue
 	};
 }
@@ -510,6 +526,7 @@ public sealed partial class KeywordPropertyDescriptor : SerializableDescriptor<K
 	private string? SimilarityValue { get; set; }
 	private bool? SplitQueriesOnWhitespaceValue { get; set; }
 	private bool? StoreValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 	private bool? TimeSeriesDimensionValue { get; set; }
 
 	public KeywordPropertyDescriptor Boost(double? boost)
@@ -677,6 +694,12 @@ public sealed partial class KeywordPropertyDescriptor : SerializableDescriptor<K
 		return Self;
 	}
 
+	public KeywordPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>
 	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
@@ -815,6 +838,12 @@ public sealed partial class KeywordPropertyDescriptor : SerializableDescriptor<K
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		if (TimeSeriesDimensionValue.HasValue)
 		{
 			writer.WritePropertyName("time_series_dimension");
@@ -871,6 +900,7 @@ public sealed partial class KeywordPropertyDescriptor : SerializableDescriptor<K
 		Similarity = SimilarityValue,
 		SplitQueriesOnWhitespace = SplitQueriesOnWhitespaceValue,
 		Store = StoreValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue,
 		TimeSeriesDimension = TimeSeriesDimensionValue
 	};
 }

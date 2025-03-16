@@ -41,6 +41,10 @@ public sealed partial class SamlServiceProviderMetadataRequestParameters : Reque
 /// <para>
 /// Generate SAML metadata for a SAML 2.0 Service Provider.
 /// </para>
+/// <para>
+/// The SAML 2.0 specification provides a mechanism for Service Providers to describe their capabilities and configuration using a metadata file.
+/// This API generates Service Provider metadata based on the configuration of a SAML realm in Elasticsearch.
+/// </para>
 /// </summary>
 public sealed partial class SamlServiceProviderMetadataRequest : PlainRequest<SamlServiceProviderMetadataRequestParameters>
 {
@@ -63,6 +67,10 @@ public sealed partial class SamlServiceProviderMetadataRequest : PlainRequest<Sa
 /// </para>
 /// <para>
 /// Generate SAML metadata for a SAML 2.0 Service Provider.
+/// </para>
+/// <para>
+/// The SAML 2.0 specification provides a mechanism for Service Providers to describe their capabilities and configuration using a metadata file.
+/// This API generates Service Provider metadata based on the configuration of a SAML realm in Elasticsearch.
 /// </para>
 /// </summary>
 public sealed partial class SamlServiceProviderMetadataRequestDescriptor : RequestDescriptor<SamlServiceProviderMetadataRequestDescriptor, SamlServiceProviderMetadataRequestParameters>

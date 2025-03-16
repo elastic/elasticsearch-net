@@ -28,298 +28,6 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
-[JsonConverter(typeof(DenseVectorElementTypeConverter))]
-public enum DenseVectorElementType
-{
-	/// <summary>
-	/// <para>
-	/// Indexes a 4-byte floating-point value per dimension.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "float")]
-	Float,
-	/// <summary>
-	/// <para>
-	/// Indexes a 1-byte integer value per dimension.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "byte")]
-	Byte,
-	/// <summary>
-	/// <para>
-	/// Indexes a single bit per dimension. Useful for very high-dimensional vectors or models that specifically support
-	/// bit vectors.
-	/// </para>
-	/// <para>
-	/// NOTE: when using <c>bit</c>, the number of dimensions must be a multiple of <c>8</c> and must represent the number of bits.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "bit")]
-	Bit
-}
-
-internal sealed class DenseVectorElementTypeConverter : JsonConverter<DenseVectorElementType>
-{
-	public override DenseVectorElementType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "float":
-				return DenseVectorElementType.Float;
-			case "byte":
-				return DenseVectorElementType.Byte;
-			case "bit":
-				return DenseVectorElementType.Bit;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, DenseVectorElementType value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case DenseVectorElementType.Float:
-				writer.WriteStringValue("float");
-				return;
-			case DenseVectorElementType.Byte:
-				writer.WriteStringValue("byte");
-				return;
-			case DenseVectorElementType.Bit:
-				writer.WriteStringValue("bit");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(DenseVectorIndexOptionsTypeConverter))]
-public enum DenseVectorIndexOptionsType
-{
-	/// <summary>
-	/// <para>
-	/// The default index type for <c>float</c> vectors. This utilizes the HNSW algorithm in addition to automatically scalar
-	/// quantization for scalable approximate kNN search with <c>element_type</c> of <c>float</c>.
-	/// </para>
-	/// <para>
-	/// This can reduce the memory footprint by 4x at the cost of some accuracy.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "int8_hnsw")]
-	Int8Hnsw,
-	/// <summary>
-	/// <para>
-	/// This utilizes a brute-force search algorithm in addition to automatically scalar quantization. Only supports
-	/// <c>element_type</c> of <c>float</c>.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "int8_flat")]
-	Int8Flat,
-	/// <summary>
-	/// <para>
-	/// This utilizes the HNSW algorithm in addition to automatically scalar quantization for scalable approximate kNN
-	/// search with <c>element_type</c> of <c>float</c>.
-	/// </para>
-	/// <para>
-	/// This can reduce the memory footprint by 8x at the cost of some accuracy.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "int4_hnsw")]
-	Int4Hnsw,
-	/// <summary>
-	/// <para>
-	/// This utilizes a brute-force search algorithm in addition to automatically half-byte scalar quantization.
-	/// Only supports <c>element_type</c> of <c>float</c>.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "int4_flat")]
-	Int4Flat,
-	/// <summary>
-	/// <para>
-	/// This utilizes the HNSW algorithm for scalable approximate kNN search. This supports all <c>element_type</c> values.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "hnsw")]
-	Hnsw,
-	/// <summary>
-	/// <para>
-	/// This utilizes a brute-force search algorithm for exact kNN search. This supports all <c>element_type</c> values.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "flat")]
-	Flat
-}
-
-internal sealed class DenseVectorIndexOptionsTypeConverter : JsonConverter<DenseVectorIndexOptionsType>
-{
-	public override DenseVectorIndexOptionsType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "int8_hnsw":
-				return DenseVectorIndexOptionsType.Int8Hnsw;
-			case "int8_flat":
-				return DenseVectorIndexOptionsType.Int8Flat;
-			case "int4_hnsw":
-				return DenseVectorIndexOptionsType.Int4Hnsw;
-			case "int4_flat":
-				return DenseVectorIndexOptionsType.Int4Flat;
-			case "hnsw":
-				return DenseVectorIndexOptionsType.Hnsw;
-			case "flat":
-				return DenseVectorIndexOptionsType.Flat;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, DenseVectorIndexOptionsType value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case DenseVectorIndexOptionsType.Int8Hnsw:
-				writer.WriteStringValue("int8_hnsw");
-				return;
-			case DenseVectorIndexOptionsType.Int8Flat:
-				writer.WriteStringValue("int8_flat");
-				return;
-			case DenseVectorIndexOptionsType.Int4Hnsw:
-				writer.WriteStringValue("int4_hnsw");
-				return;
-			case DenseVectorIndexOptionsType.Int4Flat:
-				writer.WriteStringValue("int4_flat");
-				return;
-			case DenseVectorIndexOptionsType.Hnsw:
-				writer.WriteStringValue("hnsw");
-				return;
-			case DenseVectorIndexOptionsType.Flat:
-				writer.WriteStringValue("flat");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(DenseVectorSimilarityConverter))]
-public enum DenseVectorSimilarity
-{
-	/// <summary>
-	/// <para>
-	/// Computes the maximum inner product of two vectors. This is similar to <c>dot_product</c>, but doesn't require vectors
-	/// to be normalized. This means that each vector’s magnitude can significantly effect the score.
-	/// </para>
-	/// <para>
-	/// The document <c>_score</c> is adjusted to prevent negative values. For <c>max_inner_product</c> values <c>&lt; 0</c>, the <c>_score</c>
-	/// is <c>1 / (1 + -1 * max_inner_product(query, vector))</c>. For non-negative <c>max_inner_product</c> results the <c>_score</c>
-	/// is calculated <c>max_inner_product(query, vector) + 1</c>.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "max_inner_product")]
-	MaxInnerProduct,
-	/// <summary>
-	/// <para>
-	/// Computes similarity based on the <c>L2</c> distance (also known as Euclidean distance) between the vectors.
-	/// </para>
-	/// <para>
-	/// The document <c>_score</c> is computed as <c>1 / (1 + l2_norm(query, vector)^2)</c>.
-	/// </para>
-	/// <para>
-	/// For <c>bit</c> vectors, instead of using <c>l2_norm</c>, the <c>hamming</c> distance between the vectors is used.
-	/// </para>
-	/// <para>
-	/// The <c>_score</c> transformation is <c>(numBits - hamming(a, b)) / numBits</c>.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "l2_norm")]
-	L2Norm,
-	/// <summary>
-	/// <para>
-	/// Computes the dot product of two unit vectors. This option provides an optimized way to perform cosine similarity.
-	/// The constraints and computed score are defined by <c>element_type</c>.
-	/// </para>
-	/// <para>
-	/// When <c>element_type</c> is <c>float</c>, all vectors must be unit length, including both document and query vectors.
-	/// </para>
-	/// <para>
-	/// The document <c>_score</c> is computed as <c>(1 + dot_product(query, vector)) / 2</c>.
-	/// </para>
-	/// <para>
-	/// When <c>element_type</c> is <c>byte</c>, all vectors must have the same length including both document and query vectors or
-	/// results will be inaccurate.
-	/// </para>
-	/// <para>
-	/// The document <c>_score</c> is computed as <c>0.5 + (dot_product(query, vector) / (32768 * dims))</c> where <c>dims</c> is the
-	/// number of dimensions per vector.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "dot_product")]
-	DotProduct,
-	/// <summary>
-	/// <para>
-	/// Computes the cosine similarity. During indexing Elasticsearch automatically normalizes vectors with <c>cosine</c>
-	/// similarity to unit length. This allows to internally use <c>dot_product</c> for computing similarity, which is more
-	/// efficient. Original un-normalized vectors can be still accessed through scripts.
-	/// </para>
-	/// <para>
-	/// The document <c>_score</c> is computed as <c>(1 + cosine(query, vector)) / 2</c>.
-	/// </para>
-	/// <para>
-	/// The <c>cosine</c> similarity does not allow vectors with zero magnitude, since cosine is not defined in this case.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "cosine")]
-	Cosine
-}
-
-internal sealed class DenseVectorSimilarityConverter : JsonConverter<DenseVectorSimilarity>
-{
-	public override DenseVectorSimilarity Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "max_inner_product":
-				return DenseVectorSimilarity.MaxInnerProduct;
-			case "l2_norm":
-				return DenseVectorSimilarity.L2Norm;
-			case "dot_product":
-				return DenseVectorSimilarity.DotProduct;
-			case "cosine":
-				return DenseVectorSimilarity.Cosine;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, DenseVectorSimilarity value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case DenseVectorSimilarity.MaxInnerProduct:
-				writer.WriteStringValue("max_inner_product");
-				return;
-			case DenseVectorSimilarity.L2Norm:
-				writer.WriteStringValue("l2_norm");
-				return;
-			case DenseVectorSimilarity.DotProduct:
-				writer.WriteStringValue("dot_product");
-				return;
-			case DenseVectorSimilarity.Cosine:
-				writer.WriteStringValue("cosine");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
 [JsonConverter(typeof(DynamicMappingConverter))]
 public enum DynamicMapping
 {
@@ -403,8 +111,6 @@ public enum FieldType
 	RankFeature,
 	[EnumMember(Value = "percolator")]
 	Percolator,
-	[EnumMember(Value = "passthrough")]
-	Passthrough,
 	[EnumMember(Value = "object")]
 	Object,
 	[EnumMember(Value = "none")]
@@ -506,8 +212,6 @@ internal sealed class FieldTypeConverter : JsonConverter<FieldType>
 				return FieldType.RankFeature;
 			case "percolator":
 				return FieldType.Percolator;
-			case "passthrough":
-				return FieldType.Passthrough;
 			case "object":
 				return FieldType.Object;
 			case "none":
@@ -621,9 +325,6 @@ internal sealed class FieldTypeConverter : JsonConverter<FieldType>
 				return;
 			case FieldType.Percolator:
 				writer.WriteStringValue("percolator");
-				return;
-			case FieldType.Passthrough:
-				writer.WriteStringValue("passthrough");
 				return;
 			case FieldType.Object:
 				writer.WriteStringValue("object");
@@ -1102,6 +803,75 @@ internal sealed class SourceFieldModeConverter : JsonConverter<SourceFieldMode>
 				return;
 			case SourceFieldMode.Disabled:
 				writer.WriteStringValue("disabled");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(SyntheticSourceKeepEnumConverter))]
+public enum SyntheticSourceKeepEnum
+{
+	/// <summary>
+	/// <para>
+	/// Synthetic source diverges from the original source (default)
+	/// </para>
+	/// </summary>
+	[EnumMember(Value = "none")]
+	None,
+	/// <summary>
+	/// <para>
+	/// Arrays of the corresponding field or object preserve the original element ordering and duplicate elements.
+	/// The synthetic source fragment for such arrays is not guaranteed to match the original source exactly,
+	/// e.g. array [1, 2, [5], [[4, [3]]], 5] may appear as-is or in an equivalent format like [1, 2, 5, 4, 3, 5].
+	/// The exact format may change in the future, in an effort to reduce the storage overhead of this option.
+	/// </para>
+	/// </summary>
+	[EnumMember(Value = "arrays")]
+	Arrays,
+	/// <summary>
+	/// <para>
+	/// The source for both singleton instances and arrays of the corresponding field or object gets recorded.
+	/// When applied to objects, the source of all sub-objects and sub-fields gets captured.
+	/// Furthermore, the original source of arrays gets captured and appears in synthetic source with no modifications.
+	/// </para>
+	/// </summary>
+	[EnumMember(Value = "all")]
+	All
+}
+
+internal sealed class SyntheticSourceKeepEnumConverter : JsonConverter<SyntheticSourceKeepEnum>
+{
+	public override SyntheticSourceKeepEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "none":
+				return SyntheticSourceKeepEnum.None;
+			case "arrays":
+				return SyntheticSourceKeepEnum.Arrays;
+			case "all":
+				return SyntheticSourceKeepEnum.All;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, SyntheticSourceKeepEnum value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case SyntheticSourceKeepEnum.None:
+				writer.WriteStringValue("none");
+				return;
+			case SyntheticSourceKeepEnum.Arrays:
+				writer.WriteStringValue("arrays");
+				return;
+			case SyntheticSourceKeepEnum.All:
+				writer.WriteStringValue("all");
 				return;
 		}
 

@@ -35,7 +35,7 @@ public sealed partial class GeoResults
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("actual_point")]
-	public string ActualPoint { get; init; }
+	public string? ActualPoint { get; init; }
 
 	/// <summary>
 	/// <para>
@@ -43,5 +43,5 @@ public sealed partial class GeoResults
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("typical_point")]
-	public string TypicalPoint { get; init; }
+	public string? TypicalPoint { get; init; }
 }

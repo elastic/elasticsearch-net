@@ -28,6 +28,11 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public sealed partial class SamlServiceProviderMetadataResponse : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>
+	/// An XML string that contains a SAML Service Provider's metadata for the realm.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("metadata")]
 	public string Metadata { get; init; }
 }

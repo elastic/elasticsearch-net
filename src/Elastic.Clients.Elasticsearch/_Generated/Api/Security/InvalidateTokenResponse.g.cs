@@ -28,12 +28,36 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public sealed partial class InvalidateTokenResponse : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>
+	/// The number of errors that were encountered when invalidating the tokens.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("error_count")]
 	public long ErrorCount { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// Details about the errors.
+	/// This field is not present in the response when <c>error_count</c> is <c>0</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("error_details")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? ErrorDetails { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The number of the tokens that were invalidated as part of this request.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("invalidated_tokens")]
 	public long InvalidatedTokens { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The number of tokens that were already invalidated.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("previously_invalidated_tokens")]
 	public long PreviouslyInvalidatedTokens { get; init; }
 }

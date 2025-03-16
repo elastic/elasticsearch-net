@@ -110,6 +110,22 @@ public sealed partial class MultiGetRequestParameters : RequestParameters
 /// If you specify an index in the request URI, you only need to specify the document IDs in the request body.
 /// To ensure fast responses, this multi get (mget) API responds with partial results if one or more shards fail.
 /// </para>
+/// <para>
+/// <strong>Filter source fields</strong>
+/// </para>
+/// <para>
+/// By default, the <c>_source</c> field is returned for every document (if stored).
+/// Use the <c>_source</c> and <c>_source_include</c> or <c>source_exclude</c> attributes to filter what fields are returned for a particular document.
+/// You can include the <c>_source</c>, <c>_source_includes</c>, and <c>_source_excludes</c> query parameters in the request URI to specify the defaults to use when there are no per-document instructions.
+/// </para>
+/// <para>
+/// <strong>Get stored fields</strong>
+/// </para>
+/// <para>
+/// Use the <c>stored_fields</c> attribute to specify the set of stored fields you want to retrieve.
+/// Any requested fields that are not stored are ignored.
+/// You can include the <c>stored_fields</c> query parameter in the request URI to specify the defaults to use when there are no per-document instructions.
+/// </para>
 /// </summary>
 public sealed partial class MultiGetRequest : PlainRequest<MultiGetRequestParameters>
 {
@@ -231,6 +247,22 @@ public sealed partial class MultiGetRequest : PlainRequest<MultiGetRequestParame
 /// Get multiple JSON documents by ID from one or more indices.
 /// If you specify an index in the request URI, you only need to specify the document IDs in the request body.
 /// To ensure fast responses, this multi get (mget) API responds with partial results if one or more shards fail.
+/// </para>
+/// <para>
+/// <strong>Filter source fields</strong>
+/// </para>
+/// <para>
+/// By default, the <c>_source</c> field is returned for every document (if stored).
+/// Use the <c>_source</c> and <c>_source_include</c> or <c>source_exclude</c> attributes to filter what fields are returned for a particular document.
+/// You can include the <c>_source</c>, <c>_source_includes</c>, and <c>_source_excludes</c> query parameters in the request URI to specify the defaults to use when there are no per-document instructions.
+/// </para>
+/// <para>
+/// <strong>Get stored fields</strong>
+/// </para>
+/// <para>
+/// Use the <c>stored_fields</c> attribute to specify the set of stored fields you want to retrieve.
+/// Any requested fields that are not stored are ignored.
+/// You can include the <c>stored_fields</c> query parameter in the request URI to specify the defaults to use when there are no per-document instructions.
 /// </para>
 /// </summary>
 public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescriptor<MultiGetRequestDescriptor<TDocument>, MultiGetRequestParameters>
@@ -379,6 +411,22 @@ public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescri
 /// Get multiple JSON documents by ID from one or more indices.
 /// If you specify an index in the request URI, you only need to specify the document IDs in the request body.
 /// To ensure fast responses, this multi get (mget) API responds with partial results if one or more shards fail.
+/// </para>
+/// <para>
+/// <strong>Filter source fields</strong>
+/// </para>
+/// <para>
+/// By default, the <c>_source</c> field is returned for every document (if stored).
+/// Use the <c>_source</c> and <c>_source_include</c> or <c>source_exclude</c> attributes to filter what fields are returned for a particular document.
+/// You can include the <c>_source</c>, <c>_source_includes</c>, and <c>_source_excludes</c> query parameters in the request URI to specify the defaults to use when there are no per-document instructions.
+/// </para>
+/// <para>
+/// <strong>Get stored fields</strong>
+/// </para>
+/// <para>
+/// Use the <c>stored_fields</c> attribute to specify the set of stored fields you want to retrieve.
+/// Any requested fields that are not stored are ignored.
+/// You can include the <c>stored_fields</c> query parameter in the request URI to specify the defaults to use when there are no per-document instructions.
 /// </para>
 /// </summary>
 public sealed partial class MultiGetRequestDescriptor : RequestDescriptor<MultiGetRequestDescriptor, MultiGetRequestParameters>

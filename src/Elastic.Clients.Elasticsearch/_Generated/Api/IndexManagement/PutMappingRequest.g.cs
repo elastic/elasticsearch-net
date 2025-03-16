@@ -84,9 +84,43 @@ public sealed partial class PutMappingRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Update field mappings.
-/// Adds new fields to an existing data stream or index.
-/// You can also use this API to change the search settings of existing fields.
+/// Add new fields to an existing data stream or index.
+/// You can also use this API to change the search settings of existing fields and add new properties to existing object fields.
 /// For data streams, these changes are applied to all backing indices by default.
+/// </para>
+/// <para>
+/// <strong>Add multi-fields to an existing field</strong>
+/// </para>
+/// <para>
+/// Multi-fields let you index the same field in different ways.
+/// You can use this API to update the fields mapping parameter and enable multi-fields for an existing field.
+/// WARNING: If an index (or data stream) contains documents when you add a multi-field, those documents will not have values for the new multi-field.
+/// You can populate the new multi-field with the update by query API.
+/// </para>
+/// <para>
+/// <strong>Change supported mapping parameters for an existing field</strong>
+/// </para>
+/// <para>
+/// The documentation for each mapping parameter indicates whether you can update it for an existing field using this API.
+/// For example, you can use the update mapping API to update the <c>ignore_above</c> parameter.
+/// </para>
+/// <para>
+/// <strong>Change the mapping of an existing field</strong>
+/// </para>
+/// <para>
+/// Except for supported mapping parameters, you can't change the mapping or field type of an existing field.
+/// Changing an existing field could invalidate data that's already indexed.
+/// </para>
+/// <para>
+/// If you need to change the mapping of a field in a data stream's backing indices, refer to documentation about modifying data streams.
+/// If you need to change the mapping of a field in other indices, create a new index with the correct mapping and reindex your data into that index.
+/// </para>
+/// <para>
+/// <strong>Rename a field</strong>
+/// </para>
+/// <para>
+/// Renaming a field would invalidate data already indexed under the old field name.
+/// Instead, add an alias field to create an alternate field name.
 /// </para>
 /// </summary>
 public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestParameters>
@@ -189,7 +223,6 @@ public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestPa
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("dynamic_templates")]
-	[SingleOrManyCollectionConverter(typeof(IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>))]
 	public ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplates { get; set; }
 
 	/// <summary>
@@ -271,9 +304,43 @@ public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestPa
 /// <summary>
 /// <para>
 /// Update field mappings.
-/// Adds new fields to an existing data stream or index.
-/// You can also use this API to change the search settings of existing fields.
+/// Add new fields to an existing data stream or index.
+/// You can also use this API to change the search settings of existing fields and add new properties to existing object fields.
 /// For data streams, these changes are applied to all backing indices by default.
+/// </para>
+/// <para>
+/// <strong>Add multi-fields to an existing field</strong>
+/// </para>
+/// <para>
+/// Multi-fields let you index the same field in different ways.
+/// You can use this API to update the fields mapping parameter and enable multi-fields for an existing field.
+/// WARNING: If an index (or data stream) contains documents when you add a multi-field, those documents will not have values for the new multi-field.
+/// You can populate the new multi-field with the update by query API.
+/// </para>
+/// <para>
+/// <strong>Change supported mapping parameters for an existing field</strong>
+/// </para>
+/// <para>
+/// The documentation for each mapping parameter indicates whether you can update it for an existing field using this API.
+/// For example, you can use the update mapping API to update the <c>ignore_above</c> parameter.
+/// </para>
+/// <para>
+/// <strong>Change the mapping of an existing field</strong>
+/// </para>
+/// <para>
+/// Except for supported mapping parameters, you can't change the mapping or field type of an existing field.
+/// Changing an existing field could invalidate data that's already indexed.
+/// </para>
+/// <para>
+/// If you need to change the mapping of a field in a data stream's backing indices, refer to documentation about modifying data streams.
+/// If you need to change the mapping of a field in other indices, create a new index with the correct mapping and reindex your data into that index.
+/// </para>
+/// <para>
+/// <strong>Rename a field</strong>
+/// </para>
+/// <para>
+/// Renaming a field would invalidate data already indexed under the old field name.
+/// Instead, add an alias field to create an alternate field name.
 /// </para>
 /// </summary>
 public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDescriptor<PutMappingRequestDescriptor<TDocument>, PutMappingRequestParameters>
@@ -561,7 +628,7 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 		if (DynamicTemplatesValue is not null)
 		{
 			writer.WritePropertyName("dynamic_templates");
-			SingleOrManySerializationHelper.Serialize<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>(DynamicTemplatesValue, writer, options);
+			JsonSerializer.Serialize(writer, DynamicTemplatesValue, options);
 		}
 
 		if (FieldNamesDescriptor is not null)
@@ -643,9 +710,43 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 /// <summary>
 /// <para>
 /// Update field mappings.
-/// Adds new fields to an existing data stream or index.
-/// You can also use this API to change the search settings of existing fields.
+/// Add new fields to an existing data stream or index.
+/// You can also use this API to change the search settings of existing fields and add new properties to existing object fields.
 /// For data streams, these changes are applied to all backing indices by default.
+/// </para>
+/// <para>
+/// <strong>Add multi-fields to an existing field</strong>
+/// </para>
+/// <para>
+/// Multi-fields let you index the same field in different ways.
+/// You can use this API to update the fields mapping parameter and enable multi-fields for an existing field.
+/// WARNING: If an index (or data stream) contains documents when you add a multi-field, those documents will not have values for the new multi-field.
+/// You can populate the new multi-field with the update by query API.
+/// </para>
+/// <para>
+/// <strong>Change supported mapping parameters for an existing field</strong>
+/// </para>
+/// <para>
+/// The documentation for each mapping parameter indicates whether you can update it for an existing field using this API.
+/// For example, you can use the update mapping API to update the <c>ignore_above</c> parameter.
+/// </para>
+/// <para>
+/// <strong>Change the mapping of an existing field</strong>
+/// </para>
+/// <para>
+/// Except for supported mapping parameters, you can't change the mapping or field type of an existing field.
+/// Changing an existing field could invalidate data that's already indexed.
+/// </para>
+/// <para>
+/// If you need to change the mapping of a field in a data stream's backing indices, refer to documentation about modifying data streams.
+/// If you need to change the mapping of a field in other indices, create a new index with the correct mapping and reindex your data into that index.
+/// </para>
+/// <para>
+/// <strong>Rename a field</strong>
+/// </para>
+/// <para>
+/// Renaming a field would invalidate data already indexed under the old field name.
+/// Instead, add an alias field to create an alternate field name.
 /// </para>
 /// </summary>
 public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutMappingRequestDescriptor, PutMappingRequestParameters>
@@ -929,7 +1030,7 @@ public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutM
 		if (DynamicTemplatesValue is not null)
 		{
 			writer.WritePropertyName("dynamic_templates");
-			SingleOrManySerializationHelper.Serialize<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>(DynamicTemplatesValue, writer, options);
+			JsonSerializer.Serialize(writer, DynamicTemplatesValue, options);
 		}
 
 		if (FieldNamesDescriptor is not null)

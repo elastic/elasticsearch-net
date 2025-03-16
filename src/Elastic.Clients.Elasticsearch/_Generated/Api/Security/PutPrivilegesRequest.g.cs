@@ -46,6 +46,62 @@ public sealed partial class PutPrivilegesRequestParameters : RequestParameters
 /// <para>
 /// Create or update application privileges.
 /// </para>
+/// <para>
+/// To use this API, you must have one of the following privileges:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The <c>manage_security</c> cluster privilege (or a greater privilege such as <c>all</c>).
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The "Manage Application Privileges" global privilege for the application being referenced in the request.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// Application names are formed from a prefix, with an optional suffix that conform to the following rules:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The prefix must begin with a lowercase ASCII letter.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The prefix must contain only ASCII letters or digits.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The prefix must be at least 3 characters long.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// If the suffix exists, it must begin with either a dash <c>-</c> or <c>_</c>.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The suffix cannot contain any of the following characters: <c>\</c>, <c>/</c>, <c>*</c>, <c>?</c>, <c>"</c>, <c>&lt;</c>, <c>></c>, <c>|</c>, <c>,</c>, <c>*</c>.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// No part of the name can contain whitespace.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// Privilege names must begin with a lowercase ASCII letter and must contain only ASCII letters and digits along with the characters <c>_</c>, <c>-</c>, and <c>.</c>.
+/// </para>
+/// <para>
+/// Action names can contain any number of printable ASCII characters and must contain at least one of the following characters: <c>/</c>, <c>*</c>, <c>:</c>.
+/// </para>
 /// </summary>
 public sealed partial class PutPrivilegesRequest : PlainRequest<PutPrivilegesRequestParameters>, ISelfSerializable
 {
@@ -75,6 +131,62 @@ public sealed partial class PutPrivilegesRequest : PlainRequest<PutPrivilegesReq
 /// <summary>
 /// <para>
 /// Create or update application privileges.
+/// </para>
+/// <para>
+/// To use this API, you must have one of the following privileges:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The <c>manage_security</c> cluster privilege (or a greater privilege such as <c>all</c>).
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The "Manage Application Privileges" global privilege for the application being referenced in the request.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// Application names are formed from a prefix, with an optional suffix that conform to the following rules:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The prefix must begin with a lowercase ASCII letter.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The prefix must contain only ASCII letters or digits.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The prefix must be at least 3 characters long.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// If the suffix exists, it must begin with either a dash <c>-</c> or <c>_</c>.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The suffix cannot contain any of the following characters: <c>\</c>, <c>/</c>, <c>*</c>, <c>?</c>, <c>"</c>, <c>&lt;</c>, <c>></c>, <c>|</c>, <c>,</c>, <c>*</c>.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// No part of the name can contain whitespace.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// Privilege names must begin with a lowercase ASCII letter and must contain only ASCII letters and digits along with the characters <c>_</c>, <c>-</c>, and <c>.</c>.
+/// </para>
+/// <para>
+/// Action names can contain any number of printable ASCII characters and must contain at least one of the following characters: <c>/</c>, <c>*</c>, <c>:</c>.
 /// </para>
 /// </summary>
 public sealed partial class PutPrivilegesRequestDescriptor : RequestDescriptor<PutPrivilegesRequestDescriptor, PutPrivilegesRequestParameters>, ISelfSerializable

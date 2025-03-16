@@ -66,6 +66,8 @@ public sealed partial class SearchAsYouTypeProperty : IProperty
 	public string? Similarity { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
+	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
+	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 	[JsonInclude, JsonPropertyName("term_vector")]
 	public Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVector { get; set; }
 
@@ -96,6 +98,7 @@ public sealed partial class SearchAsYouTypePropertyDescriptor<TDocument> : Seria
 	private string? SearchQuoteAnalyzerValue { get; set; }
 	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVectorValue { get; set; }
 
 	public SearchAsYouTypePropertyDescriptor<TDocument> Analyzer(string? analyzer)
@@ -221,6 +224,12 @@ public sealed partial class SearchAsYouTypePropertyDescriptor<TDocument> : Seria
 		return Self;
 	}
 
+	public SearchAsYouTypePropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	public SearchAsYouTypePropertyDescriptor<TDocument> TermVector(Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? termVector)
 	{
 		TermVectorValue = termVector;
@@ -320,6 +329,12 @@ public sealed partial class SearchAsYouTypePropertyDescriptor<TDocument> : Seria
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		if (TermVectorValue is not null)
 		{
 			writer.WritePropertyName("term_vector");
@@ -348,6 +363,7 @@ public sealed partial class SearchAsYouTypePropertyDescriptor<TDocument> : Seria
 		SearchQuoteAnalyzer = SearchQuoteAnalyzerValue,
 		Similarity = SimilarityValue,
 		Store = StoreValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue,
 		TermVector = TermVectorValue
 	};
 }
@@ -375,6 +391,7 @@ public sealed partial class SearchAsYouTypePropertyDescriptor : SerializableDesc
 	private string? SearchQuoteAnalyzerValue { get; set; }
 	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVectorValue { get; set; }
 
 	public SearchAsYouTypePropertyDescriptor Analyzer(string? analyzer)
@@ -500,6 +517,12 @@ public sealed partial class SearchAsYouTypePropertyDescriptor : SerializableDesc
 		return Self;
 	}
 
+	public SearchAsYouTypePropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	public SearchAsYouTypePropertyDescriptor TermVector(Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? termVector)
 	{
 		TermVectorValue = termVector;
@@ -599,6 +622,12 @@ public sealed partial class SearchAsYouTypePropertyDescriptor : SerializableDesc
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		if (TermVectorValue is not null)
 		{
 			writer.WritePropertyName("term_vector");
@@ -627,6 +656,7 @@ public sealed partial class SearchAsYouTypePropertyDescriptor : SerializableDesc
 		SearchQuoteAnalyzer = SearchQuoteAnalyzerValue,
 		Similarity = SimilarityValue,
 		Store = StoreValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue,
 		TermVector = TermVectorValue
 	};
 }

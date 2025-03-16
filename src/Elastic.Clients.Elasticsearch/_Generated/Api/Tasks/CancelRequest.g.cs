@@ -34,28 +34,28 @@ public sealed partial class CancelRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// Comma-separated list or wildcard expression of actions used to limit the request.
+	/// A comma-separated list or wildcard expression of actions that is used to limit the request.
 	/// </para>
 	/// </summary>
 	public ICollection<string>? Actions { get => Q<ICollection<string>?>("actions"); set => Q("actions", value); }
 
 	/// <summary>
 	/// <para>
-	/// Comma-separated list of node IDs or names used to limit the request.
+	/// A comma-separated list of node IDs or names that is used to limit the request.
 	/// </para>
 	/// </summary>
 	public ICollection<string>? Nodes { get => Q<ICollection<string>?>("nodes"); set => Q("nodes", value); }
 
 	/// <summary>
 	/// <para>
-	/// Parent task ID used to limit the tasks.
+	/// A parent task ID that is used to limit the tasks.
 	/// </para>
 	/// </summary>
 	public string? ParentTaskId { get => Q<string?>("parent_task_id"); set => Q("parent_task_id", value); }
 
 	/// <summary>
 	/// <para>
-	/// Should the request block until the cancellation of the task and its descendant tasks is completed. Defaults to false
+	/// If true, the request blocks until all found tasks are complete.
 	/// </para>
 	/// </summary>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
@@ -64,6 +64,12 @@ public sealed partial class CancelRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Cancel a task.
+/// </para>
+/// <para>
+/// WARNING: The task management API is new and should still be considered a beta feature.
+/// The API may change in ways that are not backwards compatible.
+/// </para>
+/// <para>
 /// A task may continue to run for some time after it has been cancelled because it may not be able to safely stop its current activity straight away.
 /// It is also possible that Elasticsearch must complete its work on other tasks before it can process the cancellation.
 /// The get task information API will continue to list these cancelled tasks until they complete.
@@ -94,7 +100,7 @@ public sealed partial class CancelRequest : PlainRequest<CancelRequestParameters
 
 	/// <summary>
 	/// <para>
-	/// Comma-separated list or wildcard expression of actions used to limit the request.
+	/// A comma-separated list or wildcard expression of actions that is used to limit the request.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -102,7 +108,7 @@ public sealed partial class CancelRequest : PlainRequest<CancelRequestParameters
 
 	/// <summary>
 	/// <para>
-	/// Comma-separated list of node IDs or names used to limit the request.
+	/// A comma-separated list of node IDs or names that is used to limit the request.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -110,7 +116,7 @@ public sealed partial class CancelRequest : PlainRequest<CancelRequestParameters
 
 	/// <summary>
 	/// <para>
-	/// Parent task ID used to limit the tasks.
+	/// A parent task ID that is used to limit the tasks.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -118,7 +124,7 @@ public sealed partial class CancelRequest : PlainRequest<CancelRequestParameters
 
 	/// <summary>
 	/// <para>
-	/// Should the request block until the cancellation of the task and its descendant tasks is completed. Defaults to false
+	/// If true, the request blocks until all found tasks are complete.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -128,6 +134,12 @@ public sealed partial class CancelRequest : PlainRequest<CancelRequestParameters
 /// <summary>
 /// <para>
 /// Cancel a task.
+/// </para>
+/// <para>
+/// WARNING: The task management API is new and should still be considered a beta feature.
+/// The API may change in ways that are not backwards compatible.
+/// </para>
+/// <para>
 /// A task may continue to run for some time after it has been cancelled because it may not be able to safely stop its current activity straight away.
 /// It is also possible that Elasticsearch must complete its work on other tasks before it can process the cancellation.
 /// The get task information API will continue to list these cancelled tasks until they complete.

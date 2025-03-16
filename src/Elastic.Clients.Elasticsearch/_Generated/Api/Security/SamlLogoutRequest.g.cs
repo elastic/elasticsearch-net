@@ -41,6 +41,14 @@ public sealed partial class SamlLogoutRequestParameters : RequestParameters
 /// <para>
 /// Submits a request to invalidate an access token and refresh token.
 /// </para>
+/// <para>
+/// NOTE: This API is intended for use by custom web applications other than Kibana.
+/// If you are using Kibana, refer to the documentation for configuring SAML single-sign-on on the Elastic Stack.
+/// </para>
+/// <para>
+/// This API invalidates the tokens that were generated for a user by the SAML authenticate API.
+/// If the SAML realm in Elasticsearch is configured accordingly and the SAML IdP supports this, the Elasticsearch response contains a URL to redirect the user to the IdP that contains a SAML logout request (starting an SP-initiated SAML Single Logout).
+/// </para>
 /// </summary>
 public sealed partial class SamlLogoutRequest : PlainRequest<SamlLogoutRequestParameters>
 {
@@ -64,7 +72,7 @@ public sealed partial class SamlLogoutRequest : PlainRequest<SamlLogoutRequestPa
 	/// <summary>
 	/// <para>
 	/// The access token that was returned as a response to calling the SAML authenticate API.
-	/// Alternatively, the most recent token that was received after refreshing the original one by using a refresh_token.
+	/// Alternatively, the most recent token that was received after refreshing the original one by using a <c>refresh_token</c>.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("token")]
@@ -77,6 +85,14 @@ public sealed partial class SamlLogoutRequest : PlainRequest<SamlLogoutRequestPa
 /// </para>
 /// <para>
 /// Submits a request to invalidate an access token and refresh token.
+/// </para>
+/// <para>
+/// NOTE: This API is intended for use by custom web applications other than Kibana.
+/// If you are using Kibana, refer to the documentation for configuring SAML single-sign-on on the Elastic Stack.
+/// </para>
+/// <para>
+/// This API invalidates the tokens that were generated for a user by the SAML authenticate API.
+/// If the SAML realm in Elasticsearch is configured accordingly and the SAML IdP supports this, the Elasticsearch response contains a URL to redirect the user to the IdP that contains a SAML logout request (starting an SP-initiated SAML Single Logout).
 /// </para>
 /// </summary>
 public sealed partial class SamlLogoutRequestDescriptor : RequestDescriptor<SamlLogoutRequestDescriptor, SamlLogoutRequestParameters>
@@ -113,7 +129,7 @@ public sealed partial class SamlLogoutRequestDescriptor : RequestDescriptor<Saml
 	/// <summary>
 	/// <para>
 	/// The access token that was returned as a response to calling the SAML authenticate API.
-	/// Alternatively, the most recent token that was received after refreshing the original one by using a refresh_token.
+	/// Alternatively, the most recent token that was received after refreshing the original one by using a <c>refresh_token</c>.
 	/// </para>
 	/// </summary>
 	public SamlLogoutRequestDescriptor Token(string token)

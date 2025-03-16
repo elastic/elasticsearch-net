@@ -29,15 +29,42 @@ namespace Elastic.Clients.Elasticsearch.QueryRules;
 
 public sealed partial class QueryRule
 {
+	/// <summary>
+	/// <para>
+	/// The actions to take when the rule is matched.
+	/// The format of this action depends on the rule type.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("actions")]
 	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActions Actions { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The criteria that must be met for the rule to be applied.
+	/// If multiple criteria are specified for a rule, all criteria must be met for the rule to be applied.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("criteria")]
 	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria> Criteria { get; set; }
 	[JsonInclude, JsonPropertyName("priority")]
 	public int? Priority { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// A unique identifier for the rule.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("rule_id")]
 	public Elastic.Clients.Elasticsearch.Id RuleId { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The type of rule.
+	/// <c>pinned</c> will identify and pin specific documents to the top of search results.
+	/// <c>exclude</c> will exclude specific documents from search results.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType Type { get; set; }
 }
@@ -61,6 +88,12 @@ public sealed partial class QueryRuleDescriptor : SerializableDescriptor<QueryRu
 	private Elastic.Clients.Elasticsearch.Id RuleIdValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType TypeValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// The actions to take when the rule is matched.
+	/// The format of this action depends on the rule type.
+	/// </para>
+	/// </summary>
 	public QueryRuleDescriptor Actions(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActions actions)
 	{
 		ActionsDescriptor = null;
@@ -85,6 +118,12 @@ public sealed partial class QueryRuleDescriptor : SerializableDescriptor<QueryRu
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The criteria that must be met for the rule to be applied.
+	/// If multiple criteria are specified for a rule, all criteria must be met for the rule to be applied.
+	/// </para>
+	/// </summary>
 	public QueryRuleDescriptor Criteria(ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria> criteria)
 	{
 		CriteriaDescriptor = null;
@@ -127,12 +166,24 @@ public sealed partial class QueryRuleDescriptor : SerializableDescriptor<QueryRu
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// A unique identifier for the rule.
+	/// </para>
+	/// </summary>
 	public QueryRuleDescriptor RuleId(Elastic.Clients.Elasticsearch.Id ruleId)
 	{
 		RuleIdValue = ruleId;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The type of rule.
+	/// <c>pinned</c> will identify and pin specific documents to the top of search results.
+	/// <c>exclude</c> will exclude specific documents from search results.
+	/// </para>
+	/// </summary>
 	public QueryRuleDescriptor Type(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType type)
 	{
 		TypeValue = type;

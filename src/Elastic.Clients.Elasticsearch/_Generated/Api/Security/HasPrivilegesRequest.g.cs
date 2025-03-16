@@ -40,6 +40,8 @@ public sealed partial class HasPrivilegesRequestParameters : RequestParameters
 /// </para>
 /// <para>
 /// Determine whether the specified user has a specified list of privileges.
+/// All users can use this API, but only to determine their own privileges.
+/// To check the privileges of other users, you must use the run as feature.
 /// </para>
 /// </summary>
 public sealed partial class HasPrivilegesRequest : PlainRequest<HasPrivilegesRequestParameters>
@@ -80,6 +82,8 @@ public sealed partial class HasPrivilegesRequest : PlainRequest<HasPrivilegesReq
 /// </para>
 /// <para>
 /// Determine whether the specified user has a specified list of privileges.
+/// All users can use this API, but only to determine their own privileges.
+/// To check the privileges of other users, you must use the run as feature.
 /// </para>
 /// </summary>
 public sealed partial class HasPrivilegesRequestDescriptor : RequestDescriptor<HasPrivilegesRequestDescriptor, HasPrivilegesRequestParameters>

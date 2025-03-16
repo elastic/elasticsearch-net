@@ -34,21 +34,23 @@ public sealed partial class ExistsTemplateRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// Return settings in flat format (default: false)
+	/// Indicates whether to use a flat format for the response.
 	/// </para>
 	/// </summary>
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 	/// <summary>
 	/// <para>
-	/// Return local information, do not retrieve the state from master node (default: false)
+	/// Indicates whether to get information from the local node only.
 	/// </para>
 	/// </summary>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
 	/// <para>
-	/// Explicit operation timeout for connection to master node
+	/// The period to wait for the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// To indicate that the request should never timeout, set it to <c>-1</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
@@ -57,7 +59,11 @@ public sealed partial class ExistsTemplateRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Check existence of index templates.
-/// Returns information about whether a particular index template exists.
+/// Get information about whether index templates exist.
+/// Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
+/// </para>
+/// <para>
+/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 /// </para>
 /// </summary>
 public sealed partial class ExistsTemplateRequest : PlainRequest<ExistsTemplateRequestParameters>
@@ -76,7 +82,7 @@ public sealed partial class ExistsTemplateRequest : PlainRequest<ExistsTemplateR
 
 	/// <summary>
 	/// <para>
-	/// Return settings in flat format (default: false)
+	/// Indicates whether to use a flat format for the response.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -84,7 +90,7 @@ public sealed partial class ExistsTemplateRequest : PlainRequest<ExistsTemplateR
 
 	/// <summary>
 	/// <para>
-	/// Return local information, do not retrieve the state from master node (default: false)
+	/// Indicates whether to get information from the local node only.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -92,7 +98,9 @@ public sealed partial class ExistsTemplateRequest : PlainRequest<ExistsTemplateR
 
 	/// <summary>
 	/// <para>
-	/// Explicit operation timeout for connection to master node
+	/// The period to wait for the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// To indicate that the request should never timeout, set it to <c>-1</c>.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -102,7 +110,11 @@ public sealed partial class ExistsTemplateRequest : PlainRequest<ExistsTemplateR
 /// <summary>
 /// <para>
 /// Check existence of index templates.
-/// Returns information about whether a particular index template exists.
+/// Get information about whether index templates exist.
+/// Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
+/// </para>
+/// <para>
+/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 /// </para>
 /// </summary>
 public sealed partial class ExistsTemplateRequestDescriptor : RequestDescriptor<ExistsTemplateRequestDescriptor, ExistsTemplateRequestParameters>

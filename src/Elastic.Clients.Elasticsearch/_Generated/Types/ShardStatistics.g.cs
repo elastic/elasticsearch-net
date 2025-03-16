@@ -29,6 +29,11 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed partial class ShardStatistics
 {
+	/// <summary>
+	/// <para>
+	/// The number of shards the operation or search attempted to run on but failed.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("failed")]
 	public int Failed { get; init; }
 	[JsonInclude, JsonPropertyName("failures")]
@@ -38,7 +43,7 @@ public sealed partial class ShardStatistics
 
 	/// <summary>
 	/// <para>
-	/// Indicates how many shards have successfully run the search.
+	/// The number of shards the operation or search succeeded on.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("successful")]
@@ -46,7 +51,7 @@ public sealed partial class ShardStatistics
 
 	/// <summary>
 	/// <para>
-	/// Indicates how many shards the search will run on overall.
+	/// The number of shards the operation or search will run on overall.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total")]

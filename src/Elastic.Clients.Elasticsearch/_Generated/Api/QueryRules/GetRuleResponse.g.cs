@@ -28,15 +28,42 @@ namespace Elastic.Clients.Elasticsearch.QueryRules;
 
 public sealed partial class GetRuleResponse : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>
+	/// The actions to take when the rule is matched.
+	/// The format of this action depends on the rule type.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("actions")]
 	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActions Actions { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The criteria that must be met for the rule to be applied.
+	/// If multiple criteria are specified for a rule, all criteria must be met for the rule to be applied.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("criteria")]
 	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria))]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria> Criteria { get; init; }
 	[JsonInclude, JsonPropertyName("priority")]
 	public int? Priority { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// A unique identifier for the rule.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("rule_id")]
 	public string RuleId { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The type of rule.
+	/// <c>pinned</c> will identify and pin specific documents to the top of search results.
+	/// <c>exclude</c> will exclude specific documents from search results.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType Type { get; init; }
 }

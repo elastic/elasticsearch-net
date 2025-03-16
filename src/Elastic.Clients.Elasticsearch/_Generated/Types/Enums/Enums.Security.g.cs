@@ -31,12 +31,40 @@ namespace Elastic.Clients.Elasticsearch.Security;
 [JsonConverter(typeof(AccessTokenGrantTypeConverter))]
 public enum AccessTokenGrantType
 {
+	/// <summary>
+	/// <para>
+	/// This grant type implements the Refresh Token Grant of OAuth2.
+	/// In this grant a user exchanges a previously issued refresh token for a new access token and a new refresh token.
+	/// </para>
+	/// </summary>
 	[EnumMember(Value = "refresh_token")]
 	RefreshToken,
+	/// <summary>
+	/// <para>
+	/// This grant type implements the Resource Owner Password Credentials Grant of OAuth2.
+	/// In this grant, a trusted client exchanges the end user's credentials for an access token and (possibly) a refresh token.
+	/// The request needs to be made by an authenticated user but happens on behalf of another authenticated user (the one whose credentials are passed as request parameters).
+	/// This grant type is not suitable or designed for the self-service user creation of tokens.
+	/// </para>
+	/// </summary>
 	[EnumMember(Value = "password")]
 	Password,
+	/// <summary>
+	/// <para>
+	/// This grant type is supported internally and implements SPNEGO based Kerberos support.
+	/// The <c>_kerberos</c> grant type may change from version to version.
+	/// </para>
+	/// </summary>
 	[EnumMember(Value = "_kerberos")]
 	Kerberos,
+	/// <summary>
+	/// <para>
+	/// This grant type implements the Client Credentials Grant of OAuth2.
+	/// It is geared for machine to machine communication and is not suitable or designed for the self-service user creation of tokens.
+	/// It generates only access tokens that cannot be refreshed.
+	/// The premise is that the entity that uses <c>client_credentials</c> has constant access to a set of (client, not end-user) credentials and can authenticate itself at will.
+	/// </para>
+	/// </summary>
 	[EnumMember(Value = "client_credentials")]
 	ClientCredentials
 }
@@ -262,6 +290,7 @@ public enum GrantType
 	/// <summary>
 	/// <para>
 	/// In this type of grant, you must supply an access token that was created by the Elasticsearch token service.
+	/// If you are activating a user profile, you can alternatively supply a JWT (either a JWT <c>access_token</c> or a JWT <c>id_token</c>).
 	/// </para>
 	/// </summary>
 	[EnumMember(Value = "access_token")]

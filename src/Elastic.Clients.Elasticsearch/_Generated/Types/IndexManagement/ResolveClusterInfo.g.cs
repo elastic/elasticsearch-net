@@ -45,7 +45,7 @@ public sealed partial class ResolveClusterInfo
 	/// <summary>
 	/// <para>
 	/// Provides error messages that are likely to occur if you do a search with this index expression
-	/// on the specified cluster (e.g., lack of security privileges to query an index).
+	/// on the specified cluster (for example, lack of security privileges to query an index).
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("error")]
@@ -62,7 +62,7 @@ public sealed partial class ResolveClusterInfo
 
 	/// <summary>
 	/// <para>
-	/// The skip_unavailable setting for a remote cluster.
+	/// The <c>skip_unavailable</c> setting for a remote cluster.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("skip_unavailable")]

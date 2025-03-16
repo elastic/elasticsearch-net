@@ -63,6 +63,8 @@ public sealed partial class FlattenedProperty : IProperty
 	public string? Similarity { get; set; }
 	[JsonInclude, JsonPropertyName("split_queries_on_whitespace")]
 	public bool? SplitQueriesOnWhitespace { get; set; }
+	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
+	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "flattened";
@@ -90,6 +92,7 @@ public sealed partial class FlattenedPropertyDescriptor<TDocument> : Serializabl
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private string? SimilarityValue { get; set; }
 	private bool? SplitQueriesOnWhitespaceValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public FlattenedPropertyDescriptor<TDocument> Boost(double? boost)
 	{
@@ -208,6 +211,12 @@ public sealed partial class FlattenedPropertyDescriptor<TDocument> : Serializabl
 		return Self;
 	}
 
+	public FlattenedPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -295,6 +304,12 @@ public sealed partial class FlattenedPropertyDescriptor<TDocument> : Serializabl
 			writer.WriteBooleanValue(SplitQueriesOnWhitespaceValue.Value);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("flattened");
 		writer.WriteEndObject();
@@ -315,7 +330,8 @@ public sealed partial class FlattenedPropertyDescriptor<TDocument> : Serializabl
 		NullValue = NullValueValue,
 		Properties = PropertiesValue,
 		Similarity = SimilarityValue,
-		SplitQueriesOnWhitespace = SplitQueriesOnWhitespaceValue
+		SplitQueriesOnWhitespace = SplitQueriesOnWhitespaceValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }
 
@@ -341,6 +357,7 @@ public sealed partial class FlattenedPropertyDescriptor : SerializableDescriptor
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private string? SimilarityValue { get; set; }
 	private bool? SplitQueriesOnWhitespaceValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public FlattenedPropertyDescriptor Boost(double? boost)
 	{
@@ -459,6 +476,12 @@ public sealed partial class FlattenedPropertyDescriptor : SerializableDescriptor
 		return Self;
 	}
 
+	public FlattenedPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -546,6 +569,12 @@ public sealed partial class FlattenedPropertyDescriptor : SerializableDescriptor
 			writer.WriteBooleanValue(SplitQueriesOnWhitespaceValue.Value);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("flattened");
 		writer.WriteEndObject();
@@ -566,6 +595,7 @@ public sealed partial class FlattenedPropertyDescriptor : SerializableDescriptor
 		NullValue = NullValueValue,
 		Properties = PropertiesValue,
 		Similarity = SimilarityValue,
-		SplitQueriesOnWhitespace = SplitQueriesOnWhitespaceValue
+		SplitQueriesOnWhitespace = SplitQueriesOnWhitespaceValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }

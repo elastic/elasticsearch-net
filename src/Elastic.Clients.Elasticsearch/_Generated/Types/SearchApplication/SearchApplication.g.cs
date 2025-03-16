@@ -35,7 +35,7 @@ public sealed partial class SearchApplication
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("analytics_collection_name")]
-	public string? AnalyticsCollectionName { get; init; }
+	public Elastic.Clients.Elasticsearch.Name? AnalyticsCollectionName { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -43,15 +43,15 @@ public sealed partial class SearchApplication
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("indices")]
-	public IReadOnlyCollection<string> Indices { get; init; }
+	public ICollection<Elastic.Clients.Elasticsearch.IndexName> Indices { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Search Application name
+	/// Search Application name.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("name")]
-	public string Name { get; init; }
+	public Elastic.Clients.Elasticsearch.Name Name { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -59,7 +59,7 @@ public sealed partial class SearchApplication
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("template")]
-	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationTemplate? Template { get; init; }
+	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationTemplate? Template { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -67,5 +67,129 @@ public sealed partial class SearchApplication
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("updated_at_millis")]
-	public long UpdatedAtMillis { get; init; }
+	public long UpdatedAtMillis { get; set; }
+}
+
+public sealed partial class SearchApplicationDescriptor : SerializableDescriptor<SearchApplicationDescriptor>
+{
+	internal SearchApplicationDescriptor(Action<SearchApplicationDescriptor> configure) => configure.Invoke(this);
+
+	public SearchApplicationDescriptor() : base()
+	{
+	}
+
+	private Elastic.Clients.Elasticsearch.Name? AnalyticsCollectionNameValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.IndexName> IndicesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Name NameValue { get; set; }
+	private Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationTemplate? TemplateValue { get; set; }
+	private Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationTemplateDescriptor TemplateDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationTemplateDescriptor> TemplateDescriptorAction { get; set; }
+	private long UpdatedAtMillisValue { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Analytics collection associated to the Search Application.
+	/// </para>
+	/// </summary>
+	public SearchApplicationDescriptor AnalyticsCollectionName(Elastic.Clients.Elasticsearch.Name? analyticsCollectionName)
+	{
+		AnalyticsCollectionNameValue = analyticsCollectionName;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indices that are part of the Search Application.
+	/// </para>
+	/// </summary>
+	public SearchApplicationDescriptor Indices(ICollection<Elastic.Clients.Elasticsearch.IndexName> indices)
+	{
+		IndicesValue = indices;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Search Application name.
+	/// </para>
+	/// </summary>
+	public SearchApplicationDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
+	{
+		NameValue = name;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Search template to use on search operations.
+	/// </para>
+	/// </summary>
+	public SearchApplicationDescriptor Template(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationTemplate? template)
+	{
+		TemplateDescriptor = null;
+		TemplateDescriptorAction = null;
+		TemplateValue = template;
+		return Self;
+	}
+
+	public SearchApplicationDescriptor Template(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationTemplateDescriptor descriptor)
+	{
+		TemplateValue = null;
+		TemplateDescriptorAction = null;
+		TemplateDescriptor = descriptor;
+		return Self;
+	}
+
+	public SearchApplicationDescriptor Template(Action<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationTemplateDescriptor> configure)
+	{
+		TemplateValue = null;
+		TemplateDescriptor = null;
+		TemplateDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Last time the Search Application was updated.
+	/// </para>
+	/// </summary>
+	public SearchApplicationDescriptor UpdatedAtMillis(long updatedAtMillis)
+	{
+		UpdatedAtMillisValue = updatedAtMillis;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (AnalyticsCollectionNameValue is not null)
+		{
+			writer.WritePropertyName("analytics_collection_name");
+			JsonSerializer.Serialize(writer, AnalyticsCollectionNameValue, options);
+		}
+
+		writer.WritePropertyName("indices");
+		JsonSerializer.Serialize(writer, IndicesValue, options);
+		writer.WritePropertyName("name");
+		JsonSerializer.Serialize(writer, NameValue, options);
+		if (TemplateDescriptor is not null)
+		{
+			writer.WritePropertyName("template");
+			JsonSerializer.Serialize(writer, TemplateDescriptor, options);
+		}
+		else if (TemplateDescriptorAction is not null)
+		{
+			writer.WritePropertyName("template");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationTemplateDescriptor(TemplateDescriptorAction), options);
+		}
+		else if (TemplateValue is not null)
+		{
+			writer.WritePropertyName("template");
+			JsonSerializer.Serialize(writer, TemplateValue, options);
+		}
+
+		writer.WritePropertyName("updated_at_millis");
+		writer.WriteNumberValue(UpdatedAtMillisValue);
+		writer.WriteEndObject();
+	}
 }

@@ -34,16 +34,23 @@ public sealed partial class GetRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// Should this request force synthetic _source?
-	/// Use this to test if the mapping supports synthetic _source and to get a sense of the worst case performance.
-	/// Fetches with this enabled will be slower the enabling synthetic source natively in the index.
+	/// Indicates whether the request forces synthetic <c>_source</c>.
+	/// Use this paramater to test if the mapping supports synthetic <c>_source</c> and to get a sense of the worst case performance.
+	/// Fetches with this parameter enabled will be slower than enabling synthetic source natively in the index.
 	/// </para>
 	/// </summary>
 	public bool? ForceSyntheticSource { get => Q<bool?>("force_synthetic_source"); set => Q("force_synthetic_source", value); }
 
 	/// <summary>
 	/// <para>
-	/// Specifies the node or shard the operation should be performed on. Random by default.
+	/// The node or shard the operation should be performed on.
+	/// By default, the operation is randomized between the shard replicas.
+	/// </para>
+	/// <para>
+	/// If it is set to <c>_local</c>, the operation will prefer to be run on a local allocated shard when possible.
+	/// If it is set to a custom value, the value is used to guarantee that the same shards will be used for the same custom value.
+	/// This can help with "jumping values" when hitting different shards in different refresh states.
+	/// A sample value can be something like the web session ID or the user name.
 	/// </para>
 	/// </summary>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
@@ -57,28 +64,31 @@ public sealed partial class GetRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
-	/// If true, Elasticsearch refreshes the affected shards to make this operation visible to search. If false, do nothing with refreshes.
+	/// If <c>true</c>, the request refreshes the relevant shards before retrieving the document.
+	/// Setting it to <c>true</c> should be done after careful thought and verification that this does not cause a heavy load on the system (and slow down indexing).
 	/// </para>
 	/// </summary>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
 	/// <summary>
 	/// <para>
-	/// Target the specified primary shard.
+	/// A custom value used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
 	/// <para>
-	/// True or false to return the _source field or not, or a list of fields to return.
+	/// Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or lists the fields to return.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
 
 	/// <summary>
 	/// <para>
-	/// A comma-separated list of source fields to exclude in the response.
+	/// A comma-separated list of source fields to exclude from the response.
+	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
+	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
@@ -86,29 +96,35 @@ public sealed partial class GetRequestParameters : RequestParameters
 	/// <summary>
 	/// <para>
 	/// A comma-separated list of source fields to include in the response.
+	/// If this parameter is specified, only these source fields are returned.
+	/// You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
+	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
 	/// <summary>
 	/// <para>
-	/// List of stored fields to return as part of a hit.
+	/// A comma-separated list of stored fields to return as part of a hit.
 	/// If no fields are specified, no stored fields are included in the response.
-	/// If this field is specified, the <c>_source</c> parameter defaults to false.
+	/// If this field is specified, the <c>_source</c> parameter defaults to <c>false</c>.
+	/// Only leaf fields can be retrieved with the <c>stored_field</c> option.
+	/// Object fields can't be returned;​if specified, the request fails.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("stored_fields"); set => Q("stored_fields", value); }
 
 	/// <summary>
 	/// <para>
-	/// Explicit version number for concurrency control. The specified version must match the current version of the document for the request to succeed.
+	/// The version number for concurrency control.
+	/// It must match the current version of the document for the request to succeed.
 	/// </para>
 	/// </summary>
 	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 
 	/// <summary>
 	/// <para>
-	/// Specific version type: internal, external, external_gte.
+	/// The version type.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
@@ -117,7 +133,73 @@ public sealed partial class GetRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Get a document by its ID.
-/// Retrieves the document with the specified ID from an index.
+/// </para>
+/// <para>
+/// Get a document and its source or stored fields from an index.
+/// </para>
+/// <para>
+/// By default, this API is realtime and is not affected by the refresh rate of the index (when data will become visible for search).
+/// In the case where stored fields are requested with the <c>stored_fields</c> parameter and the document has been updated but is not yet refreshed, the API will have to parse and analyze the source to extract the stored fields.
+/// To turn off realtime behavior, set the <c>realtime</c> parameter to false.
+/// </para>
+/// <para>
+/// <strong>Source filtering</strong>
+/// </para>
+/// <para>
+/// By default, the API returns the contents of the <c>_source</c> field unless you have used the <c>stored_fields</c> parameter or the <c>_source</c> field is turned off.
+/// You can turn off <c>_source</c> retrieval by using the <c>_source</c> parameter:
+/// </para>
+/// <code>
+/// GET my-index-000001/_doc/0?_source=false
+/// </code>
+/// <para>
+/// If you only need one or two fields from the <c>_source</c>, use the <c>_source_includes</c> or <c>_source_excludes</c> parameters to include or filter out particular fields.
+/// This can be helpful with large documents where partial retrieval can save on network overhead
+/// Both parameters take a comma separated list of fields or wildcard expressions.
+/// For example:
+/// </para>
+/// <code>
+/// GET my-index-000001/_doc/0?_source_includes=*.id&amp;_source_excludes=entities
+/// </code>
+/// <para>
+/// If you only want to specify includes, you can use a shorter notation:
+/// </para>
+/// <code>
+/// GET my-index-000001/_doc/0?_source=*.id
+/// </code>
+/// <para>
+/// <strong>Routing</strong>
+/// </para>
+/// <para>
+/// If routing is used during indexing, the routing value also needs to be specified to retrieve a document.
+/// For example:
+/// </para>
+/// <code>
+/// GET my-index-000001/_doc/2?routing=user1
+/// </code>
+/// <para>
+/// This request gets the document with ID 2, but it is routed based on the user.
+/// The document is not fetched if the correct routing is not specified.
+/// </para>
+/// <para>
+/// <strong>Distributed</strong>
+/// </para>
+/// <para>
+/// The GET operation is hashed into a specific shard ID.
+/// It is then redirected to one of the replicas within that shard ID and returns the result.
+/// The replicas are the primary shard and its replicas within that shard ID group.
+/// This means that the more replicas you have, the better your GET scaling will be.
+/// </para>
+/// <para>
+/// <strong>Versioning support</strong>
+/// </para>
+/// <para>
+/// You can use the <c>version</c> parameter to retrieve the document only if its current version is equal to the specified one.
+/// </para>
+/// <para>
+/// Internally, Elasticsearch has marked the old document as deleted and added an entirely new document.
+/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
+/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 /// </para>
 /// </summary>
 public sealed partial class GetRequest : PlainRequest<GetRequestParameters>
@@ -136,9 +218,9 @@ public sealed partial class GetRequest : PlainRequest<GetRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Should this request force synthetic _source?
-	/// Use this to test if the mapping supports synthetic _source and to get a sense of the worst case performance.
-	/// Fetches with this enabled will be slower the enabling synthetic source natively in the index.
+	/// Indicates whether the request forces synthetic <c>_source</c>.
+	/// Use this paramater to test if the mapping supports synthetic <c>_source</c> and to get a sense of the worst case performance.
+	/// Fetches with this parameter enabled will be slower than enabling synthetic source natively in the index.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -146,7 +228,14 @@ public sealed partial class GetRequest : PlainRequest<GetRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Specifies the node or shard the operation should be performed on. Random by default.
+	/// The node or shard the operation should be performed on.
+	/// By default, the operation is randomized between the shard replicas.
+	/// </para>
+	/// <para>
+	/// If it is set to <c>_local</c>, the operation will prefer to be run on a local allocated shard when possible.
+	/// If it is set to a custom value, the value is used to guarantee that the same shards will be used for the same custom value.
+	/// This can help with "jumping values" when hitting different shards in different refresh states.
+	/// A sample value can be something like the web session ID or the user name.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -162,7 +251,8 @@ public sealed partial class GetRequest : PlainRequest<GetRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// If true, Elasticsearch refreshes the affected shards to make this operation visible to search. If false, do nothing with refreshes.
+	/// If <c>true</c>, the request refreshes the relevant shards before retrieving the document.
+	/// Setting it to <c>true</c> should be done after careful thought and verification that this does not cause a heavy load on the system (and slow down indexing).
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -170,7 +260,7 @@ public sealed partial class GetRequest : PlainRequest<GetRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Target the specified primary shard.
+	/// A custom value used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -178,7 +268,7 @@ public sealed partial class GetRequest : PlainRequest<GetRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// True or false to return the _source field or not, or a list of fields to return.
+	/// Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or lists the fields to return.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -186,7 +276,9 @@ public sealed partial class GetRequest : PlainRequest<GetRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// A comma-separated list of source fields to exclude in the response.
+	/// A comma-separated list of source fields to exclude from the response.
+	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
+	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -195,6 +287,9 @@ public sealed partial class GetRequest : PlainRequest<GetRequestParameters>
 	/// <summary>
 	/// <para>
 	/// A comma-separated list of source fields to include in the response.
+	/// If this parameter is specified, only these source fields are returned.
+	/// You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
+	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -202,9 +297,11 @@ public sealed partial class GetRequest : PlainRequest<GetRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// List of stored fields to return as part of a hit.
+	/// A comma-separated list of stored fields to return as part of a hit.
 	/// If no fields are specified, no stored fields are included in the response.
-	/// If this field is specified, the <c>_source</c> parameter defaults to false.
+	/// If this field is specified, the <c>_source</c> parameter defaults to <c>false</c>.
+	/// Only leaf fields can be retrieved with the <c>stored_field</c> option.
+	/// Object fields can't be returned;​if specified, the request fails.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -212,7 +309,8 @@ public sealed partial class GetRequest : PlainRequest<GetRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Explicit version number for concurrency control. The specified version must match the current version of the document for the request to succeed.
+	/// The version number for concurrency control.
+	/// It must match the current version of the document for the request to succeed.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -220,7 +318,7 @@ public sealed partial class GetRequest : PlainRequest<GetRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Specific version type: internal, external, external_gte.
+	/// The version type.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -230,7 +328,73 @@ public sealed partial class GetRequest : PlainRequest<GetRequestParameters>
 /// <summary>
 /// <para>
 /// Get a document by its ID.
-/// Retrieves the document with the specified ID from an index.
+/// </para>
+/// <para>
+/// Get a document and its source or stored fields from an index.
+/// </para>
+/// <para>
+/// By default, this API is realtime and is not affected by the refresh rate of the index (when data will become visible for search).
+/// In the case where stored fields are requested with the <c>stored_fields</c> parameter and the document has been updated but is not yet refreshed, the API will have to parse and analyze the source to extract the stored fields.
+/// To turn off realtime behavior, set the <c>realtime</c> parameter to false.
+/// </para>
+/// <para>
+/// <strong>Source filtering</strong>
+/// </para>
+/// <para>
+/// By default, the API returns the contents of the <c>_source</c> field unless you have used the <c>stored_fields</c> parameter or the <c>_source</c> field is turned off.
+/// You can turn off <c>_source</c> retrieval by using the <c>_source</c> parameter:
+/// </para>
+/// <code>
+/// GET my-index-000001/_doc/0?_source=false
+/// </code>
+/// <para>
+/// If you only need one or two fields from the <c>_source</c>, use the <c>_source_includes</c> or <c>_source_excludes</c> parameters to include or filter out particular fields.
+/// This can be helpful with large documents where partial retrieval can save on network overhead
+/// Both parameters take a comma separated list of fields or wildcard expressions.
+/// For example:
+/// </para>
+/// <code>
+/// GET my-index-000001/_doc/0?_source_includes=*.id&amp;_source_excludes=entities
+/// </code>
+/// <para>
+/// If you only want to specify includes, you can use a shorter notation:
+/// </para>
+/// <code>
+/// GET my-index-000001/_doc/0?_source=*.id
+/// </code>
+/// <para>
+/// <strong>Routing</strong>
+/// </para>
+/// <para>
+/// If routing is used during indexing, the routing value also needs to be specified to retrieve a document.
+/// For example:
+/// </para>
+/// <code>
+/// GET my-index-000001/_doc/2?routing=user1
+/// </code>
+/// <para>
+/// This request gets the document with ID 2, but it is routed based on the user.
+/// The document is not fetched if the correct routing is not specified.
+/// </para>
+/// <para>
+/// <strong>Distributed</strong>
+/// </para>
+/// <para>
+/// The GET operation is hashed into a specific shard ID.
+/// It is then redirected to one of the replicas within that shard ID and returns the result.
+/// The replicas are the primary shard and its replicas within that shard ID group.
+/// This means that the more replicas you have, the better your GET scaling will be.
+/// </para>
+/// <para>
+/// <strong>Versioning support</strong>
+/// </para>
+/// <para>
+/// You can use the <c>version</c> parameter to retrieve the document only if its current version is equal to the specified one.
+/// </para>
+/// <para>
+/// Internally, Elasticsearch has marked the old document as deleted and added an entirely new document.
+/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
+/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 /// </para>
 /// </summary>
 public sealed partial class GetRequestDescriptor<TDocument> : RequestDescriptor<GetRequestDescriptor<TDocument>, GetRequestParameters>
@@ -297,7 +461,73 @@ public sealed partial class GetRequestDescriptor<TDocument> : RequestDescriptor<
 /// <summary>
 /// <para>
 /// Get a document by its ID.
-/// Retrieves the document with the specified ID from an index.
+/// </para>
+/// <para>
+/// Get a document and its source or stored fields from an index.
+/// </para>
+/// <para>
+/// By default, this API is realtime and is not affected by the refresh rate of the index (when data will become visible for search).
+/// In the case where stored fields are requested with the <c>stored_fields</c> parameter and the document has been updated but is not yet refreshed, the API will have to parse and analyze the source to extract the stored fields.
+/// To turn off realtime behavior, set the <c>realtime</c> parameter to false.
+/// </para>
+/// <para>
+/// <strong>Source filtering</strong>
+/// </para>
+/// <para>
+/// By default, the API returns the contents of the <c>_source</c> field unless you have used the <c>stored_fields</c> parameter or the <c>_source</c> field is turned off.
+/// You can turn off <c>_source</c> retrieval by using the <c>_source</c> parameter:
+/// </para>
+/// <code>
+/// GET my-index-000001/_doc/0?_source=false
+/// </code>
+/// <para>
+/// If you only need one or two fields from the <c>_source</c>, use the <c>_source_includes</c> or <c>_source_excludes</c> parameters to include or filter out particular fields.
+/// This can be helpful with large documents where partial retrieval can save on network overhead
+/// Both parameters take a comma separated list of fields or wildcard expressions.
+/// For example:
+/// </para>
+/// <code>
+/// GET my-index-000001/_doc/0?_source_includes=*.id&amp;_source_excludes=entities
+/// </code>
+/// <para>
+/// If you only want to specify includes, you can use a shorter notation:
+/// </para>
+/// <code>
+/// GET my-index-000001/_doc/0?_source=*.id
+/// </code>
+/// <para>
+/// <strong>Routing</strong>
+/// </para>
+/// <para>
+/// If routing is used during indexing, the routing value also needs to be specified to retrieve a document.
+/// For example:
+/// </para>
+/// <code>
+/// GET my-index-000001/_doc/2?routing=user1
+/// </code>
+/// <para>
+/// This request gets the document with ID 2, but it is routed based on the user.
+/// The document is not fetched if the correct routing is not specified.
+/// </para>
+/// <para>
+/// <strong>Distributed</strong>
+/// </para>
+/// <para>
+/// The GET operation is hashed into a specific shard ID.
+/// It is then redirected to one of the replicas within that shard ID and returns the result.
+/// The replicas are the primary shard and its replicas within that shard ID group.
+/// This means that the more replicas you have, the better your GET scaling will be.
+/// </para>
+/// <para>
+/// <strong>Versioning support</strong>
+/// </para>
+/// <para>
+/// You can use the <c>version</c> parameter to retrieve the document only if its current version is equal to the specified one.
+/// </para>
+/// <para>
+/// Internally, Elasticsearch has marked the old document as deleted and added an entirely new document.
+/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
+/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 /// </para>
 /// </summary>
 public sealed partial class GetRequestDescriptor : RequestDescriptor<GetRequestDescriptor, GetRequestParameters>

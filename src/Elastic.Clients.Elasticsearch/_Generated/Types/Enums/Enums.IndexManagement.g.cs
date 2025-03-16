@@ -682,6 +682,55 @@ internal sealed class ShardStoreStatusConverter : JsonConverter<ShardStoreStatus
 	}
 }
 
+[JsonConverter(typeof(SourceModeConverter))]
+public enum SourceMode
+{
+	[EnumMember(Value = "synthetic")]
+	Synthetic,
+	[EnumMember(Value = "stored")]
+	Stored,
+	[EnumMember(Value = "disabled")]
+	Disabled
+}
+
+internal sealed class SourceModeConverter : JsonConverter<SourceMode>
+{
+	public override SourceMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "synthetic":
+				return SourceMode.Synthetic;
+			case "stored":
+				return SourceMode.Stored;
+			case "disabled":
+				return SourceMode.Disabled;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, SourceMode value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case SourceMode.Synthetic:
+				writer.WriteStringValue("synthetic");
+				return;
+			case SourceMode.Stored:
+				writer.WriteStringValue("stored");
+				return;
+			case SourceMode.Disabled:
+				writer.WriteStringValue("disabled");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
 [JsonConverter(typeof(EnumStructConverter<StorageType>))]
 public readonly partial struct StorageType : IEnumStruct<StorageType>
 {

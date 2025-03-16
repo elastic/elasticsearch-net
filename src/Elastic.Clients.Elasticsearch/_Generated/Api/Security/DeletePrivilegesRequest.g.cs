@@ -44,6 +44,21 @@ public sealed partial class DeletePrivilegesRequestParameters : RequestParameter
 /// <para>
 /// Delete application privileges.
 /// </para>
+/// <para>
+/// To use this API, you must have one of the following privileges:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The <c>manage_security</c> cluster privilege (or a greater privilege such as <c>all</c>).
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The "Manage Application Privileges" global privilege for the application being referenced in the request.
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
 public sealed partial class DeletePrivilegesRequest : PlainRequest<DeletePrivilegesRequestParameters>
 {
@@ -72,6 +87,21 @@ public sealed partial class DeletePrivilegesRequest : PlainRequest<DeletePrivile
 /// <para>
 /// Delete application privileges.
 /// </para>
+/// <para>
+/// To use this API, you must have one of the following privileges:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The <c>manage_security</c> cluster privilege (or a greater privilege such as <c>all</c>).
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The "Manage Application Privileges" global privilege for the application being referenced in the request.
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
 public sealed partial class DeletePrivilegesRequestDescriptor : RequestDescriptor<DeletePrivilegesRequestDescriptor, DeletePrivilegesRequestParameters>
 {
