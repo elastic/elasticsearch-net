@@ -28,6 +28,11 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <summary>
+/// <para>
+/// An Elasticsearch Query DSL (Domain Specific Language) object that defines a query.
+/// </para>
+/// </summary>
 [JsonConverter(typeof(QueryConverter))]
 public sealed partial class Query
 {
@@ -59,6 +64,7 @@ public sealed partial class Query
 	public static Query Fuzzy(Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery fuzzyQuery) => new Query("fuzzy", fuzzyQuery);
 	public static Query GeoBoundingBox(Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery geoBoundingBoxQuery) => new Query("geo_bounding_box", geoBoundingBoxQuery);
 	public static Query GeoDistance(Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery geoDistanceQuery) => new Query("geo_distance", geoDistanceQuery);
+	public static Query GeoGrid(Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery geoGridQuery) => new Query("geo_grid", geoGridQuery);
 	public static Query GeoShape(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery geoShapeQuery) => new Query("geo_shape", geoShapeQuery);
 	public static Query HasChild(Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery hasChildQuery) => new Query("has_child", hasChildQuery);
 	public static Query HasParent(Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery hasParentQuery) => new Query("has_parent", hasParentQuery);
@@ -219,6 +225,13 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 			if (propertyName == "geo_distance")
 			{
 				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "geo_grid")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery?>(ref reader, options);
 				variantNameValue = propertyName;
 				continue;
 			}
@@ -586,6 +599,9 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 				case "geo_distance":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery)value.Variant, options);
 					break;
+				case "geo_grid":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery)value.Variant, options);
+					break;
 				case "geo_shape":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery)value.Variant, options);
 					break;
@@ -782,6 +798,8 @@ public sealed partial class QueryDescriptor<TDocument> : SerializableDescriptor<
 	public QueryDescriptor<TDocument> GeoBoundingBox(Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor<TDocument>> configure) => Set(configure, "geo_bounding_box");
 	public QueryDescriptor<TDocument> GeoDistance(Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery geoDistanceQuery) => Set(geoDistanceQuery, "geo_distance");
 	public QueryDescriptor<TDocument> GeoDistance(Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor<TDocument>> configure) => Set(configure, "geo_distance");
+	public QueryDescriptor<TDocument> GeoGrid(Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery geoGridQuery) => Set(geoGridQuery, "geo_grid");
+	public QueryDescriptor<TDocument> GeoGrid(Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor<TDocument>> configure) => Set(configure, "geo_grid");
 	public QueryDescriptor<TDocument> GeoShape(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery geoShapeQuery) => Set(geoShapeQuery, "geo_shape");
 	public QueryDescriptor<TDocument> GeoShape(Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor<TDocument>> configure) => Set(configure, "geo_shape");
 	public QueryDescriptor<TDocument> HasChild(Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery hasChildQuery) => Set(hasChildQuery, "has_child");
@@ -948,6 +966,8 @@ public sealed partial class QueryDescriptor : SerializableDescriptor<QueryDescri
 	public QueryDescriptor GeoBoundingBox<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor> configure) => Set(configure, "geo_bounding_box");
 	public QueryDescriptor GeoDistance(Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery geoDistanceQuery) => Set(geoDistanceQuery, "geo_distance");
 	public QueryDescriptor GeoDistance<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor> configure) => Set(configure, "geo_distance");
+	public QueryDescriptor GeoGrid(Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery geoGridQuery) => Set(geoGridQuery, "geo_grid");
+	public QueryDescriptor GeoGrid<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor> configure) => Set(configure, "geo_grid");
 	public QueryDescriptor GeoShape(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery geoShapeQuery) => Set(geoShapeQuery, "geo_shape");
 	public QueryDescriptor GeoShape<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor> configure) => Set(configure, "geo_shape");
 	public QueryDescriptor HasChild(Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery hasChildQuery) => Set(hasChildQuery, "has_child");

@@ -28,10 +28,27 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public sealed partial class SamlInvalidateResponse : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>
+	/// The number of tokens that were invalidated as part of this logout.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("invalidated")]
 	public int Invalidated { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The realm name of the SAML realm in Elasticsearch that authenticated the user.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("realm")]
 	public string Realm { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// A SAML logout response as a parameter so that the user can be redirected back to the SAML IdP.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("redirect")]
 	public string Redirect { get; init; }
 }

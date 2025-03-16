@@ -39,7 +39,7 @@ public sealed partial class TemplateConfig
 
 	/// <summary>
 	/// <para>
-	/// ID of the search template to use. If no source is specified,
+	/// The ID of the search template to use. If no <c>source</c> is specified,
 	/// this parameter is required.
 	/// </para>
 	/// </summary>
@@ -67,7 +67,7 @@ public sealed partial class TemplateConfig
 	/// <summary>
 	/// <para>
 	/// An inline search template. Supports the same parameters as the search API's
-	/// request body. Also supports Mustache variables. If no id is specified, this
+	/// request body. It also supports Mustache variables. If no <c>id</c> is specified, this
 	/// parameter is required.
 	/// </para>
 	/// </summary>

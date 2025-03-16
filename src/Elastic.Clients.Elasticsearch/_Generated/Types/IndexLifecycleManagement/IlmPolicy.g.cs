@@ -29,6 +29,11 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
 public sealed partial class IlmPolicy
 {
+	/// <summary>
+	/// <para>
+	/// Arbitrary metadata that is not automatically generated or used by Elasticsearch.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_meta")]
 	public IDictionary<string, object>? Meta { get; set; }
 	[JsonInclude, JsonPropertyName("phases")]
@@ -48,6 +53,11 @@ public sealed partial class IlmPolicyDescriptor : SerializableDescriptor<IlmPoli
 	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhasesDescriptor PhasesDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhasesDescriptor> PhasesDescriptorAction { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// Arbitrary metadata that is not automatically generated or used by Elasticsearch.
+	/// </para>
+	/// </summary>
 	public IlmPolicyDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());

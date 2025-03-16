@@ -28,16 +28,57 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed partial class DeleteByQueryResponse : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>
+	/// The number of scroll responses pulled back by the delete by query.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("batches")]
 	public long? Batches { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The number of documents that were successfully deleted.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("deleted")]
 	public long? Deleted { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// An array of failures if there were any unrecoverable errors during the process.
+	/// If this array is not empty, the request ended abnormally because of those failures.
+	/// Delete by query is implemented using batches and any failures cause the entire process to end but all failures in the current batch are collected into the array.
+	/// You can use the <c>conflicts</c> option to prevent reindex from ending on version conflicts.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("failures")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure>? Failures { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// This field is always equal to zero for delete by query.
+	/// It exists only so that delete by query, update by query, and reindex APIs return responses with the same structure.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("noops")]
 	public long? Noops { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The number of requests per second effectively run during the delete by query.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("requests_per_second")]
 	public float? RequestsPerSecond { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The number of retries attempted by delete by query.
+	/// <c>bulk</c> is the number of bulk actions retried.
+	/// <c>search</c> is the number of search actions retried.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("retries")]
 	public Elastic.Clients.Elasticsearch.Retries? Retries { get; init; }
 	[JsonInclude, JsonPropertyName("slice_id")]
@@ -46,18 +87,55 @@ public sealed partial class DeleteByQueryResponse : ElasticsearchResponse
 	public Elastic.Clients.Elasticsearch.TaskId? Task { get; init; }
 	[JsonInclude, JsonPropertyName("throttled")]
 	public Elastic.Clients.Elasticsearch.Duration? Throttled { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The number of milliseconds the request slept to conform to <c>requests_per_second</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("throttled_millis")]
 	public long? ThrottledMillis { get; init; }
 	[JsonInclude, JsonPropertyName("throttled_until")]
 	public Elastic.Clients.Elasticsearch.Duration? ThrottledUntil { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// This field should always be equal to zero in a <c>_delete_by_query</c> response.
+	/// It has meaning only when using the task API, where it indicates the next time (in milliseconds since epoch) a throttled request will be run again in order to conform to <c>requests_per_second</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("throttled_until_millis")]
 	public long? ThrottledUntilMillis { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, some requests run during the delete by query operation timed out.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("timed_out")]
 	public bool? TimedOut { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The number of milliseconds from start to end of the whole operation.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("took")]
 	public long? Took { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The number of documents that were successfully processed.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("total")]
 	public long? Total { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The number of version conflicts that the delete by query hit.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("version_conflicts")]
 	public long? VersionConflicts { get; init; }
 }

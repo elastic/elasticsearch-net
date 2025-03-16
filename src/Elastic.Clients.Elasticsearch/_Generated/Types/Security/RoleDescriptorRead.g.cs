@@ -145,7 +145,7 @@ public sealed partial class RoleDescriptorRead
 
 	/// <summary>
 	/// <para>
-	/// Optional description of the role descriptor
+	/// An optional description of the role descriptor.
 	/// </para>
 	/// </summary>
 	public string? Description { get; init; }
@@ -173,7 +173,8 @@ public sealed partial class RoleDescriptorRead
 
 	/// <summary>
 	/// <para>
-	/// A list of cluster permissions for remote clusters. Note - this is limited a subset of the cluster permissions.
+	/// A list of cluster permissions for remote clusters.
+	/// NOTE: This is limited a subset of the cluster permissions.
 	/// </para>
 	/// </summary>
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? RemoteCluster { get; init; }
@@ -187,7 +188,7 @@ public sealed partial class RoleDescriptorRead
 
 	/// <summary>
 	/// <para>
-	/// Restriction for when the role descriptor is allowed to be effective.
+	/// A restriction for when the role descriptor is allowed to be effective.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.Restriction? Restriction { get; init; }

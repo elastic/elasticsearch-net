@@ -46,7 +46,7 @@ public sealed partial class QueryUserResponse : ElasticsearchResponse
 
 	/// <summary>
 	/// <para>
-	/// A list of user information.
+	/// A list of users that match the query.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("users")]

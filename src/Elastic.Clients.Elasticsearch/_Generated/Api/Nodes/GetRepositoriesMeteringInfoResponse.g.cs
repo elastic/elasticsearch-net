@@ -30,7 +30,7 @@ public sealed partial class GetRepositoriesMeteringInfoResponse : ElasticsearchR
 {
 	/// <summary>
 	/// <para>
-	/// Name of the cluster. Based on the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/important-settings.html#cluster-name">Cluster name setting</a>.
+	/// Name of the cluster. Based on the <c>cluster.name</c> setting.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("cluster_name")]

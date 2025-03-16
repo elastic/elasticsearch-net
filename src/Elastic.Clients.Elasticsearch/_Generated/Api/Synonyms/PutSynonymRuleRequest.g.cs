@@ -39,6 +39,12 @@ public sealed partial class PutSynonymRuleRequestParameters : RequestParameters
 /// Create or update a synonym rule.
 /// Create or update a synonym rule in a synonym set.
 /// </para>
+/// <para>
+/// If any of the synonym rules included is invalid, the API returns an error.
+/// </para>
+/// <para>
+/// When you update a synonym rule, all analyzers using the synonyms set will be reloaded automatically to reflect the new rule.
+/// </para>
 /// </summary>
 public sealed partial class PutSynonymRuleRequest : PlainRequest<PutSynonymRuleRequestParameters>
 {
@@ -54,6 +60,11 @@ public sealed partial class PutSynonymRuleRequest : PlainRequest<PutSynonymRuleR
 
 	internal override string OperationName => "synonyms.put_synonym_rule";
 
+	/// <summary>
+	/// <para>
+	/// The synonym rule information definition, which must be in Solr format.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("synonyms")]
 	public string Synonyms { get; set; }
 }
@@ -62,6 +73,12 @@ public sealed partial class PutSynonymRuleRequest : PlainRequest<PutSynonymRuleR
 /// <para>
 /// Create or update a synonym rule.
 /// Create or update a synonym rule in a synonym set.
+/// </para>
+/// <para>
+/// If any of the synonym rules included is invalid, the API returns an error.
+/// </para>
+/// <para>
+/// When you update a synonym rule, all analyzers using the synonyms set will be reloaded automatically to reflect the new rule.
 /// </para>
 /// </summary>
 public sealed partial class PutSynonymRuleRequestDescriptor : RequestDescriptor<PutSynonymRuleRequestDescriptor, PutSynonymRuleRequestParameters>
@@ -94,6 +111,11 @@ public sealed partial class PutSynonymRuleRequestDescriptor : RequestDescriptor<
 
 	private string SynonymsValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// The synonym rule information definition, which must be in Solr format.
+	/// </para>
+	/// </summary>
 	public PutSynonymRuleRequestDescriptor Synonyms(string synonyms)
 	{
 		SynonymsValue = synonyms;

@@ -31,7 +31,7 @@ public sealed partial class UpdateApiKeyResponse : ElasticsearchResponse
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, the API key was updated.
-	/// If <c>false</c>, the API key didn’t change because no change was detected.
+	/// If <c>false</c>, the API key didn't change because no change was detected.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("updated")]

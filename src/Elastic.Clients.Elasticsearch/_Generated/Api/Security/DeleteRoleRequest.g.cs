@@ -46,6 +46,8 @@ public sealed partial class DeleteRoleRequestParameters : RequestParameters
 /// </para>
 /// <para>
 /// Delete roles in the native realm.
+/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+/// The delete roles API cannot remove roles that are defined in roles files.
 /// </para>
 /// </summary>
 public sealed partial class DeleteRoleRequest : PlainRequest<DeleteRoleRequestParameters>
@@ -77,6 +79,8 @@ public sealed partial class DeleteRoleRequest : PlainRequest<DeleteRoleRequestPa
 /// </para>
 /// <para>
 /// Delete roles in the native realm.
+/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+/// The delete roles API cannot remove roles that are defined in roles files.
 /// </para>
 /// </summary>
 public sealed partial class DeleteRoleRequestDescriptor : RequestDescriptor<DeleteRoleRequestDescriptor, DeleteRoleRequestParameters>

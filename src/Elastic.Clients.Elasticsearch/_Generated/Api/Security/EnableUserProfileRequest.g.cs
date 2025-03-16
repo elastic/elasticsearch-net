@@ -35,8 +35,9 @@ public sealed partial class EnableUserProfileRequestParameters : RequestParamete
 	/// <summary>
 	/// <para>
 	/// If 'true', Elasticsearch refreshes the affected shards to make this operation
-	/// visible to search, if 'wait_for' then wait for a refresh to make this operation
-	/// visible to search, if 'false' do nothing with refreshes.
+	/// visible to search.
+	/// If 'wait_for', it waits for a refresh to make this operation visible to search.
+	/// If 'false', nothing is done with refreshes.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
@@ -48,6 +49,15 @@ public sealed partial class EnableUserProfileRequestParameters : RequestParamete
 /// </para>
 /// <para>
 /// Enable user profiles to make them visible in user profile searches.
+/// </para>
+/// <para>
+/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions.
+/// Individual users and external applications should not call this API directly.
+/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
+/// </para>
+/// <para>
+/// When you activate a user profile, it's automatically enabled and visible in user profile searches.
+/// If you later disable the user profile, you can use the enable user profile API to make the profile visible in these searches again.
 /// </para>
 /// </summary>
 public sealed partial class EnableUserProfileRequest : PlainRequest<EnableUserProfileRequestParameters>
@@ -67,8 +77,9 @@ public sealed partial class EnableUserProfileRequest : PlainRequest<EnableUserPr
 	/// <summary>
 	/// <para>
 	/// If 'true', Elasticsearch refreshes the affected shards to make this operation
-	/// visible to search, if 'wait_for' then wait for a refresh to make this operation
-	/// visible to search, if 'false' do nothing with refreshes.
+	/// visible to search.
+	/// If 'wait_for', it waits for a refresh to make this operation visible to search.
+	/// If 'false', nothing is done with refreshes.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -81,6 +92,15 @@ public sealed partial class EnableUserProfileRequest : PlainRequest<EnableUserPr
 /// </para>
 /// <para>
 /// Enable user profiles to make them visible in user profile searches.
+/// </para>
+/// <para>
+/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions.
+/// Individual users and external applications should not call this API directly.
+/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
+/// </para>
+/// <para>
+/// When you activate a user profile, it's automatically enabled and visible in user profile searches.
+/// If you later disable the user profile, you can use the enable user profile API to make the profile visible in these searches again.
 /// </para>
 /// </summary>
 public sealed partial class EnableUserProfileRequestDescriptor : RequestDescriptor<EnableUserProfileRequestDescriptor, EnableUserProfileRequestParameters>

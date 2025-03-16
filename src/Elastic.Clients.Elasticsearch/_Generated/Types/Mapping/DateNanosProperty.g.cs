@@ -64,6 +64,8 @@ public sealed partial class DateNanosProperty : IProperty
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
+	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
+	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "date_nanos";
@@ -91,6 +93,7 @@ public sealed partial class DateNanosPropertyDescriptor<TDocument> : Serializabl
 	private int? PrecisionStepValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private bool? StoreValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public DateNanosPropertyDescriptor<TDocument> Boost(double? boost)
 	{
@@ -209,6 +212,12 @@ public sealed partial class DateNanosPropertyDescriptor<TDocument> : Serializabl
 		return Self;
 	}
 
+	public DateNanosPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -296,6 +305,12 @@ public sealed partial class DateNanosPropertyDescriptor<TDocument> : Serializabl
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("date_nanos");
 		writer.WriteEndObject();
@@ -316,7 +331,8 @@ public sealed partial class DateNanosPropertyDescriptor<TDocument> : Serializabl
 		NullValue = NullValueValue,
 		PrecisionStep = PrecisionStepValue,
 		Properties = PropertiesValue,
-		Store = StoreValue
+		Store = StoreValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }
 
@@ -342,6 +358,7 @@ public sealed partial class DateNanosPropertyDescriptor : SerializableDescriptor
 	private int? PrecisionStepValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private bool? StoreValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public DateNanosPropertyDescriptor Boost(double? boost)
 	{
@@ -460,6 +477,12 @@ public sealed partial class DateNanosPropertyDescriptor : SerializableDescriptor
 		return Self;
 	}
 
+	public DateNanosPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -547,6 +570,12 @@ public sealed partial class DateNanosPropertyDescriptor : SerializableDescriptor
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("date_nanos");
 		writer.WriteEndObject();
@@ -567,6 +596,7 @@ public sealed partial class DateNanosPropertyDescriptor : SerializableDescriptor
 		NullValue = NullValueValue,
 		PrecisionStep = PrecisionStepValue,
 		Properties = PropertiesValue,
-		Store = StoreValue
+		Store = StoreValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }

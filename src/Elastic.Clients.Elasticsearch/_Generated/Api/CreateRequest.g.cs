@@ -34,46 +34,55 @@ public sealed partial class CreateRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// ID of the pipeline to use to preprocess incoming documents.
-	/// If the index has a default ingest pipeline specified, then setting the value to <c>_none</c> disables the default ingest pipeline for this request.
-	/// If a final pipeline is configured it will always run, regardless of the value of this parameter.
+	/// The ID of the pipeline to use to preprocess incoming documents.
+	/// If the index has a default ingest pipeline specified, setting the value to <c>_none</c> turns off the default ingest pipeline for this request.
+	/// If a final pipeline is configured, it will always run regardless of the value of this parameter.
 	/// </para>
 	/// </summary>
 	public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, Elasticsearch refreshes the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> do nothing with refreshes.
-	/// Valid values: <c>true</c>, <c>false</c>, <c>wait_for</c>.
+	/// If <c>true</c>, Elasticsearch refreshes the affected shards to make this operation visible to search.
+	/// If <c>wait_for</c>, it waits for a refresh to make this operation visible to search.
+	/// If <c>false</c>, it does nothing with refreshes.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
 	/// <summary>
 	/// <para>
-	/// Custom value used to route operations to a specific shard.
+	/// A custom value that is used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
 	/// <para>
-	/// Period the request waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.
+	/// The period the request waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.
+	/// Elasticsearch waits for at least the specified timeout period before failing.
+	/// The actual wait time could be longer, particularly when multiple waits occur.
+	/// </para>
+	/// <para>
+	/// This parameter is useful for situations where the primary shard assigned to perform the operation might not be available when the operation runs.
+	/// Some reasons for this might be that the primary shard is currently recovering from a gateway or undergoing relocation.
+	/// By default, the operation will wait on the primary shard to become available for at least 1 minute before failing and responding with an error.
+	/// The actual wait time could be longer, particularly when multiple waits occur.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
 	/// <para>
-	/// Explicit version number for concurrency control.
-	/// The specified version must match the current version of the document for the request to succeed.
+	/// The explicit version number for concurrency control.
+	/// It must be a non-negative long number.
 	/// </para>
 	/// </summary>
 	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 
 	/// <summary>
 	/// <para>
-	/// Specific version type: <c>external</c>, <c>external_gte</c>.
+	/// The version type.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
@@ -81,7 +90,8 @@ public sealed partial class CreateRequestParameters : RequestParameters
 	/// <summary>
 	/// <para>
 	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// You can set it to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// The default value of <c>1</c> means it waits for each primary shard to be active.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
@@ -89,9 +99,108 @@ public sealed partial class CreateRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Index a document.
-/// Adds a JSON document to the specified data stream or index and makes it searchable.
-/// If the target is an index and the document already exists, the request updates the document and increments its version.
+/// Create a new document in the index.
+/// </para>
+/// <para>
+/// You can index a new JSON document with the <c>/&lt;target>/_doc/</c> or <c>/&lt;target>/_create/&lt;_id></c> APIs
+/// Using <c>_create</c> guarantees that the document is indexed only if it does not already exist.
+/// It returns a 409 response when a document with a same ID already exists in the index.
+/// To update an existing document, you must use the <c>/&lt;target>/_doc/</c> API.
+/// </para>
+/// <para>
+/// If the Elasticsearch security features are enabled, you must have the following index privileges for the target data stream, index, or index alias:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// To add a document using the <c>PUT /&lt;target>/_create/&lt;_id></c> or <c>POST /&lt;target>/_create/&lt;_id></c> request formats, you must have the <c>create_doc</c>, <c>create</c>, <c>index</c>, or <c>write</c> index privilege.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// To automatically create a data stream or index with this API request, you must have the <c>auto_configure</c>, <c>create_index</c>, or <c>manage</c> index privilege.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// Automatic data stream creation requires a matching index template with data stream enabled.
+/// </para>
+/// <para>
+/// <strong>Automatically create data streams and indices</strong>
+/// </para>
+/// <para>
+/// If the request's target doesn't exist and matches an index template with a <c>data_stream</c> definition, the index operation automatically creates the data stream.
+/// </para>
+/// <para>
+/// If the target doesn't exist and doesn't match a data stream template, the operation automatically creates the index and applies any matching index templates.
+/// </para>
+/// <para>
+/// NOTE: Elasticsearch includes several built-in index templates. To avoid naming collisions with these templates, refer to index pattern documentation.
+/// </para>
+/// <para>
+/// If no mapping exists, the index operation creates a dynamic mapping.
+/// By default, new fields and objects are automatically added to the mapping if needed.
+/// </para>
+/// <para>
+/// Automatic index creation is controlled by the <c>action.auto_create_index</c> setting.
+/// If it is <c>true</c>, any index can be created automatically.
+/// You can modify this setting to explicitly allow or block automatic creation of indices that match specified patterns or set it to <c>false</c> to turn off automatic index creation entirely.
+/// Specify a comma-separated list of patterns you want to allow or prefix each pattern with <c>+</c> or <c>-</c> to indicate whether it should be allowed or blocked.
+/// When a list is specified, the default behaviour is to disallow.
+/// </para>
+/// <para>
+/// NOTE: The <c>action.auto_create_index</c> setting affects the automatic creation of indices only.
+/// It does not affect the creation of data streams.
+/// </para>
+/// <para>
+/// <strong>Routing</strong>
+/// </para>
+/// <para>
+/// By default, shard placement — or routing — is controlled by using a hash of the document's ID value.
+/// For more explicit control, the value fed into the hash function used by the router can be directly specified on a per-operation basis using the <c>routing</c> parameter.
+/// </para>
+/// <para>
+/// When setting up explicit mapping, you can also use the <c>_routing</c> field to direct the index operation to extract the routing value from the document itself.
+/// This does come at the (very minimal) cost of an additional document parsing pass.
+/// If the <c>_routing</c> mapping is defined and set to be required, the index operation will fail if no routing value is provided or extracted.
+/// </para>
+/// <para>
+/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
+/// </para>
+/// <para>
+/// ** Distributed**
+/// </para>
+/// <para>
+/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
+/// After the primary shard completes the operation, if needed, the update is distributed to applicable replicas.
+/// </para>
+/// <para>
+/// <strong>Active shards</strong>
+/// </para>
+/// <para>
+/// To improve the resiliency of writes to the system, indexing operations can be configured to wait for a certain number of active shard copies before proceeding with the operation.
+/// If the requisite number of active shard copies are not available, then the write operation must wait and retry, until either the requisite shard copies have started or a timeout occurs.
+/// By default, write operations only wait for the primary shards to be active before proceeding (that is to say <c>wait_for_active_shards</c> is <c>1</c>).
+/// This default can be overridden in the index settings dynamically by setting <c>index.write.wait_for_active_shards</c>.
+/// To alter this behavior per operation, use the <c>wait_for_active_shards request</c> parameter.
+/// </para>
+/// <para>
+/// Valid values are all or any positive integer up to the total number of configured copies per shard in the index (which is <c>number_of_replicas</c>+1).
+/// Specifying a negative value or a number greater than the number of shard copies will throw an error.
+/// </para>
+/// <para>
+/// For example, suppose you have a cluster of three nodes, A, B, and C and you create an index index with the number of replicas set to 3 (resulting in 4 shard copies, one more copy than there are nodes).
+/// If you attempt an indexing operation, by default the operation will only ensure the primary copy of each shard is available before proceeding.
+/// This means that even if B and C went down and A hosted the primary shard copies, the indexing operation would still proceed with only one copy of the data.
+/// If <c>wait_for_active_shards</c> is set on the request to <c>3</c> (and all three nodes are up), the indexing operation will require 3 active shard copies before proceeding.
+/// This requirement should be met because there are 3 active nodes in the cluster, each one holding a copy of the shard.
+/// However, if you set <c>wait_for_active_shards</c> to <c>all</c> (or to <c>4</c>, which is the same in this situation), the indexing operation will not proceed as you do not have all 4 copies of each shard active in the index.
+/// The operation will timeout unless a new node is brought up in the cluster to host the fourth copy of the shard.
+/// </para>
+/// <para>
+/// It is important to note that this setting greatly reduces the chances of the write operation not writing to the requisite number of shard copies, but it does not completely eliminate the possibility, because this check occurs before the write operation starts.
+/// After the write operation is underway, it is still possible for replication to fail on any number of shard copies but still succeed on the primary.
+/// The <c>_shards</c> section of the API response reveals the number of shard copies on which replication succeeded and failed.
 /// </para>
 /// </summary>
 public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateRequestParameters>, ISelfSerializable
@@ -110,9 +219,9 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 
 	/// <summary>
 	/// <para>
-	/// ID of the pipeline to use to preprocess incoming documents.
-	/// If the index has a default ingest pipeline specified, then setting the value to <c>_none</c> disables the default ingest pipeline for this request.
-	/// If a final pipeline is configured it will always run, regardless of the value of this parameter.
+	/// The ID of the pipeline to use to preprocess incoming documents.
+	/// If the index has a default ingest pipeline specified, setting the value to <c>_none</c> turns off the default ingest pipeline for this request.
+	/// If a final pipeline is configured, it will always run regardless of the value of this parameter.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -120,8 +229,9 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, Elasticsearch refreshes the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> do nothing with refreshes.
-	/// Valid values: <c>true</c>, <c>false</c>, <c>wait_for</c>.
+	/// If <c>true</c>, Elasticsearch refreshes the affected shards to make this operation visible to search.
+	/// If <c>wait_for</c>, it waits for a refresh to make this operation visible to search.
+	/// If <c>false</c>, it does nothing with refreshes.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -129,7 +239,7 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 
 	/// <summary>
 	/// <para>
-	/// Custom value used to route operations to a specific shard.
+	/// A custom value that is used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -137,7 +247,15 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 
 	/// <summary>
 	/// <para>
-	/// Period the request waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.
+	/// The period the request waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.
+	/// Elasticsearch waits for at least the specified timeout period before failing.
+	/// The actual wait time could be longer, particularly when multiple waits occur.
+	/// </para>
+	/// <para>
+	/// This parameter is useful for situations where the primary shard assigned to perform the operation might not be available when the operation runs.
+	/// Some reasons for this might be that the primary shard is currently recovering from a gateway or undergoing relocation.
+	/// By default, the operation will wait on the primary shard to become available for at least 1 minute before failing and responding with an error.
+	/// The actual wait time could be longer, particularly when multiple waits occur.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -145,8 +263,8 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 
 	/// <summary>
 	/// <para>
-	/// Explicit version number for concurrency control.
-	/// The specified version must match the current version of the document for the request to succeed.
+	/// The explicit version number for concurrency control.
+	/// It must be a non-negative long number.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -154,7 +272,7 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 
 	/// <summary>
 	/// <para>
-	/// Specific version type: <c>external</c>, <c>external_gte</c>.
+	/// The version type.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -163,7 +281,8 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 	/// <summary>
 	/// <para>
 	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// You can set it to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// The default value of <c>1</c> means it waits for each primary shard to be active.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -179,9 +298,108 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 
 /// <summary>
 /// <para>
-/// Index a document.
-/// Adds a JSON document to the specified data stream or index and makes it searchable.
-/// If the target is an index and the document already exists, the request updates the document and increments its version.
+/// Create a new document in the index.
+/// </para>
+/// <para>
+/// You can index a new JSON document with the <c>/&lt;target>/_doc/</c> or <c>/&lt;target>/_create/&lt;_id></c> APIs
+/// Using <c>_create</c> guarantees that the document is indexed only if it does not already exist.
+/// It returns a 409 response when a document with a same ID already exists in the index.
+/// To update an existing document, you must use the <c>/&lt;target>/_doc/</c> API.
+/// </para>
+/// <para>
+/// If the Elasticsearch security features are enabled, you must have the following index privileges for the target data stream, index, or index alias:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// To add a document using the <c>PUT /&lt;target>/_create/&lt;_id></c> or <c>POST /&lt;target>/_create/&lt;_id></c> request formats, you must have the <c>create_doc</c>, <c>create</c>, <c>index</c>, or <c>write</c> index privilege.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// To automatically create a data stream or index with this API request, you must have the <c>auto_configure</c>, <c>create_index</c>, or <c>manage</c> index privilege.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// Automatic data stream creation requires a matching index template with data stream enabled.
+/// </para>
+/// <para>
+/// <strong>Automatically create data streams and indices</strong>
+/// </para>
+/// <para>
+/// If the request's target doesn't exist and matches an index template with a <c>data_stream</c> definition, the index operation automatically creates the data stream.
+/// </para>
+/// <para>
+/// If the target doesn't exist and doesn't match a data stream template, the operation automatically creates the index and applies any matching index templates.
+/// </para>
+/// <para>
+/// NOTE: Elasticsearch includes several built-in index templates. To avoid naming collisions with these templates, refer to index pattern documentation.
+/// </para>
+/// <para>
+/// If no mapping exists, the index operation creates a dynamic mapping.
+/// By default, new fields and objects are automatically added to the mapping if needed.
+/// </para>
+/// <para>
+/// Automatic index creation is controlled by the <c>action.auto_create_index</c> setting.
+/// If it is <c>true</c>, any index can be created automatically.
+/// You can modify this setting to explicitly allow or block automatic creation of indices that match specified patterns or set it to <c>false</c> to turn off automatic index creation entirely.
+/// Specify a comma-separated list of patterns you want to allow or prefix each pattern with <c>+</c> or <c>-</c> to indicate whether it should be allowed or blocked.
+/// When a list is specified, the default behaviour is to disallow.
+/// </para>
+/// <para>
+/// NOTE: The <c>action.auto_create_index</c> setting affects the automatic creation of indices only.
+/// It does not affect the creation of data streams.
+/// </para>
+/// <para>
+/// <strong>Routing</strong>
+/// </para>
+/// <para>
+/// By default, shard placement — or routing — is controlled by using a hash of the document's ID value.
+/// For more explicit control, the value fed into the hash function used by the router can be directly specified on a per-operation basis using the <c>routing</c> parameter.
+/// </para>
+/// <para>
+/// When setting up explicit mapping, you can also use the <c>_routing</c> field to direct the index operation to extract the routing value from the document itself.
+/// This does come at the (very minimal) cost of an additional document parsing pass.
+/// If the <c>_routing</c> mapping is defined and set to be required, the index operation will fail if no routing value is provided or extracted.
+/// </para>
+/// <para>
+/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
+/// </para>
+/// <para>
+/// ** Distributed**
+/// </para>
+/// <para>
+/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
+/// After the primary shard completes the operation, if needed, the update is distributed to applicable replicas.
+/// </para>
+/// <para>
+/// <strong>Active shards</strong>
+/// </para>
+/// <para>
+/// To improve the resiliency of writes to the system, indexing operations can be configured to wait for a certain number of active shard copies before proceeding with the operation.
+/// If the requisite number of active shard copies are not available, then the write operation must wait and retry, until either the requisite shard copies have started or a timeout occurs.
+/// By default, write operations only wait for the primary shards to be active before proceeding (that is to say <c>wait_for_active_shards</c> is <c>1</c>).
+/// This default can be overridden in the index settings dynamically by setting <c>index.write.wait_for_active_shards</c>.
+/// To alter this behavior per operation, use the <c>wait_for_active_shards request</c> parameter.
+/// </para>
+/// <para>
+/// Valid values are all or any positive integer up to the total number of configured copies per shard in the index (which is <c>number_of_replicas</c>+1).
+/// Specifying a negative value or a number greater than the number of shard copies will throw an error.
+/// </para>
+/// <para>
+/// For example, suppose you have a cluster of three nodes, A, B, and C and you create an index index with the number of replicas set to 3 (resulting in 4 shard copies, one more copy than there are nodes).
+/// If you attempt an indexing operation, by default the operation will only ensure the primary copy of each shard is available before proceeding.
+/// This means that even if B and C went down and A hosted the primary shard copies, the indexing operation would still proceed with only one copy of the data.
+/// If <c>wait_for_active_shards</c> is set on the request to <c>3</c> (and all three nodes are up), the indexing operation will require 3 active shard copies before proceeding.
+/// This requirement should be met because there are 3 active nodes in the cluster, each one holding a copy of the shard.
+/// However, if you set <c>wait_for_active_shards</c> to <c>all</c> (or to <c>4</c>, which is the same in this situation), the indexing operation will not proceed as you do not have all 4 copies of each shard active in the index.
+/// The operation will timeout unless a new node is brought up in the cluster to host the fourth copy of the shard.
+/// </para>
+/// <para>
+/// It is important to note that this setting greatly reduces the chances of the write operation not writing to the requisite number of shard copies, but it does not completely eliminate the possibility, because this check occurs before the write operation starts.
+/// After the write operation is underway, it is still possible for replication to fail on any number of shard copies but still succeed on the primary.
+/// The <c>_shards</c> section of the API response reveals the number of shard copies on which replication succeeded and failed.
 /// </para>
 /// </summary>
 public sealed partial class CreateRequestDescriptor<TDocument> : RequestDescriptor<CreateRequestDescriptor<TDocument>, CreateRequestParameters>

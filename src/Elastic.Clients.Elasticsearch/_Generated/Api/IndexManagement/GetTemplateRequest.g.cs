@@ -58,7 +58,10 @@ public sealed partial class GetTemplateRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Get index templates.
-/// Retrieves information about one or more index templates.
+/// Get information about one or more index templates.
+/// </para>
+/// <para>
+/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 /// </para>
 /// </summary>
 public sealed partial class GetTemplateRequest : PlainRequest<GetTemplateRequestParameters>
@@ -108,7 +111,10 @@ public sealed partial class GetTemplateRequest : PlainRequest<GetTemplateRequest
 /// <summary>
 /// <para>
 /// Get index templates.
-/// Retrieves information about one or more index templates.
+/// Get information about one or more index templates.
+/// </para>
+/// <para>
+/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 /// </para>
 /// </summary>
 public sealed partial class GetTemplateRequestDescriptor : RequestDescriptor<GetTemplateRequestDescriptor, GetTemplateRequestParameters>

@@ -28,10 +28,27 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public sealed partial class SamlPrepareAuthenticationResponse : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>
+	/// A unique identifier for the SAML Request to be stored by the caller of the API.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("id")]
 	public string Id { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The name of the Elasticsearch realm that was used to construct the authentication request.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("realm")]
 	public string Realm { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The URL to redirect the user to.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("redirect")]
 	public string Redirect { get; init; }
 }

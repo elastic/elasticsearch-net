@@ -28,25 +28,80 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed partial class GetResponse<TDocument> : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>
+	/// If the <c>stored_fields</c> parameter is set to <c>true</c> and <c>found</c> is <c>true</c>, it contains the document fields stored in the index.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.FieldValues? Fields { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether the document exists.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("found")]
 	public bool Found { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier for the document.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_id")]
 	public string Id { get; init; }
 	[JsonInclude, JsonPropertyName("_ignored")]
 	public IReadOnlyCollection<string>? Ignored { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The name of the index the document belongs to.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_index")]
 	public string Index { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The primary term assigned to the document for the indexing operation.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_primary_term")]
 	public long? PrimaryTerm { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The explicit routing, if set.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_routing")]
 	public string? Routing { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The sequence number assigned to the document for the indexing operation.
+	/// Sequence numbers are used to ensure an older version of a document doesn't overwrite a newer version.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_seq_no")]
 	public long? SeqNo { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>found</c> is <c>true</c>, it contains the document data formatted in JSON.
+	/// If the <c>_source</c> parameter is set to <c>false</c> or the <c>stored_fields</c> parameter is set to <c>true</c>, it is excluded.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_source")]
 	[SourceConverter]
 	public TDocument? Source { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The document version, which is ncremented each time the document is updated.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_version")]
 	public long? Version { get; init; }
 }

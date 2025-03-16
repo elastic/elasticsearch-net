@@ -46,7 +46,7 @@ public sealed partial class GetSearchApplicationResponse : ElasticsearchResponse
 
 	/// <summary>
 	/// <para>
-	/// Search Application name
+	/// Search Application name.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("name")]

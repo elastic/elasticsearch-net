@@ -34,7 +34,9 @@ public sealed partial class TestGrokPatternRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// The mode of compatibility with ECS compliant Grok patterns (disabled or v1, default: disabled).
+	/// The mode of compatibility with ECS compliant Grok patterns.
+	/// Use this parameter to specify whether to use ECS Grok patterns instead of legacy ones when the structure finder creates a Grok pattern.
+	/// Valid values are <c>disabled</c> and <c>v1</c>.
 	/// </para>
 	/// </summary>
 	public string? EcsCompatibility { get => Q<string?>("ecs_compatibility"); set => Q("ecs_compatibility", value); }
@@ -59,7 +61,9 @@ public sealed partial class TestGrokPatternRequest : PlainRequest<TestGrokPatter
 
 	/// <summary>
 	/// <para>
-	/// The mode of compatibility with ECS compliant Grok patterns (disabled or v1, default: disabled).
+	/// The mode of compatibility with ECS compliant Grok patterns.
+	/// Use this parameter to specify whether to use ECS Grok patterns instead of legacy ones when the structure finder creates a Grok pattern.
+	/// Valid values are <c>disabled</c> and <c>v1</c>.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -67,7 +71,7 @@ public sealed partial class TestGrokPatternRequest : PlainRequest<TestGrokPatter
 
 	/// <summary>
 	/// <para>
-	/// Grok pattern to run on the text.
+	/// The Grok pattern to run on the text.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("grok_pattern")]
@@ -75,7 +79,7 @@ public sealed partial class TestGrokPatternRequest : PlainRequest<TestGrokPatter
 
 	/// <summary>
 	/// <para>
-	/// Lines of text to run the Grok pattern on.
+	/// The lines of text to run the Grok pattern on.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("text")]
@@ -112,7 +116,7 @@ public sealed partial class TestGrokPatternRequestDescriptor : RequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Grok pattern to run on the text.
+	/// The Grok pattern to run on the text.
 	/// </para>
 	/// </summary>
 	public TestGrokPatternRequestDescriptor GrokPattern(string grokPattern)
@@ -123,7 +127,7 @@ public sealed partial class TestGrokPatternRequestDescriptor : RequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Lines of text to run the Grok pattern on.
+	/// The lines of text to run the Grok pattern on.
 	/// </para>
 	/// </summary>
 	public TestGrokPatternRequestDescriptor Text(ICollection<string> text)

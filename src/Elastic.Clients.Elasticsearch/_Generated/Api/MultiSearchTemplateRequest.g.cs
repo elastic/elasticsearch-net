@@ -43,7 +43,7 @@ public sealed partial class MultiSearchTemplateRequestParameters : RequestParame
 
 	/// <summary>
 	/// <para>
-	/// Maximum number of concurrent searches the API can run.
+	/// The maximum number of concurrent searches the API can run.
 	/// </para>
 	/// </summary>
 	public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
@@ -59,7 +59,6 @@ public sealed partial class MultiSearchTemplateRequestParameters : RequestParame
 	/// <summary>
 	/// <para>
 	/// The type of the search operation.
-	/// Available options: <c>query_then_fetch</c>, <c>dfs_query_then_fetch</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
@@ -76,6 +75,20 @@ public sealed partial class MultiSearchTemplateRequestParameters : RequestParame
 /// <para>
 /// Run multiple templated searches.
 /// </para>
+/// <para>
+/// Run multiple templated searches with a single request.
+/// If you are providing a text file or text input to <c>curl</c>, use the <c>--data-binary</c> flag instead of <c>-d</c> to preserve newlines.
+/// For example:
+/// </para>
+/// <code>
+/// $ cat requests
+/// { "index": "my-index" }
+/// { "id": "my-search-template", "params": { "query_string": "hello world", "from": 0, "size": 10 }}
+/// { "index": "my-other-index" }
+/// { "id": "my-other-search-template", "params": { "query_type": "match_all" }}
+/// 
+/// $ curl -H "Content-Type: application/x-ndjson" -XGET localhost:9200/_msearch/template --data-binary "@requests"; echo
+/// </code>
 /// </summary>
 public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearchTemplateRequestParameters>, IStreamSerializable
 {
@@ -105,7 +118,7 @@ public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearc
 
 	/// <summary>
 	/// <para>
-	/// Maximum number of concurrent searches the API can run.
+	/// The maximum number of concurrent searches the API can run.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -123,7 +136,6 @@ public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearc
 	/// <summary>
 	/// <para>
 	/// The type of the search operation.
-	/// Available options: <c>query_then_fetch</c>, <c>dfs_query_then_fetch</c>.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -165,6 +177,20 @@ public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearc
 /// <para>
 /// Run multiple templated searches.
 /// </para>
+/// <para>
+/// Run multiple templated searches with a single request.
+/// If you are providing a text file or text input to <c>curl</c>, use the <c>--data-binary</c> flag instead of <c>-d</c> to preserve newlines.
+/// For example:
+/// </para>
+/// <code>
+/// $ cat requests
+/// { "index": "my-index" }
+/// { "id": "my-search-template", "params": { "query_string": "hello world", "from": 0, "size": 10 }}
+/// { "index": "my-other-index" }
+/// { "id": "my-other-search-template", "params": { "query_type": "match_all" }}
+/// 
+/// $ curl -H "Content-Type: application/x-ndjson" -XGET localhost:9200/_msearch/template --data-binary "@requests"; echo
+/// </code>
 /// </summary>
 public sealed partial class MultiSearchTemplateRequestDescriptor<TDocument> : RequestDescriptor<MultiSearchTemplateRequestDescriptor<TDocument>, MultiSearchTemplateRequestParameters>, IStreamSerializable
 {
@@ -237,6 +263,20 @@ public sealed partial class MultiSearchTemplateRequestDescriptor<TDocument> : Re
 /// <para>
 /// Run multiple templated searches.
 /// </para>
+/// <para>
+/// Run multiple templated searches with a single request.
+/// If you are providing a text file or text input to <c>curl</c>, use the <c>--data-binary</c> flag instead of <c>-d</c> to preserve newlines.
+/// For example:
+/// </para>
+/// <code>
+/// $ cat requests
+/// { "index": "my-index" }
+/// { "id": "my-search-template", "params": { "query_string": "hello world", "from": 0, "size": 10 }}
+/// { "index": "my-other-index" }
+/// { "id": "my-other-search-template", "params": { "query_type": "match_all" }}
+/// 
+/// $ curl -H "Content-Type: application/x-ndjson" -XGET localhost:9200/_msearch/template --data-binary "@requests"; echo
+/// </code>
 /// </summary>
 public sealed partial class MultiSearchTemplateRequestDescriptor : RequestDescriptor<MultiSearchTemplateRequestDescriptor, MultiSearchTemplateRequestParameters>, IStreamSerializable
 {

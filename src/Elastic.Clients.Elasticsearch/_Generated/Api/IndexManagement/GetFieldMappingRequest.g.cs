@@ -78,6 +78,9 @@ public sealed partial class GetFieldMappingRequestParameters : RequestParameters
 /// Retrieves mapping definitions for one or more fields.
 /// For data streams, the API retrieves field mappings for the stream’s backing indices.
 /// </para>
+/// <para>
+/// This API is useful if you don't need a complete mapping or if an index mapping contains a large number of fields.
+/// </para>
 /// </summary>
 public sealed partial class GetFieldMappingRequest : PlainRequest<GetFieldMappingRequestParameters>
 {
@@ -148,6 +151,9 @@ public sealed partial class GetFieldMappingRequest : PlainRequest<GetFieldMappin
 /// Retrieves mapping definitions for one or more fields.
 /// For data streams, the API retrieves field mappings for the stream’s backing indices.
 /// </para>
+/// <para>
+/// This API is useful if you don't need a complete mapping or if an index mapping contains a large number of fields.
+/// </para>
 /// </summary>
 public sealed partial class GetFieldMappingRequestDescriptor<TDocument> : RequestDescriptor<GetFieldMappingRequestDescriptor<TDocument>, GetFieldMappingRequestParameters>
 {
@@ -197,6 +203,9 @@ public sealed partial class GetFieldMappingRequestDescriptor<TDocument> : Reques
 /// Get mapping definitions.
 /// Retrieves mapping definitions for one or more fields.
 /// For data streams, the API retrieves field mappings for the stream’s backing indices.
+/// </para>
+/// <para>
+/// This API is useful if you don't need a complete mapping or if an index mapping contains a large number of fields.
 /// </para>
 /// </summary>
 public sealed partial class GetFieldMappingRequestDescriptor : RequestDescriptor<GetFieldMappingRequestDescriptor, GetFieldMappingRequestParameters>

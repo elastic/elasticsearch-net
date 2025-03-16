@@ -49,6 +49,8 @@ public sealed partial class JoinProperty : IProperty
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 	[JsonInclude, JsonPropertyName("relations")]
 	public IDictionary<string, Union<string, ICollection<string>>>? Relations { get; set; }
+	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
+	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "join";
@@ -69,6 +71,7 @@ public sealed partial class JoinPropertyDescriptor<TDocument> : SerializableDesc
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private IDictionary<string, Union<string, ICollection<string>>>? RelationsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public JoinPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 	{
@@ -145,6 +148,12 @@ public sealed partial class JoinPropertyDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
+	public JoinPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -190,6 +199,12 @@ public sealed partial class JoinPropertyDescriptor<TDocument> : SerializableDesc
 			JsonSerializer.Serialize(writer, RelationsValue, options);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("join");
 		writer.WriteEndObject();
@@ -203,7 +218,8 @@ public sealed partial class JoinPropertyDescriptor<TDocument> : SerializableDesc
 		IgnoreAbove = IgnoreAboveValue,
 		Meta = MetaValue,
 		Properties = PropertiesValue,
-		Relations = RelationsValue
+		Relations = RelationsValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }
 
@@ -222,6 +238,7 @@ public sealed partial class JoinPropertyDescriptor : SerializableDescriptor<Join
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private IDictionary<string, Union<string, ICollection<string>>>? RelationsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public JoinPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 	{
@@ -298,6 +315,12 @@ public sealed partial class JoinPropertyDescriptor : SerializableDescriptor<Join
 		return Self;
 	}
 
+	public JoinPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -343,6 +366,12 @@ public sealed partial class JoinPropertyDescriptor : SerializableDescriptor<Join
 			JsonSerializer.Serialize(writer, RelationsValue, options);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("join");
 		writer.WriteEndObject();
@@ -356,6 +385,7 @@ public sealed partial class JoinPropertyDescriptor : SerializableDescriptor<Join
 		IgnoreAbove = IgnoreAboveValue,
 		Meta = MetaValue,
 		Properties = PropertiesValue,
-		Relations = RelationsValue
+		Relations = RelationsValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }

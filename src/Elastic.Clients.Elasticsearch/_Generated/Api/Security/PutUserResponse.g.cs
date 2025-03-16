@@ -28,6 +28,12 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public sealed partial class PutUserResponse : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>
+	/// A successful call returns a JSON structure that shows whether the user has been created or updated.
+	/// When an existing user is updated, <c>created</c> is set to <c>false</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("created")]
 	public bool Created { get; init; }
 }

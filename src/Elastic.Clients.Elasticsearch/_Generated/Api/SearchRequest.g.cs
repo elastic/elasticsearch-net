@@ -43,23 +43,27 @@ public sealed partial class SearchRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
-	/// If true, returns partial results if there are shard request timeouts or shard failures. If false, returns an error with no partial results.
+	/// If <c>true</c> and there are shard request timeouts or shard failures, the request returns partial results.
+	/// If <c>false</c>, it returns an error with no partial results.
+	/// </para>
+	/// <para>
+	/// To override the default behavior, you can set the <c>search.default_allow_partial_results</c> cluster setting to <c>false</c>.
 	/// </para>
 	/// </summary>
 	public bool? AllowPartialSearchResults { get => Q<bool?>("allow_partial_search_results"); set => Q("allow_partial_search_results", value); }
 
 	/// <summary>
 	/// <para>
-	/// Analyzer to use for the query string.
-	/// This parameter can only be used when the q query string parameter is specified.
+	/// The analyzer to use for the query string.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
 
 	/// <summary>
 	/// <para>
-	/// If true, wildcard and prefix queries are analyzed.
-	/// This parameter can only be used when the q query string parameter is specified.
+	/// If <c>true</c>, wildcard and prefix queries are analyzed.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
@@ -67,39 +71,39 @@ public sealed partial class SearchRequestParameters : RequestParameters
 	/// <summary>
 	/// <para>
 	/// The number of shard results that should be reduced at once on the coordinating node.
-	/// This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large.
+	/// If the potential number of shards in the request can be large, this value should be used as a protection mechanism to reduce the memory overhead per search request.
 	/// </para>
 	/// </summary>
 	public long? BatchedReduceSize { get => Q<long?>("batched_reduce_size"); set => Q("batched_reduce_size", value); }
 
 	/// <summary>
 	/// <para>
-	/// If true, network round-trips between the coordinating node and the remote clusters are minimized when executing cross-cluster search (CCS) requests.
+	/// If <c>true</c>, network round-trips between the coordinating node and the remote clusters are minimized when running cross-cluster search (CCS) requests.
 	/// </para>
 	/// </summary>
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 
 	/// <summary>
 	/// <para>
-	/// The default operator for query string query: AND or OR.
-	/// This parameter can only be used when the <c>q</c> query string parameter is specified.
+	/// The default operator for the query string query: <c>AND</c> or <c>OR</c>.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
 
 	/// <summary>
 	/// <para>
-	/// Field to use as default where no field prefix is given in the query string.
-	/// This parameter can only be used when the q query string parameter is specified.
+	/// The field to use as a default when no field prefix is given in the query string.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
 	/// <summary>
 	/// <para>
-	/// Type of index that wildcard patterns can match.
+	/// The type of index that wildcard patterns can match.
 	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// It supports comma-separated values such as <c>open,hidden</c>.
 	/// </para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
@@ -115,13 +119,6 @@ public sealed partial class SearchRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, concrete, expanded or aliased indices will be ignored when frozen.
-	/// </para>
-	/// </summary>
-	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
-
-	/// <summary>
-	/// <para>
 	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
 	/// </para>
 	/// </summary>
@@ -130,14 +127,14 @@ public sealed partial class SearchRequestParameters : RequestParameters
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
-	/// This parameter can only be used when the <c>q</c> query string parameter is specified.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
 	/// <summary>
 	/// <para>
-	/// Defines the number of concurrent shard requests per node this search executes concurrently.
+	/// The number of concurrent shard requests per node that the search runs concurrently.
 	/// This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests.
 	/// </para>
 	/// </summary>
@@ -145,34 +142,86 @@ public sealed partial class SearchRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
-	/// Nodes and shards used for the search.
+	/// The minimum version of the node that can handle the request.
+	/// Any handling node with a lower version will fail the request.
+	/// </para>
+	/// </summary>
+	public string? MinCompatibleShardNode { get => Q<string?>("min_compatible_shard_node"); set => Q("min_compatible_shard_node", value); }
+
+	/// <summary>
+	/// <para>
+	/// The nodes and shards used for the search.
 	/// By default, Elasticsearch selects from eligible nodes and shards using adaptive replica selection, accounting for allocation awareness. Valid values are:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
 	/// <c>_only_local</c> to run the search only on shards on the local node;
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
 	/// <c>_local</c> to, if possible, run the search on shards on the local node, or if not, select shards using the default method;
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
 	/// <c>_only_nodes:&lt;node-id>,&lt;node-id></c> to run the search on only the specified nodes IDs, where, if suitable shards exist on more than one selected node, use shards on those nodes using the default method, or if none of the specified nodes are available, select shards from any available node using the default method;
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
 	/// <c>_prefer_nodes:&lt;node-id>,&lt;node-id></c> to if possible, run the search on the specified nodes IDs, or if not, select shards using the default method;
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
 	/// <c>_shards:&lt;shard>,&lt;shard></c> to run the search only on the specified shards;
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
 	/// <c>&lt;custom-string></c> (any string that does not start with <c>_</c>) to route searches with the same <c>&lt;custom-string></c> to the same shards in the same order.
 	/// </para>
+	/// </item>
+	/// </list>
 	/// </summary>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
 	/// <para>
-	/// Defines a threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold.
+	/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold.
 	/// This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method (if date filters are mandatory to match but the shard bounds and the query are disjoint).
 	/// When unspecified, the pre-filter phase is executed if any of these conditions is met:
-	/// the request targets more than 128 shards;
-	/// the request targets one or more read-only index;
-	/// the primary sort of the query targets an indexed field.
 	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// The request targets more than 128 shards.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// The request targets one or more read-only index.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// The primary sort of the query targets an indexed field.
+	/// </para>
+	/// </item>
+	/// </list>
 	/// </summary>
 	public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
 
 	/// <summary>
 	/// <para>
-	/// Query in the Lucene query string syntax using query parameter search.
+	/// A query in the Lucene query string syntax.
 	/// Query parameter searches do not support the full Elasticsearch Query DSL but are handy for testing.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: This parameter overrides the query parameter in the request body.
+	/// If both parameters are specified, documents matching the query request body parameter are not returned.
 	/// </para>
 	/// </summary>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
@@ -180,7 +229,7 @@ public sealed partial class SearchRequestParameters : RequestParameters
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, the caching of search results is enabled for requests where <c>size</c> is <c>0</c>.
-	/// Defaults to index level settings.
+	/// It defaults to index level settings.
 	/// </para>
 	/// </summary>
 	public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
@@ -194,23 +243,23 @@ public sealed partial class SearchRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
-	/// Custom value used to route operations to a specific shard.
+	/// A custom value that is used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
 	/// <para>
-	/// Period to retain the search context for scrolling. See Scroll search results.
+	/// The period to retain the search context for scrolling.
 	/// By default, this value cannot exceed <c>1d</c> (24 hours).
-	/// You can change this limit using the <c>search.max_keep_alive</c> cluster-level setting.
+	/// You can change this limit by using the <c>search.max_keep_alive</c> cluster-level setting.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
 
 	/// <summary>
 	/// <para>
-	/// How distributed term frequencies are calculated for relevance scoring.
+	/// Indicates how distributed term frequencies are calculated for relevance scoring.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
@@ -236,23 +285,23 @@ public sealed partial class SearchRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
-	/// Specifies which field to use for suggestions.
+	/// The field to use for suggestions.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Field? SuggestField { get => Q<Elastic.Clients.Elasticsearch.Field?>("suggest_field"); set => Q("suggest_field", value); }
 
 	/// <summary>
 	/// <para>
-	/// Specifies the suggest mode.
-	/// This parameter can only be used when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
+	/// The suggest mode.
+	/// This parameter can be used only when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get => Q<Elastic.Clients.Elasticsearch.SuggestMode?>("suggest_mode"); set => Q("suggest_mode", value); }
 
 	/// <summary>
 	/// <para>
-	/// Number of suggestions to return.
-	/// This parameter can only be used when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
+	/// The number of suggestions to return.
+	/// This parameter can be used only when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
 	/// </para>
 	/// </summary>
 	public long? SuggestSize { get => Q<long?>("suggest_size"); set => Q("suggest_size", value); }
@@ -260,7 +309,7 @@ public sealed partial class SearchRequestParameters : RequestParameters
 	/// <summary>
 	/// <para>
 	/// The source text for which the suggestions should be returned.
-	/// This parameter can only be used when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
+	/// This parameter can be used only when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
 	/// </para>
 	/// </summary>
 	public string? SuggestText { get => Q<string?>("suggest_text"); set => Q("suggest_text", value); }
@@ -714,6 +763,26 @@ internal sealed partial class SearchRequestConverter : JsonConverter<SearchReque
 /// You can provide search queries using the <c>q</c> query string parameter or the request body.
 /// If both are specified, only the query parameter is used.
 /// </para>
+/// <para>
+/// If the Elasticsearch security features are enabled, you must have the read index privilege for the target data stream, index, or alias. For cross-cluster search, refer to the documentation about configuring CCS privileges.
+/// To search a point in time (PIT) for an alias, you must have the <c>read</c> index privilege for the alias's data streams or indices.
+/// </para>
+/// <para>
+/// <strong>Search slicing</strong>
+/// </para>
+/// <para>
+/// When paging through a large number of documents, it can be helpful to split the search into multiple slices to consume them independently with the <c>slice</c> and <c>pit</c> properties.
+/// By default the splitting is done first on the shards, then locally on each shard.
+/// The local splitting partitions the shard into contiguous ranges based on Lucene document IDs.
+/// </para>
+/// <para>
+/// For instance if the number of shards is equal to 2 and you request 4 slices, the slices 0 and 2 are assigned to the first shard and the slices 1 and 3 are assigned to the second shard.
+/// </para>
+/// <para>
+/// IMPORTANT: The same point-in-time ID should be used for all slices.
+/// If different PIT IDs are used, slices can overlap and miss documents.
+/// This situation can occur because the splitting criterion is based on Lucene document IDs, which are not stable across changes to the index.
+/// </para>
 /// </summary>
 [JsonConverter(typeof(SearchRequestConverter))]
 public partial class SearchRequest : PlainRequest<SearchRequestParameters>
@@ -746,7 +815,11 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// If true, returns partial results if there are shard request timeouts or shard failures. If false, returns an error with no partial results.
+	/// If <c>true</c> and there are shard request timeouts or shard failures, the request returns partial results.
+	/// If <c>false</c>, it returns an error with no partial results.
+	/// </para>
+	/// <para>
+	/// To override the default behavior, you can set the <c>search.default_allow_partial_results</c> cluster setting to <c>false</c>.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -754,8 +827,8 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Analyzer to use for the query string.
-	/// This parameter can only be used when the q query string parameter is specified.
+	/// The analyzer to use for the query string.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -763,8 +836,8 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// If true, wildcard and prefix queries are analyzed.
-	/// This parameter can only be used when the q query string parameter is specified.
+	/// If <c>true</c>, wildcard and prefix queries are analyzed.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -773,7 +846,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// <summary>
 	/// <para>
 	/// The number of shard results that should be reduced at once on the coordinating node.
-	/// This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large.
+	/// If the potential number of shards in the request can be large, this value should be used as a protection mechanism to reduce the memory overhead per search request.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -781,7 +854,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// If true, network round-trips between the coordinating node and the remote clusters are minimized when executing cross-cluster search (CCS) requests.
+	/// If <c>true</c>, network round-trips between the coordinating node and the remote clusters are minimized when running cross-cluster search (CCS) requests.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -789,8 +862,8 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// The default operator for query string query: AND or OR.
-	/// This parameter can only be used when the <c>q</c> query string parameter is specified.
+	/// The default operator for the query string query: <c>AND</c> or <c>OR</c>.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -798,8 +871,8 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Field to use as default where no field prefix is given in the query string.
-	/// This parameter can only be used when the q query string parameter is specified.
+	/// The field to use as a default when no field prefix is given in the query string.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -807,9 +880,9 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Type of index that wildcard patterns can match.
+	/// The type of index that wildcard patterns can match.
 	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// It supports comma-separated values such as <c>open,hidden</c>.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -827,14 +900,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, concrete, expanded or aliased indices will be ignored when frozen.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
-
-	/// <summary>
-	/// <para>
 	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
 	/// </para>
 	/// </summary>
@@ -844,7 +909,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
-	/// This parameter can only be used when the <c>q</c> query string parameter is specified.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -852,7 +917,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Defines the number of concurrent shard requests per node this search executes concurrently.
+	/// The number of concurrent shard requests per node that the search runs concurrently.
 	/// This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests.
 	/// </para>
 	/// </summary>
@@ -861,36 +926,89 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Nodes and shards used for the search.
+	/// The minimum version of the node that can handle the request.
+	/// Any handling node with a lower version will fail the request.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public string? MinCompatibleShardNode { get => Q<string?>("min_compatible_shard_node"); set => Q("min_compatible_shard_node", value); }
+
+	/// <summary>
+	/// <para>
+	/// The nodes and shards used for the search.
 	/// By default, Elasticsearch selects from eligible nodes and shards using adaptive replica selection, accounting for allocation awareness. Valid values are:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
 	/// <c>_only_local</c> to run the search only on shards on the local node;
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
 	/// <c>_local</c> to, if possible, run the search on shards on the local node, or if not, select shards using the default method;
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
 	/// <c>_only_nodes:&lt;node-id>,&lt;node-id></c> to run the search on only the specified nodes IDs, where, if suitable shards exist on more than one selected node, use shards on those nodes using the default method, or if none of the specified nodes are available, select shards from any available node using the default method;
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
 	/// <c>_prefer_nodes:&lt;node-id>,&lt;node-id></c> to if possible, run the search on the specified nodes IDs, or if not, select shards using the default method;
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
 	/// <c>_shards:&lt;shard>,&lt;shard></c> to run the search only on the specified shards;
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
 	/// <c>&lt;custom-string></c> (any string that does not start with <c>_</c>) to route searches with the same <c>&lt;custom-string></c> to the same shards in the same order.
 	/// </para>
+	/// </item>
+	/// </list>
 	/// </summary>
 	[JsonIgnore]
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
 	/// <para>
-	/// Defines a threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold.
+	/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold.
 	/// This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method (if date filters are mandatory to match but the shard bounds and the query are disjoint).
 	/// When unspecified, the pre-filter phase is executed if any of these conditions is met:
-	/// the request targets more than 128 shards;
-	/// the request targets one or more read-only index;
-	/// the primary sort of the query targets an indexed field.
 	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// The request targets more than 128 shards.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// The request targets one or more read-only index.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// The primary sort of the query targets an indexed field.
+	/// </para>
+	/// </item>
+	/// </list>
 	/// </summary>
 	[JsonIgnore]
 	public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
 
 	/// <summary>
 	/// <para>
-	/// Query in the Lucene query string syntax using query parameter search.
+	/// A query in the Lucene query string syntax.
 	/// Query parameter searches do not support the full Elasticsearch Query DSL but are handy for testing.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: This parameter overrides the query parameter in the request body.
+	/// If both parameters are specified, documents matching the query request body parameter are not returned.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -899,7 +1017,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, the caching of search results is enabled for requests where <c>size</c> is <c>0</c>.
-	/// Defaults to index level settings.
+	/// It defaults to index level settings.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -915,7 +1033,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Custom value used to route operations to a specific shard.
+	/// A custom value that is used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -923,9 +1041,9 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Period to retain the search context for scrolling. See Scroll search results.
+	/// The period to retain the search context for scrolling.
 	/// By default, this value cannot exceed <c>1d</c> (24 hours).
-	/// You can change this limit using the <c>search.max_keep_alive</c> cluster-level setting.
+	/// You can change this limit by using the <c>search.max_keep_alive</c> cluster-level setting.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -933,7 +1051,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// How distributed term frequencies are calculated for relevance scoring.
+	/// Indicates how distributed term frequencies are calculated for relevance scoring.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -962,7 +1080,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Specifies which field to use for suggestions.
+	/// The field to use for suggestions.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -970,8 +1088,8 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Specifies the suggest mode.
-	/// This parameter can only be used when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
+	/// The suggest mode.
+	/// This parameter can be used only when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -979,8 +1097,8 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Number of suggestions to return.
-	/// This parameter can only be used when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
+	/// The number of suggestions to return.
+	/// This parameter can be used only when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -989,7 +1107,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// <summary>
 	/// <para>
 	/// The source text for which the suggestions should be returned.
-	/// This parameter can only be used when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
+	/// This parameter can be used only when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -1021,7 +1139,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Array of wildcard (<c>*</c>) patterns.
+	/// An array of wildcard (<c>*</c>) field patterns.
 	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
 	/// </para>
 	/// </summary>
@@ -1030,7 +1148,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// If true, returns detailed information about score computation as part of a hit.
+	/// If <c>true</c>, the request returns detailed information about score computation as part of a hit.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("explain")]
@@ -1046,7 +1164,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Array of wildcard (<c>*</c>) patterns.
+	/// An array of wildcard (<c>*</c>) field patterns.
 	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
 	/// </para>
 	/// </summary>
@@ -1055,8 +1173,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Starting document offset.
-	/// Needs to be non-negative.
+	/// The starting document offset, which must be non-negative.
 	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
@@ -1074,7 +1191,10 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Boosts the _score of documents from specified indices.
+	/// Boost the <c>_score</c> of documents from specified indices.
+	/// The boost value is the factor by which scores are multiplied.
+	/// A boost value greater than <c>1.0</c> increases the score.
+	/// A boost value between <c>0</c> and <c>1.0</c> decreases the score.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("indices_boost")]
@@ -1082,7 +1202,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Defines the approximate kNN search to run.
+	/// The approximate kNN search to run.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("knn")]
@@ -1091,7 +1211,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Minimum <c>_score</c> for matching documents.
+	/// The minimum <c>_score</c> for matching documents.
 	/// Documents with a lower <c>_score</c> are not included in the search results.
 	/// </para>
 	/// </summary>
@@ -1100,7 +1220,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Limits the search to a point in time (PIT).
+	/// Limit the search to a point in time (PIT).
 	/// If you provide a PIT, you cannot specify an <c>&lt;index></c> in the request path.
 	/// </para>
 	/// </summary>
@@ -1128,7 +1248,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Defines the search definition using the Query DSL.
+	/// The search definition using the Query DSL.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
@@ -1136,7 +1256,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Defines the Reciprocal Rank Fusion (RRF) to use.
+	/// The Reciprocal Rank Fusion (RRF) to use.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("rank")]
@@ -1153,7 +1273,8 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// A retriever is a specification to describe top documents returned from a search. A retriever replaces other elements of the search API that also return top documents such as query and knn.
+	/// A retriever is a specification to describe top documents returned from a search.
+	/// A retriever replaces other elements of the search API that also return top documents such as <c>query</c> and <c>knn</c>.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("retriever")]
@@ -1161,7 +1282,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Defines one or more runtime fields in the search request.
+	/// One or more runtime fields in the search request.
 	/// These fields take precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
@@ -1186,7 +1307,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, returns sequence number and primary term of the last modification of each hit.
+	/// If <c>true</c>, the request returns sequence number and primary term of the last modification of each hit.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("seq_no_primary_term")]
@@ -1194,9 +1315,9 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// The number of hits to return.
+	/// The number of hits to return, which must not be negative.
 	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> parameter.
+	/// To page through more hits, use the <c>search_after</c> property.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
@@ -1204,7 +1325,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Can be used to split a scrolled search into multiple slices that can be consumed independently.
+	/// Split a scrolled search into multiple slices that can be consumed independently.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("slice")]
@@ -1221,8 +1342,10 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Indicates which source fields are returned for matching documents.
-	/// These fields are returned in the hits._source property of the search response.
+	/// The source fields that are returned for matching documents.
+	/// These fields are returned in the <c>hits._source</c> property of the search response.
+	/// If the <c>stored_fields</c> property is specified, the <c>_source</c> property defaults to <c>false</c>.
+	/// Otherwise, it defaults to <c>true</c>.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_source")]
@@ -1230,7 +1353,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Stats groups to associate with the search.
+	/// The stats groups to associate with the search.
 	/// Each group maintains a statistics aggregation for its associated searches.
 	/// You can retrieve these stats using the indices stats API.
 	/// </para>
@@ -1240,9 +1363,9 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// List of stored fields to return as part of a hit.
+	/// A comma-separated list of stored fields to return as part of a hit.
 	/// If no fields are specified, no stored fields are included in the response.
-	/// If this field is specified, the <c>_source</c> parameter defaults to <c>false</c>.
+	/// If this field is specified, the <c>_source</c> property defaults to <c>false</c>.
 	/// You can pass <c>_source: true</c> to return both source fields and stored fields in the search response.
 	/// </para>
 	/// </summary>
@@ -1260,13 +1383,17 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Maximum number of documents to collect for each shard.
+	/// The maximum number of documents to collect for each shard.
 	/// If a query reaches this limit, Elasticsearch terminates the query early.
 	/// Elasticsearch collects documents before sorting.
-	/// Use with caution.
-	/// Elasticsearch applies this parameter to each shard handling the request.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: Use with caution.
+	/// Elasticsearch applies this property to each shard handling the request.
 	/// When possible, let Elasticsearch perform early termination automatically.
-	/// Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.
+	/// Avoid specifying this property for requests that target data streams with backing indices across multiple data tiers.
+	/// </para>
+	/// <para>
 	/// If set to <c>0</c> (default), the query does not terminate early.
 	/// </para>
 	/// </summary>
@@ -1275,7 +1402,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Specifies the period of time to wait for a response from each shard.
+	/// The period of time to wait for a response from each shard.
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// Defaults to no timeout.
 	/// </para>
@@ -1285,7 +1412,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// If true, calculate and return document scores, even if the scores are not used for sorting.
+	/// If <c>true</c>, calculate and return document scores, even if the scores are not used for sorting.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("track_scores")]
@@ -1303,7 +1430,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// If true, returns document version as part of a hit.
+	/// If <c>true</c>, the request returns the document version as part of a hit.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("version")]
@@ -1318,6 +1445,26 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 /// Get search hits that match the query defined in the request.
 /// You can provide search queries using the <c>q</c> query string parameter or the request body.
 /// If both are specified, only the query parameter is used.
+/// </para>
+/// <para>
+/// If the Elasticsearch security features are enabled, you must have the read index privilege for the target data stream, index, or alias. For cross-cluster search, refer to the documentation about configuring CCS privileges.
+/// To search a point in time (PIT) for an alias, you must have the <c>read</c> index privilege for the alias's data streams or indices.
+/// </para>
+/// <para>
+/// <strong>Search slicing</strong>
+/// </para>
+/// <para>
+/// When paging through a large number of documents, it can be helpful to split the search into multiple slices to consume them independently with the <c>slice</c> and <c>pit</c> properties.
+/// By default the splitting is done first on the shards, then locally on each shard.
+/// The local splitting partitions the shard into contiguous ranges based on Lucene document IDs.
+/// </para>
+/// <para>
+/// For instance if the number of shards is equal to 2 and you request 4 slices, the slices 0 and 2 are assigned to the first shard and the slices 1 and 3 are assigned to the second shard.
+/// </para>
+/// <para>
+/// IMPORTANT: The same point-in-time ID should be used for all slices.
+/// If different PIT IDs are used, slices can overlap and miss documents.
+/// This situation can occur because the splitting criterion is based on Lucene document IDs, which are not stable across changes to the index.
 /// </para>
 /// </summary>
 public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescriptor<SearchRequestDescriptor<TDocument>, SearchRequestParameters>
@@ -1350,10 +1497,10 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	public SearchRequestDescriptor<TDocument> Df(string? df) => Qs("df", df);
 	public SearchRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public SearchRequestDescriptor<TDocument> ForceSyntheticSource(bool? forceSyntheticSource = true) => Qs("force_synthetic_source", forceSyntheticSource);
-	public SearchRequestDescriptor<TDocument> IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
 	public SearchRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public SearchRequestDescriptor<TDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 	public SearchRequestDescriptor<TDocument> MaxConcurrentShardRequests(long? maxConcurrentShardRequests) => Qs("max_concurrent_shard_requests", maxConcurrentShardRequests);
+	public SearchRequestDescriptor<TDocument> MinCompatibleShardNode(string? minCompatibleShardNode) => Qs("min_compatible_shard_node", minCompatibleShardNode);
 	public SearchRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
 	public SearchRequestDescriptor<TDocument> PreFilterShardSize(long? preFilterShardSize) => Qs("pre_filter_shard_size", preFilterShardSize);
 	public SearchRequestDescriptor<TDocument> QueryLuceneSyntax(string? queryLuceneSyntax) => Qs("q", queryLuceneSyntax);
@@ -1486,7 +1633,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 
 	/// <summary>
 	/// <para>
-	/// Array of wildcard (<c>*</c>) patterns.
+	/// An array of wildcard (<c>*</c>) field patterns.
 	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
 	/// </para>
 	/// </summary>
@@ -1528,7 +1675,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 
 	/// <summary>
 	/// <para>
-	/// If true, returns detailed information about score computation as part of a hit.
+	/// If <c>true</c>, the request returns detailed information about score computation as part of a hit.
 	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> Explain(bool? explain = true)
@@ -1550,7 +1697,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 
 	/// <summary>
 	/// <para>
-	/// Array of wildcard (<c>*</c>) patterns.
+	/// An array of wildcard (<c>*</c>) field patterns.
 	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
 	/// </para>
 	/// </summary>
@@ -1592,8 +1739,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 
 	/// <summary>
 	/// <para>
-	/// Starting document offset.
-	/// Needs to be non-negative.
+	/// The starting document offset, which must be non-negative.
 	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
@@ -1635,7 +1781,10 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 
 	/// <summary>
 	/// <para>
-	/// Boosts the _score of documents from specified indices.
+	/// Boost the <c>_score</c> of documents from specified indices.
+	/// The boost value is the factor by which scores are multiplied.
+	/// A boost value greater than <c>1.0</c> increases the score.
+	/// A boost value between <c>0</c> and <c>1.0</c> decreases the score.
 	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> IndicesBoost(ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
@@ -1646,7 +1795,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 
 	/// <summary>
 	/// <para>
-	/// Defines the approximate kNN search to run.
+	/// The approximate kNN search to run.
 	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> Knn(ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? knn)
@@ -1687,7 +1836,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 
 	/// <summary>
 	/// <para>
-	/// Minimum <c>_score</c> for matching documents.
+	/// The minimum <c>_score</c> for matching documents.
 	/// Documents with a lower <c>_score</c> are not included in the search results.
 	/// </para>
 	/// </summary>
@@ -1699,7 +1848,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 
 	/// <summary>
 	/// <para>
-	/// Limits the search to a point in time (PIT).
+	/// Limit the search to a point in time (PIT).
 	/// If you provide a PIT, you cannot specify an <c>&lt;index></c> in the request path.
 	/// </para>
 	/// </summary>
@@ -1772,7 +1921,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 
 	/// <summary>
 	/// <para>
-	/// Defines the search definition using the Query DSL.
+	/// The search definition using the Query DSL.
 	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
@@ -1801,7 +1950,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 
 	/// <summary>
 	/// <para>
-	/// Defines the Reciprocal Rank Fusion (RRF) to use.
+	/// The Reciprocal Rank Fusion (RRF) to use.
 	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> Rank(Elastic.Clients.Elasticsearch.Rank? rank)
@@ -1871,7 +2020,8 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 
 	/// <summary>
 	/// <para>
-	/// A retriever is a specification to describe top documents returned from a search. A retriever replaces other elements of the search API that also return top documents such as query and knn.
+	/// A retriever is a specification to describe top documents returned from a search.
+	/// A retriever replaces other elements of the search API that also return top documents such as <c>query</c> and <c>knn</c>.
 	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> Retriever(Elastic.Clients.Elasticsearch.Retriever? retriever)
@@ -1900,7 +2050,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 
 	/// <summary>
 	/// <para>
-	/// Defines one or more runtime fields in the search request.
+	/// One or more runtime fields in the search request.
 	/// These fields take precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
@@ -1934,7 +2084,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, returns sequence number and primary term of the last modification of each hit.
+	/// If <c>true</c>, the request returns sequence number and primary term of the last modification of each hit.
 	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)
@@ -1945,9 +2095,9 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 
 	/// <summary>
 	/// <para>
-	/// The number of hits to return.
+	/// The number of hits to return, which must not be negative.
 	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> parameter.
+	/// To page through more hits, use the <c>search_after</c> property.
 	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> Size(int? size)
@@ -1958,7 +2108,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 
 	/// <summary>
 	/// <para>
-	/// Can be used to split a scrolled search into multiple slices that can be consumed independently.
+	/// Split a scrolled search into multiple slices that can be consumed independently.
 	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> Slice(Elastic.Clients.Elasticsearch.SlicedScroll? slice)
@@ -2028,8 +2178,10 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 
 	/// <summary>
 	/// <para>
-	/// Indicates which source fields are returned for matching documents.
-	/// These fields are returned in the hits._source property of the search response.
+	/// The source fields that are returned for matching documents.
+	/// These fields are returned in the <c>hits._source</c> property of the search response.
+	/// If the <c>stored_fields</c> property is specified, the <c>_source</c> property defaults to <c>false</c>.
+	/// Otherwise, it defaults to <c>true</c>.
 	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? source)
@@ -2040,7 +2192,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 
 	/// <summary>
 	/// <para>
-	/// Stats groups to associate with the search.
+	/// The stats groups to associate with the search.
 	/// Each group maintains a statistics aggregation for its associated searches.
 	/// You can retrieve these stats using the indices stats API.
 	/// </para>
@@ -2053,9 +2205,9 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 
 	/// <summary>
 	/// <para>
-	/// List of stored fields to return as part of a hit.
+	/// A comma-separated list of stored fields to return as part of a hit.
 	/// If no fields are specified, no stored fields are included in the response.
-	/// If this field is specified, the <c>_source</c> parameter defaults to <c>false</c>.
+	/// If this field is specified, the <c>_source</c> property defaults to <c>false</c>.
 	/// You can pass <c>_source: true</c> to return both source fields and stored fields in the search response.
 	/// </para>
 	/// </summary>
@@ -2096,13 +2248,17 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 
 	/// <summary>
 	/// <para>
-	/// Maximum number of documents to collect for each shard.
+	/// The maximum number of documents to collect for each shard.
 	/// If a query reaches this limit, Elasticsearch terminates the query early.
 	/// Elasticsearch collects documents before sorting.
-	/// Use with caution.
-	/// Elasticsearch applies this parameter to each shard handling the request.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: Use with caution.
+	/// Elasticsearch applies this property to each shard handling the request.
 	/// When possible, let Elasticsearch perform early termination automatically.
-	/// Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.
+	/// Avoid specifying this property for requests that target data streams with backing indices across multiple data tiers.
+	/// </para>
+	/// <para>
 	/// If set to <c>0</c> (default), the query does not terminate early.
 	/// </para>
 	/// </summary>
@@ -2114,7 +2270,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 
 	/// <summary>
 	/// <para>
-	/// Specifies the period of time to wait for a response from each shard.
+	/// The period of time to wait for a response from each shard.
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// Defaults to no timeout.
 	/// </para>
@@ -2127,7 +2283,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 
 	/// <summary>
 	/// <para>
-	/// If true, calculate and return document scores, even if the scores are not used for sorting.
+	/// If <c>true</c>, calculate and return document scores, even if the scores are not used for sorting.
 	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> TrackScores(bool? trackScores = true)
@@ -2151,7 +2307,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 
 	/// <summary>
 	/// <para>
-	/// If true, returns document version as part of a hit.
+	/// If <c>true</c>, the request returns the document version as part of a hit.
 	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> Version(bool? version = true)
@@ -2589,6 +2745,26 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 /// You can provide search queries using the <c>q</c> query string parameter or the request body.
 /// If both are specified, only the query parameter is used.
 /// </para>
+/// <para>
+/// If the Elasticsearch security features are enabled, you must have the read index privilege for the target data stream, index, or alias. For cross-cluster search, refer to the documentation about configuring CCS privileges.
+/// To search a point in time (PIT) for an alias, you must have the <c>read</c> index privilege for the alias's data streams or indices.
+/// </para>
+/// <para>
+/// <strong>Search slicing</strong>
+/// </para>
+/// <para>
+/// When paging through a large number of documents, it can be helpful to split the search into multiple slices to consume them independently with the <c>slice</c> and <c>pit</c> properties.
+/// By default the splitting is done first on the shards, then locally on each shard.
+/// The local splitting partitions the shard into contiguous ranges based on Lucene document IDs.
+/// </para>
+/// <para>
+/// For instance if the number of shards is equal to 2 and you request 4 slices, the slices 0 and 2 are assigned to the first shard and the slices 1 and 3 are assigned to the second shard.
+/// </para>
+/// <para>
+/// IMPORTANT: The same point-in-time ID should be used for all slices.
+/// If different PIT IDs are used, slices can overlap and miss documents.
+/// This situation can occur because the splitting criterion is based on Lucene document IDs, which are not stable across changes to the index.
+/// </para>
 /// </summary>
 public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRequestDescriptor, SearchRequestParameters>
 {
@@ -2620,10 +2796,10 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	public SearchRequestDescriptor Df(string? df) => Qs("df", df);
 	public SearchRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public SearchRequestDescriptor ForceSyntheticSource(bool? forceSyntheticSource = true) => Qs("force_synthetic_source", forceSyntheticSource);
-	public SearchRequestDescriptor IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
 	public SearchRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public SearchRequestDescriptor Lenient(bool? lenient = true) => Qs("lenient", lenient);
 	public SearchRequestDescriptor MaxConcurrentShardRequests(long? maxConcurrentShardRequests) => Qs("max_concurrent_shard_requests", maxConcurrentShardRequests);
+	public SearchRequestDescriptor MinCompatibleShardNode(string? minCompatibleShardNode) => Qs("min_compatible_shard_node", minCompatibleShardNode);
 	public SearchRequestDescriptor Preference(string? preference) => Qs("preference", preference);
 	public SearchRequestDescriptor PreFilterShardSize(long? preFilterShardSize) => Qs("pre_filter_shard_size", preFilterShardSize);
 	public SearchRequestDescriptor QueryLuceneSyntax(string? queryLuceneSyntax) => Qs("q", queryLuceneSyntax);
@@ -2756,7 +2932,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 
 	/// <summary>
 	/// <para>
-	/// Array of wildcard (<c>*</c>) patterns.
+	/// An array of wildcard (<c>*</c>) field patterns.
 	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
 	/// </para>
 	/// </summary>
@@ -2798,7 +2974,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 
 	/// <summary>
 	/// <para>
-	/// If true, returns detailed information about score computation as part of a hit.
+	/// If <c>true</c>, the request returns detailed information about score computation as part of a hit.
 	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor Explain(bool? explain = true)
@@ -2820,7 +2996,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 
 	/// <summary>
 	/// <para>
-	/// Array of wildcard (<c>*</c>) patterns.
+	/// An array of wildcard (<c>*</c>) field patterns.
 	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
 	/// </para>
 	/// </summary>
@@ -2862,8 +3038,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 
 	/// <summary>
 	/// <para>
-	/// Starting document offset.
-	/// Needs to be non-negative.
+	/// The starting document offset, which must be non-negative.
 	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
@@ -2905,7 +3080,10 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 
 	/// <summary>
 	/// <para>
-	/// Boosts the _score of documents from specified indices.
+	/// Boost the <c>_score</c> of documents from specified indices.
+	/// The boost value is the factor by which scores are multiplied.
+	/// A boost value greater than <c>1.0</c> increases the score.
+	/// A boost value between <c>0</c> and <c>1.0</c> decreases the score.
 	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor IndicesBoost(ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
@@ -2916,7 +3094,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 
 	/// <summary>
 	/// <para>
-	/// Defines the approximate kNN search to run.
+	/// The approximate kNN search to run.
 	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor Knn(ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? knn)
@@ -2957,7 +3135,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 
 	/// <summary>
 	/// <para>
-	/// Minimum <c>_score</c> for matching documents.
+	/// The minimum <c>_score</c> for matching documents.
 	/// Documents with a lower <c>_score</c> are not included in the search results.
 	/// </para>
 	/// </summary>
@@ -2969,7 +3147,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 
 	/// <summary>
 	/// <para>
-	/// Limits the search to a point in time (PIT).
+	/// Limit the search to a point in time (PIT).
 	/// If you provide a PIT, you cannot specify an <c>&lt;index></c> in the request path.
 	/// </para>
 	/// </summary>
@@ -3042,7 +3220,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 
 	/// <summary>
 	/// <para>
-	/// Defines the search definition using the Query DSL.
+	/// The search definition using the Query DSL.
 	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
@@ -3071,7 +3249,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 
 	/// <summary>
 	/// <para>
-	/// Defines the Reciprocal Rank Fusion (RRF) to use.
+	/// The Reciprocal Rank Fusion (RRF) to use.
 	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor Rank(Elastic.Clients.Elasticsearch.Rank? rank)
@@ -3141,7 +3319,8 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 
 	/// <summary>
 	/// <para>
-	/// A retriever is a specification to describe top documents returned from a search. A retriever replaces other elements of the search API that also return top documents such as query and knn.
+	/// A retriever is a specification to describe top documents returned from a search.
+	/// A retriever replaces other elements of the search API that also return top documents such as <c>query</c> and <c>knn</c>.
 	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor Retriever(Elastic.Clients.Elasticsearch.Retriever? retriever)
@@ -3170,7 +3349,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 
 	/// <summary>
 	/// <para>
-	/// Defines one or more runtime fields in the search request.
+	/// One or more runtime fields in the search request.
 	/// These fields take precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
@@ -3204,7 +3383,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, returns sequence number and primary term of the last modification of each hit.
+	/// If <c>true</c>, the request returns sequence number and primary term of the last modification of each hit.
 	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)
@@ -3215,9 +3394,9 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 
 	/// <summary>
 	/// <para>
-	/// The number of hits to return.
+	/// The number of hits to return, which must not be negative.
 	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> parameter.
+	/// To page through more hits, use the <c>search_after</c> property.
 	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor Size(int? size)
@@ -3228,7 +3407,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 
 	/// <summary>
 	/// <para>
-	/// Can be used to split a scrolled search into multiple slices that can be consumed independently.
+	/// Split a scrolled search into multiple slices that can be consumed independently.
 	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor Slice(Elastic.Clients.Elasticsearch.SlicedScroll? slice)
@@ -3298,8 +3477,10 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 
 	/// <summary>
 	/// <para>
-	/// Indicates which source fields are returned for matching documents.
-	/// These fields are returned in the hits._source property of the search response.
+	/// The source fields that are returned for matching documents.
+	/// These fields are returned in the <c>hits._source</c> property of the search response.
+	/// If the <c>stored_fields</c> property is specified, the <c>_source</c> property defaults to <c>false</c>.
+	/// Otherwise, it defaults to <c>true</c>.
 	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? source)
@@ -3310,7 +3491,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 
 	/// <summary>
 	/// <para>
-	/// Stats groups to associate with the search.
+	/// The stats groups to associate with the search.
 	/// Each group maintains a statistics aggregation for its associated searches.
 	/// You can retrieve these stats using the indices stats API.
 	/// </para>
@@ -3323,9 +3504,9 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 
 	/// <summary>
 	/// <para>
-	/// List of stored fields to return as part of a hit.
+	/// A comma-separated list of stored fields to return as part of a hit.
 	/// If no fields are specified, no stored fields are included in the response.
-	/// If this field is specified, the <c>_source</c> parameter defaults to <c>false</c>.
+	/// If this field is specified, the <c>_source</c> property defaults to <c>false</c>.
 	/// You can pass <c>_source: true</c> to return both source fields and stored fields in the search response.
 	/// </para>
 	/// </summary>
@@ -3366,13 +3547,17 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 
 	/// <summary>
 	/// <para>
-	/// Maximum number of documents to collect for each shard.
+	/// The maximum number of documents to collect for each shard.
 	/// If a query reaches this limit, Elasticsearch terminates the query early.
 	/// Elasticsearch collects documents before sorting.
-	/// Use with caution.
-	/// Elasticsearch applies this parameter to each shard handling the request.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: Use with caution.
+	/// Elasticsearch applies this property to each shard handling the request.
 	/// When possible, let Elasticsearch perform early termination automatically.
-	/// Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.
+	/// Avoid specifying this property for requests that target data streams with backing indices across multiple data tiers.
+	/// </para>
+	/// <para>
 	/// If set to <c>0</c> (default), the query does not terminate early.
 	/// </para>
 	/// </summary>
@@ -3384,7 +3569,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 
 	/// <summary>
 	/// <para>
-	/// Specifies the period of time to wait for a response from each shard.
+	/// The period of time to wait for a response from each shard.
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// Defaults to no timeout.
 	/// </para>
@@ -3397,7 +3582,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 
 	/// <summary>
 	/// <para>
-	/// If true, calculate and return document scores, even if the scores are not used for sorting.
+	/// If <c>true</c>, calculate and return document scores, even if the scores are not used for sorting.
 	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor TrackScores(bool? trackScores = true)
@@ -3421,7 +3606,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 
 	/// <summary>
 	/// <para>
-	/// If true, returns document version as part of a hit.
+	/// If <c>true</c>, the request returns the document version as part of a hit.
 	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor Version(bool? version = true)

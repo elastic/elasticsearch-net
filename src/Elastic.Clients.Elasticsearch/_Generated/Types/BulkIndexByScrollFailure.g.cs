@@ -37,6 +37,4 @@ public sealed partial class BulkIndexByScrollFailure
 	public string Index { get; init; }
 	[JsonInclude, JsonPropertyName("status")]
 	public int Status { get; init; }
-	[JsonInclude, JsonPropertyName("type")]
-	public string Type { get; init; }
 }

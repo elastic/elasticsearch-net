@@ -491,7 +491,7 @@ public enum ExpandWildcard
 	None,
 	/// <summary>
 	/// <para>
-	/// Match hidden data streams and hidden indices. Must be combined with open, closed, or both.
+	/// Match hidden data streams and hidden indices. Must be combined with <c>open</c>, <c>closed</c>, or <c>both</c>.
 	/// </para>
 	/// </summary>
 	[EnumMember(Value = "hidden")]
@@ -1766,12 +1766,17 @@ public enum VersionType
 	/// </summary>
 	[EnumMember(Value = "internal")]
 	Internal,
+	/// <summary>
+	/// <para>
+	/// This option is deprecated because it can cause primary and replica shards to diverge.
+	/// </para>
+	/// </summary>
 	[EnumMember(Value = "force")]
 	Force,
 	/// <summary>
 	/// <para>
-	/// Only index the document if the given version is equal or higher than the version of the stored document or if there is no existing document.
-	/// Note: the external_gte version type is meant for special use cases and should be used with care.
+	/// Only index the document if the specified version is equal or higher than the version of the stored document or if there is no existing document.
+	/// NOTE: The <c>external_gte</c> version type is meant for special use cases and should be used with care.
 	/// If used incorrectly, it can result in loss of data.
 	/// </para>
 	/// </summary>
@@ -1779,7 +1784,7 @@ public enum VersionType
 	ExternalGte,
 	/// <summary>
 	/// <para>
-	/// Only index the document if the given version is strictly higher than the version of the stored document or if there is no existing document.
+	/// Only index the document if the specified version is strictly higher than the version of the stored document or if there is no existing document.
 	/// </para>
 	/// </summary>
 	[EnumMember(Value = "external")]

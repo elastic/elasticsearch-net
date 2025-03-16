@@ -43,14 +43,14 @@ public sealed partial class FieldCapsRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as <c>open,hidden</c>.
+	/// The type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as <c>open,hidden</c>.
 	/// </para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
-	/// An optional set of filters: can include +metadata,-metadata,-nested,-multifield,-parent
+	/// A comma-separated list of filters to apply to the response.
 	/// </para>
 	/// </summary>
 	public string? Filters { get => Q<string?>("filters"); set => Q("filters", value); }
@@ -78,7 +78,9 @@ public sealed partial class FieldCapsRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
-	/// Only return results for fields that have one of the types in the list
+	/// A comma-separated list of field types to include.
+	/// Any fields that do not match one of these types will be excluded from the results.
+	/// It defaults to empty, meaning that all field types are returned.
 	/// </para>
 	/// </summary>
 	public ICollection<string>? Types { get => Q<ICollection<string>?>("types"); set => Q("types", value); }
@@ -127,7 +129,7 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 
 	/// <summary>
 	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as <c>open,hidden</c>.
+	/// The type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as <c>open,hidden</c>.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -135,7 +137,7 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 
 	/// <summary>
 	/// <para>
-	/// An optional set of filters: can include +metadata,-metadata,-nested,-multifield,-parent
+	/// A comma-separated list of filters to apply to the response.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -167,7 +169,9 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 
 	/// <summary>
 	/// <para>
-	/// Only return results for fields that have one of the types in the list
+	/// A comma-separated list of field types to include.
+	/// Any fields that do not match one of these types will be excluded from the results.
+	/// It defaults to empty, meaning that all field types are returned.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -175,7 +179,7 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 
 	/// <summary>
 	/// <para>
-	/// List of fields to retrieve capabilities for. Wildcard (<c>*</c>) expressions are supported.
+	/// A list of fields to retrieve capabilities for. Wildcard (<c>*</c>) expressions are supported.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
@@ -184,7 +188,12 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 
 	/// <summary>
 	/// <para>
-	/// Allows to filter indices if the provided query rewrites to match_none on every shard.
+	/// Filter indices if the provided query rewrites to <c>match_none</c> on every shard.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The filtering is done on a best-effort basis, it uses index statistics and mappings to rewrite queries to <c>match_none</c> instead of fully running the request.
+	/// For instance a range query over a date field can rewrite to <c>match_none</c> if all documents within a shard (including deleted documents) are outside of the provided range.
+	/// However, not all queries can rewrite to <c>match_none</c> so this API may return an index even if the provided filter matches no document.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("index_filter")]
@@ -192,7 +201,7 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 
 	/// <summary>
 	/// <para>
-	/// Defines ad-hoc runtime fields in the request similar to the way it is done in search requests.
+	/// Define ad-hoc runtime fields in the request similar to the way it is done in search requests.
 	/// These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.
 	/// </para>
 	/// </summary>
@@ -255,7 +264,7 @@ public sealed partial class FieldCapsRequestDescriptor<TDocument> : RequestDescr
 
 	/// <summary>
 	/// <para>
-	/// List of fields to retrieve capabilities for. Wildcard (<c>*</c>) expressions are supported.
+	/// A list of fields to retrieve capabilities for. Wildcard (<c>*</c>) expressions are supported.
 	/// </para>
 	/// </summary>
 	public FieldCapsRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? fields)
@@ -266,7 +275,12 @@ public sealed partial class FieldCapsRequestDescriptor<TDocument> : RequestDescr
 
 	/// <summary>
 	/// <para>
-	/// Allows to filter indices if the provided query rewrites to match_none on every shard.
+	/// Filter indices if the provided query rewrites to <c>match_none</c> on every shard.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The filtering is done on a best-effort basis, it uses index statistics and mappings to rewrite queries to <c>match_none</c> instead of fully running the request.
+	/// For instance a range query over a date field can rewrite to <c>match_none</c> if all documents within a shard (including deleted documents) are outside of the provided range.
+	/// However, not all queries can rewrite to <c>match_none</c> so this API may return an index even if the provided filter matches no document.
 	/// </para>
 	/// </summary>
 	public FieldCapsRequestDescriptor<TDocument> IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? indexFilter)
@@ -295,7 +309,7 @@ public sealed partial class FieldCapsRequestDescriptor<TDocument> : RequestDescr
 
 	/// <summary>
 	/// <para>
-	/// Defines ad-hoc runtime fields in the request similar to the way it is done in search requests.
+	/// Define ad-hoc runtime fields in the request similar to the way it is done in search requests.
 	/// These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.
 	/// </para>
 	/// </summary>
@@ -395,7 +409,7 @@ public sealed partial class FieldCapsRequestDescriptor : RequestDescriptor<Field
 
 	/// <summary>
 	/// <para>
-	/// List of fields to retrieve capabilities for. Wildcard (<c>*</c>) expressions are supported.
+	/// A list of fields to retrieve capabilities for. Wildcard (<c>*</c>) expressions are supported.
 	/// </para>
 	/// </summary>
 	public FieldCapsRequestDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields)
@@ -406,7 +420,12 @@ public sealed partial class FieldCapsRequestDescriptor : RequestDescriptor<Field
 
 	/// <summary>
 	/// <para>
-	/// Allows to filter indices if the provided query rewrites to match_none on every shard.
+	/// Filter indices if the provided query rewrites to <c>match_none</c> on every shard.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The filtering is done on a best-effort basis, it uses index statistics and mappings to rewrite queries to <c>match_none</c> instead of fully running the request.
+	/// For instance a range query over a date field can rewrite to <c>match_none</c> if all documents within a shard (including deleted documents) are outside of the provided range.
+	/// However, not all queries can rewrite to <c>match_none</c> so this API may return an index even if the provided filter matches no document.
 	/// </para>
 	/// </summary>
 	public FieldCapsRequestDescriptor IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? indexFilter)
@@ -435,7 +454,7 @@ public sealed partial class FieldCapsRequestDescriptor : RequestDescriptor<Field
 
 	/// <summary>
 	/// <para>
-	/// Defines ad-hoc runtime fields in the request similar to the way it is done in search requests.
+	/// Define ad-hoc runtime fields in the request similar to the way it is done in search requests.
 	/// These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.
 	/// </para>
 	/// </summary>

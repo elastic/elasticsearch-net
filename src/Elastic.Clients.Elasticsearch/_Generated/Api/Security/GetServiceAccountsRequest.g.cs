@@ -41,6 +41,9 @@ public sealed partial class GetServiceAccountsRequestParameters : RequestParamet
 /// <para>
 /// Get a list of service accounts that match the provided path parameters.
 /// </para>
+/// <para>
+/// NOTE: Currently, only the <c>elastic/fleet-server</c> service account is available.
+/// </para>
 /// </summary>
 public sealed partial class GetServiceAccountsRequest : PlainRequest<GetServiceAccountsRequestParameters>
 {
@@ -71,6 +74,9 @@ public sealed partial class GetServiceAccountsRequest : PlainRequest<GetServiceA
 /// </para>
 /// <para>
 /// Get a list of service accounts that match the provided path parameters.
+/// </para>
+/// <para>
+/// NOTE: Currently, only the <c>elastic/fleet-server</c> service account is available.
 /// </para>
 /// </summary>
 public sealed partial class GetServiceAccountsRequestDescriptor : RequestDescriptor<GetServiceAccountsRequestDescriptor, GetServiceAccountsRequestParameters>

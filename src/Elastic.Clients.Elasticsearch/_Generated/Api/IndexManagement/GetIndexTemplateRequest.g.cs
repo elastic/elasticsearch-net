@@ -64,7 +64,7 @@ public sealed partial class GetIndexTemplateRequestParameters : RequestParameter
 /// <summary>
 /// <para>
 /// Get index templates.
-/// Returns information about one or more index templates.
+/// Get information about one or more index templates.
 /// </para>
 /// </summary>
 public sealed partial class GetIndexTemplateRequest : PlainRequest<GetIndexTemplateRequestParameters>
@@ -121,7 +121,7 @@ public sealed partial class GetIndexTemplateRequest : PlainRequest<GetIndexTempl
 /// <summary>
 /// <para>
 /// Get index templates.
-/// Returns information about one or more index templates.
+/// Get information about one or more index templates.
 /// </para>
 /// </summary>
 public sealed partial class GetIndexTemplateRequestDescriptor : RequestDescriptor<GetIndexTemplateRequestDescriptor, GetIndexTemplateRequestParameters>

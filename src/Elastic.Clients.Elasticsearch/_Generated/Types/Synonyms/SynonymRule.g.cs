@@ -31,7 +31,8 @@ public sealed partial class SynonymRule
 {
 	/// <summary>
 	/// <para>
-	/// Synonym Rule identifier
+	/// The identifier for the synonym rule.
+	/// If you do not specify a synonym rule ID when you create a rule, an identifier is created automatically by Elasticsearch.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("id")]
@@ -39,7 +40,7 @@ public sealed partial class SynonymRule
 
 	/// <summary>
 	/// <para>
-	/// Synonyms, in Solr format, that conform the synonym rule. See https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-synonym-graph-tokenfilter.html#_solr_synonyms_2
+	/// The synonyms that conform the synonym rule in Solr format.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("synonyms")]
@@ -59,7 +60,8 @@ public sealed partial class SynonymRuleDescriptor : SerializableDescriptor<Synon
 
 	/// <summary>
 	/// <para>
-	/// Synonym Rule identifier
+	/// The identifier for the synonym rule.
+	/// If you do not specify a synonym rule ID when you create a rule, an identifier is created automatically by Elasticsearch.
 	/// </para>
 	/// </summary>
 	public SynonymRuleDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
@@ -70,7 +72,7 @@ public sealed partial class SynonymRuleDescriptor : SerializableDescriptor<Synon
 
 	/// <summary>
 	/// <para>
-	/// Synonyms, in Solr format, that conform the synonym rule. See https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-synonym-graph-tokenfilter.html#_solr_synonyms_2
+	/// The synonyms that conform the synonym rule in Solr format.
 	/// </para>
 	/// </summary>
 	public SynonymRuleDescriptor Synonyms(string synonyms)

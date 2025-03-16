@@ -37,8 +37,6 @@ public sealed partial class ClosePointInTimeRequestParameters : RequestParameter
 /// <summary>
 /// <para>
 /// Close a point in time.
-/// </para>
-/// <para>
 /// A point in time must be opened explicitly before being used in search requests.
 /// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
 /// A point in time is automatically closed when the <c>keep_alive</c> period has elapsed.
@@ -67,8 +65,6 @@ public sealed partial class ClosePointInTimeRequest : PlainRequest<ClosePointInT
 /// <summary>
 /// <para>
 /// Close a point in time.
-/// </para>
-/// <para>
 /// A point in time must be opened explicitly before being used in search requests.
 /// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
 /// A point in time is automatically closed when the <c>keep_alive</c> period has elapsed.

@@ -45,6 +45,8 @@ public sealed partial class ConstantKeywordProperty : IProperty
 	public IDictionary<string, string>? Meta { get; set; }
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
+	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
+	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "constant_keyword";
@@ -66,6 +68,7 @@ public sealed partial class ConstantKeywordPropertyDescriptor<TDocument> : Seria
 	private int? IgnoreAboveValue { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 	private object? ValueValue { get; set; }
 
 	public ConstantKeywordPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
@@ -131,6 +134,12 @@ public sealed partial class ConstantKeywordPropertyDescriptor<TDocument> : Seria
 		return Self;
 	}
 
+	public ConstantKeywordPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	public ConstantKeywordPropertyDescriptor<TDocument> Value(object? value)
 	{
 		ValueValue = value;
@@ -170,6 +179,12 @@ public sealed partial class ConstantKeywordPropertyDescriptor<TDocument> : Seria
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("constant_keyword");
 		if (ValueValue is not null)
@@ -188,6 +203,7 @@ public sealed partial class ConstantKeywordPropertyDescriptor<TDocument> : Seria
 		IgnoreAbove = IgnoreAboveValue,
 		Meta = MetaValue,
 		Properties = PropertiesValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue,
 		Value = ValueValue
 	};
 }
@@ -205,6 +221,7 @@ public sealed partial class ConstantKeywordPropertyDescriptor : SerializableDesc
 	private int? IgnoreAboveValue { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 	private object? ValueValue { get; set; }
 
 	public ConstantKeywordPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
@@ -270,6 +287,12 @@ public sealed partial class ConstantKeywordPropertyDescriptor : SerializableDesc
 		return Self;
 	}
 
+	public ConstantKeywordPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	public ConstantKeywordPropertyDescriptor Value(object? value)
 	{
 		ValueValue = value;
@@ -309,6 +332,12 @@ public sealed partial class ConstantKeywordPropertyDescriptor : SerializableDesc
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("constant_keyword");
 		if (ValueValue is not null)
@@ -327,6 +356,7 @@ public sealed partial class ConstantKeywordPropertyDescriptor : SerializableDesc
 		IgnoreAbove = IgnoreAboveValue,
 		Meta = MetaValue,
 		Properties = PropertiesValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue,
 		Value = ValueValue
 	};
 }

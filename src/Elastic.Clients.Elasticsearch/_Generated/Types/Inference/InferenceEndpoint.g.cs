@@ -36,6 +36,14 @@ public sealed partial class InferenceEndpoint
 {
 	/// <summary>
 	/// <para>
+	/// Chunking configuration object
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("chunking_settings")]
+	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// The service type
 	/// </para>
 	/// </summary>
@@ -72,9 +80,41 @@ public sealed partial class InferenceEndpointDescriptor : SerializableDescriptor
 	{
 	}
 
+	private Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettingsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor ChunkingSettingsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor> ChunkingSettingsDescriptorAction { get; set; }
 	private string ServiceValue { get; set; }
 	private object ServiceSettingsValue { get; set; }
 	private object? TaskSettingsValue { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Chunking configuration object
+	/// </para>
+	/// </summary>
+	public InferenceEndpointDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? chunkingSettings)
+	{
+		ChunkingSettingsDescriptor = null;
+		ChunkingSettingsDescriptorAction = null;
+		ChunkingSettingsValue = chunkingSettings;
+		return Self;
+	}
+
+	public InferenceEndpointDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor descriptor)
+	{
+		ChunkingSettingsValue = null;
+		ChunkingSettingsDescriptorAction = null;
+		ChunkingSettingsDescriptor = descriptor;
+		return Self;
+	}
+
+	public InferenceEndpointDescriptor ChunkingSettings(Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor> configure)
+	{
+		ChunkingSettingsValue = null;
+		ChunkingSettingsDescriptor = null;
+		ChunkingSettingsDescriptorAction = configure;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>
@@ -112,6 +152,22 @@ public sealed partial class InferenceEndpointDescriptor : SerializableDescriptor
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (ChunkingSettingsDescriptor is not null)
+		{
+			writer.WritePropertyName("chunking_settings");
+			JsonSerializer.Serialize(writer, ChunkingSettingsDescriptor, options);
+		}
+		else if (ChunkingSettingsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("chunking_settings");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor(ChunkingSettingsDescriptorAction), options);
+		}
+		else if (ChunkingSettingsValue is not null)
+		{
+			writer.WritePropertyName("chunking_settings");
+			JsonSerializer.Serialize(writer, ChunkingSettingsValue, options);
+		}
+
 		writer.WritePropertyName("service");
 		writer.WriteStringValue(ServiceValue);
 		writer.WritePropertyName("service_settings");

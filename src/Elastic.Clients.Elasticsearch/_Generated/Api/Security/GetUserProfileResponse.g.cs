@@ -30,6 +30,14 @@ public sealed partial class GetUserProfileResponse : ElasticsearchResponse
 {
 	[JsonInclude, JsonPropertyName("errors")]
 	public Elastic.Clients.Elasticsearch.Security.GetUserProfileErrors? Errors { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// A successful call returns the JSON representation of the user profile and its internal versioning numbers.
+	/// The API returns an empty object if no profile document is found for the provided <c>uid</c>.
+	/// The content of the data field is not returned by default to avoid deserializing a potential large payload.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("profiles")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserProfileWithMetadata> Profiles { get; init; }
 }

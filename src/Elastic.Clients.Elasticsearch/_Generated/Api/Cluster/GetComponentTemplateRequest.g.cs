@@ -66,7 +66,7 @@ public sealed partial class GetComponentTemplateRequestParameters : RequestParam
 /// <summary>
 /// <para>
 /// Get component templates.
-/// Retrieves information about component templates.
+/// Get information about component templates.
 /// </para>
 /// </summary>
 public sealed partial class GetComponentTemplateRequest : PlainRequest<GetComponentTemplateRequestParameters>
@@ -125,7 +125,7 @@ public sealed partial class GetComponentTemplateRequest : PlainRequest<GetCompon
 /// <summary>
 /// <para>
 /// Get component templates.
-/// Retrieves information about component templates.
+/// Get information about component templates.
 /// </para>
 /// </summary>
 public sealed partial class GetComponentTemplateRequestDescriptor : RequestDescriptor<GetComponentTemplateRequestDescriptor, GetComponentTemplateRequestParameters>
