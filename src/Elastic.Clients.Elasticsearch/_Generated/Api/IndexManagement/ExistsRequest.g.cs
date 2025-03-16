@@ -82,7 +82,7 @@ public sealed partial class ExistsRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Check indices.
-/// Checks if one or more indices, index aliases, or data streams exist.
+/// Check if one or more indices, index aliases, or data streams exist.
 /// </para>
 /// </summary>
 public sealed partial class ExistsRequest : PlainRequest<ExistsRequestParameters>
@@ -155,7 +155,7 @@ public sealed partial class ExistsRequest : PlainRequest<ExistsRequestParameters
 /// <summary>
 /// <para>
 /// Check indices.
-/// Checks if one or more indices, index aliases, or data streams exist.
+/// Check if one or more indices, index aliases, or data streams exist.
 /// </para>
 /// </summary>
 public sealed partial class ExistsRequestDescriptor<TDocument> : RequestDescriptor<ExistsRequestDescriptor<TDocument>, ExistsRequestParameters>
@@ -199,7 +199,7 @@ public sealed partial class ExistsRequestDescriptor<TDocument> : RequestDescript
 /// <summary>
 /// <para>
 /// Check indices.
-/// Checks if one or more indices, index aliases, or data streams exist.
+/// Check if one or more indices, index aliases, or data streams exist.
 /// </para>
 /// </summary>
 public sealed partial class ExistsRequestDescriptor : RequestDescriptor<ExistsRequestDescriptor, ExistsRequestParameters>

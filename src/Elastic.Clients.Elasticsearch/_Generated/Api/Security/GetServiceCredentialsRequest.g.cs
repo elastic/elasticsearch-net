@@ -38,6 +38,16 @@ public sealed partial class GetServiceCredentialsRequestParameters : RequestPara
 /// <para>
 /// Get service account credentials.
 /// </para>
+/// <para>
+/// To use this API, you must have at least the <c>read_security</c> cluster privilege (or a greater privilege such as <c>manage_service_account</c> or <c>manage_security</c>).
+/// </para>
+/// <para>
+/// The response includes service account tokens that were created with the create service account tokens API as well as file-backed tokens from all nodes of the cluster.
+/// </para>
+/// <para>
+/// NOTE: For tokens backed by the <c>service_tokens</c> file, the API collects them from all nodes of the cluster.
+/// Tokens with the same name from different nodes are assumed to be the same token and are only counted once towards the total number of service tokens.
+/// </para>
 /// </summary>
 public sealed partial class GetServiceCredentialsRequest : PlainRequest<GetServiceCredentialsRequestParameters>
 {
@@ -57,6 +67,16 @@ public sealed partial class GetServiceCredentialsRequest : PlainRequest<GetServi
 /// <summary>
 /// <para>
 /// Get service account credentials.
+/// </para>
+/// <para>
+/// To use this API, you must have at least the <c>read_security</c> cluster privilege (or a greater privilege such as <c>manage_service_account</c> or <c>manage_security</c>).
+/// </para>
+/// <para>
+/// The response includes service account tokens that were created with the create service account tokens API as well as file-backed tokens from all nodes of the cluster.
+/// </para>
+/// <para>
+/// NOTE: For tokens backed by the <c>service_tokens</c> file, the API collects them from all nodes of the cluster.
+/// Tokens with the same name from different nodes are assumed to be the same token and are only counted once towards the total number of service tokens.
 /// </para>
 /// </summary>
 public sealed partial class GetServiceCredentialsRequestDescriptor : RequestDescriptor<GetServiceCredentialsRequestDescriptor, GetServiceCredentialsRequestParameters>

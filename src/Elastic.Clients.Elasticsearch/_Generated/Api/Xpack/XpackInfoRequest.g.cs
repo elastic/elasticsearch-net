@@ -41,7 +41,8 @@ public sealed partial class XpackInfoRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
-	/// A comma-separated list of the information categories to include in the response. For example, <c>build,license,features</c>.
+	/// A comma-separated list of the information categories to include in the response.
+	/// For example, <c>build,license,features</c>.
 	/// </para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.Xpack.XPackCategory>? Categories { get => Q<ICollection<Elastic.Clients.Elasticsearch.Xpack.XPackCategory>?>("categories"); set => Q("categories", value); }
@@ -90,7 +91,8 @@ public sealed partial class XpackInfoRequest : PlainRequest<XpackInfoRequestPara
 
 	/// <summary>
 	/// <para>
-	/// A comma-separated list of the information categories to include in the response. For example, <c>build,license,features</c>.
+	/// A comma-separated list of the information categories to include in the response.
+	/// For example, <c>build,license,features</c>.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]

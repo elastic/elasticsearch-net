@@ -51,7 +51,7 @@ public sealed partial class DeleteTemplateRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Deletes a legacy index template.
+/// Delete a legacy index template.
 /// </para>
 /// </summary>
 public sealed partial class DeleteTemplateRequest : PlainRequest<DeleteTemplateRequestParameters>
@@ -89,7 +89,7 @@ public sealed partial class DeleteTemplateRequest : PlainRequest<DeleteTemplateR
 
 /// <summary>
 /// <para>
-/// Deletes a legacy index template.
+/// Delete a legacy index template.
 /// </para>
 /// </summary>
 public sealed partial class DeleteTemplateRequestDescriptor : RequestDescriptor<DeleteTemplateRequestDescriptor, DeleteTemplateRequestParameters>

@@ -35,6 +35,7 @@ public sealed partial class ReindexRethrottleRequestParameters : RequestParamete
 	/// <summary>
 	/// <para>
 	/// The throttle for this request in sub-requests per second.
+	/// It can be either <c>-1</c> to turn off throttling or any decimal number like <c>1.7</c> or <c>12</c> to throttle to that level.
 	/// </para>
 	/// </summary>
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
@@ -46,6 +47,15 @@ public sealed partial class ReindexRethrottleRequestParameters : RequestParamete
 /// </para>
 /// <para>
 /// Change the number of requests per second for a particular reindex operation.
+/// For example:
+/// </para>
+/// <code>
+/// POST _reindex/r1A2WoRbTwKZ516z6NEs5A:36619/_rethrottle?requests_per_second=-1
+/// </code>
+/// <para>
+/// Rethrottling that speeds up the query takes effect immediately.
+/// Rethrottling that slows down the query will take effect after completing the current batch.
+/// This behavior prevents scroll timeouts.
 /// </para>
 /// </summary>
 public sealed partial class ReindexRethrottleRequest : PlainRequest<ReindexRethrottleRequestParameters>
@@ -65,6 +75,7 @@ public sealed partial class ReindexRethrottleRequest : PlainRequest<ReindexRethr
 	/// <summary>
 	/// <para>
 	/// The throttle for this request in sub-requests per second.
+	/// It can be either <c>-1</c> to turn off throttling or any decimal number like <c>1.7</c> or <c>12</c> to throttle to that level.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -77,6 +88,15 @@ public sealed partial class ReindexRethrottleRequest : PlainRequest<ReindexRethr
 /// </para>
 /// <para>
 /// Change the number of requests per second for a particular reindex operation.
+/// For example:
+/// </para>
+/// <code>
+/// POST _reindex/r1A2WoRbTwKZ516z6NEs5A:36619/_rethrottle?requests_per_second=-1
+/// </code>
+/// <para>
+/// Rethrottling that speeds up the query takes effect immediately.
+/// Rethrottling that slows down the query will take effect after completing the current batch.
+/// This behavior prevents scroll timeouts.
 /// </para>
 /// </summary>
 public sealed partial class ReindexRethrottleRequestDescriptor : RequestDescriptor<ReindexRethrottleRequestDescriptor, ReindexRethrottleRequestParameters>

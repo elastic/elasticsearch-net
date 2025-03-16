@@ -41,6 +41,10 @@ public sealed partial class HasPrivilegesUserProfileRequestParameters : RequestP
 /// <para>
 /// Determine whether the users associated with the specified user profile IDs have all the requested privileges.
 /// </para>
+/// <para>
+/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions. Individual users and external applications should not call this API directly.
+/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
+/// </para>
 /// </summary>
 public sealed partial class HasPrivilegesUserProfileRequest : PlainRequest<HasPrivilegesUserProfileRequestParameters>
 {
@@ -52,6 +56,11 @@ public sealed partial class HasPrivilegesUserProfileRequest : PlainRequest<HasPr
 
 	internal override string OperationName => "security.has_privileges_user_profile";
 
+	/// <summary>
+	/// <para>
+	/// An object containing all the privileges to be checked.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("privileges")]
 	public Elastic.Clients.Elasticsearch.Security.PrivilegesCheck Privileges { get; set; }
 
@@ -70,6 +79,10 @@ public sealed partial class HasPrivilegesUserProfileRequest : PlainRequest<HasPr
 /// </para>
 /// <para>
 /// Determine whether the users associated with the specified user profile IDs have all the requested privileges.
+/// </para>
+/// <para>
+/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions. Individual users and external applications should not call this API directly.
+/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
 /// </para>
 /// </summary>
 public sealed partial class HasPrivilegesUserProfileRequestDescriptor : RequestDescriptor<HasPrivilegesUserProfileRequestDescriptor, HasPrivilegesUserProfileRequestParameters>
@@ -93,6 +106,11 @@ public sealed partial class HasPrivilegesUserProfileRequestDescriptor : RequestD
 	private Action<Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor> PrivilegesDescriptorAction { get; set; }
 	private ICollection<string> UidsValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// An object containing all the privileges to be checked.
+	/// </para>
+	/// </summary>
 	public HasPrivilegesUserProfileRequestDescriptor Privileges(Elastic.Clients.Elasticsearch.Security.PrivilegesCheck privileges)
 	{
 		PrivilegesDescriptor = null;

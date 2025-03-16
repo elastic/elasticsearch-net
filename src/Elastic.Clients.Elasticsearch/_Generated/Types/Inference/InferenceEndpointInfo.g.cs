@@ -36,6 +36,14 @@ public sealed partial class InferenceEndpointInfo
 {
 	/// <summary>
 	/// <para>
+	/// Chunking configuration object
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("chunking_settings")]
+	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; init; }
+
+	/// <summary>
+	/// <para>
 	/// The inference Id
 	/// </para>
 	/// </summary>

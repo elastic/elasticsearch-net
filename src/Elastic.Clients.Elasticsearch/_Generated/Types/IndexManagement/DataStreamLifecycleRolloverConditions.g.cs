@@ -30,23 +30,169 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class DataStreamLifecycleRolloverConditions
 {
 	[JsonInclude, JsonPropertyName("max_age")]
-	public string? MaxAge { get; init; }
+	public string? MaxAge { get; set; }
 	[JsonInclude, JsonPropertyName("max_docs")]
-	public long? MaxDocs { get; init; }
+	public long? MaxDocs { get; set; }
 	[JsonInclude, JsonPropertyName("max_primary_shard_docs")]
-	public long? MaxPrimaryShardDocs { get; init; }
+	public long? MaxPrimaryShardDocs { get; set; }
 	[JsonInclude, JsonPropertyName("max_primary_shard_size")]
-	public Elastic.Clients.Elasticsearch.ByteSize? MaxPrimaryShardSize { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? MaxPrimaryShardSize { get; set; }
 	[JsonInclude, JsonPropertyName("max_size")]
-	public Elastic.Clients.Elasticsearch.ByteSize? MaxSize { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? MaxSize { get; set; }
 	[JsonInclude, JsonPropertyName("min_age")]
-	public Elastic.Clients.Elasticsearch.Duration? MinAge { get; init; }
+	public Elastic.Clients.Elasticsearch.Duration? MinAge { get; set; }
 	[JsonInclude, JsonPropertyName("min_docs")]
-	public long? MinDocs { get; init; }
+	public long? MinDocs { get; set; }
 	[JsonInclude, JsonPropertyName("min_primary_shard_docs")]
-	public long? MinPrimaryShardDocs { get; init; }
+	public long? MinPrimaryShardDocs { get; set; }
 	[JsonInclude, JsonPropertyName("min_primary_shard_size")]
-	public Elastic.Clients.Elasticsearch.ByteSize? MinPrimaryShardSize { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? MinPrimaryShardSize { get; set; }
 	[JsonInclude, JsonPropertyName("min_size")]
-	public Elastic.Clients.Elasticsearch.ByteSize? MinSize { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? MinSize { get; set; }
+}
+
+public sealed partial class DataStreamLifecycleRolloverConditionsDescriptor : SerializableDescriptor<DataStreamLifecycleRolloverConditionsDescriptor>
+{
+	internal DataStreamLifecycleRolloverConditionsDescriptor(Action<DataStreamLifecycleRolloverConditionsDescriptor> configure) => configure.Invoke(this);
+
+	public DataStreamLifecycleRolloverConditionsDescriptor() : base()
+	{
+	}
+
+	private string? MaxAgeValue { get; set; }
+	private long? MaxDocsValue { get; set; }
+	private long? MaxPrimaryShardDocsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.ByteSize? MaxPrimaryShardSizeValue { get; set; }
+	private Elastic.Clients.Elasticsearch.ByteSize? MaxSizeValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Duration? MinAgeValue { get; set; }
+	private long? MinDocsValue { get; set; }
+	private long? MinPrimaryShardDocsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.ByteSize? MinPrimaryShardSizeValue { get; set; }
+	private Elastic.Clients.Elasticsearch.ByteSize? MinSizeValue { get; set; }
+
+	public DataStreamLifecycleRolloverConditionsDescriptor MaxAge(string? maxAge)
+	{
+		MaxAgeValue = maxAge;
+		return Self;
+	}
+
+	public DataStreamLifecycleRolloverConditionsDescriptor MaxDocs(long? maxDocs)
+	{
+		MaxDocsValue = maxDocs;
+		return Self;
+	}
+
+	public DataStreamLifecycleRolloverConditionsDescriptor MaxPrimaryShardDocs(long? maxPrimaryShardDocs)
+	{
+		MaxPrimaryShardDocsValue = maxPrimaryShardDocs;
+		return Self;
+	}
+
+	public DataStreamLifecycleRolloverConditionsDescriptor MaxPrimaryShardSize(Elastic.Clients.Elasticsearch.ByteSize? maxPrimaryShardSize)
+	{
+		MaxPrimaryShardSizeValue = maxPrimaryShardSize;
+		return Self;
+	}
+
+	public DataStreamLifecycleRolloverConditionsDescriptor MaxSize(Elastic.Clients.Elasticsearch.ByteSize? maxSize)
+	{
+		MaxSizeValue = maxSize;
+		return Self;
+	}
+
+	public DataStreamLifecycleRolloverConditionsDescriptor MinAge(Elastic.Clients.Elasticsearch.Duration? minAge)
+	{
+		MinAgeValue = minAge;
+		return Self;
+	}
+
+	public DataStreamLifecycleRolloverConditionsDescriptor MinDocs(long? minDocs)
+	{
+		MinDocsValue = minDocs;
+		return Self;
+	}
+
+	public DataStreamLifecycleRolloverConditionsDescriptor MinPrimaryShardDocs(long? minPrimaryShardDocs)
+	{
+		MinPrimaryShardDocsValue = minPrimaryShardDocs;
+		return Self;
+	}
+
+	public DataStreamLifecycleRolloverConditionsDescriptor MinPrimaryShardSize(Elastic.Clients.Elasticsearch.ByteSize? minPrimaryShardSize)
+	{
+		MinPrimaryShardSizeValue = minPrimaryShardSize;
+		return Self;
+	}
+
+	public DataStreamLifecycleRolloverConditionsDescriptor MinSize(Elastic.Clients.Elasticsearch.ByteSize? minSize)
+	{
+		MinSizeValue = minSize;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(MaxAgeValue))
+		{
+			writer.WritePropertyName("max_age");
+			writer.WriteStringValue(MaxAgeValue);
+		}
+
+		if (MaxDocsValue.HasValue)
+		{
+			writer.WritePropertyName("max_docs");
+			writer.WriteNumberValue(MaxDocsValue.Value);
+		}
+
+		if (MaxPrimaryShardDocsValue.HasValue)
+		{
+			writer.WritePropertyName("max_primary_shard_docs");
+			writer.WriteNumberValue(MaxPrimaryShardDocsValue.Value);
+		}
+
+		if (MaxPrimaryShardSizeValue is not null)
+		{
+			writer.WritePropertyName("max_primary_shard_size");
+			JsonSerializer.Serialize(writer, MaxPrimaryShardSizeValue, options);
+		}
+
+		if (MaxSizeValue is not null)
+		{
+			writer.WritePropertyName("max_size");
+			JsonSerializer.Serialize(writer, MaxSizeValue, options);
+		}
+
+		if (MinAgeValue is not null)
+		{
+			writer.WritePropertyName("min_age");
+			JsonSerializer.Serialize(writer, MinAgeValue, options);
+		}
+
+		if (MinDocsValue.HasValue)
+		{
+			writer.WritePropertyName("min_docs");
+			writer.WriteNumberValue(MinDocsValue.Value);
+		}
+
+		if (MinPrimaryShardDocsValue.HasValue)
+		{
+			writer.WritePropertyName("min_primary_shard_docs");
+			writer.WriteNumberValue(MinPrimaryShardDocsValue.Value);
+		}
+
+		if (MinPrimaryShardSizeValue is not null)
+		{
+			writer.WritePropertyName("min_primary_shard_size");
+			JsonSerializer.Serialize(writer, MinPrimaryShardSizeValue, options);
+		}
+
+		if (MinSizeValue is not null)
+		{
+			writer.WritePropertyName("min_size");
+			JsonSerializer.Serialize(writer, MinSizeValue, options);
+		}
+
+		writer.WriteEndObject();
+	}
 }

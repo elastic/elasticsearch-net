@@ -42,7 +42,7 @@ public sealed partial class ReindexRequestParameters : RequestParameters
 	/// <summary>
 	/// <para>
 	/// The throttle for this request in sub-requests per second.
-	/// Defaults to no throttle.
+	/// By default, there is no throttle.
 	/// </para>
 	/// </summary>
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
@@ -56,7 +56,7 @@ public sealed partial class ReindexRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
-	/// Specifies how long a consistent view of the index should be maintained for scrolled search.
+	/// The period of time that a consistent view of the index should be maintained for scrolled search.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
@@ -64,14 +64,28 @@ public sealed partial class ReindexRequestParameters : RequestParameters
 	/// <summary>
 	/// <para>
 	/// The number of slices this task should be divided into.
-	/// Defaults to 1 slice, meaning the task isn’t sliced into subtasks.
+	/// It defaults to one slice, which means the task isn't sliced into subtasks.
+	/// </para>
+	/// <para>
+	/// Reindex supports sliced scroll to parallelize the reindexing process.
+	/// This parallelization can improve efficiency and provide a convenient way to break the request down into smaller parts.
+	/// </para>
+	/// <para>
+	/// NOTE: Reindexing from remote clusters does not support manual or automatic slicing.
+	/// </para>
+	/// <para>
+	/// If set to <c>auto</c>, Elasticsearch chooses the number of slices to use.
+	/// This setting will use one slice per shard, up to a certain limit.
+	/// If there are multiple sources, it will choose the number of slices based on the index or backing index with the smallest number of shards.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Slices? Slices { get => Q<Elastic.Clients.Elasticsearch.Slices?>("slices"); set => Q("slices", value); }
 
 	/// <summary>
 	/// <para>
-	/// Period each indexing waits for automatic index creation, dynamic mapping updates, and waiting for active shards.
+	/// The period each indexing waits for automatic index creation, dynamic mapping updates, and waiting for active shards.
+	/// By default, Elasticsearch waits for at least one minute before failing.
+	/// The actual wait time could be longer, particularly when multiple waits occur.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
@@ -79,7 +93,8 @@ public sealed partial class ReindexRequestParameters : RequestParameters
 	/// <summary>
 	/// <para>
 	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// Set it to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// The default value is one, which means it waits for each primary shard to be active.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
@@ -95,7 +110,294 @@ public sealed partial class ReindexRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Reindex documents.
-/// Copies documents from a source to a destination. The source can be any existing index, alias, or data stream. The destination must differ from the source. For example, you cannot reindex a data stream into itself.
+/// </para>
+/// <para>
+/// Copy documents from a source to a destination.
+/// You can copy all documents to the destination index or reindex a subset of the documents.
+/// The source can be any existing index, alias, or data stream.
+/// The destination must differ from the source.
+/// For example, you cannot reindex a data stream into itself.
+/// </para>
+/// <para>
+/// IMPORTANT: Reindex requires <c>_source</c> to be enabled for all documents in the source.
+/// The destination should be configured as wanted before calling the reindex API.
+/// Reindex does not copy the settings from the source or its associated template.
+/// Mappings, shard counts, and replicas, for example, must be configured ahead of time.
+/// </para>
+/// <para>
+/// If the Elasticsearch security features are enabled, you must have the following security privileges:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The <c>read</c> index privilege for the source data stream, index, or alias.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The <c>write</c> index privilege for the destination data stream, index, or index alias.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// To automatically create a data stream or index with a reindex API request, you must have the <c>auto_configure</c>, <c>create_index</c>, or <c>manage</c> index privilege for the destination data stream, index, or alias.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// If reindexing from a remote cluster, the <c>source.remote.user</c> must have the <c>monitor</c> cluster privilege and the <c>read</c> index privilege for the source data stream, index, or alias.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// If reindexing from a remote cluster, you must explicitly allow the remote host in the <c>reindex.remote.whitelist</c> setting.
+/// Automatic data stream creation requires a matching index template with data stream enabled.
+/// </para>
+/// <para>
+/// The <c>dest</c> element can be configured like the index API to control optimistic concurrency control.
+/// Omitting <c>version_type</c> or setting it to <c>internal</c> causes Elasticsearch to blindly dump documents into the destination, overwriting any that happen to have the same ID.
+/// </para>
+/// <para>
+/// Setting <c>version_type</c> to <c>external</c> causes Elasticsearch to preserve the <c>version</c> from the source, create any documents that are missing, and update any documents that have an older version in the destination than they do in the source.
+/// </para>
+/// <para>
+/// Setting <c>op_type</c> to <c>create</c> causes the reindex API to create only missing documents in the destination.
+/// All existing documents will cause a version conflict.
+/// </para>
+/// <para>
+/// IMPORTANT: Because data streams are append-only, any reindex request to a destination data stream must have an <c>op_type</c> of <c>create</c>.
+/// A reindex can only add new documents to a destination data stream.
+/// It cannot update existing documents in a destination data stream.
+/// </para>
+/// <para>
+/// By default, version conflicts abort the reindex process.
+/// To continue reindexing if there are conflicts, set the <c>conflicts</c> request body property to <c>proceed</c>.
+/// In this case, the response includes a count of the version conflicts that were encountered.
+/// Note that the handling of other error types is unaffected by the <c>conflicts</c> property.
+/// Additionally, if you opt to count version conflicts, the operation could attempt to reindex more documents from the source than <c>max_docs</c> until it has successfully indexed <c>max_docs</c> documents into the target or it has gone through every document in the source query.
+/// </para>
+/// <para>
+/// NOTE: The reindex API makes no effort to handle ID collisions.
+/// The last document written will "win" but the order isn't usually predictable so it is not a good idea to rely on this behavior.
+/// Instead, make sure that IDs are unique by using a script.
+/// </para>
+/// <para>
+/// <strong>Running reindex asynchronously</strong>
+/// </para>
+/// <para>
+/// If the request contains <c>wait_for_completion=false</c>, Elasticsearch performs some preflight checks, launches the request, and returns a task you can use to cancel or get the status of the task.
+/// Elasticsearch creates a record of this task as a document at <c>_tasks/&lt;task_id></c>.
+/// </para>
+/// <para>
+/// <strong>Reindex from multiple sources</strong>
+/// </para>
+/// <para>
+/// If you have many sources to reindex it is generally better to reindex them one at a time rather than using a glob pattern to pick up multiple sources.
+/// That way you can resume the process if there are any errors by removing the partially completed source and starting over.
+/// It also makes parallelizing the process fairly simple: split the list of sources to reindex and run each list in parallel.
+/// </para>
+/// <para>
+/// For example, you can use a bash script like this:
+/// </para>
+/// <code>
+/// for index in i1 i2 i3 i4 i5; do
+///   curl -HContent-Type:application/json -XPOST localhost:9200/_reindex?pretty -d'{
+///     "source": {
+///       "index": "'$index'"
+///     },
+///     "dest": {
+///       "index": "'$index'-reindexed"
+///     }
+///   }'
+/// done
+/// </code>
+/// <para>
+/// ** Throttling**
+/// </para>
+/// <para>
+/// Set <c>requests_per_second</c> to any positive decimal number (<c>1.4</c>, <c>6</c>, <c>1000</c>, for example) to throttle the rate at which reindex issues batches of index operations.
+/// Requests are throttled by padding each batch with a wait time.
+/// To turn off throttling, set <c>requests_per_second</c> to <c>-1</c>.
+/// </para>
+/// <para>
+/// The throttling is done by waiting between batches so that the scroll that reindex uses internally can be given a timeout that takes into account the padding.
+/// The padding time is the difference between the batch size divided by the <c>requests_per_second</c> and the time spent writing.
+/// By default the batch size is <c>1000</c>, so if <c>requests_per_second</c> is set to <c>500</c>:
+/// </para>
+/// <code>
+/// target_time = 1000 / 500 per second = 2 seconds
+/// wait_time = target_time - write_time = 2 seconds - .5 seconds = 1.5 seconds
+/// </code>
+/// <para>
+/// Since the batch is issued as a single bulk request, large batch sizes cause Elasticsearch to create many requests and then wait for a while before starting the next set.
+/// This is "bursty" instead of "smooth".
+/// </para>
+/// <para>
+/// <strong>Slicing</strong>
+/// </para>
+/// <para>
+/// Reindex supports sliced scroll to parallelize the reindexing process.
+/// This parallelization can improve efficiency and provide a convenient way to break the request down into smaller parts.
+/// </para>
+/// <para>
+/// NOTE: Reindexing from remote clusters does not support manual or automatic slicing.
+/// </para>
+/// <para>
+/// You can slice a reindex request manually by providing a slice ID and total number of slices to each request.
+/// You can also let reindex automatically parallelize by using sliced scroll to slice on <c>_id</c>.
+/// The <c>slices</c> parameter specifies the number of slices to use.
+/// </para>
+/// <para>
+/// Adding <c>slices</c> to the reindex request just automates the manual process, creating sub-requests which means it has some quirks:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// You can see these requests in the tasks API. These sub-requests are "child" tasks of the task for the request with slices.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Fetching the status of the task for the request with <c>slices</c> only contains the status of completed slices.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// These sub-requests are individually addressable for things like cancellation and rethrottling.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Rethrottling the request with <c>slices</c> will rethrottle the unfinished sub-request proportionally.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Canceling the request with <c>slices</c> will cancel each sub-request.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Due to the nature of <c>slices</c>, each sub-request won't get a perfectly even portion of the documents. All documents will be addressed, but some slices may be larger than others. Expect larger slices to have a more even distribution.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Parameters like <c>requests_per_second</c> and <c>max_docs</c> on a request with <c>slices</c> are distributed proportionally to each sub-request. Combine that with the previous point about distribution being uneven and you should conclude that using <c>max_docs</c> with <c>slices</c> might not result in exactly <c>max_docs</c> documents being reindexed.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Each sub-request gets a slightly different snapshot of the source, though these are all taken at approximately the same time.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// If slicing automatically, setting <c>slices</c> to <c>auto</c> will choose a reasonable number for most indices.
+/// If slicing manually or otherwise tuning automatic slicing, use the following guidelines.
+/// </para>
+/// <para>
+/// Query performance is most efficient when the number of slices is equal to the number of shards in the index.
+/// If that number is large (for example, <c>500</c>), choose a lower number as too many slices will hurt performance.
+/// Setting slices higher than the number of shards generally does not improve efficiency and adds overhead.
+/// </para>
+/// <para>
+/// Indexing performance scales linearly across available resources with the number of slices.
+/// </para>
+/// <para>
+/// Whether query or indexing performance dominates the runtime depends on the documents being reindexed and cluster resources.
+/// </para>
+/// <para>
+/// <strong>Modify documents during reindexing</strong>
+/// </para>
+/// <para>
+/// Like <c>_update_by_query</c>, reindex operations support a script that modifies the document.
+/// Unlike <c>_update_by_query</c>, the script is allowed to modify the document's metadata.
+/// </para>
+/// <para>
+/// Just as in <c>_update_by_query</c>, you can set <c>ctx.op</c> to change the operation that is run on the destination.
+/// For example, set <c>ctx.op</c> to <c>noop</c> if your script decides that the document doesn’t have to be indexed in the destination. This "no operation" will be reported in the <c>noop</c> counter in the response body.
+/// Set <c>ctx.op</c> to <c>delete</c> if your script decides that the document must be deleted from the destination.
+/// The deletion will be reported in the <c>deleted</c> counter in the response body.
+/// Setting <c>ctx.op</c> to anything else will return an error, as will setting any other field in <c>ctx</c>.
+/// </para>
+/// <para>
+/// Think of the possibilities! Just be careful; you are able to change:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// <c>_id</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// <c>_index</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// <c>_version</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// <c>_routing</c>
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// Setting <c>_version</c> to <c>null</c> or clearing it from the <c>ctx</c> map is just like not sending the version in an indexing request.
+/// It will cause the document to be overwritten in the destination regardless of the version on the target or the version type you use in the reindex API.
+/// </para>
+/// <para>
+/// <strong>Reindex from remote</strong>
+/// </para>
+/// <para>
+/// Reindex supports reindexing from a remote Elasticsearch cluster.
+/// The <c>host</c> parameter must contain a scheme, host, port, and optional path.
+/// The <c>username</c> and <c>password</c> parameters are optional and when they are present the reindex operation will connect to the remote Elasticsearch node using basic authentication.
+/// Be sure to use HTTPS when using basic authentication or the password will be sent in plain text.
+/// There are a range of settings available to configure the behavior of the HTTPS connection.
+/// </para>
+/// <para>
+/// When using Elastic Cloud, it is also possible to authenticate against the remote cluster through the use of a valid API key.
+/// Remote hosts must be explicitly allowed with the <c>reindex.remote.whitelist</c> setting.
+/// It can be set to a comma delimited list of allowed remote host and port combinations.
+/// Scheme is ignored; only the host and port are used.
+/// For example:
+/// </para>
+/// <code>
+/// reindex.remote.whitelist: [otherhost:9200, another:9200, 127.0.10.*:9200, localhost:*"]
+/// </code>
+/// <para>
+/// The list of allowed hosts must be configured on any nodes that will coordinate the reindex.
+/// This feature should work with remote clusters of any version of Elasticsearch.
+/// This should enable you to upgrade from any version of Elasticsearch to the current version by reindexing from a cluster of the old version.
+/// </para>
+/// <para>
+/// WARNING: Elasticsearch does not support forward compatibility across major versions.
+/// For example, you cannot reindex from a 7.x cluster into a 6.x cluster.
+/// </para>
+/// <para>
+/// To enable queries sent to older versions of Elasticsearch, the <c>query</c> parameter is sent directly to the remote host without validation or modification.
+/// </para>
+/// <para>
+/// NOTE: Reindexing from remote clusters does not support manual or automatic slicing.
+/// </para>
+/// <para>
+/// Reindexing from a remote server uses an on-heap buffer that defaults to a maximum size of 100mb.
+/// If the remote index includes very large documents you'll need to use a smaller batch size.
+/// It is also possible to set the socket read timeout on the remote connection with the <c>socket_timeout</c> field and the connection timeout with the <c>connect_timeout</c> field.
+/// Both default to 30 seconds.
+/// </para>
+/// <para>
+/// <strong>Configuring SSL parameters</strong>
+/// </para>
+/// <para>
+/// Reindex from remote supports configurable SSL settings.
+/// These must be specified in the <c>elasticsearch.yml</c> file, with the exception of the secure settings, which you add in the Elasticsearch keystore.
+/// It is not possible to configure SSL in the body of the reindex request.
 /// </para>
 /// </summary>
 public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParameters>
@@ -119,7 +421,7 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 	/// <summary>
 	/// <para>
 	/// The throttle for this request in sub-requests per second.
-	/// Defaults to no throttle.
+	/// By default, there is no throttle.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -135,7 +437,7 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 
 	/// <summary>
 	/// <para>
-	/// Specifies how long a consistent view of the index should be maintained for scrolled search.
+	/// The period of time that a consistent view of the index should be maintained for scrolled search.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -144,7 +446,19 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 	/// <summary>
 	/// <para>
 	/// The number of slices this task should be divided into.
-	/// Defaults to 1 slice, meaning the task isn’t sliced into subtasks.
+	/// It defaults to one slice, which means the task isn't sliced into subtasks.
+	/// </para>
+	/// <para>
+	/// Reindex supports sliced scroll to parallelize the reindexing process.
+	/// This parallelization can improve efficiency and provide a convenient way to break the request down into smaller parts.
+	/// </para>
+	/// <para>
+	/// NOTE: Reindexing from remote clusters does not support manual or automatic slicing.
+	/// </para>
+	/// <para>
+	/// If set to <c>auto</c>, Elasticsearch chooses the number of slices to use.
+	/// This setting will use one slice per shard, up to a certain limit.
+	/// If there are multiple sources, it will choose the number of slices based on the index or backing index with the smallest number of shards.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -152,7 +466,9 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 
 	/// <summary>
 	/// <para>
-	/// Period each indexing waits for automatic index creation, dynamic mapping updates, and waiting for active shards.
+	/// The period each indexing waits for automatic index creation, dynamic mapping updates, and waiting for active shards.
+	/// By default, Elasticsearch waits for at least one minute before failing.
+	/// The actual wait time could be longer, particularly when multiple waits occur.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -161,7 +477,8 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 	/// <summary>
 	/// <para>
 	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// Set it to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// The default value is one, which means it waits for each primary shard to be active.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -177,7 +494,7 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 
 	/// <summary>
 	/// <para>
-	/// Set to proceed to continue reindexing even if there are conflicts.
+	/// Indicates whether to continue reindexing even when there are conflicts.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("conflicts")]
@@ -194,6 +511,11 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 	/// <summary>
 	/// <para>
 	/// The maximum number of documents to reindex.
+	/// By default, all documents are reindexed.
+	/// If it is a value less then or equal to <c>scroll_size</c>, a scroll will not be used to retrieve the results for the operation.
+	/// </para>
+	/// <para>
+	/// If <c>conflicts</c> is set to <c>proceed</c>, the reindex operation could attempt to reindex more documents from the source than <c>max_docs</c> until it has successfully indexed <c>max_docs</c> documents into the target or it has gone through every document in the source query.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_docs")]
@@ -221,7 +543,294 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 /// <summary>
 /// <para>
 /// Reindex documents.
-/// Copies documents from a source to a destination. The source can be any existing index, alias, or data stream. The destination must differ from the source. For example, you cannot reindex a data stream into itself.
+/// </para>
+/// <para>
+/// Copy documents from a source to a destination.
+/// You can copy all documents to the destination index or reindex a subset of the documents.
+/// The source can be any existing index, alias, or data stream.
+/// The destination must differ from the source.
+/// For example, you cannot reindex a data stream into itself.
+/// </para>
+/// <para>
+/// IMPORTANT: Reindex requires <c>_source</c> to be enabled for all documents in the source.
+/// The destination should be configured as wanted before calling the reindex API.
+/// Reindex does not copy the settings from the source or its associated template.
+/// Mappings, shard counts, and replicas, for example, must be configured ahead of time.
+/// </para>
+/// <para>
+/// If the Elasticsearch security features are enabled, you must have the following security privileges:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The <c>read</c> index privilege for the source data stream, index, or alias.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The <c>write</c> index privilege for the destination data stream, index, or index alias.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// To automatically create a data stream or index with a reindex API request, you must have the <c>auto_configure</c>, <c>create_index</c>, or <c>manage</c> index privilege for the destination data stream, index, or alias.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// If reindexing from a remote cluster, the <c>source.remote.user</c> must have the <c>monitor</c> cluster privilege and the <c>read</c> index privilege for the source data stream, index, or alias.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// If reindexing from a remote cluster, you must explicitly allow the remote host in the <c>reindex.remote.whitelist</c> setting.
+/// Automatic data stream creation requires a matching index template with data stream enabled.
+/// </para>
+/// <para>
+/// The <c>dest</c> element can be configured like the index API to control optimistic concurrency control.
+/// Omitting <c>version_type</c> or setting it to <c>internal</c> causes Elasticsearch to blindly dump documents into the destination, overwriting any that happen to have the same ID.
+/// </para>
+/// <para>
+/// Setting <c>version_type</c> to <c>external</c> causes Elasticsearch to preserve the <c>version</c> from the source, create any documents that are missing, and update any documents that have an older version in the destination than they do in the source.
+/// </para>
+/// <para>
+/// Setting <c>op_type</c> to <c>create</c> causes the reindex API to create only missing documents in the destination.
+/// All existing documents will cause a version conflict.
+/// </para>
+/// <para>
+/// IMPORTANT: Because data streams are append-only, any reindex request to a destination data stream must have an <c>op_type</c> of <c>create</c>.
+/// A reindex can only add new documents to a destination data stream.
+/// It cannot update existing documents in a destination data stream.
+/// </para>
+/// <para>
+/// By default, version conflicts abort the reindex process.
+/// To continue reindexing if there are conflicts, set the <c>conflicts</c> request body property to <c>proceed</c>.
+/// In this case, the response includes a count of the version conflicts that were encountered.
+/// Note that the handling of other error types is unaffected by the <c>conflicts</c> property.
+/// Additionally, if you opt to count version conflicts, the operation could attempt to reindex more documents from the source than <c>max_docs</c> until it has successfully indexed <c>max_docs</c> documents into the target or it has gone through every document in the source query.
+/// </para>
+/// <para>
+/// NOTE: The reindex API makes no effort to handle ID collisions.
+/// The last document written will "win" but the order isn't usually predictable so it is not a good idea to rely on this behavior.
+/// Instead, make sure that IDs are unique by using a script.
+/// </para>
+/// <para>
+/// <strong>Running reindex asynchronously</strong>
+/// </para>
+/// <para>
+/// If the request contains <c>wait_for_completion=false</c>, Elasticsearch performs some preflight checks, launches the request, and returns a task you can use to cancel or get the status of the task.
+/// Elasticsearch creates a record of this task as a document at <c>_tasks/&lt;task_id></c>.
+/// </para>
+/// <para>
+/// <strong>Reindex from multiple sources</strong>
+/// </para>
+/// <para>
+/// If you have many sources to reindex it is generally better to reindex them one at a time rather than using a glob pattern to pick up multiple sources.
+/// That way you can resume the process if there are any errors by removing the partially completed source and starting over.
+/// It also makes parallelizing the process fairly simple: split the list of sources to reindex and run each list in parallel.
+/// </para>
+/// <para>
+/// For example, you can use a bash script like this:
+/// </para>
+/// <code>
+/// for index in i1 i2 i3 i4 i5; do
+///   curl -HContent-Type:application/json -XPOST localhost:9200/_reindex?pretty -d'{
+///     "source": {
+///       "index": "'$index'"
+///     },
+///     "dest": {
+///       "index": "'$index'-reindexed"
+///     }
+///   }'
+/// done
+/// </code>
+/// <para>
+/// ** Throttling**
+/// </para>
+/// <para>
+/// Set <c>requests_per_second</c> to any positive decimal number (<c>1.4</c>, <c>6</c>, <c>1000</c>, for example) to throttle the rate at which reindex issues batches of index operations.
+/// Requests are throttled by padding each batch with a wait time.
+/// To turn off throttling, set <c>requests_per_second</c> to <c>-1</c>.
+/// </para>
+/// <para>
+/// The throttling is done by waiting between batches so that the scroll that reindex uses internally can be given a timeout that takes into account the padding.
+/// The padding time is the difference between the batch size divided by the <c>requests_per_second</c> and the time spent writing.
+/// By default the batch size is <c>1000</c>, so if <c>requests_per_second</c> is set to <c>500</c>:
+/// </para>
+/// <code>
+/// target_time = 1000 / 500 per second = 2 seconds
+/// wait_time = target_time - write_time = 2 seconds - .5 seconds = 1.5 seconds
+/// </code>
+/// <para>
+/// Since the batch is issued as a single bulk request, large batch sizes cause Elasticsearch to create many requests and then wait for a while before starting the next set.
+/// This is "bursty" instead of "smooth".
+/// </para>
+/// <para>
+/// <strong>Slicing</strong>
+/// </para>
+/// <para>
+/// Reindex supports sliced scroll to parallelize the reindexing process.
+/// This parallelization can improve efficiency and provide a convenient way to break the request down into smaller parts.
+/// </para>
+/// <para>
+/// NOTE: Reindexing from remote clusters does not support manual or automatic slicing.
+/// </para>
+/// <para>
+/// You can slice a reindex request manually by providing a slice ID and total number of slices to each request.
+/// You can also let reindex automatically parallelize by using sliced scroll to slice on <c>_id</c>.
+/// The <c>slices</c> parameter specifies the number of slices to use.
+/// </para>
+/// <para>
+/// Adding <c>slices</c> to the reindex request just automates the manual process, creating sub-requests which means it has some quirks:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// You can see these requests in the tasks API. These sub-requests are "child" tasks of the task for the request with slices.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Fetching the status of the task for the request with <c>slices</c> only contains the status of completed slices.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// These sub-requests are individually addressable for things like cancellation and rethrottling.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Rethrottling the request with <c>slices</c> will rethrottle the unfinished sub-request proportionally.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Canceling the request with <c>slices</c> will cancel each sub-request.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Due to the nature of <c>slices</c>, each sub-request won't get a perfectly even portion of the documents. All documents will be addressed, but some slices may be larger than others. Expect larger slices to have a more even distribution.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Parameters like <c>requests_per_second</c> and <c>max_docs</c> on a request with <c>slices</c> are distributed proportionally to each sub-request. Combine that with the previous point about distribution being uneven and you should conclude that using <c>max_docs</c> with <c>slices</c> might not result in exactly <c>max_docs</c> documents being reindexed.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Each sub-request gets a slightly different snapshot of the source, though these are all taken at approximately the same time.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// If slicing automatically, setting <c>slices</c> to <c>auto</c> will choose a reasonable number for most indices.
+/// If slicing manually or otherwise tuning automatic slicing, use the following guidelines.
+/// </para>
+/// <para>
+/// Query performance is most efficient when the number of slices is equal to the number of shards in the index.
+/// If that number is large (for example, <c>500</c>), choose a lower number as too many slices will hurt performance.
+/// Setting slices higher than the number of shards generally does not improve efficiency and adds overhead.
+/// </para>
+/// <para>
+/// Indexing performance scales linearly across available resources with the number of slices.
+/// </para>
+/// <para>
+/// Whether query or indexing performance dominates the runtime depends on the documents being reindexed and cluster resources.
+/// </para>
+/// <para>
+/// <strong>Modify documents during reindexing</strong>
+/// </para>
+/// <para>
+/// Like <c>_update_by_query</c>, reindex operations support a script that modifies the document.
+/// Unlike <c>_update_by_query</c>, the script is allowed to modify the document's metadata.
+/// </para>
+/// <para>
+/// Just as in <c>_update_by_query</c>, you can set <c>ctx.op</c> to change the operation that is run on the destination.
+/// For example, set <c>ctx.op</c> to <c>noop</c> if your script decides that the document doesn’t have to be indexed in the destination. This "no operation" will be reported in the <c>noop</c> counter in the response body.
+/// Set <c>ctx.op</c> to <c>delete</c> if your script decides that the document must be deleted from the destination.
+/// The deletion will be reported in the <c>deleted</c> counter in the response body.
+/// Setting <c>ctx.op</c> to anything else will return an error, as will setting any other field in <c>ctx</c>.
+/// </para>
+/// <para>
+/// Think of the possibilities! Just be careful; you are able to change:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// <c>_id</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// <c>_index</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// <c>_version</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// <c>_routing</c>
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// Setting <c>_version</c> to <c>null</c> or clearing it from the <c>ctx</c> map is just like not sending the version in an indexing request.
+/// It will cause the document to be overwritten in the destination regardless of the version on the target or the version type you use in the reindex API.
+/// </para>
+/// <para>
+/// <strong>Reindex from remote</strong>
+/// </para>
+/// <para>
+/// Reindex supports reindexing from a remote Elasticsearch cluster.
+/// The <c>host</c> parameter must contain a scheme, host, port, and optional path.
+/// The <c>username</c> and <c>password</c> parameters are optional and when they are present the reindex operation will connect to the remote Elasticsearch node using basic authentication.
+/// Be sure to use HTTPS when using basic authentication or the password will be sent in plain text.
+/// There are a range of settings available to configure the behavior of the HTTPS connection.
+/// </para>
+/// <para>
+/// When using Elastic Cloud, it is also possible to authenticate against the remote cluster through the use of a valid API key.
+/// Remote hosts must be explicitly allowed with the <c>reindex.remote.whitelist</c> setting.
+/// It can be set to a comma delimited list of allowed remote host and port combinations.
+/// Scheme is ignored; only the host and port are used.
+/// For example:
+/// </para>
+/// <code>
+/// reindex.remote.whitelist: [otherhost:9200, another:9200, 127.0.10.*:9200, localhost:*"]
+/// </code>
+/// <para>
+/// The list of allowed hosts must be configured on any nodes that will coordinate the reindex.
+/// This feature should work with remote clusters of any version of Elasticsearch.
+/// This should enable you to upgrade from any version of Elasticsearch to the current version by reindexing from a cluster of the old version.
+/// </para>
+/// <para>
+/// WARNING: Elasticsearch does not support forward compatibility across major versions.
+/// For example, you cannot reindex from a 7.x cluster into a 6.x cluster.
+/// </para>
+/// <para>
+/// To enable queries sent to older versions of Elasticsearch, the <c>query</c> parameter is sent directly to the remote host without validation or modification.
+/// </para>
+/// <para>
+/// NOTE: Reindexing from remote clusters does not support manual or automatic slicing.
+/// </para>
+/// <para>
+/// Reindexing from a remote server uses an on-heap buffer that defaults to a maximum size of 100mb.
+/// If the remote index includes very large documents you'll need to use a smaller batch size.
+/// It is also possible to set the socket read timeout on the remote connection with the <c>socket_timeout</c> field and the connection timeout with the <c>connect_timeout</c> field.
+/// Both default to 30 seconds.
+/// </para>
+/// <para>
+/// <strong>Configuring SSL parameters</strong>
+/// </para>
+/// <para>
+/// Reindex from remote supports configurable SSL settings.
+/// These must be specified in the <c>elasticsearch.yml</c> file, with the exception of the secure settings, which you add in the Elasticsearch keystore.
+/// It is not possible to configure SSL in the body of the reindex request.
 /// </para>
 /// </summary>
 public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescriptor<ReindexRequestDescriptor<TDocument>, ReindexRequestParameters>
@@ -264,7 +873,7 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 
 	/// <summary>
 	/// <para>
-	/// Set to proceed to continue reindexing even if there are conflicts.
+	/// Indicates whether to continue reindexing even when there are conflicts.
 	/// </para>
 	/// </summary>
 	public ReindexRequestDescriptor<TDocument> Conflicts(Elastic.Clients.Elasticsearch.Conflicts? conflicts)
@@ -305,6 +914,11 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 	/// <summary>
 	/// <para>
 	/// The maximum number of documents to reindex.
+	/// By default, all documents are reindexed.
+	/// If it is a value less then or equal to <c>scroll_size</c>, a scroll will not be used to retrieve the results for the operation.
+	/// </para>
+	/// <para>
+	/// If <c>conflicts</c> is set to <c>proceed</c>, the reindex operation could attempt to reindex more documents from the source than <c>max_docs</c> until it has successfully indexed <c>max_docs</c> documents into the target or it has gone through every document in the source query.
 	/// </para>
 	/// </summary>
 	public ReindexRequestDescriptor<TDocument> MaxDocs(long? maxDocs)
@@ -453,7 +1067,294 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 /// <summary>
 /// <para>
 /// Reindex documents.
-/// Copies documents from a source to a destination. The source can be any existing index, alias, or data stream. The destination must differ from the source. For example, you cannot reindex a data stream into itself.
+/// </para>
+/// <para>
+/// Copy documents from a source to a destination.
+/// You can copy all documents to the destination index or reindex a subset of the documents.
+/// The source can be any existing index, alias, or data stream.
+/// The destination must differ from the source.
+/// For example, you cannot reindex a data stream into itself.
+/// </para>
+/// <para>
+/// IMPORTANT: Reindex requires <c>_source</c> to be enabled for all documents in the source.
+/// The destination should be configured as wanted before calling the reindex API.
+/// Reindex does not copy the settings from the source or its associated template.
+/// Mappings, shard counts, and replicas, for example, must be configured ahead of time.
+/// </para>
+/// <para>
+/// If the Elasticsearch security features are enabled, you must have the following security privileges:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The <c>read</c> index privilege for the source data stream, index, or alias.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The <c>write</c> index privilege for the destination data stream, index, or index alias.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// To automatically create a data stream or index with a reindex API request, you must have the <c>auto_configure</c>, <c>create_index</c>, or <c>manage</c> index privilege for the destination data stream, index, or alias.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// If reindexing from a remote cluster, the <c>source.remote.user</c> must have the <c>monitor</c> cluster privilege and the <c>read</c> index privilege for the source data stream, index, or alias.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// If reindexing from a remote cluster, you must explicitly allow the remote host in the <c>reindex.remote.whitelist</c> setting.
+/// Automatic data stream creation requires a matching index template with data stream enabled.
+/// </para>
+/// <para>
+/// The <c>dest</c> element can be configured like the index API to control optimistic concurrency control.
+/// Omitting <c>version_type</c> or setting it to <c>internal</c> causes Elasticsearch to blindly dump documents into the destination, overwriting any that happen to have the same ID.
+/// </para>
+/// <para>
+/// Setting <c>version_type</c> to <c>external</c> causes Elasticsearch to preserve the <c>version</c> from the source, create any documents that are missing, and update any documents that have an older version in the destination than they do in the source.
+/// </para>
+/// <para>
+/// Setting <c>op_type</c> to <c>create</c> causes the reindex API to create only missing documents in the destination.
+/// All existing documents will cause a version conflict.
+/// </para>
+/// <para>
+/// IMPORTANT: Because data streams are append-only, any reindex request to a destination data stream must have an <c>op_type</c> of <c>create</c>.
+/// A reindex can only add new documents to a destination data stream.
+/// It cannot update existing documents in a destination data stream.
+/// </para>
+/// <para>
+/// By default, version conflicts abort the reindex process.
+/// To continue reindexing if there are conflicts, set the <c>conflicts</c> request body property to <c>proceed</c>.
+/// In this case, the response includes a count of the version conflicts that were encountered.
+/// Note that the handling of other error types is unaffected by the <c>conflicts</c> property.
+/// Additionally, if you opt to count version conflicts, the operation could attempt to reindex more documents from the source than <c>max_docs</c> until it has successfully indexed <c>max_docs</c> documents into the target or it has gone through every document in the source query.
+/// </para>
+/// <para>
+/// NOTE: The reindex API makes no effort to handle ID collisions.
+/// The last document written will "win" but the order isn't usually predictable so it is not a good idea to rely on this behavior.
+/// Instead, make sure that IDs are unique by using a script.
+/// </para>
+/// <para>
+/// <strong>Running reindex asynchronously</strong>
+/// </para>
+/// <para>
+/// If the request contains <c>wait_for_completion=false</c>, Elasticsearch performs some preflight checks, launches the request, and returns a task you can use to cancel or get the status of the task.
+/// Elasticsearch creates a record of this task as a document at <c>_tasks/&lt;task_id></c>.
+/// </para>
+/// <para>
+/// <strong>Reindex from multiple sources</strong>
+/// </para>
+/// <para>
+/// If you have many sources to reindex it is generally better to reindex them one at a time rather than using a glob pattern to pick up multiple sources.
+/// That way you can resume the process if there are any errors by removing the partially completed source and starting over.
+/// It also makes parallelizing the process fairly simple: split the list of sources to reindex and run each list in parallel.
+/// </para>
+/// <para>
+/// For example, you can use a bash script like this:
+/// </para>
+/// <code>
+/// for index in i1 i2 i3 i4 i5; do
+///   curl -HContent-Type:application/json -XPOST localhost:9200/_reindex?pretty -d'{
+///     "source": {
+///       "index": "'$index'"
+///     },
+///     "dest": {
+///       "index": "'$index'-reindexed"
+///     }
+///   }'
+/// done
+/// </code>
+/// <para>
+/// ** Throttling**
+/// </para>
+/// <para>
+/// Set <c>requests_per_second</c> to any positive decimal number (<c>1.4</c>, <c>6</c>, <c>1000</c>, for example) to throttle the rate at which reindex issues batches of index operations.
+/// Requests are throttled by padding each batch with a wait time.
+/// To turn off throttling, set <c>requests_per_second</c> to <c>-1</c>.
+/// </para>
+/// <para>
+/// The throttling is done by waiting between batches so that the scroll that reindex uses internally can be given a timeout that takes into account the padding.
+/// The padding time is the difference between the batch size divided by the <c>requests_per_second</c> and the time spent writing.
+/// By default the batch size is <c>1000</c>, so if <c>requests_per_second</c> is set to <c>500</c>:
+/// </para>
+/// <code>
+/// target_time = 1000 / 500 per second = 2 seconds
+/// wait_time = target_time - write_time = 2 seconds - .5 seconds = 1.5 seconds
+/// </code>
+/// <para>
+/// Since the batch is issued as a single bulk request, large batch sizes cause Elasticsearch to create many requests and then wait for a while before starting the next set.
+/// This is "bursty" instead of "smooth".
+/// </para>
+/// <para>
+/// <strong>Slicing</strong>
+/// </para>
+/// <para>
+/// Reindex supports sliced scroll to parallelize the reindexing process.
+/// This parallelization can improve efficiency and provide a convenient way to break the request down into smaller parts.
+/// </para>
+/// <para>
+/// NOTE: Reindexing from remote clusters does not support manual or automatic slicing.
+/// </para>
+/// <para>
+/// You can slice a reindex request manually by providing a slice ID and total number of slices to each request.
+/// You can also let reindex automatically parallelize by using sliced scroll to slice on <c>_id</c>.
+/// The <c>slices</c> parameter specifies the number of slices to use.
+/// </para>
+/// <para>
+/// Adding <c>slices</c> to the reindex request just automates the manual process, creating sub-requests which means it has some quirks:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// You can see these requests in the tasks API. These sub-requests are "child" tasks of the task for the request with slices.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Fetching the status of the task for the request with <c>slices</c> only contains the status of completed slices.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// These sub-requests are individually addressable for things like cancellation and rethrottling.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Rethrottling the request with <c>slices</c> will rethrottle the unfinished sub-request proportionally.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Canceling the request with <c>slices</c> will cancel each sub-request.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Due to the nature of <c>slices</c>, each sub-request won't get a perfectly even portion of the documents. All documents will be addressed, but some slices may be larger than others. Expect larger slices to have a more even distribution.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Parameters like <c>requests_per_second</c> and <c>max_docs</c> on a request with <c>slices</c> are distributed proportionally to each sub-request. Combine that with the previous point about distribution being uneven and you should conclude that using <c>max_docs</c> with <c>slices</c> might not result in exactly <c>max_docs</c> documents being reindexed.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Each sub-request gets a slightly different snapshot of the source, though these are all taken at approximately the same time.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// If slicing automatically, setting <c>slices</c> to <c>auto</c> will choose a reasonable number for most indices.
+/// If slicing manually or otherwise tuning automatic slicing, use the following guidelines.
+/// </para>
+/// <para>
+/// Query performance is most efficient when the number of slices is equal to the number of shards in the index.
+/// If that number is large (for example, <c>500</c>), choose a lower number as too many slices will hurt performance.
+/// Setting slices higher than the number of shards generally does not improve efficiency and adds overhead.
+/// </para>
+/// <para>
+/// Indexing performance scales linearly across available resources with the number of slices.
+/// </para>
+/// <para>
+/// Whether query or indexing performance dominates the runtime depends on the documents being reindexed and cluster resources.
+/// </para>
+/// <para>
+/// <strong>Modify documents during reindexing</strong>
+/// </para>
+/// <para>
+/// Like <c>_update_by_query</c>, reindex operations support a script that modifies the document.
+/// Unlike <c>_update_by_query</c>, the script is allowed to modify the document's metadata.
+/// </para>
+/// <para>
+/// Just as in <c>_update_by_query</c>, you can set <c>ctx.op</c> to change the operation that is run on the destination.
+/// For example, set <c>ctx.op</c> to <c>noop</c> if your script decides that the document doesn’t have to be indexed in the destination. This "no operation" will be reported in the <c>noop</c> counter in the response body.
+/// Set <c>ctx.op</c> to <c>delete</c> if your script decides that the document must be deleted from the destination.
+/// The deletion will be reported in the <c>deleted</c> counter in the response body.
+/// Setting <c>ctx.op</c> to anything else will return an error, as will setting any other field in <c>ctx</c>.
+/// </para>
+/// <para>
+/// Think of the possibilities! Just be careful; you are able to change:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// <c>_id</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// <c>_index</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// <c>_version</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// <c>_routing</c>
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// Setting <c>_version</c> to <c>null</c> or clearing it from the <c>ctx</c> map is just like not sending the version in an indexing request.
+/// It will cause the document to be overwritten in the destination regardless of the version on the target or the version type you use in the reindex API.
+/// </para>
+/// <para>
+/// <strong>Reindex from remote</strong>
+/// </para>
+/// <para>
+/// Reindex supports reindexing from a remote Elasticsearch cluster.
+/// The <c>host</c> parameter must contain a scheme, host, port, and optional path.
+/// The <c>username</c> and <c>password</c> parameters are optional and when they are present the reindex operation will connect to the remote Elasticsearch node using basic authentication.
+/// Be sure to use HTTPS when using basic authentication or the password will be sent in plain text.
+/// There are a range of settings available to configure the behavior of the HTTPS connection.
+/// </para>
+/// <para>
+/// When using Elastic Cloud, it is also possible to authenticate against the remote cluster through the use of a valid API key.
+/// Remote hosts must be explicitly allowed with the <c>reindex.remote.whitelist</c> setting.
+/// It can be set to a comma delimited list of allowed remote host and port combinations.
+/// Scheme is ignored; only the host and port are used.
+/// For example:
+/// </para>
+/// <code>
+/// reindex.remote.whitelist: [otherhost:9200, another:9200, 127.0.10.*:9200, localhost:*"]
+/// </code>
+/// <para>
+/// The list of allowed hosts must be configured on any nodes that will coordinate the reindex.
+/// This feature should work with remote clusters of any version of Elasticsearch.
+/// This should enable you to upgrade from any version of Elasticsearch to the current version by reindexing from a cluster of the old version.
+/// </para>
+/// <para>
+/// WARNING: Elasticsearch does not support forward compatibility across major versions.
+/// For example, you cannot reindex from a 7.x cluster into a 6.x cluster.
+/// </para>
+/// <para>
+/// To enable queries sent to older versions of Elasticsearch, the <c>query</c> parameter is sent directly to the remote host without validation or modification.
+/// </para>
+/// <para>
+/// NOTE: Reindexing from remote clusters does not support manual or automatic slicing.
+/// </para>
+/// <para>
+/// Reindexing from a remote server uses an on-heap buffer that defaults to a maximum size of 100mb.
+/// If the remote index includes very large documents you'll need to use a smaller batch size.
+/// It is also possible to set the socket read timeout on the remote connection with the <c>socket_timeout</c> field and the connection timeout with the <c>connect_timeout</c> field.
+/// Both default to 30 seconds.
+/// </para>
+/// <para>
+/// <strong>Configuring SSL parameters</strong>
+/// </para>
+/// <para>
+/// Reindex from remote supports configurable SSL settings.
+/// These must be specified in the <c>elasticsearch.yml</c> file, with the exception of the secure settings, which you add in the Elasticsearch keystore.
+/// It is not possible to configure SSL in the body of the reindex request.
 /// </para>
 /// </summary>
 public sealed partial class ReindexRequestDescriptor : RequestDescriptor<ReindexRequestDescriptor, ReindexRequestParameters>
@@ -496,7 +1397,7 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 
 	/// <summary>
 	/// <para>
-	/// Set to proceed to continue reindexing even if there are conflicts.
+	/// Indicates whether to continue reindexing even when there are conflicts.
 	/// </para>
 	/// </summary>
 	public ReindexRequestDescriptor Conflicts(Elastic.Clients.Elasticsearch.Conflicts? conflicts)
@@ -537,6 +1438,11 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 	/// <summary>
 	/// <para>
 	/// The maximum number of documents to reindex.
+	/// By default, all documents are reindexed.
+	/// If it is a value less then or equal to <c>scroll_size</c>, a scroll will not be used to retrieve the results for the operation.
+	/// </para>
+	/// <para>
+	/// If <c>conflicts</c> is set to <c>proceed</c>, the reindex operation could attempt to reindex more documents from the source than <c>max_docs</c> until it has successfully indexed <c>max_docs</c> documents into the target or it has gone through every document in the source query.
 	/// </para>
 	/// </summary>
 	public ReindexRequestDescriptor MaxDocs(long? maxDocs)

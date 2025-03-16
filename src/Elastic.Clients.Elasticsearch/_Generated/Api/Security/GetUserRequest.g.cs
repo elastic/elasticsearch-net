@@ -34,7 +34,7 @@ public sealed partial class GetUserRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// If true will return the User Profile ID for a user, if any.
+	/// Determines whether to retrieve the user profile UID, if it exists, for the users.
 	/// </para>
 	/// </summary>
 	public bool? WithProfileUid { get => Q<bool?>("with_profile_uid"); set => Q("with_profile_uid", value); }
@@ -68,7 +68,7 @@ public sealed partial class GetUserRequest : PlainRequest<GetUserRequestParamete
 
 	/// <summary>
 	/// <para>
-	/// If true will return the User Profile ID for a user, if any.
+	/// Determines whether to retrieve the user profile UID, if it exists, for the users.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]

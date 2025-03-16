@@ -28,8 +28,20 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed partial class ClearScrollResponse : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>
+	/// The number of scrolling search requests cleared.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("num_freed")]
 	public int NumFreed { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request succeeded.
+	/// This does not indicate whether any scrolling search requests were cleared.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("succeeded")]
 	public bool Succeeded { get; init; }
 }

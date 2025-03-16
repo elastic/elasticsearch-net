@@ -58,6 +58,8 @@ public sealed partial class DoubleRangeProperty : IProperty
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
+	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
+	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "double_range";
@@ -82,6 +84,7 @@ public sealed partial class DoubleRangePropertyDescriptor<TDocument> : Serializa
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private bool? StoreValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public DoubleRangePropertyDescriptor<TDocument> Boost(double? boost)
 	{
@@ -182,6 +185,12 @@ public sealed partial class DoubleRangePropertyDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
+	public DoubleRangePropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -251,6 +260,12 @@ public sealed partial class DoubleRangePropertyDescriptor<TDocument> : Serializa
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("double_range");
 		writer.WriteEndObject();
@@ -268,7 +283,8 @@ public sealed partial class DoubleRangePropertyDescriptor<TDocument> : Serializa
 		Index = IndexValue,
 		Meta = MetaValue,
 		Properties = PropertiesValue,
-		Store = StoreValue
+		Store = StoreValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }
 
@@ -291,6 +307,7 @@ public sealed partial class DoubleRangePropertyDescriptor : SerializableDescript
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private bool? StoreValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public DoubleRangePropertyDescriptor Boost(double? boost)
 	{
@@ -391,6 +408,12 @@ public sealed partial class DoubleRangePropertyDescriptor : SerializableDescript
 		return Self;
 	}
 
+	public DoubleRangePropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -460,6 +483,12 @@ public sealed partial class DoubleRangePropertyDescriptor : SerializableDescript
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("double_range");
 		writer.WriteEndObject();
@@ -477,6 +506,7 @@ public sealed partial class DoubleRangePropertyDescriptor : SerializableDescript
 		Index = IndexValue,
 		Meta = MetaValue,
 		Properties = PropertiesValue,
-		Store = StoreValue
+		Store = StoreValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }

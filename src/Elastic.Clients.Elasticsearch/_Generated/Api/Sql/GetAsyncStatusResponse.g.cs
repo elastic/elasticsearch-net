@@ -30,7 +30,8 @@ public sealed partial class GetAsyncStatusResponse : ElasticsearchResponse
 {
 	/// <summary>
 	/// <para>
-	/// HTTP status code for the search. The API only returns this property for completed searches.
+	/// The HTTP status code for the search.
+	/// The API returns this property only for completed searches.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("completion_status")]
@@ -38,8 +39,7 @@ public sealed partial class GetAsyncStatusResponse : ElasticsearchResponse
 
 	/// <summary>
 	/// <para>
-	/// Timestamp, in milliseconds since the Unix epoch, when Elasticsearch will delete
-	/// the search and its results, even if the search is still running.
+	/// The timestamp, in milliseconds since the Unix epoch, when Elasticsearch will delete the search and its results, even if the search is still running.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("expiration_time_in_millis")]
@@ -47,7 +47,7 @@ public sealed partial class GetAsyncStatusResponse : ElasticsearchResponse
 
 	/// <summary>
 	/// <para>
-	/// Identifier for the search.
+	/// The identifier for the search.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("id")]
@@ -55,10 +55,9 @@ public sealed partial class GetAsyncStatusResponse : ElasticsearchResponse
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, the response does not contain complete search results. If <c>is_partial</c>
-	/// is <c>true</c> and <c>is_running</c> is <c>true</c>, the search is still running. If <c>is_partial</c>
-	/// is <c>true</c> but <c>is_running</c> is <c>false</c>, the results are partial due to a failure or
-	/// timeout.
+	/// If <c>true</c>, the response does not contain complete search results.
+	/// If <c>is_partial</c> is <c>true</c> and <c>is_running</c> is <c>true</c>, the search is still running.
+	/// If <c>is_partial</c> is <c>true</c> but <c>is_running</c> is <c>false</c>, the results are partial due to a failure or timeout.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("is_partial")]
@@ -66,7 +65,8 @@ public sealed partial class GetAsyncStatusResponse : ElasticsearchResponse
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, the search is still running. If <c>false</c>, the search has finished.
+	/// If <c>true</c>, the search is still running.
+	/// If <c>false</c>, the search has finished.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("is_running")]
@@ -74,8 +74,8 @@ public sealed partial class GetAsyncStatusResponse : ElasticsearchResponse
 
 	/// <summary>
 	/// <para>
-	/// Timestamp, in milliseconds since the Unix epoch, when the search started.
-	/// The API only returns this property for running searches.
+	/// The timestamp, in milliseconds since the Unix epoch, when the search started.
+	/// The API returns this property only for running searches.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("start_time_in_millis")]

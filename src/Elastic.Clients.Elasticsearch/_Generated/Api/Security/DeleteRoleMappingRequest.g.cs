@@ -44,6 +44,11 @@ public sealed partial class DeleteRoleMappingRequestParameters : RequestParamete
 /// <para>
 /// Delete role mappings.
 /// </para>
+/// <para>
+/// Role mappings define which roles are assigned to each user.
+/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
+/// The delete role mappings API cannot remove role mappings that are defined in role mapping files.
+/// </para>
 /// </summary>
 public sealed partial class DeleteRoleMappingRequest : PlainRequest<DeleteRoleMappingRequestParameters>
 {
@@ -71,6 +76,11 @@ public sealed partial class DeleteRoleMappingRequest : PlainRequest<DeleteRoleMa
 /// <summary>
 /// <para>
 /// Delete role mappings.
+/// </para>
+/// <para>
+/// Role mappings define which roles are assigned to each user.
+/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
+/// The delete role mappings API cannot remove role mappings that are defined in role mapping files.
 /// </para>
 /// </summary>
 public sealed partial class DeleteRoleMappingRequestDescriptor : RequestDescriptor<DeleteRoleMappingRequestDescriptor, DeleteRoleMappingRequestParameters>

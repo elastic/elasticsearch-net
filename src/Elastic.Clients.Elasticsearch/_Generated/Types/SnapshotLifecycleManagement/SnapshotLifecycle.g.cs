@@ -35,10 +35,22 @@ public sealed partial class SnapshotLifecycle
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Invocation? LastFailure { get; init; }
 	[JsonInclude, JsonPropertyName("last_success")]
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Invocation? LastSuccess { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The last time the policy was modified.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("modified_date")]
 	public DateTimeOffset? ModifiedDate { get; init; }
 	[JsonInclude, JsonPropertyName("modified_date_millis")]
 	public long ModifiedDateMillis { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The next time the policy will run.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("next_execution")]
 	public DateTimeOffset? NextExecution { get; init; }
 	[JsonInclude, JsonPropertyName("next_execution_millis")]
@@ -47,6 +59,13 @@ public sealed partial class SnapshotLifecycle
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmPolicy Policy { get; init; }
 	[JsonInclude, JsonPropertyName("stats")]
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Statistics Stats { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The version of the snapshot policy.
+	/// Only the latest version is stored and incremented when the policy is updated.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("version")]
 	public long Version { get; init; }
 }

@@ -34,16 +34,33 @@ public sealed partial class TermVectorsRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
-	/// Used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
+	/// A comma-separated list or wildcard expressions of fields to include in the statistics.
+	/// It is used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fields"); set => Q("fields", value); }
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, the response includes the document count, sum of document frequencies, and sum of total term frequencies.
+	/// If <c>true</c>, the response includes:
 	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// The document count (how many documents contain this field).
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// The sum of document frequencies (the sum of document frequencies for all terms in this field).
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// The sum of total term frequencies (the sum of total term frequencies of each term in this field).
+	/// </para>
+	/// </item>
+	/// </list>
 	/// </summary>
 	public bool? FieldStatistics { get => Q<bool?>("field_statistics"); set => Q("field_statistics", value); }
 
@@ -70,8 +87,8 @@ public sealed partial class TermVectorsRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
-	/// Specifies the node or shard the operation should be performed on.
-	/// Random by default.
+	/// The node or shard the operation should be performed on.
+	/// It is random by default.
 	/// </para>
 	/// </summary>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
@@ -85,14 +102,29 @@ public sealed partial class TermVectorsRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
-	/// Custom value used to route operations to a specific shard.
+	/// A custom value that is used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, the response includes term frequency and document frequency.
+	/// If <c>true</c>, the response includes:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// The total term frequency (how often a term occurs in all documents).
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// The document frequency (the number of documents containing the current term).
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// By default these values are not returned since term statistics can have a serious performance impact.
 	/// </para>
 	/// </summary>
 	public bool? TermStatistics { get => Q<bool?>("term_statistics"); set => Q("term_statistics", value); }
@@ -106,7 +138,7 @@ public sealed partial class TermVectorsRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
-	/// Specific version type.
+	/// The version type.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
@@ -118,6 +150,69 @@ public sealed partial class TermVectorsRequestParameters : RequestParameters
 /// </para>
 /// <para>
 /// Get information and statistics about terms in the fields of a particular document.
+/// </para>
+/// <para>
+/// You can retrieve term vectors for documents stored in the index or for artificial documents passed in the body of the request.
+/// You can specify the fields you are interested in through the <c>fields</c> parameter or by adding the fields to the request body.
+/// For example:
+/// </para>
+/// <code>
+/// GET /my-index-000001/_termvectors/1?fields=message
+/// </code>
+/// <para>
+/// Fields can be specified using wildcards, similar to the multi match query.
+/// </para>
+/// <para>
+/// Term vectors are real-time by default, not near real-time.
+/// This can be changed by setting <c>realtime</c> parameter to <c>false</c>.
+/// </para>
+/// <para>
+/// You can request three types of values: <em>term information</em>, <em>term statistics</em>, and <em>field statistics</em>.
+/// By default, all term information and field statistics are returned for all fields but term statistics are excluded.
+/// </para>
+/// <para>
+/// <strong>Term information</strong>
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// term frequency in the field (always returned)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// term positions (<c>positions: true</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// start and end offsets (<c>offsets: true</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// term payloads (<c>payloads: true</c>), as base64 encoded bytes
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// If the requested information wasn't stored in the index, it will be computed on the fly if possible.
+/// Additionally, term vectors could be computed for documents not even existing in the index, but instead provided by the user.
+/// </para>
+/// <para>
+/// warn
+/// Start and end offsets assume UTF-16 encoding is being used. If you want to use these offsets in order to get the original text that produced this token, you should make sure that the string you are taking a sub-string of is also encoded using UTF-16.
+/// </para>
+/// <para>
+/// <strong>Behaviour</strong>
+/// </para>
+/// <para>
+/// The term and field statistics are not accurate.
+/// Deleted documents are not taken into account.
+/// The information is only retrieved for the shard the requested document resides in.
+/// The term and field statistics are therefore only useful as relative measures whereas the absolute numbers have no meaning in this context.
+/// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
+/// Use <c>routing</c> only to hit a particular shard.
 /// </para>
 /// </summary>
 public sealed partial class TermVectorsRequest<TDocument> : PlainRequest<TermVectorsRequestParameters>
@@ -140,8 +235,8 @@ public sealed partial class TermVectorsRequest<TDocument> : PlainRequest<TermVec
 
 	/// <summary>
 	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
-	/// Used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
+	/// A comma-separated list or wildcard expressions of fields to include in the statistics.
+	/// It is used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -149,8 +244,25 @@ public sealed partial class TermVectorsRequest<TDocument> : PlainRequest<TermVec
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, the response includes the document count, sum of document frequencies, and sum of total term frequencies.
+	/// If <c>true</c>, the response includes:
 	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// The document count (how many documents contain this field).
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// The sum of document frequencies (the sum of document frequencies for all terms in this field).
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// The sum of total term frequencies (the sum of total term frequencies of each term in this field).
+	/// </para>
+	/// </item>
+	/// </list>
 	/// </summary>
 	[JsonIgnore]
 	public bool? FieldStatistics { get => Q<bool?>("field_statistics"); set => Q("field_statistics", value); }
@@ -181,8 +293,8 @@ public sealed partial class TermVectorsRequest<TDocument> : PlainRequest<TermVec
 
 	/// <summary>
 	/// <para>
-	/// Specifies the node or shard the operation should be performed on.
-	/// Random by default.
+	/// The node or shard the operation should be performed on.
+	/// It is random by default.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -198,7 +310,7 @@ public sealed partial class TermVectorsRequest<TDocument> : PlainRequest<TermVec
 
 	/// <summary>
 	/// <para>
-	/// Custom value used to route operations to a specific shard.
+	/// A custom value that is used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -206,7 +318,22 @@ public sealed partial class TermVectorsRequest<TDocument> : PlainRequest<TermVec
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, the response includes term frequency and document frequency.
+	/// If <c>true</c>, the response includes:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// The total term frequency (how often a term occurs in all documents).
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// The document frequency (the number of documents containing the current term).
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// By default these values are not returned since term statistics can have a serious performance impact.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -222,7 +349,7 @@ public sealed partial class TermVectorsRequest<TDocument> : PlainRequest<TermVec
 
 	/// <summary>
 	/// <para>
-	/// Specific version type.
+	/// The version type.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -240,6 +367,8 @@ public sealed partial class TermVectorsRequest<TDocument> : PlainRequest<TermVec
 	/// <summary>
 	/// <para>
 	/// Filter terms based on their tf-idf scores.
+	/// This could be useful in order find out a good characteristic vector of a document.
+	/// This feature works in a similar manner to the second phase of the More Like This Query.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("filter")]
@@ -247,7 +376,9 @@ public sealed partial class TermVectorsRequest<TDocument> : PlainRequest<TermVec
 
 	/// <summary>
 	/// <para>
-	/// Overrides the default per-field analyzer.
+	/// Override the default per-field analyzer.
+	/// This is useful in order to generate term vectors in any fashion, especially when using artificial documents.
+	/// When providing an analyzer for a field that already stores term vectors, the term vectors will be regenerated.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("per_field_analyzer")]
@@ -260,6 +391,69 @@ public sealed partial class TermVectorsRequest<TDocument> : PlainRequest<TermVec
 /// </para>
 /// <para>
 /// Get information and statistics about terms in the fields of a particular document.
+/// </para>
+/// <para>
+/// You can retrieve term vectors for documents stored in the index or for artificial documents passed in the body of the request.
+/// You can specify the fields you are interested in through the <c>fields</c> parameter or by adding the fields to the request body.
+/// For example:
+/// </para>
+/// <code>
+/// GET /my-index-000001/_termvectors/1?fields=message
+/// </code>
+/// <para>
+/// Fields can be specified using wildcards, similar to the multi match query.
+/// </para>
+/// <para>
+/// Term vectors are real-time by default, not near real-time.
+/// This can be changed by setting <c>realtime</c> parameter to <c>false</c>.
+/// </para>
+/// <para>
+/// You can request three types of values: <em>term information</em>, <em>term statistics</em>, and <em>field statistics</em>.
+/// By default, all term information and field statistics are returned for all fields but term statistics are excluded.
+/// </para>
+/// <para>
+/// <strong>Term information</strong>
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// term frequency in the field (always returned)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// term positions (<c>positions: true</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// start and end offsets (<c>offsets: true</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// term payloads (<c>payloads: true</c>), as base64 encoded bytes
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// If the requested information wasn't stored in the index, it will be computed on the fly if possible.
+/// Additionally, term vectors could be computed for documents not even existing in the index, but instead provided by the user.
+/// </para>
+/// <para>
+/// warn
+/// Start and end offsets assume UTF-16 encoding is being used. If you want to use these offsets in order to get the original text that produced this token, you should make sure that the string you are taking a sub-string of is also encoded using UTF-16.
+/// </para>
+/// <para>
+/// <strong>Behaviour</strong>
+/// </para>
+/// <para>
+/// The term and field statistics are not accurate.
+/// Deleted documents are not taken into account.
+/// The information is only retrieved for the shard the requested document resides in.
+/// The term and field statistics are therefore only useful as relative measures whereas the absolute numbers have no meaning in this context.
+/// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
+/// Use <c>routing</c> only to hit a particular shard.
 /// </para>
 /// </summary>
 public sealed partial class TermVectorsRequestDescriptor<TDocument> : RequestDescriptor<TermVectorsRequestDescriptor<TDocument>, TermVectorsRequestParameters>
@@ -342,6 +536,8 @@ public sealed partial class TermVectorsRequestDescriptor<TDocument> : RequestDes
 	/// <summary>
 	/// <para>
 	/// Filter terms based on their tf-idf scores.
+	/// This could be useful in order find out a good characteristic vector of a document.
+	/// This feature works in a similar manner to the second phase of the More Like This Query.
 	/// </para>
 	/// </summary>
 	public TermVectorsRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.Core.TermVectors.Filter? filter)
@@ -370,7 +566,9 @@ public sealed partial class TermVectorsRequestDescriptor<TDocument> : RequestDes
 
 	/// <summary>
 	/// <para>
-	/// Overrides the default per-field analyzer.
+	/// Override the default per-field analyzer.
+	/// This is useful in order to generate term vectors in any fashion, especially when using artificial documents.
+	/// When providing an analyzer for a field that already stores term vectors, the term vectors will be regenerated.
 	/// </para>
 	/// </summary>
 	public TermVectorsRequestDescriptor<TDocument> PerFieldAnalyzer(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>> selector)

@@ -39,7 +39,11 @@ public sealed partial class QueryRoleRequestParameters : RequestParameters
 /// Find roles with a query.
 /// </para>
 /// <para>
-/// Get roles in a paginated manner. You can optionally filter the results with a query.
+/// Get roles in a paginated manner.
+/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+/// The query roles API does not retrieve roles that are defined in roles files, nor built-in ones.
+/// You can optionally filter the results with a query.
+/// Also, the results can be paginated and sorted.
 /// </para>
 /// </summary>
 public sealed partial class QueryRoleRequest : PlainRequest<QueryRoleRequestParameters>
@@ -54,8 +58,9 @@ public sealed partial class QueryRoleRequest : PlainRequest<QueryRoleRequestPara
 
 	/// <summary>
 	/// <para>
-	/// Starting document offset.
-	/// By default, you cannot page through more than 10,000 hits using the from and size parameters.
+	/// The starting document offset.
+	/// It must not be negative.
+	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
 	/// </summary>
@@ -69,7 +74,7 @@ public sealed partial class QueryRoleRequest : PlainRequest<QueryRoleRequestPara
 	/// The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
 	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
 	/// You can query the following information associated with roles: <c>name</c>, <c>description</c>, <c>metadata</c>,
-	/// <c>applications.application</c>, <c>applications.privileges</c>, <c>applications.resources</c>.
+	/// <c>applications.application</c>, <c>applications.privileges</c>, and <c>applications.resources</c>.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
@@ -77,7 +82,7 @@ public sealed partial class QueryRoleRequest : PlainRequest<QueryRoleRequestPara
 
 	/// <summary>
 	/// <para>
-	/// Search after definition
+	/// The search after definition.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("search_after")]
@@ -86,6 +91,7 @@ public sealed partial class QueryRoleRequest : PlainRequest<QueryRoleRequestPara
 	/// <summary>
 	/// <para>
 	/// The number of hits to return.
+	/// It must not be negative.
 	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
@@ -95,7 +101,8 @@ public sealed partial class QueryRoleRequest : PlainRequest<QueryRoleRequestPara
 
 	/// <summary>
 	/// <para>
-	/// All public fields of a role are eligible for sorting.
+	/// The sort definition.
+	/// You can sort on <c>username</c>, <c>roles</c>, or <c>enabled</c>.
 	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
 	/// </para>
 	/// </summary>
@@ -109,7 +116,11 @@ public sealed partial class QueryRoleRequest : PlainRequest<QueryRoleRequestPara
 /// Find roles with a query.
 /// </para>
 /// <para>
-/// Get roles in a paginated manner. You can optionally filter the results with a query.
+/// Get roles in a paginated manner.
+/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+/// The query roles API does not retrieve roles that are defined in roles files, nor built-in ones.
+/// You can optionally filter the results with a query.
+/// Also, the results can be paginated and sorted.
 /// </para>
 /// </summary>
 public sealed partial class QueryRoleRequestDescriptor<TDocument> : RequestDescriptor<QueryRoleRequestDescriptor<TDocument>, QueryRoleRequestParameters>
@@ -141,8 +152,9 @@ public sealed partial class QueryRoleRequestDescriptor<TDocument> : RequestDescr
 
 	/// <summary>
 	/// <para>
-	/// Starting document offset.
-	/// By default, you cannot page through more than 10,000 hits using the from and size parameters.
+	/// The starting document offset.
+	/// It must not be negative.
+	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
 	/// </summary>
@@ -159,7 +171,7 @@ public sealed partial class QueryRoleRequestDescriptor<TDocument> : RequestDescr
 	/// The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
 	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
 	/// You can query the following information associated with roles: <c>name</c>, <c>description</c>, <c>metadata</c>,
-	/// <c>applications.application</c>, <c>applications.privileges</c>, <c>applications.resources</c>.
+	/// <c>applications.application</c>, <c>applications.privileges</c>, and <c>applications.resources</c>.
 	/// </para>
 	/// </summary>
 	public QueryRoleRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Security.RoleQuery? query)
@@ -188,7 +200,7 @@ public sealed partial class QueryRoleRequestDescriptor<TDocument> : RequestDescr
 
 	/// <summary>
 	/// <para>
-	/// Search after definition
+	/// The search after definition.
 	/// </para>
 	/// </summary>
 	public QueryRoleRequestDescriptor<TDocument> SearchAfter(ICollection<Elastic.Clients.Elasticsearch.FieldValue>? searchAfter)
@@ -200,6 +212,7 @@ public sealed partial class QueryRoleRequestDescriptor<TDocument> : RequestDescr
 	/// <summary>
 	/// <para>
 	/// The number of hits to return.
+	/// It must not be negative.
 	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
@@ -212,7 +225,8 @@ public sealed partial class QueryRoleRequestDescriptor<TDocument> : RequestDescr
 
 	/// <summary>
 	/// <para>
-	/// All public fields of a role are eligible for sorting.
+	/// The sort definition.
+	/// You can sort on <c>username</c>, <c>roles</c>, or <c>enabled</c>.
 	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
 	/// </para>
 	/// </summary>
@@ -327,7 +341,11 @@ public sealed partial class QueryRoleRequestDescriptor<TDocument> : RequestDescr
 /// Find roles with a query.
 /// </para>
 /// <para>
-/// Get roles in a paginated manner. You can optionally filter the results with a query.
+/// Get roles in a paginated manner.
+/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+/// The query roles API does not retrieve roles that are defined in roles files, nor built-in ones.
+/// You can optionally filter the results with a query.
+/// Also, the results can be paginated and sorted.
 /// </para>
 /// </summary>
 public sealed partial class QueryRoleRequestDescriptor : RequestDescriptor<QueryRoleRequestDescriptor, QueryRoleRequestParameters>
@@ -359,8 +377,9 @@ public sealed partial class QueryRoleRequestDescriptor : RequestDescriptor<Query
 
 	/// <summary>
 	/// <para>
-	/// Starting document offset.
-	/// By default, you cannot page through more than 10,000 hits using the from and size parameters.
+	/// The starting document offset.
+	/// It must not be negative.
+	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
 	/// </summary>
@@ -377,7 +396,7 @@ public sealed partial class QueryRoleRequestDescriptor : RequestDescriptor<Query
 	/// The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
 	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
 	/// You can query the following information associated with roles: <c>name</c>, <c>description</c>, <c>metadata</c>,
-	/// <c>applications.application</c>, <c>applications.privileges</c>, <c>applications.resources</c>.
+	/// <c>applications.application</c>, <c>applications.privileges</c>, and <c>applications.resources</c>.
 	/// </para>
 	/// </summary>
 	public QueryRoleRequestDescriptor Query(Elastic.Clients.Elasticsearch.Security.RoleQuery? query)
@@ -406,7 +425,7 @@ public sealed partial class QueryRoleRequestDescriptor : RequestDescriptor<Query
 
 	/// <summary>
 	/// <para>
-	/// Search after definition
+	/// The search after definition.
 	/// </para>
 	/// </summary>
 	public QueryRoleRequestDescriptor SearchAfter(ICollection<Elastic.Clients.Elasticsearch.FieldValue>? searchAfter)
@@ -418,6 +437,7 @@ public sealed partial class QueryRoleRequestDescriptor : RequestDescriptor<Query
 	/// <summary>
 	/// <para>
 	/// The number of hits to return.
+	/// It must not be negative.
 	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
@@ -430,7 +450,8 @@ public sealed partial class QueryRoleRequestDescriptor : RequestDescriptor<Query
 
 	/// <summary>
 	/// <para>
-	/// All public fields of a role are eligible for sorting.
+	/// The sort definition.
+	/// You can sort on <c>username</c>, <c>roles</c>, or <c>enabled</c>.
 	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
 	/// </para>
 	/// </summary>

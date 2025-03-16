@@ -47,6 +47,8 @@ public sealed partial class HistogramProperty : IProperty
 	public IDictionary<string, string>? Meta { get; set; }
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
+	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
+	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "histogram";
@@ -66,6 +68,7 @@ public sealed partial class HistogramPropertyDescriptor<TDocument> : Serializabl
 	private bool? IgnoreMalformedValue { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public HistogramPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 	{
@@ -136,6 +139,12 @@ public sealed partial class HistogramPropertyDescriptor<TDocument> : Serializabl
 		return Self;
 	}
 
+	public HistogramPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -175,6 +184,12 @@ public sealed partial class HistogramPropertyDescriptor<TDocument> : Serializabl
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("histogram");
 		writer.WriteEndObject();
@@ -187,7 +202,8 @@ public sealed partial class HistogramPropertyDescriptor<TDocument> : Serializabl
 		IgnoreAbove = IgnoreAboveValue,
 		IgnoreMalformed = IgnoreMalformedValue,
 		Meta = MetaValue,
-		Properties = PropertiesValue
+		Properties = PropertiesValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }
 
@@ -205,6 +221,7 @@ public sealed partial class HistogramPropertyDescriptor : SerializableDescriptor
 	private bool? IgnoreMalformedValue { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public HistogramPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 	{
@@ -275,6 +292,12 @@ public sealed partial class HistogramPropertyDescriptor : SerializableDescriptor
 		return Self;
 	}
 
+	public HistogramPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -314,6 +337,12 @@ public sealed partial class HistogramPropertyDescriptor : SerializableDescriptor
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("histogram");
 		writer.WriteEndObject();
@@ -326,6 +355,7 @@ public sealed partial class HistogramPropertyDescriptor : SerializableDescriptor
 		IgnoreAbove = IgnoreAboveValue,
 		IgnoreMalformed = IgnoreMalformedValue,
 		Meta = MetaValue,
-		Properties = PropertiesValue
+		Properties = PropertiesValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }

@@ -93,6 +93,11 @@ public sealed partial class ClearCacheRequestParameters : RequestParameters
 /// Clear the cache of one or more indices.
 /// For data streams, the API clears the caches of the stream's backing indices.
 /// </para>
+/// <para>
+/// By default, the clear cache API clears all caches.
+/// To clear only specific caches, use the <c>fielddata</c>, <c>query</c>, or <c>request</c> parameters.
+/// To clear the cache only of specific fields, use the <c>fields</c> parameter.
+/// </para>
 /// </summary>
 public sealed partial class ClearCacheRequest : PlainRequest<ClearCacheRequestParameters>
 {
@@ -180,6 +185,11 @@ public sealed partial class ClearCacheRequest : PlainRequest<ClearCacheRequestPa
 /// Clear the cache of one or more indices.
 /// For data streams, the API clears the caches of the stream's backing indices.
 /// </para>
+/// <para>
+/// By default, the clear cache API clears all caches.
+/// To clear only specific caches, use the <c>fielddata</c>, <c>query</c>, or <c>request</c> parameters.
+/// To clear the cache only of specific fields, use the <c>fields</c> parameter.
+/// </para>
 /// </summary>
 public sealed partial class ClearCacheRequestDescriptor<TDocument> : RequestDescriptor<ClearCacheRequestDescriptor<TDocument>, ClearCacheRequestParameters>
 {
@@ -225,6 +235,11 @@ public sealed partial class ClearCacheRequestDescriptor<TDocument> : RequestDesc
 /// Clear the cache.
 /// Clear the cache of one or more indices.
 /// For data streams, the API clears the caches of the stream's backing indices.
+/// </para>
+/// <para>
+/// By default, the clear cache API clears all caches.
+/// To clear only specific caches, use the <c>fielddata</c>, <c>query</c>, or <c>request</c> parameters.
+/// To clear the cache only of specific fields, use the <c>fields</c> parameter.
 /// </para>
 /// </summary>
 public sealed partial class ClearCacheRequestDescriptor : RequestDescriptor<ClearCacheRequestDescriptor, ClearCacheRequestParameters>

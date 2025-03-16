@@ -132,6 +132,10 @@ public sealed partial class PutRoleRequest : PlainRequest<PutRoleRequestParamete
 	/// <para>
 	/// A list of remote indices permissions entries.
 	/// </para>
+	/// <para>
+	/// NOTE: Remote indices are effective for remote clusters configured with the API key based model.
+	/// They have no effect for remote clusters configured with the certificate based model.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("remote_indices")]
 	public ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? RemoteIndices { get; set; }
@@ -380,6 +384,10 @@ public sealed partial class PutRoleRequestDescriptor<TDocument> : RequestDescrip
 	/// <summary>
 	/// <para>
 	/// A list of remote indices permissions entries.
+	/// </para>
+	/// <para>
+	/// NOTE: Remote indices are effective for remote clusters configured with the API key based model.
+	/// They have no effect for remote clusters configured with the certificate based model.
 	/// </para>
 	/// </summary>
 	public PutRoleRequestDescriptor<TDocument> RemoteIndices(ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? remoteIndices)
@@ -834,6 +842,10 @@ public sealed partial class PutRoleRequestDescriptor : RequestDescriptor<PutRole
 	/// <summary>
 	/// <para>
 	/// A list of remote indices permissions entries.
+	/// </para>
+	/// <para>
+	/// NOTE: Remote indices are effective for remote clusters configured with the API key based model.
+	/// They have no effect for remote clusters configured with the certificate based model.
 	/// </para>
 	/// </summary>
 	public PutRoleRequestDescriptor RemoteIndices(ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? remoteIndices)

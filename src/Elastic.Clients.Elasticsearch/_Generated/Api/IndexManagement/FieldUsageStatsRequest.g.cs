@@ -96,6 +96,10 @@ public sealed partial class FieldUsageStatsRequestParameters : RequestParameters
 /// Field usage statistics are automatically captured when queries are running on a cluster.
 /// A shard-level search request that accesses a given field, even if multiple times during that request, is counted as a single use.
 /// </para>
+/// <para>
+/// The response body reports the per-shard usage count of the data structures that back the fields in the index.
+/// A given request will increment each count by a maximum value of 1, even if the request accesses the same field multiple times.
+/// </para>
 /// </summary>
 public sealed partial class FieldUsageStatsRequest : PlainRequest<FieldUsageStatsRequestParameters>
 {
@@ -182,6 +186,10 @@ public sealed partial class FieldUsageStatsRequest : PlainRequest<FieldUsageStat
 /// Field usage statistics are automatically captured when queries are running on a cluster.
 /// A shard-level search request that accesses a given field, even if multiple times during that request, is counted as a single use.
 /// </para>
+/// <para>
+/// The response body reports the per-shard usage count of the data structures that back the fields in the index.
+/// A given request will increment each count by a maximum value of 1, even if the request accesses the same field multiple times.
+/// </para>
 /// </summary>
 public sealed partial class FieldUsageStatsRequestDescriptor<TDocument> : RequestDescriptor<FieldUsageStatsRequestDescriptor<TDocument>, FieldUsageStatsRequestParameters>
 {
@@ -228,6 +236,10 @@ public sealed partial class FieldUsageStatsRequestDescriptor<TDocument> : Reques
 /// Get field usage information for each shard and field of an index.
 /// Field usage statistics are automatically captured when queries are running on a cluster.
 /// A shard-level search request that accesses a given field, even if multiple times during that request, is counted as a single use.
+/// </para>
+/// <para>
+/// The response body reports the per-shard usage count of the data structures that back the fields in the index.
+/// A given request will increment each count by a maximum value of 1, even if the request accesses the same field multiple times.
 /// </para>
 /// </summary>
 public sealed partial class FieldUsageStatsRequestDescriptor : RequestDescriptor<FieldUsageStatsRequestDescriptor, FieldUsageStatsRequestParameters>

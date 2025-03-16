@@ -44,6 +44,7 @@ public sealed partial class DeleteByQueryRequestParameters : RequestParameters
 	/// <summary>
 	/// <para>
 	/// Analyzer to use for the query string.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
@@ -51,6 +52,7 @@ public sealed partial class DeleteByQueryRequestParameters : RequestParameters
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, wildcard and prefix queries are analyzed.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
@@ -65,22 +67,24 @@ public sealed partial class DeleteByQueryRequestParameters : RequestParameters
 	/// <summary>
 	/// <para>
 	/// The default operator for query string query: <c>AND</c> or <c>OR</c>.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
 
 	/// <summary>
 	/// <para>
-	/// Field to use as default where no field prefix is given in the query string.
+	/// The field to use as default where no field prefix is given in the query string.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
 	/// <summary>
 	/// <para>
-	/// Type of index that wildcard patterns can match.
+	/// The type of index that wildcard patterns can match.
 	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>. Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// It supports comma-separated values, such as <c>open,hidden</c>.
 	/// </para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
@@ -102,21 +106,22 @@ public sealed partial class DeleteByQueryRequestParameters : RequestParameters
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
 	/// <summary>
 	/// <para>
-	/// Specifies the node or shard the operation should be performed on.
-	/// Random by default.
+	/// The node or shard the operation should be performed on.
+	/// It is random by default.
 	/// </para>
 	/// </summary>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
 	/// <para>
-	/// Query in the Lucene query string syntax.
+	/// A query in the Lucene query string syntax.
 	/// </para>
 	/// </summary>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
@@ -124,6 +129,8 @@ public sealed partial class DeleteByQueryRequestParameters : RequestParameters
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, Elasticsearch refreshes all shards involved in the delete by query after the request completes.
+	/// This is different than the delete API's <c>refresh</c> parameter, which causes just the shard that received the delete request to be refreshed.
+	/// Unlike the delete API, it does not support <c>wait_for</c>.
 	/// </para>
 	/// </summary>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
@@ -145,29 +152,29 @@ public sealed partial class DeleteByQueryRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
-	/// Custom value used to route operations to a specific shard.
+	/// A custom value used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
 	/// <para>
-	/// Period to retain the search context for scrolling.
+	/// The period to retain the search context for scrolling.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
 
 	/// <summary>
 	/// <para>
-	/// Size of the scroll request that powers the operation.
+	/// The size of the scroll request that powers the operation.
 	/// </para>
 	/// </summary>
 	public long? ScrollSize { get => Q<long?>("scroll_size"); set => Q("scroll_size", value); }
 
 	/// <summary>
 	/// <para>
-	/// Explicit timeout for each search request.
-	/// Defaults to no timeout.
+	/// The explicit timeout for each search request.
+	/// It defaults to no timeout.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? SearchTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("search_timeout"); set => Q("search_timeout", value); }
@@ -175,7 +182,7 @@ public sealed partial class DeleteByQueryRequestParameters : RequestParameters
 	/// <summary>
 	/// <para>
 	/// The type of the search operation.
-	/// Available options: <c>query_then_fetch</c>, <c>dfs_query_then_fetch</c>.
+	/// Available options include <c>query_then_fetch</c> and <c>dfs_query_then_fetch</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
@@ -189,23 +196,25 @@ public sealed partial class DeleteByQueryRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
+	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs.
 	/// </para>
 	/// </summary>
 	public ICollection<string>? Sort { get => Q<ICollection<string>?>("sort"); set => Q("sort", value); }
 
 	/// <summary>
 	/// <para>
-	/// Specific <c>tag</c> of the request for logging and statistical purposes.
+	/// The specific <c>tag</c> of the request for logging and statistical purposes.
 	/// </para>
 	/// </summary>
 	public ICollection<string>? Stats { get => Q<ICollection<string>?>("stats"); set => Q("stats", value); }
 
 	/// <summary>
 	/// <para>
-	/// Maximum number of documents to collect for each shard.
+	/// The maximum number of documents to collect for each shard.
 	/// If a query reaches this limit, Elasticsearch terminates the query early.
 	/// Elasticsearch collects documents before sorting.
+	/// </para>
+	/// <para>
 	/// Use with caution.
 	/// Elasticsearch applies this parameter to each shard handling the request.
 	/// When possible, let Elasticsearch perform early termination automatically.
@@ -216,7 +225,7 @@ public sealed partial class DeleteByQueryRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
-	/// Period each deletion request waits for active shards.
+	/// The period each deletion request waits for active shards.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
@@ -231,7 +240,8 @@ public sealed partial class DeleteByQueryRequestParameters : RequestParameters
 	/// <summary>
 	/// <para>
 	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to all or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// The <c>timeout</c> value controls how long each write request waits for unavailable shards to become available.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
@@ -239,6 +249,7 @@ public sealed partial class DeleteByQueryRequestParameters : RequestParameters
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, the request blocks until the operation is complete.
+	/// If <c>false</c>, Elasticsearch performs some preflight checks, launches the request, and returns a task you can use to cancel or get the status of the task. Elasticsearch creates a record of this task as a document at <c>.tasks/task/${taskId}</c>. When you are done with a task, you should delete the task document so Elasticsearch can reclaim the space.
 	/// </para>
 	/// </summary>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
@@ -247,7 +258,153 @@ public sealed partial class DeleteByQueryRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Delete documents.
+/// </para>
+/// <para>
 /// Deletes documents that match the specified query.
+/// </para>
+/// <para>
+/// If the Elasticsearch security features are enabled, you must have the following index privileges for the target data stream, index, or alias:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// <c>read</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// <c>delete</c> or <c>write</c>
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// You can specify the query criteria in the request URI or the request body using the same syntax as the search API.
+/// When you submit a delete by query request, Elasticsearch gets a snapshot of the data stream or index when it begins processing the request and deletes matching documents using internal versioning.
+/// If a document changes between the time that the snapshot is taken and the delete operation is processed, it results in a version conflict and the delete operation fails.
+/// </para>
+/// <para>
+/// NOTE: Documents with a version equal to 0 cannot be deleted using delete by query because internal versioning does not support 0 as a valid version number.
+/// </para>
+/// <para>
+/// While processing a delete by query request, Elasticsearch performs multiple search requests sequentially to find all of the matching documents to delete.
+/// A bulk delete request is performed for each batch of matching documents.
+/// If a search or bulk request is rejected, the requests are retried up to 10 times, with exponential back off.
+/// If the maximum retry limit is reached, processing halts and all failed requests are returned in the response.
+/// Any delete requests that completed successfully still stick, they are not rolled back.
+/// </para>
+/// <para>
+/// You can opt to count version conflicts instead of halting and returning by setting <c>conflicts</c> to <c>proceed</c>.
+/// Note that if you opt to count version conflicts the operation could attempt to delete more documents from the source than <c>max_docs</c> until it has successfully deleted <c>max_docs documents</c>, or it has gone through every document in the source query.
+/// </para>
+/// <para>
+/// <strong>Throttling delete requests</strong>
+/// </para>
+/// <para>
+/// To control the rate at which delete by query issues batches of delete operations, you can set <c>requests_per_second</c> to any positive decimal number.
+/// This pads each batch with a wait time to throttle the rate.
+/// Set <c>requests_per_second</c> to <c>-1</c> to disable throttling.
+/// </para>
+/// <para>
+/// Throttling uses a wait time between batches so that the internal scroll requests can be given a timeout that takes the request padding into account.
+/// The padding time is the difference between the batch size divided by the <c>requests_per_second</c> and the time spent writing.
+/// By default the batch size is <c>1000</c>, so if <c>requests_per_second</c> is set to <c>500</c>:
+/// </para>
+/// <code>
+/// target_time = 1000 / 500 per second = 2 seconds
+/// wait_time = target_time - write_time = 2 seconds - .5 seconds = 1.5 seconds
+/// </code>
+/// <para>
+/// Since the batch is issued as a single <c>_bulk</c> request, large batch sizes cause Elasticsearch to create many requests and wait before starting the next set.
+/// This is "bursty" instead of "smooth".
+/// </para>
+/// <para>
+/// <strong>Slicing</strong>
+/// </para>
+/// <para>
+/// Delete by query supports sliced scroll to parallelize the delete process.
+/// This can improve efficiency and provide a convenient way to break the request down into smaller parts.
+/// </para>
+/// <para>
+/// Setting <c>slices</c> to <c>auto</c> lets Elasticsearch choose the number of slices to use.
+/// This setting will use one slice per shard, up to a certain limit.
+/// If there are multiple source data streams or indices, it will choose the number of slices based on the index or backing index with the smallest number of shards.
+/// Adding slices to the delete by query operation creates sub-requests which means it has some quirks:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// You can see these requests in the tasks APIs. These sub-requests are "child" tasks of the task for the request with slices.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Fetching the status of the task for the request with slices only contains the status of completed slices.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// These sub-requests are individually addressable for things like cancellation and rethrottling.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Rethrottling the request with <c>slices</c> will rethrottle the unfinished sub-request proportionally.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Canceling the request with <c>slices</c> will cancel each sub-request.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Due to the nature of <c>slices</c> each sub-request won't get a perfectly even portion of the documents. All documents will be addressed, but some slices may be larger than others. Expect larger slices to have a more even distribution.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Parameters like <c>requests_per_second</c> and <c>max_docs</c> on a request with <c>slices</c> are distributed proportionally to each sub-request. Combine that with the earlier point about distribution being uneven and you should conclude that using <c>max_docs</c> with <c>slices</c> might not result in exactly <c>max_docs</c> documents being deleted.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Each sub-request gets a slightly different snapshot of the source data stream or index though these are all taken at approximately the same time.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// If you're slicing manually or otherwise tuning automatic slicing, keep in mind that:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Query performance is most efficient when the number of slices is equal to the number of shards in the index or backing index. If that number is large (for example, 500), choose a lower number as too many <c>slices</c> hurts performance. Setting <c>slices</c> higher than the number of shards generally does not improve efficiency and adds overhead.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Delete performance scales linearly across available resources with the number of slices.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// Whether query or delete performance dominates the runtime depends on the documents being reindexed and cluster resources.
+/// </para>
+/// <para>
+/// <strong>Cancel a delete by query operation</strong>
+/// </para>
+/// <para>
+/// Any delete by query can be canceled using the task cancel API. For example:
+/// </para>
+/// <code>
+/// POST _tasks/r1A2WoRbTwKZ516z6NEs5A:36619/_cancel
+/// </code>
+/// <para>
+/// The task ID can be found by using the get tasks API.
+/// </para>
+/// <para>
+/// Cancellation should happen quickly but might take a few seconds.
+/// The get task status API will continue to list the delete by query task until this task checks that it has been cancelled and terminates itself.
 /// </para>
 /// </summary>
 public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryRequestParameters>
@@ -277,6 +434,7 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 	/// <summary>
 	/// <para>
 	/// Analyzer to use for the query string.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -285,6 +443,7 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, wildcard and prefix queries are analyzed.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -301,6 +460,7 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 	/// <summary>
 	/// <para>
 	/// The default operator for query string query: <c>AND</c> or <c>OR</c>.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -308,7 +468,8 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 
 	/// <summary>
 	/// <para>
-	/// Field to use as default where no field prefix is given in the query string.
+	/// The field to use as default where no field prefix is given in the query string.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -316,9 +477,9 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 
 	/// <summary>
 	/// <para>
-	/// Type of index that wildcard patterns can match.
+	/// The type of index that wildcard patterns can match.
 	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>. Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// It supports comma-separated values, such as <c>open,hidden</c>.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -343,6 +504,7 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -350,8 +512,8 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 
 	/// <summary>
 	/// <para>
-	/// Specifies the node or shard the operation should be performed on.
-	/// Random by default.
+	/// The node or shard the operation should be performed on.
+	/// It is random by default.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -359,7 +521,7 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 
 	/// <summary>
 	/// <para>
-	/// Query in the Lucene query string syntax.
+	/// A query in the Lucene query string syntax.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -368,6 +530,8 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, Elasticsearch refreshes all shards involved in the delete by query after the request completes.
+	/// This is different than the delete API's <c>refresh</c> parameter, which causes just the shard that received the delete request to be refreshed.
+	/// Unlike the delete API, it does not support <c>wait_for</c>.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -392,7 +556,7 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 
 	/// <summary>
 	/// <para>
-	/// Custom value used to route operations to a specific shard.
+	/// A custom value used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -400,7 +564,7 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 
 	/// <summary>
 	/// <para>
-	/// Period to retain the search context for scrolling.
+	/// The period to retain the search context for scrolling.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -408,7 +572,7 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 
 	/// <summary>
 	/// <para>
-	/// Size of the scroll request that powers the operation.
+	/// The size of the scroll request that powers the operation.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -416,8 +580,8 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 
 	/// <summary>
 	/// <para>
-	/// Explicit timeout for each search request.
-	/// Defaults to no timeout.
+	/// The explicit timeout for each search request.
+	/// It defaults to no timeout.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -426,7 +590,7 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 	/// <summary>
 	/// <para>
 	/// The type of the search operation.
-	/// Available options: <c>query_then_fetch</c>, <c>dfs_query_then_fetch</c>.
+	/// Available options include <c>query_then_fetch</c> and <c>dfs_query_then_fetch</c>.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -442,7 +606,7 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 
 	/// <summary>
 	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
+	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -450,7 +614,7 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 
 	/// <summary>
 	/// <para>
-	/// Specific <c>tag</c> of the request for logging and statistical purposes.
+	/// The specific <c>tag</c> of the request for logging and statistical purposes.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -458,9 +622,11 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 
 	/// <summary>
 	/// <para>
-	/// Maximum number of documents to collect for each shard.
+	/// The maximum number of documents to collect for each shard.
 	/// If a query reaches this limit, Elasticsearch terminates the query early.
 	/// Elasticsearch collects documents before sorting.
+	/// </para>
+	/// <para>
 	/// Use with caution.
 	/// Elasticsearch applies this parameter to each shard handling the request.
 	/// When possible, let Elasticsearch perform early termination automatically.
@@ -472,7 +638,7 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 
 	/// <summary>
 	/// <para>
-	/// Period each deletion request waits for active shards.
+	/// The period each deletion request waits for active shards.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -489,7 +655,8 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 	/// <summary>
 	/// <para>
 	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to all or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// The <c>timeout</c> value controls how long each write request waits for unavailable shards to become available.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -498,6 +665,7 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, the request blocks until the operation is complete.
+	/// If <c>false</c>, Elasticsearch performs some preflight checks, launches the request, and returns a task you can use to cancel or get the status of the task. Elasticsearch creates a record of this task as a document at <c>.tasks/task/${taskId}</c>. When you are done with a task, you should delete the task document so Elasticsearch can reclaim the space.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -513,7 +681,7 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 
 	/// <summary>
 	/// <para>
-	/// Specifies the documents to delete using the Query DSL.
+	/// The documents to delete specified with Query DSL.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
@@ -531,7 +699,153 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 /// <summary>
 /// <para>
 /// Delete documents.
+/// </para>
+/// <para>
 /// Deletes documents that match the specified query.
+/// </para>
+/// <para>
+/// If the Elasticsearch security features are enabled, you must have the following index privileges for the target data stream, index, or alias:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// <c>read</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// <c>delete</c> or <c>write</c>
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// You can specify the query criteria in the request URI or the request body using the same syntax as the search API.
+/// When you submit a delete by query request, Elasticsearch gets a snapshot of the data stream or index when it begins processing the request and deletes matching documents using internal versioning.
+/// If a document changes between the time that the snapshot is taken and the delete operation is processed, it results in a version conflict and the delete operation fails.
+/// </para>
+/// <para>
+/// NOTE: Documents with a version equal to 0 cannot be deleted using delete by query because internal versioning does not support 0 as a valid version number.
+/// </para>
+/// <para>
+/// While processing a delete by query request, Elasticsearch performs multiple search requests sequentially to find all of the matching documents to delete.
+/// A bulk delete request is performed for each batch of matching documents.
+/// If a search or bulk request is rejected, the requests are retried up to 10 times, with exponential back off.
+/// If the maximum retry limit is reached, processing halts and all failed requests are returned in the response.
+/// Any delete requests that completed successfully still stick, they are not rolled back.
+/// </para>
+/// <para>
+/// You can opt to count version conflicts instead of halting and returning by setting <c>conflicts</c> to <c>proceed</c>.
+/// Note that if you opt to count version conflicts the operation could attempt to delete more documents from the source than <c>max_docs</c> until it has successfully deleted <c>max_docs documents</c>, or it has gone through every document in the source query.
+/// </para>
+/// <para>
+/// <strong>Throttling delete requests</strong>
+/// </para>
+/// <para>
+/// To control the rate at which delete by query issues batches of delete operations, you can set <c>requests_per_second</c> to any positive decimal number.
+/// This pads each batch with a wait time to throttle the rate.
+/// Set <c>requests_per_second</c> to <c>-1</c> to disable throttling.
+/// </para>
+/// <para>
+/// Throttling uses a wait time between batches so that the internal scroll requests can be given a timeout that takes the request padding into account.
+/// The padding time is the difference between the batch size divided by the <c>requests_per_second</c> and the time spent writing.
+/// By default the batch size is <c>1000</c>, so if <c>requests_per_second</c> is set to <c>500</c>:
+/// </para>
+/// <code>
+/// target_time = 1000 / 500 per second = 2 seconds
+/// wait_time = target_time - write_time = 2 seconds - .5 seconds = 1.5 seconds
+/// </code>
+/// <para>
+/// Since the batch is issued as a single <c>_bulk</c> request, large batch sizes cause Elasticsearch to create many requests and wait before starting the next set.
+/// This is "bursty" instead of "smooth".
+/// </para>
+/// <para>
+/// <strong>Slicing</strong>
+/// </para>
+/// <para>
+/// Delete by query supports sliced scroll to parallelize the delete process.
+/// This can improve efficiency and provide a convenient way to break the request down into smaller parts.
+/// </para>
+/// <para>
+/// Setting <c>slices</c> to <c>auto</c> lets Elasticsearch choose the number of slices to use.
+/// This setting will use one slice per shard, up to a certain limit.
+/// If there are multiple source data streams or indices, it will choose the number of slices based on the index or backing index with the smallest number of shards.
+/// Adding slices to the delete by query operation creates sub-requests which means it has some quirks:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// You can see these requests in the tasks APIs. These sub-requests are "child" tasks of the task for the request with slices.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Fetching the status of the task for the request with slices only contains the status of completed slices.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// These sub-requests are individually addressable for things like cancellation and rethrottling.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Rethrottling the request with <c>slices</c> will rethrottle the unfinished sub-request proportionally.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Canceling the request with <c>slices</c> will cancel each sub-request.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Due to the nature of <c>slices</c> each sub-request won't get a perfectly even portion of the documents. All documents will be addressed, but some slices may be larger than others. Expect larger slices to have a more even distribution.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Parameters like <c>requests_per_second</c> and <c>max_docs</c> on a request with <c>slices</c> are distributed proportionally to each sub-request. Combine that with the earlier point about distribution being uneven and you should conclude that using <c>max_docs</c> with <c>slices</c> might not result in exactly <c>max_docs</c> documents being deleted.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Each sub-request gets a slightly different snapshot of the source data stream or index though these are all taken at approximately the same time.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// If you're slicing manually or otherwise tuning automatic slicing, keep in mind that:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Query performance is most efficient when the number of slices is equal to the number of shards in the index or backing index. If that number is large (for example, 500), choose a lower number as too many <c>slices</c> hurts performance. Setting <c>slices</c> higher than the number of shards generally does not improve efficiency and adds overhead.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Delete performance scales linearly across available resources with the number of slices.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// Whether query or delete performance dominates the runtime depends on the documents being reindexed and cluster resources.
+/// </para>
+/// <para>
+/// <strong>Cancel a delete by query operation</strong>
+/// </para>
+/// <para>
+/// Any delete by query can be canceled using the task cancel API. For example:
+/// </para>
+/// <code>
+/// POST _tasks/r1A2WoRbTwKZ516z6NEs5A:36619/_cancel
+/// </code>
+/// <para>
+/// The task ID can be found by using the get tasks API.
+/// </para>
+/// <para>
+/// Cancellation should happen quickly but might take a few seconds.
+/// The get task status API will continue to list the delete by query task until this task checks that it has been cancelled and terminates itself.
 /// </para>
 /// </summary>
 public sealed partial class DeleteByQueryRequestDescriptor<TDocument> : RequestDescriptor<DeleteByQueryRequestDescriptor<TDocument>, DeleteByQueryRequestParameters>
@@ -610,7 +924,7 @@ public sealed partial class DeleteByQueryRequestDescriptor<TDocument> : RequestD
 
 	/// <summary>
 	/// <para>
-	/// Specifies the documents to delete using the Query DSL.
+	/// The documents to delete specified with Query DSL.
 	/// </para>
 	/// </summary>
 	public DeleteByQueryRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
@@ -714,7 +1028,153 @@ public sealed partial class DeleteByQueryRequestDescriptor<TDocument> : RequestD
 /// <summary>
 /// <para>
 /// Delete documents.
+/// </para>
+/// <para>
 /// Deletes documents that match the specified query.
+/// </para>
+/// <para>
+/// If the Elasticsearch security features are enabled, you must have the following index privileges for the target data stream, index, or alias:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// <c>read</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// <c>delete</c> or <c>write</c>
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// You can specify the query criteria in the request URI or the request body using the same syntax as the search API.
+/// When you submit a delete by query request, Elasticsearch gets a snapshot of the data stream or index when it begins processing the request and deletes matching documents using internal versioning.
+/// If a document changes between the time that the snapshot is taken and the delete operation is processed, it results in a version conflict and the delete operation fails.
+/// </para>
+/// <para>
+/// NOTE: Documents with a version equal to 0 cannot be deleted using delete by query because internal versioning does not support 0 as a valid version number.
+/// </para>
+/// <para>
+/// While processing a delete by query request, Elasticsearch performs multiple search requests sequentially to find all of the matching documents to delete.
+/// A bulk delete request is performed for each batch of matching documents.
+/// If a search or bulk request is rejected, the requests are retried up to 10 times, with exponential back off.
+/// If the maximum retry limit is reached, processing halts and all failed requests are returned in the response.
+/// Any delete requests that completed successfully still stick, they are not rolled back.
+/// </para>
+/// <para>
+/// You can opt to count version conflicts instead of halting and returning by setting <c>conflicts</c> to <c>proceed</c>.
+/// Note that if you opt to count version conflicts the operation could attempt to delete more documents from the source than <c>max_docs</c> until it has successfully deleted <c>max_docs documents</c>, or it has gone through every document in the source query.
+/// </para>
+/// <para>
+/// <strong>Throttling delete requests</strong>
+/// </para>
+/// <para>
+/// To control the rate at which delete by query issues batches of delete operations, you can set <c>requests_per_second</c> to any positive decimal number.
+/// This pads each batch with a wait time to throttle the rate.
+/// Set <c>requests_per_second</c> to <c>-1</c> to disable throttling.
+/// </para>
+/// <para>
+/// Throttling uses a wait time between batches so that the internal scroll requests can be given a timeout that takes the request padding into account.
+/// The padding time is the difference between the batch size divided by the <c>requests_per_second</c> and the time spent writing.
+/// By default the batch size is <c>1000</c>, so if <c>requests_per_second</c> is set to <c>500</c>:
+/// </para>
+/// <code>
+/// target_time = 1000 / 500 per second = 2 seconds
+/// wait_time = target_time - write_time = 2 seconds - .5 seconds = 1.5 seconds
+/// </code>
+/// <para>
+/// Since the batch is issued as a single <c>_bulk</c> request, large batch sizes cause Elasticsearch to create many requests and wait before starting the next set.
+/// This is "bursty" instead of "smooth".
+/// </para>
+/// <para>
+/// <strong>Slicing</strong>
+/// </para>
+/// <para>
+/// Delete by query supports sliced scroll to parallelize the delete process.
+/// This can improve efficiency and provide a convenient way to break the request down into smaller parts.
+/// </para>
+/// <para>
+/// Setting <c>slices</c> to <c>auto</c> lets Elasticsearch choose the number of slices to use.
+/// This setting will use one slice per shard, up to a certain limit.
+/// If there are multiple source data streams or indices, it will choose the number of slices based on the index or backing index with the smallest number of shards.
+/// Adding slices to the delete by query operation creates sub-requests which means it has some quirks:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// You can see these requests in the tasks APIs. These sub-requests are "child" tasks of the task for the request with slices.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Fetching the status of the task for the request with slices only contains the status of completed slices.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// These sub-requests are individually addressable for things like cancellation and rethrottling.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Rethrottling the request with <c>slices</c> will rethrottle the unfinished sub-request proportionally.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Canceling the request with <c>slices</c> will cancel each sub-request.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Due to the nature of <c>slices</c> each sub-request won't get a perfectly even portion of the documents. All documents will be addressed, but some slices may be larger than others. Expect larger slices to have a more even distribution.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Parameters like <c>requests_per_second</c> and <c>max_docs</c> on a request with <c>slices</c> are distributed proportionally to each sub-request. Combine that with the earlier point about distribution being uneven and you should conclude that using <c>max_docs</c> with <c>slices</c> might not result in exactly <c>max_docs</c> documents being deleted.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Each sub-request gets a slightly different snapshot of the source data stream or index though these are all taken at approximately the same time.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// If you're slicing manually or otherwise tuning automatic slicing, keep in mind that:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Query performance is most efficient when the number of slices is equal to the number of shards in the index or backing index. If that number is large (for example, 500), choose a lower number as too many <c>slices</c> hurts performance. Setting <c>slices</c> higher than the number of shards generally does not improve efficiency and adds overhead.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Delete performance scales linearly across available resources with the number of slices.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// Whether query or delete performance dominates the runtime depends on the documents being reindexed and cluster resources.
+/// </para>
+/// <para>
+/// <strong>Cancel a delete by query operation</strong>
+/// </para>
+/// <para>
+/// Any delete by query can be canceled using the task cancel API. For example:
+/// </para>
+/// <code>
+/// POST _tasks/r1A2WoRbTwKZ516z6NEs5A:36619/_cancel
+/// </code>
+/// <para>
+/// The task ID can be found by using the get tasks API.
+/// </para>
+/// <para>
+/// Cancellation should happen quickly but might take a few seconds.
+/// The get task status API will continue to list the delete by query task until this task checks that it has been cancelled and terminates itself.
 /// </para>
 /// </summary>
 public sealed partial class DeleteByQueryRequestDescriptor : RequestDescriptor<DeleteByQueryRequestDescriptor, DeleteByQueryRequestParameters>
@@ -789,7 +1249,7 @@ public sealed partial class DeleteByQueryRequestDescriptor : RequestDescriptor<D
 
 	/// <summary>
 	/// <para>
-	/// Specifies the documents to delete using the Query DSL.
+	/// The documents to delete specified with Query DSL.
 	/// </para>
 	/// </summary>
 	public DeleteByQueryRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)

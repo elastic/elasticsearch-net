@@ -46,6 +46,8 @@ public sealed partial class DisableUserRequestParameters : RequestParameters
 /// </para>
 /// <para>
 /// Disable users in the native realm.
+/// By default, when you create users, they are enabled.
+/// You can use this API to revoke a user's access to Elasticsearch.
 /// </para>
 /// </summary>
 public sealed partial class DisableUserRequest : PlainRequest<DisableUserRequestParameters>
@@ -77,6 +79,8 @@ public sealed partial class DisableUserRequest : PlainRequest<DisableUserRequest
 /// </para>
 /// <para>
 /// Disable users in the native realm.
+/// By default, when you create users, they are enabled.
+/// You can use this API to revoke a user's access to Elasticsearch.
 /// </para>
 /// </summary>
 public sealed partial class DisableUserRequestDescriptor : RequestDescriptor<DisableUserRequestDescriptor, DisableUserRequestParameters>

@@ -39,19 +39,29 @@ public sealed partial class UpdateApiKeyRequestParameters : RequestParameters
 /// Update an API key.
 /// </para>
 /// <para>
-/// Updates attributes of an existing API key.
+/// Update attributes of an existing API key.
+/// This API supports updates to an API key's access scope, expiration, and metadata.
+/// </para>
+/// <para>
+/// To use this API, you must have at least the <c>manage_own_api_key</c> cluster privilege.
 /// Users can only update API keys that they created or that were granted to them.
-/// Use this API to update API keys created by the create API Key or grant API Key APIs.
-/// If you need to apply the same update to many API keys, you can use bulk update API Keys to reduce overhead.
-/// It’s not possible to update expired API keys, or API keys that have been invalidated by invalidate API Key.
-/// This API supports updates to an API key’s access scope and metadata.
-/// The access scope of an API key is derived from the <c>role_descriptors</c> you specify in the request, and a snapshot of the owner user’s permissions at the time of the request.
-/// The snapshot of the owner’s permissions is updated automatically on every call.
-/// If you don’t specify <c>role_descriptors</c> in the request, a call to this API might still change the API key’s access scope.
-/// This change can occur if the owner user’s permissions have changed since the API key was created or last modified.
 /// To update another user’s API key, use the <c>run_as</c> feature to submit a request on behalf of another user.
-/// IMPORTANT: It’s not possible to use an API key as the authentication credential for this API.
-/// To update an API key, the owner user’s credentials are required.
+/// </para>
+/// <para>
+/// IMPORTANT: It's not possible to use an API key as the authentication credential for this API. The owner user’s credentials are required.
+/// </para>
+/// <para>
+/// Use this API to update API keys created by the create API key or grant API Key APIs.
+/// If you need to apply the same update to many API keys, you can use the bulk update API keys API to reduce overhead.
+/// It's not possible to update expired API keys or API keys that have been invalidated by the invalidate API key API.
+/// </para>
+/// <para>
+/// The access scope of an API key is derived from the <c>role_descriptors</c> you specify in the request and a snapshot of the owner user's permissions at the time of the request.
+/// The snapshot of the owner's permissions is updated automatically on every call.
+/// </para>
+/// <para>
+/// IMPORTANT: If you don't specify <c>role_descriptors</c> in the request, a call to this API might still change the API key's access scope.
+/// This change can occur if the owner user's permissions have changed since the API key was created or last modified.
 /// </para>
 /// </summary>
 public sealed partial class UpdateApiKeyRequest : PlainRequest<UpdateApiKeyRequestParameters>
@@ -70,7 +80,9 @@ public sealed partial class UpdateApiKeyRequest : PlainRequest<UpdateApiKeyReque
 
 	/// <summary>
 	/// <para>
-	/// Expiration time for the API key.
+	/// The expiration time for the API key.
+	/// By default, API keys never expire.
+	/// This property can be omitted to leave the expiration unchanged.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("expiration")]
@@ -78,7 +90,10 @@ public sealed partial class UpdateApiKeyRequest : PlainRequest<UpdateApiKeyReque
 
 	/// <summary>
 	/// <para>
-	/// Arbitrary metadata that you want to associate with the API key. It supports nested data structure. Within the metadata object, keys beginning with _ are reserved for system usage.
+	/// Arbitrary metadata that you want to associate with the API key.
+	/// It supports a nested data structure.
+	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
+	/// When specified, this value fully replaces the metadata previously associated with the API key.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("metadata")]
@@ -86,7 +101,13 @@ public sealed partial class UpdateApiKeyRequest : PlainRequest<UpdateApiKeyReque
 
 	/// <summary>
 	/// <para>
-	/// An array of role descriptors for this API key. This parameter is optional. When it is not specified or is an empty array, then the API key will have a point in time snapshot of permissions of the authenticated user. If you supply role descriptors then the resultant permissions would be an intersection of API keys permissions and authenticated user’s permissions thereby limiting the access scope for API keys. The structure of role descriptor is the same as the request for create role API. For more details, see create or update roles API.
+	/// The role descriptors to assign to this API key.
+	/// The API key's effective permissions are an intersection of its assigned privileges and the point in time snapshot of permissions of the owner user.
+	/// You can assign new privileges by specifying them in this parameter.
+	/// To remove assigned privileges, you can supply an empty <c>role_descriptors</c> parameter, that is to say, an empty object <c>{}</c>.
+	/// If an API key has no assigned privileges, it inherits the owner user's full permissions.
+	/// The snapshot of the owner's permissions is always updated, whether you supply the <c>role_descriptors</c> parameter or not.
+	/// The structure of a role descriptor is the same as the request for the create API keys API.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("role_descriptors")]
@@ -98,19 +119,29 @@ public sealed partial class UpdateApiKeyRequest : PlainRequest<UpdateApiKeyReque
 /// Update an API key.
 /// </para>
 /// <para>
-/// Updates attributes of an existing API key.
+/// Update attributes of an existing API key.
+/// This API supports updates to an API key's access scope, expiration, and metadata.
+/// </para>
+/// <para>
+/// To use this API, you must have at least the <c>manage_own_api_key</c> cluster privilege.
 /// Users can only update API keys that they created or that were granted to them.
-/// Use this API to update API keys created by the create API Key or grant API Key APIs.
-/// If you need to apply the same update to many API keys, you can use bulk update API Keys to reduce overhead.
-/// It’s not possible to update expired API keys, or API keys that have been invalidated by invalidate API Key.
-/// This API supports updates to an API key’s access scope and metadata.
-/// The access scope of an API key is derived from the <c>role_descriptors</c> you specify in the request, and a snapshot of the owner user’s permissions at the time of the request.
-/// The snapshot of the owner’s permissions is updated automatically on every call.
-/// If you don’t specify <c>role_descriptors</c> in the request, a call to this API might still change the API key’s access scope.
-/// This change can occur if the owner user’s permissions have changed since the API key was created or last modified.
 /// To update another user’s API key, use the <c>run_as</c> feature to submit a request on behalf of another user.
-/// IMPORTANT: It’s not possible to use an API key as the authentication credential for this API.
-/// To update an API key, the owner user’s credentials are required.
+/// </para>
+/// <para>
+/// IMPORTANT: It's not possible to use an API key as the authentication credential for this API. The owner user’s credentials are required.
+/// </para>
+/// <para>
+/// Use this API to update API keys created by the create API key or grant API Key APIs.
+/// If you need to apply the same update to many API keys, you can use the bulk update API keys API to reduce overhead.
+/// It's not possible to update expired API keys or API keys that have been invalidated by the invalidate API key API.
+/// </para>
+/// <para>
+/// The access scope of an API key is derived from the <c>role_descriptors</c> you specify in the request and a snapshot of the owner user's permissions at the time of the request.
+/// The snapshot of the owner's permissions is updated automatically on every call.
+/// </para>
+/// <para>
+/// IMPORTANT: If you don't specify <c>role_descriptors</c> in the request, a call to this API might still change the API key's access scope.
+/// This change can occur if the owner user's permissions have changed since the API key was created or last modified.
 /// </para>
 /// </summary>
 public sealed partial class UpdateApiKeyRequestDescriptor<TDocument> : RequestDescriptor<UpdateApiKeyRequestDescriptor<TDocument>, UpdateApiKeyRequestParameters>
@@ -141,7 +172,9 @@ public sealed partial class UpdateApiKeyRequestDescriptor<TDocument> : RequestDe
 
 	/// <summary>
 	/// <para>
-	/// Expiration time for the API key.
+	/// The expiration time for the API key.
+	/// By default, API keys never expire.
+	/// This property can be omitted to leave the expiration unchanged.
 	/// </para>
 	/// </summary>
 	public UpdateApiKeyRequestDescriptor<TDocument> Expiration(Elastic.Clients.Elasticsearch.Duration? expiration)
@@ -152,7 +185,10 @@ public sealed partial class UpdateApiKeyRequestDescriptor<TDocument> : RequestDe
 
 	/// <summary>
 	/// <para>
-	/// Arbitrary metadata that you want to associate with the API key. It supports nested data structure. Within the metadata object, keys beginning with _ are reserved for system usage.
+	/// Arbitrary metadata that you want to associate with the API key.
+	/// It supports a nested data structure.
+	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
+	/// When specified, this value fully replaces the metadata previously associated with the API key.
 	/// </para>
 	/// </summary>
 	public UpdateApiKeyRequestDescriptor<TDocument> Metadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
@@ -163,7 +199,13 @@ public sealed partial class UpdateApiKeyRequestDescriptor<TDocument> : RequestDe
 
 	/// <summary>
 	/// <para>
-	/// An array of role descriptors for this API key. This parameter is optional. When it is not specified or is an empty array, then the API key will have a point in time snapshot of permissions of the authenticated user. If you supply role descriptors then the resultant permissions would be an intersection of API keys permissions and authenticated user’s permissions thereby limiting the access scope for API keys. The structure of role descriptor is the same as the request for create role API. For more details, see create or update roles API.
+	/// The role descriptors to assign to this API key.
+	/// The API key's effective permissions are an intersection of its assigned privileges and the point in time snapshot of permissions of the owner user.
+	/// You can assign new privileges by specifying them in this parameter.
+	/// To remove assigned privileges, you can supply an empty <c>role_descriptors</c> parameter, that is to say, an empty object <c>{}</c>.
+	/// If an API key has no assigned privileges, it inherits the owner user's full permissions.
+	/// The snapshot of the owner's permissions is always updated, whether you supply the <c>role_descriptors</c> parameter or not.
+	/// The structure of a role descriptor is the same as the request for the create API keys API.
 	/// </para>
 	/// </summary>
 	public UpdateApiKeyRequestDescriptor<TDocument> RoleDescriptors(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument>>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument>>> selector)
@@ -202,19 +244,29 @@ public sealed partial class UpdateApiKeyRequestDescriptor<TDocument> : RequestDe
 /// Update an API key.
 /// </para>
 /// <para>
-/// Updates attributes of an existing API key.
+/// Update attributes of an existing API key.
+/// This API supports updates to an API key's access scope, expiration, and metadata.
+/// </para>
+/// <para>
+/// To use this API, you must have at least the <c>manage_own_api_key</c> cluster privilege.
 /// Users can only update API keys that they created or that were granted to them.
-/// Use this API to update API keys created by the create API Key or grant API Key APIs.
-/// If you need to apply the same update to many API keys, you can use bulk update API Keys to reduce overhead.
-/// It’s not possible to update expired API keys, or API keys that have been invalidated by invalidate API Key.
-/// This API supports updates to an API key’s access scope and metadata.
-/// The access scope of an API key is derived from the <c>role_descriptors</c> you specify in the request, and a snapshot of the owner user’s permissions at the time of the request.
-/// The snapshot of the owner’s permissions is updated automatically on every call.
-/// If you don’t specify <c>role_descriptors</c> in the request, a call to this API might still change the API key’s access scope.
-/// This change can occur if the owner user’s permissions have changed since the API key was created or last modified.
 /// To update another user’s API key, use the <c>run_as</c> feature to submit a request on behalf of another user.
-/// IMPORTANT: It’s not possible to use an API key as the authentication credential for this API.
-/// To update an API key, the owner user’s credentials are required.
+/// </para>
+/// <para>
+/// IMPORTANT: It's not possible to use an API key as the authentication credential for this API. The owner user’s credentials are required.
+/// </para>
+/// <para>
+/// Use this API to update API keys created by the create API key or grant API Key APIs.
+/// If you need to apply the same update to many API keys, you can use the bulk update API keys API to reduce overhead.
+/// It's not possible to update expired API keys or API keys that have been invalidated by the invalidate API key API.
+/// </para>
+/// <para>
+/// The access scope of an API key is derived from the <c>role_descriptors</c> you specify in the request and a snapshot of the owner user's permissions at the time of the request.
+/// The snapshot of the owner's permissions is updated automatically on every call.
+/// </para>
+/// <para>
+/// IMPORTANT: If you don't specify <c>role_descriptors</c> in the request, a call to this API might still change the API key's access scope.
+/// This change can occur if the owner user's permissions have changed since the API key was created or last modified.
 /// </para>
 /// </summary>
 public sealed partial class UpdateApiKeyRequestDescriptor : RequestDescriptor<UpdateApiKeyRequestDescriptor, UpdateApiKeyRequestParameters>
@@ -245,7 +297,9 @@ public sealed partial class UpdateApiKeyRequestDescriptor : RequestDescriptor<Up
 
 	/// <summary>
 	/// <para>
-	/// Expiration time for the API key.
+	/// The expiration time for the API key.
+	/// By default, API keys never expire.
+	/// This property can be omitted to leave the expiration unchanged.
 	/// </para>
 	/// </summary>
 	public UpdateApiKeyRequestDescriptor Expiration(Elastic.Clients.Elasticsearch.Duration? expiration)
@@ -256,7 +310,10 @@ public sealed partial class UpdateApiKeyRequestDescriptor : RequestDescriptor<Up
 
 	/// <summary>
 	/// <para>
-	/// Arbitrary metadata that you want to associate with the API key. It supports nested data structure. Within the metadata object, keys beginning with _ are reserved for system usage.
+	/// Arbitrary metadata that you want to associate with the API key.
+	/// It supports a nested data structure.
+	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
+	/// When specified, this value fully replaces the metadata previously associated with the API key.
 	/// </para>
 	/// </summary>
 	public UpdateApiKeyRequestDescriptor Metadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
@@ -267,7 +324,13 @@ public sealed partial class UpdateApiKeyRequestDescriptor : RequestDescriptor<Up
 
 	/// <summary>
 	/// <para>
-	/// An array of role descriptors for this API key. This parameter is optional. When it is not specified or is an empty array, then the API key will have a point in time snapshot of permissions of the authenticated user. If you supply role descriptors then the resultant permissions would be an intersection of API keys permissions and authenticated user’s permissions thereby limiting the access scope for API keys. The structure of role descriptor is the same as the request for create role API. For more details, see create or update roles API.
+	/// The role descriptors to assign to this API key.
+	/// The API key's effective permissions are an intersection of its assigned privileges and the point in time snapshot of permissions of the owner user.
+	/// You can assign new privileges by specifying them in this parameter.
+	/// To remove assigned privileges, you can supply an empty <c>role_descriptors</c> parameter, that is to say, an empty object <c>{}</c>.
+	/// If an API key has no assigned privileges, it inherits the owner user's full permissions.
+	/// The snapshot of the owner's permissions is always updated, whether you supply the <c>role_descriptors</c> parameter or not.
+	/// The structure of a role descriptor is the same as the request for the create API keys API.
 	/// </para>
 	/// </summary>
 	public UpdateApiKeyRequestDescriptor RoleDescriptors(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor>> selector)

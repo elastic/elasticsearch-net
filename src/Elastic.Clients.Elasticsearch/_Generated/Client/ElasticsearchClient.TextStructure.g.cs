@@ -44,6 +44,43 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// Find the structure of a text field.
 	/// Find the structure of a text field in an Elasticsearch index.
 	/// </para>
+	/// <para>
+	/// This API provides a starting point for extracting further information from log messages already ingested into Elasticsearch.
+	/// For example, if you have ingested data into a very simple index that has just <c>@timestamp</c> and message fields, you can use this API to see what common structure exists in the message field.
+	/// </para>
+	/// <para>
+	/// The response from the API contains:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Sample messages.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Statistics that reveal the most common values for all fields detected within the text and basic numeric statistics for numeric fields.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Information about the structure of the text, which is useful when you write ingest configurations to index it or similarly formatted text.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Appropriate mappings for an Elasticsearch index, which you could use to ingest the text.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All this information can be calculated by the structure finder with no guidance.
+	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para>
+	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+	/// It helps determine why the returned structure was chosen.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -58,6 +95,43 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// Find the structure of a text field.
 	/// Find the structure of a text field in an Elasticsearch index.
 	/// </para>
+	/// <para>
+	/// This API provides a starting point for extracting further information from log messages already ingested into Elasticsearch.
+	/// For example, if you have ingested data into a very simple index that has just <c>@timestamp</c> and message fields, you can use this API to see what common structure exists in the message field.
+	/// </para>
+	/// <para>
+	/// The response from the API contains:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Sample messages.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Statistics that reveal the most common values for all fields detected within the text and basic numeric statistics for numeric fields.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Information about the structure of the text, which is useful when you write ingest configurations to index it or similarly formatted text.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Appropriate mappings for an Elasticsearch index, which you could use to ingest the text.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All this information can be calculated by the structure finder with no guidance.
+	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para>
+	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+	/// It helps determine why the returned structure was chosen.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FindFieldStructureResponse> FindFieldStructureAsync(FindFieldStructureRequest request, CancellationToken cancellationToken = default)
@@ -70,6 +144,43 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Find the structure of a text field.
 	/// Find the structure of a text field in an Elasticsearch index.
+	/// </para>
+	/// <para>
+	/// This API provides a starting point for extracting further information from log messages already ingested into Elasticsearch.
+	/// For example, if you have ingested data into a very simple index that has just <c>@timestamp</c> and message fields, you can use this API to see what common structure exists in the message field.
+	/// </para>
+	/// <para>
+	/// The response from the API contains:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Sample messages.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Statistics that reveal the most common values for all fields detected within the text and basic numeric statistics for numeric fields.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Information about the structure of the text, which is useful when you write ingest configurations to index it or similarly formatted text.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Appropriate mappings for an Elasticsearch index, which you could use to ingest the text.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All this information can be calculated by the structure finder with no guidance.
+	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para>
+	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+	/// It helps determine why the returned structure was chosen.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -85,6 +196,43 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// Find the structure of a text field.
 	/// Find the structure of a text field in an Elasticsearch index.
 	/// </para>
+	/// <para>
+	/// This API provides a starting point for extracting further information from log messages already ingested into Elasticsearch.
+	/// For example, if you have ingested data into a very simple index that has just <c>@timestamp</c> and message fields, you can use this API to see what common structure exists in the message field.
+	/// </para>
+	/// <para>
+	/// The response from the API contains:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Sample messages.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Statistics that reveal the most common values for all fields detected within the text and basic numeric statistics for numeric fields.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Information about the structure of the text, which is useful when you write ingest configurations to index it or similarly formatted text.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Appropriate mappings for an Elasticsearch index, which you could use to ingest the text.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All this information can be calculated by the structure finder with no guidance.
+	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para>
+	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+	/// It helps determine why the returned structure was chosen.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -99,6 +247,43 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Find the structure of a text field.
 	/// Find the structure of a text field in an Elasticsearch index.
+	/// </para>
+	/// <para>
+	/// This API provides a starting point for extracting further information from log messages already ingested into Elasticsearch.
+	/// For example, if you have ingested data into a very simple index that has just <c>@timestamp</c> and message fields, you can use this API to see what common structure exists in the message field.
+	/// </para>
+	/// <para>
+	/// The response from the API contains:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Sample messages.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Statistics that reveal the most common values for all fields detected within the text and basic numeric statistics for numeric fields.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Information about the structure of the text, which is useful when you write ingest configurations to index it or similarly formatted text.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Appropriate mappings for an Elasticsearch index, which you could use to ingest the text.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All this information can be calculated by the structure finder with no guidance.
+	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para>
+	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+	/// It helps determine why the returned structure was chosen.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -116,6 +301,43 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// Find the structure of a text field.
 	/// Find the structure of a text field in an Elasticsearch index.
 	/// </para>
+	/// <para>
+	/// This API provides a starting point for extracting further information from log messages already ingested into Elasticsearch.
+	/// For example, if you have ingested data into a very simple index that has just <c>@timestamp</c> and message fields, you can use this API to see what common structure exists in the message field.
+	/// </para>
+	/// <para>
+	/// The response from the API contains:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Sample messages.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Statistics that reveal the most common values for all fields detected within the text and basic numeric statistics for numeric fields.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Information about the structure of the text, which is useful when you write ingest configurations to index it or similarly formatted text.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Appropriate mappings for an Elasticsearch index, which you could use to ingest the text.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All this information can be calculated by the structure finder with no guidance.
+	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para>
+	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+	/// It helps determine why the returned structure was chosen.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -129,6 +351,43 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Find the structure of a text field.
 	/// Find the structure of a text field in an Elasticsearch index.
+	/// </para>
+	/// <para>
+	/// This API provides a starting point for extracting further information from log messages already ingested into Elasticsearch.
+	/// For example, if you have ingested data into a very simple index that has just <c>@timestamp</c> and message fields, you can use this API to see what common structure exists in the message field.
+	/// </para>
+	/// <para>
+	/// The response from the API contains:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Sample messages.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Statistics that reveal the most common values for all fields detected within the text and basic numeric statistics for numeric fields.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Information about the structure of the text, which is useful when you write ingest configurations to index it or similarly formatted text.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Appropriate mappings for an Elasticsearch index, which you could use to ingest the text.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All this information can be calculated by the structure finder with no guidance.
+	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para>
+	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+	/// It helps determine why the returned structure was chosen.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -144,6 +403,43 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Find the structure of a text field.
 	/// Find the structure of a text field in an Elasticsearch index.
+	/// </para>
+	/// <para>
+	/// This API provides a starting point for extracting further information from log messages already ingested into Elasticsearch.
+	/// For example, if you have ingested data into a very simple index that has just <c>@timestamp</c> and message fields, you can use this API to see what common structure exists in the message field.
+	/// </para>
+	/// <para>
+	/// The response from the API contains:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Sample messages.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Statistics that reveal the most common values for all fields detected within the text and basic numeric statistics for numeric fields.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Information about the structure of the text, which is useful when you write ingest configurations to index it or similarly formatted text.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Appropriate mappings for an Elasticsearch index, which you could use to ingest the text.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All this information can be calculated by the structure finder with no guidance.
+	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para>
+	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+	/// It helps determine why the returned structure was chosen.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -161,6 +457,43 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// Find the structure of a text field.
 	/// Find the structure of a text field in an Elasticsearch index.
 	/// </para>
+	/// <para>
+	/// This API provides a starting point for extracting further information from log messages already ingested into Elasticsearch.
+	/// For example, if you have ingested data into a very simple index that has just <c>@timestamp</c> and message fields, you can use this API to see what common structure exists in the message field.
+	/// </para>
+	/// <para>
+	/// The response from the API contains:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Sample messages.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Statistics that reveal the most common values for all fields detected within the text and basic numeric statistics for numeric fields.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Information about the structure of the text, which is useful when you write ingest configurations to index it or similarly formatted text.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Appropriate mappings for an Elasticsearch index, which you could use to ingest the text.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All this information can be calculated by the structure finder with no guidance.
+	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para>
+	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+	/// It helps determine why the returned structure was chosen.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FindFieldStructureResponse> FindFieldStructureAsync<TDocument>(FindFieldStructureRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -173,6 +506,43 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Find the structure of a text field.
 	/// Find the structure of a text field in an Elasticsearch index.
+	/// </para>
+	/// <para>
+	/// This API provides a starting point for extracting further information from log messages already ingested into Elasticsearch.
+	/// For example, if you have ingested data into a very simple index that has just <c>@timestamp</c> and message fields, you can use this API to see what common structure exists in the message field.
+	/// </para>
+	/// <para>
+	/// The response from the API contains:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Sample messages.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Statistics that reveal the most common values for all fields detected within the text and basic numeric statistics for numeric fields.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Information about the structure of the text, which is useful when you write ingest configurations to index it or similarly formatted text.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Appropriate mappings for an Elasticsearch index, which you could use to ingest the text.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All this information can be calculated by the structure finder with no guidance.
+	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para>
+	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+	/// It helps determine why the returned structure was chosen.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -187,6 +557,43 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Find the structure of a text field.
 	/// Find the structure of a text field in an Elasticsearch index.
+	/// </para>
+	/// <para>
+	/// This API provides a starting point for extracting further information from log messages already ingested into Elasticsearch.
+	/// For example, if you have ingested data into a very simple index that has just <c>@timestamp</c> and message fields, you can use this API to see what common structure exists in the message field.
+	/// </para>
+	/// <para>
+	/// The response from the API contains:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Sample messages.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Statistics that reveal the most common values for all fields detected within the text and basic numeric statistics for numeric fields.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Information about the structure of the text, which is useful when you write ingest configurations to index it or similarly formatted text.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Appropriate mappings for an Elasticsearch index, which you could use to ingest the text.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All this information can be calculated by the structure finder with no guidance.
+	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para>
+	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+	/// It helps determine why the returned structure was chosen.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -203,6 +610,43 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// Find the structure of a text field.
 	/// Find the structure of a text field in an Elasticsearch index.
 	/// </para>
+	/// <para>
+	/// This API provides a starting point for extracting further information from log messages already ingested into Elasticsearch.
+	/// For example, if you have ingested data into a very simple index that has just <c>@timestamp</c> and message fields, you can use this API to see what common structure exists in the message field.
+	/// </para>
+	/// <para>
+	/// The response from the API contains:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Sample messages.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Statistics that reveal the most common values for all fields detected within the text and basic numeric statistics for numeric fields.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Information about the structure of the text, which is useful when you write ingest configurations to index it or similarly formatted text.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Appropriate mappings for an Elasticsearch index, which you could use to ingest the text.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All this information can be calculated by the structure finder with no guidance.
+	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para>
+	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+	/// It helps determine why the returned structure was chosen.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FindFieldStructureResponse> FindFieldStructureAsync(FindFieldStructureRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -215,6 +659,43 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Find the structure of a text field.
 	/// Find the structure of a text field in an Elasticsearch index.
+	/// </para>
+	/// <para>
+	/// This API provides a starting point for extracting further information from log messages already ingested into Elasticsearch.
+	/// For example, if you have ingested data into a very simple index that has just <c>@timestamp</c> and message fields, you can use this API to see what common structure exists in the message field.
+	/// </para>
+	/// <para>
+	/// The response from the API contains:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Sample messages.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Statistics that reveal the most common values for all fields detected within the text and basic numeric statistics for numeric fields.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Information about the structure of the text, which is useful when you write ingest configurations to index it or similarly formatted text.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Appropriate mappings for an Elasticsearch index, which you could use to ingest the text.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All this information can be calculated by the structure finder with no guidance.
+	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para>
+	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+	/// It helps determine why the returned structure was chosen.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -229,6 +710,43 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Find the structure of a text field.
 	/// Find the structure of a text field in an Elasticsearch index.
+	/// </para>
+	/// <para>
+	/// This API provides a starting point for extracting further information from log messages already ingested into Elasticsearch.
+	/// For example, if you have ingested data into a very simple index that has just <c>@timestamp</c> and message fields, you can use this API to see what common structure exists in the message field.
+	/// </para>
+	/// <para>
+	/// The response from the API contains:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Sample messages.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Statistics that reveal the most common values for all fields detected within the text and basic numeric statistics for numeric fields.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Information about the structure of the text, which is useful when you write ingest configurations to index it or similarly formatted text.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Appropriate mappings for an Elasticsearch index, which you could use to ingest the text.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All this information can be calculated by the structure finder with no guidance.
+	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para>
+	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+	/// It helps determine why the returned structure was chosen.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -249,6 +767,8 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API provides a starting point for ingesting data into Elasticsearch in a format that is suitable for subsequent use with other Elastic Stack functionality.
 	/// Use this API rather than the find text structure API if your input text has already been split up into separate messages by some other process.
+	/// </para>
+	/// <para>
 	/// The response from the API contains:
 	/// </para>
 	/// <list type="bullet">
@@ -272,6 +792,10 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// All this information can be calculated by the structure finder with no guidance.
 	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para>
+	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+	/// It helps determine why the returned structure was chosen.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -291,6 +815,8 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API provides a starting point for ingesting data into Elasticsearch in a format that is suitable for subsequent use with other Elastic Stack functionality.
 	/// Use this API rather than the find text structure API if your input text has already been split up into separate messages by some other process.
+	/// </para>
+	/// <para>
 	/// The response from the API contains:
 	/// </para>
 	/// <list type="bullet">
@@ -314,6 +840,10 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// All this information can be calculated by the structure finder with no guidance.
 	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para>
+	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+	/// It helps determine why the returned structure was chosen.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -332,6 +862,8 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API provides a starting point for ingesting data into Elasticsearch in a format that is suitable for subsequent use with other Elastic Stack functionality.
 	/// Use this API rather than the find text structure API if your input text has already been split up into separate messages by some other process.
+	/// </para>
+	/// <para>
 	/// The response from the API contains:
 	/// </para>
 	/// <list type="bullet">
@@ -355,6 +887,10 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// All this information can be calculated by the structure finder with no guidance.
 	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para>
+	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+	/// It helps determine why the returned structure was chosen.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -374,6 +910,8 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API provides a starting point for ingesting data into Elasticsearch in a format that is suitable for subsequent use with other Elastic Stack functionality.
 	/// Use this API rather than the find text structure API if your input text has already been split up into separate messages by some other process.
+	/// </para>
+	/// <para>
 	/// The response from the API contains:
 	/// </para>
 	/// <list type="bullet">
@@ -397,6 +935,10 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// All this information can be calculated by the structure finder with no guidance.
 	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para>
+	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+	/// It helps determine why the returned structure was chosen.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -417,6 +959,8 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API provides a starting point for ingesting data into Elasticsearch in a format that is suitable for subsequent use with other Elastic Stack functionality.
 	/// Use this API rather than the find text structure API if your input text has already been split up into separate messages by some other process.
+	/// </para>
+	/// <para>
 	/// The response from the API contains:
 	/// </para>
 	/// <list type="bullet">
@@ -440,6 +984,10 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// All this information can be calculated by the structure finder with no guidance.
 	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para>
+	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+	/// It helps determine why the returned structure was chosen.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -461,6 +1009,8 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API provides a starting point for ingesting data into Elasticsearch in a format that is suitable for subsequent use with other Elastic Stack functionality.
 	/// Use this API rather than the find text structure API if your input text has already been split up into separate messages by some other process.
+	/// </para>
+	/// <para>
 	/// The response from the API contains:
 	/// </para>
 	/// <list type="bullet">
@@ -484,6 +1034,10 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// All this information can be calculated by the structure finder with no guidance.
 	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para>
+	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+	/// It helps determine why the returned structure was chosen.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -503,6 +1057,8 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API provides a starting point for ingesting data into Elasticsearch in a format that is suitable for subsequent use with other Elastic Stack functionality.
 	/// Use this API rather than the find text structure API if your input text has already been split up into separate messages by some other process.
+	/// </para>
+	/// <para>
 	/// The response from the API contains:
 	/// </para>
 	/// <list type="bullet">
@@ -526,6 +1082,10 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// All this information can be calculated by the structure finder with no guidance.
 	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para>
+	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+	/// It helps determine why the returned structure was chosen.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -546,6 +1106,8 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API provides a starting point for ingesting data into Elasticsearch in a format that is suitable for subsequent use with other Elastic Stack functionality.
 	/// Use this API rather than the find text structure API if your input text has already been split up into separate messages by some other process.
+	/// </para>
+	/// <para>
 	/// The response from the API contains:
 	/// </para>
 	/// <list type="bullet">
@@ -569,6 +1131,10 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// All this information can be calculated by the structure finder with no guidance.
 	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para>
+	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+	/// It helps determine why the returned structure was chosen.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -590,6 +1156,8 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API provides a starting point for ingesting data into Elasticsearch in a format that is suitable for subsequent use with other Elastic Stack functionality.
 	/// Use this API rather than the find text structure API if your input text has already been split up into separate messages by some other process.
+	/// </para>
+	/// <para>
 	/// The response from the API contains:
 	/// </para>
 	/// <list type="bullet">
@@ -613,6 +1181,10 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// All this information can be calculated by the structure finder with no guidance.
 	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para>
+	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+	/// It helps determine why the returned structure was chosen.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -631,6 +1203,8 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API provides a starting point for ingesting data into Elasticsearch in a format that is suitable for subsequent use with other Elastic Stack functionality.
 	/// Use this API rather than the find text structure API if your input text has already been split up into separate messages by some other process.
+	/// </para>
+	/// <para>
 	/// The response from the API contains:
 	/// </para>
 	/// <list type="bullet">
@@ -654,6 +1228,10 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// All this information can be calculated by the structure finder with no guidance.
 	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para>
+	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+	/// It helps determine why the returned structure was chosen.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -673,6 +1251,8 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API provides a starting point for ingesting data into Elasticsearch in a format that is suitable for subsequent use with other Elastic Stack functionality.
 	/// Use this API rather than the find text structure API if your input text has already been split up into separate messages by some other process.
+	/// </para>
+	/// <para>
 	/// The response from the API contains:
 	/// </para>
 	/// <list type="bullet">
@@ -696,6 +1276,10 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// All this information can be calculated by the structure finder with no guidance.
 	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para>
+	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+	/// It helps determine why the returned structure was chosen.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -716,6 +1300,8 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API provides a starting point for ingesting data into Elasticsearch in a format that is suitable for subsequent use with other Elastic Stack functionality.
 	/// Use this API rather than the find text structure API if your input text has already been split up into separate messages by some other process.
+	/// </para>
+	/// <para>
 	/// The response from the API contains:
 	/// </para>
 	/// <list type="bullet">
@@ -739,6 +1325,10 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// All this information can be calculated by the structure finder with no guidance.
 	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para>
+	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+	/// It helps determine why the returned structure was chosen.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -757,6 +1347,8 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API provides a starting point for ingesting data into Elasticsearch in a format that is suitable for subsequent use with other Elastic Stack functionality.
 	/// Use this API rather than the find text structure API if your input text has already been split up into separate messages by some other process.
+	/// </para>
+	/// <para>
 	/// The response from the API contains:
 	/// </para>
 	/// <list type="bullet">
@@ -780,6 +1372,10 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// All this information can be calculated by the structure finder with no guidance.
 	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para>
+	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+	/// It helps determine why the returned structure was chosen.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -799,6 +1395,8 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API provides a starting point for ingesting data into Elasticsearch in a format that is suitable for subsequent use with other Elastic Stack functionality.
 	/// Use this API rather than the find text structure API if your input text has already been split up into separate messages by some other process.
+	/// </para>
+	/// <para>
 	/// The response from the API contains:
 	/// </para>
 	/// <list type="bullet">
@@ -822,6 +1420,10 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// All this information can be calculated by the structure finder with no guidance.
 	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para>
+	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+	/// It helps determine why the returned structure was chosen.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>

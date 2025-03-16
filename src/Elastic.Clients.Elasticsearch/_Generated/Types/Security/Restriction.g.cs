@@ -29,6 +29,12 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public sealed partial class Restriction
 {
+	/// <summary>
+	/// <para>
+	/// A list of workflows to which the API key is restricted.
+	/// NOTE: In order to use a role restriction, an API key must be created with a single role descriptor.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("workflows")]
 	public ICollection<Elastic.Clients.Elasticsearch.Security.RestrictionWorkflow> Workflows { get; set; }
 }
@@ -43,6 +49,12 @@ public sealed partial class RestrictionDescriptor : SerializableDescriptor<Restr
 
 	private ICollection<Elastic.Clients.Elasticsearch.Security.RestrictionWorkflow> WorkflowsValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// A list of workflows to which the API key is restricted.
+	/// NOTE: In order to use a role restriction, an API key must be created with a single role descriptor.
+	/// </para>
+	/// </summary>
 	public RestrictionDescriptor Workflows(ICollection<Elastic.Clients.Elasticsearch.Security.RestrictionWorkflow> workflows)
 	{
 		WorkflowsValue = workflows;

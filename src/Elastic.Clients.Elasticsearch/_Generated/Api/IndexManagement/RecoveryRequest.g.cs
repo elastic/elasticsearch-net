@@ -54,6 +54,9 @@ public sealed partial class RecoveryRequestParameters : RequestParameters
 /// For data streams, the API returns information for the stream's backing indices.
 /// </para>
 /// <para>
+/// All recoveries, whether ongoing or complete, are kept in the cluster state and may be reported on at any time.
+/// </para>
+/// <para>
 /// Shard recovery is the process of initializing a shard copy, such as restoring a primary shard from a snapshot or creating a replica shard from a primary shard.
 /// When a shard recovery completes, the recovered shard is available for search and indexing.
 /// </para>
@@ -143,6 +146,9 @@ public sealed partial class RecoveryRequest : PlainRequest<RecoveryRequestParame
 /// For data streams, the API returns information for the stream's backing indices.
 /// </para>
 /// <para>
+/// All recoveries, whether ongoing or complete, are kept in the cluster state and may be reported on at any time.
+/// </para>
+/// <para>
 /// Shard recovery is the process of initializing a shard copy, such as restoring a primary shard from a snapshot or creating a replica shard from a primary shard.
 /// When a shard recovery completes, the recovered shard is available for search and indexing.
 /// </para>
@@ -229,6 +235,9 @@ public sealed partial class RecoveryRequestDescriptor<TDocument> : RequestDescri
 /// Get index recovery information.
 /// Get information about ongoing and completed shard recoveries for one or more indices.
 /// For data streams, the API returns information for the stream's backing indices.
+/// </para>
+/// <para>
+/// All recoveries, whether ongoing or complete, are kept in the cluster state and may be reported on at any time.
 /// </para>
 /// <para>
 /// Shard recovery is the process of initializing a shard copy, such as restoring a primary shard from a snapshot or creating a replica shard from a primary shard.

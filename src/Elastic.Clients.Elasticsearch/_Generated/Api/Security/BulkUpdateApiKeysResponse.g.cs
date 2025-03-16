@@ -19,29 +19,19 @@
 
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
+using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
+namespace Elastic.Clients.Elasticsearch.Security;
 
-/// <summary>
-/// <para>
-/// FILE_SETTINGS
-/// </para>
-/// </summary>
-public sealed partial class FileSettingsIndicator
+public sealed partial class BulkUpdateApiKeysResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("details")]
-	public Elastic.Clients.Elasticsearch.Core.HealthReport.FileSettingsIndicatorDetails? Details { get; init; }
-	[JsonInclude, JsonPropertyName("diagnosis")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.HealthReport.Diagnosis>? Diagnosis { get; init; }
-	[JsonInclude, JsonPropertyName("impacts")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.HealthReport.Impact>? Impacts { get; init; }
-	[JsonInclude, JsonPropertyName("status")]
-	public Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus Status { get; init; }
-	[JsonInclude, JsonPropertyName("symptom")]
-	public string Symptom { get; init; }
+	[JsonInclude, JsonPropertyName("errors")]
+	public Elastic.Clients.Elasticsearch.Security.BulkError? Errors { get; init; }
+	[JsonInclude, JsonPropertyName("noops")]
+	public IReadOnlyCollection<string> Noops { get; init; }
+	[JsonInclude, JsonPropertyName("updated")]
+	public IReadOnlyCollection<string> Updated { get; init; }
 }

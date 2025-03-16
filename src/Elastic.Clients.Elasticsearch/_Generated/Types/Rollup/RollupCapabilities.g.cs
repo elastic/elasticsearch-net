@@ -29,6 +29,11 @@ namespace Elastic.Clients.Elasticsearch.Rollup;
 
 public sealed partial class RollupCapabilities
 {
+	/// <summary>
+	/// <para>
+	/// There can be multiple, independent jobs configured for a single index or index pattern. Each of these jobs may have different configurations, so the API returns a list of all the various configurations available.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("rollup_jobs")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.RollupCapabilitySummary> RollupJobs { get; init; }
 }

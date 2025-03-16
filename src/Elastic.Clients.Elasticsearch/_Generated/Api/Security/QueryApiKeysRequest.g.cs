@@ -42,14 +42,16 @@ public sealed partial class QueryApiKeysRequestParameters : RequestParameters
 	/// <summary>
 	/// <para>
 	/// Return the snapshot of the owner user's role descriptors associated with the API key.
-	/// An API key's actual permission is the intersection of its assigned role descriptors and the owner user's role descriptors.
+	/// An API key's actual permission is the intersection of its assigned role descriptors and the owner user's role descriptors (effectively limited by it).
+	/// An API key cannot retrieve any API key’s limited-by role descriptors (including itself) unless it has <c>manage_api_key</c> or higher privileges.
 	/// </para>
 	/// </summary>
 	public bool? WithLimitedBy { get => Q<bool?>("with_limited_by"); set => Q("with_limited_by", value); }
 
 	/// <summary>
 	/// <para>
-	/// Determines whether to also retrieve the profile uid, for the API key owner principal, if it exists.
+	/// Determines whether to also retrieve the profile UID for the API key owner principal.
+	/// If it exists, the profile UID is returned under the <c>profile_uid</c> response field for each API key.
 	/// </para>
 	/// </summary>
 	public bool? WithProfileUid { get => Q<bool?>("with_profile_uid"); set => Q("with_profile_uid", value); }
@@ -156,7 +158,13 @@ internal sealed partial class QueryApiKeysRequestConverter : JsonConverter<Query
 /// Find API keys with a query.
 /// </para>
 /// <para>
-/// Get a paginated list of API keys and their information. You can optionally filter the results with a query.
+/// Get a paginated list of API keys and their information.
+/// You can optionally filter the results with a query.
+/// </para>
+/// <para>
+/// To use this API, you must have at least the <c>manage_own_api_key</c> or the <c>read_security</c> cluster privileges.
+/// If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
+/// If you have the <c>read_security</c>, <c>manage_api_key</c>, or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
 /// </para>
 /// </summary>
 [JsonConverter(typeof(QueryApiKeysRequestConverter))]
@@ -185,7 +193,8 @@ public sealed partial class QueryApiKeysRequest : PlainRequest<QueryApiKeysReque
 	/// <summary>
 	/// <para>
 	/// Return the snapshot of the owner user's role descriptors associated with the API key.
-	/// An API key's actual permission is the intersection of its assigned role descriptors and the owner user's role descriptors.
+	/// An API key's actual permission is the intersection of its assigned role descriptors and the owner user's role descriptors (effectively limited by it).
+	/// An API key cannot retrieve any API key’s limited-by role descriptors (including itself) unless it has <c>manage_api_key</c> or higher privileges.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -193,7 +202,8 @@ public sealed partial class QueryApiKeysRequest : PlainRequest<QueryApiKeysReque
 
 	/// <summary>
 	/// <para>
-	/// Determines whether to also retrieve the profile uid, for the API key owner principal, if it exists.
+	/// Determines whether to also retrieve the profile UID for the API key owner principal.
+	/// If it exists, the profile UID is returned under the <c>profile_uid</c> response field for each API key.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -213,8 +223,9 @@ public sealed partial class QueryApiKeysRequest : PlainRequest<QueryApiKeysReque
 
 	/// <summary>
 	/// <para>
-	/// Starting document offset.
-	/// By default, you cannot page through more than 10,000 hits using the from and size parameters.
+	/// The starting document offset.
+	/// It must not be negative.
+	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
 	/// </summary>
@@ -230,13 +241,18 @@ public sealed partial class QueryApiKeysRequest : PlainRequest<QueryApiKeysReque
 	/// You can query the following public information associated with an API key: <c>id</c>, <c>type</c>, <c>name</c>,
 	/// <c>creation</c>, <c>expiration</c>, <c>invalidated</c>, <c>invalidation</c>, <c>username</c>, <c>realm</c>, and <c>metadata</c>.
 	/// </para>
+	/// <para>
+	/// NOTE: The queryable string values associated with API keys are internally mapped as keywords.
+	/// Consequently, if no <c>analyzer</c> parameter is specified for a <c>match</c> query, then the provided match query string is interpreted as a single keyword value.
+	/// Such a match query is hence equivalent to a <c>term</c> query.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQuery? Query { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Search after definition
+	/// The search after definition.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("search_after")]
@@ -245,6 +261,8 @@ public sealed partial class QueryApiKeysRequest : PlainRequest<QueryApiKeysReque
 	/// <summary>
 	/// <para>
 	/// The number of hits to return.
+	/// It must not be negative.
+	/// The <c>size</c> parameter can be set to <c>0</c>, in which case no API key matches are returned, only the aggregation results.
 	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
@@ -254,6 +272,7 @@ public sealed partial class QueryApiKeysRequest : PlainRequest<QueryApiKeysReque
 
 	/// <summary>
 	/// <para>
+	/// The sort definition.
 	/// Other than <c>id</c>, all public fields of an API key are eligible for sorting.
 	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
 	/// </para>
@@ -268,7 +287,13 @@ public sealed partial class QueryApiKeysRequest : PlainRequest<QueryApiKeysReque
 /// Find API keys with a query.
 /// </para>
 /// <para>
-/// Get a paginated list of API keys and their information. You can optionally filter the results with a query.
+/// Get a paginated list of API keys and their information.
+/// You can optionally filter the results with a query.
+/// </para>
+/// <para>
+/// To use this API, you must have at least the <c>manage_own_api_key</c> or the <c>read_security</c> cluster privileges.
+/// If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
+/// If you have the <c>read_security</c>, <c>manage_api_key</c>, or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
 /// </para>
 /// </summary>
 public sealed partial class QueryApiKeysRequestDescriptor<TDocument> : RequestDescriptor<QueryApiKeysRequestDescriptor<TDocument>, QueryApiKeysRequestParameters>
@@ -320,8 +345,9 @@ public sealed partial class QueryApiKeysRequestDescriptor<TDocument> : RequestDe
 
 	/// <summary>
 	/// <para>
-	/// Starting document offset.
-	/// By default, you cannot page through more than 10,000 hits using the from and size parameters.
+	/// The starting document offset.
+	/// It must not be negative.
+	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
 	/// </summary>
@@ -339,6 +365,11 @@ public sealed partial class QueryApiKeysRequestDescriptor<TDocument> : RequestDe
 	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
 	/// You can query the following public information associated with an API key: <c>id</c>, <c>type</c>, <c>name</c>,
 	/// <c>creation</c>, <c>expiration</c>, <c>invalidated</c>, <c>invalidation</c>, <c>username</c>, <c>realm</c>, and <c>metadata</c>.
+	/// </para>
+	/// <para>
+	/// NOTE: The queryable string values associated with API keys are internally mapped as keywords.
+	/// Consequently, if no <c>analyzer</c> parameter is specified for a <c>match</c> query, then the provided match query string is interpreted as a single keyword value.
+	/// Such a match query is hence equivalent to a <c>term</c> query.
 	/// </para>
 	/// </summary>
 	public QueryApiKeysRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Security.ApiKeyQuery? query)
@@ -367,7 +398,7 @@ public sealed partial class QueryApiKeysRequestDescriptor<TDocument> : RequestDe
 
 	/// <summary>
 	/// <para>
-	/// Search after definition
+	/// The search after definition.
 	/// </para>
 	/// </summary>
 	public QueryApiKeysRequestDescriptor<TDocument> SearchAfter(ICollection<Elastic.Clients.Elasticsearch.FieldValue>? searchAfter)
@@ -379,6 +410,8 @@ public sealed partial class QueryApiKeysRequestDescriptor<TDocument> : RequestDe
 	/// <summary>
 	/// <para>
 	/// The number of hits to return.
+	/// It must not be negative.
+	/// The <c>size</c> parameter can be set to <c>0</c>, in which case no API key matches are returned, only the aggregation results.
 	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
@@ -391,6 +424,7 @@ public sealed partial class QueryApiKeysRequestDescriptor<TDocument> : RequestDe
 
 	/// <summary>
 	/// <para>
+	/// The sort definition.
 	/// Other than <c>id</c>, all public fields of an API key are eligible for sorting.
 	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
 	/// </para>
@@ -512,7 +546,13 @@ public sealed partial class QueryApiKeysRequestDescriptor<TDocument> : RequestDe
 /// Find API keys with a query.
 /// </para>
 /// <para>
-/// Get a paginated list of API keys and their information. You can optionally filter the results with a query.
+/// Get a paginated list of API keys and their information.
+/// You can optionally filter the results with a query.
+/// </para>
+/// <para>
+/// To use this API, you must have at least the <c>manage_own_api_key</c> or the <c>read_security</c> cluster privileges.
+/// If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
+/// If you have the <c>read_security</c>, <c>manage_api_key</c>, or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
 /// </para>
 /// </summary>
 public sealed partial class QueryApiKeysRequestDescriptor : RequestDescriptor<QueryApiKeysRequestDescriptor, QueryApiKeysRequestParameters>
@@ -564,8 +604,9 @@ public sealed partial class QueryApiKeysRequestDescriptor : RequestDescriptor<Qu
 
 	/// <summary>
 	/// <para>
-	/// Starting document offset.
-	/// By default, you cannot page through more than 10,000 hits using the from and size parameters.
+	/// The starting document offset.
+	/// It must not be negative.
+	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
 	/// </summary>
@@ -583,6 +624,11 @@ public sealed partial class QueryApiKeysRequestDescriptor : RequestDescriptor<Qu
 	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
 	/// You can query the following public information associated with an API key: <c>id</c>, <c>type</c>, <c>name</c>,
 	/// <c>creation</c>, <c>expiration</c>, <c>invalidated</c>, <c>invalidation</c>, <c>username</c>, <c>realm</c>, and <c>metadata</c>.
+	/// </para>
+	/// <para>
+	/// NOTE: The queryable string values associated with API keys are internally mapped as keywords.
+	/// Consequently, if no <c>analyzer</c> parameter is specified for a <c>match</c> query, then the provided match query string is interpreted as a single keyword value.
+	/// Such a match query is hence equivalent to a <c>term</c> query.
 	/// </para>
 	/// </summary>
 	public QueryApiKeysRequestDescriptor Query(Elastic.Clients.Elasticsearch.Security.ApiKeyQuery? query)
@@ -611,7 +657,7 @@ public sealed partial class QueryApiKeysRequestDescriptor : RequestDescriptor<Qu
 
 	/// <summary>
 	/// <para>
-	/// Search after definition
+	/// The search after definition.
 	/// </para>
 	/// </summary>
 	public QueryApiKeysRequestDescriptor SearchAfter(ICollection<Elastic.Clients.Elasticsearch.FieldValue>? searchAfter)
@@ -623,6 +669,8 @@ public sealed partial class QueryApiKeysRequestDescriptor : RequestDescriptor<Qu
 	/// <summary>
 	/// <para>
 	/// The number of hits to return.
+	/// It must not be negative.
+	/// The <c>size</c> parameter can be set to <c>0</c>, in which case no API key matches are returned, only the aggregation results.
 	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
@@ -635,6 +683,7 @@ public sealed partial class QueryApiKeysRequestDescriptor : RequestDescriptor<Qu
 
 	/// <summary>
 	/// <para>
+	/// The sort definition.
 	/// Other than <c>id</c>, all public fields of an API key are eligible for sorting.
 	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
 	/// </para>

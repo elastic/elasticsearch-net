@@ -30,31 +30,33 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class AnomalyCause
 {
 	[JsonInclude, JsonPropertyName("actual")]
-	public IReadOnlyCollection<double> Actual { get; init; }
+	public IReadOnlyCollection<double>? Actual { get; init; }
 	[JsonInclude, JsonPropertyName("by_field_name")]
-	public string ByFieldName { get; init; }
+	public string? ByFieldName { get; init; }
 	[JsonInclude, JsonPropertyName("by_field_value")]
-	public string ByFieldValue { get; init; }
+	public string? ByFieldValue { get; init; }
 	[JsonInclude, JsonPropertyName("correlated_by_field_value")]
-	public string CorrelatedByFieldValue { get; init; }
+	public string? CorrelatedByFieldValue { get; init; }
 	[JsonInclude, JsonPropertyName("field_name")]
-	public string FieldName { get; init; }
+	public string? FieldName { get; init; }
 	[JsonInclude, JsonPropertyName("function")]
-	public string Function { get; init; }
+	public string? Function { get; init; }
 	[JsonInclude, JsonPropertyName("function_description")]
-	public string FunctionDescription { get; init; }
+	public string? FunctionDescription { get; init; }
+	[JsonInclude, JsonPropertyName("geo_results")]
+	public Elastic.Clients.Elasticsearch.MachineLearning.GeoResults? GeoResults { get; init; }
 	[JsonInclude, JsonPropertyName("influencers")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Influence> Influencers { get; init; }
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Influence>? Influencers { get; init; }
 	[JsonInclude, JsonPropertyName("over_field_name")]
-	public string OverFieldName { get; init; }
+	public string? OverFieldName { get; init; }
 	[JsonInclude, JsonPropertyName("over_field_value")]
-	public string OverFieldValue { get; init; }
+	public string? OverFieldValue { get; init; }
 	[JsonInclude, JsonPropertyName("partition_field_name")]
-	public string PartitionFieldName { get; init; }
+	public string? PartitionFieldName { get; init; }
 	[JsonInclude, JsonPropertyName("partition_field_value")]
-	public string PartitionFieldValue { get; init; }
+	public string? PartitionFieldValue { get; init; }
 	[JsonInclude, JsonPropertyName("probability")]
 	public double Probability { get; init; }
 	[JsonInclude, JsonPropertyName("typical")]
-	public IReadOnlyCollection<double> Typical { get; init; }
+	public IReadOnlyCollection<double>? Typical { get; init; }
 }

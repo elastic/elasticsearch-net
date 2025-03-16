@@ -28,6 +28,12 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public sealed partial class DeleteRoleMappingResponse : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>
+	/// If the mapping is successfully deleted, <c>found</c> is <c>true</c>.
+	/// Otherwise, <c>found</c> is <c>false</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("found")]
 	public bool Found { get; init; }
 }

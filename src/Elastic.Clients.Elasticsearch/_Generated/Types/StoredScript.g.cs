@@ -31,7 +31,8 @@ public sealed partial class StoredScript
 {
 	/// <summary>
 	/// <para>
-	/// Specifies the language the script is written in.
+	/// The language the script is written in.
+	/// For serach templates, use <c>mustache</c>.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("lang")]
@@ -42,6 +43,7 @@ public sealed partial class StoredScript
 	/// <summary>
 	/// <para>
 	/// The script source.
+	/// For search templates, an object containing the search template.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("source")]
@@ -62,7 +64,8 @@ public sealed partial class StoredScriptDescriptor : SerializableDescriptor<Stor
 
 	/// <summary>
 	/// <para>
-	/// Specifies the language the script is written in.
+	/// The language the script is written in.
+	/// For serach templates, use <c>mustache</c>.
 	/// </para>
 	/// </summary>
 	public StoredScriptDescriptor Language(Elastic.Clients.Elasticsearch.ScriptLanguage language)
@@ -80,6 +83,7 @@ public sealed partial class StoredScriptDescriptor : SerializableDescriptor<Stor
 	/// <summary>
 	/// <para>
 	/// The script source.
+	/// For search templates, an object containing the search template.
 	/// </para>
 	/// </summary>
 	public StoredScriptDescriptor Source(string source)

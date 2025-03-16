@@ -29,8 +29,20 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public sealed partial class KibanaToken
 {
+	/// <summary>
+	/// <para>
+	/// The name of the bearer token for the <c>elastic/kibana</c> service account.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The value of the bearer token for the <c>elastic/kibana</c> service account.
+	/// Use this value to authenticate the service account with Elasticsearch.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("value")]
 	public string Value { get; init; }
 }

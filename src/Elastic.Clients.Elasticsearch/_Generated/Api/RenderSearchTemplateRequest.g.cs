@@ -65,6 +65,16 @@ public sealed partial class RenderSearchTemplateRequest : PlainRequest<RenderSea
 
 	/// <summary>
 	/// <para>
+	/// The ID of the search template to render.
+	/// If no <c>source</c> is specified, this or the <c>&lt;template-id></c> request path parameter is required.
+	/// If you specify both this parameter and the <c>&lt;template-id></c> parameter, the API uses only <c>&lt;template-id></c>.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("id")]
+	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// Key-value pairs used to replace Mustache variables in the template.
 	/// The key is the variable name.
 	/// The value is the variable value.
@@ -76,7 +86,7 @@ public sealed partial class RenderSearchTemplateRequest : PlainRequest<RenderSea
 	/// <summary>
 	/// <para>
 	/// An inline search template.
-	/// Supports the same parameters as the search API's request body.
+	/// It supports the same parameters as the search API's request body.
 	/// These parameters also support Mustache variables.
 	/// If no <c>id</c> or <c>&lt;templated-id></c> is specified, this parameter is required.
 	/// </para>
@@ -97,10 +107,6 @@ public sealed partial class RenderSearchTemplateRequestDescriptor<TDocument> : R
 {
 	internal RenderSearchTemplateRequestDescriptor(Action<RenderSearchTemplateRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 
-	public RenderSearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Optional("id", id))
-	{
-	}
-
 	public RenderSearchTemplateRequestDescriptor()
 	{
 	}
@@ -113,19 +119,27 @@ public sealed partial class RenderSearchTemplateRequestDescriptor<TDocument> : R
 
 	internal override string OperationName => "render_search_template";
 
-	public RenderSearchTemplateRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? id)
-	{
-		RouteValues.Optional("id", id);
-		return Self;
-	}
-
 	private string? FileValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
 	private IDictionary<string, object>? ParamsValue { get; set; }
 	private string? SourceValue { get; set; }
 
 	public RenderSearchTemplateRequestDescriptor<TDocument> File(string? file)
 	{
 		FileValue = file;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The ID of the search template to render.
+	/// If no <c>source</c> is specified, this or the <c>&lt;template-id></c> request path parameter is required.
+	/// If you specify both this parameter and the <c>&lt;template-id></c> parameter, the API uses only <c>&lt;template-id></c>.
+	/// </para>
+	/// </summary>
+	public RenderSearchTemplateRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? id)
+	{
+		IdValue = id;
 		return Self;
 	}
 
@@ -145,7 +159,7 @@ public sealed partial class RenderSearchTemplateRequestDescriptor<TDocument> : R
 	/// <summary>
 	/// <para>
 	/// An inline search template.
-	/// Supports the same parameters as the search API's request body.
+	/// It supports the same parameters as the search API's request body.
 	/// These parameters also support Mustache variables.
 	/// If no <c>id</c> or <c>&lt;templated-id></c> is specified, this parameter is required.
 	/// </para>
@@ -163,6 +177,12 @@ public sealed partial class RenderSearchTemplateRequestDescriptor<TDocument> : R
 		{
 			writer.WritePropertyName("file");
 			writer.WriteStringValue(FileValue);
+		}
+
+		if (IdValue is not null)
+		{
+			writer.WritePropertyName("id");
+			JsonSerializer.Serialize(writer, IdValue, options);
 		}
 
 		if (ParamsValue is not null)
@@ -193,10 +213,6 @@ public sealed partial class RenderSearchTemplateRequestDescriptor : RequestDescr
 {
 	internal RenderSearchTemplateRequestDescriptor(Action<RenderSearchTemplateRequestDescriptor> configure) => configure.Invoke(this);
 
-	public RenderSearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Optional("id", id))
-	{
-	}
-
 	public RenderSearchTemplateRequestDescriptor()
 	{
 	}
@@ -209,19 +225,27 @@ public sealed partial class RenderSearchTemplateRequestDescriptor : RequestDescr
 
 	internal override string OperationName => "render_search_template";
 
-	public RenderSearchTemplateRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
-	{
-		RouteValues.Optional("id", id);
-		return Self;
-	}
-
 	private string? FileValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
 	private IDictionary<string, object>? ParamsValue { get; set; }
 	private string? SourceValue { get; set; }
 
 	public RenderSearchTemplateRequestDescriptor File(string? file)
 	{
 		FileValue = file;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The ID of the search template to render.
+	/// If no <c>source</c> is specified, this or the <c>&lt;template-id></c> request path parameter is required.
+	/// If you specify both this parameter and the <c>&lt;template-id></c> parameter, the API uses only <c>&lt;template-id></c>.
+	/// </para>
+	/// </summary>
+	public RenderSearchTemplateRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
+	{
+		IdValue = id;
 		return Self;
 	}
 
@@ -241,7 +265,7 @@ public sealed partial class RenderSearchTemplateRequestDescriptor : RequestDescr
 	/// <summary>
 	/// <para>
 	/// An inline search template.
-	/// Supports the same parameters as the search API's request body.
+	/// It supports the same parameters as the search API's request body.
 	/// These parameters also support Mustache variables.
 	/// If no <c>id</c> or <c>&lt;templated-id></c> is specified, this parameter is required.
 	/// </para>
@@ -259,6 +283,12 @@ public sealed partial class RenderSearchTemplateRequestDescriptor : RequestDescr
 		{
 			writer.WritePropertyName("file");
 			writer.WriteStringValue(FileValue);
+		}
+
+		if (IdValue is not null)
+		{
+			writer.WritePropertyName("id");
+			JsonSerializer.Serialize(writer, IdValue, options);
 		}
 
 		if (ParamsValue is not null)

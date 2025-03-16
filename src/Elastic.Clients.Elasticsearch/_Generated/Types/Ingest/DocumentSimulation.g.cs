@@ -35,7 +35,7 @@ internal sealed partial class DocumentSimulationConverter : JsonConverter<Docume
 			throw new JsonException("Unexpected JSON detected.");
 		string id = default;
 		string index = default;
-		Elastic.Clients.Elasticsearch.Ingest.IngestInfo ingest = default;
+		Elastic.Clients.Elasticsearch.Ingest.Ingest ingest = default;
 		string? routing = default;
 		IReadOnlyDictionary<string, object> source = default;
 		long? version = default;
@@ -60,7 +60,7 @@ internal sealed partial class DocumentSimulationConverter : JsonConverter<Docume
 
 				if (property == "_ingest")
 				{
-					ingest = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.IngestInfo>(ref reader, options);
+					ingest = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.Ingest>(ref reader, options);
 					continue;
 				}
 
@@ -124,7 +124,7 @@ public sealed partial class DocumentSimulation
 	/// </para>
 	/// </summary>
 	public string Index { get; init; }
-	public Elastic.Clients.Elasticsearch.Ingest.IngestInfo Ingest { get; init; }
+	public Elastic.Clients.Elasticsearch.Ingest.Ingest Ingest { get; init; }
 
 	/// <summary>
 	/// <para>

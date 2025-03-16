@@ -73,7 +73,7 @@ public sealed partial class FindFieldStructureRequestParameters : RequestParamet
 
 	/// <summary>
 	/// <para>
-	/// If true, the response includes a field named <c>explanation</c>, which is an array of strings that indicate how the structure finder produced its result.
+	/// If <c>true</c>, the response includes a field named <c>explanation</c>, which is an array of strings that indicate how the structure finder produced its result.
 	/// </para>
 	/// </summary>
 	public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
@@ -126,7 +126,7 @@ public sealed partial class FindFieldStructureRequestParameters : RequestParamet
 	/// <para>
 	/// If the format is <c>delimited</c>, you can specify whether values between delimiters should have whitespace trimmed from them.
 	/// If this parameter is not specified and the delimiter is pipe (<c>|</c>), the default value is true.
-	/// Otherwise, the default value is false.
+	/// Otherwise, the default value is <c>false</c>.
 	/// </para>
 	/// </summary>
 	public bool? ShouldTrimFields { get => Q<bool?>("should_trim_fields"); set => Q("should_trim_fields", value); }
@@ -284,6 +284,43 @@ public sealed partial class FindFieldStructureRequestParameters : RequestParamet
 /// <para>
 /// Find the structure of a text field.
 /// Find the structure of a text field in an Elasticsearch index.
+/// </para>
+/// <para>
+/// This API provides a starting point for extracting further information from log messages already ingested into Elasticsearch.
+/// For example, if you have ingested data into a very simple index that has just <c>@timestamp</c> and message fields, you can use this API to see what common structure exists in the message field.
+/// </para>
+/// <para>
+/// The response from the API contains:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Sample messages.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Statistics that reveal the most common values for all fields detected within the text and basic numeric statistics for numeric fields.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Information about the structure of the text, which is useful when you write ingest configurations to index it or similarly formatted text.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Appropriate mappings for an Elasticsearch index, which you could use to ingest the text.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// All this information can be calculated by the structure finder with no guidance.
+/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+/// </para>
+/// <para>
+/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+/// It helps determine why the returned structure was chosen.
 /// </para>
 /// </summary>
 public sealed partial class FindFieldStructureRequest : PlainRequest<FindFieldStructureRequestParameters>
@@ -341,7 +378,7 @@ public sealed partial class FindFieldStructureRequest : PlainRequest<FindFieldSt
 
 	/// <summary>
 	/// <para>
-	/// If true, the response includes a field named <c>explanation</c>, which is an array of strings that indicate how the structure finder produced its result.
+	/// If <c>true</c>, the response includes a field named <c>explanation</c>, which is an array of strings that indicate how the structure finder produced its result.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -400,7 +437,7 @@ public sealed partial class FindFieldStructureRequest : PlainRequest<FindFieldSt
 	/// <para>
 	/// If the format is <c>delimited</c>, you can specify whether values between delimiters should have whitespace trimmed from them.
 	/// If this parameter is not specified and the delimiter is pipe (<c>|</c>), the default value is true.
-	/// Otherwise, the default value is false.
+	/// Otherwise, the default value is <c>false</c>.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -563,6 +600,43 @@ public sealed partial class FindFieldStructureRequest : PlainRequest<FindFieldSt
 /// Find the structure of a text field.
 /// Find the structure of a text field in an Elasticsearch index.
 /// </para>
+/// <para>
+/// This API provides a starting point for extracting further information from log messages already ingested into Elasticsearch.
+/// For example, if you have ingested data into a very simple index that has just <c>@timestamp</c> and message fields, you can use this API to see what common structure exists in the message field.
+/// </para>
+/// <para>
+/// The response from the API contains:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Sample messages.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Statistics that reveal the most common values for all fields detected within the text and basic numeric statistics for numeric fields.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Information about the structure of the text, which is useful when you write ingest configurations to index it or similarly formatted text.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Appropriate mappings for an Elasticsearch index, which you could use to ingest the text.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// All this information can be calculated by the structure finder with no guidance.
+/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+/// </para>
+/// <para>
+/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+/// It helps determine why the returned structure was chosen.
+/// </para>
 /// </summary>
 public sealed partial class FindFieldStructureRequestDescriptor<TDocument> : RequestDescriptor<FindFieldStructureRequestDescriptor<TDocument>, FindFieldStructureRequestParameters>
 {
@@ -604,6 +678,43 @@ public sealed partial class FindFieldStructureRequestDescriptor<TDocument> : Req
 /// <para>
 /// Find the structure of a text field.
 /// Find the structure of a text field in an Elasticsearch index.
+/// </para>
+/// <para>
+/// This API provides a starting point for extracting further information from log messages already ingested into Elasticsearch.
+/// For example, if you have ingested data into a very simple index that has just <c>@timestamp</c> and message fields, you can use this API to see what common structure exists in the message field.
+/// </para>
+/// <para>
+/// The response from the API contains:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Sample messages.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Statistics that reveal the most common values for all fields detected within the text and basic numeric statistics for numeric fields.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Information about the structure of the text, which is useful when you write ingest configurations to index it or similarly formatted text.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Appropriate mappings for an Elasticsearch index, which you could use to ingest the text.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// All this information can be calculated by the structure finder with no guidance.
+/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+/// </para>
+/// <para>
+/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+/// It helps determine why the returned structure was chosen.
 /// </para>
 /// </summary>
 public sealed partial class FindFieldStructureRequestDescriptor : RequestDescriptor<FindFieldStructureRequestDescriptor, FindFieldStructureRequestParameters>

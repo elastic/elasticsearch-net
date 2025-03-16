@@ -87,6 +87,7 @@ public sealed partial class PutJobRequestParameters : RequestParameters
 /// <para>
 /// Create an anomaly detection job.
 /// If you include a <c>datafeed_config</c>, you must have read index privileges on the source index.
+/// If you include a <c>datafeed_config</c> but do not provide a query, the datafeed uses <c>{"match_all": {"boost": 1}}</c>.
 /// </para>
 /// </summary>
 public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters>
@@ -289,6 +290,7 @@ public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters
 /// <para>
 /// Create an anomaly detection job.
 /// If you include a <c>datafeed_config</c>, you must have read index privileges on the source index.
+/// If you include a <c>datafeed_config</c> but do not provide a query, the datafeed uses <c>{"match_all": {"boost": 1}}</c>.
 /// </para>
 /// </summary>
 public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescriptor<PutJobRequestDescriptor<TDocument>, PutJobRequestParameters>
@@ -757,6 +759,7 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 /// <para>
 /// Create an anomaly detection job.
 /// If you include a <c>datafeed_config</c>, you must have read index privileges on the source index.
+/// If you include a <c>datafeed_config</c> but do not provide a query, the datafeed uses <c>{"match_all": {"boost": 1}}</c>.
 /// </para>
 /// </summary>
 public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRequestDescriptor, PutJobRequestParameters>

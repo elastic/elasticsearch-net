@@ -56,6 +56,13 @@ public sealed partial class SegmentsRequestParameters : RequestParameters
 	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request returns a verbose response.
+	/// </para>
+	/// </summary>
+	public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 }
 
 /// <summary>
@@ -110,6 +117,14 @@ public sealed partial class SegmentsRequest : PlainRequest<SegmentsRequestParame
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request returns a verbose response.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 }
 
 /// <summary>
@@ -142,6 +157,7 @@ public sealed partial class SegmentsRequestDescriptor<TDocument> : RequestDescri
 	public SegmentsRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public SegmentsRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public SegmentsRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+	public SegmentsRequestDescriptor<TDocument> Verbose(bool? verbose = true) => Qs("verbose", verbose);
 
 	public SegmentsRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
@@ -184,6 +200,7 @@ public sealed partial class SegmentsRequestDescriptor : RequestDescriptor<Segmen
 	public SegmentsRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public SegmentsRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public SegmentsRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+	public SegmentsRequestDescriptor Verbose(bool? verbose = true) => Qs("verbose", verbose);
 
 	public SegmentsRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
 	{

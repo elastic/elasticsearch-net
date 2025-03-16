@@ -29,8 +29,19 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed partial class Retries
 {
+	/// <summary>
+	/// <para>
+	/// The number of bulk actions retried.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("bulk")]
 	public long Bulk { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The number of search actions retried.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("search")]
 	public long Search { get; init; }
 }

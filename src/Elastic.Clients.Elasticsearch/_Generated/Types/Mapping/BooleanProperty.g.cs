@@ -60,6 +60,8 @@ public sealed partial class BooleanProperty : IProperty
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
+	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
+	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "boolean";
@@ -87,6 +89,7 @@ public sealed partial class BooleanPropertyDescriptor<TDocument> : SerializableD
 	private bool? NullValueValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private bool? StoreValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public BooleanPropertyDescriptor<TDocument> Boost(double? boost)
 	{
@@ -211,6 +214,12 @@ public sealed partial class BooleanPropertyDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	public BooleanPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -296,6 +305,12 @@ public sealed partial class BooleanPropertyDescriptor<TDocument> : SerializableD
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("boolean");
 		writer.WriteEndObject();
@@ -338,7 +353,8 @@ public sealed partial class BooleanPropertyDescriptor<TDocument> : SerializableD
 		Meta = MetaValue,
 		NullValue = NullValueValue,
 		Properties = PropertiesValue,
-		Store = StoreValue
+		Store = StoreValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }
 
@@ -364,6 +380,7 @@ public sealed partial class BooleanPropertyDescriptor : SerializableDescriptor<B
 	private bool? NullValueValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private bool? StoreValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public BooleanPropertyDescriptor Boost(double? boost)
 	{
@@ -488,6 +505,12 @@ public sealed partial class BooleanPropertyDescriptor : SerializableDescriptor<B
 		return Self;
 	}
 
+	public BooleanPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -573,6 +596,12 @@ public sealed partial class BooleanPropertyDescriptor : SerializableDescriptor<B
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("boolean");
 		writer.WriteEndObject();
@@ -615,6 +644,7 @@ public sealed partial class BooleanPropertyDescriptor : SerializableDescriptor<B
 		Meta = MetaValue,
 		NullValue = NullValueValue,
 		Properties = PropertiesValue,
-		Store = StoreValue
+		Store = StoreValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }

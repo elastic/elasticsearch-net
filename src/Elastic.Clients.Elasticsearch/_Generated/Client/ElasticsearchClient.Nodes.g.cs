@@ -44,7 +44,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// Clear the archived repositories metering.
 	/// Clear the archived repositories metering information in the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearRepositoriesMeteringArchiveResponse ClearRepositoriesMeteringArchive(ClearRepositoriesMeteringArchiveRequest request)
@@ -58,7 +58,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// Clear the archived repositories metering.
 	/// Clear the archived repositories metering information in the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearRepositoriesMeteringArchiveResponse> ClearRepositoriesMeteringArchiveAsync(ClearRepositoriesMeteringArchiveRequest request, CancellationToken cancellationToken = default)
 	{
@@ -71,7 +71,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// Clear the archived repositories metering.
 	/// Clear the archived repositories metering information in the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearRepositoriesMeteringArchiveResponse ClearRepositoriesMeteringArchive(ClearRepositoriesMeteringArchiveRequestDescriptor descriptor)
@@ -85,7 +85,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// Clear the archived repositories metering.
 	/// Clear the archived repositories metering information in the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearRepositoriesMeteringArchiveResponse ClearRepositoriesMeteringArchive(Elastic.Clients.Elasticsearch.NodeIds nodeId, long maxArchiveVersion)
@@ -100,7 +100,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// Clear the archived repositories metering.
 	/// Clear the archived repositories metering information in the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearRepositoriesMeteringArchiveResponse ClearRepositoriesMeteringArchive(Elastic.Clients.Elasticsearch.NodeIds nodeId, long maxArchiveVersion, Action<ClearRepositoriesMeteringArchiveRequestDescriptor> configureRequest)
@@ -116,7 +116,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// Clear the archived repositories metering.
 	/// Clear the archived repositories metering information in the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearRepositoriesMeteringArchiveResponse> ClearRepositoriesMeteringArchiveAsync(ClearRepositoriesMeteringArchiveRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -129,7 +129,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// Clear the archived repositories metering.
 	/// Clear the archived repositories metering information in the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearRepositoriesMeteringArchiveResponse> ClearRepositoriesMeteringArchiveAsync(Elastic.Clients.Elasticsearch.NodeIds nodeId, long maxArchiveVersion, CancellationToken cancellationToken = default)
 	{
@@ -143,7 +143,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// Clear the archived repositories metering.
 	/// Clear the archived repositories metering information in the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearRepositoriesMeteringArchiveResponse> ClearRepositoriesMeteringArchiveAsync(Elastic.Clients.Elasticsearch.NodeIds nodeId, long maxArchiveVersion, Action<ClearRepositoriesMeteringArchiveRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -160,7 +160,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// This API exposes monotonically non-decreasing counters and it is expected that clients would durably store the information needed to compute aggregations over a period of time.
 	/// Additionally, the information exposed by this API is volatile, meaning that it will not be present after node restarts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRepositoriesMeteringInfoResponse GetRepositoriesMeteringInfo(GetRepositoriesMeteringInfoRequest request)
@@ -176,7 +176,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// This API exposes monotonically non-decreasing counters and it is expected that clients would durably store the information needed to compute aggregations over a period of time.
 	/// Additionally, the information exposed by this API is volatile, meaning that it will not be present after node restarts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRepositoriesMeteringInfoResponse> GetRepositoriesMeteringInfoAsync(GetRepositoriesMeteringInfoRequest request, CancellationToken cancellationToken = default)
 	{
@@ -191,7 +191,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// This API exposes monotonically non-decreasing counters and it is expected that clients would durably store the information needed to compute aggregations over a period of time.
 	/// Additionally, the information exposed by this API is volatile, meaning that it will not be present after node restarts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRepositoriesMeteringInfoResponse GetRepositoriesMeteringInfo(GetRepositoriesMeteringInfoRequestDescriptor descriptor)
@@ -207,7 +207,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// This API exposes monotonically non-decreasing counters and it is expected that clients would durably store the information needed to compute aggregations over a period of time.
 	/// Additionally, the information exposed by this API is volatile, meaning that it will not be present after node restarts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRepositoriesMeteringInfoResponse GetRepositoriesMeteringInfo(Elastic.Clients.Elasticsearch.NodeIds nodeId)
@@ -224,7 +224,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// This API exposes monotonically non-decreasing counters and it is expected that clients would durably store the information needed to compute aggregations over a period of time.
 	/// Additionally, the information exposed by this API is volatile, meaning that it will not be present after node restarts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRepositoriesMeteringInfoResponse GetRepositoriesMeteringInfo(Elastic.Clients.Elasticsearch.NodeIds nodeId, Action<GetRepositoriesMeteringInfoRequestDescriptor> configureRequest)
@@ -242,7 +242,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// This API exposes monotonically non-decreasing counters and it is expected that clients would durably store the information needed to compute aggregations over a period of time.
 	/// Additionally, the information exposed by this API is volatile, meaning that it will not be present after node restarts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRepositoriesMeteringInfoResponse> GetRepositoriesMeteringInfoAsync(GetRepositoriesMeteringInfoRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -257,7 +257,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// This API exposes monotonically non-decreasing counters and it is expected that clients would durably store the information needed to compute aggregations over a period of time.
 	/// Additionally, the information exposed by this API is volatile, meaning that it will not be present after node restarts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRepositoriesMeteringInfoResponse> GetRepositoriesMeteringInfoAsync(Elastic.Clients.Elasticsearch.NodeIds nodeId, CancellationToken cancellationToken = default)
 	{
@@ -273,7 +273,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// This API exposes monotonically non-decreasing counters and it is expected that clients would durably store the information needed to compute aggregations over a period of time.
 	/// Additionally, the information exposed by this API is volatile, meaning that it will not be present after node restarts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRepositoriesMeteringInfoResponse> GetRepositoriesMeteringInfoAsync(Elastic.Clients.Elasticsearch.NodeIds nodeId, Action<GetRepositoriesMeteringInfoRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{

@@ -116,7 +116,7 @@ public sealed partial class ErrorCause
 
 	/// <summary>
 	/// <para>
-	/// A human-readable explanation of the error, in english
+	/// A human-readable explanation of the error, in English.
 	/// </para>
 	/// </summary>
 	public string? Reason { get; init; }

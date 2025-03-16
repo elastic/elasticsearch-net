@@ -28,10 +28,21 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed partial class BulkResponse : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, one or more of the operations in the bulk request did not complete successfully.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("errors")]
 	public bool Errors { get; init; }
 	[JsonInclude, JsonPropertyName("ingest_took")]
 	public long? IngestTook { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The length of time, in milliseconds, it took to process the bulk request.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("took")]
 	public long Took { get; init; }
 }

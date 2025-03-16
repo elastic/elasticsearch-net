@@ -31,7 +31,7 @@ public sealed partial class PutSynonymRuleResponse : ElasticsearchResponse
 	/// <summary>
 	/// <para>
 	/// Updating synonyms in a synonym set reloads the associated analyzers.
-	/// This is the analyzers reloading result
+	/// This information is the analyzers reloading result.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("reload_analyzers_details")]
@@ -39,7 +39,7 @@ public sealed partial class PutSynonymRuleResponse : ElasticsearchResponse
 
 	/// <summary>
 	/// <para>
-	/// Update operation result
+	/// The update operation result.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("result")]

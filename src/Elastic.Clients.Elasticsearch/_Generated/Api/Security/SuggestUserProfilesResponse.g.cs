@@ -28,10 +28,27 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public sealed partial class SuggestUserProfilesResponse : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>
+	/// A list of profile documents, ordered by relevance, that match the search criteria.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("profiles")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserProfile> Profiles { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The number of milliseconds it took Elasticsearch to run the request.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("took")]
 	public long Took { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// Metadata about the number of matching profiles.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("total")]
 	public Elastic.Clients.Elasticsearch.Security.TotalUserProfiles Total { get; init; }
 }

@@ -34,6 +34,12 @@ public sealed partial class SearchResponse<TDocument> : ElasticsearchResponse
 	public Elastic.Clients.Elasticsearch.ClusterStatistics? Clusters { get; init; }
 	[JsonInclude, JsonPropertyName("fields")]
 	public IReadOnlyDictionary<string, object>? Fields { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The returned documents and metadata.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("hits")]
 	public Elastic.Clients.Elasticsearch.Core.Search.HitsMetadata<TDocument> HitsMetadata { get; init; }
 	[JsonInclude, JsonPropertyName("max_score")]
@@ -44,16 +50,81 @@ public sealed partial class SearchResponse<TDocument> : ElasticsearchResponse
 	public string? PitId { get; init; }
 	[JsonInclude, JsonPropertyName("profile")]
 	public Elastic.Clients.Elasticsearch.Core.Search.Profile? Profile { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The identifier for the search and its search context.
+	/// You can use this scroll ID with the scroll API to retrieve the next batch of search results for the request.
+	/// This property is returned only if the <c>scroll</c> query parameter is specified in the request.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_scroll_id")]
 	public Elastic.Clients.Elasticsearch.ScrollId? ScrollId { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// A count of shards used for the request.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_shards")]
 	public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
 	[JsonInclude, JsonPropertyName("suggest")]
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggestDictionary<TDocument>? Suggest { get; init; }
 	[JsonInclude, JsonPropertyName("terminated_early")]
 	public bool? TerminatedEarly { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request timed out before completion; returned results may be partial or empty.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("timed_out")]
 	public bool TimedOut { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The number of milliseconds it took Elasticsearch to run the request.
+	/// This value is calculated by measuring the time elapsed between receipt of a request on the coordinating node and the time at which the coordinating node is ready to send the response.
+	/// It includes:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Communication time between the coordinating node and data nodes
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Time the request spends in the search thread pool, queued for execution
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Actual run time
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// It does not include:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Time needed to send the request to Elasticsearch
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Time needed to serialize the JSON response
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Time needed to send the response to a client
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("took")]
 	public long Took { get; init; }
 }

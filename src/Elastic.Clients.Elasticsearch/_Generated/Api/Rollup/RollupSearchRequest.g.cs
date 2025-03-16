@@ -113,6 +113,53 @@ internal sealed partial class RollupSearchRequestConverter : JsonConverter<Rollu
 /// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
 /// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
 /// </para>
+/// <para>
+/// The request body supports a subset of features from the regular search API.
+/// The following functionality is not available:
+/// </para>
+/// <para>
+/// <c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
+/// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
+/// </para>
+/// <para>
+/// <strong>Searching both historical rollup and non-rollup data</strong>
+/// </para>
+/// <para>
+/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
+/// This is done by simply adding the live indices to the URI. For example:
+/// </para>
+/// <code>
+/// GET sensor-1,sensor_rollup/_rollup_search
+/// {
+///   "size": 0,
+///   "aggregations": {
+///      "max_temperature": {
+///       "max": {
+///         "field": "temperature"
+///       }
+///     }
+///   }
+/// }
+/// </code>
+/// <para>
+/// The rollup search endpoint does two things when the search runs:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The original request is sent to the non-rollup index unaltered.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A rewritten version of the original request is sent to the rollup index.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
+/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
+/// </para>
 /// </summary>
 [JsonConverter(typeof(RollupSearchRequestConverter))]
 public sealed partial class RollupSearchRequest : PlainRequest<RollupSearchRequestParameters>
@@ -159,7 +206,7 @@ public sealed partial class RollupSearchRequest : PlainRequest<RollupSearchReque
 
 	/// <summary>
 	/// <para>
-	/// Specifies a DSL query.
+	/// Specifies a DSL query that is subject to some limitations.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
@@ -179,6 +226,53 @@ public sealed partial class RollupSearchRequest : PlainRequest<RollupSearchReque
 /// Search rolled-up data.
 /// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
 /// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
+/// </para>
+/// <para>
+/// The request body supports a subset of features from the regular search API.
+/// The following functionality is not available:
+/// </para>
+/// <para>
+/// <c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
+/// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
+/// </para>
+/// <para>
+/// <strong>Searching both historical rollup and non-rollup data</strong>
+/// </para>
+/// <para>
+/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
+/// This is done by simply adding the live indices to the URI. For example:
+/// </para>
+/// <code>
+/// GET sensor-1,sensor_rollup/_rollup_search
+/// {
+///   "size": 0,
+///   "aggregations": {
+///      "max_temperature": {
+///       "max": {
+///         "field": "temperature"
+///       }
+///     }
+///   }
+/// }
+/// </code>
+/// <para>
+/// The rollup search endpoint does two things when the search runs:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The original request is sent to the non-rollup index unaltered.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A rewritten version of the original request is sent to the rollup index.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
+/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
 /// </para>
 /// </summary>
 public sealed partial class RollupSearchRequestDescriptor<TDocument> : RequestDescriptor<RollupSearchRequestDescriptor<TDocument>, RollupSearchRequestParameters>
@@ -229,7 +323,7 @@ public sealed partial class RollupSearchRequestDescriptor<TDocument> : RequestDe
 
 	/// <summary>
 	/// <para>
-	/// Specifies a DSL query.
+	/// Specifies a DSL query that is subject to some limitations.
 	/// </para>
 	/// </summary>
 	public RollupSearchRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
@@ -308,6 +402,53 @@ public sealed partial class RollupSearchRequestDescriptor<TDocument> : RequestDe
 /// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
 /// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
 /// </para>
+/// <para>
+/// The request body supports a subset of features from the regular search API.
+/// The following functionality is not available:
+/// </para>
+/// <para>
+/// <c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
+/// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
+/// </para>
+/// <para>
+/// <strong>Searching both historical rollup and non-rollup data</strong>
+/// </para>
+/// <para>
+/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
+/// This is done by simply adding the live indices to the URI. For example:
+/// </para>
+/// <code>
+/// GET sensor-1,sensor_rollup/_rollup_search
+/// {
+///   "size": 0,
+///   "aggregations": {
+///      "max_temperature": {
+///       "max": {
+///         "field": "temperature"
+///       }
+///     }
+///   }
+/// }
+/// </code>
+/// <para>
+/// The rollup search endpoint does two things when the search runs:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The original request is sent to the non-rollup index unaltered.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A rewritten version of the original request is sent to the rollup index.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
+/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
+/// </para>
 /// </summary>
 public sealed partial class RollupSearchRequestDescriptor : RequestDescriptor<RollupSearchRequestDescriptor, RollupSearchRequestParameters>
 {
@@ -353,7 +494,7 @@ public sealed partial class RollupSearchRequestDescriptor : RequestDescriptor<Ro
 
 	/// <summary>
 	/// <para>
-	/// Specifies a DSL query.
+	/// Specifies a DSL query that is subject to some limitations.
 	/// </para>
 	/// </summary>
 	public RollupSearchRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)

@@ -50,7 +50,7 @@ public sealed partial class SimulateIndexTemplateRequestParameters : RequestPara
 /// <summary>
 /// <para>
 /// Simulate an index.
-/// Returns the index configuration that would be applied to the specified index from an existing index template.
+/// Get the index configuration that would be applied to the specified index from an existing index template.
 /// </para>
 /// </summary>
 public sealed partial class SimulateIndexTemplateRequest : PlainRequest<SimulateIndexTemplateRequestParameters>
@@ -87,7 +87,7 @@ public sealed partial class SimulateIndexTemplateRequest : PlainRequest<Simulate
 /// <summary>
 /// <para>
 /// Simulate an index.
-/// Returns the index configuration that would be applied to the specified index from an existing index template.
+/// Get the index configuration that would be applied to the specified index from an existing index template.
 /// </para>
 /// </summary>
 public sealed partial class SimulateIndexTemplateRequestDescriptor : RequestDescriptor<SimulateIndexTemplateRequestDescriptor, SimulateIndexTemplateRequestParameters>
