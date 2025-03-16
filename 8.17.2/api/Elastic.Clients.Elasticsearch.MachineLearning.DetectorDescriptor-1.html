@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class DetectorDescriptor&lt;TDocument&gt; | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class DetectorDescriptor&lt;TDocument&gt; | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.17.2/apiSpec/new?filename=Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1" class="text-break">
+Class DetectorDescriptor&lt;TDocument&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Detector.g.cs/#L113"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.html">MachineLearning</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class DetectorDescriptor&lt;TDocument&gt; : SerializableDescriptor&lt;DetectorDescriptor&lt;TDocument&gt;&gt;</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.Descriptor.html">Descriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.Descriptor-1.html">Descriptor</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor-1.html">DetectorDescriptor</a>&lt;TDocument&gt;&gt;</div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.SerializableDescriptor-1.html">SerializableDescriptor</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor-1.html">DetectorDescriptor</a>&lt;TDocument&gt;&gt;</div>
+      <div><span class="xref">DetectorDescriptor&lt;TDocument&gt;</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1__ctor" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.#ctor">
+  DetectorDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Detector.g.cs/#L117"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DetectorDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_ByFieldName_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.ByFieldName*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_ByFieldName_Elastic_Clients_Elasticsearch_Field_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.ByFieldName(Elastic.Clients.Elasticsearch.Field)">
+  ByFieldName(Field?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Detector.g.cs/#L140"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The field used to split the data. In particular, this property is used for analyzing the splits with respect to their own history. It is used for finding unusual values in the context of the split.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DetectorDescriptor&lt;TDocument&gt; ByFieldName(Field? byFieldName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>byFieldName</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor-1.html">DetectorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_ByFieldName_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.ByFieldName*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_ByFieldName_System_Linq_Expressions_Expression_System_Func__0_System_Object___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.ByFieldName(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+  ByFieldName(Expression&lt;Func&lt;TDocument, object&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Detector.g.cs/#L162"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The field used to split the data. In particular, this property is used for analyzing the splits with respect to their own history. It is used for finding unusual values in the context of the split.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DetectorDescriptor&lt;TDocument&gt; ByFieldName(Expression&lt;Func&lt;TDocument, object&gt;&gt; byFieldName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>byFieldName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor-1.html">DetectorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_ByFieldName_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.ByFieldName*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_ByFieldName__1_System_Linq_Expressions_Expression_System_Func__0___0___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.ByFieldName``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+  ByFieldName&lt;TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Detector.g.cs/#L151"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The field used to split the data. In particular, this property is used for analyzing the splits with respect to their own history. It is used for finding unusual values in the context of the split.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DetectorDescriptor&lt;TDocument&gt; ByFieldName&lt;TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt; byFieldName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>byFieldName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, TValue&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor-1.html">DetectorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TValue</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_CustomRules_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.CustomRules*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_CustomRules_Elastic_Clients_Elasticsearch_MachineLearning_DetectionRuleDescriptor__0__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.CustomRules(Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor{`0})">
+  CustomRules(DetectionRuleDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Detector.g.cs/#L182"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DetectorDescriptor&lt;TDocument&gt; CustomRules(DetectionRuleDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor-1.html">DetectionRuleDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor-1.html">DetectorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_CustomRules_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.CustomRules*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_CustomRules_System_Action_Elastic_Clients_Elasticsearch_MachineLearning_DetectionRuleDescriptor__0___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.CustomRules(System.Action{Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor{`0}})">
+  CustomRules(Action&lt;DetectionRuleDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Detector.g.cs/#L191"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DetectorDescriptor&lt;TDocument&gt; CustomRules(Action&lt;DetectionRuleDescriptor&lt;TDocument&gt;&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor-1.html">DetectionRuleDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor-1.html">DetectorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_CustomRules_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.CustomRules*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_CustomRules_System_Action_Elastic_Clients_Elasticsearch_MachineLearning_DetectionRuleDescriptor__0_____" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.CustomRules(System.Action{Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor{`0}}[])">
+  CustomRules(params Action&lt;DetectionRuleDescriptor&lt;TDocument&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Detector.g.cs/#L200"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DetectorDescriptor&lt;TDocument&gt; CustomRules(params Action&lt;DetectionRuleDescriptor&lt;TDocument&gt;&gt;[] configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor-1.html">DetectionRuleDescriptor</a>&lt;TDocument&gt;&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor-1.html">DetectorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_CustomRules_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.CustomRules*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_CustomRules_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_MachineLearning_DetectionRule__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.CustomRules(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule})">
+  CustomRules(ICollection&lt;DetectionRule&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Detector.g.cs/#L173"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DetectorDescriptor&lt;TDocument&gt; CustomRules(ICollection&lt;DetectionRule&gt;? customRules)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>customRules</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule.html">DetectionRule</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor-1.html">DetectorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_DetectorDescription_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.DetectorDescription*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_DetectorDescription_System_String_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.DetectorDescription(System.String)">
+  DetectorDescription(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Detector.g.cs/#L214"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A description of the detector.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DetectorDescriptor&lt;TDocument&gt; DetectorDescription(string? detectorDescription)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>detectorDescription</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor-1.html">DetectorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_DetectorIndex_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.DetectorIndex*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_DetectorIndex_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.DetectorIndex(System.Nullable{System.Int32})">
+  DetectorIndex(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Detector.g.cs/#L225"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A unique identifier for the detector. This identifier is based on the order of the detectors in the <code>analysis_config</code>, starting at zero. If you specify a value for this property, it is ignored.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DetectorDescriptor&lt;TDocument&gt; DetectorIndex(int? detectorIndex)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>detectorIndex</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor-1.html">DetectorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_ExcludeFrequent_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.ExcludeFrequent*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_ExcludeFrequent_System_Nullable_Elastic_Clients_Elasticsearch_MachineLearning_ExcludeFrequent__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.ExcludeFrequent(System.Nullable{Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent})">
+  ExcludeFrequent(ExcludeFrequent?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Detector.g.cs/#L236"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If set, frequent entities are excluded from influencing the anomaly results. Entities can be considered frequent over time or frequent in a population. If you are working with both over and by fields, you can set <code>exclude_frequent</code> to <code>all</code> for both fields, or to <code>by</code> or <code>over</code> for those specific fields.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DetectorDescriptor&lt;TDocument&gt; ExcludeFrequent(ExcludeFrequent? excludeFrequent)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>excludeFrequent</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent.html">ExcludeFrequent</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor-1.html">DetectorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_FieldName_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.FieldName*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_FieldName_Elastic_Clients_Elasticsearch_Field_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.FieldName(Elastic.Clients.Elasticsearch.Field)">
+  FieldName(Field?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Detector.g.cs/#L247"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The field that the detector uses in the function. If you use an event rate function such as count or rare, do not specify this field. The <code>field_name</code> cannot contain double quotes or backslashes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DetectorDescriptor&lt;TDocument&gt; FieldName(Field? fieldName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>fieldName</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor-1.html">DetectorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_FieldName_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.FieldName*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_FieldName_System_Linq_Expressions_Expression_System_Func__0_System_Object___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.FieldName(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+  FieldName(Expression&lt;Func&lt;TDocument, object&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Detector.g.cs/#L269"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The field that the detector uses in the function. If you use an event rate function such as count or rare, do not specify this field. The <code>field_name</code> cannot contain double quotes or backslashes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DetectorDescriptor&lt;TDocument&gt; FieldName(Expression&lt;Func&lt;TDocument, object&gt;&gt; fieldName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>fieldName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor-1.html">DetectorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_FieldName_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.FieldName*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_FieldName__1_System_Linq_Expressions_Expression_System_Func__0___0___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.FieldName``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+  FieldName&lt;TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Detector.g.cs/#L258"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The field that the detector uses in the function. If you use an event rate function such as count or rare, do not specify this field. The <code>field_name</code> cannot contain double quotes or backslashes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DetectorDescriptor&lt;TDocument&gt; FieldName&lt;TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt; fieldName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>fieldName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, TValue&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor-1.html">DetectorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TValue</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_Function_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.Function*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_Function_System_String_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.Function(System.String)">
+  Function(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Detector.g.cs/#L280"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The analysis function that is used. For example, <code>count</code>, <code>rare</code>, <code>mean</code>, <code>min</code>, <code>max</code>, or <code>sum</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DetectorDescriptor&lt;TDocument&gt; Function(string? function)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>function</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor-1.html">DetectorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_OverFieldName_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.OverFieldName*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_OverFieldName_Elastic_Clients_Elasticsearch_Field_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.OverFieldName(Elastic.Clients.Elasticsearch.Field)">
+  OverFieldName(Field?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Detector.g.cs/#L291"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The field used to split the data. In particular, this property is used for analyzing the splits with respect to the history of all splits. It is used for finding unusual values in the population of all splits.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DetectorDescriptor&lt;TDocument&gt; OverFieldName(Field? overFieldName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>overFieldName</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor-1.html">DetectorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_OverFieldName_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.OverFieldName*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_OverFieldName_System_Linq_Expressions_Expression_System_Func__0_System_Object___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.OverFieldName(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+  OverFieldName(Expression&lt;Func&lt;TDocument, object&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Detector.g.cs/#L313"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The field used to split the data. In particular, this property is used for analyzing the splits with respect to the history of all splits. It is used for finding unusual values in the population of all splits.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DetectorDescriptor&lt;TDocument&gt; OverFieldName(Expression&lt;Func&lt;TDocument, object&gt;&gt; overFieldName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>overFieldName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor-1.html">DetectorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_OverFieldName_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.OverFieldName*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_OverFieldName__1_System_Linq_Expressions_Expression_System_Func__0___0___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.OverFieldName``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+  OverFieldName&lt;TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Detector.g.cs/#L302"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The field used to split the data. In particular, this property is used for analyzing the splits with respect to the history of all splits. It is used for finding unusual values in the population of all splits.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DetectorDescriptor&lt;TDocument&gt; OverFieldName&lt;TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt; overFieldName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>overFieldName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, TValue&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor-1.html">DetectorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TValue</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_PartitionFieldName_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.PartitionFieldName*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_PartitionFieldName_Elastic_Clients_Elasticsearch_Field_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.PartitionFieldName(Elastic.Clients.Elasticsearch.Field)">
+  PartitionFieldName(Field?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Detector.g.cs/#L324"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The field used to segment the analysis. When you use this property, you have completely independent baselines for each value of this field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DetectorDescriptor&lt;TDocument&gt; PartitionFieldName(Field? partitionFieldName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>partitionFieldName</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor-1.html">DetectorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_PartitionFieldName_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.PartitionFieldName*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_PartitionFieldName_System_Linq_Expressions_Expression_System_Func__0_System_Object___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.PartitionFieldName(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+  PartitionFieldName(Expression&lt;Func&lt;TDocument, object&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Detector.g.cs/#L346"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The field used to segment the analysis. When you use this property, you have completely independent baselines for each value of this field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DetectorDescriptor&lt;TDocument&gt; PartitionFieldName(Expression&lt;Func&lt;TDocument, object&gt;&gt; partitionFieldName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>partitionFieldName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor-1.html">DetectorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_PartitionFieldName_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.PartitionFieldName*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_PartitionFieldName__1_System_Linq_Expressions_Expression_System_Func__0___0___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.PartitionFieldName``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+  PartitionFieldName&lt;TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Detector.g.cs/#L335"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The field used to segment the analysis. When you use this property, you have completely independent baselines for each value of this field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DetectorDescriptor&lt;TDocument&gt; PartitionFieldName&lt;TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt; partitionFieldName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>partitionFieldName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, TValue&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor-1.html">DetectorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TValue</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_Serialize_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.Serialize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_Serialize_System_Text_Json_Utf8JsonWriter_System_Text_Json_JsonSerializerOptions_Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.Serialize(System.Text.Json.Utf8JsonWriter,System.Text.Json.JsonSerializerOptions,Elastic.Clients.Elasticsearch.IElasticsearchClientSettings)">
+  Serialize(Utf8JsonWriter, JsonSerializerOptions, IElasticsearchClientSettings)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Detector.g.cs/#L363"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>writer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.utf8jsonwriter">Utf8JsonWriter</a></dt>
+    <dd></dd>
+    <dt><code>options</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions">JsonSerializerOptions</a></dt>
+    <dd></dd>
+    <dt><code>settings</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.html">IElasticsearchClientSettings</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_UseNull_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.UseNull*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DetectorDescriptor_1_UseNull_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor`1.UseNull(System.Nullable{System.Boolean})">
+  UseNull(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Detector.g.cs/#L357"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines whether a new series is used as the null series when there is no value for the by or partition fields.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DetectorDescriptor&lt;TDocument&gt; UseNull(bool? useNull = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>useNull</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor-1.html">DetectorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

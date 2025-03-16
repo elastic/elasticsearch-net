@@ -1,0 +1,1744 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class CommunityIDProcessorDescriptor&lt;TDocument&gt; | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class CommunityIDProcessorDescriptor&lt;TDocument&gt; | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.17.2/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1" class="text-break">
+Class CommunityIDProcessorDescriptor&lt;TDocument&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L170"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.html">Ingest</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class CommunityIDProcessorDescriptor&lt;TDocument&gt; : SerializableDescriptor&lt;CommunityIDProcessorDescriptor&lt;TDocument&gt;&gt;</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.Descriptor.html">Descriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.Descriptor-1.html">Descriptor</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;&gt;</div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.SerializableDescriptor-1.html">SerializableDescriptor</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;&gt;</div>
+      <div><span class="xref">CommunityIDProcessorDescriptor&lt;TDocument&gt;</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1__ctor" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.#ctor">
+  CommunityIDProcessorDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L174"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_Description_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.Description*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_Description_System_String_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.Description(System.String)">
+  Description(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L204"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Description of the processor.
+Useful for describing the purpose of the processor or its configuration.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; Description(string? description)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>description</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_DestinationIp_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.DestinationIp*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_DestinationIp_Elastic_Clients_Elasticsearch_Field_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.DestinationIp(Elastic.Clients.Elasticsearch.Field)">
+  DestinationIp(Field?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L215"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field containing the destination IP address.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; DestinationIp(Field? destinationIp)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>destinationIp</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_DestinationIp_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.DestinationIp*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_DestinationIp_System_Linq_Expressions_Expression_System_Func__0_System_Object___" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.DestinationIp(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+  DestinationIp(Expression&lt;Func&lt;TDocument, object&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L237"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field containing the destination IP address.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; DestinationIp(Expression&lt;Func&lt;TDocument, object&gt;&gt; destinationIp)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>destinationIp</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_DestinationIp_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.DestinationIp*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_DestinationIp__1_System_Linq_Expressions_Expression_System_Func__0___0___" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.DestinationIp``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+  DestinationIp&lt;TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L226"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field containing the destination IP address.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; DestinationIp&lt;TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt; destinationIp)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>destinationIp</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, TValue&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TValue</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_DestinationPort_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.DestinationPort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_DestinationPort_Elastic_Clients_Elasticsearch_Field_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.DestinationPort(Elastic.Clients.Elasticsearch.Field)">
+  DestinationPort(Field?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L248"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field containing the destination port.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; DestinationPort(Field? destinationPort)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>destinationPort</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_DestinationPort_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.DestinationPort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_DestinationPort_System_Linq_Expressions_Expression_System_Func__0_System_Object___" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.DestinationPort(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+  DestinationPort(Expression&lt;Func&lt;TDocument, object&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L270"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field containing the destination port.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; DestinationPort(Expression&lt;Func&lt;TDocument, object&gt;&gt; destinationPort)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>destinationPort</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_DestinationPort_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.DestinationPort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_DestinationPort__1_System_Linq_Expressions_Expression_System_Func__0___0___" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.DestinationPort``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+  DestinationPort&lt;TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L259"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field containing the destination port.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; DestinationPort&lt;TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt; destinationPort)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>destinationPort</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, TValue&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TValue</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_IanaNumber_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.IanaNumber*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_IanaNumber_Elastic_Clients_Elasticsearch_Field_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.IanaNumber(Elastic.Clients.Elasticsearch.Field)">
+  IanaNumber(Field?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L281"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field containing the IANA number.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; IanaNumber(Field? ianaNumber)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>ianaNumber</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_IanaNumber_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.IanaNumber*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_IanaNumber_System_Linq_Expressions_Expression_System_Func__0_System_Object___" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.IanaNumber(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+  IanaNumber(Expression&lt;Func&lt;TDocument, object&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L303"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field containing the IANA number.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; IanaNumber(Expression&lt;Func&lt;TDocument, object&gt;&gt; ianaNumber)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>ianaNumber</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_IanaNumber_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.IanaNumber*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_IanaNumber__1_System_Linq_Expressions_Expression_System_Func__0___0___" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.IanaNumber``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+  IanaNumber&lt;TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L292"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field containing the IANA number.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; IanaNumber&lt;TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt; ianaNumber)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>ianaNumber</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, TValue&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TValue</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_IcmpCode_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.IcmpCode*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_IcmpCode_Elastic_Clients_Elasticsearch_Field_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.IcmpCode(Elastic.Clients.Elasticsearch.Field)">
+  IcmpCode(Field?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L314"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field containing the ICMP code.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; IcmpCode(Field? icmpCode)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>icmpCode</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_IcmpCode_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.IcmpCode*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_IcmpCode_System_Linq_Expressions_Expression_System_Func__0_System_Object___" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.IcmpCode(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+  IcmpCode(Expression&lt;Func&lt;TDocument, object&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L336"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field containing the ICMP code.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; IcmpCode(Expression&lt;Func&lt;TDocument, object&gt;&gt; icmpCode)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>icmpCode</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_IcmpCode_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.IcmpCode*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_IcmpCode__1_System_Linq_Expressions_Expression_System_Func__0___0___" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.IcmpCode``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+  IcmpCode&lt;TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L325"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field containing the ICMP code.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; IcmpCode&lt;TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt; icmpCode)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>icmpCode</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, TValue&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TValue</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_IcmpType_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.IcmpType*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_IcmpType_Elastic_Clients_Elasticsearch_Field_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.IcmpType(Elastic.Clients.Elasticsearch.Field)">
+  IcmpType(Field?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L347"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field containing the ICMP type.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; IcmpType(Field? icmpType)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>icmpType</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_IcmpType_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.IcmpType*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_IcmpType_System_Linq_Expressions_Expression_System_Func__0_System_Object___" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.IcmpType(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+  IcmpType(Expression&lt;Func&lt;TDocument, object&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L369"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field containing the ICMP type.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; IcmpType(Expression&lt;Func&lt;TDocument, object&gt;&gt; icmpType)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>icmpType</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_IcmpType_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.IcmpType*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_IcmpType__1_System_Linq_Expressions_Expression_System_Func__0___0___" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.IcmpType``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+  IcmpType&lt;TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L358"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field containing the ICMP type.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; IcmpType&lt;TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt; icmpType)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>icmpType</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, TValue&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TValue</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_If_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.If*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_If_System_String_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.If(System.String)">
+  If(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L380"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Conditionally execute the processor.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; If(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_IgnoreFailure_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.IgnoreFailure*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_IgnoreFailure_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.IgnoreFailure(System.Nullable{System.Boolean})">
+  IgnoreFailure(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L391"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Ignore failures for the processor.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; IgnoreFailure(bool? ignoreFailure = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>ignoreFailure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_IgnoreMissing_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.IgnoreMissing*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_IgnoreMissing_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.IgnoreMissing(System.Nullable{System.Boolean})">
+  IgnoreMissing(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L403"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If true and any required fields are missing, the processor quietly exits
+without modifying the document.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; IgnoreMissing(bool? ignoreMissing = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>ignoreMissing</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_OnFailure_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.OnFailure*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_OnFailure_Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor__0__" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor{`0})">
+  OnFailure(ProcessorDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L423"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; OnFailure(ProcessorDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor-1.html">ProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_OnFailure_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.OnFailure*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_OnFailure_System_Action_Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor__0___" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.OnFailure(System.Action{Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor{`0}})">
+  OnFailure(Action&lt;ProcessorDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L432"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; OnFailure(Action&lt;ProcessorDescriptor&lt;TDocument&gt;&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor-1.html">ProcessorDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_OnFailure_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.OnFailure*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_OnFailure_System_Action_Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor__0_____" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.OnFailure(System.Action{Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor{`0}}[])">
+  OnFailure(params Action&lt;ProcessorDescriptor&lt;TDocument&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L441"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; OnFailure(params Action&lt;ProcessorDescriptor&lt;TDocument&gt;&gt;[] configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor-1.html">ProcessorDescriptor</a>&lt;TDocument&gt;&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_OnFailure_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.OnFailure*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_OnFailure_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_Ingest_Processor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.OnFailure(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.Ingest.Processor})">
+  OnFailure(ICollection&lt;Processor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L414"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Handle failures for the processor.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; OnFailure(ICollection&lt;Processor&gt;? onFailure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>onFailure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_Seed_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.Seed*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_Seed_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.Seed(System.Nullable{System.Int32})">
+  Seed(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L457"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Seed for the community ID hash. Must be between 0 and 65535 (inclusive). The
+seed can prevent hash collisions between network domains, such as a staging
+and production network that use the same addressing scheme.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; Seed(int? seed)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>seed</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_Serialize_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.Serialize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_Serialize_System_Text_Json_Utf8JsonWriter_System_Text_Json_JsonSerializerOptions_Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.Serialize(System.Text.Json.Utf8JsonWriter,System.Text.Json.JsonSerializerOptions,Elastic.Clients.Elasticsearch.IElasticsearchClientSettings)">
+  Serialize(Utf8JsonWriter, JsonSerializerOptions, IElasticsearchClientSettings)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L613"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>writer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.utf8jsonwriter">Utf8JsonWriter</a></dt>
+    <dd></dd>
+    <dt><code>options</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions">JsonSerializerOptions</a></dt>
+    <dd></dd>
+    <dt><code>settings</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.html">IElasticsearchClientSettings</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_SourceIp_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.SourceIp*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_SourceIp_Elastic_Clients_Elasticsearch_Field_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.SourceIp(Elastic.Clients.Elasticsearch.Field)">
+  SourceIp(Field?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L468"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field containing the source IP address.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; SourceIp(Field? sourceIp)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sourceIp</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_SourceIp_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.SourceIp*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_SourceIp_System_Linq_Expressions_Expression_System_Func__0_System_Object___" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.SourceIp(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+  SourceIp(Expression&lt;Func&lt;TDocument, object&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L490"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field containing the source IP address.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; SourceIp(Expression&lt;Func&lt;TDocument, object&gt;&gt; sourceIp)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sourceIp</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_SourceIp_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.SourceIp*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_SourceIp__1_System_Linq_Expressions_Expression_System_Func__0___0___" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.SourceIp``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+  SourceIp&lt;TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L479"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field containing the source IP address.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; SourceIp&lt;TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt; sourceIp)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sourceIp</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, TValue&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TValue</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_SourcePort_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.SourcePort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_SourcePort_Elastic_Clients_Elasticsearch_Field_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.SourcePort(Elastic.Clients.Elasticsearch.Field)">
+  SourcePort(Field?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L501"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field containing the source port.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; SourcePort(Field? sourcePort)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sourcePort</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_SourcePort_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.SourcePort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_SourcePort_System_Linq_Expressions_Expression_System_Func__0_System_Object___" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.SourcePort(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+  SourcePort(Expression&lt;Func&lt;TDocument, object&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L523"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field containing the source port.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; SourcePort(Expression&lt;Func&lt;TDocument, object&gt;&gt; sourcePort)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sourcePort</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_SourcePort_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.SourcePort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_SourcePort__1_System_Linq_Expressions_Expression_System_Func__0___0___" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.SourcePort``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+  SourcePort&lt;TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L512"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field containing the source port.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; SourcePort&lt;TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt; sourcePort)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sourcePort</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, TValue&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TValue</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_Tag_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.Tag*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_Tag_System_String_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.Tag(System.String)">
+  Tag(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L535"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Identifier for the processor.
+Useful for debugging and metrics.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; Tag(string? tag)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_TargetField_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.TargetField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_TargetField_Elastic_Clients_Elasticsearch_Field_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.TargetField(Elastic.Clients.Elasticsearch.Field)">
+  TargetField(Field?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L546"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Output field for the community ID.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; TargetField(Field? targetField)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>targetField</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_TargetField_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.TargetField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_TargetField_System_Linq_Expressions_Expression_System_Func__0_System_Object___" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.TargetField(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+  TargetField(Expression&lt;Func&lt;TDocument, object&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L568"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Output field for the community ID.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; TargetField(Expression&lt;Func&lt;TDocument, object&gt;&gt; targetField)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>targetField</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_TargetField_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.TargetField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_TargetField__1_System_Linq_Expressions_Expression_System_Func__0___0___" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.TargetField``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+  TargetField&lt;TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L557"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Output field for the community ID.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; TargetField&lt;TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt; targetField)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>targetField</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, TValue&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TValue</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_Transport_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.Transport*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_Transport_Elastic_Clients_Elasticsearch_Field_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.Transport(Elastic.Clients.Elasticsearch.Field)">
+  Transport(Field?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L581"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field containing the transport protocol name or number. Used only when the
+iana_number field is not present. The following protocol names are currently
+supported: eigrp, gre, icmp, icmpv6, igmp, ipv6-icmp, ospf, pim, sctp, tcp, udp
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; Transport(Field? transport)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transport</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_Transport_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.Transport*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_Transport_System_Linq_Expressions_Expression_System_Func__0_System_Object___" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.Transport(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+  Transport(Expression&lt;Func&lt;TDocument, object&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L607"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field containing the transport protocol name or number. Used only when the
+iana_number field is not present. The following protocol names are currently
+supported: eigrp, gre, icmp, icmpv6, igmp, ipv6-icmp, ospf, pim, sctp, tcp, udp
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; Transport(Expression&lt;Func&lt;TDocument, object&gt;&gt; transport)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transport</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_Transport_" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.Transport*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor_1_Transport__1_System_Linq_Expressions_Expression_System_Func__0___0___" data-uid="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor`1.Transport``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+  Transport&lt;TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/CommunityIDProcessor.g.cs/#L594"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field containing the transport protocol name or number. Used only when the
+iana_number field is not present. The following protocol names are currently
+supported: eigrp, gre, icmp, icmpv6, igmp, ipv6-icmp, ospf, pim, sctp, tcp, udp
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommunityIDProcessorDescriptor&lt;TDocument&gt; Transport&lt;TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt; transport)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transport</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, TValue&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TValue</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

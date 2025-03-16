@@ -1,0 +1,1843 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class Processor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class Processor | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.17.2/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Ingest_Processor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Ingest.Processor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Ingest_Processor" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor" class="text-break">
+Class Processor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L31"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.html">Ingest</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(ProcessorConverter))]
+public sealed class Processor</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">Processor</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_Append_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Append*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_Append_Elastic_Clients_Elasticsearch_Ingest_AppendProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Append(Elastic.Clients.Elasticsearch.Ingest.AppendProcessor)">
+  Append(AppendProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L49"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor Append(AppendProcessor appendProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>appendProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.AppendProcessor.html">AppendProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_Attachment_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Attachment*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_Attachment_Elastic_Clients_Elasticsearch_Ingest_AttachmentProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Attachment(Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor)">
+  Attachment(AttachmentProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L50"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor Attachment(AttachmentProcessor attachmentProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>attachmentProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor.html">AttachmentProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_Bytes_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Bytes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_Bytes_Elastic_Clients_Elasticsearch_Ingest_BytesProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Bytes(Elastic.Clients.Elasticsearch.Ingest.BytesProcessor)">
+  Bytes(BytesProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L51"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor Bytes(BytesProcessor bytesProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>bytesProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.BytesProcessor.html">BytesProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_Circle_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Circle*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_Circle_Elastic_Clients_Elasticsearch_Ingest_CircleProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Circle(Elastic.Clients.Elasticsearch.Ingest.CircleProcessor)">
+  Circle(CircleProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L52"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor Circle(CircleProcessor circleProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>circleProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CircleProcessor.html">CircleProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_CommunityId_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.CommunityId*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_CommunityId_Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.CommunityId(Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor)">
+  CommunityId(CommunityIDProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L53"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor CommunityId(CommunityIDProcessor communityIDProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>communityIDProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor.html">CommunityIDProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_Convert_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Convert*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_Convert_Elastic_Clients_Elasticsearch_Ingest_ConvertProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Convert(Elastic.Clients.Elasticsearch.Ingest.ConvertProcessor)">
+  Convert(ConvertProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L54"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor Convert(ConvertProcessor convertProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>convertProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessor.html">ConvertProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_Csv_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Csv*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_Csv_Elastic_Clients_Elasticsearch_Ingest_CsvProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Csv(Elastic.Clients.Elasticsearch.Ingest.CsvProcessor)">
+  Csv(CsvProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor Csv(CsvProcessor csvProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>csvProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CsvProcessor.html">CsvProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_Date_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Date*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_Date_Elastic_Clients_Elasticsearch_Ingest_DateProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Date(Elastic.Clients.Elasticsearch.Ingest.DateProcessor)">
+  Date(DateProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L56"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor Date(DateProcessor dateProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>dateProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DateProcessor.html">DateProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_DateIndexName_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.DateIndexName*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_DateIndexName_Elastic_Clients_Elasticsearch_Ingest_DateIndexNameProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.DateIndexName(Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor)">
+  DateIndexName(DateIndexNameProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L57"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor DateIndexName(DateIndexNameProcessor dateIndexNameProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>dateIndexNameProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor.html">DateIndexNameProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_Dissect_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Dissect*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_Dissect_Elastic_Clients_Elasticsearch_Ingest_DissectProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Dissect(Elastic.Clients.Elasticsearch.Ingest.DissectProcessor)">
+  Dissect(DissectProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L58"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor Dissect(DissectProcessor dissectProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>dissectProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DissectProcessor.html">DissectProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_DotExpander_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.DotExpander*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_DotExpander_Elastic_Clients_Elasticsearch_Ingest_DotExpanderProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.DotExpander(Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessor)">
+  DotExpander(DotExpanderProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L59"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor DotExpander(DotExpanderProcessor dotExpanderProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>dotExpanderProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessor.html">DotExpanderProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_Drop_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Drop*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_Drop_Elastic_Clients_Elasticsearch_Ingest_DropProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Drop(Elastic.Clients.Elasticsearch.Ingest.DropProcessor)">
+  Drop(DropProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L60"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor Drop(DropProcessor dropProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>dropProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DropProcessor.html">DropProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_Enrich_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Enrich*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_Enrich_Elastic_Clients_Elasticsearch_Ingest_EnrichProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Enrich(Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor)">
+  Enrich(EnrichProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L61"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor Enrich(EnrichProcessor enrichProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>enrichProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor.html">EnrichProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_Fail_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Fail*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_Fail_Elastic_Clients_Elasticsearch_Ingest_FailProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Fail(Elastic.Clients.Elasticsearch.Ingest.FailProcessor)">
+  Fail(FailProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L62"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor Fail(FailProcessor failProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>failProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.FailProcessor.html">FailProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_Fingerprint_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Fingerprint*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_Fingerprint_Elastic_Clients_Elasticsearch_Ingest_FingerprintProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Fingerprint(Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor)">
+  Fingerprint(FingerprintProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L63"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor Fingerprint(FingerprintProcessor fingerprintProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>fingerprintProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor.html">FingerprintProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_Foreach_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Foreach*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_Foreach_Elastic_Clients_Elasticsearch_Ingest_ForeachProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Foreach(Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor)">
+  Foreach(ForeachProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L64"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor Foreach(ForeachProcessor foreachProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>foreachProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor.html">ForeachProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_GeoGrid_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.GeoGrid*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_GeoGrid_Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.GeoGrid(Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor)">
+  GeoGrid(GeoGridProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L65"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor GeoGrid(GeoGridProcessor geoGridProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>geoGridProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor.html">GeoGridProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_Geoip_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Geoip*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_Geoip_Elastic_Clients_Elasticsearch_Ingest_GeoIpProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Geoip(Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor)">
+  Geoip(GeoIpProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L66"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor Geoip(GeoIpProcessor geoIpProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>geoIpProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor.html">GeoIpProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_Grok_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Grok*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_Grok_Elastic_Clients_Elasticsearch_Ingest_GrokProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Grok(Elastic.Clients.Elasticsearch.Ingest.GrokProcessor)">
+  Grok(GrokProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L67"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor Grok(GrokProcessor grokProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>grokProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GrokProcessor.html">GrokProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_Gsub_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Gsub*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_Gsub_Elastic_Clients_Elasticsearch_Ingest_GsubProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Gsub(Elastic.Clients.Elasticsearch.Ingest.GsubProcessor)">
+  Gsub(GsubProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L68"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor Gsub(GsubProcessor gsubProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>gsubProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GsubProcessor.html">GsubProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_HtmlStrip_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.HtmlStrip*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_HtmlStrip_Elastic_Clients_Elasticsearch_Ingest_HtmlStripProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.HtmlStrip(Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessor)">
+  HtmlStrip(HtmlStripProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L69"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor HtmlStrip(HtmlStripProcessor htmlStripProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>htmlStripProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessor.html">HtmlStripProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_Inference_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Inference*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_Inference_Elastic_Clients_Elasticsearch_Ingest_InferenceProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Inference(Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor)">
+  Inference(InferenceProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L70"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor Inference(InferenceProcessor inferenceProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>inferenceProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor.html">InferenceProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_IpLocation_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.IpLocation*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_IpLocation_Elastic_Clients_Elasticsearch_Ingest_IpLocationProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.IpLocation(Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor)">
+  IpLocation(IpLocationProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L71"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor IpLocation(IpLocationProcessor ipLocationProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>ipLocationProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor.html">IpLocationProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_Join_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Join*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_Join_Elastic_Clients_Elasticsearch_Ingest_JoinProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Join(Elastic.Clients.Elasticsearch.Ingest.JoinProcessor)">
+  Join(JoinProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L72"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor Join(JoinProcessor joinProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>joinProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.JoinProcessor.html">JoinProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_Json_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Json*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_Json_Elastic_Clients_Elasticsearch_Ingest_JsonProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Json(Elastic.Clients.Elasticsearch.Ingest.JsonProcessor)">
+  Json(JsonProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L73"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor Json(JsonProcessor jsonProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>jsonProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.JsonProcessor.html">JsonProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_Kv_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Kv*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_Kv_Elastic_Clients_Elasticsearch_Ingest_KeyValueProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Kv(Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor)">
+  Kv(KeyValueProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L74"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor Kv(KeyValueProcessor keyValueProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>keyValueProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor.html">KeyValueProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_Lowercase_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Lowercase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_Lowercase_Elastic_Clients_Elasticsearch_Ingest_LowercaseProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Lowercase(Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor)">
+  Lowercase(LowercaseProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L75"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor Lowercase(LowercaseProcessor lowercaseProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>lowercaseProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor.html">LowercaseProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_NetworkDirection_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.NetworkDirection*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_NetworkDirection_Elastic_Clients_Elasticsearch_Ingest_NetworkDirectionProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.NetworkDirection(Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessor)">
+  NetworkDirection(NetworkDirectionProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L76"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor NetworkDirection(NetworkDirectionProcessor networkDirectionProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>networkDirectionProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessor.html">NetworkDirectionProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_Pipeline_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Pipeline*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_Pipeline_Elastic_Clients_Elasticsearch_Ingest_PipelineProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Pipeline(Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor)">
+  Pipeline(PipelineProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L77"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor Pipeline(PipelineProcessor pipelineProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>pipelineProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor.html">PipelineProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_Redact_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Redact*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_Redact_Elastic_Clients_Elasticsearch_Ingest_RedactProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Redact(Elastic.Clients.Elasticsearch.Ingest.RedactProcessor)">
+  Redact(RedactProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L78"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor Redact(RedactProcessor redactProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>redactProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.RedactProcessor.html">RedactProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_RegisteredDomain_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.RegisteredDomain*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_RegisteredDomain_Elastic_Clients_Elasticsearch_Ingest_RegisteredDomainProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.RegisteredDomain(Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessor)">
+  RegisteredDomain(RegisteredDomainProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L79"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor RegisteredDomain(RegisteredDomainProcessor registeredDomainProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>registeredDomainProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessor.html">RegisteredDomainProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_Remove_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Remove*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_Remove_Elastic_Clients_Elasticsearch_Ingest_RemoveProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Remove(Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor)">
+  Remove(RemoveProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L80"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor Remove(RemoveProcessor removeProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>removeProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor.html">RemoveProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_Rename_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Rename*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_Rename_Elastic_Clients_Elasticsearch_Ingest_RenameProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Rename(Elastic.Clients.Elasticsearch.Ingest.RenameProcessor)">
+  Rename(RenameProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L81"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor Rename(RenameProcessor renameProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>renameProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.RenameProcessor.html">RenameProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_Reroute_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Reroute*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_Reroute_Elastic_Clients_Elasticsearch_Ingest_RerouteProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Reroute(Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor)">
+  Reroute(RerouteProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L82"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor Reroute(RerouteProcessor rerouteProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rerouteProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor.html">RerouteProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_Script_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Script*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_Script_Elastic_Clients_Elasticsearch_Ingest_ScriptProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Script(Elastic.Clients.Elasticsearch.Ingest.ScriptProcessor)">
+  Script(ScriptProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L83"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor Script(ScriptProcessor scriptProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>scriptProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ScriptProcessor.html">ScriptProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_Set_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Set*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_Set_Elastic_Clients_Elasticsearch_Ingest_SetProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Set(Elastic.Clients.Elasticsearch.Ingest.SetProcessor)">
+  Set(SetProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L84"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor Set(SetProcessor setProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>setProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SetProcessor.html">SetProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_SetSecurityUser_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.SetSecurityUser*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_SetSecurityUser_Elastic_Clients_Elasticsearch_Ingest_SetSecurityUserProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.SetSecurityUser(Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor)">
+  SetSecurityUser(SetSecurityUserProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L85"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor SetSecurityUser(SetSecurityUserProcessor setSecurityUserProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>setSecurityUserProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor.html">SetSecurityUserProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_Sort_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Sort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_Sort_Elastic_Clients_Elasticsearch_Ingest_SortProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Sort(Elastic.Clients.Elasticsearch.Ingest.SortProcessor)">
+  Sort(SortProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L86"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor Sort(SortProcessor sortProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sortProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SortProcessor.html">SortProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_Split_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Split*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_Split_Elastic_Clients_Elasticsearch_Ingest_SplitProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Split(Elastic.Clients.Elasticsearch.Ingest.SplitProcessor)">
+  Split(SplitProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L87"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor Split(SplitProcessor splitProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>splitProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SplitProcessor.html">SplitProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_Terminate_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Terminate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_Terminate_Elastic_Clients_Elasticsearch_Ingest_TerminateProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Terminate(Elastic.Clients.Elasticsearch.Ingest.TerminateProcessor)">
+  Terminate(TerminateProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L88"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor Terminate(TerminateProcessor terminateProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>terminateProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.TerminateProcessor.html">TerminateProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_Trim_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Trim*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_Trim_Elastic_Clients_Elasticsearch_Ingest_TrimProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Trim(Elastic.Clients.Elasticsearch.Ingest.TrimProcessor)">
+  Trim(TrimProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L89"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor Trim(TrimProcessor trimProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>trimProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.TrimProcessor.html">TrimProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_TryGet_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.TryGet*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_TryGet__1___0__" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.TryGet``1(``0@)">
+  TryGet&lt;T&gt;(out T?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L95"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryGet&lt;T&gt;(out T? result) where T : class</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>result</code> <span class="xref">T</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_Uppercase_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Uppercase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_Uppercase_Elastic_Clients_Elasticsearch_Ingest_UppercaseProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.Uppercase(Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessor)">
+  Uppercase(UppercaseProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L90"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor Uppercase(UppercaseProcessor uppercaseProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>uppercaseProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessor.html">UppercaseProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_UriParts_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.UriParts*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_UriParts_Elastic_Clients_Elasticsearch_Ingest_UriPartsProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.UriParts(Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessor)">
+  UriParts(UriPartsProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L91"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor UriParts(UriPartsProcessor uriPartsProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>uriPartsProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessor.html">UriPartsProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_UrlDecode_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.UrlDecode*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_UrlDecode_Elastic_Clients_Elasticsearch_Ingest_UrlDecodeProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.UrlDecode(Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor)">
+  UrlDecode(UrlDecodeProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L92"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor UrlDecode(UrlDecodeProcessor urlDecodeProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>urlDecodeProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor.html">UrlDecodeProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_Processor_UserAgent_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.UserAgent*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_Processor_UserAgent_Elastic_Clients_Elasticsearch_Ingest_UserAgentProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.Processor.UserAgent(Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor)">
+  UserAgent(UserAgentProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L93"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Processor UserAgent(UserAgentProcessor userAgentProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>userAgentProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor.html">UserAgentProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

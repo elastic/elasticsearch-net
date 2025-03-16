@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class UserQuery | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class UserQuery | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.17.2/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Security_UserQuery.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Security.UserQuery%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Security.UserQuery">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Security_UserQuery" data-uid="Elastic.Clients.Elasticsearch.Security.UserQuery" class="text-break">
+Class UserQuery  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L31"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Security.html">Security</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(UserQueryConverter))]
+public sealed class UserQuery</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">UserQuery</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQuery_Bool_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQuery.Bool*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQuery_Bool_Elastic_Clients_Elasticsearch_QueryDsl_BoolQuery_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQuery.Bool(Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery)">
+  Bool(BoolQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L49"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static UserQuery Bool(BoolQuery boolQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>boolQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery.html">BoolQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQuery.html">UserQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQuery_Exists_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQuery.Exists*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQuery_Exists_Elastic_Clients_Elasticsearch_QueryDsl_ExistsQuery_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQuery.Exists(Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery)">
+  Exists(ExistsQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L50"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static UserQuery Exists(ExistsQuery existsQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>existsQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery.html">ExistsQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQuery.html">UserQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQuery_Ids_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQuery.Ids*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQuery_Ids_Elastic_Clients_Elasticsearch_QueryDsl_IdsQuery_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQuery.Ids(Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery)">
+  Ids(IdsQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L51"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static UserQuery Ids(IdsQuery idsQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>idsQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery.html">IdsQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQuery.html">UserQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQuery_Match_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQuery.Match*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQuery_Match_Elastic_Clients_Elasticsearch_QueryDsl_MatchQuery_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQuery.Match(Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery)">
+  Match(MatchQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L52"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static UserQuery Match(MatchQuery matchQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>matchQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery.html">MatchQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQuery.html">UserQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQuery_MatchAll_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQuery.MatchAll*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQuery_MatchAll_Elastic_Clients_Elasticsearch_QueryDsl_MatchAllQuery_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQuery.MatchAll(Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery)">
+  MatchAll(MatchAllQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L53"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static UserQuery MatchAll(MatchAllQuery matchAllQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>matchAllQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery.html">MatchAllQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQuery.html">UserQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQuery_Prefix_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQuery.Prefix*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQuery_Prefix_Elastic_Clients_Elasticsearch_QueryDsl_PrefixQuery_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQuery.Prefix(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery)">
+  Prefix(PrefixQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L54"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static UserQuery Prefix(PrefixQuery prefixQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>prefixQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery.html">PrefixQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQuery.html">UserQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQuery_Range_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQuery.Range*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQuery_Range_Elastic_Clients_Elasticsearch_QueryDsl_DateRangeQuery_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQuery.Range(Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery)">
+  Range(DateRangeQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L56"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static UserQuery Range(DateRangeQuery rangeQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rangeQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery.html">DateRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQuery.html">UserQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQuery_Range_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQuery.Range*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQuery_Range_Elastic_Clients_Elasticsearch_QueryDsl_NumberRangeQuery_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQuery.Range(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery)">
+  Range(NumberRangeQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L57"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static UserQuery Range(NumberRangeQuery rangeQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rangeQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery.html">NumberRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQuery.html">UserQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQuery_Range_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQuery.Range*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQuery_Range_Elastic_Clients_Elasticsearch_QueryDsl_TermRangeQuery_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQuery.Range(Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery)">
+  Range(TermRangeQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L58"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static UserQuery Range(TermRangeQuery rangeQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rangeQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery.html">TermRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQuery.html">UserQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQuery_Range_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQuery.Range*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQuery_Range_Elastic_Clients_Elasticsearch_QueryDsl_UntypedRangeQuery_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQuery.Range(Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery)">
+  Range(UntypedRangeQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static UserQuery Range(UntypedRangeQuery rangeQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rangeQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery.html">UntypedRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQuery.html">UserQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQuery_SimpleQueryString_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQuery.SimpleQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQuery_SimpleQueryString_Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQuery_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQuery.SimpleQueryString(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery)">
+  SimpleQueryString(SimpleQueryStringQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L59"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static UserQuery SimpleQueryString(SimpleQueryStringQuery simpleQueryStringQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>simpleQueryStringQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery.html">SimpleQueryStringQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQuery.html">UserQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQuery_Term_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQuery.Term*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQuery_Term_Elastic_Clients_Elasticsearch_QueryDsl_TermQuery_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQuery.Term(Elastic.Clients.Elasticsearch.QueryDsl.TermQuery)">
+  Term(TermQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L60"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static UserQuery Term(TermQuery termQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>termQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermQuery.html">TermQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQuery.html">UserQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQuery_Terms_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQuery.Terms*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQuery_Terms_Elastic_Clients_Elasticsearch_QueryDsl_TermsQuery_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQuery.Terms(Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery)">
+  Terms(TermsQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L61"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static UserQuery Terms(TermsQuery termsQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>termsQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery.html">TermsQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQuery.html">UserQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQuery_TryGet_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQuery.TryGet*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQuery_TryGet__1___0__" data-uid="Elastic.Clients.Elasticsearch.Security.UserQuery.TryGet``1(``0@)">
+  TryGet&lt;T&gt;(out T?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L64"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryGet&lt;T&gt;(out T? result) where T : class</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>result</code> <span class="xref">T</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQuery_Wildcard_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQuery.Wildcard*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQuery_Wildcard_Elastic_Clients_Elasticsearch_QueryDsl_WildcardQuery_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQuery.Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery)">
+  Wildcard(WildcardQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L62"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static UserQuery Wildcard(WildcardQuery wildcardQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>wildcardQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery.html">WildcardQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQuery.html">UserQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
