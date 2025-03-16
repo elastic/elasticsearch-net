@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 using Elastic.Transport;
 using System.IO;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Serialization;
-#else
 namespace Elastic.Clients.Elasticsearch.Serialization;
-#endif
 
 /// <summary>
 /// Used to mark types which expect to directly serialize into a stream. This supports non-json compliant output such as NDJSON.

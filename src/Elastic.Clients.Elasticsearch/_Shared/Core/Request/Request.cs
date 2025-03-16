@@ -7,11 +7,7 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Requests;
-#else
 namespace Elastic.Clients.Elasticsearch.Requests;
-#endif
 
 /// <summary>
 /// Base type for requests sent by the client.

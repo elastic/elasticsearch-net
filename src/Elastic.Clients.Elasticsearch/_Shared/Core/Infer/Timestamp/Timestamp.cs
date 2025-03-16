@@ -6,11 +6,7 @@ using System;
 using System.Globalization;
 using Elastic.Transport;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 public sealed class Timestamp : IUrlParameter, IEquatable<Timestamp>
 {

@@ -6,11 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Core.MSearch;
-#else
 namespace Elastic.Clients.Elasticsearch.Core.MSearch;
-#endif
 
 public partial class MultiSearchItem<TDocument>
 {

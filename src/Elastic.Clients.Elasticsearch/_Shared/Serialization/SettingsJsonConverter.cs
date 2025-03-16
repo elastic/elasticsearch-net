@@ -5,11 +5,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Serialization;
-#else
 namespace Elastic.Clients.Elasticsearch.Serialization;
-#endif
 
 /// <summary>
 /// Used for derived converters which need access to <see cref="IElasticsearchClientSettings"/> in order to serialize.

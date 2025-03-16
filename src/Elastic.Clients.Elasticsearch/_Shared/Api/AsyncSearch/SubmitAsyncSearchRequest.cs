@@ -3,17 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
-#else
 using Elastic.Clients.Elasticsearch.QueryDsl;
-#endif
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.AsyncSearch;
-#else
 namespace Elastic.Clients.Elasticsearch.AsyncSearch;
-#endif
 
 public partial class SubmitAsyncSearchRequest
 {

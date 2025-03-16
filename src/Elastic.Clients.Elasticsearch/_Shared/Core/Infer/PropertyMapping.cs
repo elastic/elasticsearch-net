@@ -3,17 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Serialization;
-#else
 using Elastic.Clients.Elasticsearch.Serialization;
-#endif
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 /// <summary>
 /// Represents meta data about a property which may be used by inferrence and during serialization.

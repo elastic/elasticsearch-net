@@ -6,11 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 internal static class DotNetCoreTypeExtensions
 {

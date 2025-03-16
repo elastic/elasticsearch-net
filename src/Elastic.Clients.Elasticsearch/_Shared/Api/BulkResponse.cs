@@ -6,17 +6,9 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using System.Text;
 using System.Linq;
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Core.Bulk;
-#else
 using Elastic.Clients.Elasticsearch.Core.Bulk;
-#endif
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 public partial class BulkResponse
 {

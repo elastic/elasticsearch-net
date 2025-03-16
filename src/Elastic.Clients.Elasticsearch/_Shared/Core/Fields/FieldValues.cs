@@ -8,17 +8,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Serialization;
-#else
 using Elastic.Clients.Elasticsearch.Serialization;
-#endif
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 [JsonConverter(typeof(FieldValuesConverter))]
 public sealed class FieldValues : IsADictionary<string, LazyJson>

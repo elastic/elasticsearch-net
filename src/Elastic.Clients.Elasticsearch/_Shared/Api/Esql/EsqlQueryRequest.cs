@@ -9,11 +9,7 @@ using System.Threading.Tasks;
 
 using Elastic.Transport;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Esql;
-#else
 namespace Elastic.Clients.Elasticsearch.Esql;
-#endif
 
 internal sealed class EsqlResponseBuilder : TypedResponseBuilder<EsqlQueryResponse>
 {
