@@ -28,6 +28,11 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public sealed partial class PutRoleResponse : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>
+	/// When an existing role is updated, <c>created</c> is set to <c>false</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("role")]
 	public Elastic.Clients.Elasticsearch.Security.CreatedStatus Role { get; init; }
 }

@@ -34,8 +34,8 @@ public sealed partial class MultiTermVectorsRequestParameters : RequestParameter
 {
 	/// <summary>
 	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
-	/// Used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
+	/// A comma-separated list or wildcard expressions of fields to include in the statistics.
+	/// It is used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fields"); set => Q("fields", value); }
@@ -70,8 +70,8 @@ public sealed partial class MultiTermVectorsRequestParameters : RequestParameter
 
 	/// <summary>
 	/// <para>
-	/// Specifies the node or shard the operation should be performed on.
-	/// Random by default.
+	/// The node or shard the operation should be performed on.
+	/// It is random by default.
 	/// </para>
 	/// </summary>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
@@ -85,7 +85,7 @@ public sealed partial class MultiTermVectorsRequestParameters : RequestParameter
 
 	/// <summary>
 	/// <para>
-	/// Custom value used to route operations to a specific shard.
+	/// A custom value used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
@@ -106,7 +106,7 @@ public sealed partial class MultiTermVectorsRequestParameters : RequestParameter
 
 	/// <summary>
 	/// <para>
-	/// Specific version type.
+	/// The version type.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
@@ -117,10 +117,18 @@ public sealed partial class MultiTermVectorsRequestParameters : RequestParameter
 /// Get multiple term vectors.
 /// </para>
 /// <para>
+/// Get multiple term vectors with a single request.
 /// You can specify existing documents by index and ID or provide artificial documents in the body of the request.
 /// You can specify the index in the request body or request URI.
 /// The response contains a <c>docs</c> array with all the fetched termvectors.
 /// Each element has the structure provided by the termvectors API.
+/// </para>
+/// <para>
+/// <strong>Artificial documents</strong>
+/// </para>
+/// <para>
+/// You can also use <c>mtermvectors</c> to generate term vectors for artificial documents provided in the body of the request.
+/// The mapping used is determined by the specified <c>_index</c>.
 /// </para>
 /// </summary>
 public sealed partial class MultiTermVectorsRequest : PlainRequest<MultiTermVectorsRequestParameters>
@@ -143,8 +151,8 @@ public sealed partial class MultiTermVectorsRequest : PlainRequest<MultiTermVect
 
 	/// <summary>
 	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
-	/// Used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
+	/// A comma-separated list or wildcard expressions of fields to include in the statistics.
+	/// It is used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -184,8 +192,8 @@ public sealed partial class MultiTermVectorsRequest : PlainRequest<MultiTermVect
 
 	/// <summary>
 	/// <para>
-	/// Specifies the node or shard the operation should be performed on.
-	/// Random by default.
+	/// The node or shard the operation should be performed on.
+	/// It is random by default.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -201,7 +209,7 @@ public sealed partial class MultiTermVectorsRequest : PlainRequest<MultiTermVect
 
 	/// <summary>
 	/// <para>
-	/// Custom value used to route operations to a specific shard.
+	/// A custom value used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -225,7 +233,7 @@ public sealed partial class MultiTermVectorsRequest : PlainRequest<MultiTermVect
 
 	/// <summary>
 	/// <para>
-	/// Specific version type.
+	/// The version type.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -233,7 +241,7 @@ public sealed partial class MultiTermVectorsRequest : PlainRequest<MultiTermVect
 
 	/// <summary>
 	/// <para>
-	/// Array of existing or artificial documents.
+	/// An array of existing or artificial documents.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("docs")]
@@ -241,7 +249,7 @@ public sealed partial class MultiTermVectorsRequest : PlainRequest<MultiTermVect
 
 	/// <summary>
 	/// <para>
-	/// Simplified syntax to specify documents by their ID if they're in the same index.
+	/// A simplified syntax to specify documents by their ID if they're in the same index.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ids")]
@@ -253,10 +261,18 @@ public sealed partial class MultiTermVectorsRequest : PlainRequest<MultiTermVect
 /// Get multiple term vectors.
 /// </para>
 /// <para>
+/// Get multiple term vectors with a single request.
 /// You can specify existing documents by index and ID or provide artificial documents in the body of the request.
 /// You can specify the index in the request body or request URI.
 /// The response contains a <c>docs</c> array with all the fetched termvectors.
 /// Each element has the structure provided by the termvectors API.
+/// </para>
+/// <para>
+/// <strong>Artificial documents</strong>
+/// </para>
+/// <para>
+/// You can also use <c>mtermvectors</c> to generate term vectors for artificial documents provided in the body of the request.
+/// The mapping used is determined by the specified <c>_index</c>.
 /// </para>
 /// </summary>
 public sealed partial class MultiTermVectorsRequestDescriptor<TDocument> : RequestDescriptor<MultiTermVectorsRequestDescriptor<TDocument>, MultiTermVectorsRequestParameters>
@@ -305,7 +321,7 @@ public sealed partial class MultiTermVectorsRequestDescriptor<TDocument> : Reque
 
 	/// <summary>
 	/// <para>
-	/// Array of existing or artificial documents.
+	/// An array of existing or artificial documents.
 	/// </para>
 	/// </summary>
 	public MultiTermVectorsRequestDescriptor<TDocument> Docs(ICollection<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation>? docs)
@@ -346,7 +362,7 @@ public sealed partial class MultiTermVectorsRequestDescriptor<TDocument> : Reque
 
 	/// <summary>
 	/// <para>
-	/// Simplified syntax to specify documents by their ID if they're in the same index.
+	/// A simplified syntax to specify documents by their ID if they're in the same index.
 	/// </para>
 	/// </summary>
 	public MultiTermVectorsRequestDescriptor<TDocument> Ids(ICollection<Elastic.Clients.Elasticsearch.Id>? ids)
@@ -404,10 +420,18 @@ public sealed partial class MultiTermVectorsRequestDescriptor<TDocument> : Reque
 /// Get multiple term vectors.
 /// </para>
 /// <para>
+/// Get multiple term vectors with a single request.
 /// You can specify existing documents by index and ID or provide artificial documents in the body of the request.
 /// You can specify the index in the request body or request URI.
 /// The response contains a <c>docs</c> array with all the fetched termvectors.
 /// Each element has the structure provided by the termvectors API.
+/// </para>
+/// <para>
+/// <strong>Artificial documents</strong>
+/// </para>
+/// <para>
+/// You can also use <c>mtermvectors</c> to generate term vectors for artificial documents provided in the body of the request.
+/// The mapping used is determined by the specified <c>_index</c>.
 /// </para>
 /// </summary>
 public sealed partial class MultiTermVectorsRequestDescriptor : RequestDescriptor<MultiTermVectorsRequestDescriptor, MultiTermVectorsRequestParameters>
@@ -456,7 +480,7 @@ public sealed partial class MultiTermVectorsRequestDescriptor : RequestDescripto
 
 	/// <summary>
 	/// <para>
-	/// Array of existing or artificial documents.
+	/// An array of existing or artificial documents.
 	/// </para>
 	/// </summary>
 	public MultiTermVectorsRequestDescriptor Docs(ICollection<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation>? docs)
@@ -497,7 +521,7 @@ public sealed partial class MultiTermVectorsRequestDescriptor : RequestDescripto
 
 	/// <summary>
 	/// <para>
-	/// Simplified syntax to specify documents by their ID if they're in the same index.
+	/// A simplified syntax to specify documents by their ID if they're in the same index.
 	/// </para>
 	/// </summary>
 	public MultiTermVectorsRequestDescriptor Ids(ICollection<Elastic.Clients.Elasticsearch.Id>? ids)

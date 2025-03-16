@@ -19,18 +19,15 @@
 
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
+using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Nodes;
+namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class NodeReloadError
+public sealed partial class UpdateSettingsResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("name")]
-	public string Name { get; init; }
-	[JsonInclude, JsonPropertyName("reload_exception")]
-	public Elastic.Clients.Elasticsearch.ErrorCause? ReloadException { get; init; }
+	[JsonInclude, JsonPropertyName("acknowledged")]
+	public bool Acknowledged { get; init; }
 }

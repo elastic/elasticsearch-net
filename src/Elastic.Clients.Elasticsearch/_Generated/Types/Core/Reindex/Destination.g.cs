@@ -39,8 +39,10 @@ public sealed partial class Destination
 
 	/// <summary>
 	/// <para>
-	/// Set to <c>create</c> to only index documents that do not already exist.
-	/// Important: To reindex to a data stream destination, this argument must be <c>create</c>.
+	/// If it is <c>create</c>, the operation will only index documents that do not already exist (also known as "put if absent").
+	/// </para>
+	/// <para>
+	/// IMPORTANT: To reindex to a data stream destination, this argument must be <c>create</c>.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("op_type")]
@@ -56,8 +58,10 @@ public sealed partial class Destination
 
 	/// <summary>
 	/// <para>
-	/// By default, a document's routing is preserved unless it’s changed by the script.
-	/// Set to <c>discard</c> to set routing to <c>null</c>,  or <c>=value</c> to route using the specified <c>value</c>.
+	/// By default, a document's routing is preserved unless it's changed by the script.
+	/// If it is <c>keep</c>, the routing on the bulk request sent for each match is set to the routing on the match.
+	/// If it is <c>discard</c>, the routing on the bulk request sent for each match is set to <c>null</c>.
+	/// If it is <c>=value</c>, the routing on the bulk request sent for each match is set to all value specified after the equals sign (<c>=</c>).
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("routing")]
@@ -99,8 +103,10 @@ public sealed partial class DestinationDescriptor : SerializableDescriptor<Desti
 
 	/// <summary>
 	/// <para>
-	/// Set to <c>create</c> to only index documents that do not already exist.
-	/// Important: To reindex to a data stream destination, this argument must be <c>create</c>.
+	/// If it is <c>create</c>, the operation will only index documents that do not already exist (also known as "put if absent").
+	/// </para>
+	/// <para>
+	/// IMPORTANT: To reindex to a data stream destination, this argument must be <c>create</c>.
 	/// </para>
 	/// </summary>
 	public DestinationDescriptor OpType(Elastic.Clients.Elasticsearch.OpType? opType)
@@ -122,8 +128,10 @@ public sealed partial class DestinationDescriptor : SerializableDescriptor<Desti
 
 	/// <summary>
 	/// <para>
-	/// By default, a document's routing is preserved unless it’s changed by the script.
-	/// Set to <c>discard</c> to set routing to <c>null</c>,  or <c>=value</c> to route using the specified <c>value</c>.
+	/// By default, a document's routing is preserved unless it's changed by the script.
+	/// If it is <c>keep</c>, the routing on the bulk request sent for each match is set to the routing on the match.
+	/// If it is <c>discard</c>, the routing on the bulk request sent for each match is set to <c>null</c>.
+	/// If it is <c>=value</c>, the routing on the bulk request sent for each match is set to all value specified after the equals sign (<c>=</c>).
 	/// </para>
 	/// </summary>
 	public DestinationDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing)

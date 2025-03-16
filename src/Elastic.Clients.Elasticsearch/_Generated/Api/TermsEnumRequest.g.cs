@@ -40,14 +40,11 @@ public sealed partial class TermsEnumRequestParameters : RequestParameters
 /// </para>
 /// <para>
 /// Discover terms that match a partial string in an index.
-/// This "terms enum" API is designed for low-latency look-ups used in auto-complete scenarios.
+/// This API is designed for low-latency look-ups used in auto-complete scenarios.
 /// </para>
 /// <para>
-/// If the <c>complete</c> property in the response is false, the returned terms set may be incomplete and should be treated as approximate.
-/// This can occur due to a few reasons, such as a request timeout or a node error.
-/// </para>
-/// <para>
-/// NOTE: The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
+/// info
+/// The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 /// </para>
 /// </summary>
 public sealed partial class TermsEnumRequest : PlainRequest<TermsEnumRequestParameters>
@@ -66,7 +63,7 @@ public sealed partial class TermsEnumRequest : PlainRequest<TermsEnumRequestPara
 
 	/// <summary>
 	/// <para>
-	/// When true the provided search string is matched against index terms without case sensitivity.
+	/// When <c>true</c>, the provided search string is matched against index terms without case sensitivity.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("case_insensitive")]
@@ -82,17 +79,24 @@ public sealed partial class TermsEnumRequest : PlainRequest<TermsEnumRequestPara
 
 	/// <summary>
 	/// <para>
-	/// Allows to filter an index shard if the provided query rewrites to match_none.
+	/// Filter an index shard if the provided query rewrites to <c>match_none</c>.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("index_filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? IndexFilter { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The string after which terms in the index should be returned.
+	/// It allows for a form of pagination if the last result from one request is passed as the <c>search_after</c> parameter for a subsequent request.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("search_after")]
 	public string? SearchAfter { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// How many matching terms to return.
+	/// The number of matching terms to return.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
@@ -100,7 +104,12 @@ public sealed partial class TermsEnumRequest : PlainRequest<TermsEnumRequestPara
 
 	/// <summary>
 	/// <para>
-	/// The string after which terms in the index should be returned. Allows for a form of pagination if the last result from one request is passed as the search_after parameter for a subsequent request.
+	/// The string to match at the start of indexed terms.
+	/// If it is not provided, all terms in the field are considered.
+	/// </para>
+	/// <para>
+	/// info
+	/// The prefix string cannot be larger than the largest possible keyword value, which is Lucene's term byte-length limit of 32766.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("string")]
@@ -108,7 +117,8 @@ public sealed partial class TermsEnumRequest : PlainRequest<TermsEnumRequestPara
 
 	/// <summary>
 	/// <para>
-	/// The maximum length of time to spend collecting results. Defaults to "1s" (one second). If the timeout is exceeded the complete flag set to false in the response and the results may be partial or empty.
+	/// The maximum length of time to spend collecting results.
+	/// If the timeout is exceeded the <c>complete</c> flag set to <c>false</c> in the response and the results may be partial or empty.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("timeout")]
@@ -121,14 +131,11 @@ public sealed partial class TermsEnumRequest : PlainRequest<TermsEnumRequestPara
 /// </para>
 /// <para>
 /// Discover terms that match a partial string in an index.
-/// This "terms enum" API is designed for low-latency look-ups used in auto-complete scenarios.
+/// This API is designed for low-latency look-ups used in auto-complete scenarios.
 /// </para>
 /// <para>
-/// If the <c>complete</c> property in the response is false, the returned terms set may be incomplete and should be treated as approximate.
-/// This can occur due to a few reasons, such as a request timeout or a node error.
-/// </para>
-/// <para>
-/// NOTE: The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
+/// info
+/// The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 /// </para>
 /// </summary>
 public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescriptor<TermsEnumRequestDescriptor<TDocument>, TermsEnumRequestParameters>
@@ -169,7 +176,7 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 
 	/// <summary>
 	/// <para>
-	/// When true the provided search string is matched against index terms without case sensitivity.
+	/// When <c>true</c>, the provided search string is matched against index terms without case sensitivity.
 	/// </para>
 	/// </summary>
 	public TermsEnumRequestDescriptor<TDocument> CaseInsensitive(bool? caseInsensitive = true)
@@ -213,7 +220,7 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 
 	/// <summary>
 	/// <para>
-	/// Allows to filter an index shard if the provided query rewrites to match_none.
+	/// Filter an index shard if the provided query rewrites to <c>match_none</c>.
 	/// </para>
 	/// </summary>
 	public TermsEnumRequestDescriptor<TDocument> IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? indexFilter)
@@ -240,6 +247,12 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The string after which terms in the index should be returned.
+	/// It allows for a form of pagination if the last result from one request is passed as the <c>search_after</c> parameter for a subsequent request.
+	/// </para>
+	/// </summary>
 	public TermsEnumRequestDescriptor<TDocument> SearchAfter(string? searchAfter)
 	{
 		SearchAfterValue = searchAfter;
@@ -248,7 +261,7 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 
 	/// <summary>
 	/// <para>
-	/// How many matching terms to return.
+	/// The number of matching terms to return.
 	/// </para>
 	/// </summary>
 	public TermsEnumRequestDescriptor<TDocument> Size(int? size)
@@ -259,7 +272,12 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 
 	/// <summary>
 	/// <para>
-	/// The string after which terms in the index should be returned. Allows for a form of pagination if the last result from one request is passed as the search_after parameter for a subsequent request.
+	/// The string to match at the start of indexed terms.
+	/// If it is not provided, all terms in the field are considered.
+	/// </para>
+	/// <para>
+	/// info
+	/// The prefix string cannot be larger than the largest possible keyword value, which is Lucene's term byte-length limit of 32766.
 	/// </para>
 	/// </summary>
 	public TermsEnumRequestDescriptor<TDocument> String(string? value)
@@ -270,7 +288,8 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 
 	/// <summary>
 	/// <para>
-	/// The maximum length of time to spend collecting results. Defaults to "1s" (one second). If the timeout is exceeded the complete flag set to false in the response and the results may be partial or empty.
+	/// The maximum length of time to spend collecting results.
+	/// If the timeout is exceeded the <c>complete</c> flag set to <c>false</c> in the response and the results may be partial or empty.
 	/// </para>
 	/// </summary>
 	public TermsEnumRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout)
@@ -340,14 +359,11 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 /// </para>
 /// <para>
 /// Discover terms that match a partial string in an index.
-/// This "terms enum" API is designed for low-latency look-ups used in auto-complete scenarios.
+/// This API is designed for low-latency look-ups used in auto-complete scenarios.
 /// </para>
 /// <para>
-/// If the <c>complete</c> property in the response is false, the returned terms set may be incomplete and should be treated as approximate.
-/// This can occur due to a few reasons, such as a request timeout or a node error.
-/// </para>
-/// <para>
-/// NOTE: The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
+/// info
+/// The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 /// </para>
 /// </summary>
 public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<TermsEnumRequestDescriptor, TermsEnumRequestParameters>
@@ -384,7 +400,7 @@ public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<Terms
 
 	/// <summary>
 	/// <para>
-	/// When true the provided search string is matched against index terms without case sensitivity.
+	/// When <c>true</c>, the provided search string is matched against index terms without case sensitivity.
 	/// </para>
 	/// </summary>
 	public TermsEnumRequestDescriptor CaseInsensitive(bool? caseInsensitive = true)
@@ -428,7 +444,7 @@ public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<Terms
 
 	/// <summary>
 	/// <para>
-	/// Allows to filter an index shard if the provided query rewrites to match_none.
+	/// Filter an index shard if the provided query rewrites to <c>match_none</c>.
 	/// </para>
 	/// </summary>
 	public TermsEnumRequestDescriptor IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? indexFilter)
@@ -455,6 +471,12 @@ public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<Terms
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The string after which terms in the index should be returned.
+	/// It allows for a form of pagination if the last result from one request is passed as the <c>search_after</c> parameter for a subsequent request.
+	/// </para>
+	/// </summary>
 	public TermsEnumRequestDescriptor SearchAfter(string? searchAfter)
 	{
 		SearchAfterValue = searchAfter;
@@ -463,7 +485,7 @@ public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<Terms
 
 	/// <summary>
 	/// <para>
-	/// How many matching terms to return.
+	/// The number of matching terms to return.
 	/// </para>
 	/// </summary>
 	public TermsEnumRequestDescriptor Size(int? size)
@@ -474,7 +496,12 @@ public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<Terms
 
 	/// <summary>
 	/// <para>
-	/// The string after which terms in the index should be returned. Allows for a form of pagination if the last result from one request is passed as the search_after parameter for a subsequent request.
+	/// The string to match at the start of indexed terms.
+	/// If it is not provided, all terms in the field are considered.
+	/// </para>
+	/// <para>
+	/// info
+	/// The prefix string cannot be larger than the largest possible keyword value, which is Lucene's term byte-length limit of 32766.
 	/// </para>
 	/// </summary>
 	public TermsEnumRequestDescriptor String(string? value)
@@ -485,7 +512,8 @@ public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<Terms
 
 	/// <summary>
 	/// <para>
-	/// The maximum length of time to spend collecting results. Defaults to "1s" (one second). If the timeout is exceeded the complete flag set to false in the response and the results may be partial or empty.
+	/// The maximum length of time to spend collecting results.
+	/// If the timeout is exceeded the <c>complete</c> flag set to <c>false</c> in the response and the results may be partial or empty.
 	/// </para>
 	/// </summary>
 	public TermsEnumRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout)

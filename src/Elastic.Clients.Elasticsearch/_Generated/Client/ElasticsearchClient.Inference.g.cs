@@ -806,4 +806,520 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PutInferenceRequestDescriptor, PutInferenceResponse, PutInferenceRequestParameters>(descriptor, cancellationToken);
 	}
+
+	/// <summary>
+	/// <para>
+	/// Perform streaming inference.
+	/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
+	/// This API works only with the completion task type.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para>
+	/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/stream-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual StreamInferenceResponse StreamInference(StreamInferenceRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<StreamInferenceRequest, StreamInferenceResponse, StreamInferenceRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform streaming inference.
+	/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
+	/// This API works only with the completion task type.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para>
+	/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/stream-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<StreamInferenceResponse> StreamInferenceAsync(StreamInferenceRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<StreamInferenceRequest, StreamInferenceResponse, StreamInferenceRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform streaming inference.
+	/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
+	/// This API works only with the completion task type.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para>
+	/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/stream-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual StreamInferenceResponse StreamInference(StreamInferenceRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<StreamInferenceRequestDescriptor, StreamInferenceResponse, StreamInferenceRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform streaming inference.
+	/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
+	/// This API works only with the completion task type.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para>
+	/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/stream-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual StreamInferenceResponse StreamInference(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId)
+	{
+		var descriptor = new StreamInferenceRequestDescriptor(taskType, inferenceId);
+		descriptor.BeforeRequest();
+		return DoRequest<StreamInferenceRequestDescriptor, StreamInferenceResponse, StreamInferenceRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform streaming inference.
+	/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
+	/// This API works only with the completion task type.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para>
+	/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/stream-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual StreamInferenceResponse StreamInference(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<StreamInferenceRequestDescriptor> configureRequest)
+	{
+		var descriptor = new StreamInferenceRequestDescriptor(taskType, inferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<StreamInferenceRequestDescriptor, StreamInferenceResponse, StreamInferenceRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform streaming inference.
+	/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
+	/// This API works only with the completion task type.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para>
+	/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/stream-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual StreamInferenceResponse StreamInference(Elastic.Clients.Elasticsearch.Id inferenceId)
+	{
+		var descriptor = new StreamInferenceRequestDescriptor(inferenceId);
+		descriptor.BeforeRequest();
+		return DoRequest<StreamInferenceRequestDescriptor, StreamInferenceResponse, StreamInferenceRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform streaming inference.
+	/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
+	/// This API works only with the completion task type.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para>
+	/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/stream-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual StreamInferenceResponse StreamInference(Elastic.Clients.Elasticsearch.Id inferenceId, Action<StreamInferenceRequestDescriptor> configureRequest)
+	{
+		var descriptor = new StreamInferenceRequestDescriptor(inferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<StreamInferenceRequestDescriptor, StreamInferenceResponse, StreamInferenceRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform streaming inference.
+	/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
+	/// This API works only with the completion task type.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para>
+	/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/stream-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<StreamInferenceResponse> StreamInferenceAsync(StreamInferenceRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<StreamInferenceRequestDescriptor, StreamInferenceResponse, StreamInferenceRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform streaming inference.
+	/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
+	/// This API works only with the completion task type.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para>
+	/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/stream-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<StreamInferenceResponse> StreamInferenceAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new StreamInferenceRequestDescriptor(taskType, inferenceId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<StreamInferenceRequestDescriptor, StreamInferenceResponse, StreamInferenceRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform streaming inference.
+	/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
+	/// This API works only with the completion task type.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para>
+	/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/stream-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<StreamInferenceResponse> StreamInferenceAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<StreamInferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new StreamInferenceRequestDescriptor(taskType, inferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<StreamInferenceRequestDescriptor, StreamInferenceResponse, StreamInferenceRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform streaming inference.
+	/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
+	/// This API works only with the completion task type.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para>
+	/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/stream-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<StreamInferenceResponse> StreamInferenceAsync(Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new StreamInferenceRequestDescriptor(inferenceId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<StreamInferenceRequestDescriptor, StreamInferenceResponse, StreamInferenceRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform streaming inference.
+	/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
+	/// This API works only with the completion task type.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para>
+	/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/stream-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<StreamInferenceResponse> StreamInferenceAsync(Elastic.Clients.Elasticsearch.Id inferenceId, Action<StreamInferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new StreamInferenceRequestDescriptor(inferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<StreamInferenceRequestDescriptor, StreamInferenceResponse, StreamInferenceRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Update an inference endpoint.
+	/// </para>
+	/// <para>
+	/// Modify <c>task_settings</c>, secrets (within <c>service_settings</c>), or <c>num_allocations</c> for an inference endpoint, depending on the specific endpoint service and <c>task_type</c>.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
+	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual UpdateInferenceResponse Update(UpdateInferenceRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<UpdateInferenceRequest, UpdateInferenceResponse, UpdateInferenceRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Update an inference endpoint.
+	/// </para>
+	/// <para>
+	/// Modify <c>task_settings</c>, secrets (within <c>service_settings</c>), or <c>num_allocations</c> for an inference endpoint, depending on the specific endpoint service and <c>task_type</c>.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
+	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<UpdateInferenceResponse> UpdateAsync(UpdateInferenceRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<UpdateInferenceRequest, UpdateInferenceResponse, UpdateInferenceRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Update an inference endpoint.
+	/// </para>
+	/// <para>
+	/// Modify <c>task_settings</c>, secrets (within <c>service_settings</c>), or <c>num_allocations</c> for an inference endpoint, depending on the specific endpoint service and <c>task_type</c>.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
+	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual UpdateInferenceResponse Update(UpdateInferenceRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<UpdateInferenceRequestDescriptor, UpdateInferenceResponse, UpdateInferenceRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Update an inference endpoint.
+	/// </para>
+	/// <para>
+	/// Modify <c>task_settings</c>, secrets (within <c>service_settings</c>), or <c>num_allocations</c> for an inference endpoint, depending on the specific endpoint service and <c>task_type</c>.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
+	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual UpdateInferenceResponse Update(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId)
+	{
+		var descriptor = new UpdateInferenceRequestDescriptor(inferenceConfig, taskType, inferenceId);
+		descriptor.BeforeRequest();
+		return DoRequest<UpdateInferenceRequestDescriptor, UpdateInferenceResponse, UpdateInferenceRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Update an inference endpoint.
+	/// </para>
+	/// <para>
+	/// Modify <c>task_settings</c>, secrets (within <c>service_settings</c>), or <c>num_allocations</c> for an inference endpoint, depending on the specific endpoint service and <c>task_type</c>.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
+	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual UpdateInferenceResponse Update(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<UpdateInferenceRequestDescriptor> configureRequest)
+	{
+		var descriptor = new UpdateInferenceRequestDescriptor(inferenceConfig, taskType, inferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<UpdateInferenceRequestDescriptor, UpdateInferenceResponse, UpdateInferenceRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Update an inference endpoint.
+	/// </para>
+	/// <para>
+	/// Modify <c>task_settings</c>, secrets (within <c>service_settings</c>), or <c>num_allocations</c> for an inference endpoint, depending on the specific endpoint service and <c>task_type</c>.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
+	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual UpdateInferenceResponse Update(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Id inferenceId)
+	{
+		var descriptor = new UpdateInferenceRequestDescriptor(inferenceConfig, inferenceId);
+		descriptor.BeforeRequest();
+		return DoRequest<UpdateInferenceRequestDescriptor, UpdateInferenceResponse, UpdateInferenceRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Update an inference endpoint.
+	/// </para>
+	/// <para>
+	/// Modify <c>task_settings</c>, secrets (within <c>service_settings</c>), or <c>num_allocations</c> for an inference endpoint, depending on the specific endpoint service and <c>task_type</c>.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
+	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual UpdateInferenceResponse Update(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Id inferenceId, Action<UpdateInferenceRequestDescriptor> configureRequest)
+	{
+		var descriptor = new UpdateInferenceRequestDescriptor(inferenceConfig, inferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<UpdateInferenceRequestDescriptor, UpdateInferenceResponse, UpdateInferenceRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Update an inference endpoint.
+	/// </para>
+	/// <para>
+	/// Modify <c>task_settings</c>, secrets (within <c>service_settings</c>), or <c>num_allocations</c> for an inference endpoint, depending on the specific endpoint service and <c>task_type</c>.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
+	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<UpdateInferenceResponse> UpdateAsync(UpdateInferenceRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<UpdateInferenceRequestDescriptor, UpdateInferenceResponse, UpdateInferenceRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Update an inference endpoint.
+	/// </para>
+	/// <para>
+	/// Modify <c>task_settings</c>, secrets (within <c>service_settings</c>), or <c>num_allocations</c> for an inference endpoint, depending on the specific endpoint service and <c>task_type</c>.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
+	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<UpdateInferenceResponse> UpdateAsync(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new UpdateInferenceRequestDescriptor(inferenceConfig, taskType, inferenceId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<UpdateInferenceRequestDescriptor, UpdateInferenceResponse, UpdateInferenceRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Update an inference endpoint.
+	/// </para>
+	/// <para>
+	/// Modify <c>task_settings</c>, secrets (within <c>service_settings</c>), or <c>num_allocations</c> for an inference endpoint, depending on the specific endpoint service and <c>task_type</c>.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
+	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<UpdateInferenceResponse> UpdateAsync(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<UpdateInferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new UpdateInferenceRequestDescriptor(inferenceConfig, taskType, inferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<UpdateInferenceRequestDescriptor, UpdateInferenceResponse, UpdateInferenceRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Update an inference endpoint.
+	/// </para>
+	/// <para>
+	/// Modify <c>task_settings</c>, secrets (within <c>service_settings</c>), or <c>num_allocations</c> for an inference endpoint, depending on the specific endpoint service and <c>task_type</c>.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
+	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<UpdateInferenceResponse> UpdateAsync(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new UpdateInferenceRequestDescriptor(inferenceConfig, inferenceId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<UpdateInferenceRequestDescriptor, UpdateInferenceResponse, UpdateInferenceRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Update an inference endpoint.
+	/// </para>
+	/// <para>
+	/// Modify <c>task_settings</c>, secrets (within <c>service_settings</c>), or <c>num_allocations</c> for an inference endpoint, depending on the specific endpoint service and <c>task_type</c>.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
+	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<UpdateInferenceResponse> UpdateAsync(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Id inferenceId, Action<UpdateInferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new UpdateInferenceRequestDescriptor(inferenceConfig, inferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<UpdateInferenceRequestDescriptor, UpdateInferenceResponse, UpdateInferenceRequestParameters>(descriptor, cancellationToken);
+	}
 }

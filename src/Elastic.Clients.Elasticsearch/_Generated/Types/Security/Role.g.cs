@@ -33,6 +33,8 @@ public sealed partial class Role
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges> Applications { get; init; }
 	[JsonInclude, JsonPropertyName("cluster")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege> Cluster { get; init; }
+	[JsonInclude, JsonPropertyName("description")]
+	public string? Description { get; init; }
 	[JsonInclude, JsonPropertyName("global")]
 	public IReadOnlyDictionary<string, IReadOnlyDictionary<string, IReadOnlyDictionary<string, IReadOnlyCollection<string>>>>? Global { get; init; }
 	[JsonInclude, JsonPropertyName("indices")]
@@ -46,7 +48,7 @@ public sealed partial class Role
 	[JsonInclude, JsonPropertyName("role_templates")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RoleTemplate>? RoleTemplates { get; init; }
 	[JsonInclude, JsonPropertyName("run_as")]
-	public IReadOnlyCollection<string> RunAs { get; init; }
+	public IReadOnlyCollection<string>? RunAs { get; init; }
 	[JsonInclude, JsonPropertyName("transient_metadata")]
 	public IReadOnlyDictionary<string, object>? TransientMetadata { get; init; }
 }

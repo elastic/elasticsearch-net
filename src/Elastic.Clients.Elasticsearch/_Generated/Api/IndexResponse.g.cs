@@ -30,18 +30,61 @@ public sealed partial class IndexResponse : ElasticsearchResponse
 {
 	[JsonInclude, JsonPropertyName("forced_refresh")]
 	public bool? ForcedRefresh { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier for the added document.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_id")]
 	public string Id { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The name of the index the document was added to.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_index")]
 	public string Index { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The primary term assigned to the document for the indexing operation.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_primary_term")]
 	public long? PrimaryTerm { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The result of the indexing operation: <c>created</c> or <c>updated</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("result")]
 	public Elastic.Clients.Elasticsearch.Result Result { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The sequence number assigned to the document for the indexing operation.
+	/// Sequence numbers are used to ensure an older version of a document doesn't overwrite a newer version.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_seq_no")]
 	public long? SeqNo { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// Information about the replication process of the operation.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_shards")]
 	public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The document version, which is incremented each time the document is updated.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_version")]
 	public long Version { get; init; }
 }

@@ -33,7 +33,7 @@ public sealed partial class GetServiceCredentialsResponse : ElasticsearchRespons
 
 	/// <summary>
 	/// <para>
-	/// Contains service account credentials collected from all nodes of the cluster
+	/// Service account credentials collected from all nodes of the cluster.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("nodes_credentials")]

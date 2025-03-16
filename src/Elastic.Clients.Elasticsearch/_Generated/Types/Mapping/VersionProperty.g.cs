@@ -52,6 +52,8 @@ public sealed partial class VersionProperty : IProperty
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
+	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
+	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "version";
@@ -73,6 +75,7 @@ public sealed partial class VersionPropertyDescriptor<TDocument> : SerializableD
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private bool? StoreValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public VersionPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 	{
@@ -155,6 +158,12 @@ public sealed partial class VersionPropertyDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	public VersionPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -206,6 +215,12 @@ public sealed partial class VersionPropertyDescriptor<TDocument> : SerializableD
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("version");
 		writer.WriteEndObject();
@@ -220,7 +235,8 @@ public sealed partial class VersionPropertyDescriptor<TDocument> : SerializableD
 		IgnoreAbove = IgnoreAboveValue,
 		Meta = MetaValue,
 		Properties = PropertiesValue,
-		Store = StoreValue
+		Store = StoreValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }
 
@@ -240,6 +256,7 @@ public sealed partial class VersionPropertyDescriptor : SerializableDescriptor<V
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private bool? StoreValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public VersionPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 	{
@@ -322,6 +339,12 @@ public sealed partial class VersionPropertyDescriptor : SerializableDescriptor<V
 		return Self;
 	}
 
+	public VersionPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -373,6 +396,12 @@ public sealed partial class VersionPropertyDescriptor : SerializableDescriptor<V
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("version");
 		writer.WriteEndObject();
@@ -387,6 +416,7 @@ public sealed partial class VersionPropertyDescriptor : SerializableDescriptor<V
 		IgnoreAbove = IgnoreAboveValue,
 		Meta = MetaValue,
 		Properties = PropertiesValue,
-		Store = StoreValue
+		Store = StoreValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }

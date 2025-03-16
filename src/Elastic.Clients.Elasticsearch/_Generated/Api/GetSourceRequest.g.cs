@@ -34,35 +34,37 @@ public sealed partial class GetSourceRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// Specifies the node or shard the operation should be performed on. Random by default.
+	/// The node or shard the operation should be performed on.
+	/// By default, the operation is randomized between the shard replicas.
 	/// </para>
 	/// </summary>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
 	/// <para>
-	/// Boolean) If true, the request is real-time as opposed to near-real-time.
+	/// If <c>true</c>, the request is real-time as opposed to near-real-time.
 	/// </para>
 	/// </summary>
 	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 
 	/// <summary>
 	/// <para>
-	/// If true, Elasticsearch refreshes the affected shards to make this operation visible to search. If false, do nothing with refreshes.
+	/// If <c>true</c>, the request refreshes the relevant shards before retrieving the document.
+	/// Setting it to <c>true</c> should be done after careful thought and verification that this does not cause a heavy load on the system (and slow down indexing).
 	/// </para>
 	/// </summary>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
 	/// <summary>
 	/// <para>
-	/// Target the specified primary shard.
+	/// A custom value used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
 	/// <para>
-	/// True or false to return the _source field or not, or a list of fields to return.
+	/// Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or lists the fields to return.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
@@ -80,18 +82,25 @@ public sealed partial class GetSourceRequestParameters : RequestParameters
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of stored fields to return as part of a hit.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("stored_fields"); set => Q("stored_fields", value); }
 
 	/// <summary>
 	/// <para>
-	/// Explicit version number for concurrency control. The specified version must match the current version of the document for the request to succeed.
+	/// The version number for concurrency control.
+	/// It must match the current version of the document for the request to succeed.
 	/// </para>
 	/// </summary>
 	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 
 	/// <summary>
 	/// <para>
-	/// Specific version type: internal, external, external_gte.
+	/// The version type.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
@@ -100,8 +109,20 @@ public sealed partial class GetSourceRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Get a document's source.
-/// Returns the source of a document.
 /// </para>
+/// <para>
+/// Get the source of a document.
+/// For example:
+/// </para>
+/// <code>
+/// GET my-index-000001/_source/1
+/// </code>
+/// <para>
+/// You can use the source filtering parameters to control which parts of the <c>_source</c> are returned:
+/// </para>
+/// <code>
+/// GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities
+/// </code>
 /// </summary>
 public sealed partial class GetSourceRequest : PlainRequest<GetSourceRequestParameters>
 {
@@ -119,7 +140,8 @@ public sealed partial class GetSourceRequest : PlainRequest<GetSourceRequestPara
 
 	/// <summary>
 	/// <para>
-	/// Specifies the node or shard the operation should be performed on. Random by default.
+	/// The node or shard the operation should be performed on.
+	/// By default, the operation is randomized between the shard replicas.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -127,7 +149,7 @@ public sealed partial class GetSourceRequest : PlainRequest<GetSourceRequestPara
 
 	/// <summary>
 	/// <para>
-	/// Boolean) If true, the request is real-time as opposed to near-real-time.
+	/// If <c>true</c>, the request is real-time as opposed to near-real-time.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -135,7 +157,8 @@ public sealed partial class GetSourceRequest : PlainRequest<GetSourceRequestPara
 
 	/// <summary>
 	/// <para>
-	/// If true, Elasticsearch refreshes the affected shards to make this operation visible to search. If false, do nothing with refreshes.
+	/// If <c>true</c>, the request refreshes the relevant shards before retrieving the document.
+	/// Setting it to <c>true</c> should be done after careful thought and verification that this does not cause a heavy load on the system (and slow down indexing).
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -143,7 +166,7 @@ public sealed partial class GetSourceRequest : PlainRequest<GetSourceRequestPara
 
 	/// <summary>
 	/// <para>
-	/// Target the specified primary shard.
+	/// A custom value used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -151,7 +174,7 @@ public sealed partial class GetSourceRequest : PlainRequest<GetSourceRequestPara
 
 	/// <summary>
 	/// <para>
-	/// True or false to return the _source field or not, or a list of fields to return.
+	/// Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or lists the fields to return.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -172,12 +195,19 @@ public sealed partial class GetSourceRequest : PlainRequest<GetSourceRequestPara
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of stored fields to return as part of a hit.
+	/// </para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("stored_fields"); set => Q("stored_fields", value); }
 
 	/// <summary>
 	/// <para>
-	/// Explicit version number for concurrency control. The specified version must match the current version of the document for the request to succeed.
+	/// The version number for concurrency control.
+	/// It must match the current version of the document for the request to succeed.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -185,7 +215,7 @@ public sealed partial class GetSourceRequest : PlainRequest<GetSourceRequestPara
 
 	/// <summary>
 	/// <para>
-	/// Specific version type: internal, external, external_gte.
+	/// The version type.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -195,8 +225,20 @@ public sealed partial class GetSourceRequest : PlainRequest<GetSourceRequestPara
 /// <summary>
 /// <para>
 /// Get a document's source.
-/// Returns the source of a document.
 /// </para>
+/// <para>
+/// Get the source of a document.
+/// For example:
+/// </para>
+/// <code>
+/// GET my-index-000001/_source/1
+/// </code>
+/// <para>
+/// You can use the source filtering parameters to control which parts of the <c>_source</c> are returned:
+/// </para>
+/// <code>
+/// GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities
+/// </code>
 /// </summary>
 public sealed partial class GetSourceRequestDescriptor<TDocument> : RequestDescriptor<GetSourceRequestDescriptor<TDocument>, GetSourceRequestParameters>
 {
@@ -261,8 +303,20 @@ public sealed partial class GetSourceRequestDescriptor<TDocument> : RequestDescr
 /// <summary>
 /// <para>
 /// Get a document's source.
-/// Returns the source of a document.
 /// </para>
+/// <para>
+/// Get the source of a document.
+/// For example:
+/// </para>
+/// <code>
+/// GET my-index-000001/_source/1
+/// </code>
+/// <para>
+/// You can use the source filtering parameters to control which parts of the <c>_source</c> are returned:
+/// </para>
+/// <code>
+/// GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities
+/// </code>
 /// </summary>
 public sealed partial class GetSourceRequestDescriptor : RequestDescriptor<GetSourceRequestDescriptor, GetSourceRequestParameters>
 {

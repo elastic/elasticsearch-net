@@ -69,8 +69,19 @@ public sealed partial class MoveToStepRequest : PlainRequest<MoveToStepRequestPa
 
 	internal override string OperationName => "ilm.move_to_step";
 
+	/// <summary>
+	/// <para>
+	/// The step that the index is expected to be in.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("current_step")]
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey CurrentStep { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The step that you want to run.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("next_step")]
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey NextStep { get; set; }
 }
@@ -129,6 +140,11 @@ public sealed partial class MoveToStepRequestDescriptor<TDocument> : RequestDesc
 	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor NextStepDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor> NextStepDescriptorAction { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// The step that the index is expected to be in.
+	/// </para>
+	/// </summary>
 	public MoveToStepRequestDescriptor<TDocument> CurrentStep(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey currentStep)
 	{
 		CurrentStepDescriptor = null;
@@ -153,6 +169,11 @@ public sealed partial class MoveToStepRequestDescriptor<TDocument> : RequestDesc
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The step that you want to run.
+	/// </para>
+	/// </summary>
 	public MoveToStepRequestDescriptor<TDocument> NextStep(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey nextStep)
 	{
 		NextStepDescriptor = null;
@@ -266,6 +287,11 @@ public sealed partial class MoveToStepRequestDescriptor : RequestDescriptor<Move
 	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor NextStepDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor> NextStepDescriptorAction { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// The step that the index is expected to be in.
+	/// </para>
+	/// </summary>
 	public MoveToStepRequestDescriptor CurrentStep(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey currentStep)
 	{
 		CurrentStepDescriptor = null;
@@ -290,6 +316,11 @@ public sealed partial class MoveToStepRequestDescriptor : RequestDescriptor<Move
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The step that you want to run.
+	/// </para>
+	/// </summary>
 	public MoveToStepRequestDescriptor NextStep(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey nextStep)
 	{
 		NextStepDescriptor = null;

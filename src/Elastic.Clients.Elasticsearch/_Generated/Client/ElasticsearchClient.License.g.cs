@@ -911,7 +911,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// To check the status of your trial, use the get trial status API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PostStartTrialResponse PostStartTrial(PostStartTrialRequest request)
@@ -932,7 +932,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// To check the status of your trial, use the get trial status API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PostStartTrialResponse> PostStartTrialAsync(PostStartTrialRequest request, CancellationToken cancellationToken = default)
 	{
@@ -952,7 +952,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// To check the status of your trial, use the get trial status API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PostStartTrialResponse PostStartTrial(PostStartTrialRequestDescriptor descriptor)
@@ -973,7 +973,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// To check the status of your trial, use the get trial status API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PostStartTrialResponse PostStartTrial()
@@ -995,7 +995,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// To check the status of your trial, use the get trial status API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PostStartTrialResponse PostStartTrial(Action<PostStartTrialRequestDescriptor> configureRequest)
@@ -1018,7 +1018,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// To check the status of your trial, use the get trial status API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PostStartTrialResponse> PostStartTrialAsync(PostStartTrialRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1038,7 +1038,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// To check the status of your trial, use the get trial status API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PostStartTrialResponse> PostStartTrialAsync(CancellationToken cancellationToken = default)
 	{
@@ -1059,7 +1059,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// To check the status of your trial, use the get trial status API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PostStartTrialResponse> PostStartTrialAsync(Action<PostStartTrialRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{

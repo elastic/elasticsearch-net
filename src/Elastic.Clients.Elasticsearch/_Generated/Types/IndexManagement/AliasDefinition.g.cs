@@ -35,7 +35,7 @@ public sealed partial class AliasDefinition
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("filter")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; init; }
+	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -44,7 +44,7 @@ public sealed partial class AliasDefinition
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("index_routing")]
-	public string? IndexRouting { get; init; }
+	public string? IndexRouting { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -53,7 +53,7 @@ public sealed partial class AliasDefinition
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("is_hidden")]
-	public bool? IsHidden { get; init; }
+	public bool? IsHidden { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -61,7 +61,7 @@ public sealed partial class AliasDefinition
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("is_write_index")]
-	public bool? IsWriteIndex { get; init; }
+	public bool? IsWriteIndex { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -69,7 +69,7 @@ public sealed partial class AliasDefinition
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("routing")]
-	public string? Routing { get; init; }
+	public string? Routing { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -78,5 +78,319 @@ public sealed partial class AliasDefinition
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("search_routing")]
-	public string? SearchRouting { get; init; }
+	public string? SearchRouting { get; set; }
+}
+
+public sealed partial class AliasDefinitionDescriptor<TDocument> : SerializableDescriptor<AliasDefinitionDescriptor<TDocument>>
+{
+	internal AliasDefinitionDescriptor(Action<AliasDefinitionDescriptor<TDocument>> configure) => configure.Invoke(this);
+
+	public AliasDefinitionDescriptor() : base()
+	{
+	}
+
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
+	private string? IndexRoutingValue { get; set; }
+	private bool? IsHiddenValue { get; set; }
+	private bool? IsWriteIndexValue { get; set; }
+	private string? RoutingValue { get; set; }
+	private string? SearchRoutingValue { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Query used to limit documents the alias can access.
+	/// </para>
+	/// </summary>
+	public AliasDefinitionDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
+	{
+		FilterDescriptor = null;
+		FilterDescriptorAction = null;
+		FilterValue = filter;
+		return Self;
+	}
+
+	public AliasDefinitionDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	{
+		FilterValue = null;
+		FilterDescriptorAction = null;
+		FilterDescriptor = descriptor;
+		return Self;
+	}
+
+	public AliasDefinitionDescriptor<TDocument> Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
+	{
+		FilterValue = null;
+		FilterDescriptor = null;
+		FilterDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Value used to route indexing operations to a specific shard.
+	/// If specified, this overwrites the <c>routing</c> value for indexing operations.
+	/// </para>
+	/// </summary>
+	public AliasDefinitionDescriptor<TDocument> IndexRouting(string? indexRouting)
+	{
+		IndexRoutingValue = indexRouting;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the alias is hidden.
+	/// All indices for the alias must have the same <c>is_hidden</c> value.
+	/// </para>
+	/// </summary>
+	public AliasDefinitionDescriptor<TDocument> IsHidden(bool? isHidden = true)
+	{
+		IsHiddenValue = isHidden;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the index is the write index for the alias.
+	/// </para>
+	/// </summary>
+	public AliasDefinitionDescriptor<TDocument> IsWriteIndex(bool? isWriteIndex = true)
+	{
+		IsWriteIndexValue = isWriteIndex;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Value used to route indexing and search operations to a specific shard.
+	/// </para>
+	/// </summary>
+	public AliasDefinitionDescriptor<TDocument> Routing(string? routing)
+	{
+		RoutingValue = routing;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Value used to route search operations to a specific shard.
+	/// If specified, this overwrites the <c>routing</c> value for search operations.
+	/// </para>
+	/// </summary>
+	public AliasDefinitionDescriptor<TDocument> SearchRouting(string? searchRouting)
+	{
+		SearchRoutingValue = searchRouting;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (FilterDescriptor is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterDescriptor, options);
+		}
+		else if (FilterDescriptorAction is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
+		}
+		else if (FilterValue is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(IndexRoutingValue))
+		{
+			writer.WritePropertyName("index_routing");
+			writer.WriteStringValue(IndexRoutingValue);
+		}
+
+		if (IsHiddenValue.HasValue)
+		{
+			writer.WritePropertyName("is_hidden");
+			writer.WriteBooleanValue(IsHiddenValue.Value);
+		}
+
+		if (IsWriteIndexValue.HasValue)
+		{
+			writer.WritePropertyName("is_write_index");
+			writer.WriteBooleanValue(IsWriteIndexValue.Value);
+		}
+
+		if (!string.IsNullOrEmpty(RoutingValue))
+		{
+			writer.WritePropertyName("routing");
+			writer.WriteStringValue(RoutingValue);
+		}
+
+		if (!string.IsNullOrEmpty(SearchRoutingValue))
+		{
+			writer.WritePropertyName("search_routing");
+			writer.WriteStringValue(SearchRoutingValue);
+		}
+
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class AliasDefinitionDescriptor : SerializableDescriptor<AliasDefinitionDescriptor>
+{
+	internal AliasDefinitionDescriptor(Action<AliasDefinitionDescriptor> configure) => configure.Invoke(this);
+
+	public AliasDefinitionDescriptor() : base()
+	{
+	}
+
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
+	private string? IndexRoutingValue { get; set; }
+	private bool? IsHiddenValue { get; set; }
+	private bool? IsWriteIndexValue { get; set; }
+	private string? RoutingValue { get; set; }
+	private string? SearchRoutingValue { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Query used to limit documents the alias can access.
+	/// </para>
+	/// </summary>
+	public AliasDefinitionDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
+	{
+		FilterDescriptor = null;
+		FilterDescriptorAction = null;
+		FilterValue = filter;
+		return Self;
+	}
+
+	public AliasDefinitionDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	{
+		FilterValue = null;
+		FilterDescriptorAction = null;
+		FilterDescriptor = descriptor;
+		return Self;
+	}
+
+	public AliasDefinitionDescriptor Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
+	{
+		FilterValue = null;
+		FilterDescriptor = null;
+		FilterDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Value used to route indexing operations to a specific shard.
+	/// If specified, this overwrites the <c>routing</c> value for indexing operations.
+	/// </para>
+	/// </summary>
+	public AliasDefinitionDescriptor IndexRouting(string? indexRouting)
+	{
+		IndexRoutingValue = indexRouting;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the alias is hidden.
+	/// All indices for the alias must have the same <c>is_hidden</c> value.
+	/// </para>
+	/// </summary>
+	public AliasDefinitionDescriptor IsHidden(bool? isHidden = true)
+	{
+		IsHiddenValue = isHidden;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the index is the write index for the alias.
+	/// </para>
+	/// </summary>
+	public AliasDefinitionDescriptor IsWriteIndex(bool? isWriteIndex = true)
+	{
+		IsWriteIndexValue = isWriteIndex;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Value used to route indexing and search operations to a specific shard.
+	/// </para>
+	/// </summary>
+	public AliasDefinitionDescriptor Routing(string? routing)
+	{
+		RoutingValue = routing;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Value used to route search operations to a specific shard.
+	/// If specified, this overwrites the <c>routing</c> value for search operations.
+	/// </para>
+	/// </summary>
+	public AliasDefinitionDescriptor SearchRouting(string? searchRouting)
+	{
+		SearchRoutingValue = searchRouting;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (FilterDescriptor is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterDescriptor, options);
+		}
+		else if (FilterDescriptorAction is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
+		}
+		else if (FilterValue is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(IndexRoutingValue))
+		{
+			writer.WritePropertyName("index_routing");
+			writer.WriteStringValue(IndexRoutingValue);
+		}
+
+		if (IsHiddenValue.HasValue)
+		{
+			writer.WritePropertyName("is_hidden");
+			writer.WriteBooleanValue(IsHiddenValue.Value);
+		}
+
+		if (IsWriteIndexValue.HasValue)
+		{
+			writer.WritePropertyName("is_write_index");
+			writer.WriteBooleanValue(IsWriteIndexValue.Value);
+		}
+
+		if (!string.IsNullOrEmpty(RoutingValue))
+		{
+			writer.WritePropertyName("routing");
+			writer.WriteStringValue(RoutingValue);
+		}
+
+		if (!string.IsNullOrEmpty(SearchRoutingValue))
+		{
+			writer.WritePropertyName("search_routing");
+			writer.WriteStringValue(SearchRoutingValue);
+		}
+
+		writer.WriteEndObject();
+	}
 }

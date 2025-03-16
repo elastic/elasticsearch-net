@@ -48,45 +48,52 @@ public sealed partial class DeleteRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, Elasticsearch refreshes the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> do nothing with refreshes.
-	/// Valid values: <c>true</c>, <c>false</c>, <c>wait_for</c>.
+	/// If <c>true</c>, Elasticsearch refreshes the affected shards to make this operation visible to search.
+	/// If <c>wait_for</c>, it waits for a refresh to make this operation visible to search.
+	/// If <c>false</c>, it does nothing with refreshes.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
 	/// <summary>
 	/// <para>
-	/// Custom value used to route operations to a specific shard.
+	/// A custom value used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for active shards.
+	/// The period to wait for active shards.
+	/// </para>
+	/// <para>
+	/// This parameter is useful for situations where the primary shard assigned to perform the delete operation might not be available when the delete operation runs.
+	/// Some reasons for this might be that the primary shard is currently recovering from a store or undergoing relocation.
+	/// By default, the delete operation will wait on the primary shard to become available for up to 1 minute before failing and responding with an error.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
 	/// <para>
-	/// Explicit version number for concurrency control.
-	/// The specified version must match the current version of the document for the request to succeed.
+	/// An explicit version number for concurrency control.
+	/// It must match the current version of the document for the request to succeed.
 	/// </para>
 	/// </summary>
 	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 
 	/// <summary>
 	/// <para>
-	/// Specific version type: <c>external</c>, <c>external_gte</c>.
+	/// The version type.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
 
 	/// <summary>
 	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// The minimum number of shard copies that must be active before proceeding with the operation.
+	/// You can set it to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// The default value of <c>1</c> means it waits for each primary shard to be active.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
@@ -95,7 +102,56 @@ public sealed partial class DeleteRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Delete a document.
-/// Removes a JSON document from the specified index.
+/// </para>
+/// <para>
+/// Remove a JSON document from the specified index.
+/// </para>
+/// <para>
+/// NOTE: You cannot send deletion requests directly to a data stream.
+/// To delete a document in a data stream, you must target the backing index containing the document.
+/// </para>
+/// <para>
+/// <strong>Optimistic concurrency control</strong>
+/// </para>
+/// <para>
+/// Delete operations can be made conditional and only be performed if the last modification to the document was assigned the sequence number and primary term specified by the <c>if_seq_no</c> and <c>if_primary_term</c> parameters.
+/// If a mismatch is detected, the operation will result in a <c>VersionConflictException</c> and a status code of <c>409</c>.
+/// </para>
+/// <para>
+/// <strong>Versioning</strong>
+/// </para>
+/// <para>
+/// Each document indexed is versioned.
+/// When deleting a document, the version can be specified to make sure the relevant document you are trying to delete is actually being deleted and it has not changed in the meantime.
+/// Every write operation run on a document, deletes included, causes its version to be incremented.
+/// The version number of a deleted document remains available for a short time after deletion to allow for control of concurrent operations.
+/// The length of time for which a deleted document's version remains available is determined by the <c>index.gc_deletes</c> index setting.
+/// </para>
+/// <para>
+/// <strong>Routing</strong>
+/// </para>
+/// <para>
+/// If routing is used during indexing, the routing value also needs to be specified to delete a document.
+/// </para>
+/// <para>
+/// If the <c>_routing</c> mapping is set to <c>required</c> and no routing value is specified, the delete API throws a <c>RoutingMissingException</c> and rejects the request.
+/// </para>
+/// <para>
+/// For example:
+/// </para>
+/// <code>
+/// DELETE /my-index-000001/_doc/1?routing=shard-1
+/// </code>
+/// <para>
+/// This request deletes the document with ID 1, but it is routed based on the user.
+/// The document is not deleted if the correct routing is not specified.
+/// </para>
+/// <para>
+/// <strong>Distributed</strong>
+/// </para>
+/// <para>
+/// The delete operation gets hashed into a specific shard ID.
+/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 /// </para>
 /// </summary>
 public partial class DeleteRequest : PlainRequest<DeleteRequestParameters>
@@ -130,8 +186,9 @@ public partial class DeleteRequest : PlainRequest<DeleteRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, Elasticsearch refreshes the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> do nothing with refreshes.
-	/// Valid values: <c>true</c>, <c>false</c>, <c>wait_for</c>.
+	/// If <c>true</c>, Elasticsearch refreshes the affected shards to make this operation visible to search.
+	/// If <c>wait_for</c>, it waits for a refresh to make this operation visible to search.
+	/// If <c>false</c>, it does nothing with refreshes.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -139,7 +196,7 @@ public partial class DeleteRequest : PlainRequest<DeleteRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Custom value used to route operations to a specific shard.
+	/// A custom value used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -147,7 +204,12 @@ public partial class DeleteRequest : PlainRequest<DeleteRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for active shards.
+	/// The period to wait for active shards.
+	/// </para>
+	/// <para>
+	/// This parameter is useful for situations where the primary shard assigned to perform the delete operation might not be available when the delete operation runs.
+	/// Some reasons for this might be that the primary shard is currently recovering from a store or undergoing relocation.
+	/// By default, the delete operation will wait on the primary shard to become available for up to 1 minute before failing and responding with an error.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -155,8 +217,8 @@ public partial class DeleteRequest : PlainRequest<DeleteRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Explicit version number for concurrency control.
-	/// The specified version must match the current version of the document for the request to succeed.
+	/// An explicit version number for concurrency control.
+	/// It must match the current version of the document for the request to succeed.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -164,7 +226,7 @@ public partial class DeleteRequest : PlainRequest<DeleteRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Specific version type: <c>external</c>, <c>external_gte</c>.
+	/// The version type.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -172,8 +234,9 @@ public partial class DeleteRequest : PlainRequest<DeleteRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// The minimum number of shard copies that must be active before proceeding with the operation.
+	/// You can set it to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// The default value of <c>1</c> means it waits for each primary shard to be active.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -183,7 +246,56 @@ public partial class DeleteRequest : PlainRequest<DeleteRequestParameters>
 /// <summary>
 /// <para>
 /// Delete a document.
-/// Removes a JSON document from the specified index.
+/// </para>
+/// <para>
+/// Remove a JSON document from the specified index.
+/// </para>
+/// <para>
+/// NOTE: You cannot send deletion requests directly to a data stream.
+/// To delete a document in a data stream, you must target the backing index containing the document.
+/// </para>
+/// <para>
+/// <strong>Optimistic concurrency control</strong>
+/// </para>
+/// <para>
+/// Delete operations can be made conditional and only be performed if the last modification to the document was assigned the sequence number and primary term specified by the <c>if_seq_no</c> and <c>if_primary_term</c> parameters.
+/// If a mismatch is detected, the operation will result in a <c>VersionConflictException</c> and a status code of <c>409</c>.
+/// </para>
+/// <para>
+/// <strong>Versioning</strong>
+/// </para>
+/// <para>
+/// Each document indexed is versioned.
+/// When deleting a document, the version can be specified to make sure the relevant document you are trying to delete is actually being deleted and it has not changed in the meantime.
+/// Every write operation run on a document, deletes included, causes its version to be incremented.
+/// The version number of a deleted document remains available for a short time after deletion to allow for control of concurrent operations.
+/// The length of time for which a deleted document's version remains available is determined by the <c>index.gc_deletes</c> index setting.
+/// </para>
+/// <para>
+/// <strong>Routing</strong>
+/// </para>
+/// <para>
+/// If routing is used during indexing, the routing value also needs to be specified to delete a document.
+/// </para>
+/// <para>
+/// If the <c>_routing</c> mapping is set to <c>required</c> and no routing value is specified, the delete API throws a <c>RoutingMissingException</c> and rejects the request.
+/// </para>
+/// <para>
+/// For example:
+/// </para>
+/// <code>
+/// DELETE /my-index-000001/_doc/1?routing=shard-1
+/// </code>
+/// <para>
+/// This request deletes the document with ID 1, but it is routed based on the user.
+/// The document is not deleted if the correct routing is not specified.
+/// </para>
+/// <para>
+/// <strong>Distributed</strong>
+/// </para>
+/// <para>
+/// The delete operation gets hashed into a specific shard ID.
+/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 /// </para>
 /// </summary>
 public sealed partial class DeleteRequestDescriptor<TDocument> : RequestDescriptor<DeleteRequestDescriptor<TDocument>, DeleteRequestParameters>
@@ -247,7 +359,56 @@ public sealed partial class DeleteRequestDescriptor<TDocument> : RequestDescript
 /// <summary>
 /// <para>
 /// Delete a document.
-/// Removes a JSON document from the specified index.
+/// </para>
+/// <para>
+/// Remove a JSON document from the specified index.
+/// </para>
+/// <para>
+/// NOTE: You cannot send deletion requests directly to a data stream.
+/// To delete a document in a data stream, you must target the backing index containing the document.
+/// </para>
+/// <para>
+/// <strong>Optimistic concurrency control</strong>
+/// </para>
+/// <para>
+/// Delete operations can be made conditional and only be performed if the last modification to the document was assigned the sequence number and primary term specified by the <c>if_seq_no</c> and <c>if_primary_term</c> parameters.
+/// If a mismatch is detected, the operation will result in a <c>VersionConflictException</c> and a status code of <c>409</c>.
+/// </para>
+/// <para>
+/// <strong>Versioning</strong>
+/// </para>
+/// <para>
+/// Each document indexed is versioned.
+/// When deleting a document, the version can be specified to make sure the relevant document you are trying to delete is actually being deleted and it has not changed in the meantime.
+/// Every write operation run on a document, deletes included, causes its version to be incremented.
+/// The version number of a deleted document remains available for a short time after deletion to allow for control of concurrent operations.
+/// The length of time for which a deleted document's version remains available is determined by the <c>index.gc_deletes</c> index setting.
+/// </para>
+/// <para>
+/// <strong>Routing</strong>
+/// </para>
+/// <para>
+/// If routing is used during indexing, the routing value also needs to be specified to delete a document.
+/// </para>
+/// <para>
+/// If the <c>_routing</c> mapping is set to <c>required</c> and no routing value is specified, the delete API throws a <c>RoutingMissingException</c> and rejects the request.
+/// </para>
+/// <para>
+/// For example:
+/// </para>
+/// <code>
+/// DELETE /my-index-000001/_doc/1?routing=shard-1
+/// </code>
+/// <para>
+/// This request deletes the document with ID 1, but it is routed based on the user.
+/// The document is not deleted if the correct routing is not specified.
+/// </para>
+/// <para>
+/// <strong>Distributed</strong>
+/// </para>
+/// <para>
+/// The delete operation gets hashed into a specific shard ID.
+/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 /// </para>
 /// </summary>
 public sealed partial class DeleteRequestDescriptor : RequestDescriptor<DeleteRequestDescriptor, DeleteRequestParameters>

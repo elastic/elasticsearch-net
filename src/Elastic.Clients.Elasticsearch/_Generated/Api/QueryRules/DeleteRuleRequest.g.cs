@@ -38,6 +38,7 @@ public sealed partial class DeleteRuleRequestParameters : RequestParameters
 /// <para>
 /// Delete a query rule.
 /// Delete a query rule within a query ruleset.
+/// This is a destructive action that is only recoverable by re-adding the same rule with the create or update query rule API.
 /// </para>
 /// </summary>
 public sealed partial class DeleteRuleRequest : PlainRequest<DeleteRuleRequestParameters>
@@ -59,6 +60,7 @@ public sealed partial class DeleteRuleRequest : PlainRequest<DeleteRuleRequestPa
 /// <para>
 /// Delete a query rule.
 /// Delete a query rule within a query ruleset.
+/// This is a destructive action that is only recoverable by re-adding the same rule with the create or update query rule API.
 /// </para>
 /// </summary>
 public sealed partial class DeleteRuleRequestDescriptor : RequestDescriptor<DeleteRuleRequestDescriptor, DeleteRuleRequestParameters>

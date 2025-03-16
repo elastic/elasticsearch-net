@@ -40,6 +40,20 @@ public sealed partial class GetTokenRequestParameters : RequestParameters
 /// </para>
 /// <para>
 /// Create a bearer token for access without requiring basic authentication.
+/// The tokens are created by the Elasticsearch Token Service, which is automatically enabled when you configure TLS on the HTTP interface.
+/// Alternatively, you can explicitly enable the <c>xpack.security.authc.token.enabled</c> setting.
+/// When you are running in production mode, a bootstrap check prevents you from enabling the token service unless you also enable TLS on the HTTP interface.
+/// </para>
+/// <para>
+/// The get token API takes the same parameters as a typical OAuth 2.0 token API except for the use of a JSON request body.
+/// </para>
+/// <para>
+/// A successful get token API call returns a JSON structure that contains the access token, the amount of time (seconds) that the token expires in, the type, and the scope if available.
+/// </para>
+/// <para>
+/// The tokens returned by the get token API have a finite period of time for which they are valid and after that time period, they can no longer be used.
+/// That time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
+/// If you want to invalidate a token immediately, you can do so by using the invalidate token API.
 /// </para>
 /// </summary>
 public sealed partial class GetTokenRequest : PlainRequest<GetTokenRequestParameters>
@@ -52,16 +66,61 @@ public sealed partial class GetTokenRequest : PlainRequest<GetTokenRequestParame
 
 	internal override string OperationName => "security.get_token";
 
+	/// <summary>
+	/// <para>
+	/// The type of grant.
+	/// Supported grant types are: <c>password</c>, <c>_kerberos</c>, <c>client_credentials</c>, and <c>refresh_token</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("grant_type")]
 	public Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType? GrantType { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The base64 encoded kerberos ticket.
+	/// If you specify the <c>_kerberos</c> grant type, this parameter is required.
+	/// This parameter is not valid with any other supported grant type.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("kerberos_ticket")]
 	public string? KerberosTicket { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The user's password.
+	/// If you specify the <c>password</c> grant type, this parameter is required.
+	/// This parameter is not valid with any other supported grant type.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("password")]
 	public string? Password { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The string that was returned when you created the token, which enables you to extend its life.
+	/// If you specify the <c>refresh_token</c> grant type, this parameter is required.
+	/// This parameter is not valid with any other supported grant type.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("refresh_token")]
 	public string? RefreshToken { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The scope of the token.
+	/// Currently tokens are only issued for a scope of FULL regardless of the value sent with the request.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("scope")]
 	public string? Scope { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The username that identifies the user.
+	/// If you specify the <c>password</c> grant type, this parameter is required.
+	/// This parameter is not valid with any other supported grant type.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("username")]
 	public Elastic.Clients.Elasticsearch.Username? Username { get; set; }
 }
@@ -72,6 +131,20 @@ public sealed partial class GetTokenRequest : PlainRequest<GetTokenRequestParame
 /// </para>
 /// <para>
 /// Create a bearer token for access without requiring basic authentication.
+/// The tokens are created by the Elasticsearch Token Service, which is automatically enabled when you configure TLS on the HTTP interface.
+/// Alternatively, you can explicitly enable the <c>xpack.security.authc.token.enabled</c> setting.
+/// When you are running in production mode, a bootstrap check prevents you from enabling the token service unless you also enable TLS on the HTTP interface.
+/// </para>
+/// <para>
+/// The get token API takes the same parameters as a typical OAuth 2.0 token API except for the use of a JSON request body.
+/// </para>
+/// <para>
+/// A successful get token API call returns a JSON structure that contains the access token, the amount of time (seconds) that the token expires in, the type, and the scope if available.
+/// </para>
+/// <para>
+/// The tokens returned by the get token API have a finite period of time for which they are valid and after that time period, they can no longer be used.
+/// That time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
+/// If you want to invalidate a token immediately, you can do so by using the invalidate token API.
 /// </para>
 /// </summary>
 public sealed partial class GetTokenRequestDescriptor : RequestDescriptor<GetTokenRequestDescriptor, GetTokenRequestParameters>
@@ -97,36 +170,76 @@ public sealed partial class GetTokenRequestDescriptor : RequestDescriptor<GetTok
 	private string? ScopeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Username? UsernameValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// The type of grant.
+	/// Supported grant types are: <c>password</c>, <c>_kerberos</c>, <c>client_credentials</c>, and <c>refresh_token</c>.
+	/// </para>
+	/// </summary>
 	public GetTokenRequestDescriptor GrantType(Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType? grantType)
 	{
 		GrantTypeValue = grantType;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The base64 encoded kerberos ticket.
+	/// If you specify the <c>_kerberos</c> grant type, this parameter is required.
+	/// This parameter is not valid with any other supported grant type.
+	/// </para>
+	/// </summary>
 	public GetTokenRequestDescriptor KerberosTicket(string? kerberosTicket)
 	{
 		KerberosTicketValue = kerberosTicket;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The user's password.
+	/// If you specify the <c>password</c> grant type, this parameter is required.
+	/// This parameter is not valid with any other supported grant type.
+	/// </para>
+	/// </summary>
 	public GetTokenRequestDescriptor Password(string? password)
 	{
 		PasswordValue = password;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The string that was returned when you created the token, which enables you to extend its life.
+	/// If you specify the <c>refresh_token</c> grant type, this parameter is required.
+	/// This parameter is not valid with any other supported grant type.
+	/// </para>
+	/// </summary>
 	public GetTokenRequestDescriptor RefreshToken(string? refreshToken)
 	{
 		RefreshTokenValue = refreshToken;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The scope of the token.
+	/// Currently tokens are only issued for a scope of FULL regardless of the value sent with the request.
+	/// </para>
+	/// </summary>
 	public GetTokenRequestDescriptor Scope(string? scope)
 	{
 		ScopeValue = scope;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The username that identifies the user.
+	/// If you specify the <c>password</c> grant type, this parameter is required.
+	/// This parameter is not valid with any other supported grant type.
+	/// </para>
+	/// </summary>
 	public GetTokenRequestDescriptor Username(Elastic.Clients.Elasticsearch.Username? username)
 	{
 		UsernameValue = username;

@@ -84,8 +84,35 @@ public sealed partial class OpenIndexRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Opens a closed index.
+/// Open a closed index.
 /// For data streams, the API opens any closed backing indices.
+/// </para>
+/// <para>
+/// A closed index is blocked for read/write operations and does not allow all operations that opened indices allow.
+/// It is not possible to index documents or to search for documents in a closed index.
+/// This allows closed indices to not have to maintain internal data structures for indexing or searching documents, resulting in a smaller overhead on the cluster.
+/// </para>
+/// <para>
+/// When opening or closing an index, the master is responsible for restarting the index shards to reflect the new state of the index.
+/// The shards will then go through the normal recovery process.
+/// The data of opened or closed indices is automatically replicated by the cluster to ensure that enough shard copies are safely kept around at all times.
+/// </para>
+/// <para>
+/// You can open and close multiple indices.
+/// An error is thrown if the request explicitly refers to a missing index.
+/// This behavior can be turned off by using the <c>ignore_unavailable=true</c> parameter.
+/// </para>
+/// <para>
+/// By default, you must explicitly name the indices you are opening or closing.
+/// To open or close indices with <c>_all</c>, <c>*</c>, or other wildcard expressions, change the <c>action.destructive_requires_name</c> setting to <c>false</c>.
+/// This setting can also be changed with the cluster update settings API.
+/// </para>
+/// <para>
+/// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
+/// Closing indices can be turned off with the cluster settings API by setting <c>cluster.indices.close.enable</c> to <c>false</c>.
+/// </para>
+/// <para>
+/// Because opening or closing an index allocates its shards, the <c>wait_for_active_shards</c> setting on index creation applies to the <c>_open</c> and <c>_close</c> index actions as well.
 /// </para>
 /// </summary>
 public sealed partial class OpenIndexRequest : PlainRequest<OpenIndexRequestParameters>
@@ -160,8 +187,35 @@ public sealed partial class OpenIndexRequest : PlainRequest<OpenIndexRequestPara
 
 /// <summary>
 /// <para>
-/// Opens a closed index.
+/// Open a closed index.
 /// For data streams, the API opens any closed backing indices.
+/// </para>
+/// <para>
+/// A closed index is blocked for read/write operations and does not allow all operations that opened indices allow.
+/// It is not possible to index documents or to search for documents in a closed index.
+/// This allows closed indices to not have to maintain internal data structures for indexing or searching documents, resulting in a smaller overhead on the cluster.
+/// </para>
+/// <para>
+/// When opening or closing an index, the master is responsible for restarting the index shards to reflect the new state of the index.
+/// The shards will then go through the normal recovery process.
+/// The data of opened or closed indices is automatically replicated by the cluster to ensure that enough shard copies are safely kept around at all times.
+/// </para>
+/// <para>
+/// You can open and close multiple indices.
+/// An error is thrown if the request explicitly refers to a missing index.
+/// This behavior can be turned off by using the <c>ignore_unavailable=true</c> parameter.
+/// </para>
+/// <para>
+/// By default, you must explicitly name the indices you are opening or closing.
+/// To open or close indices with <c>_all</c>, <c>*</c>, or other wildcard expressions, change the <c>action.destructive_requires_name</c> setting to <c>false</c>.
+/// This setting can also be changed with the cluster update settings API.
+/// </para>
+/// <para>
+/// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
+/// Closing indices can be turned off with the cluster settings API by setting <c>cluster.indices.close.enable</c> to <c>false</c>.
+/// </para>
+/// <para>
+/// Because opening or closing an index allocates its shards, the <c>wait_for_active_shards</c> setting on index creation applies to the <c>_open</c> and <c>_close</c> index actions as well.
 /// </para>
 /// </summary>
 public sealed partial class OpenIndexRequestDescriptor<TDocument> : RequestDescriptor<OpenIndexRequestDescriptor<TDocument>, OpenIndexRequestParameters>
@@ -204,8 +258,35 @@ public sealed partial class OpenIndexRequestDescriptor<TDocument> : RequestDescr
 
 /// <summary>
 /// <para>
-/// Opens a closed index.
+/// Open a closed index.
 /// For data streams, the API opens any closed backing indices.
+/// </para>
+/// <para>
+/// A closed index is blocked for read/write operations and does not allow all operations that opened indices allow.
+/// It is not possible to index documents or to search for documents in a closed index.
+/// This allows closed indices to not have to maintain internal data structures for indexing or searching documents, resulting in a smaller overhead on the cluster.
+/// </para>
+/// <para>
+/// When opening or closing an index, the master is responsible for restarting the index shards to reflect the new state of the index.
+/// The shards will then go through the normal recovery process.
+/// The data of opened or closed indices is automatically replicated by the cluster to ensure that enough shard copies are safely kept around at all times.
+/// </para>
+/// <para>
+/// You can open and close multiple indices.
+/// An error is thrown if the request explicitly refers to a missing index.
+/// This behavior can be turned off by using the <c>ignore_unavailable=true</c> parameter.
+/// </para>
+/// <para>
+/// By default, you must explicitly name the indices you are opening or closing.
+/// To open or close indices with <c>_all</c>, <c>*</c>, or other wildcard expressions, change the <c>action.destructive_requires_name</c> setting to <c>false</c>.
+/// This setting can also be changed with the cluster update settings API.
+/// </para>
+/// <para>
+/// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
+/// Closing indices can be turned off with the cluster settings API by setting <c>cluster.indices.close.enable</c> to <c>false</c>.
+/// </para>
+/// <para>
+/// Because opening or closing an index allocates its shards, the <c>wait_for_active_shards</c> setting on index creation applies to the <c>_open</c> and <c>_close</c> index actions as well.
 /// </para>
 /// </summary>
 public sealed partial class OpenIndexRequestDescriptor : RequestDescriptor<OpenIndexRequestDescriptor, OpenIndexRequestParameters>

@@ -54,6 +54,12 @@ public sealed partial class TestRequest : PlainRequest<TestRequestParameters>
 
 	internal override string OperationName => "query_rules.test";
 
+	/// <summary>
+	/// <para>
+	/// The match criteria to apply to rules in the given query ruleset.
+	/// Match criteria should match the keys defined in the <c>criteria.metadata</c> field of the rule.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("match_criteria")]
 	public IDictionary<string, object> MatchCriteria { get; set; }
 }
@@ -88,6 +94,12 @@ public sealed partial class TestRequestDescriptor : RequestDescriptor<TestReques
 
 	private IDictionary<string, object> MatchCriteriaValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// The match criteria to apply to rules in the given query ruleset.
+	/// Match criteria should match the keys defined in the <c>criteria.metadata</c> field of the rule.
+	/// </para>
+	/// </summary>
 	public TestRequestDescriptor MatchCriteria(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
 		MatchCriteriaValue = selector?.Invoke(new FluentDictionary<string, object>());

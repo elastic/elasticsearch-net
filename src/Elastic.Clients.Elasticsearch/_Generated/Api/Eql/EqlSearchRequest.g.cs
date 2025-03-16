@@ -76,10 +76,6 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-	[JsonInclude, JsonPropertyName("allow_partial_search_results")]
-	public bool? AllowPartialSearchResults { get; set; }
-	[JsonInclude, JsonPropertyName("allow_partial_sequence_results")]
-	public bool? AllowPartialSequenceResults { get; set; }
 	[JsonInclude, JsonPropertyName("case_sensitive")]
 	public bool? CaseSensitive { get; set; }
 
@@ -120,16 +116,6 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get; set; }
 	[JsonInclude, JsonPropertyName("keep_on_completion")]
 	public bool? KeepOnCompletion { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// By default, the response of a sample query contains up to <c>10</c> samples, with one sample per unique set of join keys. Use the <c>size</c>
-	/// parameter to get a smaller or larger set of samples. To retrieve more than one sample per set of join keys, use the
-	/// <c>max_samples_per_key</c> parameter. Pipes are not supported for sample queries.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("max_samples_per_key")]
-	public int? MaxSamplesPerKey { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -207,8 +193,6 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
-	private bool? AllowPartialSearchResultsValue { get; set; }
-	private bool? AllowPartialSequenceResultsValue { get; set; }
 	private bool? CaseSensitiveValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? EventCategoryFieldValue { get; set; }
 	private int? FetchSizeValue { get; set; }
@@ -222,7 +206,6 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] FilterDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.Duration? KeepAliveValue { get; set; }
 	private bool? KeepOnCompletionValue { get; set; }
-	private int? MaxSamplesPerKeyValue { get; set; }
 	private string QueryValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Eql.ResultPosition? ResultPositionValue { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> RuntimeMappingsValue { get; set; }
@@ -230,18 +213,6 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	private Elastic.Clients.Elasticsearch.Field? TiebreakerFieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? TimestampFieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeoutValue { get; set; }
-
-	public EqlSearchRequestDescriptor<TDocument> AllowPartialSearchResults(bool? allowPartialSearchResults = true)
-	{
-		AllowPartialSearchResultsValue = allowPartialSearchResults;
-		return Self;
-	}
-
-	public EqlSearchRequestDescriptor<TDocument> AllowPartialSequenceResults(bool? allowPartialSequenceResults = true)
-	{
-		AllowPartialSequenceResultsValue = allowPartialSequenceResults;
-		return Self;
-	}
 
 	public EqlSearchRequestDescriptor<TDocument> CaseSensitive(bool? caseSensitive = true)
 	{
@@ -389,19 +360,6 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 
 	/// <summary>
 	/// <para>
-	/// By default, the response of a sample query contains up to <c>10</c> samples, with one sample per unique set of join keys. Use the <c>size</c>
-	/// parameter to get a smaller or larger set of samples. To retrieve more than one sample per set of join keys, use the
-	/// <c>max_samples_per_key</c> parameter. Pipes are not supported for sample queries.
-	/// </para>
-	/// </summary>
-	public EqlSearchRequestDescriptor<TDocument> MaxSamplesPerKey(int? maxSamplesPerKey)
-	{
-		MaxSamplesPerKeyValue = maxSamplesPerKey;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
 	/// EQL query you wish to run.
 	/// </para>
 	/// </summary>
@@ -509,18 +467,6 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (AllowPartialSearchResultsValue.HasValue)
-		{
-			writer.WritePropertyName("allow_partial_search_results");
-			writer.WriteBooleanValue(AllowPartialSearchResultsValue.Value);
-		}
-
-		if (AllowPartialSequenceResultsValue.HasValue)
-		{
-			writer.WritePropertyName("allow_partial_sequence_results");
-			writer.WriteBooleanValue(AllowPartialSequenceResultsValue.Value);
-		}
-
 		if (CaseSensitiveValue.HasValue)
 		{
 			writer.WritePropertyName("case_sensitive");
@@ -609,12 +555,6 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 			writer.WriteBooleanValue(KeepOnCompletionValue.Value);
 		}
 
-		if (MaxSamplesPerKeyValue.HasValue)
-		{
-			writer.WritePropertyName("max_samples_per_key");
-			writer.WriteNumberValue(MaxSamplesPerKeyValue.Value);
-		}
-
 		writer.WritePropertyName("query");
 		writer.WriteStringValue(QueryValue);
 		if (ResultPositionValue is not null)
@@ -690,8 +630,6 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 		return Self;
 	}
 
-	private bool? AllowPartialSearchResultsValue { get; set; }
-	private bool? AllowPartialSequenceResultsValue { get; set; }
 	private bool? CaseSensitiveValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? EventCategoryFieldValue { get; set; }
 	private int? FetchSizeValue { get; set; }
@@ -705,7 +643,6 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] FilterDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.Duration? KeepAliveValue { get; set; }
 	private bool? KeepOnCompletionValue { get; set; }
-	private int? MaxSamplesPerKeyValue { get; set; }
 	private string QueryValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Eql.ResultPosition? ResultPositionValue { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> RuntimeMappingsValue { get; set; }
@@ -713,18 +650,6 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	private Elastic.Clients.Elasticsearch.Field? TiebreakerFieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? TimestampFieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeoutValue { get; set; }
-
-	public EqlSearchRequestDescriptor AllowPartialSearchResults(bool? allowPartialSearchResults = true)
-	{
-		AllowPartialSearchResultsValue = allowPartialSearchResults;
-		return Self;
-	}
-
-	public EqlSearchRequestDescriptor AllowPartialSequenceResults(bool? allowPartialSequenceResults = true)
-	{
-		AllowPartialSequenceResultsValue = allowPartialSequenceResults;
-		return Self;
-	}
 
 	public EqlSearchRequestDescriptor CaseSensitive(bool? caseSensitive = true)
 	{
@@ -872,19 +797,6 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 
 	/// <summary>
 	/// <para>
-	/// By default, the response of a sample query contains up to <c>10</c> samples, with one sample per unique set of join keys. Use the <c>size</c>
-	/// parameter to get a smaller or larger set of samples. To retrieve more than one sample per set of join keys, use the
-	/// <c>max_samples_per_key</c> parameter. Pipes are not supported for sample queries.
-	/// </para>
-	/// </summary>
-	public EqlSearchRequestDescriptor MaxSamplesPerKey(int? maxSamplesPerKey)
-	{
-		MaxSamplesPerKeyValue = maxSamplesPerKey;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
 	/// EQL query you wish to run.
 	/// </para>
 	/// </summary>
@@ -992,18 +904,6 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (AllowPartialSearchResultsValue.HasValue)
-		{
-			writer.WritePropertyName("allow_partial_search_results");
-			writer.WriteBooleanValue(AllowPartialSearchResultsValue.Value);
-		}
-
-		if (AllowPartialSequenceResultsValue.HasValue)
-		{
-			writer.WritePropertyName("allow_partial_sequence_results");
-			writer.WriteBooleanValue(AllowPartialSequenceResultsValue.Value);
-		}
-
 		if (CaseSensitiveValue.HasValue)
 		{
 			writer.WritePropertyName("case_sensitive");
@@ -1090,12 +990,6 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 		{
 			writer.WritePropertyName("keep_on_completion");
 			writer.WriteBooleanValue(KeepOnCompletionValue.Value);
-		}
-
-		if (MaxSamplesPerKeyValue.HasValue)
-		{
-			writer.WritePropertyName("max_samples_per_key");
-			writer.WriteNumberValue(MaxSamplesPerKeyValue.Value);
 		}
 
 		writer.WritePropertyName("query");

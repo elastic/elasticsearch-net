@@ -34,7 +34,8 @@ public sealed partial class PutUserRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
+	/// Valid values are <c>true</c>, <c>false</c>, and <c>wait_for</c>.
+	/// These values have the same meaning as in the index API, but the default value for this API is true.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
@@ -45,8 +46,9 @@ public sealed partial class PutUserRequestParameters : RequestParameters
 /// Create or update users.
 /// </para>
 /// <para>
+/// Add and update users in the native realm.
 /// A password is required for adding a new user but is optional when updating an existing user.
-/// To change a user’s password without updating any other fields, use the change password API.
+/// To change a user's password without updating any other fields, use the change password API.
 /// </para>
 /// </summary>
 public sealed partial class PutUserRequest : PlainRequest<PutUserRequestParameters>
@@ -65,23 +67,75 @@ public sealed partial class PutUserRequest : PlainRequest<PutUserRequestParamete
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
+	/// Valid values are <c>true</c>, <c>false</c>, and <c>wait_for</c>.
+	/// These values have the same meaning as in the index API, but the default value for this API is true.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
+
+	/// <summary>
+	/// <para>
+	/// The email of the user.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("email")]
 	public string? Email { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Specifies whether the user is enabled.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("enabled")]
 	public bool? Enabled { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The full name of the user.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("full_name")]
 	public string? FullName { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Arbitrary metadata that you want to associate with the user.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("metadata")]
 	public IDictionary<string, object>? Metadata { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The user's password.
+	/// Passwords must be at least 6 characters long.
+	/// When adding a user, one of <c>password</c> or <c>password_hash</c> is required.
+	/// When updating an existing user, the password is optional, so that other fields on the user (such as their roles) may be updated without modifying the user's password
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("password")]
 	public string? Password { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// A hash of the user's password.
+	/// This must be produced using the same hashing algorithm as has been configured for password storage.
+	/// For more details, see the explanation of the <c>xpack.security.authc.password_hashing.algorithm</c> setting in the user cache and password hash algorithm documentation.
+	/// Using this parameter allows the client to pre-hash the password for performance and/or confidentiality reasons.
+	/// The <c>password</c> parameter and the <c>password_hash</c> parameter cannot be used in the same request.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("password_hash")]
 	public string? PasswordHash { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// A set of roles the user has.
+	/// The roles determine the user's access permissions.
+	/// To create a user without any roles, specify an empty list (<c>[]</c>).
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("roles")]
 	public ICollection<string>? Roles { get; set; }
 	[JsonInclude, JsonPropertyName("username")]
@@ -93,8 +147,9 @@ public sealed partial class PutUserRequest : PlainRequest<PutUserRequestParamete
 /// Create or update users.
 /// </para>
 /// <para>
+/// Add and update users in the native realm.
 /// A password is required for adding a new user but is optional when updating an existing user.
-/// To change a user’s password without updating any other fields, use the change password API.
+/// To change a user's password without updating any other fields, use the change password API.
 /// </para>
 /// </summary>
 public sealed partial class PutUserRequestDescriptor : RequestDescriptor<PutUserRequestDescriptor, PutUserRequestParameters>
@@ -120,42 +175,86 @@ public sealed partial class PutUserRequestDescriptor : RequestDescriptor<PutUser
 	private ICollection<string>? RolesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Username? UsernameValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// The email of the user.
+	/// </para>
+	/// </summary>
 	public PutUserRequestDescriptor Email(string? email)
 	{
 		EmailValue = email;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Specifies whether the user is enabled.
+	/// </para>
+	/// </summary>
 	public PutUserRequestDescriptor Enabled(bool? enabled = true)
 	{
 		EnabledValue = enabled;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The full name of the user.
+	/// </para>
+	/// </summary>
 	public PutUserRequestDescriptor FullName(string? fullName)
 	{
 		FullNameValue = fullName;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Arbitrary metadata that you want to associate with the user.
+	/// </para>
+	/// </summary>
 	public PutUserRequestDescriptor Metadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
 		MetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The user's password.
+	/// Passwords must be at least 6 characters long.
+	/// When adding a user, one of <c>password</c> or <c>password_hash</c> is required.
+	/// When updating an existing user, the password is optional, so that other fields on the user (such as their roles) may be updated without modifying the user's password
+	/// </para>
+	/// </summary>
 	public PutUserRequestDescriptor Password(string? password)
 	{
 		PasswordValue = password;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// A hash of the user's password.
+	/// This must be produced using the same hashing algorithm as has been configured for password storage.
+	/// For more details, see the explanation of the <c>xpack.security.authc.password_hashing.algorithm</c> setting in the user cache and password hash algorithm documentation.
+	/// Using this parameter allows the client to pre-hash the password for performance and/or confidentiality reasons.
+	/// The <c>password</c> parameter and the <c>password_hash</c> parameter cannot be used in the same request.
+	/// </para>
+	/// </summary>
 	public PutUserRequestDescriptor PasswordHash(string? passwordHash)
 	{
 		PasswordHashValue = passwordHash;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// A set of roles the user has.
+	/// The roles determine the user's access permissions.
+	/// To create a user without any roles, specify an empty list (<c>[]</c>).
+	/// </para>
+	/// </summary>
 	public PutUserRequestDescriptor Roles(ICollection<string>? roles)
 	{
 		RolesValue = roles;

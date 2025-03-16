@@ -60,7 +60,41 @@ public sealed partial class CreateIndexRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Create an index.
-/// Creates a new index.
+/// You can use the create index API to add a new index to an Elasticsearch cluster.
+/// When creating an index, you can specify the following:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Settings for the index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Mappings for fields in the index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Index aliases
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// <strong>Wait for active shards</strong>
+/// </para>
+/// <para>
+/// By default, index creation will only return a response to the client when the primary copies of each shard have been started, or the request times out.
+/// The index creation response will indicate what happened.
+/// For example, <c>acknowledged</c> indicates whether the index was successfully created in the cluster, <c>while shards_acknowledged</c> indicates whether the requisite number of shard copies were started for each shard in the index before timing out.
+/// Note that it is still possible for either <c>acknowledged</c> or <c>shards_acknowledged</c> to be <c>false</c>, but for the index creation to be successful.
+/// These values simply indicate whether the operation completed before the timeout.
+/// If <c>acknowledged</c> is false, the request timed out before the cluster state was updated with the newly created index, but it probably will be created sometime soon.
+/// If <c>shards_acknowledged</c> is false, then the request timed out before the requisite number of shards were started (by default just the primaries), even if the cluster state was successfully updated to reflect the newly created index (that is to say, <c>acknowledged</c> is <c>true</c>).
+/// </para>
+/// <para>
+/// You can change the default of only waiting for the primary shards to start through the index setting <c>index.write.wait_for_active_shards</c>.
+/// Note that changing this setting will also affect the <c>wait_for_active_shards</c> value on all subsequent write operations.
 /// </para>
 /// </summary>
 public sealed partial class CreateIndexRequest : PlainRequest<CreateIndexRequestParameters>
@@ -149,7 +183,41 @@ public sealed partial class CreateIndexRequest : PlainRequest<CreateIndexRequest
 /// <summary>
 /// <para>
 /// Create an index.
-/// Creates a new index.
+/// You can use the create index API to add a new index to an Elasticsearch cluster.
+/// When creating an index, you can specify the following:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Settings for the index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Mappings for fields in the index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Index aliases
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// <strong>Wait for active shards</strong>
+/// </para>
+/// <para>
+/// By default, index creation will only return a response to the client when the primary copies of each shard have been started, or the request times out.
+/// The index creation response will indicate what happened.
+/// For example, <c>acknowledged</c> indicates whether the index was successfully created in the cluster, <c>while shards_acknowledged</c> indicates whether the requisite number of shard copies were started for each shard in the index before timing out.
+/// Note that it is still possible for either <c>acknowledged</c> or <c>shards_acknowledged</c> to be <c>false</c>, but for the index creation to be successful.
+/// These values simply indicate whether the operation completed before the timeout.
+/// If <c>acknowledged</c> is false, the request timed out before the cluster state was updated with the newly created index, but it probably will be created sometime soon.
+/// If <c>shards_acknowledged</c> is false, then the request timed out before the requisite number of shards were started (by default just the primaries), even if the cluster state was successfully updated to reflect the newly created index (that is to say, <c>acknowledged</c> is <c>true</c>).
+/// </para>
+/// <para>
+/// You can change the default of only waiting for the primary shards to start through the index setting <c>index.write.wait_for_active_shards</c>.
+/// Note that changing this setting will also affect the <c>wait_for_active_shards</c> value on all subsequent write operations.
 /// </para>
 /// </summary>
 public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDescriptor<CreateIndexRequestDescriptor<TDocument>, CreateIndexRequestParameters>
@@ -324,7 +392,41 @@ public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDes
 /// <summary>
 /// <para>
 /// Create an index.
-/// Creates a new index.
+/// You can use the create index API to add a new index to an Elasticsearch cluster.
+/// When creating an index, you can specify the following:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Settings for the index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Mappings for fields in the index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Index aliases
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// <strong>Wait for active shards</strong>
+/// </para>
+/// <para>
+/// By default, index creation will only return a response to the client when the primary copies of each shard have been started, or the request times out.
+/// The index creation response will indicate what happened.
+/// For example, <c>acknowledged</c> indicates whether the index was successfully created in the cluster, <c>while shards_acknowledged</c> indicates whether the requisite number of shard copies were started for each shard in the index before timing out.
+/// Note that it is still possible for either <c>acknowledged</c> or <c>shards_acknowledged</c> to be <c>false</c>, but for the index creation to be successful.
+/// These values simply indicate whether the operation completed before the timeout.
+/// If <c>acknowledged</c> is false, the request timed out before the cluster state was updated with the newly created index, but it probably will be created sometime soon.
+/// If <c>shards_acknowledged</c> is false, then the request timed out before the requisite number of shards were started (by default just the primaries), even if the cluster state was successfully updated to reflect the newly created index (that is to say, <c>acknowledged</c> is <c>true</c>).
+/// </para>
+/// <para>
+/// You can change the default of only waiting for the primary shards to start through the index setting <c>index.write.wait_for_active_shards</c>.
+/// Note that changing this setting will also affect the <c>wait_for_active_shards</c> value on all subsequent write operations.
 /// </para>
 /// </summary>
 public sealed partial class CreateIndexRequestDescriptor : RequestDescriptor<CreateIndexRequestDescriptor, CreateIndexRequestParameters>

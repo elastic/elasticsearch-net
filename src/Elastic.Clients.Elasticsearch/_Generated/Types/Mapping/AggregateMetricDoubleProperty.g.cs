@@ -49,6 +49,8 @@ public sealed partial class AggregateMetricDoubleProperty : IProperty
 	public ICollection<string> Metrics { get; set; }
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
+	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
+	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 	[JsonInclude, JsonPropertyName("time_series_metric")]
 	public Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetric { get; set; }
 
@@ -71,6 +73,7 @@ public sealed partial class AggregateMetricDoublePropertyDescriptor<TDocument> :
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private ICollection<string> MetricsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
 
 	public AggregateMetricDoublePropertyDescriptor<TDocument> DefaultMetric(string defaultMetric)
@@ -148,6 +151,12 @@ public sealed partial class AggregateMetricDoublePropertyDescriptor<TDocument> :
 		return Self;
 	}
 
+	public AggregateMetricDoublePropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	public AggregateMetricDoublePropertyDescriptor<TDocument> TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? timeSeriesMetric)
 	{
 		TimeSeriesMetricValue = timeSeriesMetric;
@@ -191,6 +200,12 @@ public sealed partial class AggregateMetricDoublePropertyDescriptor<TDocument> :
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		if (TimeSeriesMetricValue is not null)
 		{
 			writer.WritePropertyName("time_series_metric");
@@ -211,6 +226,7 @@ public sealed partial class AggregateMetricDoublePropertyDescriptor<TDocument> :
 		Meta = MetaValue,
 		Metrics = MetricsValue,
 		Properties = PropertiesValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue,
 		TimeSeriesMetric = TimeSeriesMetricValue
 	};
 }
@@ -230,6 +246,7 @@ public sealed partial class AggregateMetricDoublePropertyDescriptor : Serializab
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private ICollection<string> MetricsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
 
 	public AggregateMetricDoublePropertyDescriptor DefaultMetric(string defaultMetric)
@@ -307,6 +324,12 @@ public sealed partial class AggregateMetricDoublePropertyDescriptor : Serializab
 		return Self;
 	}
 
+	public AggregateMetricDoublePropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	public AggregateMetricDoublePropertyDescriptor TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? timeSeriesMetric)
 	{
 		TimeSeriesMetricValue = timeSeriesMetric;
@@ -350,6 +373,12 @@ public sealed partial class AggregateMetricDoublePropertyDescriptor : Serializab
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		if (TimeSeriesMetricValue is not null)
 		{
 			writer.WritePropertyName("time_series_metric");
@@ -370,6 +399,7 @@ public sealed partial class AggregateMetricDoublePropertyDescriptor : Serializab
 		Meta = MetaValue,
 		Metrics = MetricsValue,
 		Properties = PropertiesValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue,
 		TimeSeriesMetric = TimeSeriesMetricValue
 	};
 }

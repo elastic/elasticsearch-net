@@ -28,10 +28,29 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public sealed partial class EvaluateDataFrameResponse : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>
+	/// Evaluation results for a classification analysis.
+	/// It outputs a prediction that identifies to which of the classes each document belongs.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("classification")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummary? Classification { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// Evaluation results for an outlier detection analysis.
+	/// It outputs the probability that each document is an outlier.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("outlier_detection")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeOutlierDetectionSummary? OutlierDetection { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// Evaluation results for a regression analysis which outputs a prediction of values.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("regression")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeRegressionSummary? Regression { get; init; }
 }

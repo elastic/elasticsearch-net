@@ -64,6 +64,8 @@ public sealed partial class IpProperty : IProperty
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
+	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
+	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -101,6 +103,7 @@ public sealed partial class IpPropertyDescriptor<TDocument> : SerializableDescri
 	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private bool? StoreValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 	private bool? TimeSeriesDimensionValue { get; set; }
 
 	public IpPropertyDescriptor<TDocument> Boost(double? boost)
@@ -238,6 +241,12 @@ public sealed partial class IpPropertyDescriptor<TDocument> : SerializableDescri
 		return Self;
 	}
 
+	public IpPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>
 	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
@@ -346,6 +355,12 @@ public sealed partial class IpPropertyDescriptor<TDocument> : SerializableDescri
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		if (TimeSeriesDimensionValue.HasValue)
 		{
 			writer.WritePropertyName("time_series_dimension");
@@ -397,6 +412,7 @@ public sealed partial class IpPropertyDescriptor<TDocument> : SerializableDescri
 		Properties = PropertiesValue,
 		Script = BuildScript(),
 		Store = StoreValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue,
 		TimeSeriesDimension = TimeSeriesDimensionValue
 	};
 }
@@ -425,6 +441,7 @@ public sealed partial class IpPropertyDescriptor : SerializableDescriptor<IpProp
 	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private bool? StoreValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 	private bool? TimeSeriesDimensionValue { get; set; }
 
 	public IpPropertyDescriptor Boost(double? boost)
@@ -562,6 +579,12 @@ public sealed partial class IpPropertyDescriptor : SerializableDescriptor<IpProp
 		return Self;
 	}
 
+	public IpPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>
 	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
@@ -670,6 +693,12 @@ public sealed partial class IpPropertyDescriptor : SerializableDescriptor<IpProp
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		if (TimeSeriesDimensionValue.HasValue)
 		{
 			writer.WritePropertyName("time_series_dimension");
@@ -721,6 +750,7 @@ public sealed partial class IpPropertyDescriptor : SerializableDescriptor<IpProp
 		Properties = PropertiesValue,
 		Script = BuildScript(),
 		Store = StoreValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue,
 		TimeSeriesDimension = TimeSeriesDimensionValue
 	};
 }

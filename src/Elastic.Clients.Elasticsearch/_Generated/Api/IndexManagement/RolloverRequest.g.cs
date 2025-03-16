@@ -67,7 +67,55 @@ public sealed partial class RolloverRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Roll over to a new index.
-/// Creates a new index for a data stream or index alias.
+/// TIP: It is recommended to use the index lifecycle rollover action to automate rollovers.
+/// </para>
+/// <para>
+/// The rollover API creates a new index for a data stream or index alias.
+/// The API behavior depends on the rollover target.
+/// </para>
+/// <para>
+/// <strong>Roll over a data stream</strong>
+/// </para>
+/// <para>
+/// If you roll over a data stream, the API creates a new write index for the stream.
+/// The stream's previous write index becomes a regular backing index.
+/// A rollover also increments the data stream's generation.
+/// </para>
+/// <para>
+/// <strong>Roll over an index alias with a write index</strong>
+/// </para>
+/// <para>
+/// TIP: Prior to Elasticsearch 7.9, you'd typically use an index alias with a write index to manage time series data.
+/// Data streams replace this functionality, require less maintenance, and automatically integrate with data tiers.
+/// </para>
+/// <para>
+/// If an index alias points to multiple indices, one of the indices must be a write index.
+/// The rollover API creates a new write index for the alias with <c>is_write_index</c> set to <c>true</c>.
+/// The API also <c>sets is_write_index</c> to <c>false</c> for the previous write index.
+/// </para>
+/// <para>
+/// <strong>Roll over an index alias with one index</strong>
+/// </para>
+/// <para>
+/// If you roll over an index alias that points to only one index, the API creates a new index for the alias and removes the original index from the alias.
+/// </para>
+/// <para>
+/// NOTE: A rollover creates a new index and is subject to the <c>wait_for_active_shards</c> setting.
+/// </para>
+/// <para>
+/// <strong>Increment index names for an alias</strong>
+/// </para>
+/// <para>
+/// When you roll over an index alias, you can specify a name for the new index.
+/// If you don't specify a name and the current index ends with <c>-</c> and a number, such as <c>my-index-000001</c> or <c>my-index-3</c>, the new index name increments that number.
+/// For example, if you roll over an alias with a current index of <c>my-index-000001</c>, the rollover creates a new index named <c>my-index-000002</c>.
+/// This number is always six characters and zero-padded, regardless of the previous index's name.
+/// </para>
+/// <para>
+/// If you use an index alias for time series data, you can use date math in the index name to track the rollover date.
+/// For example, you can create an alias that points to an index named <c>&lt;my-index-{now/d}-000001></c>.
+/// If you create the index on May 6, 2099, the index's name is <c>my-index-2099.05.06-000001</c>.
+/// If you roll over the alias on May 7, 2099, the new index's name is <c>my-index-2099.05.07-000002</c>.
 /// </para>
 /// </summary>
 public sealed partial class RolloverRequest : PlainRequest<RolloverRequestParameters>
@@ -166,7 +214,55 @@ public sealed partial class RolloverRequest : PlainRequest<RolloverRequestParame
 /// <summary>
 /// <para>
 /// Roll over to a new index.
-/// Creates a new index for a data stream or index alias.
+/// TIP: It is recommended to use the index lifecycle rollover action to automate rollovers.
+/// </para>
+/// <para>
+/// The rollover API creates a new index for a data stream or index alias.
+/// The API behavior depends on the rollover target.
+/// </para>
+/// <para>
+/// <strong>Roll over a data stream</strong>
+/// </para>
+/// <para>
+/// If you roll over a data stream, the API creates a new write index for the stream.
+/// The stream's previous write index becomes a regular backing index.
+/// A rollover also increments the data stream's generation.
+/// </para>
+/// <para>
+/// <strong>Roll over an index alias with a write index</strong>
+/// </para>
+/// <para>
+/// TIP: Prior to Elasticsearch 7.9, you'd typically use an index alias with a write index to manage time series data.
+/// Data streams replace this functionality, require less maintenance, and automatically integrate with data tiers.
+/// </para>
+/// <para>
+/// If an index alias points to multiple indices, one of the indices must be a write index.
+/// The rollover API creates a new write index for the alias with <c>is_write_index</c> set to <c>true</c>.
+/// The API also <c>sets is_write_index</c> to <c>false</c> for the previous write index.
+/// </para>
+/// <para>
+/// <strong>Roll over an index alias with one index</strong>
+/// </para>
+/// <para>
+/// If you roll over an index alias that points to only one index, the API creates a new index for the alias and removes the original index from the alias.
+/// </para>
+/// <para>
+/// NOTE: A rollover creates a new index and is subject to the <c>wait_for_active_shards</c> setting.
+/// </para>
+/// <para>
+/// <strong>Increment index names for an alias</strong>
+/// </para>
+/// <para>
+/// When you roll over an index alias, you can specify a name for the new index.
+/// If you don't specify a name and the current index ends with <c>-</c> and a number, such as <c>my-index-000001</c> or <c>my-index-3</c>, the new index name increments that number.
+/// For example, if you roll over an alias with a current index of <c>my-index-000001</c>, the rollover creates a new index named <c>my-index-000002</c>.
+/// This number is always six characters and zero-padded, regardless of the previous index's name.
+/// </para>
+/// <para>
+/// If you use an index alias for time series data, you can use date math in the index name to track the rollover date.
+/// For example, you can create an alias that points to an index named <c>&lt;my-index-{now/d}-000001></c>.
+/// If you create the index on May 6, 2099, the index's name is <c>my-index-2099.05.06-000001</c>.
+/// If you roll over the alias on May 7, 2099, the new index's name is <c>my-index-2099.05.07-000002</c>.
 /// </para>
 /// </summary>
 public sealed partial class RolloverRequestDescriptor<TDocument> : RequestDescriptor<RolloverRequestDescriptor<TDocument>, RolloverRequestParameters>
@@ -356,7 +452,55 @@ public sealed partial class RolloverRequestDescriptor<TDocument> : RequestDescri
 /// <summary>
 /// <para>
 /// Roll over to a new index.
-/// Creates a new index for a data stream or index alias.
+/// TIP: It is recommended to use the index lifecycle rollover action to automate rollovers.
+/// </para>
+/// <para>
+/// The rollover API creates a new index for a data stream or index alias.
+/// The API behavior depends on the rollover target.
+/// </para>
+/// <para>
+/// <strong>Roll over a data stream</strong>
+/// </para>
+/// <para>
+/// If you roll over a data stream, the API creates a new write index for the stream.
+/// The stream's previous write index becomes a regular backing index.
+/// A rollover also increments the data stream's generation.
+/// </para>
+/// <para>
+/// <strong>Roll over an index alias with a write index</strong>
+/// </para>
+/// <para>
+/// TIP: Prior to Elasticsearch 7.9, you'd typically use an index alias with a write index to manage time series data.
+/// Data streams replace this functionality, require less maintenance, and automatically integrate with data tiers.
+/// </para>
+/// <para>
+/// If an index alias points to multiple indices, one of the indices must be a write index.
+/// The rollover API creates a new write index for the alias with <c>is_write_index</c> set to <c>true</c>.
+/// The API also <c>sets is_write_index</c> to <c>false</c> for the previous write index.
+/// </para>
+/// <para>
+/// <strong>Roll over an index alias with one index</strong>
+/// </para>
+/// <para>
+/// If you roll over an index alias that points to only one index, the API creates a new index for the alias and removes the original index from the alias.
+/// </para>
+/// <para>
+/// NOTE: A rollover creates a new index and is subject to the <c>wait_for_active_shards</c> setting.
+/// </para>
+/// <para>
+/// <strong>Increment index names for an alias</strong>
+/// </para>
+/// <para>
+/// When you roll over an index alias, you can specify a name for the new index.
+/// If you don't specify a name and the current index ends with <c>-</c> and a number, such as <c>my-index-000001</c> or <c>my-index-3</c>, the new index name increments that number.
+/// For example, if you roll over an alias with a current index of <c>my-index-000001</c>, the rollover creates a new index named <c>my-index-000002</c>.
+/// This number is always six characters and zero-padded, regardless of the previous index's name.
+/// </para>
+/// <para>
+/// If you use an index alias for time series data, you can use date math in the index name to track the rollover date.
+/// For example, you can create an alias that points to an index named <c>&lt;my-index-{now/d}-000001></c>.
+/// If you create the index on May 6, 2099, the index's name is <c>my-index-2099.05.06-000001</c>.
+/// If you roll over the alias on May 7, 2099, the new index's name is <c>my-index-2099.05.07-000002</c>.
 /// </para>
 /// </summary>
 public sealed partial class RolloverRequestDescriptor : RequestDescriptor<RolloverRequestDescriptor, RolloverRequestParameters>

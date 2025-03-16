@@ -36,6 +36,10 @@ public sealed partial class GetUserPrivilegesResponse : ElasticsearchResponse
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege> Global { get; init; }
 	[JsonInclude, JsonPropertyName("indices")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserIndicesPrivileges> Indices { get; init; }
+	[JsonInclude, JsonPropertyName("remote_cluster")]
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? RemoteCluster { get; init; }
+	[JsonInclude, JsonPropertyName("remote_indices")]
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteUserIndicesPrivileges>? RemoteIndices { get; init; }
 	[JsonInclude, JsonPropertyName("run_as")]
 	public IReadOnlyCollection<string> RunAs { get; init; }
 }

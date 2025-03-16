@@ -32,7 +32,18 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
 public sealed partial class StartIlmRequestParameters : RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// Explicit operation timeout for connection to master node
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
+	/// Explicit operation timeout
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
@@ -54,8 +65,19 @@ public sealed partial class StartIlmRequest : PlainRequest<StartIlmRequestParame
 
 	internal override string OperationName => "ilm.start";
 
+	/// <summary>
+	/// <para>
+	/// Explicit operation timeout for connection to master node
+	/// </para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
+	/// Explicit operation timeout
+	/// </para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }

@@ -36,7 +36,7 @@ public sealed partial class FieldAndFormat
 {
 	/// <summary>
 	/// <para>
-	/// Wildcard pattern. The request returns values for field names matching this pattern.
+	/// A wildcard pattern. The request returns values for field names matching this pattern.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
@@ -44,7 +44,7 @@ public sealed partial class FieldAndFormat
 
 	/// <summary>
 	/// <para>
-	/// Format in which the values are returned.
+	/// The format in which the values are returned.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("format")]
@@ -72,7 +72,7 @@ public sealed partial class FieldAndFormatDescriptor<TDocument> : SerializableDe
 
 	/// <summary>
 	/// <para>
-	/// Wildcard pattern. The request returns values for field names matching this pattern.
+	/// A wildcard pattern. The request returns values for field names matching this pattern.
 	/// </para>
 	/// </summary>
 	public FieldAndFormatDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
@@ -83,7 +83,7 @@ public sealed partial class FieldAndFormatDescriptor<TDocument> : SerializableDe
 
 	/// <summary>
 	/// <para>
-	/// Wildcard pattern. The request returns values for field names matching this pattern.
+	/// A wildcard pattern. The request returns values for field names matching this pattern.
 	/// </para>
 	/// </summary>
 	public FieldAndFormatDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
@@ -94,7 +94,7 @@ public sealed partial class FieldAndFormatDescriptor<TDocument> : SerializableDe
 
 	/// <summary>
 	/// <para>
-	/// Wildcard pattern. The request returns values for field names matching this pattern.
+	/// A wildcard pattern. The request returns values for field names matching this pattern.
 	/// </para>
 	/// </summary>
 	public FieldAndFormatDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
@@ -105,7 +105,7 @@ public sealed partial class FieldAndFormatDescriptor<TDocument> : SerializableDe
 
 	/// <summary>
 	/// <para>
-	/// Format in which the values are returned.
+	/// The format in which the values are returned.
 	/// </para>
 	/// </summary>
 	public FieldAndFormatDescriptor<TDocument> Format(string? format)
@@ -160,7 +160,7 @@ public sealed partial class FieldAndFormatDescriptor : SerializableDescriptor<Fi
 
 	/// <summary>
 	/// <para>
-	/// Wildcard pattern. The request returns values for field names matching this pattern.
+	/// A wildcard pattern. The request returns values for field names matching this pattern.
 	/// </para>
 	/// </summary>
 	public FieldAndFormatDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
@@ -171,7 +171,7 @@ public sealed partial class FieldAndFormatDescriptor : SerializableDescriptor<Fi
 
 	/// <summary>
 	/// <para>
-	/// Wildcard pattern. The request returns values for field names matching this pattern.
+	/// A wildcard pattern. The request returns values for field names matching this pattern.
 	/// </para>
 	/// </summary>
 	public FieldAndFormatDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
@@ -182,7 +182,7 @@ public sealed partial class FieldAndFormatDescriptor : SerializableDescriptor<Fi
 
 	/// <summary>
 	/// <para>
-	/// Wildcard pattern. The request returns values for field names matching this pattern.
+	/// A wildcard pattern. The request returns values for field names matching this pattern.
 	/// </para>
 	/// </summary>
 	public FieldAndFormatDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
@@ -193,7 +193,7 @@ public sealed partial class FieldAndFormatDescriptor : SerializableDescriptor<Fi
 
 	/// <summary>
 	/// <para>
-	/// Format in which the values are returned.
+	/// The format in which the values are returned.
 	/// </para>
 	/// </summary>
 	public FieldAndFormatDescriptor Format(string? format)

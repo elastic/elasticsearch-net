@@ -28,12 +28,36 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public sealed partial class InvalidateApiKeyResponse : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>
+	/// The number of errors that were encountered when invalidating the API keys.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("error_count")]
 	public int ErrorCount { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// Details about the errors.
+	/// This field is not present in the response when <c>error_count</c> is <c>0</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("error_details")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? ErrorDetails { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The IDs of the API keys that were invalidated as part of this request.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("invalidated_api_keys")]
 	public IReadOnlyCollection<string> InvalidatedApiKeys { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The IDs of the API keys that were already invalidated.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("previously_invalidated_api_keys")]
 	public IReadOnlyCollection<string> PreviouslyInvalidatedApiKeys { get; init; }
 }

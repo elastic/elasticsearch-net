@@ -30,16 +30,323 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 public sealed partial class ComponentTemplateSummary
 {
 	[JsonInclude, JsonPropertyName("aliases")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>? Aliases { get; init; }
+	public IDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>? Aliases { get; set; }
 	[JsonInclude, JsonPropertyName("lifecycle")]
-	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover? Lifecycle { get; init; }
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover? Lifecycle { get; set; }
 	[JsonInclude, JsonPropertyName("mappings")]
-	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; init; }
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
 	[JsonInclude, JsonPropertyName("_meta")]
-	public IReadOnlyDictionary<string, object>? Meta { get; init; }
+	public IDictionary<string, object>? Meta { get; set; }
 	[JsonInclude, JsonPropertyName("settings")]
-	[ReadOnlyIndexNameDictionaryConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings))]
-	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings>? Settings { get; init; }
+	public IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings>? Settings { get; set; }
 	[JsonInclude, JsonPropertyName("version")]
-	public long? Version { get; init; }
+	public long? Version { get; set; }
+}
+
+public sealed partial class ComponentTemplateSummaryDescriptor<TDocument> : SerializableDescriptor<ComponentTemplateSummaryDescriptor<TDocument>>
+{
+	internal ComponentTemplateSummaryDescriptor(Action<ComponentTemplateSummaryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
+	public ComponentTemplateSummaryDescriptor() : base()
+	{
+	}
+
+	private IDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptor<TDocument>> AliasesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover? LifecycleValue { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor LifecycleDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor> LifecycleDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> MappingsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>> MappingsDescriptorAction { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>> SettingsValue { get; set; }
+	private long? VersionValue { get; set; }
+
+	public ComponentTemplateSummaryDescriptor<TDocument> Aliases(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptor<TDocument>>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptor<TDocument>>> selector)
+	{
+		AliasesValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptor<TDocument>>());
+		return Self;
+	}
+
+	public ComponentTemplateSummaryDescriptor<TDocument> Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover? lifecycle)
+	{
+		LifecycleDescriptor = null;
+		LifecycleDescriptorAction = null;
+		LifecycleValue = lifecycle;
+		return Self;
+	}
+
+	public ComponentTemplateSummaryDescriptor<TDocument> Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor descriptor)
+	{
+		LifecycleValue = null;
+		LifecycleDescriptorAction = null;
+		LifecycleDescriptor = descriptor;
+		return Self;
+	}
+
+	public ComponentTemplateSummaryDescriptor<TDocument> Lifecycle(Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor> configure)
+	{
+		LifecycleValue = null;
+		LifecycleDescriptor = null;
+		LifecycleDescriptorAction = configure;
+		return Self;
+	}
+
+	public ComponentTemplateSummaryDescriptor<TDocument> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
+	{
+		MappingsDescriptor = null;
+		MappingsDescriptorAction = null;
+		MappingsValue = mappings;
+		return Self;
+	}
+
+	public ComponentTemplateSummaryDescriptor<TDocument> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> descriptor)
+	{
+		MappingsValue = null;
+		MappingsDescriptorAction = null;
+		MappingsDescriptor = descriptor;
+		return Self;
+	}
+
+	public ComponentTemplateSummaryDescriptor<TDocument> Mappings(Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>> configure)
+	{
+		MappingsValue = null;
+		MappingsDescriptor = null;
+		MappingsDescriptorAction = configure;
+		return Self;
+	}
+
+	public ComponentTemplateSummaryDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public ComponentTemplateSummaryDescriptor<TDocument> Settings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>>> selector)
+	{
+		SettingsValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>>());
+		return Self;
+	}
+
+	public ComponentTemplateSummaryDescriptor<TDocument> Version(long? version)
+	{
+		VersionValue = version;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (AliasesValue is not null)
+		{
+			writer.WritePropertyName("aliases");
+			JsonSerializer.Serialize(writer, AliasesValue, options);
+		}
+
+		if (LifecycleDescriptor is not null)
+		{
+			writer.WritePropertyName("lifecycle");
+			JsonSerializer.Serialize(writer, LifecycleDescriptor, options);
+		}
+		else if (LifecycleDescriptorAction is not null)
+		{
+			writer.WritePropertyName("lifecycle");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor(LifecycleDescriptorAction), options);
+		}
+		else if (LifecycleValue is not null)
+		{
+			writer.WritePropertyName("lifecycle");
+			JsonSerializer.Serialize(writer, LifecycleValue, options);
+		}
+
+		if (MappingsDescriptor is not null)
+		{
+			writer.WritePropertyName("mappings");
+			JsonSerializer.Serialize(writer, MappingsDescriptor, options);
+		}
+		else if (MappingsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("mappings");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>(MappingsDescriptorAction), options);
+		}
+		else if (MappingsValue is not null)
+		{
+			writer.WritePropertyName("mappings");
+			JsonSerializer.Serialize(writer, MappingsValue, options);
+		}
+
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("_meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
+		if (SettingsValue is not null)
+		{
+			writer.WritePropertyName("settings");
+			JsonSerializer.Serialize(writer, SettingsValue, options);
+		}
+
+		if (VersionValue.HasValue)
+		{
+			writer.WritePropertyName("version");
+			writer.WriteNumberValue(VersionValue.Value);
+		}
+
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class ComponentTemplateSummaryDescriptor : SerializableDescriptor<ComponentTemplateSummaryDescriptor>
+{
+	internal ComponentTemplateSummaryDescriptor(Action<ComponentTemplateSummaryDescriptor> configure) => configure.Invoke(this);
+
+	public ComponentTemplateSummaryDescriptor() : base()
+	{
+	}
+
+	private IDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptor> AliasesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover? LifecycleValue { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor LifecycleDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor> LifecycleDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor MappingsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor> MappingsDescriptorAction { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor> SettingsValue { get; set; }
+	private long? VersionValue { get; set; }
+
+	public ComponentTemplateSummaryDescriptor Aliases(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptor>> selector)
+	{
+		AliasesValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptor>());
+		return Self;
+	}
+
+	public ComponentTemplateSummaryDescriptor Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover? lifecycle)
+	{
+		LifecycleDescriptor = null;
+		LifecycleDescriptorAction = null;
+		LifecycleValue = lifecycle;
+		return Self;
+	}
+
+	public ComponentTemplateSummaryDescriptor Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor descriptor)
+	{
+		LifecycleValue = null;
+		LifecycleDescriptorAction = null;
+		LifecycleDescriptor = descriptor;
+		return Self;
+	}
+
+	public ComponentTemplateSummaryDescriptor Lifecycle(Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor> configure)
+	{
+		LifecycleValue = null;
+		LifecycleDescriptor = null;
+		LifecycleDescriptorAction = configure;
+		return Self;
+	}
+
+	public ComponentTemplateSummaryDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
+	{
+		MappingsDescriptor = null;
+		MappingsDescriptorAction = null;
+		MappingsValue = mappings;
+		return Self;
+	}
+
+	public ComponentTemplateSummaryDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor descriptor)
+	{
+		MappingsValue = null;
+		MappingsDescriptorAction = null;
+		MappingsDescriptor = descriptor;
+		return Self;
+	}
+
+	public ComponentTemplateSummaryDescriptor Mappings(Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor> configure)
+	{
+		MappingsValue = null;
+		MappingsDescriptor = null;
+		MappingsDescriptorAction = configure;
+		return Self;
+	}
+
+	public ComponentTemplateSummaryDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public ComponentTemplateSummaryDescriptor Settings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor>> selector)
+	{
+		SettingsValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor>());
+		return Self;
+	}
+
+	public ComponentTemplateSummaryDescriptor Version(long? version)
+	{
+		VersionValue = version;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (AliasesValue is not null)
+		{
+			writer.WritePropertyName("aliases");
+			JsonSerializer.Serialize(writer, AliasesValue, options);
+		}
+
+		if (LifecycleDescriptor is not null)
+		{
+			writer.WritePropertyName("lifecycle");
+			JsonSerializer.Serialize(writer, LifecycleDescriptor, options);
+		}
+		else if (LifecycleDescriptorAction is not null)
+		{
+			writer.WritePropertyName("lifecycle");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor(LifecycleDescriptorAction), options);
+		}
+		else if (LifecycleValue is not null)
+		{
+			writer.WritePropertyName("lifecycle");
+			JsonSerializer.Serialize(writer, LifecycleValue, options);
+		}
+
+		if (MappingsDescriptor is not null)
+		{
+			writer.WritePropertyName("mappings");
+			JsonSerializer.Serialize(writer, MappingsDescriptor, options);
+		}
+		else if (MappingsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("mappings");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor(MappingsDescriptorAction), options);
+		}
+		else if (MappingsValue is not null)
+		{
+			writer.WritePropertyName("mappings");
+			JsonSerializer.Serialize(writer, MappingsValue, options);
+		}
+
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("_meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
+		if (SettingsValue is not null)
+		{
+			writer.WritePropertyName("settings");
+			JsonSerializer.Serialize(writer, SettingsValue, options);
+		}
+
+		if (VersionValue.HasValue)
+		{
+			writer.WritePropertyName("version");
+			writer.WriteNumberValue(VersionValue.Value);
+		}
+
+		writer.WriteEndObject();
+	}
 }

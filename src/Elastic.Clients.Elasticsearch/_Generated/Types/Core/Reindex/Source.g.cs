@@ -32,7 +32,7 @@ public sealed partial class Source
 	/// <summary>
 	/// <para>
 	/// The name of the data stream, index, or alias you are copying from.
-	/// Accepts a comma-separated list to reindex from multiple sources.
+	/// It accepts a comma-separated list to reindex from multiple sources.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("index")]
@@ -40,7 +40,7 @@ public sealed partial class Source
 
 	/// <summary>
 	/// <para>
-	/// Specifies the documents to reindex using the Query DSL.
+	/// The documents to reindex, which is defined with Query DSL.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
@@ -59,7 +59,7 @@ public sealed partial class Source
 	/// <summary>
 	/// <para>
 	/// The number of documents to index per batch.
-	/// Use when indexing from remote to ensure that the batches fit within the on-heap buffer, which defaults to a maximum size of 100 MB.
+	/// Use it when you are indexing from remote to ensure that the batches fit within the on-heap buffer, which defaults to a maximum size of 100 MB.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
@@ -72,14 +72,11 @@ public sealed partial class Source
 	/// </summary>
 	[JsonInclude, JsonPropertyName("slice")]
 	public Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
-	[JsonInclude, JsonPropertyName("sort")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.SortOptions))]
-	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c> reindexes all source fields.
-	/// Set to a list to reindex select fields.
+	/// If <c>true</c>, reindex all source fields.
+	/// Set it to a list to reindex select fields.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_source")]
@@ -107,16 +104,12 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 	private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
 	private Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument> SliceDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument>> SliceDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument> SortDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>> SortDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] SortDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.Fields? SourceFieldsValue { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The name of the data stream, index, or alias you are copying from.
-	/// Accepts a comma-separated list to reindex from multiple sources.
+	/// It accepts a comma-separated list to reindex from multiple sources.
 	/// </para>
 	/// </summary>
 	public SourceDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices indices)
@@ -127,7 +120,7 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Specifies the documents to reindex using the Query DSL.
+	/// The documents to reindex, which is defined with Query DSL.
 	/// </para>
 	/// </summary>
 	public SourceDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
@@ -192,7 +185,7 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 	/// <summary>
 	/// <para>
 	/// The number of documents to index per batch.
-	/// Use when indexing from remote to ensure that the batches fit within the on-heap buffer, which defaults to a maximum size of 100 MB.
+	/// Use it when you are indexing from remote to ensure that the batches fit within the on-heap buffer, which defaults to a maximum size of 100 MB.
 	/// </para>
 	/// </summary>
 	public SourceDescriptor<TDocument> Size(int? size)
@@ -230,46 +223,10 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 		return Self;
 	}
 
-	public SourceDescriptor<TDocument> Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
-	{
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortValue = sort;
-		return Self;
-	}
-
-	public SourceDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument> descriptor)
-	{
-		SortValue = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortDescriptor = descriptor;
-		return Self;
-	}
-
-	public SourceDescriptor<TDocument> Sort(Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>> configure)
-	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorActions = null;
-		SortDescriptorAction = configure;
-		return Self;
-	}
-
-	public SourceDescriptor<TDocument> Sort(params Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] configure)
-	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = configure;
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>
-	/// If <c>true</c> reindexes all source fields.
-	/// Set to a list to reindex select fields.
+	/// If <c>true</c>, reindex all source fields.
+	/// Set it to a list to reindex select fields.
 	/// </para>
 	/// </summary>
 	public SourceDescriptor<TDocument> SourceFields(Elastic.Clients.Elasticsearch.Fields? sourceFields)
@@ -343,35 +300,6 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 			JsonSerializer.Serialize(writer, SliceValue, options);
 		}
 
-		if (SortDescriptor is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, SortDescriptor, options);
-		}
-		else if (SortDescriptorAction is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>(SortDescriptorAction), options);
-		}
-		else if (SortDescriptorActions is not null)
-		{
-			writer.WritePropertyName("sort");
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in SortDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>(action), options);
-			}
-
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
-		}
-
 		if (SourceFieldsValue is not null)
 		{
 			writer.WritePropertyName("_source");
@@ -402,16 +330,12 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 	private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
 	private Elastic.Clients.Elasticsearch.SlicedScrollDescriptor SliceDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor> SliceDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SortOptionsDescriptor SortDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor> SortDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] SortDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.Fields? SourceFieldsValue { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The name of the data stream, index, or alias you are copying from.
-	/// Accepts a comma-separated list to reindex from multiple sources.
+	/// It accepts a comma-separated list to reindex from multiple sources.
 	/// </para>
 	/// </summary>
 	public SourceDescriptor Indices(Elastic.Clients.Elasticsearch.Indices indices)
@@ -422,7 +346,7 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 
 	/// <summary>
 	/// <para>
-	/// Specifies the documents to reindex using the Query DSL.
+	/// The documents to reindex, which is defined with Query DSL.
 	/// </para>
 	/// </summary>
 	public SourceDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
@@ -487,7 +411,7 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 	/// <summary>
 	/// <para>
 	/// The number of documents to index per batch.
-	/// Use when indexing from remote to ensure that the batches fit within the on-heap buffer, which defaults to a maximum size of 100 MB.
+	/// Use it when you are indexing from remote to ensure that the batches fit within the on-heap buffer, which defaults to a maximum size of 100 MB.
 	/// </para>
 	/// </summary>
 	public SourceDescriptor Size(int? size)
@@ -525,46 +449,10 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 		return Self;
 	}
 
-	public SourceDescriptor Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
-	{
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortValue = sort;
-		return Self;
-	}
-
-	public SourceDescriptor Sort(Elastic.Clients.Elasticsearch.SortOptionsDescriptor descriptor)
-	{
-		SortValue = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortDescriptor = descriptor;
-		return Self;
-	}
-
-	public SourceDescriptor Sort(Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor> configure)
-	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorActions = null;
-		SortDescriptorAction = configure;
-		return Self;
-	}
-
-	public SourceDescriptor Sort(params Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] configure)
-	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = configure;
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>
-	/// If <c>true</c> reindexes all source fields.
-	/// Set to a list to reindex select fields.
+	/// If <c>true</c>, reindex all source fields.
+	/// Set it to a list to reindex select fields.
 	/// </para>
 	/// </summary>
 	public SourceDescriptor SourceFields(Elastic.Clients.Elasticsearch.Fields? sourceFields)
@@ -636,35 +524,6 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 		{
 			writer.WritePropertyName("slice");
 			JsonSerializer.Serialize(writer, SliceValue, options);
-		}
-
-		if (SortDescriptor is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, SortDescriptor, options);
-		}
-		else if (SortDescriptorAction is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor(SortDescriptorAction), options);
-		}
-		else if (SortDescriptorActions is not null)
-		{
-			writer.WritePropertyName("sort");
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in SortDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor(action), options);
-			}
-
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
 		}
 
 		if (SourceFieldsValue is not null)

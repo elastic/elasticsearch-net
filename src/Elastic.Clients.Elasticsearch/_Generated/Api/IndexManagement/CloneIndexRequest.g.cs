@@ -99,6 +99,11 @@ public sealed partial class CloneIndexRequestParameters : RequestParameters
 /// <list type="bullet">
 /// <item>
 /// <para>
+/// The index must be marked as read-only and have a cluster health status of green.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
 /// The target index must not exist.
 /// </para>
 /// </item>
@@ -113,6 +118,35 @@ public sealed partial class CloneIndexRequestParameters : RequestParameters
 /// </para>
 /// </item>
 /// </list>
+/// <para>
+/// The current write index on a data stream cannot be cloned.
+/// In order to clone the current write index, the data stream must first be rolled over so that a new write index is created and then the previous write index can be cloned.
+/// </para>
+/// <para>
+/// NOTE: Mappings cannot be specified in the <c>_clone</c> request. The mappings of the source index will be used for the target index.
+/// </para>
+/// <para>
+/// <strong>Monitor the cloning process</strong>
+/// </para>
+/// <para>
+/// The cloning process can be monitored with the cat recovery API or the cluster health API can be used to wait until all primary shards have been allocated by setting the <c>wait_for_status</c> parameter to <c>yellow</c>.
+/// </para>
+/// <para>
+/// The <c>_clone</c> API returns as soon as the target index has been added to the cluster state, before any shards have been allocated.
+/// At this point, all shards are in the state unassigned.
+/// If, for any reason, the target index can't be allocated, its primary shard will remain unassigned until it can be allocated on that node.
+/// </para>
+/// <para>
+/// Once the primary shard is allocated, it moves to state initializing, and the clone process begins.
+/// When the clone operation completes, the shard will become active.
+/// At that point, Elasticsearch will try to allocate any replicas and may decide to relocate the primary shard to another node.
+/// </para>
+/// <para>
+/// <strong>Wait for active shards</strong>
+/// </para>
+/// <para>
+/// Because the clone operation creates a new index to clone the shards to, the wait for active shards setting on index creation applies to the clone index action as well.
+/// </para>
 /// </summary>
 public sealed partial class CloneIndexRequest : PlainRequest<CloneIndexRequestParameters>
 {
@@ -214,6 +248,11 @@ public sealed partial class CloneIndexRequest : PlainRequest<CloneIndexRequestPa
 /// <list type="bullet">
 /// <item>
 /// <para>
+/// The index must be marked as read-only and have a cluster health status of green.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
 /// The target index must not exist.
 /// </para>
 /// </item>
@@ -228,6 +267,35 @@ public sealed partial class CloneIndexRequest : PlainRequest<CloneIndexRequestPa
 /// </para>
 /// </item>
 /// </list>
+/// <para>
+/// The current write index on a data stream cannot be cloned.
+/// In order to clone the current write index, the data stream must first be rolled over so that a new write index is created and then the previous write index can be cloned.
+/// </para>
+/// <para>
+/// NOTE: Mappings cannot be specified in the <c>_clone</c> request. The mappings of the source index will be used for the target index.
+/// </para>
+/// <para>
+/// <strong>Monitor the cloning process</strong>
+/// </para>
+/// <para>
+/// The cloning process can be monitored with the cat recovery API or the cluster health API can be used to wait until all primary shards have been allocated by setting the <c>wait_for_status</c> parameter to <c>yellow</c>.
+/// </para>
+/// <para>
+/// The <c>_clone</c> API returns as soon as the target index has been added to the cluster state, before any shards have been allocated.
+/// At this point, all shards are in the state unassigned.
+/// If, for any reason, the target index can't be allocated, its primary shard will remain unassigned until it can be allocated on that node.
+/// </para>
+/// <para>
+/// Once the primary shard is allocated, it moves to state initializing, and the clone process begins.
+/// When the clone operation completes, the shard will become active.
+/// At that point, Elasticsearch will try to allocate any replicas and may decide to relocate the primary shard to another node.
+/// </para>
+/// <para>
+/// <strong>Wait for active shards</strong>
+/// </para>
+/// <para>
+/// Because the clone operation creates a new index to clone the shards to, the wait for active shards setting on index creation applies to the clone index action as well.
+/// </para>
 /// </summary>
 public sealed partial class CloneIndexRequestDescriptor<TDocument> : RequestDescriptor<CloneIndexRequestDescriptor<TDocument>, CloneIndexRequestParameters>
 {
@@ -351,6 +419,11 @@ public sealed partial class CloneIndexRequestDescriptor<TDocument> : RequestDesc
 /// <list type="bullet">
 /// <item>
 /// <para>
+/// The index must be marked as read-only and have a cluster health status of green.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
 /// The target index must not exist.
 /// </para>
 /// </item>
@@ -365,6 +438,35 @@ public sealed partial class CloneIndexRequestDescriptor<TDocument> : RequestDesc
 /// </para>
 /// </item>
 /// </list>
+/// <para>
+/// The current write index on a data stream cannot be cloned.
+/// In order to clone the current write index, the data stream must first be rolled over so that a new write index is created and then the previous write index can be cloned.
+/// </para>
+/// <para>
+/// NOTE: Mappings cannot be specified in the <c>_clone</c> request. The mappings of the source index will be used for the target index.
+/// </para>
+/// <para>
+/// <strong>Monitor the cloning process</strong>
+/// </para>
+/// <para>
+/// The cloning process can be monitored with the cat recovery API or the cluster health API can be used to wait until all primary shards have been allocated by setting the <c>wait_for_status</c> parameter to <c>yellow</c>.
+/// </para>
+/// <para>
+/// The <c>_clone</c> API returns as soon as the target index has been added to the cluster state, before any shards have been allocated.
+/// At this point, all shards are in the state unassigned.
+/// If, for any reason, the target index can't be allocated, its primary shard will remain unassigned until it can be allocated on that node.
+/// </para>
+/// <para>
+/// Once the primary shard is allocated, it moves to state initializing, and the clone process begins.
+/// When the clone operation completes, the shard will become active.
+/// At that point, Elasticsearch will try to allocate any replicas and may decide to relocate the primary shard to another node.
+/// </para>
+/// <para>
+/// <strong>Wait for active shards</strong>
+/// </para>
+/// <para>
+/// Because the clone operation creates a new index to clone the shards to, the wait for active shards setting on index creation applies to the clone index action as well.
+/// </para>
 /// </summary>
 public sealed partial class CloneIndexRequestDescriptor : RequestDescriptor<CloneIndexRequestDescriptor, CloneIndexRequestParameters>
 {

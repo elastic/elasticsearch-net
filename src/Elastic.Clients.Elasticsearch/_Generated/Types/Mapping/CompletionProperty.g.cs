@@ -64,6 +64,8 @@ public sealed partial class CompletionProperty : IProperty
 	public string? SearchAnalyzer { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
+	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
+	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "completion";
@@ -94,6 +96,7 @@ public sealed partial class CompletionPropertyDescriptor<TDocument> : Serializab
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private string? SearchAnalyzerValue { get; set; }
 	private bool? StoreValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public CompletionPropertyDescriptor<TDocument> Analyzer(string? analyzer)
 	{
@@ -242,6 +245,12 @@ public sealed partial class CompletionPropertyDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
+	public CompletionPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -354,6 +363,12 @@ public sealed partial class CompletionPropertyDescriptor<TDocument> : Serializab
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("completion");
 		writer.WriteEndObject();
@@ -398,7 +413,8 @@ public sealed partial class CompletionPropertyDescriptor<TDocument> : Serializab
 		PreserveSeparators = PreserveSeparatorsValue,
 		Properties = PropertiesValue,
 		SearchAnalyzer = SearchAnalyzerValue,
-		Store = StoreValue
+		Store = StoreValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }
 
@@ -427,6 +443,7 @@ public sealed partial class CompletionPropertyDescriptor : SerializableDescripto
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private string? SearchAnalyzerValue { get; set; }
 	private bool? StoreValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public CompletionPropertyDescriptor Analyzer(string? analyzer)
 	{
@@ -575,6 +592,12 @@ public sealed partial class CompletionPropertyDescriptor : SerializableDescripto
 		return Self;
 	}
 
+	public CompletionPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -687,6 +710,12 @@ public sealed partial class CompletionPropertyDescriptor : SerializableDescripto
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("completion");
 		writer.WriteEndObject();
@@ -731,6 +760,7 @@ public sealed partial class CompletionPropertyDescriptor : SerializableDescripto
 		PreserveSeparators = PreserveSeparatorsValue,
 		Properties = PropertiesValue,
 		SearchAnalyzer = SearchAnalyzerValue,
-		Store = StoreValue
+		Store = StoreValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }

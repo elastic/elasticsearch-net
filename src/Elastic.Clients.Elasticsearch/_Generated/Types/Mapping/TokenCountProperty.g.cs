@@ -62,6 +62,8 @@ public sealed partial class TokenCountProperty : IProperty
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
+	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
+	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "token_count";
@@ -88,6 +90,7 @@ public sealed partial class TokenCountPropertyDescriptor<TDocument> : Serializab
 	private double? NullValueValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private bool? StoreValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public TokenCountPropertyDescriptor<TDocument> Analyzer(string? analyzer)
 	{
@@ -200,6 +203,12 @@ public sealed partial class TokenCountPropertyDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
+	public TokenCountPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -281,6 +290,12 @@ public sealed partial class TokenCountPropertyDescriptor<TDocument> : Serializab
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("token_count");
 		writer.WriteEndObject();
@@ -300,7 +315,8 @@ public sealed partial class TokenCountPropertyDescriptor<TDocument> : Serializab
 		Meta = MetaValue,
 		NullValue = NullValueValue,
 		Properties = PropertiesValue,
-		Store = StoreValue
+		Store = StoreValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }
 
@@ -325,6 +341,7 @@ public sealed partial class TokenCountPropertyDescriptor : SerializableDescripto
 	private double? NullValueValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private bool? StoreValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public TokenCountPropertyDescriptor Analyzer(string? analyzer)
 	{
@@ -437,6 +454,12 @@ public sealed partial class TokenCountPropertyDescriptor : SerializableDescripto
 		return Self;
 	}
 
+	public TokenCountPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -518,6 +541,12 @@ public sealed partial class TokenCountPropertyDescriptor : SerializableDescripto
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("token_count");
 		writer.WriteEndObject();
@@ -537,6 +566,7 @@ public sealed partial class TokenCountPropertyDescriptor : SerializableDescripto
 		Meta = MetaValue,
 		NullValue = NullValueValue,
 		Properties = PropertiesValue,
-		Store = StoreValue
+		Store = StoreValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }

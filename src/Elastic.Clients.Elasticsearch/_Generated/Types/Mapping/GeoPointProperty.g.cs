@@ -64,6 +64,8 @@ public sealed partial class GeoPointProperty : IProperty
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
+	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
+	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "geo_point";
@@ -93,6 +95,7 @@ public sealed partial class GeoPointPropertyDescriptor<TDocument> : Serializable
 	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private bool? StoreValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public GeoPointPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 	{
@@ -229,6 +232,12 @@ public sealed partial class GeoPointPropertyDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	public GeoPointPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -326,6 +335,12 @@ public sealed partial class GeoPointPropertyDescriptor<TDocument> : Serializable
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("geo_point");
 		writer.WriteEndObject();
@@ -370,7 +385,8 @@ public sealed partial class GeoPointPropertyDescriptor<TDocument> : Serializable
 		OnScriptError = OnScriptErrorValue,
 		Properties = PropertiesValue,
 		Script = BuildScript(),
-		Store = StoreValue
+		Store = StoreValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }
 
@@ -398,6 +414,7 @@ public sealed partial class GeoPointPropertyDescriptor : SerializableDescriptor<
 	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private bool? StoreValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public GeoPointPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 	{
@@ -534,6 +551,12 @@ public sealed partial class GeoPointPropertyDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
+	public GeoPointPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -631,6 +654,12 @@ public sealed partial class GeoPointPropertyDescriptor : SerializableDescriptor<
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("geo_point");
 		writer.WriteEndObject();
@@ -675,6 +704,7 @@ public sealed partial class GeoPointPropertyDescriptor : SerializableDescriptor<
 		OnScriptError = OnScriptErrorValue,
 		Properties = PropertiesValue,
 		Script = BuildScript(),
-		Store = StoreValue
+		Store = StoreValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }

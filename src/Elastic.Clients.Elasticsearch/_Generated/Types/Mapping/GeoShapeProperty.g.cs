@@ -69,6 +69,8 @@ public sealed partial class GeoShapeProperty : IProperty
 	public bool? Store { get; set; }
 	[JsonInclude, JsonPropertyName("strategy")]
 	public Elastic.Clients.Elasticsearch.Mapping.GeoStrategy? Strategy { get; set; }
+	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
+	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "geo_shape";
@@ -102,6 +104,7 @@ public sealed partial class GeoShapePropertyDescriptor<TDocument> : Serializable
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private bool? StoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.GeoStrategy? StrategyValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public GeoShapePropertyDescriptor<TDocument> Coerce(bool? coerce = true)
 	{
@@ -214,6 +217,12 @@ public sealed partial class GeoShapePropertyDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	public GeoShapePropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -295,6 +304,12 @@ public sealed partial class GeoShapePropertyDescriptor<TDocument> : Serializable
 			JsonSerializer.Serialize(writer, StrategyValue, options);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("geo_shape");
 		writer.WriteEndObject();
@@ -314,7 +329,8 @@ public sealed partial class GeoShapePropertyDescriptor<TDocument> : Serializable
 		Orientation = OrientationValue,
 		Properties = PropertiesValue,
 		Store = StoreValue,
-		Strategy = StrategyValue
+		Strategy = StrategyValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }
 
@@ -346,6 +362,7 @@ public sealed partial class GeoShapePropertyDescriptor : SerializableDescriptor<
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private bool? StoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.GeoStrategy? StrategyValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public GeoShapePropertyDescriptor Coerce(bool? coerce = true)
 	{
@@ -458,6 +475,12 @@ public sealed partial class GeoShapePropertyDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
+	public GeoShapePropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -539,6 +562,12 @@ public sealed partial class GeoShapePropertyDescriptor : SerializableDescriptor<
 			JsonSerializer.Serialize(writer, StrategyValue, options);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("geo_shape");
 		writer.WriteEndObject();
@@ -558,6 +587,7 @@ public sealed partial class GeoShapePropertyDescriptor : SerializableDescriptor<
 		Orientation = OrientationValue,
 		Properties = PropertiesValue,
 		Store = StoreValue,
-		Strategy = StrategyValue
+		Strategy = StrategyValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }

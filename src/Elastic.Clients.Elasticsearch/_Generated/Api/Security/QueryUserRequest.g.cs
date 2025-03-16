@@ -34,7 +34,7 @@ public sealed partial class QueryUserRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// If true will return the User Profile ID for the users in the query result, if any.
+	/// Determines whether to retrieve the user profile UID, if it exists, for the users.
 	/// </para>
 	/// </summary>
 	public bool? WithProfileUid { get => Q<bool?>("with_profile_uid"); set => Q("with_profile_uid", value); }
@@ -47,6 +47,10 @@ public sealed partial class QueryUserRequestParameters : RequestParameters
 /// <para>
 /// Get information for users in a paginated manner.
 /// You can optionally filter the results with a query.
+/// </para>
+/// <para>
+/// NOTE: As opposed to the get user API, built-in users are excluded from the result.
+/// This API is only for native users.
 /// </para>
 /// </summary>
 public sealed partial class QueryUserRequest : PlainRequest<QueryUserRequestParameters>
@@ -61,7 +65,7 @@ public sealed partial class QueryUserRequest : PlainRequest<QueryUserRequestPara
 
 	/// <summary>
 	/// <para>
-	/// If true will return the User Profile ID for the users in the query result, if any.
+	/// Determines whether to retrieve the user profile UID, if it exists, for the users.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -69,8 +73,9 @@ public sealed partial class QueryUserRequest : PlainRequest<QueryUserRequestPara
 
 	/// <summary>
 	/// <para>
-	/// Starting document offset.
-	/// By default, you cannot page through more than 10,000 hits using the from and size parameters.
+	/// The starting document offset.
+	/// It must not be negative.
+	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
 	/// </summary>
@@ -83,7 +88,7 @@ public sealed partial class QueryUserRequest : PlainRequest<QueryUserRequestPara
 	/// If the query parameter is missing, it is equivalent to a <c>match_all</c> query.
 	/// The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
 	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
-	/// You can query the following information associated with user: <c>username</c>, <c>roles</c>, <c>enabled</c>
+	/// You can query the following information associated with user: <c>username</c>, <c>roles</c>, <c>enabled</c>, <c>full_name</c>, and <c>email</c>.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
@@ -91,7 +96,7 @@ public sealed partial class QueryUserRequest : PlainRequest<QueryUserRequestPara
 
 	/// <summary>
 	/// <para>
-	/// Search after definition
+	/// The search after definition
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("search_after")]
@@ -100,6 +105,7 @@ public sealed partial class QueryUserRequest : PlainRequest<QueryUserRequestPara
 	/// <summary>
 	/// <para>
 	/// The number of hits to return.
+	/// It must not be negative.
 	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
@@ -109,7 +115,8 @@ public sealed partial class QueryUserRequest : PlainRequest<QueryUserRequestPara
 
 	/// <summary>
 	/// <para>
-	/// Fields eligible for sorting are: username, roles, enabled
+	/// The sort definition.
+	/// Fields eligible for sorting are: <c>username</c>, <c>roles</c>, <c>enabled</c>.
 	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
 	/// </para>
 	/// </summary>
@@ -125,6 +132,10 @@ public sealed partial class QueryUserRequest : PlainRequest<QueryUserRequestPara
 /// <para>
 /// Get information for users in a paginated manner.
 /// You can optionally filter the results with a query.
+/// </para>
+/// <para>
+/// NOTE: As opposed to the get user API, built-in users are excluded from the result.
+/// This API is only for native users.
 /// </para>
 /// </summary>
 public sealed partial class QueryUserRequestDescriptor<TDocument> : RequestDescriptor<QueryUserRequestDescriptor<TDocument>, QueryUserRequestParameters>
@@ -158,8 +169,9 @@ public sealed partial class QueryUserRequestDescriptor<TDocument> : RequestDescr
 
 	/// <summary>
 	/// <para>
-	/// Starting document offset.
-	/// By default, you cannot page through more than 10,000 hits using the from and size parameters.
+	/// The starting document offset.
+	/// It must not be negative.
+	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
 	/// </summary>
@@ -175,7 +187,7 @@ public sealed partial class QueryUserRequestDescriptor<TDocument> : RequestDescr
 	/// If the query parameter is missing, it is equivalent to a <c>match_all</c> query.
 	/// The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
 	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
-	/// You can query the following information associated with user: <c>username</c>, <c>roles</c>, <c>enabled</c>
+	/// You can query the following information associated with user: <c>username</c>, <c>roles</c>, <c>enabled</c>, <c>full_name</c>, and <c>email</c>.
 	/// </para>
 	/// </summary>
 	public QueryUserRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Security.UserQuery? query)
@@ -204,7 +216,7 @@ public sealed partial class QueryUserRequestDescriptor<TDocument> : RequestDescr
 
 	/// <summary>
 	/// <para>
-	/// Search after definition
+	/// The search after definition
 	/// </para>
 	/// </summary>
 	public QueryUserRequestDescriptor<TDocument> SearchAfter(ICollection<Elastic.Clients.Elasticsearch.FieldValue>? searchAfter)
@@ -216,6 +228,7 @@ public sealed partial class QueryUserRequestDescriptor<TDocument> : RequestDescr
 	/// <summary>
 	/// <para>
 	/// The number of hits to return.
+	/// It must not be negative.
 	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
@@ -228,7 +241,8 @@ public sealed partial class QueryUserRequestDescriptor<TDocument> : RequestDescr
 
 	/// <summary>
 	/// <para>
-	/// Fields eligible for sorting are: username, roles, enabled
+	/// The sort definition.
+	/// Fields eligible for sorting are: <c>username</c>, <c>roles</c>, <c>enabled</c>.
 	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
 	/// </para>
 	/// </summary>
@@ -346,6 +360,10 @@ public sealed partial class QueryUserRequestDescriptor<TDocument> : RequestDescr
 /// Get information for users in a paginated manner.
 /// You can optionally filter the results with a query.
 /// </para>
+/// <para>
+/// NOTE: As opposed to the get user API, built-in users are excluded from the result.
+/// This API is only for native users.
+/// </para>
 /// </summary>
 public sealed partial class QueryUserRequestDescriptor : RequestDescriptor<QueryUserRequestDescriptor, QueryUserRequestParameters>
 {
@@ -378,8 +396,9 @@ public sealed partial class QueryUserRequestDescriptor : RequestDescriptor<Query
 
 	/// <summary>
 	/// <para>
-	/// Starting document offset.
-	/// By default, you cannot page through more than 10,000 hits using the from and size parameters.
+	/// The starting document offset.
+	/// It must not be negative.
+	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
 	/// </summary>
@@ -395,7 +414,7 @@ public sealed partial class QueryUserRequestDescriptor : RequestDescriptor<Query
 	/// If the query parameter is missing, it is equivalent to a <c>match_all</c> query.
 	/// The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
 	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
-	/// You can query the following information associated with user: <c>username</c>, <c>roles</c>, <c>enabled</c>
+	/// You can query the following information associated with user: <c>username</c>, <c>roles</c>, <c>enabled</c>, <c>full_name</c>, and <c>email</c>.
 	/// </para>
 	/// </summary>
 	public QueryUserRequestDescriptor Query(Elastic.Clients.Elasticsearch.Security.UserQuery? query)
@@ -424,7 +443,7 @@ public sealed partial class QueryUserRequestDescriptor : RequestDescriptor<Query
 
 	/// <summary>
 	/// <para>
-	/// Search after definition
+	/// The search after definition
 	/// </para>
 	/// </summary>
 	public QueryUserRequestDescriptor SearchAfter(ICollection<Elastic.Clients.Elasticsearch.FieldValue>? searchAfter)
@@ -436,6 +455,7 @@ public sealed partial class QueryUserRequestDescriptor : RequestDescriptor<Query
 	/// <summary>
 	/// <para>
 	/// The number of hits to return.
+	/// It must not be negative.
 	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
@@ -448,7 +468,8 @@ public sealed partial class QueryUserRequestDescriptor : RequestDescriptor<Query
 
 	/// <summary>
 	/// <para>
-	/// Fields eligible for sorting are: username, roles, enabled
+	/// The sort definition.
+	/// Fields eligible for sorting are: <c>username</c>, <c>roles</c>, <c>enabled</c>.
 	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
 	/// </para>
 	/// </summary>

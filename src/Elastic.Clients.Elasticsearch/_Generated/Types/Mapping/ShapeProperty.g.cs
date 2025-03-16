@@ -67,6 +67,8 @@ public sealed partial class ShapeProperty : IProperty
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
+	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
+	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "shape";
@@ -99,6 +101,7 @@ public sealed partial class ShapePropertyDescriptor<TDocument> : SerializableDes
 	private Elastic.Clients.Elasticsearch.Mapping.GeoOrientation? OrientationValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private bool? StoreValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public ShapePropertyDescriptor<TDocument> Coerce(bool? coerce = true)
 	{
@@ -205,6 +208,12 @@ public sealed partial class ShapePropertyDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	public ShapePropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -280,6 +289,12 @@ public sealed partial class ShapePropertyDescriptor<TDocument> : SerializableDes
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("shape");
 		writer.WriteEndObject();
@@ -298,7 +313,8 @@ public sealed partial class ShapePropertyDescriptor<TDocument> : SerializableDes
 		Meta = MetaValue,
 		Orientation = OrientationValue,
 		Properties = PropertiesValue,
-		Store = StoreValue
+		Store = StoreValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }
 
@@ -329,6 +345,7 @@ public sealed partial class ShapePropertyDescriptor : SerializableDescriptor<Sha
 	private Elastic.Clients.Elasticsearch.Mapping.GeoOrientation? OrientationValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private bool? StoreValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public ShapePropertyDescriptor Coerce(bool? coerce = true)
 	{
@@ -435,6 +452,12 @@ public sealed partial class ShapePropertyDescriptor : SerializableDescriptor<Sha
 		return Self;
 	}
 
+	public ShapePropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -510,6 +533,12 @@ public sealed partial class ShapePropertyDescriptor : SerializableDescriptor<Sha
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("shape");
 		writer.WriteEndObject();
@@ -528,6 +557,7 @@ public sealed partial class ShapePropertyDescriptor : SerializableDescriptor<Sha
 		Meta = MetaValue,
 		Orientation = OrientationValue,
 		Properties = PropertiesValue,
-		Store = StoreValue
+		Store = StoreValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }

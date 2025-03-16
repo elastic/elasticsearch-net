@@ -28,6 +28,12 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public sealed partial class EnrollKibanaResponse : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>
+	/// The CA certificate used to sign the node certificates that Elasticsearch uses for TLS on the HTTP layer.
+	/// The certificate is returned as a Base64 encoded string of the ASN.1 DER encoding of the certificate.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("http_ca")]
 	public string HttpCa { get; init; }
 	[JsonInclude, JsonPropertyName("token")]

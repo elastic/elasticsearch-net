@@ -40,6 +40,10 @@ public sealed partial class PutSynonymRequestParameters : RequestParameters
 /// Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
 /// If you need to manage more synonym rules, you can create multiple synonym sets.
 /// </para>
+/// <para>
+/// When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
+/// This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
+/// </para>
 /// </summary>
 public sealed partial class PutSynonymRequest : PlainRequest<PutSynonymRequestParameters>
 {
@@ -57,7 +61,7 @@ public sealed partial class PutSynonymRequest : PlainRequest<PutSynonymRequestPa
 
 	/// <summary>
 	/// <para>
-	/// The synonym set information to update
+	/// The synonym rules definitions for the synonyms set.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("synonyms_set")]
@@ -70,6 +74,10 @@ public sealed partial class PutSynonymRequest : PlainRequest<PutSynonymRequestPa
 /// Create or update a synonym set.
 /// Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
 /// If you need to manage more synonym rules, you can create multiple synonym sets.
+/// </para>
+/// <para>
+/// When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
+/// This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
 /// </para>
 /// </summary>
 public sealed partial class PutSynonymRequestDescriptor<TDocument> : RequestDescriptor<PutSynonymRequestDescriptor<TDocument>, PutSynonymRequestParameters>
@@ -101,7 +109,7 @@ public sealed partial class PutSynonymRequestDescriptor<TDocument> : RequestDesc
 
 	/// <summary>
 	/// <para>
-	/// The synonym set information to update
+	/// The synonym rules definitions for the synonyms set.
 	/// </para>
 	/// </summary>
 	public PutSynonymRequestDescriptor<TDocument> SynonymsSet(ICollection<Elastic.Clients.Elasticsearch.Synonyms.SynonymRule> synonymsSet)
@@ -182,6 +190,10 @@ public sealed partial class PutSynonymRequestDescriptor<TDocument> : RequestDesc
 /// Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
 /// If you need to manage more synonym rules, you can create multiple synonym sets.
 /// </para>
+/// <para>
+/// When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
+/// This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
+/// </para>
 /// </summary>
 public sealed partial class PutSynonymRequestDescriptor : RequestDescriptor<PutSynonymRequestDescriptor, PutSynonymRequestParameters>
 {
@@ -212,7 +224,7 @@ public sealed partial class PutSynonymRequestDescriptor : RequestDescriptor<PutS
 
 	/// <summary>
 	/// <para>
-	/// The synonym set information to update
+	/// The synonym rules definitions for the synonyms set.
 	/// </para>
 	/// </summary>
 	public PutSynonymRequestDescriptor SynonymsSet(ICollection<Elastic.Clients.Elasticsearch.Synonyms.SynonymRule> synonymsSet)

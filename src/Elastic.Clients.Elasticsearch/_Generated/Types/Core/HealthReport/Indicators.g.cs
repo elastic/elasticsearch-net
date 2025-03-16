@@ -33,8 +33,6 @@ public sealed partial class Indicators
 	public Elastic.Clients.Elasticsearch.Core.HealthReport.DataStreamLifecycleIndicator? DataStreamLifecycle { get; init; }
 	[JsonInclude, JsonPropertyName("disk")]
 	public Elastic.Clients.Elasticsearch.Core.HealthReport.DiskIndicator? Disk { get; init; }
-	[JsonInclude, JsonPropertyName("file_settings")]
-	public Elastic.Clients.Elasticsearch.Core.HealthReport.FileSettingsIndicator? FileSettings { get; init; }
 	[JsonInclude, JsonPropertyName("ilm")]
 	public Elastic.Clients.Elasticsearch.Core.HealthReport.IlmIndicator? Ilm { get; init; }
 	[JsonInclude, JsonPropertyName("master_is_stable")]

@@ -47,6 +47,10 @@ public sealed partial class CreateServiceTokenRequestParameters : RequestParamet
 /// <para>
 /// Create a service accounts token for access without requiring basic authentication.
 /// </para>
+/// <para>
+/// NOTE: Service account tokens never expire.
+/// You must actively delete them if they are no longer needed.
+/// </para>
 /// </summary>
 public sealed partial class CreateServiceTokenRequest : PlainRequest<CreateServiceTokenRequestParameters>
 {
@@ -81,6 +85,10 @@ public sealed partial class CreateServiceTokenRequest : PlainRequest<CreateServi
 /// </para>
 /// <para>
 /// Create a service accounts token for access without requiring basic authentication.
+/// </para>
+/// <para>
+/// NOTE: Service account tokens never expire.
+/// You must actively delete them if they are no longer needed.
 /// </para>
 /// </summary>
 public sealed partial class CreateServiceTokenRequestDescriptor : RequestDescriptor<CreateServiceTokenRequestDescriptor, CreateServiceTokenRequestParameters>

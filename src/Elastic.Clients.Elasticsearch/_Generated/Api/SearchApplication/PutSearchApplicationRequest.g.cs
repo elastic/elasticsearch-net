@@ -67,7 +67,7 @@ public sealed partial class PutSearchApplicationRequest : PlainRequest<PutSearch
 	[JsonIgnore]
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters SearchApplication { get; set; }
+	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplication SearchApplication { get; set; }
 
 	void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
@@ -83,7 +83,7 @@ public sealed partial class PutSearchApplicationRequest : PlainRequest<PutSearch
 public sealed partial class PutSearchApplicationRequestDescriptor : RequestDescriptor<PutSearchApplicationRequestDescriptor, PutSearchApplicationRequestParameters>
 {
 	internal PutSearchApplicationRequestDescriptor(Action<PutSearchApplicationRequestDescriptor> configure) => configure.Invoke(this);
-	public PutSearchApplicationRequestDescriptor(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters searchApplication, Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name)) => SearchApplicationValue = searchApplication;
+	public PutSearchApplicationRequestDescriptor(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplication searchApplication, Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name)) => SearchApplicationValue = searchApplication;
 
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SearchApplicationPut;
 
@@ -101,11 +101,11 @@ public sealed partial class PutSearchApplicationRequestDescriptor : RequestDescr
 		return Self;
 	}
 
-	private Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters SearchApplicationValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParametersDescriptor SearchApplicationDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParametersDescriptor> SearchApplicationDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.SearchApplication.SearchApplication SearchApplicationValue { get; set; }
+	private Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationDescriptor SearchApplicationDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationDescriptor> SearchApplicationDescriptorAction { get; set; }
 
-	public PutSearchApplicationRequestDescriptor SearchApplication(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters searchApplication)
+	public PutSearchApplicationRequestDescriptor SearchApplication(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplication searchApplication)
 	{
 		SearchApplicationDescriptor = null;
 		SearchApplicationDescriptorAction = null;
@@ -113,7 +113,7 @@ public sealed partial class PutSearchApplicationRequestDescriptor : RequestDescr
 		return Self;
 	}
 
-	public PutSearchApplicationRequestDescriptor SearchApplication(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParametersDescriptor descriptor)
+	public PutSearchApplicationRequestDescriptor SearchApplication(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationDescriptor descriptor)
 	{
 		SearchApplicationValue = null;
 		SearchApplicationDescriptorAction = null;
@@ -121,7 +121,7 @@ public sealed partial class PutSearchApplicationRequestDescriptor : RequestDescr
 		return Self;
 	}
 
-	public PutSearchApplicationRequestDescriptor SearchApplication(Action<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParametersDescriptor> configure)
+	public PutSearchApplicationRequestDescriptor SearchApplication(Action<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationDescriptor> configure)
 	{
 		SearchApplicationValue = null;
 		SearchApplicationDescriptor = null;

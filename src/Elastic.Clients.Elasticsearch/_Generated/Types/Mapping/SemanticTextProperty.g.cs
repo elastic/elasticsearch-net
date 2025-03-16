@@ -29,10 +29,27 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public sealed partial class SemanticTextProperty : IProperty
 {
+	/// <summary>
+	/// <para>
+	/// Inference endpoint that will be used to generate embeddings for the field.
+	/// This parameter cannot be updated. Use the Create inference API to create the endpoint.
+	/// If <c>search_inference_id</c> is specified, the inference endpoint will only be used at index time.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("inference_id")]
-	public Elastic.Clients.Elasticsearch.Id InferenceId { get; set; }
+	public Elastic.Clients.Elasticsearch.Id? InferenceId { get; set; }
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Inference endpoint that will be used to generate embeddings at query time.
+	/// You can update this parameter by using the Update mapping API. Use the Create inference API to create the endpoint.
+	/// If not specified, the inference endpoint defined by inference_id will be used at both index and query time.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("search_inference_id")]
+	public Elastic.Clients.Elasticsearch.Id? SearchInferenceId { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "semantic_text";
@@ -46,10 +63,18 @@ public sealed partial class SemanticTextPropertyDescriptor : SerializableDescrip
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Id InferenceIdValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Id? InferenceIdValue { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Id? SearchInferenceIdValue { get; set; }
 
-	public SemanticTextPropertyDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id inferenceId)
+	/// <summary>
+	/// <para>
+	/// Inference endpoint that will be used to generate embeddings for the field.
+	/// This parameter cannot be updated. Use the Create inference API to create the endpoint.
+	/// If <c>search_inference_id</c> is specified, the inference endpoint will only be used at index time.
+	/// </para>
+	/// </summary>
+	public SemanticTextPropertyDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id? inferenceId)
 	{
 		InferenceIdValue = inferenceId;
 		return Self;
@@ -61,15 +86,38 @@ public sealed partial class SemanticTextPropertyDescriptor : SerializableDescrip
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Inference endpoint that will be used to generate embeddings at query time.
+	/// You can update this parameter by using the Update mapping API. Use the Create inference API to create the endpoint.
+	/// If not specified, the inference endpoint defined by inference_id will be used at both index and query time.
+	/// </para>
+	/// </summary>
+	public SemanticTextPropertyDescriptor SearchInferenceId(Elastic.Clients.Elasticsearch.Id? searchInferenceId)
+	{
+		SearchInferenceIdValue = searchInferenceId;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("inference_id");
-		JsonSerializer.Serialize(writer, InferenceIdValue, options);
+		if (InferenceIdValue is not null)
+		{
+			writer.WritePropertyName("inference_id");
+			JsonSerializer.Serialize(writer, InferenceIdValue, options);
+		}
+
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
 			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
+		if (SearchInferenceIdValue is not null)
+		{
+			writer.WritePropertyName("search_inference_id");
+			JsonSerializer.Serialize(writer, SearchInferenceIdValue, options);
 		}
 
 		writer.WritePropertyName("type");
@@ -80,6 +128,7 @@ public sealed partial class SemanticTextPropertyDescriptor : SerializableDescrip
 	SemanticTextProperty IBuildableDescriptor<SemanticTextProperty>.Build() => new()
 	{
 		InferenceId = InferenceIdValue,
-		Meta = MetaValue
+		Meta = MetaValue,
+		SearchInferenceId = SearchInferenceIdValue
 	};
 }

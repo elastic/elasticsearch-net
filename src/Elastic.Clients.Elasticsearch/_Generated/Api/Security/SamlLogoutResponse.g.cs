@@ -28,6 +28,12 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public sealed partial class SamlLogoutResponse : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>
+	/// A URL that contains a SAML logout request as a parameter.
+	/// You can use this URL to be redirected back to the SAML IdP and to initiate Single Logout.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("redirect")]
 	public string Redirect { get; init; }
 }

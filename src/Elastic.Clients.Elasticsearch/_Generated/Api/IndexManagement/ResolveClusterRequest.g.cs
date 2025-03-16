@@ -109,6 +109,38 @@ public sealed partial class ResolveClusterRequestParameters : RequestParameters
 /// </para>
 /// </item>
 /// </list>
+/// <para>
+/// For example, <c>GET /_resolve/cluster/my-index-*,cluster*:my-index-*</c> returns information about the local cluster and all remotely configured clusters that start with the alias <c>cluster*</c>.
+/// Each cluster returns information about whether it has any indices, aliases or data streams that match <c>my-index-*</c>.
+/// </para>
+/// <para>
+/// <strong>Advantages of using this endpoint before a cross-cluster search</strong>
+/// </para>
+/// <para>
+/// You may want to exclude a cluster or index from a search when:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// A remote cluster is not currently connected and is configured with <c>skip_unavailable=false</c>. Running a cross-cluster search under those conditions will cause the entire search to fail.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A cluster has no matching indices, aliases or data streams for the index expression (or your user does not have permissions to search them). For example, suppose your index expression is <c>logs*,remote1:logs*</c> and the remote1 cluster has no indices, aliases or data streams that match <c>logs*</c>. In that case, that cluster will return no results from that cluster if you include it in a cross-cluster search.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The index expression (combined with any query parameters you specify) will likely cause an exception to be thrown when you do the search. In these cases, the "error" field in the <c>_resolve/cluster</c> response will be present. (This is also where security/permission errors will be shown.)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A remote cluster is an older version that does not support the feature you want to use in your search.
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
 public sealed partial class ResolveClusterRequest : PlainRequest<ResolveClusterRequestParameters>
 {
@@ -202,6 +234,38 @@ public sealed partial class ResolveClusterRequest : PlainRequest<ResolveClusterR
 /// <item>
 /// <para>
 /// Cluster version information, including the Elasticsearch server version.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// For example, <c>GET /_resolve/cluster/my-index-*,cluster*:my-index-*</c> returns information about the local cluster and all remotely configured clusters that start with the alias <c>cluster*</c>.
+/// Each cluster returns information about whether it has any indices, aliases or data streams that match <c>my-index-*</c>.
+/// </para>
+/// <para>
+/// <strong>Advantages of using this endpoint before a cross-cluster search</strong>
+/// </para>
+/// <para>
+/// You may want to exclude a cluster or index from a search when:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// A remote cluster is not currently connected and is configured with <c>skip_unavailable=false</c>. Running a cross-cluster search under those conditions will cause the entire search to fail.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A cluster has no matching indices, aliases or data streams for the index expression (or your user does not have permissions to search them). For example, suppose your index expression is <c>logs*,remote1:logs*</c> and the remote1 cluster has no indices, aliases or data streams that match <c>logs*</c>. In that case, that cluster will return no results from that cluster if you include it in a cross-cluster search.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The index expression (combined with any query parameters you specify) will likely cause an exception to be thrown when you do the search. In these cases, the "error" field in the <c>_resolve/cluster</c> response will be present. (This is also where security/permission errors will be shown.)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A remote cluster is an older version that does not support the feature you want to use in your search.
 /// </para>
 /// </item>
 /// </list>

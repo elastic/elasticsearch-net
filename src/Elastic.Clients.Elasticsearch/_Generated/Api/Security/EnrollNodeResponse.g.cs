@@ -28,16 +28,51 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public sealed partial class EnrollNodeResponse : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>
+	/// The CA certificate that can be used by the new node in order to sign its certificate for the HTTP layer, as a Base64 encoded string of the ASN.1 DER encoding of the certificate.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("http_ca_cert")]
 	public string HttpCaCert { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The CA private key that can be used by the new node in order to sign its certificate for the HTTP layer, as a Base64 encoded string of the ASN.1 DER encoding of the key.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("http_ca_key")]
 	public string HttpCaKey { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// A list of transport addresses in the form of <c>host:port</c> for the nodes that are already members of the cluster.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("nodes_addresses")]
 	public IReadOnlyCollection<string> NodesAddresses { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The CA certificate that is used to sign the TLS certificate for the transport layer, as a Base64 encoded string of the ASN.1 DER encoding of the certificate.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("transport_ca_cert")]
 	public string TransportCaCert { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The certificate that the node can use for TLS for its transport layer, as a Base64 encoded string of the ASN.1 DER encoding of the certificate.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("transport_cert")]
 	public string TransportCert { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The private key that the node can use for TLS for its transport layer, as a Base64 encoded string of the ASN.1 DER encoding of the key.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("transport_key")]
 	public string TransportKey { get; init; }
 }

@@ -34,31 +34,33 @@ public sealed partial class GetAsyncRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// Separator for CSV results. The API only supports this parameter for CSV responses.
+	/// The separator for CSV results.
+	/// The API supports this parameter only for CSV responses.
 	/// </para>
 	/// </summary>
 	public string? Delimiter { get => Q<string?>("delimiter"); set => Q("delimiter", value); }
 
 	/// <summary>
 	/// <para>
-	/// Format for the response. You must specify a format using this parameter or the
-	/// Accept HTTP header. If you specify both, the API uses this parameter.
+	/// The format for the response.
+	/// You must specify a format using this parameter or the <c>Accept</c> HTTP header.
+	/// If you specify both, the API uses this parameter.
 	/// </para>
 	/// </summary>
 	public string? Format { get => Q<string?>("format"); set => Q("format", value); }
 
 	/// <summary>
 	/// <para>
-	/// Retention period for the search and its results. Defaults
-	/// to the <c>keep_alive</c> period for the original SQL search.
+	/// The retention period for the search and its results.
+	/// It defaults to the <c>keep_alive</c> period for the original SQL search.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for complete results. Defaults to no timeout,
-	/// meaning the request waits for complete search results.
+	/// The period to wait for complete results.
+	/// It defaults to no timeout, meaning the request waits for complete search results.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
@@ -68,6 +70,9 @@ public sealed partial class GetAsyncRequestParameters : RequestParameters
 /// <para>
 /// Get async SQL search results.
 /// Get the current status and available results for an async SQL search or stored synchronous SQL search.
+/// </para>
+/// <para>
+/// If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
 /// </para>
 /// </summary>
 public sealed partial class GetAsyncRequest : PlainRequest<GetAsyncRequestParameters>
@@ -86,7 +91,8 @@ public sealed partial class GetAsyncRequest : PlainRequest<GetAsyncRequestParame
 
 	/// <summary>
 	/// <para>
-	/// Separator for CSV results. The API only supports this parameter for CSV responses.
+	/// The separator for CSV results.
+	/// The API supports this parameter only for CSV responses.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -94,8 +100,9 @@ public sealed partial class GetAsyncRequest : PlainRequest<GetAsyncRequestParame
 
 	/// <summary>
 	/// <para>
-	/// Format for the response. You must specify a format using this parameter or the
-	/// Accept HTTP header. If you specify both, the API uses this parameter.
+	/// The format for the response.
+	/// You must specify a format using this parameter or the <c>Accept</c> HTTP header.
+	/// If you specify both, the API uses this parameter.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -103,8 +110,8 @@ public sealed partial class GetAsyncRequest : PlainRequest<GetAsyncRequestParame
 
 	/// <summary>
 	/// <para>
-	/// Retention period for the search and its results. Defaults
-	/// to the <c>keep_alive</c> period for the original SQL search.
+	/// The retention period for the search and its results.
+	/// It defaults to the <c>keep_alive</c> period for the original SQL search.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -112,8 +119,8 @@ public sealed partial class GetAsyncRequest : PlainRequest<GetAsyncRequestParame
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for complete results. Defaults to no timeout,
-	/// meaning the request waits for complete search results.
+	/// The period to wait for complete results.
+	/// It defaults to no timeout, meaning the request waits for complete search results.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -124,6 +131,9 @@ public sealed partial class GetAsyncRequest : PlainRequest<GetAsyncRequestParame
 /// <para>
 /// Get async SQL search results.
 /// Get the current status and available results for an async SQL search or stored synchronous SQL search.
+/// </para>
+/// <para>
+/// If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
 /// </para>
 /// </summary>
 public sealed partial class GetAsyncRequestDescriptor<TDocument> : RequestDescriptor<GetAsyncRequestDescriptor<TDocument>, GetAsyncRequestParameters>
@@ -162,6 +172,9 @@ public sealed partial class GetAsyncRequestDescriptor<TDocument> : RequestDescri
 /// <para>
 /// Get async SQL search results.
 /// Get the current status and available results for an async SQL search or stored synchronous SQL search.
+/// </para>
+/// <para>
+/// If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
 /// </para>
 /// </summary>
 public sealed partial class GetAsyncRequestDescriptor : RequestDescriptor<GetAsyncRequestDescriptor, GetAsyncRequestParameters>

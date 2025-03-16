@@ -30,17 +30,54 @@ public sealed partial class MigrateToDataTiersResponse : ElasticsearchResponse
 {
 	[JsonInclude, JsonPropertyName("dry_run")]
 	public bool DryRun { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The component templates that were updated to not contain custom routing settings for the provided data attribute.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("migrated_component_templates")]
 	public IReadOnlyCollection<string> MigratedComponentTemplates { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The composable index templates that were updated to not contain custom routing settings for the provided data attribute.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("migrated_composable_templates")]
 	public IReadOnlyCollection<string> MigratedComposableTemplates { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The ILM policies that were updated.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("migrated_ilm_policies")]
 	public IReadOnlyCollection<string> MigratedIlmPolicies { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The indices that were migrated to tier preference routing.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("migrated_indices")]
 	[SingleOrManyCollectionConverter(typeof(string))]
 	public IReadOnlyCollection<string> MigratedIndices { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The legacy index templates that were updated to not contain custom routing settings for the provided data attribute.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("migrated_legacy_templates")]
 	public IReadOnlyCollection<string> MigratedLegacyTemplates { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The name of the legacy index template that was deleted.
+	/// This information is missing if no legacy index templates were deleted.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("removed_legacy_template")]
 	public string RemovedLegacyTemplate { get; init; }
 }

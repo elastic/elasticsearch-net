@@ -19,18 +19,13 @@
 
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
+using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
+namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
-public sealed partial class FileSettingsIndicatorDetails
+public sealed partial class RenderQueryResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("failure_streak")]
-	public long FailureStreak { get; init; }
-	[JsonInclude, JsonPropertyName("most_recent_failure")]
-	public string MostRecentFailure { get; init; }
 }

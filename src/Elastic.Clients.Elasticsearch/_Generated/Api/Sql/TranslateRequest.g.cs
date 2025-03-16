@@ -38,6 +38,7 @@ public sealed partial class TranslateRequestParameters : RequestParameters
 /// <para>
 /// Translate SQL into Elasticsearch queries.
 /// Translate an SQL search into a search API request containing Query DSL.
+/// It accepts the same request body parameters as the SQL search API, excluding <c>cursor</c>.
 /// </para>
 /// </summary>
 public sealed partial class TranslateRequest : PlainRequest<TranslateRequestParameters>
@@ -60,7 +61,7 @@ public sealed partial class TranslateRequest : PlainRequest<TranslateRequestPara
 
 	/// <summary>
 	/// <para>
-	/// Elasticsearch query DSL for additional filtering.
+	/// The Elasticsearch query DSL for additional filtering.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("filter")]
@@ -68,7 +69,7 @@ public sealed partial class TranslateRequest : PlainRequest<TranslateRequestPara
 
 	/// <summary>
 	/// <para>
-	/// SQL query to run.
+	/// The SQL query to run.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
@@ -76,7 +77,7 @@ public sealed partial class TranslateRequest : PlainRequest<TranslateRequestPara
 
 	/// <summary>
 	/// <para>
-	/// ISO-8601 time zone ID for the search.
+	/// The ISO-8601 time zone ID for the search.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("time_zone")]
@@ -87,6 +88,7 @@ public sealed partial class TranslateRequest : PlainRequest<TranslateRequestPara
 /// <para>
 /// Translate SQL into Elasticsearch queries.
 /// Translate an SQL search into a search API request containing Query DSL.
+/// It accepts the same request body parameters as the SQL search API, excluding <c>cursor</c>.
 /// </para>
 /// </summary>
 public sealed partial class TranslateRequestDescriptor<TDocument> : RequestDescriptor<TranslateRequestDescriptor<TDocument>, TranslateRequestParameters>
@@ -125,7 +127,7 @@ public sealed partial class TranslateRequestDescriptor<TDocument> : RequestDescr
 
 	/// <summary>
 	/// <para>
-	/// Elasticsearch query DSL for additional filtering.
+	/// The Elasticsearch query DSL for additional filtering.
 	/// </para>
 	/// </summary>
 	public TranslateRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
@@ -154,7 +156,7 @@ public sealed partial class TranslateRequestDescriptor<TDocument> : RequestDescr
 
 	/// <summary>
 	/// <para>
-	/// SQL query to run.
+	/// The SQL query to run.
 	/// </para>
 	/// </summary>
 	public TranslateRequestDescriptor<TDocument> Query(string query)
@@ -165,7 +167,7 @@ public sealed partial class TranslateRequestDescriptor<TDocument> : RequestDescr
 
 	/// <summary>
 	/// <para>
-	/// ISO-8601 time zone ID for the search.
+	/// The ISO-8601 time zone ID for the search.
 	/// </para>
 	/// </summary>
 	public TranslateRequestDescriptor<TDocument> TimeZone(string? timeZone)
@@ -215,6 +217,7 @@ public sealed partial class TranslateRequestDescriptor<TDocument> : RequestDescr
 /// <para>
 /// Translate SQL into Elasticsearch queries.
 /// Translate an SQL search into a search API request containing Query DSL.
+/// It accepts the same request body parameters as the SQL search API, excluding <c>cursor</c>.
 /// </para>
 /// </summary>
 public sealed partial class TranslateRequestDescriptor : RequestDescriptor<TranslateRequestDescriptor, TranslateRequestParameters>
@@ -253,7 +256,7 @@ public sealed partial class TranslateRequestDescriptor : RequestDescriptor<Trans
 
 	/// <summary>
 	/// <para>
-	/// Elasticsearch query DSL for additional filtering.
+	/// The Elasticsearch query DSL for additional filtering.
 	/// </para>
 	/// </summary>
 	public TranslateRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
@@ -282,7 +285,7 @@ public sealed partial class TranslateRequestDescriptor : RequestDescriptor<Trans
 
 	/// <summary>
 	/// <para>
-	/// SQL query to run.
+	/// The SQL query to run.
 	/// </para>
 	/// </summary>
 	public TranslateRequestDescriptor Query(string query)
@@ -293,7 +296,7 @@ public sealed partial class TranslateRequestDescriptor : RequestDescriptor<Trans
 
 	/// <summary>
 	/// <para>
-	/// ISO-8601 time zone ID for the search.
+	/// The ISO-8601 time zone ID for the search.
 	/// </para>
 	/// </summary>
 	public TranslateRequestDescriptor TimeZone(string? timeZone)

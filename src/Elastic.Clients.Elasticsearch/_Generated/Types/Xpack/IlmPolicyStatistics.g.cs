@@ -32,5 +32,5 @@ public sealed partial class IlmPolicyStatistics
 	[JsonInclude, JsonPropertyName("indices_managed")]
 	public int IndicesManaged { get; init; }
 	[JsonInclude, JsonPropertyName("phases")]
-	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phases Phases { get; init; }
+	public Elastic.Clients.Elasticsearch.Xpack.Phases Phases { get; init; }
 }

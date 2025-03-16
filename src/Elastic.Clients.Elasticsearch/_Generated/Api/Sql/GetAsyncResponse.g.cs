@@ -38,8 +38,8 @@ public sealed partial class GetAsyncResponse : ElasticsearchResponse
 
 	/// <summary>
 	/// <para>
-	/// Cursor for the next set of paginated results. For CSV, TSV, and
-	/// TXT responses, this value is returned in the <c>Cursor</c> HTTP header.
+	/// The cursor for the next set of paginated results.
+	/// For CSV, TSV, and TXT responses, this value is returned in the <c>Cursor</c> HTTP header.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("cursor")]
@@ -47,9 +47,9 @@ public sealed partial class GetAsyncResponse : ElasticsearchResponse
 
 	/// <summary>
 	/// <para>
-	/// Identifier for the search. This value is only returned for async and saved
-	/// synchronous searches. For CSV, TSV, and TXT responses, this value is returned
-	/// in the <c>Async-ID</c> HTTP header.
+	/// Identifier for the search.
+	/// This value is returned only for async and saved synchronous searches.
+	/// For CSV, TSV, and TXT responses, this value is returned in the <c>Async-ID</c> HTTP header.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("id")]
@@ -57,10 +57,10 @@ public sealed partial class GetAsyncResponse : ElasticsearchResponse
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, the response does not contain complete search results. If <c>is_partial</c>
-	/// is <c>true</c> and <c>is_running</c> is <c>true</c>, the search is still running. If <c>is_partial</c>
-	/// is <c>true</c> but <c>is_running</c> is <c>false</c>, the results are partial due to a failure or
-	/// timeout. This value is only returned for async and saved synchronous searches.
+	/// If <c>true</c>, the response does not contain complete search results.
+	/// If <c>is_partial</c> is <c>true</c> and <c>is_running</c> is <c>true</c>, the search is still running.
+	/// If <c>is_partial</c> is <c>true</c> but <c>is_running</c> is <c>false</c>, the results are partial due to a failure or timeout.
+	/// This value is returned only for async and saved synchronous searches.
 	/// For CSV, TSV, and TXT responses, this value is returned in the <c>Async-partial</c> HTTP header.
 	/// </para>
 	/// </summary>
@@ -69,10 +69,10 @@ public sealed partial class GetAsyncResponse : ElasticsearchResponse
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, the search is still running. If false, the search has finished.
-	/// This value is only returned for async and saved synchronous searches. For
-	/// CSV, TSV, and TXT responses, this value is returned in the <c>Async-partial</c>
-	/// HTTP header.
+	/// If <c>true</c>, the search is still running.
+	/// If <c>false</c>, the search has finished.
+	/// This value is returned only for async and saved synchronous searches.
+	/// For CSV, TSV, and TXT responses, this value is returned in the <c>Async-partial</c> HTTP header.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("is_running")]

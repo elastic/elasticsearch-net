@@ -38,6 +38,28 @@ public sealed partial class DeleteSynonymRequestParameters : RequestParameters
 /// <para>
 /// Delete a synonym set.
 /// </para>
+/// <para>
+/// You can only delete a synonyms set that is not in use by any index analyzer.
+/// </para>
+/// <para>
+/// Synonyms sets can be used in synonym graph token filters and synonym token filters.
+/// These synonym filters can be used as part of search analyzers.
+/// </para>
+/// <para>
+/// Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
+/// Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
+/// </para>
+/// <para>
+/// If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
+/// To prevent that, synonyms sets that are used in analyzers can't be deleted.
+/// A delete request in this case will return a 400 response code.
+/// </para>
+/// <para>
+/// To remove a synonyms set, you must first remove all indices that contain analyzers using it.
+/// You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
+/// Once finished, you can delete the index.
+/// When the synonyms set is not used in analyzers, you will be able to delete it.
+/// </para>
 /// </summary>
 public sealed partial class DeleteSynonymRequest : PlainRequest<DeleteSynonymRequestParameters>
 {
@@ -57,6 +79,28 @@ public sealed partial class DeleteSynonymRequest : PlainRequest<DeleteSynonymReq
 /// <summary>
 /// <para>
 /// Delete a synonym set.
+/// </para>
+/// <para>
+/// You can only delete a synonyms set that is not in use by any index analyzer.
+/// </para>
+/// <para>
+/// Synonyms sets can be used in synonym graph token filters and synonym token filters.
+/// These synonym filters can be used as part of search analyzers.
+/// </para>
+/// <para>
+/// Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
+/// Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
+/// </para>
+/// <para>
+/// If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
+/// To prevent that, synonyms sets that are used in analyzers can't be deleted.
+/// A delete request in this case will return a 400 response code.
+/// </para>
+/// <para>
+/// To remove a synonyms set, you must first remove all indices that contain analyzers using it.
+/// You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
+/// Once finished, you can delete the index.
+/// When the synonyms set is not used in analyzers, you will be able to delete it.
 /// </para>
 /// </summary>
 public sealed partial class DeleteSynonymRequestDescriptor<TDocument> : RequestDescriptor<DeleteSynonymRequestDescriptor<TDocument>, DeleteSynonymRequestParameters>
@@ -89,6 +133,28 @@ public sealed partial class DeleteSynonymRequestDescriptor<TDocument> : RequestD
 /// <summary>
 /// <para>
 /// Delete a synonym set.
+/// </para>
+/// <para>
+/// You can only delete a synonyms set that is not in use by any index analyzer.
+/// </para>
+/// <para>
+/// Synonyms sets can be used in synonym graph token filters and synonym token filters.
+/// These synonym filters can be used as part of search analyzers.
+/// </para>
+/// <para>
+/// Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
+/// Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
+/// </para>
+/// <para>
+/// If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
+/// To prevent that, synonyms sets that are used in analyzers can't be deleted.
+/// A delete request in this case will return a 400 response code.
+/// </para>
+/// <para>
+/// To remove a synonyms set, you must first remove all indices that contain analyzers using it.
+/// You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
+/// Once finished, you can delete the index.
+/// When the synonyms set is not used in analyzers, you will be able to delete it.
 /// </para>
 /// </summary>
 public sealed partial class DeleteSynonymRequestDescriptor : RequestDescriptor<DeleteSynonymRequestDescriptor, DeleteSynonymRequestParameters>

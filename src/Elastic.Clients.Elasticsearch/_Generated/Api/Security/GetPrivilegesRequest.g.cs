@@ -38,6 +38,21 @@ public sealed partial class GetPrivilegesRequestParameters : RequestParameters
 /// <para>
 /// Get application privileges.
 /// </para>
+/// <para>
+/// To use this API, you must have one of the following privileges:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The <c>read_security</c> cluster privilege (or a greater privilege such as <c>manage_security</c> or <c>all</c>).
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The "Manage Application Privileges" global privilege for the application being referenced in the request.
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
 public sealed partial class GetPrivilegesRequest : PlainRequest<GetPrivilegesRequestParameters>
 {
@@ -66,6 +81,21 @@ public sealed partial class GetPrivilegesRequest : PlainRequest<GetPrivilegesReq
 /// <para>
 /// Get application privileges.
 /// </para>
+/// <para>
+/// To use this API, you must have one of the following privileges:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The <c>read_security</c> cluster privilege (or a greater privilege such as <c>manage_security</c> or <c>all</c>).
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The "Manage Application Privileges" global privilege for the application being referenced in the request.
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
 public sealed partial class GetPrivilegesRequestDescriptor : RequestDescriptor<GetPrivilegesRequestDescriptor, GetPrivilegesRequestParameters>
 {

@@ -56,7 +56,8 @@ public sealed partial class ListRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Returns the existing search applications.
+/// Get search applications.
+/// Get information about search applications.
 /// </para>
 /// </summary>
 public sealed partial class ListRequest : PlainRequest<ListRequestParameters>
@@ -96,7 +97,8 @@ public sealed partial class ListRequest : PlainRequest<ListRequestParameters>
 
 /// <summary>
 /// <para>
-/// Returns the existing search applications.
+/// Get search applications.
+/// Get information about search applications.
 /// </para>
 /// </summary>
 public sealed partial class ListRequestDescriptor : RequestDescriptor<ListRequestDescriptor, ListRequestParameters>

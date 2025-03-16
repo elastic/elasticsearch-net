@@ -41,6 +41,25 @@ public sealed partial class UpdateCrossClusterApiKeyRequestParameters : RequestP
 /// <para>
 /// Update the attributes of an existing cross-cluster API key, which is used for API key based remote cluster access.
 /// </para>
+/// <para>
+/// To use this API, you must have at least the <c>manage_security</c> cluster privilege.
+/// Users can only update API keys that they created.
+/// To update another user's API key, use the <c>run_as</c> feature to submit a request on behalf of another user.
+/// </para>
+/// <para>
+/// IMPORTANT: It's not possible to use an API key as the authentication credential for this API.
+/// To update an API key, the owner user's credentials are required.
+/// </para>
+/// <para>
+/// It's not possible to update expired API keys, or API keys that have been invalidated by the invalidate API key API.
+/// </para>
+/// <para>
+/// This API supports updates to an API key's access scope, metadata, and expiration.
+/// The owner user's information, such as the <c>username</c> and <c>realm</c>, is also updated automatically on every call.
+/// </para>
+/// <para>
+/// NOTE: This API cannot update REST API keys, which should be updated by either the update API key or bulk update API keys API.
+/// </para>
 /// </summary>
 public sealed partial class UpdateCrossClusterApiKeyRequest : PlainRequest<UpdateCrossClusterApiKeyRequestParameters>
 {
@@ -69,7 +88,7 @@ public sealed partial class UpdateCrossClusterApiKeyRequest : PlainRequest<Updat
 
 	/// <summary>
 	/// <para>
-	/// Expiration time for the API key.
+	/// The expiration time for the API key.
 	/// By default, API keys never expire. This property can be omitted to leave the value unchanged.
 	/// </para>
 	/// </summary>
@@ -94,6 +113,25 @@ public sealed partial class UpdateCrossClusterApiKeyRequest : PlainRequest<Updat
 /// </para>
 /// <para>
 /// Update the attributes of an existing cross-cluster API key, which is used for API key based remote cluster access.
+/// </para>
+/// <para>
+/// To use this API, you must have at least the <c>manage_security</c> cluster privilege.
+/// Users can only update API keys that they created.
+/// To update another user's API key, use the <c>run_as</c> feature to submit a request on behalf of another user.
+/// </para>
+/// <para>
+/// IMPORTANT: It's not possible to use an API key as the authentication credential for this API.
+/// To update an API key, the owner user's credentials are required.
+/// </para>
+/// <para>
+/// It's not possible to update expired API keys, or API keys that have been invalidated by the invalidate API key API.
+/// </para>
+/// <para>
+/// This API supports updates to an API key's access scope, metadata, and expiration.
+/// The owner user's information, such as the <c>username</c> and <c>realm</c>, is also updated automatically on every call.
+/// </para>
+/// <para>
+/// NOTE: This API cannot update REST API keys, which should be updated by either the update API key or bulk update API keys API.
 /// </para>
 /// </summary>
 public sealed partial class UpdateCrossClusterApiKeyRequestDescriptor<TDocument> : RequestDescriptor<UpdateCrossClusterApiKeyRequestDescriptor<TDocument>, UpdateCrossClusterApiKeyRequestParameters>
@@ -158,7 +196,7 @@ public sealed partial class UpdateCrossClusterApiKeyRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Expiration time for the API key.
+	/// The expiration time for the API key.
 	/// By default, API keys never expire. This property can be omitted to leave the value unchanged.
 	/// </para>
 	/// </summary>
@@ -224,6 +262,25 @@ public sealed partial class UpdateCrossClusterApiKeyRequestDescriptor<TDocument>
 /// <para>
 /// Update the attributes of an existing cross-cluster API key, which is used for API key based remote cluster access.
 /// </para>
+/// <para>
+/// To use this API, you must have at least the <c>manage_security</c> cluster privilege.
+/// Users can only update API keys that they created.
+/// To update another user's API key, use the <c>run_as</c> feature to submit a request on behalf of another user.
+/// </para>
+/// <para>
+/// IMPORTANT: It's not possible to use an API key as the authentication credential for this API.
+/// To update an API key, the owner user's credentials are required.
+/// </para>
+/// <para>
+/// It's not possible to update expired API keys, or API keys that have been invalidated by the invalidate API key API.
+/// </para>
+/// <para>
+/// This API supports updates to an API key's access scope, metadata, and expiration.
+/// The owner user's information, such as the <c>username</c> and <c>realm</c>, is also updated automatically on every call.
+/// </para>
+/// <para>
+/// NOTE: This API cannot update REST API keys, which should be updated by either the update API key or bulk update API keys API.
+/// </para>
 /// </summary>
 public sealed partial class UpdateCrossClusterApiKeyRequestDescriptor : RequestDescriptor<UpdateCrossClusterApiKeyRequestDescriptor, UpdateCrossClusterApiKeyRequestParameters>
 {
@@ -287,7 +344,7 @@ public sealed partial class UpdateCrossClusterApiKeyRequestDescriptor : RequestD
 
 	/// <summary>
 	/// <para>
-	/// Expiration time for the API key.
+	/// The expiration time for the API key.
 	/// By default, API keys never expire. This property can be omitted to leave the value unchanged.
 	/// </para>
 	/// </summary>

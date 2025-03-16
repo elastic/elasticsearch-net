@@ -47,6 +47,8 @@ public sealed partial class RankFeatureProperty : IProperty
 	public bool? PositiveScoreImpact { get; set; }
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
+	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
+	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "rank_feature";
@@ -66,6 +68,7 @@ public sealed partial class RankFeaturePropertyDescriptor<TDocument> : Serializa
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private bool? PositiveScoreImpactValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public RankFeaturePropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 	{
@@ -136,6 +139,12 @@ public sealed partial class RankFeaturePropertyDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
+	public RankFeaturePropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -175,6 +184,12 @@ public sealed partial class RankFeaturePropertyDescriptor<TDocument> : Serializa
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("rank_feature");
 		writer.WriteEndObject();
@@ -187,7 +202,8 @@ public sealed partial class RankFeaturePropertyDescriptor<TDocument> : Serializa
 		IgnoreAbove = IgnoreAboveValue,
 		Meta = MetaValue,
 		PositiveScoreImpact = PositiveScoreImpactValue,
-		Properties = PropertiesValue
+		Properties = PropertiesValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }
 
@@ -205,6 +221,7 @@ public sealed partial class RankFeaturePropertyDescriptor : SerializableDescript
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private bool? PositiveScoreImpactValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public RankFeaturePropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 	{
@@ -275,6 +292,12 @@ public sealed partial class RankFeaturePropertyDescriptor : SerializableDescript
 		return Self;
 	}
 
+	public RankFeaturePropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -314,6 +337,12 @@ public sealed partial class RankFeaturePropertyDescriptor : SerializableDescript
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("rank_feature");
 		writer.WriteEndObject();
@@ -326,6 +355,7 @@ public sealed partial class RankFeaturePropertyDescriptor : SerializableDescript
 		IgnoreAbove = IgnoreAboveValue,
 		Meta = MetaValue,
 		PositiveScoreImpact = PositiveScoreImpactValue,
-		Properties = PropertiesValue
+		Properties = PropertiesValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }

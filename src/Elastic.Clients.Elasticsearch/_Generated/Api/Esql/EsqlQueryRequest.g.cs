@@ -111,6 +111,16 @@ public sealed partial class EsqlQueryRequest : PlainRequest<EsqlQueryRequestPara
 	/// </summary>
 	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// When set to <c>true</c> and performing a cross-cluster query, the response will include an extra <c>_clusters</c>
+	/// object with information about the clusters that participated in the search along with info such as shards
+	/// count.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("include_ccs_metadata")]
+	public bool? IncludeCcsMetadata { get; set; }
 	[JsonInclude, JsonPropertyName("locale")]
 	public string? Locale { get; set; }
 
@@ -172,6 +182,7 @@ public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescr
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
+	private bool? IncludeCcsMetadataValue { get; set; }
 	private string? LocaleValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? ParamsValue { get; set; }
 	private bool? ProfileValue { get; set; }
@@ -214,6 +225,19 @@ public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescr
 		FilterValue = null;
 		FilterDescriptor = null;
 		FilterDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// When set to <c>true</c> and performing a cross-cluster query, the response will include an extra <c>_clusters</c>
+	/// object with information about the clusters that participated in the search along with info such as shards
+	/// count.
+	/// </para>
+	/// </summary>
+	public EsqlQueryRequestDescriptor<TDocument> IncludeCcsMetadata(bool? includeCcsMetadata = true)
+	{
+		IncludeCcsMetadataValue = includeCcsMetadata;
 		return Self;
 	}
 
@@ -284,6 +308,12 @@ public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescr
 			JsonSerializer.Serialize(writer, FilterValue, options);
 		}
 
+		if (IncludeCcsMetadataValue.HasValue)
+		{
+			writer.WritePropertyName("include_ccs_metadata");
+			writer.WriteBooleanValue(IncludeCcsMetadataValue.Value);
+		}
+
 		if (!string.IsNullOrEmpty(LocaleValue))
 		{
 			writer.WritePropertyName("locale");
@@ -338,6 +368,7 @@ public sealed partial class EsqlQueryRequestDescriptor : RequestDescriptor<EsqlQ
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
+	private bool? IncludeCcsMetadataValue { get; set; }
 	private string? LocaleValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? ParamsValue { get; set; }
 	private bool? ProfileValue { get; set; }
@@ -380,6 +411,19 @@ public sealed partial class EsqlQueryRequestDescriptor : RequestDescriptor<EsqlQ
 		FilterValue = null;
 		FilterDescriptor = null;
 		FilterDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// When set to <c>true</c> and performing a cross-cluster query, the response will include an extra <c>_clusters</c>
+	/// object with information about the clusters that participated in the search along with info such as shards
+	/// count.
+	/// </para>
+	/// </summary>
+	public EsqlQueryRequestDescriptor IncludeCcsMetadata(bool? includeCcsMetadata = true)
+	{
+		IncludeCcsMetadataValue = includeCcsMetadata;
 		return Self;
 	}
 
@@ -448,6 +492,12 @@ public sealed partial class EsqlQueryRequestDescriptor : RequestDescriptor<EsqlQ
 		{
 			writer.WritePropertyName("filter");
 			JsonSerializer.Serialize(writer, FilterValue, options);
+		}
+
+		if (IncludeCcsMetadataValue.HasValue)
+		{
+			writer.WritePropertyName("include_ccs_metadata");
+			writer.WriteBooleanValue(IncludeCcsMetadataValue.Value);
 		}
 
 		if (!string.IsNullOrEmpty(LocaleValue))

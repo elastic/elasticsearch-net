@@ -29,56 +29,14 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public sealed partial class DenseVectorIndexOptions
 {
-	/// <summary>
-	/// <para>
-	/// The confidence interval to use when quantizing the vectors. Can be any value between and including <c>0.90</c> and
-	/// <c>1.0</c> or exactly <c>0</c>. When the value is <c>0</c>, this indicates that dynamic quantiles should be calculated for
-	/// optimized quantization. When between <c>0.90</c> and <c>1.0</c>, this value restricts the values used when calculating
-	/// the quantization thresholds.
-	/// </para>
-	/// <para>
-	/// For example, a value of <c>0.95</c> will only use the middle <c>95%</c> of the values when calculating the quantization
-	/// thresholds (e.g. the highest and lowest <c>2.5%</c> of values will be ignored).
-	/// </para>
-	/// <para>
-	/// Defaults to <c>1/(dims + 1)</c> for <c>int8</c> quantized vectors and <c>0</c> for <c>int4</c> for dynamic quantile calculation.
-	/// </para>
-	/// <para>
-	/// Only applicable to <c>int8_hnsw</c>, <c>int4_hnsw</c>, <c>int8_flat</c>, and <c>int4_flat</c> index types.
-	/// </para>
-	/// </summary>
 	[JsonInclude, JsonPropertyName("confidence_interval")]
 	public float? ConfidenceInterval { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The number of candidates to track while assembling the list of nearest neighbors for each new node.
-	/// </para>
-	/// <para>
-	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, and <c>int4_hnsw</c> index types.
-	/// </para>
-	/// </summary>
 	[JsonInclude, JsonPropertyName("ef_construction")]
 	public int? EfConstruction { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The number of neighbors each node will be connected to in the HNSW graph.
-	/// </para>
-	/// <para>
-	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, and <c>int4_hnsw</c> index types.
-	/// </para>
-	/// </summary>
 	[JsonInclude, JsonPropertyName("m")]
 	public int? m { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The type of kNN algorithm to use.
-	/// </para>
-	/// </summary>
 	[JsonInclude, JsonPropertyName("type")]
-	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType Type { get; set; }
+	public string Type { get; set; }
 }
 
 public sealed partial class DenseVectorIndexOptionsDescriptor : SerializableDescriptor<DenseVectorIndexOptionsDescriptor>
@@ -92,66 +50,27 @@ public sealed partial class DenseVectorIndexOptionsDescriptor : SerializableDesc
 	private float? ConfidenceIntervalValue { get; set; }
 	private int? EfConstructionValue { get; set; }
 	private int? mValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType TypeValue { get; set; }
+	private string TypeValue { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The confidence interval to use when quantizing the vectors. Can be any value between and including <c>0.90</c> and
-	/// <c>1.0</c> or exactly <c>0</c>. When the value is <c>0</c>, this indicates that dynamic quantiles should be calculated for
-	/// optimized quantization. When between <c>0.90</c> and <c>1.0</c>, this value restricts the values used when calculating
-	/// the quantization thresholds.
-	/// </para>
-	/// <para>
-	/// For example, a value of <c>0.95</c> will only use the middle <c>95%</c> of the values when calculating the quantization
-	/// thresholds (e.g. the highest and lowest <c>2.5%</c> of values will be ignored).
-	/// </para>
-	/// <para>
-	/// Defaults to <c>1/(dims + 1)</c> for <c>int8</c> quantized vectors and <c>0</c> for <c>int4</c> for dynamic quantile calculation.
-	/// </para>
-	/// <para>
-	/// Only applicable to <c>int8_hnsw</c>, <c>int4_hnsw</c>, <c>int8_flat</c>, and <c>int4_flat</c> index types.
-	/// </para>
-	/// </summary>
 	public DenseVectorIndexOptionsDescriptor ConfidenceInterval(float? confidenceInterval)
 	{
 		ConfidenceIntervalValue = confidenceInterval;
 		return Self;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of candidates to track while assembling the list of nearest neighbors for each new node.
-	/// </para>
-	/// <para>
-	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, and <c>int4_hnsw</c> index types.
-	/// </para>
-	/// </summary>
 	public DenseVectorIndexOptionsDescriptor EfConstruction(int? efConstruction)
 	{
 		EfConstructionValue = efConstruction;
 		return Self;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of neighbors each node will be connected to in the HNSW graph.
-	/// </para>
-	/// <para>
-	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, and <c>int4_hnsw</c> index types.
-	/// </para>
-	/// </summary>
 	public DenseVectorIndexOptionsDescriptor m(int? m)
 	{
 		mValue = m;
 		return Self;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of kNN algorithm to use.
-	/// </para>
-	/// </summary>
-	public DenseVectorIndexOptionsDescriptor Type(Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType type)
+	public DenseVectorIndexOptionsDescriptor Type(string type)
 	{
 		TypeValue = type;
 		return Self;
@@ -179,7 +98,7 @@ public sealed partial class DenseVectorIndexOptionsDescriptor : SerializableDesc
 		}
 
 		writer.WritePropertyName("type");
-		JsonSerializer.Serialize(writer, TypeValue, options);
+		writer.WriteStringValue(TypeValue);
 		writer.WriteEndObject();
 	}
 }

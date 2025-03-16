@@ -103,7 +103,7 @@ public sealed partial class FindMessageStructureRequestParameters : RequestParam
 	/// <para>
 	/// If the format is <c>delimited</c>, you can specify whether values between delimiters should have whitespace trimmed from them.
 	/// If this parameter is not specified and the delimiter is pipe (<c>|</c>), the default value is true.
-	/// Otherwise, the default value is false.
+	/// Otherwise, the default value is <c>false</c>.
 	/// </para>
 	/// </summary>
 	public bool? ShouldTrimFields { get => Q<bool?>("should_trim_fields"); set => Q("should_trim_fields", value); }
@@ -266,6 +266,8 @@ public sealed partial class FindMessageStructureRequestParameters : RequestParam
 /// <para>
 /// This API provides a starting point for ingesting data into Elasticsearch in a format that is suitable for subsequent use with other Elastic Stack functionality.
 /// Use this API rather than the find text structure API if your input text has already been split up into separate messages by some other process.
+/// </para>
+/// <para>
 /// The response from the API contains:
 /// </para>
 /// <list type="bullet">
@@ -289,6 +291,10 @@ public sealed partial class FindMessageStructureRequestParameters : RequestParam
 /// <para>
 /// All this information can be calculated by the structure finder with no guidance.
 /// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+/// </para>
+/// <para>
+/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+/// It helps determine why the returned structure was chosen.
 /// </para>
 /// </summary>
 public sealed partial class FindMessageStructureRequest : PlainRequest<FindMessageStructureRequestParameters>
@@ -379,7 +385,7 @@ public sealed partial class FindMessageStructureRequest : PlainRequest<FindMessa
 	/// <para>
 	/// If the format is <c>delimited</c>, you can specify whether values between delimiters should have whitespace trimmed from them.
 	/// If this parameter is not specified and the delimiter is pipe (<c>|</c>), the default value is true.
-	/// Otherwise, the default value is false.
+	/// Otherwise, the default value is <c>false</c>.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -554,6 +560,8 @@ public sealed partial class FindMessageStructureRequest : PlainRequest<FindMessa
 /// <para>
 /// This API provides a starting point for ingesting data into Elasticsearch in a format that is suitable for subsequent use with other Elastic Stack functionality.
 /// Use this API rather than the find text structure API if your input text has already been split up into separate messages by some other process.
+/// </para>
+/// <para>
 /// The response from the API contains:
 /// </para>
 /// <list type="bullet">
@@ -577,6 +585,10 @@ public sealed partial class FindMessageStructureRequest : PlainRequest<FindMessa
 /// <para>
 /// All this information can be calculated by the structure finder with no guidance.
 /// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+/// </para>
+/// <para>
+/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+/// It helps determine why the returned structure was chosen.
 /// </para>
 /// </summary>
 public sealed partial class FindMessageStructureRequestDescriptor<TDocument> : RequestDescriptor<FindMessageStructureRequestDescriptor<TDocument>, FindMessageStructureRequestParameters>
@@ -638,6 +650,8 @@ public sealed partial class FindMessageStructureRequestDescriptor<TDocument> : R
 /// <para>
 /// This API provides a starting point for ingesting data into Elasticsearch in a format that is suitable for subsequent use with other Elastic Stack functionality.
 /// Use this API rather than the find text structure API if your input text has already been split up into separate messages by some other process.
+/// </para>
+/// <para>
 /// The response from the API contains:
 /// </para>
 /// <list type="bullet">
@@ -661,6 +675,10 @@ public sealed partial class FindMessageStructureRequestDescriptor<TDocument> : R
 /// <para>
 /// All this information can be calculated by the structure finder with no guidance.
 /// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+/// </para>
+/// <para>
+/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
+/// It helps determine why the returned structure was chosen.
 /// </para>
 /// </summary>
 public sealed partial class FindMessageStructureRequestDescriptor : RequestDescriptor<FindMessageStructureRequestDescriptor, FindMessageStructureRequestParameters>

@@ -82,7 +82,7 @@ public sealed partial class ScrollRequest : PlainRequest<ScrollRequestParameters
 
 	/// <summary>
 	/// <para>
-	/// Period to retain the search context for scrolling.
+	/// The period to retain the search context for scrolling.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("scroll")]
@@ -90,7 +90,7 @@ public sealed partial class ScrollRequest : PlainRequest<ScrollRequestParameters
 
 	/// <summary>
 	/// <para>
-	/// Scroll ID of the search.
+	/// The scroll ID of the search.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("scroll_id")]
@@ -142,7 +142,7 @@ public sealed partial class ScrollRequestDescriptor : RequestDescriptor<ScrollRe
 
 	/// <summary>
 	/// <para>
-	/// Period to retain the search context for scrolling.
+	/// The period to retain the search context for scrolling.
 	/// </para>
 	/// </summary>
 	public ScrollRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Duration? scroll)
@@ -153,7 +153,7 @@ public sealed partial class ScrollRequestDescriptor : RequestDescriptor<ScrollRe
 
 	/// <summary>
 	/// <para>
-	/// Scroll ID of the search.
+	/// The scroll ID of the search.
 	/// </para>
 	/// </summary>
 	public ScrollRequestDescriptor ScrollId(Elastic.Clients.Elasticsearch.ScrollId scrollId)

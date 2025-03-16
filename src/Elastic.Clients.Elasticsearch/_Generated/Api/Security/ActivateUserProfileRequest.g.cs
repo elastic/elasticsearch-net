@@ -41,6 +41,20 @@ public sealed partial class ActivateUserProfileRequestParameters : RequestParame
 /// <para>
 /// Create or update a user profile on behalf of another user.
 /// </para>
+/// <para>
+/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions.
+/// Individual users and external applications should not call this API directly.
+/// The calling application must have either an <c>access_token</c> or a combination of <c>username</c> and <c>password</c> for the user that the profile document is intended for.
+/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
+/// </para>
+/// <para>
+/// This API creates or updates a profile document for end users with information that is extracted from the user's authentication object including <c>username</c>, <c>full_name,</c> <c>roles</c>, and the authentication realm.
+/// For example, in the JWT <c>access_token</c> case, the profile user's <c>username</c> is extracted from the JWT token claim pointed to by the <c>claims.principal</c> setting of the JWT realm that authenticated the token.
+/// </para>
+/// <para>
+/// When updating a profile document, the API enables the document if it was disabled.
+/// Any updates do not change existing content for either the <c>labels</c> or <c>data</c> fields.
+/// </para>
 /// </summary>
 public sealed partial class ActivateUserProfileRequest : PlainRequest<ActivateUserProfileRequestParameters>
 {
@@ -52,12 +66,42 @@ public sealed partial class ActivateUserProfileRequest : PlainRequest<ActivateUs
 
 	internal override string OperationName => "security.activate_user_profile";
 
+	/// <summary>
+	/// <para>
+	/// The user's Elasticsearch access token or JWT.
+	/// Both <c>access</c> and <c>id</c> JWT token types are supported and they depend on the underlying JWT realm configuration.
+	/// If you specify the <c>access_token</c> grant type, this parameter is required.
+	/// It is not valid with other grant types.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("access_token")]
 	public string? AccessToken { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The type of grant.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("grant_type")]
 	public Elastic.Clients.Elasticsearch.Security.GrantType GrantType { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The user's password.
+	/// If you specify the <c>password</c> grant type, this parameter is required.
+	/// It is not valid with other grant types.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("password")]
 	public string? Password { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The username that identifies the user.
+	/// If you specify the <c>password</c> grant type, this parameter is required.
+	/// It is not valid with other grant types.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("username")]
 	public string? Username { get; set; }
 }
@@ -68,6 +112,20 @@ public sealed partial class ActivateUserProfileRequest : PlainRequest<ActivateUs
 /// </para>
 /// <para>
 /// Create or update a user profile on behalf of another user.
+/// </para>
+/// <para>
+/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions.
+/// Individual users and external applications should not call this API directly.
+/// The calling application must have either an <c>access_token</c> or a combination of <c>username</c> and <c>password</c> for the user that the profile document is intended for.
+/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
+/// </para>
+/// <para>
+/// This API creates or updates a profile document for end users with information that is extracted from the user's authentication object including <c>username</c>, <c>full_name,</c> <c>roles</c>, and the authentication realm.
+/// For example, in the JWT <c>access_token</c> case, the profile user's <c>username</c> is extracted from the JWT token claim pointed to by the <c>claims.principal</c> setting of the JWT realm that authenticated the token.
+/// </para>
+/// <para>
+/// When updating a profile document, the API enables the document if it was disabled.
+/// Any updates do not change existing content for either the <c>labels</c> or <c>data</c> fields.
 /// </para>
 /// </summary>
 public sealed partial class ActivateUserProfileRequestDescriptor : RequestDescriptor<ActivateUserProfileRequestDescriptor, ActivateUserProfileRequestParameters>
@@ -91,24 +149,51 @@ public sealed partial class ActivateUserProfileRequestDescriptor : RequestDescri
 	private string? PasswordValue { get; set; }
 	private string? UsernameValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// The user's Elasticsearch access token or JWT.
+	/// Both <c>access</c> and <c>id</c> JWT token types are supported and they depend on the underlying JWT realm configuration.
+	/// If you specify the <c>access_token</c> grant type, this parameter is required.
+	/// It is not valid with other grant types.
+	/// </para>
+	/// </summary>
 	public ActivateUserProfileRequestDescriptor AccessToken(string? accessToken)
 	{
 		AccessTokenValue = accessToken;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The type of grant.
+	/// </para>
+	/// </summary>
 	public ActivateUserProfileRequestDescriptor GrantType(Elastic.Clients.Elasticsearch.Security.GrantType grantType)
 	{
 		GrantTypeValue = grantType;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The user's password.
+	/// If you specify the <c>password</c> grant type, this parameter is required.
+	/// It is not valid with other grant types.
+	/// </para>
+	/// </summary>
 	public ActivateUserProfileRequestDescriptor Password(string? password)
 	{
 		PasswordValue = password;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The username that identifies the user.
+	/// If you specify the <c>password</c> grant type, this parameter is required.
+	/// It is not valid with other grant types.
+	/// </para>
+	/// </summary>
 	public ActivateUserProfileRequestDescriptor Username(string? username)
 	{
 		UsernameValue = username;

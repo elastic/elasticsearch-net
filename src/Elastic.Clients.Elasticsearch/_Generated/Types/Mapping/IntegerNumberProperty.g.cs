@@ -66,6 +66,8 @@ public sealed partial class IntegerNumberProperty : IProperty
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
+	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
+	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -112,6 +114,7 @@ public sealed partial class IntegerNumberPropertyDescriptor<TDocument> : Seriali
 	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private bool? StoreValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 	private bool? TimeSeriesDimensionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
 
@@ -256,6 +259,12 @@ public sealed partial class IntegerNumberPropertyDescriptor<TDocument> : Seriali
 		return Self;
 	}
 
+	public IntegerNumberPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>
 	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
@@ -381,6 +390,12 @@ public sealed partial class IntegerNumberPropertyDescriptor<TDocument> : Seriali
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		if (TimeSeriesDimensionValue.HasValue)
 		{
 			writer.WritePropertyName("time_series_dimension");
@@ -439,6 +454,7 @@ public sealed partial class IntegerNumberPropertyDescriptor<TDocument> : Seriali
 		Properties = PropertiesValue,
 		Script = BuildScript(),
 		Store = StoreValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue,
 		TimeSeriesDimension = TimeSeriesDimensionValue,
 		TimeSeriesMetric = TimeSeriesMetricValue
 	};
@@ -469,6 +485,7 @@ public sealed partial class IntegerNumberPropertyDescriptor : SerializableDescri
 	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private bool? StoreValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 	private bool? TimeSeriesDimensionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
 
@@ -613,6 +630,12 @@ public sealed partial class IntegerNumberPropertyDescriptor : SerializableDescri
 		return Self;
 	}
 
+	public IntegerNumberPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>
 	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
@@ -738,6 +761,12 @@ public sealed partial class IntegerNumberPropertyDescriptor : SerializableDescri
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		if (TimeSeriesDimensionValue.HasValue)
 		{
 			writer.WritePropertyName("time_series_dimension");
@@ -796,6 +825,7 @@ public sealed partial class IntegerNumberPropertyDescriptor : SerializableDescri
 		Properties = PropertiesValue,
 		Script = BuildScript(),
 		Store = StoreValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue,
 		TimeSeriesDimension = TimeSeriesDimensionValue,
 		TimeSeriesMetric = TimeSeriesMetricValue
 	};

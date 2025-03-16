@@ -44,11 +44,13 @@ public sealed partial class MappingLimitSettings
 	[JsonInclude, JsonPropertyName("field_name_length")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLength? FieldNameLength { get; set; }
 	[JsonInclude, JsonPropertyName("ignore_malformed")]
-	public bool? IgnoreMalformed { get; set; }
+	public object? IgnoreMalformed { get; set; }
 	[JsonInclude, JsonPropertyName("nested_fields")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFields? NestedFields { get; set; }
 	[JsonInclude, JsonPropertyName("nested_objects")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjects? NestedObjects { get; set; }
+	[JsonInclude, JsonPropertyName("source")]
+	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsSourceFields? Source { get; set; }
 	[JsonInclude, JsonPropertyName("total_fields")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields? TotalFields { get; set; }
 }
@@ -77,13 +79,16 @@ public sealed partial class MappingLimitSettingsDescriptor : SerializableDescrip
 	private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLength? FieldNameLengthValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLengthDescriptor FieldNameLengthDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLengthDescriptor> FieldNameLengthDescriptorAction { get; set; }
-	private bool? IgnoreMalformedValue { get; set; }
+	private object? IgnoreMalformedValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFields? NestedFieldsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFieldsDescriptor NestedFieldsDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFieldsDescriptor> NestedFieldsDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjects? NestedObjectsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjectsDescriptor NestedObjectsDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjectsDescriptor> NestedObjectsDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsSourceFields? SourceValue { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsSourceFieldsDescriptor SourceDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsSourceFieldsDescriptor> SourceDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields? TotalFieldsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFieldsDescriptor TotalFieldsDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFieldsDescriptor> TotalFieldsDescriptorAction { get; set; }
@@ -166,7 +171,7 @@ public sealed partial class MappingLimitSettingsDescriptor : SerializableDescrip
 		return Self;
 	}
 
-	public MappingLimitSettingsDescriptor IgnoreMalformed(bool? ignoreMalformed = true)
+	public MappingLimitSettingsDescriptor IgnoreMalformed(object? ignoreMalformed)
 	{
 		IgnoreMalformedValue = ignoreMalformed;
 		return Self;
@@ -217,6 +222,30 @@ public sealed partial class MappingLimitSettingsDescriptor : SerializableDescrip
 		NestedObjectsValue = null;
 		NestedObjectsDescriptor = null;
 		NestedObjectsDescriptorAction = configure;
+		return Self;
+	}
+
+	public MappingLimitSettingsDescriptor Source(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsSourceFields? source)
+	{
+		SourceDescriptor = null;
+		SourceDescriptorAction = null;
+		SourceValue = source;
+		return Self;
+	}
+
+	public MappingLimitSettingsDescriptor Source(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsSourceFieldsDescriptor descriptor)
+	{
+		SourceValue = null;
+		SourceDescriptorAction = null;
+		SourceDescriptor = descriptor;
+		return Self;
+	}
+
+	public MappingLimitSettingsDescriptor Source(Action<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsSourceFieldsDescriptor> configure)
+	{
+		SourceValue = null;
+		SourceDescriptor = null;
+		SourceDescriptorAction = configure;
 		return Self;
 	}
 
@@ -301,10 +330,10 @@ public sealed partial class MappingLimitSettingsDescriptor : SerializableDescrip
 			JsonSerializer.Serialize(writer, FieldNameLengthValue, options);
 		}
 
-		if (IgnoreMalformedValue.HasValue)
+		if (IgnoreMalformedValue is not null)
 		{
 			writer.WritePropertyName("ignore_malformed");
-			writer.WriteBooleanValue(IgnoreMalformedValue.Value);
+			JsonSerializer.Serialize(writer, IgnoreMalformedValue, options);
 		}
 
 		if (NestedFieldsDescriptor is not null)
@@ -337,6 +366,22 @@ public sealed partial class MappingLimitSettingsDescriptor : SerializableDescrip
 		{
 			writer.WritePropertyName("nested_objects");
 			JsonSerializer.Serialize(writer, NestedObjectsValue, options);
+		}
+
+		if (SourceDescriptor is not null)
+		{
+			writer.WritePropertyName("source");
+			JsonSerializer.Serialize(writer, SourceDescriptor, options);
+		}
+		else if (SourceDescriptorAction is not null)
+		{
+			writer.WritePropertyName("source");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsSourceFieldsDescriptor(SourceDescriptorAction), options);
+		}
+		else if (SourceValue is not null)
+		{
+			writer.WritePropertyName("source");
+			JsonSerializer.Serialize(writer, SourceValue, options);
 		}
 
 		if (TotalFieldsDescriptor is not null)

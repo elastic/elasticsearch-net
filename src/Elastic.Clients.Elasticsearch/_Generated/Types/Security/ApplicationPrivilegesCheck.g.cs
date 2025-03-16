@@ -39,7 +39,8 @@ public sealed partial class ApplicationPrivilegesCheck
 
 	/// <summary>
 	/// <para>
-	/// A list of the privileges that you want to check for the specified resources. May be either application privilege names, or the names of actions that are granted by those privileges
+	/// A list of the privileges that you want to check for the specified resources.
+	/// It may be either application privilege names or the names of actions that are granted by those privileges
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("privileges")]
@@ -47,7 +48,7 @@ public sealed partial class ApplicationPrivilegesCheck
 
 	/// <summary>
 	/// <para>
-	/// A list of resource names against which the privileges should be checked
+	/// A list of resource names against which the privileges should be checked.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("resources")]
@@ -79,7 +80,8 @@ public sealed partial class ApplicationPrivilegesCheckDescriptor : SerializableD
 
 	/// <summary>
 	/// <para>
-	/// A list of the privileges that you want to check for the specified resources. May be either application privilege names, or the names of actions that are granted by those privileges
+	/// A list of the privileges that you want to check for the specified resources.
+	/// It may be either application privilege names or the names of actions that are granted by those privileges
 	/// </para>
 	/// </summary>
 	public ApplicationPrivilegesCheckDescriptor Privileges(ICollection<string> privileges)
@@ -90,7 +92,7 @@ public sealed partial class ApplicationPrivilegesCheckDescriptor : SerializableD
 
 	/// <summary>
 	/// <para>
-	/// A list of resource names against which the privileges should be checked
+	/// A list of resource names against which the privileges should be checked.
 	/// </para>
 	/// </summary>
 	public ApplicationPrivilegesCheckDescriptor Resources(ICollection<string> resources)
