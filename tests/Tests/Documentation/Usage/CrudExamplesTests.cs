@@ -56,7 +56,7 @@ var tweet = new Tweet // <1>
     Message = "Trying out the client, so far so good?"
 };
 
-var response = await client.IndexAsync(tweet, "my-tweet-index"); // <2>
+var response = await client.IndexAsync(tweet, (IndexName)"my-tweet-index"); // <2>
 
 if (response.IsValidResponse) // <3>
 {
