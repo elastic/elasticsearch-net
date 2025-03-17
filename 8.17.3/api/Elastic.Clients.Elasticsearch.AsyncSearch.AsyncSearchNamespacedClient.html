@@ -1,0 +1,2668 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class AsyncSearchNamespacedClient | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class AsyncSearchNamespacedClient | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.17.3/apiSpec/new?filename=Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient" class="text-break">
+Class AsyncSearchNamespacedClient  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L27"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.html">AsyncSearch</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class AsyncSearchNamespacedClient : NamespacedClientProxy</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.NamespacedClientProxy.html">NamespacedClientProxy</a></div>
+      <div><span class="xref">AsyncSearchNamespacedClient</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.NamespacedClientProxy.html#Elastic_Clients_Elasticsearch_NamespacedClientProxy_Client">NamespacedClientProxy.Client</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient__ctor_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient__ctor" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.#ctor">
+  AsyncSearchNamespacedClient()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L34"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Initializes a new instance of the <a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.html">AsyncSearchNamespacedClient</a> class for mocking.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected AsyncSearchNamespacedClient()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Delete_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Delete*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Delete_Elastic_Clients_Elasticsearch_AsyncSearch_DeleteAsyncSearchRequest_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Delete(Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequest)">
+  Delete(DeleteAsyncSearchRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L53"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete an async search.
+</p>
+<p>
+If the asynchronous search is still running, it is cancelled.
+Otherwise, the saved search results are deleted.
+If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <code>cancel_task</code> cluster privilege.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual DeleteAsyncSearchResponse Delete(DeleteAsyncSearchRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequest.html">DeleteAsyncSearchRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchResponse.html">DeleteAsyncSearchResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Delete_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Delete*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Delete_Elastic_Clients_Elasticsearch_AsyncSearch_DeleteAsyncSearchRequestDescriptor_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Delete(Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor)">
+  Delete(DeleteAsyncSearchRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L145"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete an async search.
+</p>
+<p>
+If the asynchronous search is still running, it is cancelled.
+Otherwise, the saved search results are deleted.
+If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <code>cancel_task</code> cluster privilege.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual DeleteAsyncSearchResponse Delete(DeleteAsyncSearchRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor.html">DeleteAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchResponse.html">DeleteAsyncSearchResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Delete_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Delete*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Delete_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Delete(Elastic.Clients.Elasticsearch.Id)">
+  Delete(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L163"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete an async search.
+</p>
+<p>
+If the asynchronous search is still running, it is cancelled.
+Otherwise, the saved search results are deleted.
+If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <code>cancel_task</code> cluster privilege.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual DeleteAsyncSearchResponse Delete(Id id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchResponse.html">DeleteAsyncSearchResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Delete_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Delete*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Delete_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_AsyncSearch_DeleteAsyncSearchRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Delete(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor})">
+  Delete(Id, Action&lt;DeleteAsyncSearchRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L182"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete an async search.
+</p>
+<p>
+If the asynchronous search is still running, it is cancelled.
+Otherwise, the saved search results are deleted.
+If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <code>cancel_task</code> cluster privilege.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual DeleteAsyncSearchResponse Delete(Id id, Action&lt;DeleteAsyncSearchRequestDescriptor&gt; configureRequest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor.html">DeleteAsyncSearchRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchResponse.html">DeleteAsyncSearchResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_DeleteAsync_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.DeleteAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_DeleteAsync_Elastic_Clients_Elasticsearch_AsyncSearch_DeleteAsyncSearchRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.DeleteAsync(Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequest,System.Threading.CancellationToken)">
+  DeleteAsync(DeleteAsyncSearchRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L71"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete an async search.
+</p>
+<p>
+If the asynchronous search is still running, it is cancelled.
+Otherwise, the saved search results are deleted.
+If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <code>cancel_task</code> cluster privilege.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteAsyncSearchResponse&gt; DeleteAsync(DeleteAsyncSearchRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequest.html">DeleteAsyncSearchRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchResponse.html">DeleteAsyncSearchResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_DeleteAsync_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.DeleteAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_DeleteAsync_Elastic_Clients_Elasticsearch_AsyncSearch_DeleteAsyncSearchRequestDescriptor_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.DeleteAsync(Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor,System.Threading.CancellationToken)">
+  DeleteAsync(DeleteAsyncSearchRequestDescriptor, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L256"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete an async search.
+</p>
+<p>
+If the asynchronous search is still running, it is cancelled.
+Otherwise, the saved search results are deleted.
+If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <code>cancel_task</code> cluster privilege.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteAsyncSearchResponse&gt; DeleteAsync(DeleteAsyncSearchRequestDescriptor descriptor, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor.html">DeleteAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchResponse.html">DeleteAsyncSearchResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_DeleteAsync_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.DeleteAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_DeleteAsync_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_AsyncSearch_DeleteAsyncSearchRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.DeleteAsync(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor},System.Threading.CancellationToken)">
+  DeleteAsync(Id, Action&lt;DeleteAsyncSearchRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L291"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete an async search.
+</p>
+<p>
+If the asynchronous search is still running, it is cancelled.
+Otherwise, the saved search results are deleted.
+If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <code>cancel_task</code> cluster privilege.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteAsyncSearchResponse&gt; DeleteAsync(Id id, Action&lt;DeleteAsyncSearchRequestDescriptor&gt; configureRequest, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor.html">DeleteAsyncSearchRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchResponse.html">DeleteAsyncSearchResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_DeleteAsync_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.DeleteAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_DeleteAsync_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.DeleteAsync(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  DeleteAsync(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L273"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete an async search.
+</p>
+<p>
+If the asynchronous search is still running, it is cancelled.
+Otherwise, the saved search results are deleted.
+If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <code>cancel_task</code> cluster privilege.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteAsyncSearchResponse&gt; DeleteAsync(Id id, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchResponse.html">DeleteAsyncSearchResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_DeleteAsync_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.DeleteAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_DeleteAsync__1_Elastic_Clients_Elasticsearch_AsyncSearch_DeleteAsyncSearchRequestDescriptor___0__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.DeleteAsync``1(Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor{``0},System.Threading.CancellationToken)">
+  DeleteAsync&lt;TDocument&gt;(DeleteAsyncSearchRequestDescriptor&lt;TDocument&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L202"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete an async search.
+</p>
+<p>
+If the asynchronous search is still running, it is cancelled.
+Otherwise, the saved search results are deleted.
+If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <code>cancel_task</code> cluster privilege.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteAsyncSearchResponse&gt; DeleteAsync&lt;TDocument&gt;(DeleteAsyncSearchRequestDescriptor&lt;TDocument&gt; descriptor, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor-1.html">DeleteAsyncSearchRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchResponse.html">DeleteAsyncSearchResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_DeleteAsync_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.DeleteAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_DeleteAsync__1_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_AsyncSearch_DeleteAsyncSearchRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.DeleteAsync``1(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  DeleteAsync&lt;TDocument&gt;(Id, Action&lt;DeleteAsyncSearchRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L237"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete an async search.
+</p>
+<p>
+If the asynchronous search is still running, it is cancelled.
+Otherwise, the saved search results are deleted.
+If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <code>cancel_task</code> cluster privilege.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteAsyncSearchResponse&gt; DeleteAsync&lt;TDocument&gt;(Id id, Action&lt;DeleteAsyncSearchRequestDescriptor&lt;TDocument&gt;&gt; configureRequest, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor-1.html">DeleteAsyncSearchRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchResponse.html">DeleteAsyncSearchResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_DeleteAsync_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.DeleteAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_DeleteAsync__1_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.DeleteAsync``1(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  DeleteAsync&lt;TDocument&gt;(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L219"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete an async search.
+</p>
+<p>
+If the asynchronous search is still running, it is cancelled.
+Otherwise, the saved search results are deleted.
+If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <code>cancel_task</code> cluster privilege.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteAsyncSearchResponse&gt; DeleteAsync&lt;TDocument&gt;(Id id, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchResponse.html">DeleteAsyncSearchResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Delete_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Delete*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Delete__1_Elastic_Clients_Elasticsearch_AsyncSearch_DeleteAsyncSearchRequestDescriptor___0__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Delete``1(Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor{``0})">
+  Delete&lt;TDocument&gt;(DeleteAsyncSearchRequestDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L88"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete an async search.
+</p>
+<p>
+If the asynchronous search is still running, it is cancelled.
+Otherwise, the saved search results are deleted.
+If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <code>cancel_task</code> cluster privilege.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual DeleteAsyncSearchResponse Delete&lt;TDocument&gt;(DeleteAsyncSearchRequestDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor-1.html">DeleteAsyncSearchRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchResponse.html">DeleteAsyncSearchResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Delete_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Delete*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Delete__1_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Delete``1(Elastic.Clients.Elasticsearch.Id)">
+  Delete&lt;TDocument&gt;(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L106"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete an async search.
+</p>
+<p>
+If the asynchronous search is still running, it is cancelled.
+Otherwise, the saved search results are deleted.
+If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <code>cancel_task</code> cluster privilege.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual DeleteAsyncSearchResponse Delete&lt;TDocument&gt;(Id id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchResponse.html">DeleteAsyncSearchResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Delete_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Delete*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Delete__1_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_AsyncSearch_DeleteAsyncSearchRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Delete``1(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor{``0}})">
+  Delete&lt;TDocument&gt;(Id, Action&lt;DeleteAsyncSearchRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L125"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete an async search.
+</p>
+<p>
+If the asynchronous search is still running, it is cancelled.
+Otherwise, the saved search results are deleted.
+If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <code>cancel_task</code> cluster privilege.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual DeleteAsyncSearchResponse Delete&lt;TDocument&gt;(Id id, Action&lt;DeleteAsyncSearchRequestDescriptor&lt;TDocument&gt;&gt; configureRequest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor-1.html">DeleteAsyncSearchRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchResponse.html">DeleteAsyncSearchResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_GetAsync_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.GetAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_GetAsync__1_Elastic_Clients_Elasticsearch_AsyncSearch_GetAsyncSearchRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.GetAsync``1(Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequest,System.Threading.CancellationToken)">
+  GetAsync&lt;TDocument&gt;(GetAsyncSearchRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L326"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get async search results.
+</p>
+<p>
+Retrieve the results of a previously submitted asynchronous search request.
+If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetAsyncSearchResponse&lt;TDocument&gt;&gt; GetAsync&lt;TDocument&gt;(GetAsyncSearchRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequest.html">GetAsyncSearchRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchResponse-1.html">GetAsyncSearchResponse</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_GetAsync_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.GetAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_GetAsync__1_Elastic_Clients_Elasticsearch_AsyncSearch_GetAsyncSearchRequestDescriptor___0__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.GetAsync``1(Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor{``0},System.Threading.CancellationToken)">
+  GetAsync&lt;TDocument&gt;(GetAsyncSearchRequestDescriptor&lt;TDocument&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L396"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get async search results.
+</p>
+<p>
+Retrieve the results of a previously submitted asynchronous search request.
+If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetAsyncSearchResponse&lt;TDocument&gt;&gt; GetAsync&lt;TDocument&gt;(GetAsyncSearchRequestDescriptor&lt;TDocument&gt; descriptor, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor-1.html">GetAsyncSearchRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchResponse-1.html">GetAsyncSearchResponse</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_GetAsync_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.GetAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_GetAsync__1_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_AsyncSearch_GetAsyncSearchRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.GetAsync``1(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  GetAsync&lt;TDocument&gt;(Id, Action&lt;GetAsyncSearchRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L429"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get async search results.
+</p>
+<p>
+Retrieve the results of a previously submitted asynchronous search request.
+If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetAsyncSearchResponse&lt;TDocument&gt;&gt; GetAsync&lt;TDocument&gt;(Id id, Action&lt;GetAsyncSearchRequestDescriptor&lt;TDocument&gt;&gt; configureRequest, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor-1.html">GetAsyncSearchRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchResponse-1.html">GetAsyncSearchResponse</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_GetAsync_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.GetAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_GetAsync__1_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.GetAsync``1(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  GetAsync&lt;TDocument&gt;(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L412"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get async search results.
+</p>
+<p>
+Retrieve the results of a previously submitted asynchronous search request.
+If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetAsyncSearchResponse&lt;TDocument&gt;&gt; GetAsync&lt;TDocument&gt;(Id id, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchResponse-1.html">GetAsyncSearchResponse</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Get_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Get*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Get__1_Elastic_Clients_Elasticsearch_AsyncSearch_GetAsyncSearchRequest_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Get``1(Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequest)">
+  Get&lt;TDocument&gt;(GetAsyncSearchRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L309"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get async search results.
+</p>
+<p>
+Retrieve the results of a previously submitted asynchronous search request.
+If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual GetAsyncSearchResponse&lt;TDocument&gt; Get&lt;TDocument&gt;(GetAsyncSearchRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequest.html">GetAsyncSearchRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchResponse-1.html">GetAsyncSearchResponse</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Get_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Get*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Get__1_Elastic_Clients_Elasticsearch_AsyncSearch_GetAsyncSearchRequestDescriptor___0__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Get``1(Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor{``0})">
+  Get&lt;TDocument&gt;(GetAsyncSearchRequestDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L342"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get async search results.
+</p>
+<p>
+Retrieve the results of a previously submitted asynchronous search request.
+If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual GetAsyncSearchResponse&lt;TDocument&gt; Get&lt;TDocument&gt;(GetAsyncSearchRequestDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor-1.html">GetAsyncSearchRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchResponse-1.html">GetAsyncSearchResponse</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Get_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Get*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Get__1_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Get``1(Elastic.Clients.Elasticsearch.Id)">
+  Get&lt;TDocument&gt;(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L359"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get async search results.
+</p>
+<p>
+Retrieve the results of a previously submitted asynchronous search request.
+If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual GetAsyncSearchResponse&lt;TDocument&gt; Get&lt;TDocument&gt;(Id id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchResponse-1.html">GetAsyncSearchResponse</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Get_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Get*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Get__1_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_AsyncSearch_GetAsyncSearchRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Get``1(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor{``0}})">
+  Get&lt;TDocument&gt;(Id, Action&lt;GetAsyncSearchRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L377"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get async search results.
+</p>
+<p>
+Retrieve the results of a previously submitted asynchronous search request.
+If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual GetAsyncSearchResponse&lt;TDocument&gt; Get&lt;TDocument&gt;(Id id, Action&lt;GetAsyncSearchRequestDescriptor&lt;TDocument&gt;&gt; configureRequest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor-1.html">GetAsyncSearchRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchResponse-1.html">GetAsyncSearchResponse</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Status_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Status*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Status_Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchStatusRequest_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Status(Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequest)">
+  Status(AsyncSearchStatusRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L447"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get the async search status.
+</p>
+<p>
+Get the status of a previously submitted async search request given its identifier, without retrieving search results.
+If the Elasticsearch security features are enabled, use of this API is restricted to the <code>monitoring_user</code> role.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual AsyncSearchStatusResponse Status(AsyncSearchStatusRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequest.html">AsyncSearchStatusRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusResponse.html">AsyncSearchStatusResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Status_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Status*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Status_Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchStatusRequestDescriptor_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Status(Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestDescriptor)">
+  Status(AsyncSearchStatusRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L534"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get the async search status.
+</p>
+<p>
+Get the status of a previously submitted async search request given its identifier, without retrieving search results.
+If the Elasticsearch security features are enabled, use of this API is restricted to the <code>monitoring_user</code> role.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual AsyncSearchStatusResponse Status(AsyncSearchStatusRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestDescriptor.html">AsyncSearchStatusRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusResponse.html">AsyncSearchStatusResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Status_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Status*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Status_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Status(Elastic.Clients.Elasticsearch.Id)">
+  Status(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L551"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get the async search status.
+</p>
+<p>
+Get the status of a previously submitted async search request given its identifier, without retrieving search results.
+If the Elasticsearch security features are enabled, use of this API is restricted to the <code>monitoring_user</code> role.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual AsyncSearchStatusResponse Status(Id id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusResponse.html">AsyncSearchStatusResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Status_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Status*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Status_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchStatusRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Status(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestDescriptor})">
+  Status(Id, Action&lt;AsyncSearchStatusRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L569"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get the async search status.
+</p>
+<p>
+Get the status of a previously submitted async search request given its identifier, without retrieving search results.
+If the Elasticsearch security features are enabled, use of this API is restricted to the <code>monitoring_user</code> role.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual AsyncSearchStatusResponse Status(Id id, Action&lt;AsyncSearchStatusRequestDescriptor&gt; configureRequest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestDescriptor.html">AsyncSearchStatusRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusResponse.html">AsyncSearchStatusResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_StatusAsync_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.StatusAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_StatusAsync_Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchStatusRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.StatusAsync(Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequest,System.Threading.CancellationToken)">
+  StatusAsync(AsyncSearchStatusRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L464"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get the async search status.
+</p>
+<p>
+Get the status of a previously submitted async search request given its identifier, without retrieving search results.
+If the Elasticsearch security features are enabled, use of this API is restricted to the <code>monitoring_user</code> role.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;AsyncSearchStatusResponse&gt; StatusAsync(AsyncSearchStatusRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequest.html">AsyncSearchStatusRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusResponse.html">AsyncSearchStatusResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_StatusAsync_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.StatusAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_StatusAsync_Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchStatusRequestDescriptor_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.StatusAsync(Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestDescriptor,System.Threading.CancellationToken)">
+  StatusAsync(AsyncSearchStatusRequestDescriptor, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L639"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get the async search status.
+</p>
+<p>
+Get the status of a previously submitted async search request given its identifier, without retrieving search results.
+If the Elasticsearch security features are enabled, use of this API is restricted to the <code>monitoring_user</code> role.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;AsyncSearchStatusResponse&gt; StatusAsync(AsyncSearchStatusRequestDescriptor descriptor, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestDescriptor.html">AsyncSearchStatusRequestDescriptor</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusResponse.html">AsyncSearchStatusResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_StatusAsync_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.StatusAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_StatusAsync_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchStatusRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.StatusAsync(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestDescriptor},System.Threading.CancellationToken)">
+  StatusAsync(Id, Action&lt;AsyncSearchStatusRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L672"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get the async search status.
+</p>
+<p>
+Get the status of a previously submitted async search request given its identifier, without retrieving search results.
+If the Elasticsearch security features are enabled, use of this API is restricted to the <code>monitoring_user</code> role.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;AsyncSearchStatusResponse&gt; StatusAsync(Id id, Action&lt;AsyncSearchStatusRequestDescriptor&gt; configureRequest, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestDescriptor.html">AsyncSearchStatusRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusResponse.html">AsyncSearchStatusResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_StatusAsync_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.StatusAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_StatusAsync_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.StatusAsync(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  StatusAsync(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L655"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get the async search status.
+</p>
+<p>
+Get the status of a previously submitted async search request given its identifier, without retrieving search results.
+If the Elasticsearch security features are enabled, use of this API is restricted to the <code>monitoring_user</code> role.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;AsyncSearchStatusResponse&gt; StatusAsync(Id id, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusResponse.html">AsyncSearchStatusResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_StatusAsync_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.StatusAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_StatusAsync__1_Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchStatusRequestDescriptor___0__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.StatusAsync``1(Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestDescriptor{``0},System.Threading.CancellationToken)">
+  StatusAsync&lt;TDocument&gt;(AsyncSearchStatusRequestDescriptor&lt;TDocument&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L588"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get the async search status.
+</p>
+<p>
+Get the status of a previously submitted async search request given its identifier, without retrieving search results.
+If the Elasticsearch security features are enabled, use of this API is restricted to the <code>monitoring_user</code> role.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;AsyncSearchStatusResponse&gt; StatusAsync&lt;TDocument&gt;(AsyncSearchStatusRequestDescriptor&lt;TDocument&gt; descriptor, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestDescriptor-1.html">AsyncSearchStatusRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusResponse.html">AsyncSearchStatusResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_StatusAsync_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.StatusAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_StatusAsync__1_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchStatusRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.StatusAsync``1(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  StatusAsync&lt;TDocument&gt;(Id, Action&lt;AsyncSearchStatusRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L621"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get the async search status.
+</p>
+<p>
+Get the status of a previously submitted async search request given its identifier, without retrieving search results.
+If the Elasticsearch security features are enabled, use of this API is restricted to the <code>monitoring_user</code> role.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;AsyncSearchStatusResponse&gt; StatusAsync&lt;TDocument&gt;(Id id, Action&lt;AsyncSearchStatusRequestDescriptor&lt;TDocument&gt;&gt; configureRequest, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestDescriptor-1.html">AsyncSearchStatusRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusResponse.html">AsyncSearchStatusResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_StatusAsync_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.StatusAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_StatusAsync__1_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.StatusAsync``1(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  StatusAsync&lt;TDocument&gt;(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L604"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get the async search status.
+</p>
+<p>
+Get the status of a previously submitted async search request given its identifier, without retrieving search results.
+If the Elasticsearch security features are enabled, use of this API is restricted to the <code>monitoring_user</code> role.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;AsyncSearchStatusResponse&gt; StatusAsync&lt;TDocument&gt;(Id id, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusResponse.html">AsyncSearchStatusResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Status_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Status*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Status__1_Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchStatusRequestDescriptor___0__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Status``1(Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestDescriptor{``0})">
+  Status&lt;TDocument&gt;(AsyncSearchStatusRequestDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L480"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get the async search status.
+</p>
+<p>
+Get the status of a previously submitted async search request given its identifier, without retrieving search results.
+If the Elasticsearch security features are enabled, use of this API is restricted to the <code>monitoring_user</code> role.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual AsyncSearchStatusResponse Status&lt;TDocument&gt;(AsyncSearchStatusRequestDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestDescriptor-1.html">AsyncSearchStatusRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusResponse.html">AsyncSearchStatusResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Status_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Status*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Status__1_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Status``1(Elastic.Clients.Elasticsearch.Id)">
+  Status&lt;TDocument&gt;(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L497"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get the async search status.
+</p>
+<p>
+Get the status of a previously submitted async search request given its identifier, without retrieving search results.
+If the Elasticsearch security features are enabled, use of this API is restricted to the <code>monitoring_user</code> role.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual AsyncSearchStatusResponse Status&lt;TDocument&gt;(Id id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusResponse.html">AsyncSearchStatusResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Status_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Status*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Status__1_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchStatusRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Status``1(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestDescriptor{``0}})">
+  Status&lt;TDocument&gt;(Id, Action&lt;AsyncSearchStatusRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L515"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get the async search status.
+</p>
+<p>
+Get the status of a previously submitted async search request given its identifier, without retrieving search results.
+If the Elasticsearch security features are enabled, use of this API is restricted to the <code>monitoring_user</code> role.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual AsyncSearchStatusResponse Status&lt;TDocument&gt;(Id id, Action&lt;AsyncSearchStatusRequestDescriptor&lt;TDocument&gt;&gt; configureRequest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestDescriptor-1.html">AsyncSearchStatusRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusResponse.html">AsyncSearchStatusResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_SubmitAsync_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.SubmitAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_SubmitAsync__1_Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.SubmitAsync``1(Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest,System.Threading.CancellationToken)">
+  SubmitAsync&lt;TDocument&gt;(SubmitAsyncSearchRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L719"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Run an async search.
+</p>
+<p>
+When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field. Partial results become available following the sort criteria that was requested.
+</p>
+<p>
+Warning: Asynchronous search does not support scroll or search requests that include only the suggest section.
+</p>
+<p>
+By default, Elasticsearch does not allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
+The maximum allowed size for a stored async search response can be set by changing the <code>search.max_async_search_response_size</code> cluster level setting.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;SubmitAsyncSearchResponse&lt;TDocument&gt;&gt; SubmitAsync&lt;TDocument&gt;(SubmitAsyncSearchRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest.html">SubmitAsyncSearchRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse-1.html">SubmitAsyncSearchResponse</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_SubmitAsync_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.SubmitAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_SubmitAsync__1_Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor___0__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.SubmitAsync``1(Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor{``0},System.Threading.CancellationToken)">
+  SubmitAsync&lt;TDocument&gt;(SubmitAsyncSearchRequestDescriptor&lt;TDocument&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L862"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Run an async search.
+</p>
+<p>
+When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field. Partial results become available following the sort criteria that was requested.
+</p>
+<p>
+Warning: Asynchronous search does not support scroll or search requests that include only the suggest section.
+</p>
+<p>
+By default, Elasticsearch does not allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
+The maximum allowed size for a stored async search response can be set by changing the <code>search.max_async_search_response_size</code> cluster level setting.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;SubmitAsyncSearchResponse&lt;TDocument&gt;&gt; SubmitAsync&lt;TDocument&gt;(SubmitAsyncSearchRequestDescriptor&lt;TDocument&gt; descriptor, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor-1.html">SubmitAsyncSearchRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse-1.html">SubmitAsyncSearchResponse</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_SubmitAsync_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.SubmitAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_SubmitAsync__1_Elastic_Clients_Elasticsearch_Indices_System_Action_Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.SubmitAsync``1(Elastic.Clients.Elasticsearch.Indices,System.Action{Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  SubmitAsync&lt;TDocument&gt;(Indices?, Action&lt;SubmitAsyncSearchRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L907"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Run an async search.
+</p>
+<p>
+When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field. Partial results become available following the sort criteria that was requested.
+</p>
+<p>
+Warning: Asynchronous search does not support scroll or search requests that include only the suggest section.
+</p>
+<p>
+By default, Elasticsearch does not allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
+The maximum allowed size for a stored async search response can be set by changing the <code>search.max_async_search_response_size</code> cluster level setting.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;SubmitAsyncSearchResponse&lt;TDocument&gt;&gt; SubmitAsync&lt;TDocument&gt;(Indices? indices, Action&lt;SubmitAsyncSearchRequestDescriptor&lt;TDocument&gt;&gt; configureRequest, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor-1.html">SubmitAsyncSearchRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse-1.html">SubmitAsyncSearchResponse</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_SubmitAsync_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.SubmitAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_SubmitAsync__1_Elastic_Clients_Elasticsearch_Indices_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.SubmitAsync``1(Elastic.Clients.Elasticsearch.Indices,System.Threading.CancellationToken)">
+  SubmitAsync&lt;TDocument&gt;(Indices?, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L884"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Run an async search.
+</p>
+<p>
+When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field. Partial results become available following the sort criteria that was requested.
+</p>
+<p>
+Warning: Asynchronous search does not support scroll or search requests that include only the suggest section.
+</p>
+<p>
+By default, Elasticsearch does not allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
+The maximum allowed size for a stored async search response can be set by changing the <code>search.max_async_search_response_size</code> cluster level setting.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;SubmitAsyncSearchResponse&lt;TDocument&gt;&gt; SubmitAsync&lt;TDocument&gt;(Indices? indices, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse-1.html">SubmitAsyncSearchResponse</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_SubmitAsync_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.SubmitAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_SubmitAsync__1_System_Action_Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.SubmitAsync``1(System.Action{Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  SubmitAsync&lt;TDocument&gt;(Action&lt;SubmitAsyncSearchRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L954"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Run an async search.
+</p>
+<p>
+When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field. Partial results become available following the sort criteria that was requested.
+</p>
+<p>
+Warning: Asynchronous search does not support scroll or search requests that include only the suggest section.
+</p>
+<p>
+By default, Elasticsearch does not allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
+The maximum allowed size for a stored async search response can be set by changing the <code>search.max_async_search_response_size</code> cluster level setting.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;SubmitAsyncSearchResponse&lt;TDocument&gt;&gt; SubmitAsync&lt;TDocument&gt;(Action&lt;SubmitAsyncSearchRequestDescriptor&lt;TDocument&gt;&gt; configureRequest, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor-1.html">SubmitAsyncSearchRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse-1.html">SubmitAsyncSearchResponse</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_SubmitAsync_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.SubmitAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_SubmitAsync__1_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.SubmitAsync``1(System.Threading.CancellationToken)">
+  SubmitAsync&lt;TDocument&gt;(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L931"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Run an async search.
+</p>
+<p>
+When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field. Partial results become available following the sort criteria that was requested.
+</p>
+<p>
+Warning: Asynchronous search does not support scroll or search requests that include only the suggest section.
+</p>
+<p>
+By default, Elasticsearch does not allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
+The maximum allowed size for a stored async search response can be set by changing the <code>search.max_async_search_response_size</code> cluster level setting.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;SubmitAsyncSearchResponse&lt;TDocument&gt;&gt; SubmitAsync&lt;TDocument&gt;(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse-1.html">SubmitAsyncSearchResponse</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Submit_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Submit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Submit__1" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Submit``1">
+  Submit&lt;TDocument&gt;()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L813"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Run an async search.
+</p>
+<p>
+When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field. Partial results become available following the sort criteria that was requested.
+</p>
+<p>
+Warning: Asynchronous search does not support scroll or search requests that include only the suggest section.
+</p>
+<p>
+By default, Elasticsearch does not allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
+The maximum allowed size for a stored async search response can be set by changing the <code>search.max_async_search_response_size</code> cluster level setting.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual SubmitAsyncSearchResponse&lt;TDocument&gt; Submit&lt;TDocument&gt;()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse-1.html">SubmitAsyncSearchResponse</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Submit_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Submit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Submit__1_Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequest_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Submit``1(Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest)">
+  Submit&lt;TDocument&gt;(SubmitAsyncSearchRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L696"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Run an async search.
+</p>
+<p>
+When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field. Partial results become available following the sort criteria that was requested.
+</p>
+<p>
+Warning: Asynchronous search does not support scroll or search requests that include only the suggest section.
+</p>
+<p>
+By default, Elasticsearch does not allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
+The maximum allowed size for a stored async search response can be set by changing the <code>search.max_async_search_response_size</code> cluster level setting.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual SubmitAsyncSearchResponse&lt;TDocument&gt; Submit&lt;TDocument&gt;(SubmitAsyncSearchRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest.html">SubmitAsyncSearchRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse-1.html">SubmitAsyncSearchResponse</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Submit_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Submit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Submit__1_Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor___0__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Submit``1(Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor{``0})">
+  Submit&lt;TDocument&gt;(SubmitAsyncSearchRequestDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L741"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Run an async search.
+</p>
+<p>
+When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field. Partial results become available following the sort criteria that was requested.
+</p>
+<p>
+Warning: Asynchronous search does not support scroll or search requests that include only the suggest section.
+</p>
+<p>
+By default, Elasticsearch does not allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
+The maximum allowed size for a stored async search response can be set by changing the <code>search.max_async_search_response_size</code> cluster level setting.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual SubmitAsyncSearchResponse&lt;TDocument&gt; Submit&lt;TDocument&gt;(SubmitAsyncSearchRequestDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor-1.html">SubmitAsyncSearchRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse-1.html">SubmitAsyncSearchResponse</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Submit_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Submit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Submit__1_Elastic_Clients_Elasticsearch_Indices_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Submit``1(Elastic.Clients.Elasticsearch.Indices)">
+  Submit&lt;TDocument&gt;(Indices?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L764"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Run an async search.
+</p>
+<p>
+When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field. Partial results become available following the sort criteria that was requested.
+</p>
+<p>
+Warning: Asynchronous search does not support scroll or search requests that include only the suggest section.
+</p>
+<p>
+By default, Elasticsearch does not allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
+The maximum allowed size for a stored async search response can be set by changing the <code>search.max_async_search_response_size</code> cluster level setting.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual SubmitAsyncSearchResponse&lt;TDocument&gt; Submit&lt;TDocument&gt;(Indices? indices)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse-1.html">SubmitAsyncSearchResponse</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Submit_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Submit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Submit__1_Elastic_Clients_Elasticsearch_Indices_System_Action_Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Submit``1(Elastic.Clients.Elasticsearch.Indices,System.Action{Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor{``0}})">
+  Submit&lt;TDocument&gt;(Indices?, Action&lt;SubmitAsyncSearchRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L788"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Run an async search.
+</p>
+<p>
+When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field. Partial results become available following the sort criteria that was requested.
+</p>
+<p>
+Warning: Asynchronous search does not support scroll or search requests that include only the suggest section.
+</p>
+<p>
+By default, Elasticsearch does not allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
+The maximum allowed size for a stored async search response can be set by changing the <code>search.max_async_search_response_size</code> cluster level setting.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual SubmitAsyncSearchResponse&lt;TDocument&gt; Submit&lt;TDocument&gt;(Indices? indices, Action&lt;SubmitAsyncSearchRequestDescriptor&lt;TDocument&gt;&gt; configureRequest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor-1.html">SubmitAsyncSearchRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse-1.html">SubmitAsyncSearchResponse</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Submit_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Submit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_AsyncSearchNamespacedClient_Submit__1_System_Action_Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient.Submit``1(System.Action{Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor{``0}})">
+  Submit&lt;TDocument&gt;(Action&lt;SubmitAsyncSearchRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.AsyncSearch.g.cs/#L837"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Run an async search.
+</p>
+<p>
+When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field. Partial results become available following the sort criteria that was requested.
+</p>
+<p>
+Warning: Asynchronous search does not support scroll or search requests that include only the suggest section.
+</p>
+<p>
+By default, Elasticsearch does not allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
+The maximum allowed size for a stored async search response can be set by changing the <code>search.max_async_search_response_size</code> cluster level setting.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual SubmitAsyncSearchResponse&lt;TDocument&gt; Submit&lt;TDocument&gt;(Action&lt;SubmitAsyncSearchRequestDescriptor&lt;TDocument&gt;&gt; configureRequest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor-1.html">SubmitAsyncSearchRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse-1.html">SubmitAsyncSearchResponse</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

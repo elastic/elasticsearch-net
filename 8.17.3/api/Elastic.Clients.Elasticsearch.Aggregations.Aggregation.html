@@ -1,0 +1,3069 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class Aggregation | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class Aggregation | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.17.3/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Aggregations_Aggregation.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Aggregations.Aggregation%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation" class="text-break">
+Class Aggregation  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L31"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.html">Aggregations</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(AggregationConverter))]
+public sealed class Aggregation</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">Aggregation</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Aggregations_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Aggregations*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Aggregations" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Aggregations">
+  Aggregations
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L133"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Sub-aggregations for this aggregation.
+Only applies to bucket aggregations.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;aggregations&quot;)]
+public IDictionary&lt;string, Aggregation&gt;? Aggregations { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Meta_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Meta*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Meta" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Meta">
+  Meta
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L135"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;meta&quot;)]
+public IDictionary&lt;string, object&gt;? Meta { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_AdjacencyMatrix_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.AdjacencyMatrix*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_AdjacencyMatrix_Elastic_Clients_Elasticsearch_Aggregations_AdjacencyMatrixAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.AdjacencyMatrix(Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregation)">
+  AdjacencyMatrix(AdjacencyMatrixAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L49"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation AdjacencyMatrix(AdjacencyMatrixAggregation adjacencyMatrixAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>adjacencyMatrixAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregation.html">AdjacencyMatrixAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_AutoDateHistogram_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.AutoDateHistogram*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_AutoDateHistogram_Elastic_Clients_Elasticsearch_Aggregations_AutoDateHistogramAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.AutoDateHistogram(Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation)">
+  AutoDateHistogram(AutoDateHistogramAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L50"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation AutoDateHistogram(AutoDateHistogramAggregation autoDateHistogramAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>autoDateHistogramAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation.html">AutoDateHistogramAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Avg_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Avg*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Avg_Elastic_Clients_Elasticsearch_Aggregations_AverageAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Avg(Elastic.Clients.Elasticsearch.Aggregations.AverageAggregation)">
+  Avg(AverageAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L51"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation Avg(AverageAggregation averageAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>averageAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.AverageAggregation.html">AverageAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_AvgBucket_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.AvgBucket*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_AvgBucket_Elastic_Clients_Elasticsearch_Aggregations_AverageBucketAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.AvgBucket(Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregation)">
+  AvgBucket(AverageBucketAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L52"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation AvgBucket(AverageBucketAggregation averageBucketAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>averageBucketAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregation.html">AverageBucketAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Boxplot_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Boxplot*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Boxplot_Elastic_Clients_Elasticsearch_Aggregations_BoxplotAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Boxplot(Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregation)">
+  Boxplot(BoxplotAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L53"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation Boxplot(BoxplotAggregation boxplotAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>boxplotAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregation.html">BoxplotAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_BucketCorrelation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.BucketCorrelation*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_BucketCorrelation_Elastic_Clients_Elasticsearch_Aggregations_BucketCorrelationAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.BucketCorrelation(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation)">
+  BucketCorrelation(BucketCorrelationAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L54"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation BucketCorrelation(BucketCorrelationAggregation bucketCorrelationAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>bucketCorrelationAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation.html">BucketCorrelationAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_BucketCountKsTest_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.BucketCountKsTest*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_BucketCountKsTest_Elastic_Clients_Elasticsearch_Aggregations_BucketKsAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.BucketCountKsTest(Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregation)">
+  BucketCountKsTest(BucketKsAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation BucketCountKsTest(BucketKsAggregation bucketKsAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>bucketKsAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregation.html">BucketKsAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_BucketScript_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.BucketScript*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_BucketScript_Elastic_Clients_Elasticsearch_Aggregations_BucketScriptAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.BucketScript(Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregation)">
+  BucketScript(BucketScriptAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L56"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation BucketScript(BucketScriptAggregation bucketScriptAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>bucketScriptAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregation.html">BucketScriptAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_BucketSelector_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.BucketSelector*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_BucketSelector_Elastic_Clients_Elasticsearch_Aggregations_BucketSelectorAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.BucketSelector(Elastic.Clients.Elasticsearch.Aggregations.BucketSelectorAggregation)">
+  BucketSelector(BucketSelectorAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L57"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation BucketSelector(BucketSelectorAggregation bucketSelectorAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>bucketSelectorAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.BucketSelectorAggregation.html">BucketSelectorAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_BucketSort_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.BucketSort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_BucketSort_Elastic_Clients_Elasticsearch_Aggregations_BucketSortAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.BucketSort(Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation)">
+  BucketSort(BucketSortAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L58"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation BucketSort(BucketSortAggregation bucketSortAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>bucketSortAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation.html">BucketSortAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Cardinality_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Cardinality*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Cardinality_Elastic_Clients_Elasticsearch_Aggregations_CardinalityAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Cardinality(Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation)">
+  Cardinality(CardinalityAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L59"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation Cardinality(CardinalityAggregation cardinalityAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cardinalityAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation.html">CardinalityAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_CategorizeText_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.CategorizeText*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_CategorizeText_Elastic_Clients_Elasticsearch_Aggregations_CategorizeTextAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.CategorizeText(Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation)">
+  CategorizeText(CategorizeTextAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L60"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation CategorizeText(CategorizeTextAggregation categorizeTextAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>categorizeTextAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation.html">CategorizeTextAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Children_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Children*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Children_Elastic_Clients_Elasticsearch_Aggregations_ChildrenAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Children(Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregation)">
+  Children(ChildrenAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L61"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation Children(ChildrenAggregation childrenAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>childrenAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregation.html">ChildrenAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Composite_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Composite*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Composite_Elastic_Clients_Elasticsearch_Aggregations_CompositeAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Composite(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation)">
+  Composite(CompositeAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L62"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation Composite(CompositeAggregation compositeAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>compositeAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation.html">CompositeAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_CumulativeCardinality_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.CumulativeCardinality*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_CumulativeCardinality_Elastic_Clients_Elasticsearch_Aggregations_CumulativeCardinalityAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.CumulativeCardinality(Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregation)">
+  CumulativeCardinality(CumulativeCardinalityAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L63"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation CumulativeCardinality(CumulativeCardinalityAggregation cumulativeCardinalityAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cumulativeCardinalityAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregation.html">CumulativeCardinalityAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_CumulativeSum_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.CumulativeSum*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_CumulativeSum_Elastic_Clients_Elasticsearch_Aggregations_CumulativeSumAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.CumulativeSum(Elastic.Clients.Elasticsearch.Aggregations.CumulativeSumAggregation)">
+  CumulativeSum(CumulativeSumAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L64"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation CumulativeSum(CumulativeSumAggregation cumulativeSumAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cumulativeSumAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.CumulativeSumAggregation.html">CumulativeSumAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_DateHistogram_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.DateHistogram*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_DateHistogram_Elastic_Clients_Elasticsearch_Aggregations_DateHistogramAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation)">
+  DateHistogram(DateHistogramAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L65"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation DateHistogram(DateHistogramAggregation dateHistogramAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>dateHistogramAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation.html">DateHistogramAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_DateRange_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.DateRange*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_DateRange_Elastic_Clients_Elasticsearch_Aggregations_DateRangeAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.DateRange(Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation)">
+  DateRange(DateRangeAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L66"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation DateRange(DateRangeAggregation dateRangeAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>dateRangeAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation.html">DateRangeAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Derivative_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Derivative*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Derivative_Elastic_Clients_Elasticsearch_Aggregations_DerivativeAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Derivative(Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregation)">
+  Derivative(DerivativeAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L67"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation Derivative(DerivativeAggregation derivativeAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>derivativeAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregation.html">DerivativeAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_DiversifiedSampler_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.DiversifiedSampler*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_DiversifiedSampler_Elastic_Clients_Elasticsearch_Aggregations_DiversifiedSamplerAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.DiversifiedSampler(Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation)">
+  DiversifiedSampler(DiversifiedSamplerAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L68"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation DiversifiedSampler(DiversifiedSamplerAggregation diversifiedSamplerAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>diversifiedSamplerAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation.html">DiversifiedSamplerAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_ExtendedStats_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.ExtendedStats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_ExtendedStats_Elastic_Clients_Elasticsearch_Aggregations_ExtendedStatsAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.ExtendedStats(Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregation)">
+  ExtendedStats(ExtendedStatsAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L69"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation ExtendedStats(ExtendedStatsAggregation extendedStatsAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>extendedStatsAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregation.html">ExtendedStatsAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_ExtendedStatsBucket_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.ExtendedStatsBucket*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_ExtendedStatsBucket_Elastic_Clients_Elasticsearch_Aggregations_ExtendedStatsBucketAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.ExtendedStatsBucket(Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregation)">
+  ExtendedStatsBucket(ExtendedStatsBucketAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L70"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation ExtendedStatsBucket(ExtendedStatsBucketAggregation extendedStatsBucketAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>extendedStatsBucketAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregation.html">ExtendedStatsBucketAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Filter_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Filter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Filter_Elastic_Clients_Elasticsearch_QueryDsl_Query_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query)">
+  Filter(Query)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L71"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation Filter(Query queryContainer)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>queryContainer</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Filters_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Filters*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Filters_Elastic_Clients_Elasticsearch_Aggregations_FiltersAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Filters(Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation)">
+  Filters(FiltersAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L72"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation Filters(FiltersAggregation filtersAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>filtersAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation.html">FiltersAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_FrequentItemSets_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.FrequentItemSets*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_FrequentItemSets_Elastic_Clients_Elasticsearch_Aggregations_FrequentItemSetsAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.FrequentItemSets(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation)">
+  FrequentItemSets(FrequentItemSetsAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L73"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation FrequentItemSets(FrequentItemSetsAggregation frequentItemSetsAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>frequentItemSetsAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation.html">FrequentItemSetsAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_GeoBounds_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.GeoBounds*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_GeoBounds_Elastic_Clients_Elasticsearch_Aggregations_GeoBoundsAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.GeoBounds(Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregation)">
+  GeoBounds(GeoBoundsAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L74"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation GeoBounds(GeoBoundsAggregation geoBoundsAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>geoBoundsAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregation.html">GeoBoundsAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_GeoCentroid_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.GeoCentroid*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_GeoCentroid_Elastic_Clients_Elasticsearch_Aggregations_GeoCentroidAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.GeoCentroid(Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation)">
+  GeoCentroid(GeoCentroidAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L75"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation GeoCentroid(GeoCentroidAggregation geoCentroidAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>geoCentroidAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation.html">GeoCentroidAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_GeoDistance_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.GeoDistance*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_GeoDistance_Elastic_Clients_Elasticsearch_Aggregations_GeoDistanceAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.GeoDistance(Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation)">
+  GeoDistance(GeoDistanceAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L76"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation GeoDistance(GeoDistanceAggregation geoDistanceAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>geoDistanceAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation.html">GeoDistanceAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_GeoLine_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.GeoLine*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_GeoLine_Elastic_Clients_Elasticsearch_Aggregations_GeoLineAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.GeoLine(Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation)">
+  GeoLine(GeoLineAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L79"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation GeoLine(GeoLineAggregation geoLineAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>geoLineAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation.html">GeoLineAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_GeohashGrid_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.GeohashGrid*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_GeohashGrid_Elastic_Clients_Elasticsearch_Aggregations_GeohashGridAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.GeohashGrid(Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregation)">
+  GeohashGrid(GeohashGridAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L77"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation GeohashGrid(GeohashGridAggregation geohashGridAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>geohashGridAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregation.html">GeohashGridAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_GeohexGrid_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.GeohexGrid*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_GeohexGrid_Elastic_Clients_Elasticsearch_Aggregations_GeohexGridAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.GeohexGrid(Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation)">
+  GeohexGrid(GeohexGridAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L78"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation GeohexGrid(GeohexGridAggregation geohexGridAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>geohexGridAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation.html">GeohexGridAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_GeotileGrid_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.GeotileGrid*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_GeotileGrid_Elastic_Clients_Elasticsearch_Aggregations_GeotileGridAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.GeotileGrid(Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation)">
+  GeotileGrid(GeotileGridAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L80"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation GeotileGrid(GeotileGridAggregation geotileGridAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>geotileGridAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation.html">GeotileGridAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Global_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Global*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Global_Elastic_Clients_Elasticsearch_Aggregations_GlobalAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Global(Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregation)">
+  Global(GlobalAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L81"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation Global(GlobalAggregation globalAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>globalAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregation.html">GlobalAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Histogram_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Histogram*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Histogram_Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Histogram(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation)">
+  Histogram(HistogramAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L82"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation Histogram(HistogramAggregation histogramAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>histogramAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation.html">HistogramAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Inference_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Inference*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Inference_Elastic_Clients_Elasticsearch_Aggregations_InferenceAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Inference(Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregation)">
+  Inference(InferenceAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L83"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation Inference(InferenceAggregation inferenceAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>inferenceAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregation.html">InferenceAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_IpPrefix_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.IpPrefix*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_IpPrefix_Elastic_Clients_Elasticsearch_Aggregations_IpPrefixAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.IpPrefix(Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation)">
+  IpPrefix(IpPrefixAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L84"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation IpPrefix(IpPrefixAggregation ipPrefixAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>ipPrefixAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation.html">IpPrefixAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_IpRange_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.IpRange*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_IpRange_Elastic_Clients_Elasticsearch_Aggregations_IpRangeAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.IpRange(Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregation)">
+  IpRange(IpRangeAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L85"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation IpRange(IpRangeAggregation ipRangeAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>ipRangeAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregation.html">IpRangeAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Line_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Line*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Line_Elastic_Clients_Elasticsearch_Aggregations_GeoLineAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Line(Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation)">
+  Line(GeoLineAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L86"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation Line(GeoLineAggregation geoLineAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>geoLineAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation.html">GeoLineAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_MatrixStats_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.MatrixStats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_MatrixStats_Elastic_Clients_Elasticsearch_Aggregations_MatrixStatsAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.MatrixStats(Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregation)">
+  MatrixStats(MatrixStatsAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L87"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation MatrixStats(MatrixStatsAggregation matrixStatsAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>matrixStatsAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregation.html">MatrixStatsAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Max_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Max*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Max_Elastic_Clients_Elasticsearch_Aggregations_MaxAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Max(Elastic.Clients.Elasticsearch.Aggregations.MaxAggregation)">
+  Max(MaxAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L88"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation Max(MaxAggregation maxAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>maxAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MaxAggregation.html">MaxAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_MaxBucket_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.MaxBucket*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_MaxBucket_Elastic_Clients_Elasticsearch_Aggregations_MaxBucketAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.MaxBucket(Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregation)">
+  MaxBucket(MaxBucketAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L89"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation MaxBucket(MaxBucketAggregation maxBucketAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>maxBucketAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregation.html">MaxBucketAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_MedianAbsoluteDeviation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.MedianAbsoluteDeviation*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_MedianAbsoluteDeviation_Elastic_Clients_Elasticsearch_Aggregations_MedianAbsoluteDeviationAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.MedianAbsoluteDeviation(Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregation)">
+  MedianAbsoluteDeviation(MedianAbsoluteDeviationAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L90"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation MedianAbsoluteDeviation(MedianAbsoluteDeviationAggregation medianAbsoluteDeviationAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>medianAbsoluteDeviationAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregation.html">MedianAbsoluteDeviationAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Min_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Min*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Min_Elastic_Clients_Elasticsearch_Aggregations_MinAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Min(Elastic.Clients.Elasticsearch.Aggregations.MinAggregation)">
+  Min(MinAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L91"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation Min(MinAggregation minAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>minAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MinAggregation.html">MinAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_MinBucket_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.MinBucket*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_MinBucket_Elastic_Clients_Elasticsearch_Aggregations_MinBucketAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.MinBucket(Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregation)">
+  MinBucket(MinBucketAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L92"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation MinBucket(MinBucketAggregation minBucketAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>minBucketAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregation.html">MinBucketAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Missing_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Missing*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Missing_Elastic_Clients_Elasticsearch_Aggregations_MissingAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Missing(Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation)">
+  Missing(MissingAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L93"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation Missing(MissingAggregation missingAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>missingAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation.html">MissingAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_MovingFn_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.MovingFn*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_MovingFn_Elastic_Clients_Elasticsearch_Aggregations_MovingFunctionAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.MovingFn(Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregation)">
+  MovingFn(MovingFunctionAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L94"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation MovingFn(MovingFunctionAggregation movingFunctionAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>movingFunctionAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregation.html">MovingFunctionAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_MovingPercentiles_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.MovingPercentiles*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_MovingPercentiles_Elastic_Clients_Elasticsearch_Aggregations_MovingPercentilesAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.MovingPercentiles(Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation)">
+  MovingPercentiles(MovingPercentilesAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L95"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation MovingPercentiles(MovingPercentilesAggregation movingPercentilesAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>movingPercentilesAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation.html">MovingPercentilesAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_MultiTerms_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.MultiTerms*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_MultiTerms_Elastic_Clients_Elasticsearch_Aggregations_MultiTermsAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.MultiTerms(Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregation)">
+  MultiTerms(MultiTermsAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L96"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation MultiTerms(MultiTermsAggregation multiTermsAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>multiTermsAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregation.html">MultiTermsAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Nested_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Nested*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Nested_Elastic_Clients_Elasticsearch_Aggregations_NestedAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Nested(Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation)">
+  Nested(NestedAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L97"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation Nested(NestedAggregation nestedAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>nestedAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation.html">NestedAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Normalize_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Normalize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Normalize_Elastic_Clients_Elasticsearch_Aggregations_NormalizeAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Normalize(Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregation)">
+  Normalize(NormalizeAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L98"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation Normalize(NormalizeAggregation normalizeAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>normalizeAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregation.html">NormalizeAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Parent_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Parent*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Parent_Elastic_Clients_Elasticsearch_Aggregations_ParentAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Parent(Elastic.Clients.Elasticsearch.Aggregations.ParentAggregation)">
+  Parent(ParentAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L99"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation Parent(ParentAggregation parentAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>parentAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ParentAggregation.html">ParentAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_PercentileRanks_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.PercentileRanks*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_PercentileRanks_Elastic_Clients_Elasticsearch_Aggregations_PercentileRanksAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.PercentileRanks(Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation)">
+  PercentileRanks(PercentileRanksAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L100"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation PercentileRanks(PercentileRanksAggregation percentileRanksAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>percentileRanksAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation.html">PercentileRanksAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Percentiles_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Percentiles*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Percentiles_Elastic_Clients_Elasticsearch_Aggregations_PercentilesAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Percentiles(Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregation)">
+  Percentiles(PercentilesAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L101"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation Percentiles(PercentilesAggregation percentilesAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>percentilesAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregation.html">PercentilesAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_PercentilesBucket_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.PercentilesBucket*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_PercentilesBucket_Elastic_Clients_Elasticsearch_Aggregations_PercentilesBucketAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.PercentilesBucket(Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation)">
+  PercentilesBucket(PercentilesBucketAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L102"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation PercentilesBucket(PercentilesBucketAggregation percentilesBucketAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>percentilesBucketAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation.html">PercentilesBucketAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_RandomSampler_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.RandomSampler*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_RandomSampler_Elastic_Clients_Elasticsearch_Aggregations_RandomSamplerAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.RandomSampler(Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation)">
+  RandomSampler(RandomSamplerAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L103"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation RandomSampler(RandomSamplerAggregation randomSamplerAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>randomSamplerAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation.html">RandomSamplerAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Range_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Range*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Range_Elastic_Clients_Elasticsearch_Aggregations_RangeAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Range(Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation)">
+  Range(RangeAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L104"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation Range(RangeAggregation rangeAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rangeAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation.html">RangeAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_RareTerms_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.RareTerms*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_RareTerms_Elastic_Clients_Elasticsearch_Aggregations_RareTermsAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.RareTerms(Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation)">
+  RareTerms(RareTermsAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L105"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation RareTerms(RareTermsAggregation rareTermsAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rareTermsAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation.html">RareTermsAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Rate_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Rate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Rate_Elastic_Clients_Elasticsearch_Aggregations_RateAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Rate(Elastic.Clients.Elasticsearch.Aggregations.RateAggregation)">
+  Rate(RateAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L106"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation Rate(RateAggregation rateAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rateAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.RateAggregation.html">RateAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_ReverseNested_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.ReverseNested*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_ReverseNested_Elastic_Clients_Elasticsearch_Aggregations_ReverseNestedAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.ReverseNested(Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregation)">
+  ReverseNested(ReverseNestedAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L107"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation ReverseNested(ReverseNestedAggregation reverseNestedAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>reverseNestedAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregation.html">ReverseNestedAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Sampler_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Sampler*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Sampler_Elastic_Clients_Elasticsearch_Aggregations_SamplerAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Sampler(Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation)">
+  Sampler(SamplerAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L108"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation Sampler(SamplerAggregation samplerAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>samplerAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation.html">SamplerAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_ScriptedMetric_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.ScriptedMetric*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_ScriptedMetric_Elastic_Clients_Elasticsearch_Aggregations_ScriptedMetricAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.ScriptedMetric(Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation)">
+  ScriptedMetric(ScriptedMetricAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L109"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation ScriptedMetric(ScriptedMetricAggregation scriptedMetricAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>scriptedMetricAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation.html">ScriptedMetricAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_SerialDiff_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.SerialDiff*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_SerialDiff_Elastic_Clients_Elasticsearch_Aggregations_SerialDifferencingAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.SerialDiff(Elastic.Clients.Elasticsearch.Aggregations.SerialDifferencingAggregation)">
+  SerialDiff(SerialDifferencingAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L110"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation SerialDiff(SerialDifferencingAggregation serialDifferencingAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>serialDifferencingAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.SerialDifferencingAggregation.html">SerialDifferencingAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_SignificantTerms_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.SignificantTerms*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_SignificantTerms_Elastic_Clients_Elasticsearch_Aggregations_SignificantTermsAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.SignificantTerms(Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregation)">
+  SignificantTerms(SignificantTermsAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L111"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation SignificantTerms(SignificantTermsAggregation significantTermsAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>significantTermsAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregation.html">SignificantTermsAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_SignificantText_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.SignificantText*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_SignificantText_Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.SignificantText(Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation)">
+  SignificantText(SignificantTextAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L112"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation SignificantText(SignificantTextAggregation significantTextAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>significantTextAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.html">SignificantTextAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Stats_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Stats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Stats_Elastic_Clients_Elasticsearch_Aggregations_StatsAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Stats(Elastic.Clients.Elasticsearch.Aggregations.StatsAggregation)">
+  Stats(StatsAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L113"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation Stats(StatsAggregation statsAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>statsAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.StatsAggregation.html">StatsAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_StatsBucket_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.StatsBucket*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_StatsBucket_Elastic_Clients_Elasticsearch_Aggregations_StatsBucketAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.StatsBucket(Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregation)">
+  StatsBucket(StatsBucketAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L114"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation StatsBucket(StatsBucketAggregation statsBucketAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>statsBucketAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregation.html">StatsBucketAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_StringStats_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.StringStats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_StringStats_Elastic_Clients_Elasticsearch_Aggregations_StringStatsAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.StringStats(Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregation)">
+  StringStats(StringStatsAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L115"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation StringStats(StringStatsAggregation stringStatsAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>stringStatsAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregation.html">StringStatsAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Sum_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Sum*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Sum_Elastic_Clients_Elasticsearch_Aggregations_SumAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Sum(Elastic.Clients.Elasticsearch.Aggregations.SumAggregation)">
+  Sum(SumAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L116"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation Sum(SumAggregation sumAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sumAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.SumAggregation.html">SumAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_SumBucket_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.SumBucket*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_SumBucket_Elastic_Clients_Elasticsearch_Aggregations_SumBucketAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.SumBucket(Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregation)">
+  SumBucket(SumBucketAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L117"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation SumBucket(SumBucketAggregation sumBucketAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sumBucketAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregation.html">SumBucketAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_TTest_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.TTest*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_TTest_Elastic_Clients_Elasticsearch_Aggregations_TTestAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.TTest(Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation)">
+  TTest(TTestAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L122"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation TTest(TTestAggregation tTestAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>tTestAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation.html">TTestAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Terms_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Terms*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_Terms_Elastic_Clients_Elasticsearch_Aggregations_TermsAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation)">
+  Terms(TermsAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L118"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation Terms(TermsAggregation termsAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>termsAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation.html">TermsAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_TimeSeries_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.TimeSeries*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_TimeSeries_Elastic_Clients_Elasticsearch_Aggregations_TimeSeriesAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.TimeSeries(Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregation)">
+  TimeSeries(TimeSeriesAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L119"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation TimeSeries(TimeSeriesAggregation timeSeriesAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>timeSeriesAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregation.html">TimeSeriesAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_TopHits_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.TopHits*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_TopHits_Elastic_Clients_Elasticsearch_Aggregations_TopHitsAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.TopHits(Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation)">
+  TopHits(TopHitsAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L120"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation TopHits(TopHitsAggregation topHitsAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>topHitsAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation.html">TopHitsAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_TopMetrics_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.TopMetrics*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_TopMetrics_Elastic_Clients_Elasticsearch_Aggregations_TopMetricsAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.TopMetrics(Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation)">
+  TopMetrics(TopMetricsAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L121"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation TopMetrics(TopMetricsAggregation topMetricsAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>topMetricsAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation.html">TopMetricsAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_TryGet_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.TryGet*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_TryGet__1___0__" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.TryGet``1(``0@)">
+  TryGet&lt;T&gt;(out T?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L138"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryGet&lt;T&gt;(out T? result) where T : class</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>result</code> <span class="xref">T</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_ValueCount_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.ValueCount*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_ValueCount_Elastic_Clients_Elasticsearch_Aggregations_ValueCountAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.ValueCount(Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation)">
+  ValueCount(ValueCountAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L123"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation ValueCount(ValueCountAggregation valueCountAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>valueCountAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation.html">ValueCountAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_VariableWidthHistogram_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.VariableWidthHistogram*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_VariableWidthHistogram_Elastic_Clients_Elasticsearch_Aggregations_VariableWidthHistogramAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.VariableWidthHistogram(Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregation)">
+  VariableWidthHistogram(VariableWidthHistogramAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L124"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation VariableWidthHistogram(VariableWidthHistogramAggregation variableWidthHistogramAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>variableWidthHistogramAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregation.html">VariableWidthHistogramAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_WeightedAvg_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.WeightedAvg*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_Aggregation_WeightedAvg_Elastic_Clients_Elasticsearch_Aggregations_WeightedAverageAggregation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.WeightedAvg(Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation)">
+  WeightedAvg(WeightedAverageAggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/Aggregation.g.cs/#L125"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Aggregation WeightedAvg(WeightedAverageAggregation weightedAverageAggregation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>weightedAverageAggregation</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation.html">WeightedAverageAggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

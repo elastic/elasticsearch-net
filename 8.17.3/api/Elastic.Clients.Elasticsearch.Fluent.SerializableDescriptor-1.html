@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class SerializableDescriptor&lt;TDescriptor&gt; | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class SerializableDescriptor&lt;TDescriptor&gt; | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.17.3/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Fluent_SerializableDescriptor_1.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Fluent.SerializableDescriptor%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Fluent.SerializableDescriptor`1">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Fluent_SerializableDescriptor_1" data-uid="Elastic.Clients.Elasticsearch.Fluent.SerializableDescriptor`1" class="text-break">
+Class SerializableDescriptor&lt;TDescriptor&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Shared/Core/Fluent/Descriptor.cs/#L64"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.html">Fluent</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class SerializableDescriptor&lt;TDescriptor&gt; : Descriptor&lt;TDescriptor&gt; where TDescriptor : SerializableDescriptor&lt;TDescriptor&gt;</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDescriptor</code></dt>
+    <dd></dd>
+  </dl>
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.Descriptor.html">Descriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.Descriptor-1.html">Descriptor</a>&lt;TDescriptor&gt;</div>
+      <div><span class="xref">SerializableDescriptor&lt;TDescriptor&gt;</span></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist derived">
+    <dt>Derived</dt>
+    <dd>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor.html">AdjacencyMatrixAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor-1.html">AdjacencyMatrixAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor.html">AggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor-1.html">AggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor.html">AggregationRangeDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor.html">AutoDateHistogramAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor-1.html">AutoDateHistogramAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.AverageAggregationDescriptor.html">AverageAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.AverageAggregationDescriptor-1.html">AverageAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregationDescriptor.html">AverageBucketAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregationDescriptor.html">BoxplotAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregationDescriptor-1.html">BoxplotAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregationDescriptor.html">BucketCorrelationAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationDescriptor.html">BucketCorrelationFunctionCountCorrelationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicatorDescriptor.html">BucketCorrelationFunctionCountCorrelationIndicatorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionDescriptor.html">BucketCorrelationFunctionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregationDescriptor.html">BucketKsAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregationDescriptor.html">BucketScriptAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.BucketSelectorAggregationDescriptor.html">BucketSelectorAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor.html">BucketSortAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor-1.html">BucketSortAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor.html">CardinalityAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor-1.html">CardinalityAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor.html">CategorizeTextAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor-1.html">CategorizeTextAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristicDescriptor.html">ChiSquareHeuristicDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregationDescriptor.html">ChildrenAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor.html">CompositeAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor-1.html">CompositeAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor.html">CompositeAggregationSourceDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor-1.html">CompositeAggregationSourceDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor.html">CompositeDateHistogramAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor-1.html">CompositeDateHistogramAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor.html">CompositeGeoTileGridAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor-1.html">CompositeGeoTileGridAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor.html">CompositeHistogramAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor-1.html">CompositeHistogramAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor.html">CompositeTermsAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor-1.html">CompositeTermsAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregationDescriptor.html">CumulativeCardinalityAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.CumulativeSumAggregationDescriptor.html">CumulativeSumAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzerDescriptor.html">CustomCategorizeTextAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor.html">DateHistogramAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor-1.html">DateHistogramAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor.html">DateRangeAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor-1.html">DateRangeAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpressionDescriptor.html">DateRangeExpressionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregationDescriptor.html">DerivativeAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor.html">DiversifiedSamplerAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor-1.html">DiversifiedSamplerAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsDateDescriptor.html">ExtendedBoundsDateDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloatDescriptor.html">ExtendedBoundsFloatDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregationDescriptor.html">ExtendedStatsAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregationDescriptor-1.html">ExtendedStatsAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregationDescriptor.html">ExtendedStatsBucketAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor.html">FiltersAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor-1.html">FiltersAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor.html">FrequentItemSetsAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor-1.html">FrequentItemSetsAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor.html">FrequentItemSetsFieldDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor-1.html">FrequentItemSetsFieldDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregationDescriptor.html">GeoBoundsAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregationDescriptor-1.html">GeoBoundsAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor.html">GeoCentroidAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor-1.html">GeoCentroidAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor.html">GeoDistanceAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor-1.html">GeoDistanceAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor.html">GeoLineAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor-1.html">GeoLineAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor.html">GeoLinePointDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor-1.html">GeoLinePointDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor.html">GeoLineSortDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor-1.html">GeoLineSortDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor.html">GeohashGridAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor-1.html">GeohashGridAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor.html">GeohexGridAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor-1.html">GeohexGridAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor.html">GeotileGridAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor-1.html">GeotileGridAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregationDescriptor.html">GlobalAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicDescriptor.html">GoogleNormalizedDistanceHeuristicDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor.html">HdrMethodDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.html">HistogramAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor-1.html">HistogramAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregationDescriptor.html">InferenceAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregationDescriptor-1.html">InferenceAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor.html">InferenceConfigDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor-1.html">InferenceConfigDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor.html">IpPrefixAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor-1.html">IpPrefixAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor.html">IpRangeAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor-1.html">IpRangeAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRangeDescriptor.html">IpRangeAggregationRangeDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor.html">MatrixStatsAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor-1.html">MatrixStatsAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MaxAggregationDescriptor.html">MaxAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MaxAggregationDescriptor-1.html">MaxAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregationDescriptor.html">MaxBucketAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregationDescriptor.html">MedianAbsoluteDeviationAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregationDescriptor-1.html">MedianAbsoluteDeviationAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MinAggregationDescriptor.html">MinAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MinAggregationDescriptor-1.html">MinAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregationDescriptor.html">MinBucketAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor.html">MissingAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor-1.html">MissingAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregationDescriptor.html">MovingFunctionAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregationDescriptor.html">MovingPercentilesAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor.html">MultiTermLookupDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor-1.html">MultiTermLookupDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor.html">MultiTermsAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor-1.html">MultiTermsAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor.html">MutualInformationHeuristicDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor.html">NestedAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor-1.html">NestedAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregationDescriptor.html">NormalizeAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ParentAggregationDescriptor.html">ParentAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristicDescriptor.html">PercentageScoreHeuristicDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor.html">PercentileRanksAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor-1.html">PercentileRanksAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregationDescriptor.html">PercentilesAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregationDescriptor-1.html">PercentilesAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor.html">PercentilesBucketAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregationDescriptor.html">RandomSamplerAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor.html">RangeAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor-1.html">RangeAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor.html">RareTermsAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor-1.html">RareTermsAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.RateAggregationDescriptor.html">RateAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.RateAggregationDescriptor-1.html">RateAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregationDescriptor.html">ReverseNestedAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregationDescriptor-1.html">ReverseNestedAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationDescriptor.html">SamplerAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristicDescriptor.html">ScriptedHeuristicDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor.html">ScriptedMetricAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor-1.html">ScriptedMetricAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.SerialDifferencingAggregationDescriptor.html">SerialDifferencingAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor.html">SignificantTermsAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor-1.html">SignificantTermsAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor.html">SignificantTextAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor-1.html">SignificantTextAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.StatsAggregationDescriptor.html">StatsAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.StatsAggregationDescriptor-1.html">StatsAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregationDescriptor.html">StatsBucketAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregationDescriptor.html">StringStatsAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregationDescriptor-1.html">StringStatsAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.SumAggregationDescriptor.html">SumAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.SumAggregationDescriptor-1.html">SumAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregationDescriptor.html">SumBucketAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor.html">TDigestDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor.html">TTestAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor-1.html">TTestAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor.html">TermsAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor-1.html">TermsAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor.html">TestPopulationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor-1.html">TestPopulationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregationDescriptor.html">TimeSeriesAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor.html">TopHitsAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor-1.html">TopHitsAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor.html">TopMetricsAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor-1.html">TopMetricsAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValueDescriptor.html">TopMetricsValueDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValueDescriptor-1.html">TopMetricsValueDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor.html">ValueCountAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor-1.html">ValueCountAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregationDescriptor.html">VariableWidthHistogramAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregationDescriptor-1.html">VariableWidthHistogramAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor.html">WeightedAverageAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor-1.html">WeightedAverageAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor.html">WeightedAverageValueDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor-1.html">WeightedAverageValueDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ArabicAnalyzerDescriptor.html">ArabicAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ArmenianAnalyzerDescriptor.html">ArmenianAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilterDescriptor.html">AsciiFoldingTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.BasqueAnalyzerDescriptor.html">BasqueAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.BengaliAnalyzerDescriptor.html">BengaliAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.BrazilianAnalyzerDescriptor.html">BrazilianAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.BulgarianAnalyzerDescriptor.html">BulgarianAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.CatalanAnalyzerDescriptor.html">CatalanAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.CharGroupTokenizerDescriptor.html">CharGroupTokenizerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ChineseAnalyzerDescriptor.html">ChineseAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.CjkAnalyzerDescriptor.html">CjkAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizerDescriptor.html">ClassicTokenizerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilterDescriptor.html">CommonGramsTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilterDescriptor.html">ConditionTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.CustomAnalyzerDescriptor.html">CustomAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.CustomNormalizerDescriptor.html">CustomNormalizerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.CzechAnalyzerDescriptor.html">CzechAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.DanishAnalyzerDescriptor.html">DanishAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilterDescriptor.html">DelimitedPayloadTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilterDescriptor.html">DictionaryDecompounderTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.DutchAnalyzerDescriptor.html">DutchAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilterDescriptor.html">EdgeNGramTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizerDescriptor.html">EdgeNGramTokenizerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilterDescriptor.html">ElisionTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.EnglishAnalyzerDescriptor.html">EnglishAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.EstonianAnalyzerDescriptor.html">EstonianAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor.html">FingerprintAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilterDescriptor.html">FingerprintTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.FinnishAnalyzerDescriptor.html">FinnishAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.FrenchAnalyzerDescriptor.html">FrenchAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.GalicianAnalyzerDescriptor.html">GalicianAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.GermanAnalyzerDescriptor.html">GermanAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.GreekAnalyzerDescriptor.html">GreekAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.HindiAnalyzerDescriptor.html">HindiAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilterDescriptor.html">HtmlStripCharFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.HungarianAnalyzerDescriptor.html">HungarianAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilterDescriptor.html">HunspellTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor.html">HyphenationDecompounderTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzerDescriptor.html">IcuAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.IcuCollationTokenFilterDescriptor.html">IcuCollationTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilterDescriptor.html">IcuFoldingTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationCharFilterDescriptor.html">IcuNormalizationCharFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTokenFilterDescriptor.html">IcuNormalizationTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.IcuTokenizerDescriptor.html">IcuTokenizerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilterDescriptor.html">IcuTransformTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzerDescriptor.html">IndonesianAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.IrishAnalyzerDescriptor.html">IrishAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzerDescriptor.html">ItalianAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.KStemTokenFilterDescriptor.html">KStemTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor.html">KeepTypesTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilterDescriptor.html">KeepWordsTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzerDescriptor.html">KeywordAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor.html">KeywordMarkerTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizerDescriptor.html">KeywordTokenizerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzerDescriptor.html">KuromojiAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilterDescriptor.html">KuromojiIterationMarkCharFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilterDescriptor.html">KuromojiPartOfSpeechTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilterDescriptor.html">KuromojiReadingFormTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilterDescriptor.html">KuromojiStemmerTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizerDescriptor.html">KuromojiTokenizerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.LanguageAnalyzerDescriptor.html">LanguageAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.LatvianAnalyzerDescriptor.html">LatvianAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilterDescriptor.html">LengthTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.LetterTokenizerDescriptor.html">LetterTokenizerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilterDescriptor.html">LimitTokenCountTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.LithuanianAnalyzerDescriptor.html">LithuanianAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizerDescriptor.html">LowercaseNormalizerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterDescriptor.html">LowercaseTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenizerDescriptor.html">LowercaseTokenizerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.MappingCharFilterDescriptor.html">MappingCharFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilterDescriptor.html">MultiplexerTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.NGramTokenFilterDescriptor.html">NGramTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.NGramTokenizerDescriptor.html">NGramTokenizerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.NoriAnalyzerDescriptor.html">NoriAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.NoriPartOfSpeechTokenFilterDescriptor.html">NoriPartOfSpeechTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.NoriTokenizerDescriptor.html">NoriTokenizerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.NorwegianAnalyzerDescriptor.html">NorwegianAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizerDescriptor.html">PathHierarchyTokenizerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor.html">PatternAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilterDescriptor.html">PatternCaptureTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilterDescriptor.html">PatternReplaceCharFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor.html">PatternReplaceTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.PatternTokenizerDescriptor.html">PatternTokenizerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.PersianAnalyzerDescriptor.html">PersianAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilterDescriptor.html">PhoneticTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.PorterStemTokenFilterDescriptor.html">PorterStemTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.PortugueseAnalyzerDescriptor.html">PortugueseAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilterDescriptor.html">PredicateTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.RemoveDuplicatesTokenFilterDescriptor.html">RemoveDuplicatesTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ReverseTokenFilterDescriptor.html">ReverseTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.RomanianAnalyzerDescriptor.html">RomanianAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.RussianAnalyzerDescriptor.html">RussianAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.SerbianAnalyzerDescriptor.html">SerbianAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilterDescriptor.html">ShingleTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.SimpleAnalyzerDescriptor.html">SimpleAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.SimplePatternSplitTokenizerDescriptor.html">SimplePatternSplitTokenizerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizerDescriptor.html">SimplePatternTokenizerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzerDescriptor.html">SnowballAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilterDescriptor.html">SnowballTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.SoraniAnalyzerDescriptor.html">SoraniAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.SpanishAnalyzerDescriptor.html">SpanishAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzerDescriptor.html">StandardAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.StandardTokenizerDescriptor.html">StandardTokenizerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilterDescriptor.html">StemmerOverrideTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilterDescriptor.html">StemmerTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.StopAnalyzerDescriptor.html">StopAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.StopTokenFilterDescriptor.html">StopTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.SwedishAnalyzerDescriptor.html">SwedishAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilterDescriptor.html">SynonymGraphTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilterDescriptor.html">SynonymTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ThaiAnalyzerDescriptor.html">ThaiAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizerDescriptor.html">ThaiTokenizerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.TrimTokenFilterDescriptor.html">TrimTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilterDescriptor.html">TruncateTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.TurkishAnalyzerDescriptor.html">TurkishAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.UaxEmailUrlTokenizerDescriptor.html">UaxEmailUrlTokenizerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilterDescriptor.html">UniqueTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.UppercaseTokenFilterDescriptor.html">UppercaseTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.WhitespaceAnalyzerDescriptor.html">WhitespaceAnalyzerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.WhitespaceTokenizerDescriptor.html">WhitespaceTokenizerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.WordDelimiterGraphTokenFilterDescriptor.html">WordDelimiterGraphTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor.html">WordDelimiterTokenFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.BulkAllRequestDescriptor-1.html">BulkAllRequestDescriptor&lt;T&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor.html">ComponentTemplateNodeDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor-1.html">ComponentTemplateNodeDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor.html">ComponentTemplateSummaryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor-1.html">ComponentTemplateSummaryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.CoordsGeoBoundsDescriptor.html">CoordsGeoBoundsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Bulk.BulkOperationDescriptor-1.html">BulkOperationDescriptor&lt;TDescriptor&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor.html">MultiGetOperationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor-1.html">MultiGetOperationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor-1.html">MultisearchBodyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor.html">MultisearchHeaderDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor.html">MultiTermVectorsOperationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor-1.html">MultiTermVectorsOperationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor.html">DocumentRatingDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor.html">RankEvalMetricDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGainDescriptor.html">RankEvalMetricDiscountedCumulativeGainDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRankDescriptor.html">RankEvalMetricExpectedReciprocalRankDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRankDescriptor.html">RankEvalMetricMeanReciprocalRankDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecisionDescriptor.html">RankEvalMetricPrecisionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecallDescriptor.html">RankEvalMetricRecallDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor.html">RankEvalQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor-1.html">RankEvalQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor.html">RankEvalRequestItemDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor-1.html">RankEvalRequestItemDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor.html">DestinationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSourceDescriptor.html">RemoteSourceDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor.html">SourceDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor-1.html">SourceDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor.html">PainlessContextSetupDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor-1.html">PainlessContextSetupDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor.html">CompletionContextDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor.html">CompletionSuggesterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor-1.html">CompletionSuggesterDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor.html">DirectGeneratorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor-1.html">DirectGeneratorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor.html">FieldCollapseDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor-1.html">FieldCollapseDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor.html">FieldSuggesterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor-1.html">FieldSuggesterDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor.html">HighlightDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor-1.html">HighlightDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor.html">HighlightFieldDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor-1.html">HighlightFieldDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor.html">InnerHitsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModelDescriptor.html">LaplaceSmoothingModelDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.LearningToRankDescriptor.html">LearningToRankDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModelDescriptor.html">LinearInterpolationSmoothingModelDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor.html">PhraseSuggestCollateDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQueryDescriptor.html">PhraseSuggestCollateQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlightDescriptor.html">PhraseSuggestHighlightDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor.html">PhraseSuggesterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor-1.html">PhraseSuggesterDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor.html">PointInTimeReferenceDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor.html">RegexOptionsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor.html">RescoreDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor-1.html">RescoreDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor.html">RescoreQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor-1.html">RescoreQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor.html">SmoothingModelDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor-1.html">SmoothingModelDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor.html">SourceFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor-1.html">SourceFilterDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModelDescriptor.html">StupidBackoffSmoothingModelDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor.html">SuggestFuzzinessDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor.html">SuggesterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor-1.html">SuggesterDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.html">TermSuggesterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor-1.html">TermSuggesterDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor.html">FilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.EmptyObjectDescriptor.html">EmptyObjectDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor.html">EnrichPolicyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor-1.html">EnrichPolicyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.FieldSortDescriptor.html">FieldSortDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.FieldSortDescriptor-1.html">FieldSortDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor.html">GeoDistanceSortDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor-1.html">GeoDistanceSortDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.GeoHashLocationDescriptor.html">GeoHashLocationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor.html">ExploreControlsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor-1.html">ExploreControlsDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Graph.HopDescriptor.html">HopDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Graph.HopDescriptor-1.html">HopDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor.html">SampleDiversityDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor-1.html">SampleDiversityDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor.html">VertexDefinitionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor-1.html">VertexDefinitionDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor.html">VertexIncludeDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor.html">ActionsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateActionDescriptor.html">AllocateActionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteActionDescriptor.html">DeleteActionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DownsampleActionDescriptor.html">DownsampleActionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeActionDescriptor.html">ForceMergeActionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicyDescriptor.html">IlmPolicyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateActionDescriptor.html">MigrateActionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor.html">PhaseDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhasesDescriptor.html">PhasesDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RolloverActionDescriptor.html">RolloverActionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotActionDescriptor.html">SearchableSnapshotActionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityActionDescriptor.html">SetPriorityActionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkActionDescriptor.html">ShrinkActionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor.html">StepKeyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotActionDescriptor.html">WaitForSnapshotActionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor.html">AddActionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor-1.html">AddActionDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptor.html">AliasDefinitionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptor-1.html">AliasDefinitionDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor.html">AliasDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor-1.html">AliasDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.CacheQueriesDescriptor.html">CacheQueriesDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor.html">DataStreamLifecycleDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor.html">DataStreamLifecycleDownsamplingDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleRolloverConditionsDescriptor.html">DataStreamLifecycleRolloverConditionsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor.html">DataStreamLifecycleWithRolloverDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor.html">DataStreamVisibilityDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor.html">DownsampleConfigDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor.html">DownsamplingRoundDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilterDescriptor.html">FielddataFrequencyFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamActionDescriptor.html">IndexAndDataStreamActionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamActionDescriptor.html">IndexModifyDataStreamActionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamActionDescriptor-1.html">IndexModifyDataStreamActionDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDescriptor.html">IndexRoutingAllocationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDiskDescriptor.html">IndexRoutingAllocationDiskDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationIncludeDescriptor.html">IndexRoutingAllocationIncludeDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecoveryDescriptor.html">IndexRoutingAllocationInitialRecoveryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingDescriptor.html">IndexRoutingDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceDescriptor.html">IndexRoutingRebalanceDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSortDescriptor.html">IndexSegmentSortDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSortDescriptor-1.html">IndexSegmentSortDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocksDescriptor.html">IndexSettingBlocksDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysisDescriptor.html">IndexSettingsAnalysisDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor.html">IndexSettingsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleDescriptor.html">IndexSettingsLifecycleDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStepDescriptor.html">IndexSettingsLifecycleStepDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesDescriptor.html">IndexSettingsTimeSeriesDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor.html">IndexStateDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor-1.html">IndexStateDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfigurationDescriptor.html">IndexTemplateDataStreamConfigurationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor.html">IndexTemplateDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor-1.html">IndexTemplateDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor.html">IndexTemplateMappingDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor-1.html">IndexTemplateMappingDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor.html">IndexTemplateSummaryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor-1.html">IndexTemplateSummaryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor.html">IndexUpdateAliasesActionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor-1.html">IndexUpdateAliasesActionDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioningDescriptor.html">IndexVersioningDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureDescriptor.html">IndexingPressureDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemoryDescriptor.html">IndexingPressureMemoryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettingsDescriptor.html">IndexingSlowlogSettingsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholdsDescriptor.html">IndexingSlowlogTresholdsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDepthDescriptor.html">MappingLimitSettingsDepthDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor.html">MappingLimitSettingsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFieldsDescriptor.html">MappingLimitSettingsDimensionFieldsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLengthDescriptor.html">MappingLimitSettingsFieldNameLengthDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFieldsDescriptor.html">MappingLimitSettingsNestedFieldsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjectsDescriptor.html">MappingLimitSettingsNestedObjectsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsSourceFieldsDescriptor.html">MappingLimitSettingsSourceFieldsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFieldsDescriptor.html">MappingLimitSettingsTotalFieldsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MergeDescriptor.html">MergeDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MergeSchedulerDescriptor.html">MergeSchedulerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataDescriptor.html">NumericFielddataDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.QueriesDescriptor.html">QueriesDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor.html">RemoveActionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexActionDescriptor.html">RemoveIndexActionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RetentionLeaseDescriptor.html">RetentionLeaseDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor.html">RolloverConditionsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SearchIdleDescriptor.html">SearchIdleDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyzeDescriptor.html">SettingsAnalyzeDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlightDescriptor.html">SettingsHighlightDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsQueryStringDescriptor.html">SettingsQueryStringDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearchDescriptor.html">SettingsSearchDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25Descriptor.html">SettingsSimilarityBm25Descriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBooleanDescriptor.html">SettingsSimilarityBooleanDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfiDescriptor.html">SettingsSimilarityDfiDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfrDescriptor.html">SettingsSimilarityDfrDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIbDescriptor.html">SettingsSimilarityIbDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmdDescriptor.html">SettingsSimilarityLmdDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmjDescriptor.html">SettingsSimilarityLmjDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScriptedDescriptor.html">SettingsSimilarityScriptedDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettingsDescriptor.html">SlowlogSettingsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevelsDescriptor.html">SlowlogTresholdLevelsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdsDescriptor.html">SlowlogTresholdsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletesDescriptor.html">SoftDeletesDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor.html">StorageDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.TranslogDescriptor.html">TranslogDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetentionDescriptor.html">TranslogRetentionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor.html">IndicesOptionsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.html">InferenceChunkingSettingsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Inference.InferenceEndpointDescriptor.html">InferenceEndpointDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor.html">AppendProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor-1.html">AppendProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor.html">AttachmentProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor-1.html">AttachmentProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor.html">BytesProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor-1.html">BytesProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor.html">CircleProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor-1.html">CircleProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor.html">CommunityIDProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor-1.html">CommunityIDProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.html">ConvertProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor-1.html">ConvertProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor.html">CsvProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor-1.html">CsvProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DatabaseConfigurationDescriptor.html">DatabaseConfigurationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DatabaseConfigurationDescriptor-1.html">DatabaseConfigurationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DatabaseConfigurationFullDescriptor.html">DatabaseConfigurationFullDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DatabaseConfigurationFullDescriptor-1.html">DatabaseConfigurationFullDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor.html">DateIndexNameProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor-1.html">DateIndexNameProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor.html">DateProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor-1.html">DateProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor.html">DissectProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor-1.html">DissectProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor.html">DocumentDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor.html">DotExpanderProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor-1.html">DotExpanderProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DropProcessorDescriptor.html">DropProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DropProcessorDescriptor-1.html">DropProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor.html">EnrichProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor-1.html">EnrichProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor.html">FailProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor-1.html">FailProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor.html">FingerprintProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor-1.html">FingerprintProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor.html">ForeachProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor-1.html">ForeachProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.html">GeoGridProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor-1.html">GeoGridProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor.html">GeoIpProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor-1.html">GeoIpProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor.html">GrokProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor-1.html">GrokProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor.html">GsubProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor-1.html">GsubProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor.html">HtmlStripProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor-1.html">HtmlStripProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor.html">InferenceConfigClassificationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor-1.html">InferenceConfigClassificationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor.html">InferenceConfigDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor-1.html">InferenceConfigDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegressionDescriptor.html">InferenceConfigRegressionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegressionDescriptor-1.html">InferenceConfigRegressionDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor.html">InferenceProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor-1.html">InferenceProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor.html">IpLocationProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor-1.html">IpLocationProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.IpinfoDescriptor.html">IpinfoDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.JoinProcessorDescriptor.html">JoinProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.JoinProcessorDescriptor-1.html">JoinProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor.html">JsonProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor-1.html">JsonProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor.html">KeyValueProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor-1.html">KeyValueProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.LocalDescriptor.html">LocalDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor.html">LowercaseProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor-1.html">LowercaseProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.MaxmindDescriptor.html">MaxmindDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor.html">NetworkDirectionProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor-1.html">NetworkDirectionProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor.html">PipelineDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor-1.html">PipelineDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor.html">PipelineProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor-1.html">PipelineProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor-1.html">ProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor.html">RedactProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor-1.html">RedactProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor.html">RegisteredDomainProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor-1.html">RegisteredDomainProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor.html">RemoveProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor-1.html">RemoveProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor.html">RenameProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor-1.html">RenameProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor.html">RerouteProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor-1.html">RerouteProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor.html">ScriptProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor-1.html">ScriptProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor.html">SetProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor-1.html">SetProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor.html">SetSecurityUserProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor-1.html">SetSecurityUserProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor.html">SortProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor-1.html">SortProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SplitProcessorDescriptor.html">SplitProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SplitProcessorDescriptor-1.html">SplitProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor.html">TerminateProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor-1.html">TerminateProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor.html">TrimProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor-1.html">TrimProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor.html">UppercaseProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor-1.html">UppercaseProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor.html">UriPartsProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor-1.html">UriPartsProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor.html">UrlDecodeProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor-1.html">UrlDecodeProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor.html">UserAgentProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor-1.html">UserAgentProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.WebDescriptor.html">WebDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.KnnQueryDescriptor.html">KnnQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.KnnQueryDescriptor-1.html">KnnQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor.html">KnnRetrieverDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor-1.html">KnnRetrieverDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.KnnSearchDescriptor.html">KnnSearchDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.KnnSearchDescriptor-1.html">KnnSearchDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.LatLonGeoLocationDescriptor.html">LatLonGeoLocationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseDescriptor.html">LicenseDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutputDescriptor.html">AggregateOutputDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor.html">AnalysisConfigDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor-1.html">AnalysisConfigDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimitsDescriptor.html">AnalysisLimitsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimitDescriptor.html">AnalysisMemoryLimitDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.CalendarEventDescriptor.html">CalendarEventDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerDefinitionDescriptor.html">CategorizationAnalyzerDefinitionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigDescriptor.html">ChunkingConfigDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor.html">ClassificationInferenceOptionsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor.html">DataDescriptionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor-1.html">DataDescriptionDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfigDescriptor.html">DatafeedConfigDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfigDescriptor-1.html">DatafeedConfigDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.html">DataframeAnalysisAnalyzedFieldsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassificationDescriptor.html">DataframeAnalysisClassificationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassificationDescriptor-1.html">DataframeAnalysisClassificationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor.html">DataframeAnalysisDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor-1.html">DataframeAnalysisDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor.html">DataframeAnalysisFeatureProcessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor-1.html">DataframeAnalysisFeatureProcessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor.html">DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor-1.html">DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncodingDescriptor.html">DataframeAnalysisFeatureProcessorMultiEncodingDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor.html">DataframeAnalysisFeatureProcessorNGramEncodingDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor-1.html">DataframeAnalysisFeatureProcessorNGramEncodingDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor.html">DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor-1.html">DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor.html">DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor-1.html">DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor.html">DataframeAnalysisOutlierDetectionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor.html">DataframeAnalysisRegressionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor-1.html">DataframeAnalysisRegressionDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor.html">DataframeAnalyticsDestinationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor-1.html">DataframeAnalyticsDestinationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor.html">DataframeAnalyticsSourceDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor-1.html">DataframeAnalyticsSourceDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor.html">DataframeEvaluationClassificationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor-1.html">DataframeEvaluationClassificationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor.html">DataframeEvaluationClassificationMetricsAucRocDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor.html">DataframeEvaluationClassificationMetricsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor.html">DataframeEvaluationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor-1.html">DataframeEvaluationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor.html">DataframeEvaluationOutlierDetectionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor-1.html">DataframeEvaluationOutlierDetectionDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor.html">DataframeEvaluationOutlierDetectionMetricsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor.html">DataframeEvaluationRegressionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor-1.html">DataframeEvaluationRegressionDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor.html">DataframeEvaluationRegressionMetricsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuberDescriptor.html">DataframeEvaluationRegressionMetricsHuberDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsMsleDescriptor.html">DataframeEvaluationRegressionMetricsMsleDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor.html">DataframePreviewConfigDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor-1.html">DataframePreviewConfigDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor.html">DefinitionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor.html">DelayedDataCheckConfigDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor.html">DetectionRuleDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor-1.html">DetectionRuleDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor.html">DetectorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor-1.html">DetectorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor.html">DetectorUpdateDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor-1.html">DetectorUpdateDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.EnsembleDescriptor.html">EnsembleDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptionsDescriptor.html">FillMaskInferenceOptionsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceUpdateOptionsDescriptor.html">FillMaskInferenceUpdateOptionsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor.html">FilterRefDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.FrequencyEncodingPreprocessorDescriptor.html">FrequencyEncodingPreprocessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor.html">InferenceConfigCreateDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor-1.html">InferenceConfigCreateDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdateDescriptor.html">InferenceConfigUpdateDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdateDescriptor-1.html">InferenceConfigUpdateDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.InputDescriptor.html">InputDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor.html">ModelPlotConfigDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor-1.html">ModelPlotConfigDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor.html">NerInferenceOptionsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceUpdateOptionsDescriptor.html">NerInferenceUpdateOptionsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor.html">NlpBertTokenizationConfigDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfigDescriptor.html">NlpRobertaTokenizationConfigDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor.html">NlpTokenizationUpdateOptionsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.OneHotEncodingPreprocessorDescriptor.html">OneHotEncodingPreprocessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor.html">PageDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptionsDescriptor.html">PassThroughInferenceOptionsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceUpdateOptionsDescriptor.html">PassThroughInferenceUpdateOptionsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor.html">PerPartitionCategorizationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PreprocessorDescriptor.html">PreprocessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PreprocessorDescriptor-1.html">PreprocessorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptionsDescriptor.html">QuestionAnsweringInferenceOptionsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptionsDescriptor.html">QuestionAnsweringInferenceUpdateOptionsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor.html">RegressionInferenceOptionsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor-1.html">RegressionInferenceOptionsDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor.html">RuleConditionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessorDescriptor.html">TargetMeanEncodingPreprocessorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptionsDescriptor.html">TextClassificationInferenceOptionsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceUpdateOptionsDescriptor.html">TextClassificationInferenceUpdateOptionsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsDescriptor.html">TextEmbeddingInferenceOptionsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceUpdateOptionsDescriptor.html">TextEmbeddingInferenceUpdateOptionsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptionsDescriptor.html">TextExpansionInferenceOptionsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceUpdateOptionsDescriptor.html">TextExpansionInferenceUpdateOptionsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor.html">TokenizationConfigDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor-1.html">TokenizationConfigDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDescriptor.html">TrainedModelDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor.html">TrainedModelPrefixStringsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeDescriptor.html">TrainedModelTreeDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNodeDescriptor.html">TrainedModelTreeNodeDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.VocabularyDescriptor.html">VocabularyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor.html">WeightsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor.html">ZeroShotClassificationInferenceOptionsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceUpdateOptionsDescriptor.html">ZeroShotClassificationInferenceUpdateOptionsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor.html">AggregateMetricDoublePropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor-1.html">AggregateMetricDoublePropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.AllFieldDescriptor.html">AllFieldDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor.html">BinaryPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor-1.html">BinaryPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor.html">BooleanPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor-1.html">BooleanPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.ByteNumberPropertyDescriptor.html">ByteNumberPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.ByteNumberPropertyDescriptor-1.html">ByteNumberPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor.html">CompletionPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor-1.html">CompletionPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.CompositeSubFieldDescriptor.html">CompositeSubFieldDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor.html">ConstantKeywordPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor-1.html">ConstantKeywordPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestampDescriptor.html">DataStreamTimestampDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor.html">DateNanosPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor-1.html">DateNanosPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor.html">DatePropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor-1.html">DatePropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DateRangePropertyDescriptor.html">DateRangePropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DateRangePropertyDescriptor-1.html">DateRangePropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor.html">DenseVectorIndexOptionsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor.html">DenseVectorPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor-1.html">DenseVectorPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DoubleNumberPropertyDescriptor.html">DoubleNumberPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DoubleNumberPropertyDescriptor-1.html">DoubleNumberPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor.html">DoubleRangePropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor-1.html">DoubleRangePropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor-1.html">DynamicPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor.html">DynamicTemplateDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor-1.html">DynamicTemplateDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor.html">FieldAliasPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor-1.html">FieldAliasPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor.html">FieldNamesFieldDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor.html">FlattenedPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor-1.html">FlattenedPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.FloatNumberPropertyDescriptor.html">FloatNumberPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.FloatNumberPropertyDescriptor-1.html">FloatNumberPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor.html">FloatRangePropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor-1.html">FloatRangePropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor.html">GeoPointPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor-1.html">GeoPointPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor.html">GeoShapePropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor-1.html">GeoShapePropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberPropertyDescriptor.html">HalfFloatNumberPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberPropertyDescriptor-1.html">HalfFloatNumberPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor.html">HistogramPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor-1.html">HistogramPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor.html">IcuCollationPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor-1.html">IcuCollationPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.IndexFieldDescriptor.html">IndexFieldDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor.html">IntegerNumberPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor-1.html">IntegerNumberPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.IntegerRangePropertyDescriptor.html">IntegerRangePropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.IntegerRangePropertyDescriptor-1.html">IntegerRangePropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.IpPropertyDescriptor.html">IpPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.IpPropertyDescriptor-1.html">IpPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor.html">IpRangePropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor-1.html">IpRangePropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor.html">JoinPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor-1.html">JoinPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor.html">KeywordPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor-1.html">KeywordPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor.html">LongNumberPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor-1.html">LongNumberPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor.html">LongRangePropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor-1.html">LongRangePropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor.html">MatchOnlyTextPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor-1.html">MatchOnlyTextPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.Murmur3HashPropertyDescriptor.html">Murmur3HashPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.Murmur3HashPropertyDescriptor-1.html">Murmur3HashPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor.html">NestedPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor-1.html">NestedPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor.html">ObjectPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor-1.html">ObjectPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor.html">PercolatorPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor-1.html">PercolatorPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor.html">PointPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor-1.html">PointPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor.html">RankFeaturePropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor-1.html">RankFeaturePropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor.html">RankFeaturesPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor-1.html">RankFeaturesPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor.html">RoutingFieldDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor.html">RuntimeFieldDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor-1.html">RuntimeFieldDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor.html">RuntimeFieldFetchFieldsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor-1.html">RuntimeFieldFetchFieldsDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor.html">ScaledFloatNumberPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor-1.html">ScaledFloatNumberPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor.html">SearchAsYouTypePropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor-1.html">SearchAsYouTypePropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor.html">SemanticTextPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor.html">ShapePropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor-1.html">ShapePropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.ShortNumberPropertyDescriptor.html">ShortNumberPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.ShortNumberPropertyDescriptor-1.html">ShortNumberPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.SizeFieldDescriptor.html">SizeFieldDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor.html">SourceFieldDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor.html">SparseVectorPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor-1.html">SparseVectorPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.SuggestContextDescriptor.html">SuggestContextDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.SuggestContextDescriptor-1.html">SuggestContextDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor.html">TextIndexPrefixesDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TextPropertyDescriptor.html">TextPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TextPropertyDescriptor-1.html">TextPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TokenCountPropertyDescriptor.html">TokenCountPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TokenCountPropertyDescriptor-1.html">TokenCountPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor-1.html">TypeMappingDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberPropertyDescriptor.html">UnsignedLongNumberPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberPropertyDescriptor-1.html">UnsignedLongNumberPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor.html">VersionPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor-1.html">VersionPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor.html">WildcardPropertyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor-1.html">WildcardPropertyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.NestedSortValueDescriptor.html">NestedSortValueDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.NestedSortValueDescriptor-1.html">NestedSortValueDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor.html">BoolQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor-1.html">BoolQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor.html">BoostingQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor-1.html">BoostingQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor.html">CombinedFieldsQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor-1.html">CombinedFieldsQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQueryDescriptor.html">ConstantScoreQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQueryDescriptor-1.html">ConstantScoreQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DateDecayFunctionDescriptor.html">DateDecayFunctionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DateDecayFunctionDescriptor-1.html">DateDecayFunctionDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DateDistanceFeatureQueryDescriptor.html">DateDistanceFeatureQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DateDistanceFeatureQueryDescriptor-1.html">DateDistanceFeatureQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor.html">DateRangeQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor-1.html">DateRangeQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor.html">DisMaxQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor-1.html">DisMaxQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor.html">ExistsQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor-1.html">ExistsQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor.html">FieldAndFormatDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor-1.html">FieldAndFormatDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor.html">FieldLookupDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor-1.html">FieldLookupDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor.html">FieldValueFactorScoreFunctionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor-1.html">FieldValueFactorScoreFunctionDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.html">FunctionScoreDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor-1.html">FunctionScoreDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor.html">FunctionScoreQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor-1.html">FunctionScoreQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor.html">FuzzyQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor-1.html">FuzzyQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor.html">GeoBoundingBoxQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor-1.html">GeoBoundingBoxQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunctionDescriptor.html">GeoDecayFunctionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunctionDescriptor-1.html">GeoDecayFunctionDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQueryDescriptor.html">GeoDistanceFeatureQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQueryDescriptor-1.html">GeoDistanceFeatureQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor.html">GeoDistanceQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor-1.html">GeoDistanceQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor.html">GeoGridQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor-1.html">GeoGridQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryDescriptor.html">GeoShapeFieldQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryDescriptor-1.html">GeoShapeFieldQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor.html">GeoShapeQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor-1.html">GeoShapeQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor.html">HasChildQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor-1.html">HasChildQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor.html">HasParentQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor-1.html">HasParentQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor.html">IdsQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor.html">IntervalsAllOfDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor-1.html">IntervalsAllOfDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor.html">IntervalsAnyOfDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor-1.html">IntervalsAnyOfDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor.html">IntervalsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor-1.html">IntervalsDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor.html">IntervalsFilterDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor-1.html">IntervalsFilterDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor.html">IntervalsFuzzyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor-1.html">IntervalsFuzzyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor.html">IntervalsMatchDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor-1.html">IntervalsMatchDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor.html">IntervalsPrefixDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor-1.html">IntervalsPrefixDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor.html">IntervalsQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor-1.html">IntervalsQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor.html">IntervalsWildcardDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor-1.html">IntervalsWildcardDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor.html">LikeDocumentDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor-1.html">LikeDocumentDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor.html">MatchAllQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor.html">MatchBoolPrefixQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor-1.html">MatchBoolPrefixQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchNoneQueryDescriptor.html">MatchNoneQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor.html">MatchPhrasePrefixQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor-1.html">MatchPhrasePrefixQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQueryDescriptor.html">MatchPhraseQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQueryDescriptor-1.html">MatchPhraseQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor.html">MatchQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor-1.html">MatchQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor.html">MoreLikeThisQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor-1.html">MoreLikeThisQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.html">MultiMatchQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor-1.html">MultiMatchQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor.html">NestedQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor-1.html">NestedQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor.html">NumberRangeQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor-1.html">NumberRangeQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunctionDescriptor.html">NumericDecayFunctionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunctionDescriptor-1.html">NumericDecayFunctionDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQueryDescriptor.html">ParentIdQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor.html">PercolateQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor-1.html">PercolateQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PinnedDocDescriptor.html">PinnedDocDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor.html">PinnedQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor-1.html">PinnedQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor.html">PrefixQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor-1.html">PrefixQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor-1.html">QueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor.html">QueryStringQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor-1.html">QueryStringQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor.html">RandomScoreFunctionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor-1.html">RandomScoreFunctionDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinearDescriptor.html">RankFeatureFunctionLinearDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithmDescriptor.html">RankFeatureFunctionLogarithmDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturationDescriptor.html">RankFeatureFunctionSaturationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidDescriptor.html">RankFeatureFunctionSigmoidDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor.html">RankFeatureQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor-1.html">RankFeatureQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RegexpQueryDescriptor.html">RegexpQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RegexpQueryDescriptor-1.html">RegexpQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RuleQueryDescriptor.html">RuleQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RuleQueryDescriptor-1.html">RuleQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ScriptQueryDescriptor.html">ScriptQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunctionDescriptor.html">ScriptScoreFunctionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor.html">ScriptScoreQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor-1.html">ScriptScoreQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SemanticQueryDescriptor.html">SemanticQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor.html">ShapeFieldQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor-1.html">ShapeFieldQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor.html">ShapeQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor-1.html">ShapeQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.html">SimpleQueryStringQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor-1.html">SimpleQueryStringQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor.html">SpanContainingQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor-1.html">SpanContainingQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQueryDescriptor.html">SpanFieldMaskingQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQueryDescriptor-1.html">SpanFieldMaskingQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor.html">SpanFirstQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor-1.html">SpanFirstQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor.html">SpanMultiTermQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor-1.html">SpanMultiTermQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor.html">SpanNearQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor-1.html">SpanNearQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor.html">SpanNotQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor-1.html">SpanNotQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor.html">SpanOrQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor-1.html">SpanOrQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor.html">SpanQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor-1.html">SpanQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQueryDescriptor.html">SpanTermQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQueryDescriptor-1.html">SpanTermQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor.html">SpanWithinQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor-1.html">SpanWithinQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor.html">SparseVectorQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor-1.html">SparseVectorQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor.html">TermQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor-1.html">TermQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor.html">TermRangeQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor-1.html">TermRangeQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermsLookupDescriptor.html">TermsLookupDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermsLookupDescriptor-1.html">TermsLookupDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor.html">TermsQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor-1.html">TermsQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor.html">TermsSetQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor-1.html">TermsSetQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfigDescriptor.html">TokenPruningConfigDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunctionDescriptor.html">UntypedDecayFunctionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunctionDescriptor-1.html">UntypedDecayFunctionDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor.html">UntypedDistanceFeatureQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor-1.html">UntypedDistanceFeatureQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor.html">UntypedRangeQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor-1.html">UntypedRangeQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor.html">WildcardQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor-1.html">WildcardQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.WrapperQueryDescriptor.html">WrapperQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActionsDescriptor.html">QueryRuleActionsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaDescriptor.html">QueryRuleCriteriaDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor.html">QueryRuleDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor.html">QueryVectorBuilderDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor-1.html">QueryVectorBuilderDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.RRFRetrieverDescriptor.html">RRFRetrieverDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.RRFRetrieverDescriptor-1.html">RRFRetrieverDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.RankDescriptor.html">RankDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.RankDescriptor-1.html">RankDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.RetrieverDescriptor.html">RetrieverDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.RetrieverDescriptor-1.html">RetrieverDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor.html">DateHistogramGroupingDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor-1.html">DateHistogramGroupingDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor.html">FieldMetricDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor-1.html">FieldMetricDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor.html">GroupingsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor-1.html">GroupingsDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor.html">HistogramGroupingDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor-1.html">HistogramGroupingDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor.html">TermsGroupingDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor-1.html">TermsGroupingDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.RrfRankDescriptor.html">RrfRankDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor.html">RuleRetrieverDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor-1.html">RuleRetrieverDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.ScoreSortDescriptor.html">ScoreSortDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.ScriptDescriptor.html">ScriptDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.ScriptFieldDescriptor.html">ScriptFieldDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.ScriptSortDescriptor.html">ScriptSortDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.ScriptSortDescriptor-1.html">ScriptSortDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationDescriptor.html">SearchApplicationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationTemplateDescriptor.html">SearchApplicationTemplateDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.AccessDescriptor.html">AccessDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.AccessDescriptor-1.html">AccessDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor.html">ApiKeyAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor-1.html">ApiKeyAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor.html">ApiKeyFiltersAggregationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor-1.html">ApiKeyFiltersAggregationDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor.html">ApiKeyQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor-1.html">ApiKeyQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivilegesDescriptor.html">ApplicationGlobalUserPrivilegesDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheckDescriptor.html">ApplicationPrivilegesCheckDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor.html">ApplicationPrivilegesDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.FieldRuleDescriptor.html">FieldRuleDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.FieldRuleDescriptor-1.html">FieldRuleDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor.html">FieldSecurityDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor-1.html">FieldSecurityDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor.html">GlobalPrivilegeDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor.html">GrantApiKeyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor-1.html">GrantApiKeyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.HintDescriptor.html">HintDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheckDescriptor.html">IndexPrivilegesCheckDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor.html">IndicesPrivilegesDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor-1.html">IndicesPrivilegesDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.ManageUserPrivilegesDescriptor.html">ManageUserPrivilegesDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PrivilegeActionsDescriptor.html">PrivilegeActionsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor.html">PrivilegesCheckDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor.html">RemoteClusterPrivilegesDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor.html">RemoteIndicesPrivilegesDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor-1.html">RemoteIndicesPrivilegesDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.ReplicationAccessDescriptor.html">ReplicationAccessDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor.html">RestrictionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor.html">RoleDescriptorDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor-1.html">RoleDescriptorDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor.html">RoleMappingRuleDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor-1.html">RoleMappingRuleDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor.html">RoleQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor-1.html">RoleQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.RoleTemplateDescriptor.html">RoleTemplateDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor.html">SearchAccessDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor-1.html">SearchAccessDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor.html">SecuritySettingsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor-1.html">SecuritySettingsDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor-1.html">UserQueryDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.SlicedScrollDescriptor.html">SlicedScrollDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.SlicedScrollDescriptor-1.html">SlicedScrollDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryDescriptor.html">AzureRepositoryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor.html">AzureRepositorySettingsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.GcsRepositoryDescriptor.html">GcsRepositoryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.GcsRepositorySettingsDescriptor.html">GcsRepositorySettingsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositoryDescriptor.html">ReadOnlyUrlRepositoryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsDescriptor.html">ReadOnlyUrlRepositorySettingsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.S3RepositoryDescriptor.html">S3RepositoryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettingsDescriptor.html">S3RepositorySettingsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.SharedFileSystemRepositoryDescriptor.html">SharedFileSystemRepositoryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.SharedFileSystemRepositorySettingsDescriptor.html">SharedFileSystemRepositorySettingsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositoryDescriptor.html">SourceOnlyRepositoryDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor.html">SourceOnlyRepositorySettingsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.RetentionDescriptor.html">RetentionDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor.html">SlmConfigurationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor-1.html">SortOptionsDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor.html">StandardRetrieverDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor-1.html">StandardRetrieverDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.StoredScriptDescriptor.html">StoredScriptDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.SynonymRuleDescriptor.html">SynonymRuleDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TextEmbeddingDescriptor.html">TextEmbeddingDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor.html">TextSimilarityRerankerDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor-1.html">TextSimilarityRerankerDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TopLeftBottomRightGeoBoundsDescriptor.html">TopLeftBottomRightGeoBoundsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBoundsDescriptor.html">TopRightBottomLeftGeoBoundsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor.html">DestinationDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor.html">LatestDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor-1.html">LatestDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor.html">PivotDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor-1.html">PivotDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor.html">PivotGroupByDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor-1.html">PivotGroupByDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor.html">RetentionPolicyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor-1.html">RetentionPolicyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor.html">SettingsDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor.html">SourceDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor-1.html">SourceDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor.html">SyncDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor-1.html">SyncDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor.html">TimeRetentionPolicyDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor-1.html">TimeRetentionPolicyDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor.html">TimeSyncDescriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor-1.html">TimeSyncDescriptor&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.WktGeoBoundsDescriptor.html">WktGeoBoundsDescriptor</a></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.Descriptor-1.html#Elastic_Clients_Elasticsearch_Fluent_Descriptor_1_Self">Descriptor&lt;TDescriptor&gt;.Self</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.Descriptor-1.html#Elastic_Clients_Elasticsearch_Fluent_Descriptor_1_Assign__1___0_System_Action__0___0__">Descriptor&lt;TDescriptor&gt;.Assign&lt;TValue&gt;(TValue, Action&lt;TDescriptor, TValue&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Fluent_SerializableDescriptor_1_Serialize_" data-uid="Elastic.Clients.Elasticsearch.Fluent.SerializableDescriptor`1.Serialize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Fluent_SerializableDescriptor_1_Serialize_System_Text_Json_Utf8JsonWriter_System_Text_Json_JsonSerializerOptions_Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_" data-uid="Elastic.Clients.Elasticsearch.Fluent.SerializableDescriptor`1.Serialize(System.Text.Json.Utf8JsonWriter,System.Text.Json.JsonSerializerOptions,Elastic.Clients.Elasticsearch.IElasticsearchClientSettings)">
+  Serialize(Utf8JsonWriter, JsonSerializerOptions, IElasticsearchClientSettings)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.3/src/Elastic.Clients.Elasticsearch/_Shared/Core/Fluent/Descriptor.cs/#L73"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected abstract void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>writer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.utf8jsonwriter">Utf8JsonWriter</a></dt>
+    <dd></dd>
+    <dt><code>options</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions">JsonSerializerOptions</a></dt>
+    <dd></dd>
+    <dt><code>settings</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.html">IElasticsearchClientSettings</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
