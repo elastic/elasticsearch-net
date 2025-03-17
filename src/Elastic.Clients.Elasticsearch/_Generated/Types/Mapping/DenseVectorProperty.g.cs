@@ -29,18 +29,47 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public sealed partial class DenseVectorProperty : IProperty
 {
+	/// <summary>
+	/// <para>
+	/// Number of vector dimensions. Can't exceed <c>4096</c>. If <c>dims</c> is not specified, it will be set to the length of
+	/// the first vector added to the field.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("dims")]
 	public int? Dims { get; set; }
 	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The data type used to encode vectors. The supported data types are <c>float</c> (default), <c>byte</c>, and <c>bit</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("element_type")]
-	public string? ElementType { get; set; }
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType? ElementType { get; set; }
 	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, you can search this field using the kNN search API.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("index")]
 	public bool? Index { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// An optional section that configures the kNN indexing algorithm. The HNSW algorithm has two internal parameters
+	/// that influence how the data structure is built. These can be adjusted to improve the accuracy of results, at the
+	/// expense of slower indexing speed.
+	/// </para>
+	/// <para>
+	/// This parameter can only be specified when <c>index</c> is <c>true</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("index_options")]
 	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions? IndexOptions { get; set; }
 
@@ -53,8 +82,28 @@ public sealed partial class DenseVectorProperty : IProperty
 	public IDictionary<string, string>? Meta { get; set; }
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The vector similarity metric to use in kNN search.
+	/// </para>
+	/// <para>
+	/// Documents are ranked by their vector field's similarity to the query vector. The <c>_score</c> of each document will
+	/// be derived from the similarity, in a way that ensures scores are positive and that a larger score corresponds
+	/// to a higher ranking.
+	/// </para>
+	/// <para>
+	/// Defaults to <c>l2_norm</c> when <c>element_type</c> is <c>bit</c> otherwise defaults to <c>cosine</c>.
+	/// </para>
+	/// <para>
+	/// <c>bit</c> vectors only support <c>l2_norm</c> as their similarity metric.
+	/// </para>
+	/// <para>
+	/// This parameter can only be specified when <c>index</c> is <c>true</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("similarity")]
-	public string? Similarity { get; set; }
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity? Similarity { get; set; }
 	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
 	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
@@ -72,7 +121,7 @@ public sealed partial class DenseVectorPropertyDescriptor<TDocument> : Serializa
 
 	private int? DimsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-	private string? ElementTypeValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType? ElementTypeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 	private int? IgnoreAboveValue { get; set; }
 	private bool? IndexValue { get; set; }
@@ -81,9 +130,15 @@ public sealed partial class DenseVectorPropertyDescriptor<TDocument> : Serializa
 	private Action<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor> IndexOptionsDescriptorAction { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-	private string? SimilarityValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity? SimilarityValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// Number of vector dimensions. Can't exceed <c>4096</c>. If <c>dims</c> is not specified, it will be set to the length of
+	/// the first vector added to the field.
+	/// </para>
+	/// </summary>
 	public DenseVectorPropertyDescriptor<TDocument> Dims(int? dims)
 	{
 		DimsValue = dims;
@@ -96,7 +151,12 @@ public sealed partial class DenseVectorPropertyDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
-	public DenseVectorPropertyDescriptor<TDocument> ElementType(string? elementType)
+	/// <summary>
+	/// <para>
+	/// The data type used to encode vectors. The supported data types are <c>float</c> (default), <c>byte</c>, and <c>bit</c>.
+	/// </para>
+	/// </summary>
+	public DenseVectorPropertyDescriptor<TDocument> ElementType(Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType? elementType)
 	{
 		ElementTypeValue = elementType;
 		return Self;
@@ -128,12 +188,27 @@ public sealed partial class DenseVectorPropertyDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, you can search this field using the kNN search API.
+	/// </para>
+	/// </summary>
 	public DenseVectorPropertyDescriptor<TDocument> Index(bool? index = true)
 	{
 		IndexValue = index;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// An optional section that configures the kNN indexing algorithm. The HNSW algorithm has two internal parameters
+	/// that influence how the data structure is built. These can be adjusted to improve the accuracy of results, at the
+	/// expense of slower indexing speed.
+	/// </para>
+	/// <para>
+	/// This parameter can only be specified when <c>index</c> is <c>true</c>.
+	/// </para>
+	/// </summary>
 	public DenseVectorPropertyDescriptor<TDocument> IndexOptions(Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions? indexOptions)
 	{
 		IndexOptionsDescriptor = null;
@@ -189,7 +264,26 @@ public sealed partial class DenseVectorPropertyDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
-	public DenseVectorPropertyDescriptor<TDocument> Similarity(string? similarity)
+	/// <summary>
+	/// <para>
+	/// The vector similarity metric to use in kNN search.
+	/// </para>
+	/// <para>
+	/// Documents are ranked by their vector field's similarity to the query vector. The <c>_score</c> of each document will
+	/// be derived from the similarity, in a way that ensures scores are positive and that a larger score corresponds
+	/// to a higher ranking.
+	/// </para>
+	/// <para>
+	/// Defaults to <c>l2_norm</c> when <c>element_type</c> is <c>bit</c> otherwise defaults to <c>cosine</c>.
+	/// </para>
+	/// <para>
+	/// <c>bit</c> vectors only support <c>l2_norm</c> as their similarity metric.
+	/// </para>
+	/// <para>
+	/// This parameter can only be specified when <c>index</c> is <c>true</c>.
+	/// </para>
+	/// </summary>
+	public DenseVectorPropertyDescriptor<TDocument> Similarity(Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity? similarity)
 	{
 		SimilarityValue = similarity;
 		return Self;
@@ -216,10 +310,10 @@ public sealed partial class DenseVectorPropertyDescriptor<TDocument> : Serializa
 			JsonSerializer.Serialize(writer, DynamicValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(ElementTypeValue))
+		if (ElementTypeValue is not null)
 		{
 			writer.WritePropertyName("element_type");
-			writer.WriteStringValue(ElementTypeValue);
+			JsonSerializer.Serialize(writer, ElementTypeValue, options);
 		}
 
 		if (FieldsValue is not null)
@@ -268,10 +362,10 @@ public sealed partial class DenseVectorPropertyDescriptor<TDocument> : Serializa
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
+		if (SimilarityValue is not null)
 		{
 			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
+			JsonSerializer.Serialize(writer, SimilarityValue, options);
 		}
 
 		if (SyntheticSourceKeepValue is not null)
@@ -335,7 +429,7 @@ public sealed partial class DenseVectorPropertyDescriptor : SerializableDescript
 
 	private int? DimsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-	private string? ElementTypeValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType? ElementTypeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 	private int? IgnoreAboveValue { get; set; }
 	private bool? IndexValue { get; set; }
@@ -344,9 +438,15 @@ public sealed partial class DenseVectorPropertyDescriptor : SerializableDescript
 	private Action<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor> IndexOptionsDescriptorAction { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-	private string? SimilarityValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity? SimilarityValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// Number of vector dimensions. Can't exceed <c>4096</c>. If <c>dims</c> is not specified, it will be set to the length of
+	/// the first vector added to the field.
+	/// </para>
+	/// </summary>
 	public DenseVectorPropertyDescriptor Dims(int? dims)
 	{
 		DimsValue = dims;
@@ -359,7 +459,12 @@ public sealed partial class DenseVectorPropertyDescriptor : SerializableDescript
 		return Self;
 	}
 
-	public DenseVectorPropertyDescriptor ElementType(string? elementType)
+	/// <summary>
+	/// <para>
+	/// The data type used to encode vectors. The supported data types are <c>float</c> (default), <c>byte</c>, and <c>bit</c>.
+	/// </para>
+	/// </summary>
+	public DenseVectorPropertyDescriptor ElementType(Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType? elementType)
 	{
 		ElementTypeValue = elementType;
 		return Self;
@@ -391,12 +496,27 @@ public sealed partial class DenseVectorPropertyDescriptor : SerializableDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, you can search this field using the kNN search API.
+	/// </para>
+	/// </summary>
 	public DenseVectorPropertyDescriptor Index(bool? index = true)
 	{
 		IndexValue = index;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// An optional section that configures the kNN indexing algorithm. The HNSW algorithm has two internal parameters
+	/// that influence how the data structure is built. These can be adjusted to improve the accuracy of results, at the
+	/// expense of slower indexing speed.
+	/// </para>
+	/// <para>
+	/// This parameter can only be specified when <c>index</c> is <c>true</c>.
+	/// </para>
+	/// </summary>
 	public DenseVectorPropertyDescriptor IndexOptions(Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions? indexOptions)
 	{
 		IndexOptionsDescriptor = null;
@@ -452,7 +572,26 @@ public sealed partial class DenseVectorPropertyDescriptor : SerializableDescript
 		return Self;
 	}
 
-	public DenseVectorPropertyDescriptor Similarity(string? similarity)
+	/// <summary>
+	/// <para>
+	/// The vector similarity metric to use in kNN search.
+	/// </para>
+	/// <para>
+	/// Documents are ranked by their vector field's similarity to the query vector. The <c>_score</c> of each document will
+	/// be derived from the similarity, in a way that ensures scores are positive and that a larger score corresponds
+	/// to a higher ranking.
+	/// </para>
+	/// <para>
+	/// Defaults to <c>l2_norm</c> when <c>element_type</c> is <c>bit</c> otherwise defaults to <c>cosine</c>.
+	/// </para>
+	/// <para>
+	/// <c>bit</c> vectors only support <c>l2_norm</c> as their similarity metric.
+	/// </para>
+	/// <para>
+	/// This parameter can only be specified when <c>index</c> is <c>true</c>.
+	/// </para>
+	/// </summary>
+	public DenseVectorPropertyDescriptor Similarity(Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity? similarity)
 	{
 		SimilarityValue = similarity;
 		return Self;
@@ -479,10 +618,10 @@ public sealed partial class DenseVectorPropertyDescriptor : SerializableDescript
 			JsonSerializer.Serialize(writer, DynamicValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(ElementTypeValue))
+		if (ElementTypeValue is not null)
 		{
 			writer.WritePropertyName("element_type");
-			writer.WriteStringValue(ElementTypeValue);
+			JsonSerializer.Serialize(writer, ElementTypeValue, options);
 		}
 
 		if (FieldsValue is not null)
@@ -531,10 +670,10 @@ public sealed partial class DenseVectorPropertyDescriptor : SerializableDescript
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
+		if (SimilarityValue is not null)
 		{
 			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
+			JsonSerializer.Serialize(writer, SimilarityValue, options);
 		}
 
 		if (SyntheticSourceKeepValue is not null)
