@@ -1,5 +1,5 @@
 ---
-navigation_title: "Elasticsearch .NET Client"
+navigation_title: "Known issues"
 
 ---
 
