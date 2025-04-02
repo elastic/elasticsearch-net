@@ -402,3 +402,214 @@ public readonly partial struct FlushRequestDescriptor
 		return this;
 	}
 }
+
+/// <summary>
+/// <para>
+/// Flush data streams or indices.
+/// Flushing a data stream or index is the process of making sure that any data that is currently only stored in the transaction log is also permanently stored in the Lucene index.
+/// When restarting, Elasticsearch replays any unflushed operations from the transaction log into the Lucene index to bring it back into the state that it was in before the restart.
+/// Elasticsearch automatically triggers flushes as needed, using heuristics that trade off the size of the unflushed transaction log against the cost of performing each flush.
+/// </para>
+/// <para>
+/// After each operation has been flushed it is permanently stored in the Lucene index.
+/// This may mean that there is no need to maintain an additional copy of it in the transaction log.
+/// The transaction log is made up of multiple files, called generations, and Elasticsearch will delete any generation files when they are no longer needed, freeing up disk space.
+/// </para>
+/// <para>
+/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
+/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
+/// </para>
+/// </summary>
+public readonly partial struct FlushRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FlushRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public FlushRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest(indices);
+	}
+
+	public FlushRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest(Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and aliases to flush.
+	/// Supports wildcards (<c>*</c>).
+	/// To flush all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
+	{
+		Instance.Indices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+	/// This behavior applies even if the request targets other open indices.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
+	{
+		Instance.AllowNoIndices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument> ExpandWildcards()
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument> ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request forces a flush even if there are no changes to commit to the index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument> Force(bool? value = true)
+	{
+		Instance.Force = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the flush operation blocks until execution when another flush operation is running.
+	/// If <c>false</c>, Elasticsearch returns an error if you request a flush when another flush operation is running.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument> WaitIfOngoing(bool? value = true)
+	{
+		Instance.WaitIfOngoing = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument>>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}

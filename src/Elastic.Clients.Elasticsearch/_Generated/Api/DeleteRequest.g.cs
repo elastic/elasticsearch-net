@@ -540,3 +540,253 @@ public readonly partial struct DeleteRequestDescriptor
 		return this;
 	}
 }
+
+/// <summary>
+/// <para>
+/// Delete a document.
+/// </para>
+/// <para>
+/// Remove a JSON document from the specified index.
+/// </para>
+/// <para>
+/// NOTE: You cannot send deletion requests directly to a data stream.
+/// To delete a document in a data stream, you must target the backing index containing the document.
+/// </para>
+/// <para>
+/// <strong>Optimistic concurrency control</strong>
+/// </para>
+/// <para>
+/// Delete operations can be made conditional and only be performed if the last modification to the document was assigned the sequence number and primary term specified by the <c>if_seq_no</c> and <c>if_primary_term</c> parameters.
+/// If a mismatch is detected, the operation will result in a <c>VersionConflictException</c> and a status code of <c>409</c>.
+/// </para>
+/// <para>
+/// <strong>Versioning</strong>
+/// </para>
+/// <para>
+/// Each document indexed is versioned.
+/// When deleting a document, the version can be specified to make sure the relevant document you are trying to delete is actually being deleted and it has not changed in the meantime.
+/// Every write operation run on a document, deletes included, causes its version to be incremented.
+/// The version number of a deleted document remains available for a short time after deletion to allow for control of concurrent operations.
+/// The length of time for which a deleted document's version remains available is determined by the <c>index.gc_deletes</c> index setting.
+/// </para>
+/// <para>
+/// <strong>Routing</strong>
+/// </para>
+/// <para>
+/// If routing is used during indexing, the routing value also needs to be specified to delete a document.
+/// </para>
+/// <para>
+/// If the <c>_routing</c> mapping is set to <c>required</c> and no routing value is specified, the delete API throws a <c>RoutingMissingException</c> and rejects the request.
+/// </para>
+/// <para>
+/// For example:
+/// </para>
+/// <code>
+/// DELETE /my-index-000001/_doc/1?routing=shard-1
+/// </code>
+/// <para>
+/// This request deletes the document with ID 1, but it is routed based on the user.
+/// The document is not deleted if the correct routing is not specified.
+/// </para>
+/// <para>
+/// <strong>Distributed</strong>
+/// </para>
+/// <para>
+/// The delete operation gets hashed into a specific shard ID.
+/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
+/// </para>
+/// </summary>
+public readonly partial struct DeleteRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.DeleteRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DeleteRequestDescriptor(Elastic.Clients.Elasticsearch.DeleteRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public DeleteRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.DeleteRequest(index, id);
+	}
+
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DeleteRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.DeleteRequest instance) => new Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.DeleteRequest(Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A unique identifier for the document.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.Id = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The name of the target index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
+	{
+		Instance.Index = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Only perform the operation if the document has this primary term.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument> IfPrimaryTerm(long? value)
+	{
+		Instance.IfPrimaryTerm = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Only perform the operation if the document has this sequence number.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument> IfSeqNo(long? value)
+	{
+		Instance.IfSeqNo = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, Elasticsearch refreshes the affected shards to make this operation visible to search.
+	/// If <c>wait_for</c>, it waits for a refresh to make this operation visible to search.
+	/// If <c>false</c>, it does nothing with refreshes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument> Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
+	{
+		Instance.Refresh = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A custom value used to route operations to a specific shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	{
+		Instance.Routing = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for active shards.
+	/// </para>
+	/// <para>
+	/// This parameter is useful for situations where the primary shard assigned to perform the delete operation might not be available when the delete operation runs.
+	/// Some reasons for this might be that the primary shard is currently recovering from a store or undergoing relocation.
+	/// By default, the delete operation will wait on the primary shard to become available for up to 1 minute before failing and responding with an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An explicit version number for concurrency control.
+	/// It must match the current version of the document for the request to succeed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument> Version(long? value)
+	{
+		Instance.Version = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The version type.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? value)
+	{
+		Instance.VersionType = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The minimum number of shard copies that must be active before proceeding with the operation.
+	/// You can set it to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// The default value of <c>1</c> means it waits for each primary shard to be active.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
+	{
+		Instance.WaitForActiveShards = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.DeleteRequest Build(System.Action<Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.DeleteRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}

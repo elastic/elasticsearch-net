@@ -44,10 +44,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequest, Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheResponse, Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheResponse> ClearTrainedModelDeploymentCacheAsync(Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheResponse ClearTrainedModelDeploymentCache(Elastic.Clients.Elasticsearch.Id modelId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequestDescriptor(modelId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequest, Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheResponse, Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequest, Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheResponse, Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheResponse ClearTrainedModelDeploymentCache(Elastic.Clients.Elasticsearch.Id modelId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequestDescriptor> action)
@@ -57,6 +59,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequest, Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheResponse, Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheResponse> ClearTrainedModelDeploymentCacheAsync(Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequest, Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheResponse, Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheResponse> ClearTrainedModelDeploymentCacheAsync(Elastic.Clients.Elasticsearch.Id modelId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequestDescriptor(modelId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequest, Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheResponse, Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheResponse> ClearTrainedModelDeploymentCacheAsync(Elastic.Clients.Elasticsearch.Id modelId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -74,10 +90,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.CloseJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.CloseJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.CloseJobRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.CloseJobResponse> CloseJobAsync(Elastic.Clients.Elasticsearch.MachineLearning.CloseJobRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.CloseJobResponse CloseJob(Elastic.Clients.Elasticsearch.Id jobId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.CloseJobRequestDescriptor(jobId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.CloseJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.CloseJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.CloseJobRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.CloseJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.CloseJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.CloseJobRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.CloseJobResponse CloseJob(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.CloseJobRequestDescriptor> action)
@@ -87,6 +105,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.CloseJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.CloseJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.CloseJobRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.CloseJobResponse> CloseJobAsync(Elastic.Clients.Elasticsearch.MachineLearning.CloseJobRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.CloseJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.CloseJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.CloseJobRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.CloseJobResponse> CloseJobAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.CloseJobRequestDescriptor(jobId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.CloseJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.CloseJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.CloseJobRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.CloseJobResponse> CloseJobAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.CloseJobRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -104,10 +136,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarResponse> DeleteCalendarAsync(Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarResponse DeleteCalendar(Elastic.Clients.Elasticsearch.Id calendarId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequestDescriptor(calendarId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarResponse DeleteCalendar(Elastic.Clients.Elasticsearch.Id calendarId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequestDescriptor> action)
@@ -117,6 +151,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarResponse> DeleteCalendarAsync(Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarResponse> DeleteCalendarAsync(Elastic.Clients.Elasticsearch.Id calendarId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequestDescriptor(calendarId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarResponse> DeleteCalendarAsync(Elastic.Clients.Elasticsearch.Id calendarId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -134,10 +182,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventResponse> DeleteCalendarEventAsync(Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventResponse DeleteCalendarEvent(Elastic.Clients.Elasticsearch.Id calendarId, Elastic.Clients.Elasticsearch.Id eventId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventRequestDescriptor(calendarId, eventId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventResponse DeleteCalendarEvent(Elastic.Clients.Elasticsearch.Id calendarId, Elastic.Clients.Elasticsearch.Id eventId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventRequestDescriptor> action)
@@ -147,6 +197,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventResponse> DeleteCalendarEventAsync(Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventResponse> DeleteCalendarEventAsync(Elastic.Clients.Elasticsearch.Id calendarId, Elastic.Clients.Elasticsearch.Id eventId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventRequestDescriptor(calendarId, eventId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventResponse> DeleteCalendarEventAsync(Elastic.Clients.Elasticsearch.Id calendarId, Elastic.Clients.Elasticsearch.Id eventId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -164,10 +228,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobResponse> DeleteCalendarJobAsync(Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobResponse DeleteCalendarJob(Elastic.Clients.Elasticsearch.Id calendarId, Elastic.Clients.Elasticsearch.Ids jobId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobRequestDescriptor(calendarId, jobId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobResponse DeleteCalendarJob(Elastic.Clients.Elasticsearch.Id calendarId, Elastic.Clients.Elasticsearch.Ids jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobRequestDescriptor> action)
@@ -177,6 +243,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobResponse> DeleteCalendarJobAsync(Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobResponse> DeleteCalendarJobAsync(Elastic.Clients.Elasticsearch.Id calendarId, Elastic.Clients.Elasticsearch.Ids jobId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobRequestDescriptor(calendarId, jobId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobResponse> DeleteCalendarJobAsync(Elastic.Clients.Elasticsearch.Id calendarId, Elastic.Clients.Elasticsearch.Ids jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -194,10 +274,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedResponse> DeleteDatafeedAsync(Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedResponse DeleteDatafeed(Elastic.Clients.Elasticsearch.Id datafeedId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequestDescriptor(datafeedId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedResponse DeleteDatafeed(Elastic.Clients.Elasticsearch.Id datafeedId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequestDescriptor> action)
@@ -207,6 +289,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedResponse> DeleteDatafeedAsync(Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedResponse> DeleteDatafeedAsync(Elastic.Clients.Elasticsearch.Id datafeedId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequestDescriptor(datafeedId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedResponse> DeleteDatafeedAsync(Elastic.Clients.Elasticsearch.Id datafeedId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -224,10 +320,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsResponse> DeleteDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsResponse DeleteDataFrameAnalytics(Elastic.Clients.Elasticsearch.Id id)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsRequestDescriptor(id);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsResponse DeleteDataFrameAnalytics(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsRequestDescriptor> action)
@@ -237,6 +335,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsResponse> DeleteDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsResponse> DeleteDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsResponse> DeleteDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -252,12 +364,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestParameters>(request);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataResponse> DeleteExpiredDataAsync(Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataResponse DeleteExpiredData()
@@ -277,23 +383,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataResponse> DeleteExpiredDataAsync(System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataResponse> DeleteExpiredDataAsync(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestDescriptor();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataResponse DeleteExpiredData(Elastic.Clients.Elasticsearch.Id jobId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestDescriptor(jobId);
@@ -309,6 +398,29 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataResponse> DeleteExpiredDataAsync(Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataResponse> DeleteExpiredDataAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataResponse> DeleteExpiredDataAsync(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataResponse> DeleteExpiredDataAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Threading.CancellationToken cancellationToken = default)
@@ -334,10 +446,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterResponse> DeleteFilterAsync(Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterResponse DeleteFilter(Elastic.Clients.Elasticsearch.Id filterId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterRequestDescriptor(filterId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterResponse DeleteFilter(Elastic.Clients.Elasticsearch.Id filterId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterRequestDescriptor> action)
@@ -347,6 +461,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterResponse> DeleteFilterAsync(Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterResponse> DeleteFilterAsync(Elastic.Clients.Elasticsearch.Id filterId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterRequestDescriptor(filterId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterResponse> DeleteFilterAsync(Elastic.Clients.Elasticsearch.Id filterId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -364,10 +492,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastResponse> DeleteForecastAsync(Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastResponse DeleteForecast(Elastic.Clients.Elasticsearch.Id jobId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor(jobId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastResponse DeleteForecast(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor> action)
@@ -379,13 +509,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastResponse> DeleteForecastAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastResponse DeleteForecast(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id forecastId)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor(jobId);
-		action.Invoke(builder);
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor(jobId, forecastId);
 		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastResponse DeleteForecast(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id forecastId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor> action)
@@ -395,6 +524,37 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastResponse> DeleteForecastAsync(Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastResponse> DeleteForecastAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor(jobId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastResponse> DeleteForecastAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor(jobId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastResponse> DeleteForecastAsync(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id forecastId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor(jobId, forecastId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastResponse> DeleteForecastAsync(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id forecastId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -412,10 +572,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobResponse> DeleteJobAsync(Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobResponse DeleteJob(Elastic.Clients.Elasticsearch.Id jobId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobRequestDescriptor(jobId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobResponse DeleteJob(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobRequestDescriptor> action)
@@ -425,6 +587,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobResponse> DeleteJobAsync(Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobResponse> DeleteJobAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobRequestDescriptor(jobId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobResponse> DeleteJobAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -442,10 +618,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotResponse> DeleteModelSnapshotAsync(Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotResponse DeleteModelSnapshot(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequestDescriptor(jobId, snapshotId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotResponse DeleteModelSnapshot(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequestDescriptor> action)
@@ -455,6 +633,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotResponse> DeleteModelSnapshotAsync(Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotResponse> DeleteModelSnapshotAsync(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequestDescriptor(jobId, snapshotId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotResponse> DeleteModelSnapshotAsync(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -472,10 +664,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelResponse> DeleteTrainedModelAsync(Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelResponse DeleteTrainedModel(Elastic.Clients.Elasticsearch.Id modelId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestDescriptor(modelId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelResponse DeleteTrainedModel(Elastic.Clients.Elasticsearch.Id modelId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestDescriptor> action)
@@ -485,6 +679,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelResponse> DeleteTrainedModelAsync(Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelResponse> DeleteTrainedModelAsync(Elastic.Clients.Elasticsearch.Id modelId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestDescriptor(modelId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelResponse> DeleteTrainedModelAsync(Elastic.Clients.Elasticsearch.Id modelId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -502,10 +710,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasResponse> DeleteTrainedModelAliasAsync(Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasResponse DeleteTrainedModelAlias(Elastic.Clients.Elasticsearch.Id modelId, Elastic.Clients.Elasticsearch.Name modelAlias)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestDescriptor(modelId, modelAlias);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasResponse DeleteTrainedModelAlias(Elastic.Clients.Elasticsearch.Id modelId, Elastic.Clients.Elasticsearch.Name modelAlias, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestDescriptor> action)
@@ -515,6 +725,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasResponse> DeleteTrainedModelAliasAsync(Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasResponse> DeleteTrainedModelAliasAsync(Elastic.Clients.Elasticsearch.Id modelId, Elastic.Clients.Elasticsearch.Name modelAlias, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestDescriptor(modelId, modelAlias);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequest, Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasResponse, Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasResponse> DeleteTrainedModelAliasAsync(Elastic.Clients.Elasticsearch.Id modelId, Elastic.Clients.Elasticsearch.Name modelAlias, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -530,12 +754,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest, Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryResponse, Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestParameters>(request);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryResponse> EstimateModelMemoryAsync(Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest, Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryResponse, Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryResponse EstimateModelMemory()
@@ -562,6 +780,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest, Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryResponse, Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryResponse> EstimateModelMemoryAsync(Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest, Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryResponse, Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryResponse> EstimateModelMemoryAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -596,12 +820,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest, Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameResponse, Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameResponse> EvaluateDataFrameAsync(Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest, Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameResponse, Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameResponse EvaluateDataFrame(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor();
@@ -618,6 +836,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest, Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameResponse, Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameResponse> EvaluateDataFrameAsync(Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest, Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameResponse, Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameResponse> EvaluateDataFrameAsync(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -644,12 +868,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse> ExplainDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse ExplainDataFrameAnalytics()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor();
@@ -665,41 +883,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestParameters>(request);
-	}
-
-	public virtual Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse ExplainDataFrameAnalytics<TDocument>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument>> action)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument>();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestParameters>(request);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse> ExplainDataFrameAnalyticsAsync(System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse> ExplainDataFrameAnalyticsAsync(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse> ExplainDataFrameAnalyticsAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument>();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse ExplainDataFrameAnalytics(Elastic.Clients.Elasticsearch.Id id)
@@ -719,6 +902,15 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse ExplainDataFrameAnalytics<TDocument>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestParameters>(request);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse ExplainDataFrameAnalytics<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument>(id);
@@ -726,6 +918,29 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse> ExplainDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse> ExplainDataFrameAnalyticsAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse> ExplainDataFrameAnalyticsAsync(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse> ExplainDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
@@ -739,6 +954,15 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse> ExplainDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse> ExplainDataFrameAnalyticsAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument>();
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
@@ -760,10 +984,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequest, Elastic.Clients.Elasticsearch.MachineLearning.ForecastResponse, Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.ForecastResponse> ForecastAsync(Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.ForecastResponse Forecast(Elastic.Clients.Elasticsearch.Id jobId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequestDescriptor(jobId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequest, Elastic.Clients.Elasticsearch.MachineLearning.ForecastResponse, Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequest, Elastic.Clients.Elasticsearch.MachineLearning.ForecastResponse, Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.ForecastResponse Forecast(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequestDescriptor> action)
@@ -773,6 +999,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequest, Elastic.Clients.Elasticsearch.MachineLearning.ForecastResponse, Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.ForecastResponse> ForecastAsync(Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequest, Elastic.Clients.Elasticsearch.MachineLearning.ForecastResponse, Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.ForecastResponse> ForecastAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequestDescriptor(jobId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequest, Elastic.Clients.Elasticsearch.MachineLearning.ForecastResponse, Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.ForecastResponse> ForecastAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -790,15 +1030,34 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse> GetBucketsAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse GetBuckets(Elastic.Clients.Elasticsearch.Id jobId, System.DateTime timestamp)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor(jobId, timestamp);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse GetBuckets(Elastic.Clients.Elasticsearch.Id jobId, System.DateTime timestamp, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor(jobId, timestamp);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse GetBuckets(Elastic.Clients.Elasticsearch.Id jobId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor(jobId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse GetBuckets(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor(jobId);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
@@ -814,33 +1073,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse> GetBucketsAsync(Elastic.Clients.Elasticsearch.Id jobId, System.DateTime timestamp, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor(jobId, timestamp);
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse> GetBucketsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id jobId, System.DateTime timestamp, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor<TDocument>(jobId, timestamp);
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse GetBuckets(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor> action)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor(jobId);
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestParameters>(request);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse GetBuckets<TDocument>(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor<TDocument>(jobId);
@@ -850,9 +1082,49 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestParameters>(request);
 	}
 
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse> GetBucketsAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse> GetBucketsAsync(Elastic.Clients.Elasticsearch.Id jobId, System.DateTime timestamp, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor(jobId, timestamp);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse> GetBucketsAsync(Elastic.Clients.Elasticsearch.Id jobId, System.DateTime timestamp, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor(jobId, timestamp);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse> GetBucketsAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor(jobId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestParameters>(request, cancellationToken);
+	}
+
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse> GetBucketsAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor(jobId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse> GetBucketsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id jobId, System.DateTime timestamp, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor<TDocument>(jobId, timestamp);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
@@ -874,10 +1146,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsResponse> GetCalendarEventsAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsResponse GetCalendarEvents(Elastic.Clients.Elasticsearch.Id calendarId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor(calendarId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsResponse GetCalendarEvents(Elastic.Clients.Elasticsearch.Id calendarId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor> action)
@@ -887,6 +1161,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsResponse> GetCalendarEventsAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsResponse> GetCalendarEventsAsync(Elastic.Clients.Elasticsearch.Id calendarId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor(calendarId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsResponse> GetCalendarEventsAsync(Elastic.Clients.Elasticsearch.Id calendarId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -902,12 +1190,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestParameters>(request);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsResponse> GetCalendarsAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsResponse GetCalendars()
@@ -927,23 +1209,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsResponse> GetCalendarsAsync(System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsResponse> GetCalendarsAsync(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsResponse GetCalendars(Elastic.Clients.Elasticsearch.Id calendarId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor(calendarId);
@@ -959,6 +1224,29 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsResponse> GetCalendarsAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsResponse> GetCalendarsAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsResponse> GetCalendarsAsync(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsResponse> GetCalendarsAsync(Elastic.Clients.Elasticsearch.Id calendarId, System.Threading.CancellationToken cancellationToken = default)
@@ -984,10 +1272,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesResponse> GetCategoriesAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesResponse GetCategories(Elastic.Clients.Elasticsearch.Id jobId, string categoryId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor(jobId, categoryId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesResponse GetCategories(Elastic.Clients.Elasticsearch.Id jobId, string categoryId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor> action)
@@ -999,13 +1289,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesResponse> GetCategoriesAsync(Elastic.Clients.Elasticsearch.Id jobId, string categoryId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesResponse GetCategories(Elastic.Clients.Elasticsearch.Id jobId)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor(jobId, categoryId);
-		action.Invoke(builder);
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor(jobId);
 		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesResponse GetCategories(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor> action)
@@ -1015,6 +1304,37 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesResponse> GetCategoriesAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesResponse> GetCategoriesAsync(Elastic.Clients.Elasticsearch.Id jobId, string categoryId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor(jobId, categoryId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesResponse> GetCategoriesAsync(Elastic.Clients.Elasticsearch.Id jobId, string categoryId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor(jobId, categoryId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesResponse> GetCategoriesAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor(jobId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesResponse> GetCategoriesAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -1030,12 +1350,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequestParameters>(request);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsResponse> GetDatafeedsAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsResponse GetDatafeeds()
@@ -1055,23 +1369,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsResponse> GetDatafeedsAsync(System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsResponse> GetDatafeedsAsync(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequestDescriptor();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsResponse GetDatafeeds(Elastic.Clients.Elasticsearch.Ids datafeedId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequestDescriptor(datafeedId);
@@ -1087,6 +1384,29 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsResponse> GetDatafeedsAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsResponse> GetDatafeedsAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsResponse> GetDatafeedsAsync(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsResponse> GetDatafeedsAsync(Elastic.Clients.Elasticsearch.Ids datafeedId, System.Threading.CancellationToken cancellationToken = default)
@@ -1112,12 +1432,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsResponse> GetDatafeedStatsAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsResponse GetDatafeedStats()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestDescriptor();
@@ -1135,23 +1449,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsResponse> GetDatafeedStatsAsync(System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsResponse> GetDatafeedStatsAsync(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestDescriptor();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsResponse GetDatafeedStats(Elastic.Clients.Elasticsearch.Ids datafeedId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestDescriptor(datafeedId);
@@ -1167,6 +1464,29 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsResponse> GetDatafeedStatsAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsResponse> GetDatafeedStatsAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsResponse> GetDatafeedStatsAsync(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsResponse> GetDatafeedStatsAsync(Elastic.Clients.Elasticsearch.Ids datafeedId, System.Threading.CancellationToken cancellationToken = default)
@@ -1192,12 +1512,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsResponse> GetDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsResponse GetDataFrameAnalytics()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequestDescriptor();
@@ -1215,23 +1529,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsResponse> GetDataFrameAnalyticsAsync(System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsResponse> GetDataFrameAnalyticsAsync(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequestDescriptor();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsResponse GetDataFrameAnalytics(Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequestDescriptor(id);
@@ -1247,6 +1544,29 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsResponse> GetDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsResponse> GetDataFrameAnalyticsAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsResponse> GetDataFrameAnalyticsAsync(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsResponse> GetDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
@@ -1272,12 +1592,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsResponse> GetDataFrameAnalyticsStatsAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsResponse GetDataFrameAnalyticsStats()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestDescriptor();
@@ -1295,23 +1609,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsResponse> GetDataFrameAnalyticsStatsAsync(System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsResponse> GetDataFrameAnalyticsStatsAsync(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestDescriptor();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsResponse GetDataFrameAnalyticsStats(Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestDescriptor(id);
@@ -1327,6 +1624,29 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsResponse> GetDataFrameAnalyticsStatsAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsResponse> GetDataFrameAnalyticsStatsAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsResponse> GetDataFrameAnalyticsStatsAsync(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsResponse> GetDataFrameAnalyticsStatsAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
@@ -1352,12 +1672,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersResponse> GetFiltersAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersResponse GetFilters()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequestDescriptor();
@@ -1375,23 +1689,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersResponse> GetFiltersAsync(System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersResponse> GetFiltersAsync(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequestDescriptor();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersResponse GetFilters(Elastic.Clients.Elasticsearch.Ids filterId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequestDescriptor(filterId);
@@ -1407,6 +1704,29 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersResponse> GetFiltersAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersResponse> GetFiltersAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersResponse> GetFiltersAsync(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersResponse> GetFiltersAsync(Elastic.Clients.Elasticsearch.Ids filterId, System.Threading.CancellationToken cancellationToken = default)
@@ -1432,10 +1752,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersResponse> GetInfluencersAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersResponse GetInfluencers(Elastic.Clients.Elasticsearch.Id jobId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor(jobId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersResponse GetInfluencers(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor> action)
@@ -1454,6 +1776,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersResponse> GetInfluencersAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersResponse> GetInfluencersAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor(jobId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersResponse> GetInfluencersAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -1480,12 +1816,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetJobsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetJobsResponse> GetJobsAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetJobsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetJobsResponse GetJobs()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestDescriptor();
@@ -1503,23 +1833,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetJobsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetJobsResponse> GetJobsAsync(System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetJobsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetJobsResponse> GetJobsAsync(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestDescriptor();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetJobsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetJobsResponse GetJobs(Elastic.Clients.Elasticsearch.Ids jobId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestDescriptor(jobId);
@@ -1535,6 +1848,29 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetJobsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetJobsResponse> GetJobsAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetJobsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetJobsResponse> GetJobsAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetJobsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetJobsResponse> GetJobsAsync(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetJobsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetJobsResponse> GetJobsAsync(Elastic.Clients.Elasticsearch.Ids jobId, System.Threading.CancellationToken cancellationToken = default)
@@ -1560,12 +1896,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsResponse> GetJobStatsAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsResponse GetJobStats()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequestDescriptor();
@@ -1583,23 +1913,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsResponse> GetJobStatsAsync(System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsResponse> GetJobStatsAsync(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequestDescriptor();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsResponse GetJobStats(Elastic.Clients.Elasticsearch.Id jobId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequestDescriptor(jobId);
@@ -1615,6 +1928,29 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsResponse> GetJobStatsAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsResponse> GetJobStatsAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsResponse> GetJobStatsAsync(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsResponse> GetJobStatsAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Threading.CancellationToken cancellationToken = default)
@@ -1640,12 +1976,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsResponse> GetMemoryStatsAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsResponse GetMemoryStats()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestDescriptor();
@@ -1663,23 +1993,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsResponse> GetMemoryStatsAsync(System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsResponse> GetMemoryStatsAsync(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestDescriptor();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsResponse GetMemoryStats(Elastic.Clients.Elasticsearch.Id nodeId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestDescriptor(nodeId);
@@ -1695,6 +2008,29 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsResponse> GetMemoryStatsAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsResponse> GetMemoryStatsAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsResponse> GetMemoryStatsAsync(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsResponse> GetMemoryStatsAsync(Elastic.Clients.Elasticsearch.Id nodeId, System.Threading.CancellationToken cancellationToken = default)
@@ -1720,15 +2056,34 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsResponse> GetModelSnapshotsAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsResponse GetModelSnapshots(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor(jobId, snapshotId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsResponse GetModelSnapshots(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor(jobId, snapshotId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsResponse GetModelSnapshots(Elastic.Clients.Elasticsearch.Id jobId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor(jobId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsResponse GetModelSnapshots(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor(jobId);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
@@ -1744,33 +2099,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsResponse> GetModelSnapshotsAsync(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor(jobId, snapshotId);
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsResponse> GetModelSnapshotsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument>(jobId, snapshotId);
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsResponse GetModelSnapshots(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor> action)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor(jobId);
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestParameters>(request);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsResponse GetModelSnapshots<TDocument>(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument>(jobId);
@@ -1780,9 +2108,49 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestParameters>(request);
 	}
 
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsResponse> GetModelSnapshotsAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsResponse> GetModelSnapshotsAsync(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor(jobId, snapshotId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsResponse> GetModelSnapshotsAsync(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor(jobId, snapshotId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsResponse> GetModelSnapshotsAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor(jobId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestParameters>(request, cancellationToken);
+	}
+
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsResponse> GetModelSnapshotsAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor(jobId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsResponse> GetModelSnapshotsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument>(jobId, snapshotId);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
@@ -1804,10 +2172,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsResponse> GetModelSnapshotUpgradeStatsAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsResponse GetModelSnapshotUpgradeStats(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestDescriptor(jobId, snapshotId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsResponse GetModelSnapshotUpgradeStats(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestDescriptor> action)
@@ -1817,6 +2187,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsResponse> GetModelSnapshotUpgradeStatsAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsResponse> GetModelSnapshotUpgradeStatsAsync(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestDescriptor(jobId, snapshotId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsResponse> GetModelSnapshotUpgradeStatsAsync(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -1834,10 +2218,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsResponse> GetOverallBucketsAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsResponse GetOverallBuckets(Elastic.Clients.Elasticsearch.Id jobId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor(jobId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsResponse GetOverallBuckets(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor> action)
@@ -1847,6 +2233,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsResponse> GetOverallBucketsAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsResponse> GetOverallBucketsAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor(jobId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsResponse> GetOverallBucketsAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -1864,10 +2264,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsResponse> GetRecordsAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsResponse GetRecords(Elastic.Clients.Elasticsearch.Id jobId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor(jobId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsResponse GetRecords(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor> action)
@@ -1886,6 +2288,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsResponse> GetRecordsAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsResponse> GetRecordsAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor(jobId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsResponse> GetRecordsAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -1912,12 +2328,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsResponse> GetTrainedModelsAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsResponse GetTrainedModels()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor();
@@ -1935,23 +2345,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsResponse> GetTrainedModelsAsync(System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsResponse> GetTrainedModelsAsync(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsResponse GetTrainedModels(Elastic.Clients.Elasticsearch.Ids modelId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor(modelId);
@@ -1967,6 +2360,29 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsResponse> GetTrainedModelsAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsResponse> GetTrainedModelsAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsResponse> GetTrainedModelsAsync(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsResponse> GetTrainedModelsAsync(Elastic.Clients.Elasticsearch.Ids modelId, System.Threading.CancellationToken cancellationToken = default)
@@ -1992,12 +2408,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsResponse> GetTrainedModelsStatsAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsResponse GetTrainedModelsStats()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequestDescriptor();
@@ -2015,23 +2425,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsResponse> GetTrainedModelsStatsAsync(System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsResponse> GetTrainedModelsStatsAsync(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequestDescriptor();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsResponse GetTrainedModelsStats(Elastic.Clients.Elasticsearch.Ids modelId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequestDescriptor(modelId);
@@ -2047,6 +2440,29 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsResponse> GetTrainedModelsStatsAsync(Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsResponse> GetTrainedModelsStatsAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsResponse> GetTrainedModelsStatsAsync(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsResponse> GetTrainedModelsStatsAsync(Elastic.Clients.Elasticsearch.Ids modelId, System.Threading.CancellationToken cancellationToken = default)
@@ -2072,10 +2488,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequest, Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelResponse, Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelResponse> InferTrainedModelAsync(Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelResponse InferTrainedModel(Elastic.Clients.Elasticsearch.Id modelId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor(modelId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequest, Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelResponse, Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequest, Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelResponse, Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelResponse InferTrainedModel(Elastic.Clients.Elasticsearch.Id modelId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor> action)
@@ -2094,6 +2512,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequest, Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelResponse, Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelResponse> InferTrainedModelAsync(Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequest, Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelResponse, Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelResponse> InferTrainedModelAsync(Elastic.Clients.Elasticsearch.Id modelId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor(modelId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequest, Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelResponse, Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelResponse> InferTrainedModelAsync(Elastic.Clients.Elasticsearch.Id modelId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -2120,12 +2552,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.MlInfoRequest, Elastic.Clients.Elasticsearch.MachineLearning.MlInfoResponse, Elastic.Clients.Elasticsearch.MachineLearning.MlInfoRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.MlInfoResponse> InfoAsync(Elastic.Clients.Elasticsearch.MachineLearning.MlInfoRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.MlInfoRequest, Elastic.Clients.Elasticsearch.MachineLearning.MlInfoResponse, Elastic.Clients.Elasticsearch.MachineLearning.MlInfoRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.MlInfoResponse Info()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.MlInfoRequestDescriptor();
@@ -2141,6 +2567,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.MlInfoRequest, Elastic.Clients.Elasticsearch.MachineLearning.MlInfoResponse, Elastic.Clients.Elasticsearch.MachineLearning.MlInfoRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.MlInfoResponse> InfoAsync(Elastic.Clients.Elasticsearch.MachineLearning.MlInfoRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.MlInfoRequest, Elastic.Clients.Elasticsearch.MachineLearning.MlInfoResponse, Elastic.Clients.Elasticsearch.MachineLearning.MlInfoRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.MlInfoResponse> InfoAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -2166,10 +2598,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.OpenJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.OpenJobResponse> OpenJobAsync(Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.OpenJobResponse OpenJob(Elastic.Clients.Elasticsearch.Id jobId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequestDescriptor(jobId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.OpenJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.OpenJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.OpenJobResponse OpenJob(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequestDescriptor> action)
@@ -2179,6 +2613,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.OpenJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.OpenJobResponse> OpenJobAsync(Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.OpenJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.OpenJobResponse> OpenJobAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequestDescriptor(jobId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.OpenJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.OpenJobResponse> OpenJobAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -2196,10 +2644,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequest, Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsResponse, Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsResponse> PostCalendarEventsAsync(Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsResponse PostCalendarEvents(Elastic.Clients.Elasticsearch.Id calendarId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequestDescriptor(calendarId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequest, Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsResponse, Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequest, Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsResponse, Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsResponse PostCalendarEvents(Elastic.Clients.Elasticsearch.Id calendarId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequestDescriptor> action)
@@ -2209,6 +2659,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequest, Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsResponse, Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsResponse> PostCalendarEventsAsync(Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequest, Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsResponse, Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsResponse> PostCalendarEventsAsync(Elastic.Clients.Elasticsearch.Id calendarId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequestDescriptor(calendarId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequest, Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsResponse, Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsResponse> PostCalendarEventsAsync(Elastic.Clients.Elasticsearch.Id calendarId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -2224,12 +2688,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestParameters>(request);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse> PreviewDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse PreviewDataFrameAnalytics()
@@ -2249,6 +2707,23 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse PreviewDataFrameAnalytics(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse PreviewDataFrameAnalytics(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestParameters>(request);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse PreviewDataFrameAnalytics<TDocument>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument>();
@@ -2256,6 +2731,21 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse PreviewDataFrameAnalytics<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument>(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse> PreviewDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse> PreviewDataFrameAnalyticsAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -2275,41 +2765,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse> PreviewDataFrameAnalyticsAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument>();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse PreviewDataFrameAnalytics(Elastic.Clients.Elasticsearch.Id id)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor(id);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestParameters>(request);
-	}
-
-	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse PreviewDataFrameAnalytics(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor> action)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor(id);
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestParameters>(request);
-	}
-
-	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse PreviewDataFrameAnalytics<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument>> action)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument>(id);
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestParameters>(request);
-	}
-
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse> PreviewDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor(id);
@@ -2321,6 +2776,15 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse> PreviewDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse> PreviewDataFrameAnalyticsAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument>();
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
@@ -2342,10 +2806,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarResponse> PutCalendarAsync(Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarResponse PutCalendar(Elastic.Clients.Elasticsearch.Id calendarId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarRequestDescriptor(calendarId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarResponse PutCalendar(Elastic.Clients.Elasticsearch.Id calendarId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarRequestDescriptor> action)
@@ -2355,6 +2821,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarResponse> PutCalendarAsync(Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarResponse> PutCalendarAsync(Elastic.Clients.Elasticsearch.Id calendarId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarRequestDescriptor(calendarId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarResponse> PutCalendarAsync(Elastic.Clients.Elasticsearch.Id calendarId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -2372,10 +2852,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobResponse> PutCalendarJobAsync(Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobResponse PutCalendarJob(Elastic.Clients.Elasticsearch.Id calendarId, Elastic.Clients.Elasticsearch.Ids jobId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequestDescriptor(calendarId, jobId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobResponse PutCalendarJob(Elastic.Clients.Elasticsearch.Id calendarId, Elastic.Clients.Elasticsearch.Ids jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequestDescriptor> action)
@@ -2385,6 +2867,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobResponse> PutCalendarJobAsync(Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobResponse> PutCalendarJobAsync(Elastic.Clients.Elasticsearch.Id calendarId, Elastic.Clients.Elasticsearch.Ids jobId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequestDescriptor(calendarId, jobId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobResponse> PutCalendarJobAsync(Elastic.Clients.Elasticsearch.Id calendarId, Elastic.Clients.Elasticsearch.Ids jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -2402,10 +2898,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedResponse> PutDatafeedAsync(Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedResponse PutDatafeed(Elastic.Clients.Elasticsearch.Id datafeedId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor(datafeedId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedResponse PutDatafeed(Elastic.Clients.Elasticsearch.Id datafeedId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor> action)
@@ -2424,6 +2922,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedResponse> PutDatafeedAsync(Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedResponse> PutDatafeedAsync(Elastic.Clients.Elasticsearch.Id datafeedId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor(datafeedId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedResponse> PutDatafeedAsync(Elastic.Clients.Elasticsearch.Id datafeedId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -2450,10 +2962,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsResponse> PutDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsResponse PutDataFrameAnalytics(Elastic.Clients.Elasticsearch.Id id)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor(id);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsResponse PutDataFrameAnalytics(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor> action)
@@ -2472,6 +2986,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsResponse> PutDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsResponse> PutDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsResponse> PutDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -2498,10 +3026,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutFilterResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutFilterResponse> PutFilterAsync(Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PutFilterResponse PutFilter(Elastic.Clients.Elasticsearch.Id filterId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor(filterId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutFilterResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutFilterResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PutFilterResponse PutFilter(Elastic.Clients.Elasticsearch.Id filterId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor> action)
@@ -2511,6 +3041,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutFilterResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutFilterResponse> PutFilterAsync(Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutFilterResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutFilterResponse> PutFilterAsync(Elastic.Clients.Elasticsearch.Id filterId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor(filterId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutFilterResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutFilterResponse> PutFilterAsync(Elastic.Clients.Elasticsearch.Id filterId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -2526,12 +3070,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestParameters>(request);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutJobResponse> PutJobAsync(Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PutJobResponse PutJob(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor> action)
@@ -2550,6 +3088,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutJobResponse> PutJobAsync(Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutJobResponse> PutJobAsync(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -2576,10 +3120,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelResponse> PutTrainedModelAsync(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelResponse PutTrainedModel(Elastic.Clients.Elasticsearch.Id modelId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor(modelId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelResponse PutTrainedModel(Elastic.Clients.Elasticsearch.Id modelId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor> action)
@@ -2598,6 +3144,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelResponse> PutTrainedModelAsync(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelResponse> PutTrainedModelAsync(Elastic.Clients.Elasticsearch.Id modelId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor(modelId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelResponse> PutTrainedModelAsync(Elastic.Clients.Elasticsearch.Id modelId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -2624,10 +3184,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasResponse> PutTrainedModelAliasAsync(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasResponse PutTrainedModelAlias(Elastic.Clients.Elasticsearch.Id modelId, Elastic.Clients.Elasticsearch.Name modelAlias)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestDescriptor(modelId, modelAlias);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasResponse PutTrainedModelAlias(Elastic.Clients.Elasticsearch.Id modelId, Elastic.Clients.Elasticsearch.Name modelAlias, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestDescriptor> action)
@@ -2637,6 +3199,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasResponse> PutTrainedModelAliasAsync(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasResponse> PutTrainedModelAliasAsync(Elastic.Clients.Elasticsearch.Id modelId, Elastic.Clients.Elasticsearch.Name modelAlias, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestDescriptor(modelId, modelAlias);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasResponse> PutTrainedModelAliasAsync(Elastic.Clients.Elasticsearch.Id modelId, Elastic.Clients.Elasticsearch.Name modelAlias, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -2654,10 +3230,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartResponse> PutTrainedModelDefinitionPartAsync(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartResponse PutTrainedModelDefinitionPart(Elastic.Clients.Elasticsearch.Id modelId, int part)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestDescriptor(modelId, part);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartResponse PutTrainedModelDefinitionPart(Elastic.Clients.Elasticsearch.Id modelId, int part, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestDescriptor> action)
@@ -2667,6 +3245,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartResponse> PutTrainedModelDefinitionPartAsync(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartResponse> PutTrainedModelDefinitionPartAsync(Elastic.Clients.Elasticsearch.Id modelId, int part, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestDescriptor(modelId, part);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartResponse> PutTrainedModelDefinitionPartAsync(Elastic.Clients.Elasticsearch.Id modelId, int part, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -2684,10 +3276,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyResponse> PutTrainedModelVocabularyAsync(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyResponse PutTrainedModelVocabulary(Elastic.Clients.Elasticsearch.Id modelId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor(modelId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyResponse PutTrainedModelVocabulary(Elastic.Clients.Elasticsearch.Id modelId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor> action)
@@ -2697,6 +3291,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyResponse> PutTrainedModelVocabularyAsync(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyResponse> PutTrainedModelVocabularyAsync(Elastic.Clients.Elasticsearch.Id modelId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor(modelId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyResponse> PutTrainedModelVocabularyAsync(Elastic.Clients.Elasticsearch.Id modelId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -2714,10 +3322,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.ResetJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.ResetJobResponse> ResetJobAsync(Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.ResetJobResponse ResetJob(Elastic.Clients.Elasticsearch.Id jobId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestDescriptor(jobId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.ResetJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.ResetJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.ResetJobResponse ResetJob(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestDescriptor> action)
@@ -2727,6 +3337,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.ResetJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.ResetJobResponse> ResetJobAsync(Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.ResetJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.ResetJobResponse> ResetJobAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestDescriptor(jobId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.ResetJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.ResetJobResponse> ResetJobAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -2744,10 +3368,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest, Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotResponse, Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotResponse> RevertModelSnapshotAsync(Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotResponse RevertModelSnapshot(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestDescriptor(jobId, snapshotId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest, Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotResponse, Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest, Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotResponse, Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotResponse RevertModelSnapshot(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestDescriptor> action)
@@ -2757,6 +3383,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest, Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotResponse, Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotResponse> RevertModelSnapshotAsync(Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest, Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotResponse, Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotResponse> RevertModelSnapshotAsync(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestDescriptor(jobId, snapshotId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest, Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotResponse, Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotResponse> RevertModelSnapshotAsync(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -2774,12 +3414,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.SetUpgradeModeRequest, Elastic.Clients.Elasticsearch.MachineLearning.SetUpgradeModeResponse, Elastic.Clients.Elasticsearch.MachineLearning.SetUpgradeModeRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.SetUpgradeModeResponse> SetUpgradeModeAsync(Elastic.Clients.Elasticsearch.MachineLearning.SetUpgradeModeRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.SetUpgradeModeRequest, Elastic.Clients.Elasticsearch.MachineLearning.SetUpgradeModeResponse, Elastic.Clients.Elasticsearch.MachineLearning.SetUpgradeModeRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.SetUpgradeModeResponse SetUpgradeMode()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.SetUpgradeModeRequestDescriptor();
@@ -2795,6 +3429,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.SetUpgradeModeRequest, Elastic.Clients.Elasticsearch.MachineLearning.SetUpgradeModeResponse, Elastic.Clients.Elasticsearch.MachineLearning.SetUpgradeModeRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.SetUpgradeModeResponse> SetUpgradeModeAsync(Elastic.Clients.Elasticsearch.MachineLearning.SetUpgradeModeRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.SetUpgradeModeRequest, Elastic.Clients.Elasticsearch.MachineLearning.SetUpgradeModeResponse, Elastic.Clients.Elasticsearch.MachineLearning.SetUpgradeModeRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.SetUpgradeModeResponse> SetUpgradeModeAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -2820,10 +3460,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedResponse, Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedResponse> StartDatafeedAsync(Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedResponse StartDatafeed(Elastic.Clients.Elasticsearch.Id datafeedId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestDescriptor(datafeedId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedResponse, Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedResponse, Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedResponse StartDatafeed(Elastic.Clients.Elasticsearch.Id datafeedId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestDescriptor> action)
@@ -2833,6 +3475,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedResponse, Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedResponse> StartDatafeedAsync(Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedResponse, Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedResponse> StartDatafeedAsync(Elastic.Clients.Elasticsearch.Id datafeedId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestDescriptor(datafeedId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedResponse, Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedResponse> StartDatafeedAsync(Elastic.Clients.Elasticsearch.Id datafeedId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -2850,10 +3506,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsResponse> StartDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsResponse StartDataFrameAnalytics(Elastic.Clients.Elasticsearch.Id id)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequestDescriptor(id);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsResponse StartDataFrameAnalytics(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequestDescriptor> action)
@@ -2863,6 +3521,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsResponse> StartDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsResponse> StartDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsResponse> StartDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -2880,10 +3552,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequest, Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentResponse, Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentResponse> StartTrainedModelDeploymentAsync(Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentResponse StartTrainedModelDeployment(Elastic.Clients.Elasticsearch.Id modelId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequestDescriptor(modelId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequest, Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentResponse, Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequest, Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentResponse, Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentResponse StartTrainedModelDeployment(Elastic.Clients.Elasticsearch.Id modelId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequestDescriptor> action)
@@ -2893,6 +3567,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequest, Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentResponse, Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentResponse> StartTrainedModelDeploymentAsync(Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequest, Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentResponse, Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentResponse> StartTrainedModelDeploymentAsync(Elastic.Clients.Elasticsearch.Id modelId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequestDescriptor(modelId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequest, Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentResponse, Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentResponse> StartTrainedModelDeploymentAsync(Elastic.Clients.Elasticsearch.Id modelId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -2910,10 +3598,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedResponse, Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedResponse> StopDatafeedAsync(Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedResponse StopDatafeed(Elastic.Clients.Elasticsearch.Id datafeedId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestDescriptor(datafeedId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedResponse, Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedResponse, Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedResponse StopDatafeed(Elastic.Clients.Elasticsearch.Id datafeedId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestDescriptor> action)
@@ -2923,6 +3613,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedResponse, Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedResponse> StopDatafeedAsync(Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedResponse, Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedResponse> StopDatafeedAsync(Elastic.Clients.Elasticsearch.Id datafeedId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestDescriptor(datafeedId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedResponse, Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedResponse> StopDatafeedAsync(Elastic.Clients.Elasticsearch.Id datafeedId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -2940,10 +3644,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsResponse> StopDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsResponse StopDataFrameAnalytics(Elastic.Clients.Elasticsearch.Id id)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestDescriptor(id);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsResponse StopDataFrameAnalytics(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestDescriptor> action)
@@ -2953,6 +3659,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsResponse> StopDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsResponse> StopDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsResponse> StopDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -2970,10 +3690,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequest, Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentResponse, Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentResponse> StopTrainedModelDeploymentAsync(Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentResponse StopTrainedModelDeployment(Elastic.Clients.Elasticsearch.Id modelId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestDescriptor(modelId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequest, Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentResponse, Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequest, Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentResponse, Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentResponse StopTrainedModelDeployment(Elastic.Clients.Elasticsearch.Id modelId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestDescriptor> action)
@@ -2983,6 +3705,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequest, Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentResponse, Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentResponse> StopTrainedModelDeploymentAsync(Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequest, Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentResponse, Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentResponse> StopTrainedModelDeploymentAsync(Elastic.Clients.Elasticsearch.Id modelId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestDescriptor(modelId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequest, Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentResponse, Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentResponse> StopTrainedModelDeploymentAsync(Elastic.Clients.Elasticsearch.Id modelId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -3000,10 +3736,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedResponse> UpdateDatafeedAsync(Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedResponse UpdateDatafeed(Elastic.Clients.Elasticsearch.Id datafeedId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor(datafeedId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedResponse UpdateDatafeed(Elastic.Clients.Elasticsearch.Id datafeedId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor> action)
@@ -3022,6 +3760,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedResponse> UpdateDatafeedAsync(Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedResponse> UpdateDatafeedAsync(Elastic.Clients.Elasticsearch.Id datafeedId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor(datafeedId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedResponse> UpdateDatafeedAsync(Elastic.Clients.Elasticsearch.Id datafeedId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -3048,10 +3800,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsResponse> UpdateDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsResponse UpdateDataFrameAnalytics(Elastic.Clients.Elasticsearch.Id id)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestDescriptor(id);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsResponse UpdateDataFrameAnalytics(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestDescriptor> action)
@@ -3061,6 +3815,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsResponse> UpdateDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsResponse> UpdateDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsResponse> UpdateDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -3078,10 +3846,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterResponse> UpdateFilterAsync(Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterResponse UpdateFilter(Elastic.Clients.Elasticsearch.Id filterId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor(filterId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterResponse UpdateFilter(Elastic.Clients.Elasticsearch.Id filterId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor> action)
@@ -3091,6 +3861,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterResponse> UpdateFilterAsync(Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterResponse> UpdateFilterAsync(Elastic.Clients.Elasticsearch.Id filterId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor(filterId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterResponse> UpdateFilterAsync(Elastic.Clients.Elasticsearch.Id filterId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -3108,10 +3892,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobResponse> UpdateJobAsync(Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobResponse UpdateJob(Elastic.Clients.Elasticsearch.Id jobId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor(jobId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobResponse UpdateJob(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor> action)
@@ -3130,6 +3916,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobResponse> UpdateJobAsync(Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobResponse> UpdateJobAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor(jobId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobResponse> UpdateJobAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -3156,10 +3956,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotResponse> UpdateModelSnapshotAsync(Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotResponse UpdateModelSnapshot(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequestDescriptor(jobId, snapshotId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotResponse UpdateModelSnapshot(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequestDescriptor> action)
@@ -3169,6 +3971,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotResponse> UpdateModelSnapshotAsync(Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotResponse> UpdateModelSnapshotAsync(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequestDescriptor(jobId, snapshotId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotResponse> UpdateModelSnapshotAsync(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -3186,10 +4002,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentResponse> UpdateTrainedModelDeploymentAsync(Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentResponse UpdateTrainedModelDeployment(Elastic.Clients.Elasticsearch.Id modelId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestDescriptor(modelId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentResponse UpdateTrainedModelDeployment(Elastic.Clients.Elasticsearch.Id modelId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestDescriptor> action)
@@ -3199,6 +4017,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentResponse> UpdateTrainedModelDeploymentAsync(Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentResponse> UpdateTrainedModelDeploymentAsync(Elastic.Clients.Elasticsearch.Id modelId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestDescriptor(modelId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentResponse> UpdateTrainedModelDeploymentAsync(Elastic.Clients.Elasticsearch.Id modelId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -3216,10 +4048,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotResponse> UpgradeJobSnapshotAsync(Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotResponse UpgradeJobSnapshot(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestDescriptor(jobId, snapshotId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotResponse UpgradeJobSnapshot(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestDescriptor> action)
@@ -3229,6 +4063,20 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotResponse> UpgradeJobSnapshotAsync(Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotResponse> UpgradeJobSnapshotAsync(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestDescriptor(jobId, snapshotId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequest, Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotResponse, Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotResponse> UpgradeJobSnapshotAsync(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -3244,12 +4092,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequest, Elastic.Clients.Elasticsearch.MachineLearning.ValidateResponse, Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequestParameters>(request);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.ValidateResponse> ValidateAsync(Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequest, Elastic.Clients.Elasticsearch.MachineLearning.ValidateResponse, Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.ValidateResponse Validate()
@@ -3276,6 +4118,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequest, Elastic.Clients.Elasticsearch.MachineLearning.ValidateResponse, Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.ValidateResponse> ValidateAsync(Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequest, Elastic.Clients.Elasticsearch.MachineLearning.ValidateResponse, Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.ValidateResponse> ValidateAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -3310,12 +4158,6 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest, Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorResponse, Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorResponse> ValidateDetectorAsync(Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest, Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorResponse, Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorResponse ValidateDetector(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor();
@@ -3332,6 +4174,12 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest, Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorResponse, Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorResponse> ValidateDetectorAsync(Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest, Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorResponse, Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorResponse> ValidateDetectorAsync(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)

@@ -329,3 +329,181 @@ public readonly partial struct SegmentsRequestDescriptor
 		return this;
 	}
 }
+
+/// <summary>
+/// <para>
+/// Get index segments.
+/// Get low-level information about the Lucene segments in index shards.
+/// For data streams, the API returns information about the stream's backing indices.
+/// </para>
+/// </summary>
+public readonly partial struct SegmentsRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SegmentsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public SegmentsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest(indices);
+	}
+
+	public SegmentsRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest(Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and aliases used to limit the request.
+	/// Supports wildcards (<c>*</c>).
+	/// To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
+	{
+		Instance.Indices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+	/// This behavior applies even if the request targets other open indices.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
+	{
+		Instance.AllowNoIndices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument> ExpandWildcards()
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument> ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument>>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}

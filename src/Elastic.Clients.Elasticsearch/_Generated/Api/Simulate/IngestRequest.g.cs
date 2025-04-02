@@ -729,7 +729,9 @@ public readonly partial struct IngestRequestDescriptor<TDocument>
 
 	public IngestRequestDescriptor()
 	{
-		Instance = new Elastic.Clients.Elasticsearch.Simulate.IngestRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.Simulate.IngestRequest(typeof(TDocument));
+#pragma warning restore CS0618
 	}
 
 	public static explicit operator Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Simulate.IngestRequest instance) => new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>(instance);

@@ -44,12 +44,6 @@ public partial class SqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 		return DoRequest<Elastic.Clients.Elasticsearch.Sql.ClearCursorRequest, Elastic.Clients.Elasticsearch.Sql.ClearCursorResponse, Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Sql.ClearCursorResponse> ClearCursorAsync(Elastic.Clients.Elasticsearch.Sql.ClearCursorRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Sql.ClearCursorRequest, Elastic.Clients.Elasticsearch.Sql.ClearCursorResponse, Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Sql.ClearCursorResponse ClearCursor(System.Action<Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestDescriptor();
@@ -57,6 +51,12 @@ public partial class SqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Sql.ClearCursorRequest, Elastic.Clients.Elasticsearch.Sql.ClearCursorResponse, Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Sql.ClearCursorResponse> ClearCursorAsync(Elastic.Clients.Elasticsearch.Sql.ClearCursorRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Sql.ClearCursorRequest, Elastic.Clients.Elasticsearch.Sql.ClearCursorResponse, Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Sql.ClearCursorResponse> ClearCursorAsync(System.Action<Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -74,10 +74,12 @@ public partial class SqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 		return DoRequest<Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequest, Elastic.Clients.Elasticsearch.Sql.DeleteAsyncResponse, Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Sql.DeleteAsyncResponse> DeleteAsyncAsync(Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Sql.DeleteAsyncResponse DeleteAsync(Elastic.Clients.Elasticsearch.Id id)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequestDescriptor(id);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequest, Elastic.Clients.Elasticsearch.Sql.DeleteAsyncResponse, Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequest, Elastic.Clients.Elasticsearch.Sql.DeleteAsyncResponse, Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Sql.DeleteAsyncResponse DeleteAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequestDescriptor> action)
@@ -87,6 +89,20 @@ public partial class SqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequest, Elastic.Clients.Elasticsearch.Sql.DeleteAsyncResponse, Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Sql.DeleteAsyncResponse> DeleteAsyncAsync(Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequest, Elastic.Clients.Elasticsearch.Sql.DeleteAsyncResponse, Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Sql.DeleteAsyncResponse> DeleteAsyncAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequest, Elastic.Clients.Elasticsearch.Sql.DeleteAsyncResponse, Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Sql.DeleteAsyncResponse> DeleteAsyncAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -104,10 +120,12 @@ public partial class SqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 		return DoRequest<Elastic.Clients.Elasticsearch.Sql.GetAsyncRequest, Elastic.Clients.Elasticsearch.Sql.GetAsyncResponse, Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Sql.GetAsyncResponse> GetAsyncAsync(Elastic.Clients.Elasticsearch.Sql.GetAsyncRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Sql.GetAsyncResponse GetAsync(Elastic.Clients.Elasticsearch.Id id)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor(id);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Sql.GetAsyncRequest, Elastic.Clients.Elasticsearch.Sql.GetAsyncResponse, Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Sql.GetAsyncRequest, Elastic.Clients.Elasticsearch.Sql.GetAsyncResponse, Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Sql.GetAsyncResponse GetAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor> action)
@@ -117,6 +135,20 @@ public partial class SqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Sql.GetAsyncRequest, Elastic.Clients.Elasticsearch.Sql.GetAsyncResponse, Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Sql.GetAsyncResponse> GetAsyncAsync(Elastic.Clients.Elasticsearch.Sql.GetAsyncRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Sql.GetAsyncRequest, Elastic.Clients.Elasticsearch.Sql.GetAsyncResponse, Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Sql.GetAsyncResponse> GetAsyncAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Sql.GetAsyncRequest, Elastic.Clients.Elasticsearch.Sql.GetAsyncResponse, Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Sql.GetAsyncResponse> GetAsyncAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -134,10 +166,12 @@ public partial class SqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 		return DoRequest<Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequest, Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusResponse, Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusResponse> GetAsyncStatusAsync(Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusResponse GetAsyncStatus(Elastic.Clients.Elasticsearch.Id id)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequestDescriptor(id);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequest, Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusResponse, Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequest, Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusResponse, Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusResponse GetAsyncStatus(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequestDescriptor> action)
@@ -147,6 +181,20 @@ public partial class SqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequest, Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusResponse, Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusResponse> GetAsyncStatusAsync(Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequest, Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusResponse, Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusResponse> GetAsyncStatusAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequest, Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusResponse, Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusResponse> GetAsyncStatusAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -162,12 +210,6 @@ public partial class SqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Sql.QueryRequest, Elastic.Clients.Elasticsearch.Sql.QueryResponse, Elastic.Clients.Elasticsearch.Sql.QueryRequestParameters>(request);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Sql.QueryResponse> QueryAsync(Elastic.Clients.Elasticsearch.Sql.QueryRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Sql.QueryRequest, Elastic.Clients.Elasticsearch.Sql.QueryResponse, Elastic.Clients.Elasticsearch.Sql.QueryRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Sql.QueryResponse Query()
@@ -194,6 +236,12 @@ public partial class SqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Sql.QueryRequest, Elastic.Clients.Elasticsearch.Sql.QueryResponse, Elastic.Clients.Elasticsearch.Sql.QueryRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Sql.QueryResponse> QueryAsync(Elastic.Clients.Elasticsearch.Sql.QueryRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Sql.QueryRequest, Elastic.Clients.Elasticsearch.Sql.QueryResponse, Elastic.Clients.Elasticsearch.Sql.QueryRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Sql.QueryResponse> QueryAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -228,12 +276,6 @@ public partial class SqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 		return DoRequest<Elastic.Clients.Elasticsearch.Sql.TranslateRequest, Elastic.Clients.Elasticsearch.Sql.TranslateResponse, Elastic.Clients.Elasticsearch.Sql.TranslateRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Sql.TranslateResponse> TranslateAsync(Elastic.Clients.Elasticsearch.Sql.TranslateRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Sql.TranslateRequest, Elastic.Clients.Elasticsearch.Sql.TranslateResponse, Elastic.Clients.Elasticsearch.Sql.TranslateRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Sql.TranslateResponse Translate(System.Action<Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor();
@@ -250,6 +292,12 @@ public partial class SqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Sql.TranslateRequest, Elastic.Clients.Elasticsearch.Sql.TranslateResponse, Elastic.Clients.Elasticsearch.Sql.TranslateRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Sql.TranslateResponse> TranslateAsync(Elastic.Clients.Elasticsearch.Sql.TranslateRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Sql.TranslateRequest, Elastic.Clients.Elasticsearch.Sql.TranslateResponse, Elastic.Clients.Elasticsearch.Sql.TranslateRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Sql.TranslateResponse> TranslateAsync(System.Action<Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)

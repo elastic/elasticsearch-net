@@ -231,3 +231,112 @@ public readonly partial struct PauseFollowRequestDescriptor
 		return this;
 	}
 }
+
+/// <summary>
+/// <para>
+/// Pause a follower.
+/// </para>
+/// <para>
+/// Pause a cross-cluster replication follower index.
+/// The follower index will not fetch any additional operations from the leader index.
+/// You can resume following with the resume follower API.
+/// You can pause and resume a follower index to change the configuration of the following task.
+/// </para>
+/// </summary>
+public readonly partial struct PauseFollowRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PauseFollowRequestDescriptor(Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public PauseFollowRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequest(index);
+	}
+
+	public PauseFollowRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequest(typeof(TDocument));
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequest instance) => new Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequest(Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The name of the follower index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
+	{
+		Instance.Index = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequest Build(System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}

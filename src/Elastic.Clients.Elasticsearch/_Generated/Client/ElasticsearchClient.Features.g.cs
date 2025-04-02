@@ -44,12 +44,6 @@ public partial class FeaturesNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest, Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse, Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse> GetFeaturesAsync(Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest, Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse, Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse GetFeatures()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestDescriptor();
@@ -65,6 +59,12 @@ public partial class FeaturesNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest, Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse, Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse> GetFeaturesAsync(Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest, Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse, Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse> GetFeaturesAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -90,12 +90,6 @@ public partial class FeaturesNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest, Elastic.Clients.Elasticsearch.Features.ResetFeaturesResponse, Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Features.ResetFeaturesResponse> ResetFeaturesAsync(Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest, Elastic.Clients.Elasticsearch.Features.ResetFeaturesResponse, Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Features.ResetFeaturesResponse ResetFeatures()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestDescriptor();
@@ -111,6 +105,12 @@ public partial class FeaturesNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest, Elastic.Clients.Elasticsearch.Features.ResetFeaturesResponse, Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Features.ResetFeaturesResponse> ResetFeaturesAsync(Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest, Elastic.Clients.Elasticsearch.Features.ResetFeaturesResponse, Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Features.ResetFeaturesResponse> ResetFeaturesAsync(System.Threading.CancellationToken cancellationToken = default)

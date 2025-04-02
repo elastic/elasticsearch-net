@@ -691,3 +691,353 @@ public readonly partial struct SearchTemplateRequestDescriptor
 		return this;
 	}
 }
+
+/// <summary>
+/// <para>
+/// Run a search with a search template.
+/// </para>
+/// </summary>
+public readonly partial struct SearchTemplateRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.SearchTemplateRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.SearchTemplateRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public SearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.SearchTemplateRequest(indices);
+	}
+
+	public SearchTemplateRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.SearchTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.SearchTemplateRequest instance) => new Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.SearchTemplateRequest(Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of data streams, indices, and aliases to search.
+	/// It supports wildcards (<c>*</c>).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
+	{
+		Instance.Indices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+	/// This behavior applies even if the request targets other open indices.
+	/// For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
+	{
+		Instance.AllowNoIndices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, network round-trips are minimized for cross-cluster search requests.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> CcsMinimizeRoundtrips(bool? value = true)
+	{
+		Instance.CcsMinimizeRoundtrips = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> ExpandWildcards()
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The node or shard the operation should be performed on.
+	/// It is random by default.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> Preference(string? value)
+	{
+		Instance.Preference = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, <c>hits.total</c> is rendered as an integer in the response.
+	/// If <c>false</c>, it is rendered as an object.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> RestTotalHitsAsInt(bool? value = true)
+	{
+		Instance.RestTotalHitsAsInt = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A custom value used to route operations to a specific shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	{
+		Instance.Routing = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies how long a consistent view of the index
+	/// should be maintained for scrolled search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> Scroll(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Scroll = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of the search operation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> SearchType(Elastic.Clients.Elasticsearch.SearchType? value)
+	{
+		Instance.SearchType = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the response prefixes aggregation and suggester names with their respective types.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> TypedKeys(bool? value = true)
+	{
+		Instance.TypedKeys = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, returns detailed information about score calculation as part of each hit.
+	/// If you specify both this and the <c>explain</c> query parameter, the API uses only the query parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> Explain(bool? value = true)
+	{
+		Instance.Explain = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The ID of the search template to use. If no <c>source</c> is specified,
+	/// this parameter is required.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? value)
+	{
+		Instance.Id = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Key-value pairs used to replace Mustache variables in the template.
+	/// The key is the variable name.
+	/// The value is the variable value.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> Params(System.Collections.Generic.IDictionary<string, object>? value)
+	{
+		Instance.Params = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Key-value pairs used to replace Mustache variables in the template.
+	/// The key is the variable name.
+	/// The value is the variable value.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> Params()
+	{
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Key-value pairs used to replace Mustache variables in the template.
+	/// The key is the variable name.
+	/// The value is the variable value.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	{
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> AddParam(string key, object value)
+	{
+		Instance.Params ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Params.Add(key, value);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the query execution is profiled.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> Profile(bool? value = true)
+	{
+		Instance.Profile = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An inline search template. Supports the same parameters as the search API's
+	/// request body. It also supports Mustache variables. If no <c>id</c> is specified, this
+	/// parameter is required.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> Source(string? value)
+	{
+		Instance.Source = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.SearchTemplateRequest Build(System.Action<Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument>>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.SearchTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.SearchTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}

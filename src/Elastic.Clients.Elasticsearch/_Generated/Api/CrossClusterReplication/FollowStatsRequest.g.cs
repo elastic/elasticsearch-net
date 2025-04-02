@@ -224,3 +224,109 @@ public readonly partial struct FollowStatsRequestDescriptor
 		return this;
 	}
 }
+
+/// <summary>
+/// <para>
+/// Get follower stats.
+/// </para>
+/// <para>
+/// Get cross-cluster replication follower stats.
+/// The API returns shard-level stats about the "following tasks" associated with each shard for the specified indices.
+/// </para>
+/// </summary>
+public readonly partial struct FollowStatsRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FollowStatsRequestDescriptor(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public FollowStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequest(indices);
+	}
+
+	public FollowStatsRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequest(typeof(TDocument));
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequest instance) => new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequest(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A comma-delimited list of index patterns.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
+	{
+		Instance.Indices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequest Build(System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}

@@ -258,3 +258,125 @@ public readonly partial struct MigrateToDataStreamRequestDescriptor
 		return this;
 	}
 }
+
+/// <summary>
+/// <para>
+/// Convert an index alias to a data stream.
+/// Converts an index alias to a data stream.
+/// You must have a matching index template that is data stream enabled.
+/// The alias must meet the following criteria:
+/// The alias must have a write index;
+/// All indices for the alias must have a <c>@timestamp</c> field mapping of a <c>date</c> or <c>date_nanos</c> field type;
+/// The alias must not have any filters;
+/// The alias must not use custom routing.
+/// If successful, the request removes the alias and creates a data stream with the same name.
+/// The indices for the alias become hidden backing indices for the stream.
+/// The write index for the alias becomes the write index for the stream.
+/// </para>
+/// </summary>
+public readonly partial struct MigrateToDataStreamRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MigrateToDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public MigrateToDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName name)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequest(name);
+	}
+
+	public MigrateToDataStreamRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequest(typeof(TDocument));
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequest(Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Name of the index alias to convert to a data stream.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.IndexName value)
+	{
+		Instance.Name = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}

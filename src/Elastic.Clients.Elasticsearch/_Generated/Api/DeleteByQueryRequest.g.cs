@@ -1674,10 +1674,9 @@ public readonly partial struct DeleteByQueryRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.DeleteByQueryRequest(indices);
 	}
 
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public DeleteByQueryRequestDescriptor()
 	{
-		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+		Instance = new Elastic.Clients.Elasticsearch.DeleteByQueryRequest(typeof(TDocument));
 	}
 
 	public static explicit operator Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.DeleteByQueryRequest instance) => new Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument>(instance);

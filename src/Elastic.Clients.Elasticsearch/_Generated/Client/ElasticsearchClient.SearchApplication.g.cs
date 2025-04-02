@@ -44,10 +44,12 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse> DeleteAsync(Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse Delete(Elastic.Clients.Elasticsearch.Name name)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestDescriptor(name);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse Delete(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestDescriptor> action)
@@ -57,6 +59,20 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse> DeleteAsync(Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -74,10 +90,12 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse> GetAsync(Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse Get(Elastic.Clients.Elasticsearch.Name name)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestDescriptor(name);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse Get(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestDescriptor> action)
@@ -87,6 +105,20 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse> GetAsync(Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse> GetAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse> GetAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -104,12 +136,6 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.ListRequest, Elastic.Clients.Elasticsearch.SearchApplication.ListResponse, Elastic.Clients.Elasticsearch.SearchApplication.ListRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.ListResponse> ListAsync(Elastic.Clients.Elasticsearch.SearchApplication.ListRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.ListRequest, Elastic.Clients.Elasticsearch.SearchApplication.ListResponse, Elastic.Clients.Elasticsearch.SearchApplication.ListRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.ListResponse List()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.ListRequestDescriptor();
@@ -125,6 +151,12 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.ListRequest, Elastic.Clients.Elasticsearch.SearchApplication.ListResponse, Elastic.Clients.Elasticsearch.SearchApplication.ListRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.ListResponse> ListAsync(Elastic.Clients.Elasticsearch.SearchApplication.ListRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.ListRequest, Elastic.Clients.Elasticsearch.SearchApplication.ListResponse, Elastic.Clients.Elasticsearch.SearchApplication.ListRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.ListResponse> ListAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -150,10 +182,12 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse> PutAsync(Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse Put(Elastic.Clients.Elasticsearch.Name name)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor(name);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse Put(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor> action)
@@ -163,6 +197,20 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse> PutAsync(Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse> PutAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse> PutAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -180,10 +228,12 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse> RenderQueryAsync(Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse RenderQuery(Elastic.Clients.Elasticsearch.Name name)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestDescriptor(name);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse RenderQuery(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestDescriptor> action)
@@ -193,6 +243,20 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse> RenderQueryAsync(Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse> RenderQueryAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse> RenderQueryAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -210,10 +274,12 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument>> SearchAsync<TDocument>(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument> Search<TDocument>(Elastic.Clients.Elasticsearch.Name name)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor(name);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument> Search<TDocument>(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor> action)
@@ -223,6 +289,20 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument>> SearchAsync<TDocument>(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument>> SearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument>> SearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)

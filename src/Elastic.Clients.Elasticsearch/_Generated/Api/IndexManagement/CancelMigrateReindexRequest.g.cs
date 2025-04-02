@@ -195,3 +195,96 @@ public readonly partial struct CancelMigrateReindexRequestDescriptor
 		return this;
 	}
 }
+
+/// <summary>
+/// <para>
+/// Cancel a migration reindex operation.
+/// </para>
+/// <para>
+/// Cancel a migration reindex attempt for a data stream or index.
+/// </para>
+/// </summary>
+public readonly partial struct CancelMigrateReindexRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CancelMigrateReindexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public CancelMigrateReindexRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequest(indices);
+	}
+
+	public CancelMigrateReindexRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequest(typeof(TDocument));
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequest(Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The index or data stream name
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
+	{
+		Instance.Indices = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}

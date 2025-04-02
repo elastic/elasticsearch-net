@@ -355,3 +355,192 @@ public readonly partial struct GetMappingRequestDescriptor
 		return this;
 	}
 }
+
+/// <summary>
+/// <para>
+/// Get mapping definitions.
+/// For data streams, the API retrieves mappings for the stream’s backing indices.
+/// </para>
+/// </summary>
+public readonly partial struct GetMappingRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetMappingRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public GetMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest(indices);
+	}
+
+	public GetMappingRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest(Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and aliases used to limit the request.
+	/// Supports wildcards (<c>*</c>).
+	/// To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
+	{
+		Instance.Indices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+	/// This behavior applies even if the request targets other open indices.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
+	{
+		Instance.AllowNoIndices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument> ExpandWildcards()
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument> ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument>>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}

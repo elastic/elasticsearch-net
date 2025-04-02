@@ -11,6 +11,7 @@ using Elastic.Clients.Elasticsearch.Core.Bulk;
 namespace Elastic.Clients.Elasticsearch;
 
 public sealed class BulkAllRequest<T> :
+	IBulkAllRequest<T>,
 	IHelperCallable
 {
 	public BulkAllRequest(IEnumerable<T> documents)
@@ -62,7 +63,7 @@ public sealed class BulkAllRequest<T> :
 
 public sealed class BulkAllRequestDescriptor<T>
 {
-	private BulkAllRequest<T> Instance { get; }
+	internal BulkAllRequest<T> Instance { get; }
 
 	public BulkAllRequestDescriptor(IEnumerable<T> documents)
 	{

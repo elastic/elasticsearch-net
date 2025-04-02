@@ -237,3 +237,116 @@ public readonly partial struct PromoteDataStreamRequestDescriptor
 		return this;
 	}
 }
+
+/// <summary>
+/// <para>
+/// Promote a data stream.
+/// Promote a data stream from a replicated data stream managed by cross-cluster replication (CCR) to a regular data stream.
+/// </para>
+/// <para>
+/// With CCR auto following, a data stream from a remote cluster can be replicated to the local cluster.
+/// These data streams can't be rolled over in the local cluster.
+/// These replicated data streams roll over only if the upstream data stream rolls over.
+/// In the event that the remote cluster is no longer available, the data stream in the local cluster can be promoted to a regular data stream, which allows these data streams to be rolled over in the local cluster.
+/// </para>
+/// <para>
+/// NOTE: When promoting a data stream, ensure the local cluster has a data stream enabled index template that matches the data stream.
+/// If this is missing, the data stream will not be able to roll over until a matching index template is created.
+/// This will affect the lifecycle management of the data stream and interfere with the data stream size and retention.
+/// </para>
+/// </summary>
+public readonly partial struct PromoteDataStreamRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PromoteDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public PromoteDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName name)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequest(name);
+	}
+
+	public PromoteDataStreamRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequest(typeof(TDocument));
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequest(Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The name of the data stream
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.IndexName value)
+	{
+		Instance.Name = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}

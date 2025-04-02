@@ -44,12 +44,6 @@ public partial class ClusterNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest, Elastic.Clients.Elasticsearch.Cluster.AllocationExplainResponse, Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.AllocationExplainResponse> AllocationExplainAsync(Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest, Elastic.Clients.Elasticsearch.Cluster.AllocationExplainResponse, Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Cluster.AllocationExplainResponse AllocationExplain()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor();
@@ -65,6 +59,12 @@ public partial class ClusterNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest, Elastic.Clients.Elasticsearch.Cluster.AllocationExplainResponse, Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.AllocationExplainResponse> AllocationExplainAsync(Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest, Elastic.Clients.Elasticsearch.Cluster.AllocationExplainResponse, Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.AllocationExplainResponse> AllocationExplainAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -90,10 +90,12 @@ public partial class ClusterNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateResponse> DeleteComponentTemplateAsync(Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateResponse DeleteComponentTemplate(Elastic.Clients.Elasticsearch.Names name)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequestDescriptor(name);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateResponse DeleteComponentTemplate(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequestDescriptor> action)
@@ -103,6 +105,20 @@ public partial class ClusterNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateResponse> DeleteComponentTemplateAsync(Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateResponse> DeleteComponentTemplateAsync(Elastic.Clients.Elasticsearch.Names name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateResponse> DeleteComponentTemplateAsync(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -120,12 +136,6 @@ public partial class ClusterNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequest, Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsResponse, Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsResponse> DeleteVotingConfigExclusionsAsync(Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequest, Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsResponse, Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsResponse DeleteVotingConfigExclusions()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequestDescriptor();
@@ -141,6 +151,12 @@ public partial class ClusterNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequest, Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsResponse, Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsResponse> DeleteVotingConfigExclusionsAsync(Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequest, Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsResponse, Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsResponse> DeleteVotingConfigExclusionsAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -166,10 +182,12 @@ public partial class ClusterNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateResponse> ExistsComponentTemplateAsync(Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateResponse ExistsComponentTemplate(Elastic.Clients.Elasticsearch.Names name)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequestDescriptor(name);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateResponse ExistsComponentTemplate(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequestDescriptor> action)
@@ -179,6 +197,20 @@ public partial class ClusterNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateResponse> ExistsComponentTemplateAsync(Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateResponse> ExistsComponentTemplateAsync(Elastic.Clients.Elasticsearch.Names name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateResponse> ExistsComponentTemplateAsync(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -194,12 +226,6 @@ public partial class ClusterNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestParameters>(request);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse> GetComponentTemplateAsync(Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse GetComponentTemplate()
@@ -219,23 +245,6 @@ public partial class ClusterNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse> GetComponentTemplateAsync(System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse> GetComponentTemplateAsync(System.Action<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse GetComponentTemplate(Elastic.Clients.Elasticsearch.Name name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor(name);
@@ -251,6 +260,29 @@ public partial class ClusterNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse> GetComponentTemplateAsync(Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse> GetComponentTemplateAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse> GetComponentTemplateAsync(System.Action<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse> GetComponentTemplateAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
@@ -276,12 +308,6 @@ public partial class ClusterNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequest, Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsResponse, Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsResponse> GetSettingsAsync(Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequest, Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsResponse, Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsResponse GetSettings()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequestDescriptor();
@@ -297,6 +323,12 @@ public partial class ClusterNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequest, Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsResponse, Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsResponse> GetSettingsAsync(Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequest, Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsResponse, Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsResponse> GetSettingsAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -322,12 +354,6 @@ public partial class ClusterNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.HealthRequest, Elastic.Clients.Elasticsearch.Cluster.HealthResponse, Elastic.Clients.Elasticsearch.Cluster.HealthRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.HealthResponse> HealthAsync(Elastic.Clients.Elasticsearch.Cluster.HealthRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.HealthRequest, Elastic.Clients.Elasticsearch.Cluster.HealthResponse, Elastic.Clients.Elasticsearch.Cluster.HealthRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Cluster.HealthResponse Health()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor();
@@ -343,23 +369,6 @@ public partial class ClusterNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.HealthRequest, Elastic.Clients.Elasticsearch.Cluster.HealthResponse, Elastic.Clients.Elasticsearch.Cluster.HealthRequestParameters>(request);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.HealthResponse> HealthAsync(System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.HealthRequest, Elastic.Clients.Elasticsearch.Cluster.HealthResponse, Elastic.Clients.Elasticsearch.Cluster.HealthRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.HealthResponse> HealthAsync(System.Action<Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.HealthRequest, Elastic.Clients.Elasticsearch.Cluster.HealthResponse, Elastic.Clients.Elasticsearch.Cluster.HealthRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Cluster.HealthResponse Health(Elastic.Clients.Elasticsearch.Indices indices)
@@ -379,6 +388,47 @@ public partial class ClusterNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.HealthRequest, Elastic.Clients.Elasticsearch.Cluster.HealthResponse, Elastic.Clients.Elasticsearch.Cluster.HealthRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.Cluster.HealthResponse Health<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.HealthRequest, Elastic.Clients.Elasticsearch.Cluster.HealthResponse, Elastic.Clients.Elasticsearch.Cluster.HealthRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Cluster.HealthResponse Health<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument>(indices);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.HealthRequest, Elastic.Clients.Elasticsearch.Cluster.HealthResponse, Elastic.Clients.Elasticsearch.Cluster.HealthRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.HealthResponse> HealthAsync(Elastic.Clients.Elasticsearch.Cluster.HealthRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.HealthRequest, Elastic.Clients.Elasticsearch.Cluster.HealthResponse, Elastic.Clients.Elasticsearch.Cluster.HealthRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.HealthResponse> HealthAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.HealthRequest, Elastic.Clients.Elasticsearch.Cluster.HealthResponse, Elastic.Clients.Elasticsearch.Cluster.HealthRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.HealthResponse> HealthAsync(System.Action<Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.HealthRequest, Elastic.Clients.Elasticsearch.Cluster.HealthResponse, Elastic.Clients.Elasticsearch.Cluster.HealthRequestParameters>(request, cancellationToken);
+	}
+
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.HealthResponse> HealthAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor(indices);
@@ -396,8 +446,43 @@ public partial class ClusterNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.HealthRequest, Elastic.Clients.Elasticsearch.Cluster.HealthResponse, Elastic.Clients.Elasticsearch.Cluster.HealthRequestParameters>(request, cancellationToken);
 	}
 
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.HealthResponse> HealthAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.HealthRequest, Elastic.Clients.Elasticsearch.Cluster.HealthResponse, Elastic.Clients.Elasticsearch.Cluster.HealthRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.HealthResponse> HealthAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument>(indices);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.HealthRequest, Elastic.Clients.Elasticsearch.Cluster.HealthResponse, Elastic.Clients.Elasticsearch.Cluster.HealthRequestParameters>(request, cancellationToken);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.Cluster.ClusterInfoResponse Info(Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest request)
 	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest, Elastic.Clients.Elasticsearch.Cluster.ClusterInfoResponse, Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Cluster.ClusterInfoResponse Info(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget> target)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor(target);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest, Elastic.Clients.Elasticsearch.Cluster.ClusterInfoResponse, Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Cluster.ClusterInfoResponse Info(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget> target, System.Action<Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor(target);
+		action.Invoke(builder);
+		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest, Elastic.Clients.Elasticsearch.Cluster.ClusterInfoResponse, Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestParameters>(request);
 	}
@@ -408,13 +493,12 @@ public partial class ClusterNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest, Elastic.Clients.Elasticsearch.Cluster.ClusterInfoResponse, Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Cluster.ClusterInfoResponse Info(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget> target, System.Action<Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor> action)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.ClusterInfoResponse> InfoAsync(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget> target, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor(target);
-		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest, Elastic.Clients.Elasticsearch.Cluster.ClusterInfoResponse, Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestParameters>(request);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest, Elastic.Clients.Elasticsearch.Cluster.ClusterInfoResponse, Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.ClusterInfoResponse> InfoAsync(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget> target, System.Action<Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -432,12 +516,6 @@ public partial class ClusterNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequest, Elastic.Clients.Elasticsearch.Cluster.PendingTasksResponse, Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.PendingTasksResponse> PendingTasksAsync(Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequest, Elastic.Clients.Elasticsearch.Cluster.PendingTasksResponse, Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Cluster.PendingTasksResponse PendingTasks()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequestDescriptor();
@@ -453,6 +531,12 @@ public partial class ClusterNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequest, Elastic.Clients.Elasticsearch.Cluster.PendingTasksResponse, Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.PendingTasksResponse> PendingTasksAsync(Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequest, Elastic.Clients.Elasticsearch.Cluster.PendingTasksResponse, Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.PendingTasksResponse> PendingTasksAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -478,12 +562,6 @@ public partial class ClusterNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest, Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsResponse, Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsResponse> PostVotingConfigExclusionsAsync(Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest, Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsResponse, Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsResponse PostVotingConfigExclusions()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestDescriptor();
@@ -499,6 +577,12 @@ public partial class ClusterNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest, Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsResponse, Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsResponse> PostVotingConfigExclusionsAsync(Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest, Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsResponse, Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsResponse> PostVotingConfigExclusionsAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -524,10 +608,12 @@ public partial class ClusterNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse> PutComponentTemplateAsync(Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse PutComponentTemplate(Elastic.Clients.Elasticsearch.Name name)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor(name);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse PutComponentTemplate(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor> action)
@@ -546,6 +632,20 @@ public partial class ClusterNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse> PutComponentTemplateAsync(Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse> PutComponentTemplateAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse> PutComponentTemplateAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -572,12 +672,6 @@ public partial class ClusterNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse Stats()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor();
@@ -595,23 +689,6 @@ public partial class ClusterNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse> StatsAsync(System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse> StatsAsync(System.Action<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse Stats(Elastic.Clients.Elasticsearch.NodeIds nodeId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor(nodeId);
@@ -627,6 +704,29 @@ public partial class ClusterNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse> StatsAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse> StatsAsync(System.Action<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.NodeIds nodeId, System.Threading.CancellationToken cancellationToken = default)

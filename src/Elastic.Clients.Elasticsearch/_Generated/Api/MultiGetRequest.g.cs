@@ -709,7 +709,7 @@ public readonly partial struct MultiGetRequestDescriptor<TDocument>
 
 	public MultiGetRequestDescriptor()
 	{
-		Instance = new Elastic.Clients.Elasticsearch.MultiGetRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		Instance = new Elastic.Clients.Elasticsearch.MultiGetRequest(typeof(TDocument));
 	}
 
 	public static explicit operator Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MultiGetRequest instance) => new Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument>(instance);

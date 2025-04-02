@@ -193,3 +193,95 @@ public readonly partial struct RemovePolicyRequestDescriptor
 		return this;
 	}
 }
+
+/// <summary>
+/// <para>
+/// Remove policies from an index.
+/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
+/// It also stops managing the indices.
+/// </para>
+/// </summary>
+public readonly partial struct RemovePolicyRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RemovePolicyRequestDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public RemovePolicyRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest(index);
+	}
+
+	public RemovePolicyRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest(typeof(TDocument));
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest instance) => new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The name of the index to remove policy on
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
+	{
+		Instance.Index = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}

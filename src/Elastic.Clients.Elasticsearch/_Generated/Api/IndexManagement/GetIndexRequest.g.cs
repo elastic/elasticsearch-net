@@ -478,3 +478,260 @@ public readonly partial struct GetIndexRequestDescriptor
 		return this;
 	}
 }
+
+/// <summary>
+/// <para>
+/// Get index information.
+/// Get information about one or more indices. For data streams, the API returns information about the
+/// stream’s backing indices.
+/// </para>
+/// </summary>
+public readonly partial struct GetIndexRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public GetIndexRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequest(indices);
+	}
+
+	public GetIndexRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequest(typeof(TDocument));
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequest(Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and index aliases used to limit the request.
+	/// Wildcard expressions (*) are supported.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
+	{
+		Instance.Indices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If false, the request returns an error if any wildcard expression, index alias, or _all value targets only
+	/// missing or closed indices. This behavior applies even if the request targets other open indices. For example,
+	/// a request targeting foo*,bar* returns an error if an index starts with foo but no index starts with bar.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
+	{
+		Instance.AllowNoIndices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument
+	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
+	/// such as open,hidden.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument
+	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
+	/// such as open,hidden.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> ExpandWildcards()
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument
+	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
+	/// such as open,hidden.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument
+	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
+	/// such as open,hidden.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Return only information on specified index features
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> Features(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.Feature>? value)
+	{
+		Instance.Features = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Return only information on specified index features
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> Features()
+	{
+		Instance.Features = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFeature.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Return only information on specified index features
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> Features(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFeature>? action)
+	{
+		Instance.Features = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFeature.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Return only information on specified index features
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> Features(params Elastic.Clients.Elasticsearch.IndexManagement.Feature[] values)
+	{
+		Instance.Features = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, returns settings in flat format.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> FlatSettings(bool? value = true)
+	{
+		Instance.FlatSettings = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If false, requests that target a missing index return an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, return all default settings in the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> IncludeDefaults(bool? value = true)
+	{
+		Instance.IncludeDefaults = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> Local(bool? value = true)
+	{
+		Instance.Local = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}

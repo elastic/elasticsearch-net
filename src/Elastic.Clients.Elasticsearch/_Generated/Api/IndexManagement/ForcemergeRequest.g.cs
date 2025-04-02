@@ -560,3 +560,288 @@ public readonly partial struct ForcemergeRequestDescriptor
 		return this;
 	}
 }
+
+/// <summary>
+/// <para>
+/// Force a merge.
+/// Perform the force merge operation on the shards of one or more indices.
+/// For data streams, the API forces a merge on the shards of the stream's backing indices.
+/// </para>
+/// <para>
+/// Merging reduces the number of segments in each shard by merging some of them together and also frees up the space used by deleted documents.
+/// Merging normally happens automatically, but sometimes it is useful to trigger a merge manually.
+/// </para>
+/// <para>
+/// WARNING: We recommend force merging only a read-only index (meaning the index is no longer receiving writes).
+/// When documents are updated or deleted, the old version is not immediately removed but instead soft-deleted and marked with a "tombstone".
+/// These soft-deleted documents are automatically cleaned up during regular segment merges.
+/// But force merge can cause very large (greater than 5 GB) segments to be produced, which are not eligible for regular merges.
+/// So the number of soft-deleted documents can then grow rapidly, resulting in higher disk usage and worse search performance.
+/// If you regularly force merge an index receiving writes, this can also make snapshots more expensive, since the new documents can't be backed up incrementally.
+/// </para>
+/// <para>
+/// <strong>Blocks during a force merge</strong>
+/// </para>
+/// <para>
+/// Calls to this API block until the merge is complete (unless request contains <c>wait_for_completion=false</c>).
+/// If the client connection is lost before completion then the force merge process will continue in the background.
+/// Any new requests to force merge the same indices will also block until the ongoing force merge is complete.
+/// </para>
+/// <para>
+/// <strong>Running force merge asynchronously</strong>
+/// </para>
+/// <para>
+/// If the request contains <c>wait_for_completion=false</c>, Elasticsearch performs some preflight checks, launches the request, and returns a task you can use to get the status of the task.
+/// However, you can not cancel this task as the force merge task is not cancelable.
+/// Elasticsearch creates a record of this task as a document at <c>_tasks/&lt;task_id></c>.
+/// When you are done with a task, you should delete the task document so Elasticsearch can reclaim the space.
+/// </para>
+/// <para>
+/// <strong>Force merging multiple indices</strong>
+/// </para>
+/// <para>
+/// You can force merge multiple indices with a single request by targeting:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// One or more data streams that contain multiple backing indices
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Multiple indices
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// One or more aliases
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// All data streams and indices in a cluster
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// Each targeted shard is force-merged separately using the force_merge threadpool.
+/// By default each node only has a single <c>force_merge</c> thread which means that the shards on that node are force-merged one at a time.
+/// If you expand the <c>force_merge</c> threadpool on a node then it will force merge its shards in parallel
+/// </para>
+/// <para>
+/// Force merge makes the storage for the shard being merged temporarily increase, as it may require free space up to triple its size in case <c>max_num_segments parameter</c> is set to <c>1</c>, to rewrite all segments into a new one.
+/// </para>
+/// <para>
+/// <strong>Data streams and time-based indices</strong>
+/// </para>
+/// <para>
+/// Force-merging is useful for managing a data stream's older backing indices and other time-based indices, particularly after a rollover.
+/// In these cases, each index only receives indexing traffic for a certain period of time.
+/// Once an index receive no more writes, its shards can be force-merged to a single segment.
+/// This can be a good idea because single-segment shards can sometimes use simpler and more efficient data structures to perform searches.
+/// For example:
+/// </para>
+/// <code>
+/// POST /.ds-my-data-stream-2099.03.07-000001/_forcemerge?max_num_segments=1
+/// </code>
+/// </summary>
+public readonly partial struct ForcemergeRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ForcemergeRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public ForcemergeRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest(indices);
+	}
+
+	public ForcemergeRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest(Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of index names; use <c>_all</c> or empty string to perform the operation on all indices
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
+	{
+		Instance.Indices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes <c>_all</c> string or when no indices have been specified)
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
+	{
+		Instance.AllowNoIndices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> ExpandWildcards()
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specify whether the index should be flushed after performing the operation (default: true)
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> Flush(bool? value = true)
+	{
+		Instance.Flush = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether specified concrete indices should be ignored when unavailable (missing or closed)
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of segments the index should be merged into (default: dynamic)
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> MaxNumSegments(long? value)
+	{
+		Instance.MaxNumSegments = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specify whether the operation should only expunge deleted documents
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> OnlyExpungeDeletes(bool? value = true)
+	{
+		Instance.OnlyExpungeDeletes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Should the request wait until the force merge is completed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> WaitForCompletion(bool? value = true)
+	{
+		Instance.WaitForCompletion = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument>>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}

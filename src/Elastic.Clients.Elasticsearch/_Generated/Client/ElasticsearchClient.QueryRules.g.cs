@@ -44,10 +44,12 @@ public partial class QueryRulesNamespacedClient : Elastic.Clients.Elasticsearch.
 		return DoRequest<Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequest, Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleResponse, Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleResponse> DeleteRuleAsync(Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleResponse DeleteRule(Elastic.Clients.Elasticsearch.Id rulesetId, Elastic.Clients.Elasticsearch.Id ruleId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequestDescriptor(rulesetId, ruleId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequest, Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleResponse, Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequest, Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleResponse, Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleResponse DeleteRule(Elastic.Clients.Elasticsearch.Id rulesetId, Elastic.Clients.Elasticsearch.Id ruleId, System.Action<Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequestDescriptor> action)
@@ -57,6 +59,20 @@ public partial class QueryRulesNamespacedClient : Elastic.Clients.Elasticsearch.
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequest, Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleResponse, Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleResponse> DeleteRuleAsync(Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequest, Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleResponse, Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleResponse> DeleteRuleAsync(Elastic.Clients.Elasticsearch.Id rulesetId, Elastic.Clients.Elasticsearch.Id ruleId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequestDescriptor(rulesetId, ruleId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequest, Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleResponse, Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleResponse> DeleteRuleAsync(Elastic.Clients.Elasticsearch.Id rulesetId, Elastic.Clients.Elasticsearch.Id ruleId, System.Action<Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -74,10 +90,12 @@ public partial class QueryRulesNamespacedClient : Elastic.Clients.Elasticsearch.
 		return DoRequest<Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequest, Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetResponse, Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetResponse> DeleteRulesetAsync(Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetResponse DeleteRuleset(Elastic.Clients.Elasticsearch.Id rulesetId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequestDescriptor(rulesetId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequest, Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetResponse, Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequest, Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetResponse, Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetResponse DeleteRuleset(Elastic.Clients.Elasticsearch.Id rulesetId, System.Action<Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequestDescriptor> action)
@@ -87,6 +105,20 @@ public partial class QueryRulesNamespacedClient : Elastic.Clients.Elasticsearch.
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequest, Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetResponse, Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetResponse> DeleteRulesetAsync(Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequest, Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetResponse, Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetResponse> DeleteRulesetAsync(Elastic.Clients.Elasticsearch.Id rulesetId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequestDescriptor(rulesetId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequest, Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetResponse, Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetResponse> DeleteRulesetAsync(Elastic.Clients.Elasticsearch.Id rulesetId, System.Action<Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -104,10 +136,12 @@ public partial class QueryRulesNamespacedClient : Elastic.Clients.Elasticsearch.
 		return DoRequest<Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequest, Elastic.Clients.Elasticsearch.QueryRules.GetRuleResponse, Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.QueryRules.GetRuleResponse> GetRuleAsync(Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.QueryRules.GetRuleResponse GetRule(Elastic.Clients.Elasticsearch.Id rulesetId, Elastic.Clients.Elasticsearch.Id ruleId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestDescriptor(rulesetId, ruleId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequest, Elastic.Clients.Elasticsearch.QueryRules.GetRuleResponse, Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequest, Elastic.Clients.Elasticsearch.QueryRules.GetRuleResponse, Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.QueryRules.GetRuleResponse GetRule(Elastic.Clients.Elasticsearch.Id rulesetId, Elastic.Clients.Elasticsearch.Id ruleId, System.Action<Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestDescriptor> action)
@@ -117,6 +151,20 @@ public partial class QueryRulesNamespacedClient : Elastic.Clients.Elasticsearch.
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequest, Elastic.Clients.Elasticsearch.QueryRules.GetRuleResponse, Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.QueryRules.GetRuleResponse> GetRuleAsync(Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequest, Elastic.Clients.Elasticsearch.QueryRules.GetRuleResponse, Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.QueryRules.GetRuleResponse> GetRuleAsync(Elastic.Clients.Elasticsearch.Id rulesetId, Elastic.Clients.Elasticsearch.Id ruleId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestDescriptor(rulesetId, ruleId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequest, Elastic.Clients.Elasticsearch.QueryRules.GetRuleResponse, Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.QueryRules.GetRuleResponse> GetRuleAsync(Elastic.Clients.Elasticsearch.Id rulesetId, Elastic.Clients.Elasticsearch.Id ruleId, System.Action<Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -134,10 +182,12 @@ public partial class QueryRulesNamespacedClient : Elastic.Clients.Elasticsearch.
 		return DoRequest<Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequest, Elastic.Clients.Elasticsearch.QueryRules.GetRulesetResponse, Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.QueryRules.GetRulesetResponse> GetRulesetAsync(Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.QueryRules.GetRulesetResponse GetRuleset(Elastic.Clients.Elasticsearch.Id rulesetId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequestDescriptor(rulesetId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequest, Elastic.Clients.Elasticsearch.QueryRules.GetRulesetResponse, Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequest, Elastic.Clients.Elasticsearch.QueryRules.GetRulesetResponse, Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.QueryRules.GetRulesetResponse GetRuleset(Elastic.Clients.Elasticsearch.Id rulesetId, System.Action<Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequestDescriptor> action)
@@ -147,6 +197,20 @@ public partial class QueryRulesNamespacedClient : Elastic.Clients.Elasticsearch.
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequest, Elastic.Clients.Elasticsearch.QueryRules.GetRulesetResponse, Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.QueryRules.GetRulesetResponse> GetRulesetAsync(Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequest, Elastic.Clients.Elasticsearch.QueryRules.GetRulesetResponse, Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.QueryRules.GetRulesetResponse> GetRulesetAsync(Elastic.Clients.Elasticsearch.Id rulesetId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequestDescriptor(rulesetId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequest, Elastic.Clients.Elasticsearch.QueryRules.GetRulesetResponse, Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.QueryRules.GetRulesetResponse> GetRulesetAsync(Elastic.Clients.Elasticsearch.Id rulesetId, System.Action<Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -164,12 +228,6 @@ public partial class QueryRulesNamespacedClient : Elastic.Clients.Elasticsearch.
 		return DoRequest<Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequest, Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsResponse, Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsResponse> ListRulesetsAsync(Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequest, Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsResponse, Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsResponse ListRulesets()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequestDescriptor();
@@ -185,6 +243,12 @@ public partial class QueryRulesNamespacedClient : Elastic.Clients.Elasticsearch.
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequest, Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsResponse, Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsResponse> ListRulesetsAsync(Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequest, Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsResponse, Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsResponse> ListRulesetsAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -210,10 +274,12 @@ public partial class QueryRulesNamespacedClient : Elastic.Clients.Elasticsearch.
 		return DoRequest<Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequest, Elastic.Clients.Elasticsearch.QueryRules.PutRuleResponse, Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.QueryRules.PutRuleResponse> PutRuleAsync(Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.QueryRules.PutRuleResponse PutRule(Elastic.Clients.Elasticsearch.Id rulesetId, Elastic.Clients.Elasticsearch.Id ruleId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor(rulesetId, ruleId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequest, Elastic.Clients.Elasticsearch.QueryRules.PutRuleResponse, Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequest, Elastic.Clients.Elasticsearch.QueryRules.PutRuleResponse, Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.QueryRules.PutRuleResponse PutRule(Elastic.Clients.Elasticsearch.Id rulesetId, Elastic.Clients.Elasticsearch.Id ruleId, System.Action<Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor> action)
@@ -223,6 +289,20 @@ public partial class QueryRulesNamespacedClient : Elastic.Clients.Elasticsearch.
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequest, Elastic.Clients.Elasticsearch.QueryRules.PutRuleResponse, Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.QueryRules.PutRuleResponse> PutRuleAsync(Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequest, Elastic.Clients.Elasticsearch.QueryRules.PutRuleResponse, Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.QueryRules.PutRuleResponse> PutRuleAsync(Elastic.Clients.Elasticsearch.Id rulesetId, Elastic.Clients.Elasticsearch.Id ruleId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor(rulesetId, ruleId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequest, Elastic.Clients.Elasticsearch.QueryRules.PutRuleResponse, Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.QueryRules.PutRuleResponse> PutRuleAsync(Elastic.Clients.Elasticsearch.Id rulesetId, Elastic.Clients.Elasticsearch.Id ruleId, System.Action<Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -240,10 +320,12 @@ public partial class QueryRulesNamespacedClient : Elastic.Clients.Elasticsearch.
 		return DoRequest<Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequest, Elastic.Clients.Elasticsearch.QueryRules.PutRulesetResponse, Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.QueryRules.PutRulesetResponse> PutRulesetAsync(Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.QueryRules.PutRulesetResponse PutRuleset(Elastic.Clients.Elasticsearch.Id rulesetId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor(rulesetId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequest, Elastic.Clients.Elasticsearch.QueryRules.PutRulesetResponse, Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequest, Elastic.Clients.Elasticsearch.QueryRules.PutRulesetResponse, Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.QueryRules.PutRulesetResponse PutRuleset(Elastic.Clients.Elasticsearch.Id rulesetId, System.Action<Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor> action)
@@ -253,6 +335,20 @@ public partial class QueryRulesNamespacedClient : Elastic.Clients.Elasticsearch.
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequest, Elastic.Clients.Elasticsearch.QueryRules.PutRulesetResponse, Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.QueryRules.PutRulesetResponse> PutRulesetAsync(Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequest, Elastic.Clients.Elasticsearch.QueryRules.PutRulesetResponse, Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.QueryRules.PutRulesetResponse> PutRulesetAsync(Elastic.Clients.Elasticsearch.Id rulesetId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor(rulesetId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequest, Elastic.Clients.Elasticsearch.QueryRules.PutRulesetResponse, Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.QueryRules.PutRulesetResponse> PutRulesetAsync(Elastic.Clients.Elasticsearch.Id rulesetId, System.Action<Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -270,10 +366,12 @@ public partial class QueryRulesNamespacedClient : Elastic.Clients.Elasticsearch.
 		return DoRequest<Elastic.Clients.Elasticsearch.QueryRules.TestRequest, Elastic.Clients.Elasticsearch.QueryRules.TestResponse, Elastic.Clients.Elasticsearch.QueryRules.TestRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.QueryRules.TestResponse> TestAsync(Elastic.Clients.Elasticsearch.QueryRules.TestRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.QueryRules.TestResponse Test(Elastic.Clients.Elasticsearch.Id rulesetId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor(rulesetId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.QueryRules.TestRequest, Elastic.Clients.Elasticsearch.QueryRules.TestResponse, Elastic.Clients.Elasticsearch.QueryRules.TestRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.QueryRules.TestRequest, Elastic.Clients.Elasticsearch.QueryRules.TestResponse, Elastic.Clients.Elasticsearch.QueryRules.TestRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.QueryRules.TestResponse Test(Elastic.Clients.Elasticsearch.Id rulesetId, System.Action<Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor> action)
@@ -283,6 +381,20 @@ public partial class QueryRulesNamespacedClient : Elastic.Clients.Elasticsearch.
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.QueryRules.TestRequest, Elastic.Clients.Elasticsearch.QueryRules.TestResponse, Elastic.Clients.Elasticsearch.QueryRules.TestRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.QueryRules.TestResponse> TestAsync(Elastic.Clients.Elasticsearch.QueryRules.TestRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.QueryRules.TestRequest, Elastic.Clients.Elasticsearch.QueryRules.TestResponse, Elastic.Clients.Elasticsearch.QueryRules.TestRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.QueryRules.TestResponse> TestAsync(Elastic.Clients.Elasticsearch.Id rulesetId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor(rulesetId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.QueryRules.TestRequest, Elastic.Clients.Elasticsearch.QueryRules.TestResponse, Elastic.Clients.Elasticsearch.QueryRules.TestRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.QueryRules.TestResponse> TestAsync(Elastic.Clients.Elasticsearch.Id rulesetId, System.Action<Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)

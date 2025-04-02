@@ -240,3 +240,116 @@ public readonly partial struct ExplainDataLifecycleRequestDescriptor
 		return this;
 	}
 }
+
+/// <summary>
+/// <para>
+/// Get the status for a data stream lifecycle.
+/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
+/// </para>
+/// </summary>
+public readonly partial struct ExplainDataLifecycleRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ExplainDataLifecycleRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public ExplainDataLifecycleRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequest(indices);
+	}
+
+	public ExplainDataLifecycleRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequest(typeof(TDocument));
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequest(Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The name of the index to explain
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
+	{
+		Instance.Indices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// indicates if the API should return the default values the system uses for the index's lifecycle
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument> IncludeDefaults(bool? value = true)
+	{
+		Instance.IncludeDefaults = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specify timeout for connection to master
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}

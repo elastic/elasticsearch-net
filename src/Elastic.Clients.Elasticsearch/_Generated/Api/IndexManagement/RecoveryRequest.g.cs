@@ -350,3 +350,174 @@ public readonly partial struct RecoveryRequestDescriptor
 		return this;
 	}
 }
+
+/// <summary>
+/// <para>
+/// Get index recovery information.
+/// Get information about ongoing and completed shard recoveries for one or more indices.
+/// For data streams, the API returns information for the stream's backing indices.
+/// </para>
+/// <para>
+/// All recoveries, whether ongoing or complete, are kept in the cluster state and may be reported on at any time.
+/// </para>
+/// <para>
+/// Shard recovery is the process of initializing a shard copy, such as restoring a primary shard from a snapshot or creating a replica shard from a primary shard.
+/// When a shard recovery completes, the recovered shard is available for search and indexing.
+/// </para>
+/// <para>
+/// Recovery automatically occurs during the following processes:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// When creating an index for the first time.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// When a node rejoins the cluster and starts up any missing primary shard copies using the data that it holds in its data path.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Creation of new replica shard copies from the primary.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Relocation of a shard copy to a different node in the same cluster.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A snapshot restore operation.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A clone, shrink, or split operation.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// You can determine the cause of a shard recovery using the recovery or cat recovery APIs.
+/// </para>
+/// <para>
+/// The index recovery API reports information about completed recoveries only for shard copies that currently exist in the cluster.
+/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
+/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
+/// </para>
+/// </summary>
+public readonly partial struct RecoveryRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RecoveryRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public RecoveryRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest(indices);
+	}
+
+	public RecoveryRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest(Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and aliases used to limit the request.
+	/// Supports wildcards (<c>*</c>).
+	/// To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
+	{
+		Instance.Indices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the response only includes ongoing shard recoveries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument> ActiveOnly(bool? value = true)
+	{
+		Instance.ActiveOnly = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the response includes detailed information about shard recoveries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument> Detailed(bool? value = true)
+	{
+		Instance.Detailed = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument>>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}

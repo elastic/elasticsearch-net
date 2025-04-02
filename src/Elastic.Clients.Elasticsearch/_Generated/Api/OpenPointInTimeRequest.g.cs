@@ -604,10 +604,9 @@ public readonly partial struct OpenPointInTimeRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.OpenPointInTimeRequest(indices);
 	}
 
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public OpenPointInTimeRequestDescriptor()
 	{
-		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+		Instance = new Elastic.Clients.Elasticsearch.OpenPointInTimeRequest(typeof(TDocument));
 	}
 
 	public static explicit operator Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.OpenPointInTimeRequest instance) => new Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument>(instance);

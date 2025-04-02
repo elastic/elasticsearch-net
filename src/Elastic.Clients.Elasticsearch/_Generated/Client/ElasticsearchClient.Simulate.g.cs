@@ -44,12 +44,6 @@ public partial class SimulateNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Simulate.IngestResponse> IngestAsync(Elastic.Clients.Elasticsearch.Simulate.IngestRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Simulate.IngestResponse Ingest(System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor();
@@ -59,36 +53,34 @@ public partial class SimulateNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Simulate.IngestResponse Ingest<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>> action)
+	public virtual Elastic.Clients.Elasticsearch.Simulate.IngestResponse Ingest(Elastic.Clients.Elasticsearch.IndexName index)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>();
+		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor(index);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Simulate.IngestResponse Ingest(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor(index);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Simulate.IngestResponse> IngestAsync(System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Simulate.IngestResponse> IngestAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Simulate.IngestResponse Ingest<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>();
-		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Simulate.IngestResponse Ingest(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Simulate.IngestResponse Ingest<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor(index);
+		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>();
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
@@ -104,9 +96,49 @@ public partial class SimulateNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request);
 	}
 
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Simulate.IngestResponse> IngestAsync(Elastic.Clients.Elasticsearch.Simulate.IngestRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Simulate.IngestResponse> IngestAsync(System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Simulate.IngestResponse> IngestAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor(index);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request, cancellationToken);
+	}
+
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Simulate.IngestResponse> IngestAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Simulate.IngestResponse> IngestAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Simulate.IngestResponse> IngestAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>();
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();

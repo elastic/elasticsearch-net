@@ -490,10 +490,11 @@ public readonly partial struct TermsEnumRequestDescriptor<TDocument>
 #pragma warning restore CS0618
 	}
 
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public TermsEnumRequestDescriptor()
 	{
-		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.TermsEnumRequest(typeof(TDocument));
+#pragma warning restore CS0618
 	}
 
 	public static explicit operator Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.TermsEnumRequest instance) => new Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument>(instance);

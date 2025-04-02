@@ -686,7 +686,7 @@ public readonly partial struct AnalyzeIndexRequestDescriptor<TDocument>
 
 	public AnalyzeIndexRequestDescriptor()
 	{
-		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest(typeof(TDocument));
 	}
 
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument>(instance);

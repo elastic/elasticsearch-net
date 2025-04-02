@@ -8,17 +8,17 @@ using System.Threading;
 
 namespace Elastic.Clients.Elasticsearch;
 
-// TODO:
+public partial class ElasticsearchClient
+{
+	public virtual BulkAllObservable<T> BulkAll<T>(IEnumerable<T> documents, Action<BulkAllRequestDescriptor<T>> configure, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new BulkAllRequestDescriptor<T>(documents);
+		configure?.Invoke(descriptor);
+		return BulkAll<T>(descriptor.Instance, cancellationToken);
+	}
 
-//public partial class ElasticsearchClient
-//{
-//	public virtual BulkAllObservable<T> BulkAll<T>(IEnumerable<T> documents, Action<BulkAllRequestDescriptor<T>> configure, CancellationToken cancellationToken = default)
-//	{
-//		var descriptor = new BulkAllRequestDescriptor<T>(documents);
-//		configure?.Invoke(descriptor);
-//		return BulkAll<T>(descriptor, cancellationToken);
-//	}
-
-//	public virtual BulkAllObservable<T> BulkAll<T>(IBulkAllRequest<T> request, CancellationToken cancellationToken = default) =>
-//		new(this, request, cancellationToken);
-//}
+	public virtual BulkAllObservable<T> BulkAll<T>(IBulkAllRequest<T> request, CancellationToken cancellationToken = default)
+	{
+		return new BulkAllObservable<T>(this, request, cancellationToken);
+	}
+}

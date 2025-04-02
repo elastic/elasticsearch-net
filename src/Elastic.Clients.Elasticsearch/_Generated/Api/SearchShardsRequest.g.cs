@@ -453,3 +453,235 @@ public readonly partial struct SearchShardsRequestDescriptor
 		return this;
 	}
 }
+
+/// <summary>
+/// <para>
+/// Get the search shards.
+/// </para>
+/// <para>
+/// Get the indices and shards that a search request would be run against.
+/// This information can be useful for working out issues or planning optimizations with routing and shard preferences.
+/// When filtered aliases are used, the filter is returned as part of the <c>indices</c> section.
+/// </para>
+/// <para>
+/// If the Elasticsearch security features are enabled, you must have the <c>view_index_metadata</c> or <c>manage</c> index privilege for the target data stream, index, or alias.
+/// </para>
+/// </summary>
+public readonly partial struct SearchShardsRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.SearchShardsRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SearchShardsRequestDescriptor(Elastic.Clients.Elasticsearch.SearchShardsRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public SearchShardsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.SearchShardsRequest(indices);
+	}
+
+	public SearchShardsRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.SearchShardsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.SearchShardsRequest instance) => new Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.SearchShardsRequest(Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of data streams, indices, and aliases to search.
+	/// It supports wildcards (<c>*</c>).
+	/// To search all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
+	{
+		Instance.Indices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+	/// This behavior applies even if the request targets other open indices.
+	/// For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
+	{
+		Instance.AllowNoIndices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument> ExpandWildcards()
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument> ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request retrieves information from the local node only.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument> Local(bool? value = true)
+	{
+		Instance.Local = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// IT can also be set to <c>-1</c> to indicate that the request should never timeout.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The node or shard the operation should be performed on.
+	/// It is random by default.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument> Preference(string? value)
+	{
+		Instance.Preference = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A custom value used to route operations to a specific shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	{
+		Instance.Routing = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.SearchShardsRequest Build(System.Action<Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument>>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.SearchShardsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.SearchShardsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}

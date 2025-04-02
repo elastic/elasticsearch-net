@@ -44,12 +44,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest, Elastic.Clients.Elasticsearch.Security.ActivateUserProfileResponse, Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ActivateUserProfileResponse> ActivateUserProfileAsync(Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest, Elastic.Clients.Elasticsearch.Security.ActivateUserProfileResponse, Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.ActivateUserProfileResponse ActivateUserProfile(System.Action<Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestDescriptor();
@@ -57,6 +51,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest, Elastic.Clients.Elasticsearch.Security.ActivateUserProfileResponse, Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ActivateUserProfileResponse> ActivateUserProfileAsync(Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest, Elastic.Clients.Elasticsearch.Security.ActivateUserProfileResponse, Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ActivateUserProfileResponse> ActivateUserProfileAsync(System.Action<Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -74,12 +74,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.AuthenticateRequest, Elastic.Clients.Elasticsearch.Security.AuthenticateResponse, Elastic.Clients.Elasticsearch.Security.AuthenticateRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.AuthenticateResponse> AuthenticateAsync(Elastic.Clients.Elasticsearch.Security.AuthenticateRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.AuthenticateRequest, Elastic.Clients.Elasticsearch.Security.AuthenticateResponse, Elastic.Clients.Elasticsearch.Security.AuthenticateRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.AuthenticateResponse Authenticate()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.AuthenticateRequestDescriptor();
@@ -95,6 +89,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.AuthenticateRequest, Elastic.Clients.Elasticsearch.Security.AuthenticateResponse, Elastic.Clients.Elasticsearch.Security.AuthenticateRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.AuthenticateResponse> AuthenticateAsync(Elastic.Clients.Elasticsearch.Security.AuthenticateRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.AuthenticateRequest, Elastic.Clients.Elasticsearch.Security.AuthenticateResponse, Elastic.Clients.Elasticsearch.Security.AuthenticateRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.AuthenticateResponse> AuthenticateAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -120,12 +120,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequest, Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleResponse, Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleResponse> BulkDeleteRoleAsync(Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequest, Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleResponse, Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleResponse BulkDeleteRole(System.Action<Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestDescriptor();
@@ -133,6 +127,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequest, Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleResponse, Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleResponse> BulkDeleteRoleAsync(Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequest, Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleResponse, Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleResponse> BulkDeleteRoleAsync(System.Action<Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -148,12 +148,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequest, Elastic.Clients.Elasticsearch.Security.BulkPutRoleResponse, Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestParameters>(request);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.BulkPutRoleResponse> BulkPutRoleAsync(Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequest, Elastic.Clients.Elasticsearch.Security.BulkPutRoleResponse, Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Security.BulkPutRoleResponse BulkPutRole(System.Action<Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor> action)
@@ -172,6 +166,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequest, Elastic.Clients.Elasticsearch.Security.BulkPutRoleResponse, Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.BulkPutRoleResponse> BulkPutRoleAsync(Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequest, Elastic.Clients.Elasticsearch.Security.BulkPutRoleResponse, Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.BulkPutRoleResponse> BulkPutRoleAsync(System.Action<Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -198,12 +198,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequest, Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysResponse, Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysResponse> BulkUpdateApiKeysAsync(Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequest, Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysResponse, Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysResponse BulkUpdateApiKeys(System.Action<Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestDescriptor();
@@ -220,6 +214,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequest, Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysResponse, Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysResponse> BulkUpdateApiKeysAsync(Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequest, Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysResponse, Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysResponse> BulkUpdateApiKeysAsync(System.Action<Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -246,12 +246,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest, Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse, Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse> ChangePasswordAsync(Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest, Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse, Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse ChangePassword()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor();
@@ -269,23 +263,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest, Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse, Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse> ChangePasswordAsync(System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest, Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse, Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse> ChangePasswordAsync(System.Action<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest, Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse, Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse ChangePassword(Elastic.Clients.Elasticsearch.Username username)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor(username);
@@ -301,6 +278,29 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest, Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse, Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse> ChangePasswordAsync(Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest, Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse, Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse> ChangePasswordAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest, Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse, Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse> ChangePasswordAsync(System.Action<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest, Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse, Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse> ChangePasswordAsync(Elastic.Clients.Elasticsearch.Username username, System.Threading.CancellationToken cancellationToken = default)
@@ -326,10 +326,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequest, Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheResponse, Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheResponse> ClearApiKeyCacheAsync(Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheResponse ClearApiKeyCache(Elastic.Clients.Elasticsearch.Ids ids)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequestDescriptor(ids);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequest, Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheResponse, Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequest, Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheResponse, Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheResponse ClearApiKeyCache(Elastic.Clients.Elasticsearch.Ids ids, System.Action<Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequestDescriptor> action)
@@ -339,6 +341,20 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequest, Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheResponse, Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheResponse> ClearApiKeyCacheAsync(Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequest, Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheResponse, Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheResponse> ClearApiKeyCacheAsync(Elastic.Clients.Elasticsearch.Ids ids, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequestDescriptor(ids);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequest, Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheResponse, Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheResponse> ClearApiKeyCacheAsync(Elastic.Clients.Elasticsearch.Ids ids, System.Action<Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -356,10 +372,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesResponse> ClearCachedPrivilegesAsync(Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesResponse ClearCachedPrivileges(Elastic.Clients.Elasticsearch.Name application)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestDescriptor(application);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesResponse ClearCachedPrivileges(Elastic.Clients.Elasticsearch.Name application, System.Action<Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestDescriptor> action)
@@ -369,6 +387,20 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesResponse> ClearCachedPrivilegesAsync(Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesResponse> ClearCachedPrivilegesAsync(Elastic.Clients.Elasticsearch.Name application, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestDescriptor(application);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesResponse> ClearCachedPrivilegesAsync(Elastic.Clients.Elasticsearch.Name application, System.Action<Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -386,10 +418,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsResponse> ClearCachedRealmsAsync(Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsResponse ClearCachedRealms(Elastic.Clients.Elasticsearch.Names realms)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor(realms);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsResponse ClearCachedRealms(Elastic.Clients.Elasticsearch.Names realms, System.Action<Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor> action)
@@ -399,6 +433,20 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsResponse> ClearCachedRealmsAsync(Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsResponse> ClearCachedRealmsAsync(Elastic.Clients.Elasticsearch.Names realms, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor(realms);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsResponse> ClearCachedRealmsAsync(Elastic.Clients.Elasticsearch.Names realms, System.Action<Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -416,10 +464,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedRolesResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearCachedRolesResponse> ClearCachedRolesAsync(Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Security.ClearCachedRolesResponse ClearCachedRoles(Elastic.Clients.Elasticsearch.Names name)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestDescriptor(name);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedRolesResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedRolesResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Security.ClearCachedRolesResponse ClearCachedRoles(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestDescriptor> action)
@@ -429,6 +479,20 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedRolesResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearCachedRolesResponse> ClearCachedRolesAsync(Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedRolesResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearCachedRolesResponse> ClearCachedRolesAsync(Elastic.Clients.Elasticsearch.Names name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedRolesResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearCachedRolesResponse> ClearCachedRolesAsync(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -446,10 +510,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensResponse> ClearCachedServiceTokensAsync(Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensResponse ClearCachedServiceTokens(string @namespace, string service, Elastic.Clients.Elasticsearch.Names name)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor(@namespace, service, name);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensResponse ClearCachedServiceTokens(string @namespace, string service, Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor> action)
@@ -459,6 +525,20 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensResponse> ClearCachedServiceTokensAsync(Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensResponse> ClearCachedServiceTokensAsync(string @namespace, string service, Elastic.Clients.Elasticsearch.Names name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor(@namespace, service, name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensResponse> ClearCachedServiceTokensAsync(string @namespace, string service, Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -474,12 +554,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestParameters>(request);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse> CreateApiKeyAsync(Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse CreateApiKey()
@@ -506,6 +580,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse> CreateApiKeyAsync(Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse> CreateApiKeyAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -540,12 +620,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyResponse> CreateCrossClusterApiKeyAsync(Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyResponse CreateCrossClusterApiKey(System.Action<Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor();
@@ -562,6 +636,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyResponse> CreateCrossClusterApiKeyAsync(Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyResponse> CreateCrossClusterApiKeyAsync(System.Action<Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -588,10 +668,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse> CreateServiceTokenAsync(Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse CreateServiceToken(string @namespace, string service, Elastic.Clients.Elasticsearch.Name name)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestDescriptor(@namespace, service, name);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse CreateServiceToken(string @namespace, string service, Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestDescriptor> action)
@@ -603,13 +685,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse> CreateServiceTokenAsync(string @namespace, string service, Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse CreateServiceToken(string @namespace, string service)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestDescriptor(@namespace, service, name);
-		action.Invoke(builder);
+		var builder = new Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestDescriptor(@namespace, service);
 		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse CreateServiceToken(string @namespace, string service, System.Action<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestDescriptor> action)
@@ -619,6 +700,37 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse> CreateServiceTokenAsync(Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse> CreateServiceTokenAsync(string @namespace, string service, Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestDescriptor(@namespace, service, name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse> CreateServiceTokenAsync(string @namespace, string service, Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestDescriptor(@namespace, service, name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse> CreateServiceTokenAsync(string @namespace, string service, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestDescriptor(@namespace, service);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse> CreateServiceTokenAsync(string @namespace, string service, System.Action<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -636,12 +748,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.DelegatePkiRequest, Elastic.Clients.Elasticsearch.Security.DelegatePkiResponse, Elastic.Clients.Elasticsearch.Security.DelegatePkiRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DelegatePkiResponse> DelegatePkiAsync(Elastic.Clients.Elasticsearch.Security.DelegatePkiRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DelegatePkiRequest, Elastic.Clients.Elasticsearch.Security.DelegatePkiResponse, Elastic.Clients.Elasticsearch.Security.DelegatePkiRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.DelegatePkiResponse DelegatePki(System.Action<Elastic.Clients.Elasticsearch.Security.DelegatePkiRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.DelegatePkiRequestDescriptor();
@@ -649,6 +755,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.DelegatePkiRequest, Elastic.Clients.Elasticsearch.Security.DelegatePkiResponse, Elastic.Clients.Elasticsearch.Security.DelegatePkiRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DelegatePkiResponse> DelegatePkiAsync(Elastic.Clients.Elasticsearch.Security.DelegatePkiRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DelegatePkiRequest, Elastic.Clients.Elasticsearch.Security.DelegatePkiResponse, Elastic.Clients.Elasticsearch.Security.DelegatePkiRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DelegatePkiResponse> DelegatePkiAsync(System.Action<Elastic.Clients.Elasticsearch.Security.DelegatePkiRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -666,10 +778,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequest, Elastic.Clients.Elasticsearch.Security.DeletePrivilegesResponse, Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeletePrivilegesResponse> DeletePrivilegesAsync(Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Security.DeletePrivilegesResponse DeletePrivileges(Elastic.Clients.Elasticsearch.Name application, Elastic.Clients.Elasticsearch.Names name)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequestDescriptor(application, name);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequest, Elastic.Clients.Elasticsearch.Security.DeletePrivilegesResponse, Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequest, Elastic.Clients.Elasticsearch.Security.DeletePrivilegesResponse, Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Security.DeletePrivilegesResponse DeletePrivileges(Elastic.Clients.Elasticsearch.Name application, Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequestDescriptor> action)
@@ -679,6 +793,20 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequest, Elastic.Clients.Elasticsearch.Security.DeletePrivilegesResponse, Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeletePrivilegesResponse> DeletePrivilegesAsync(Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequest, Elastic.Clients.Elasticsearch.Security.DeletePrivilegesResponse, Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeletePrivilegesResponse> DeletePrivilegesAsync(Elastic.Clients.Elasticsearch.Name application, Elastic.Clients.Elasticsearch.Names name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequestDescriptor(application, name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequest, Elastic.Clients.Elasticsearch.Security.DeletePrivilegesResponse, Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeletePrivilegesResponse> DeletePrivilegesAsync(Elastic.Clients.Elasticsearch.Name application, Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -696,10 +824,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.DeleteRoleRequest, Elastic.Clients.Elasticsearch.Security.DeleteRoleResponse, Elastic.Clients.Elasticsearch.Security.DeleteRoleRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeleteRoleResponse> DeleteRoleAsync(Elastic.Clients.Elasticsearch.Security.DeleteRoleRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Security.DeleteRoleResponse DeleteRole(Elastic.Clients.Elasticsearch.Name name)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeleteRoleRequestDescriptor(name);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeleteRoleRequest, Elastic.Clients.Elasticsearch.Security.DeleteRoleResponse, Elastic.Clients.Elasticsearch.Security.DeleteRoleRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.DeleteRoleRequest, Elastic.Clients.Elasticsearch.Security.DeleteRoleResponse, Elastic.Clients.Elasticsearch.Security.DeleteRoleRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Security.DeleteRoleResponse DeleteRole(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Security.DeleteRoleRequestDescriptor> action)
@@ -709,6 +839,20 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.DeleteRoleRequest, Elastic.Clients.Elasticsearch.Security.DeleteRoleResponse, Elastic.Clients.Elasticsearch.Security.DeleteRoleRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeleteRoleResponse> DeleteRoleAsync(Elastic.Clients.Elasticsearch.Security.DeleteRoleRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeleteRoleRequest, Elastic.Clients.Elasticsearch.Security.DeleteRoleResponse, Elastic.Clients.Elasticsearch.Security.DeleteRoleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeleteRoleResponse> DeleteRoleAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeleteRoleRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeleteRoleRequest, Elastic.Clients.Elasticsearch.Security.DeleteRoleResponse, Elastic.Clients.Elasticsearch.Security.DeleteRoleRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeleteRoleResponse> DeleteRoleAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Security.DeleteRoleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -726,10 +870,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingResponse> DeleteRoleMappingAsync(Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingResponse DeleteRoleMapping(Elastic.Clients.Elasticsearch.Name name)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequestDescriptor(name);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingResponse DeleteRoleMapping(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequestDescriptor> action)
@@ -739,6 +885,20 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingResponse> DeleteRoleMappingAsync(Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingResponse> DeleteRoleMappingAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingResponse> DeleteRoleMappingAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -756,10 +916,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenResponse> DeleteServiceTokenAsync(Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenResponse DeleteServiceToken(string @namespace, string service, Elastic.Clients.Elasticsearch.Name name)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequestDescriptor(@namespace, service, name);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenResponse DeleteServiceToken(string @namespace, string service, Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequestDescriptor> action)
@@ -769,6 +931,20 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenResponse> DeleteServiceTokenAsync(Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenResponse> DeleteServiceTokenAsync(string @namespace, string service, Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequestDescriptor(@namespace, service, name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenResponse> DeleteServiceTokenAsync(string @namespace, string service, Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -786,10 +962,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.DeleteUserRequest, Elastic.Clients.Elasticsearch.Security.DeleteUserResponse, Elastic.Clients.Elasticsearch.Security.DeleteUserRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeleteUserResponse> DeleteUserAsync(Elastic.Clients.Elasticsearch.Security.DeleteUserRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Security.DeleteUserResponse DeleteUser(Elastic.Clients.Elasticsearch.Username username)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeleteUserRequestDescriptor(username);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeleteUserRequest, Elastic.Clients.Elasticsearch.Security.DeleteUserResponse, Elastic.Clients.Elasticsearch.Security.DeleteUserRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.DeleteUserRequest, Elastic.Clients.Elasticsearch.Security.DeleteUserResponse, Elastic.Clients.Elasticsearch.Security.DeleteUserRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Security.DeleteUserResponse DeleteUser(Elastic.Clients.Elasticsearch.Username username, System.Action<Elastic.Clients.Elasticsearch.Security.DeleteUserRequestDescriptor> action)
@@ -799,6 +977,20 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.DeleteUserRequest, Elastic.Clients.Elasticsearch.Security.DeleteUserResponse, Elastic.Clients.Elasticsearch.Security.DeleteUserRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeleteUserResponse> DeleteUserAsync(Elastic.Clients.Elasticsearch.Security.DeleteUserRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeleteUserRequest, Elastic.Clients.Elasticsearch.Security.DeleteUserResponse, Elastic.Clients.Elasticsearch.Security.DeleteUserRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeleteUserResponse> DeleteUserAsync(Elastic.Clients.Elasticsearch.Username username, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeleteUserRequestDescriptor(username);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeleteUserRequest, Elastic.Clients.Elasticsearch.Security.DeleteUserResponse, Elastic.Clients.Elasticsearch.Security.DeleteUserRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeleteUserResponse> DeleteUserAsync(Elastic.Clients.Elasticsearch.Username username, System.Action<Elastic.Clients.Elasticsearch.Security.DeleteUserRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -816,10 +1008,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.DisableUserRequest, Elastic.Clients.Elasticsearch.Security.DisableUserResponse, Elastic.Clients.Elasticsearch.Security.DisableUserRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DisableUserResponse> DisableUserAsync(Elastic.Clients.Elasticsearch.Security.DisableUserRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Security.DisableUserResponse DisableUser(Elastic.Clients.Elasticsearch.Username username)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DisableUserRequestDescriptor(username);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DisableUserRequest, Elastic.Clients.Elasticsearch.Security.DisableUserResponse, Elastic.Clients.Elasticsearch.Security.DisableUserRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.DisableUserRequest, Elastic.Clients.Elasticsearch.Security.DisableUserResponse, Elastic.Clients.Elasticsearch.Security.DisableUserRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Security.DisableUserResponse DisableUser(Elastic.Clients.Elasticsearch.Username username, System.Action<Elastic.Clients.Elasticsearch.Security.DisableUserRequestDescriptor> action)
@@ -829,6 +1023,20 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.DisableUserRequest, Elastic.Clients.Elasticsearch.Security.DisableUserResponse, Elastic.Clients.Elasticsearch.Security.DisableUserRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DisableUserResponse> DisableUserAsync(Elastic.Clients.Elasticsearch.Security.DisableUserRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DisableUserRequest, Elastic.Clients.Elasticsearch.Security.DisableUserResponse, Elastic.Clients.Elasticsearch.Security.DisableUserRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DisableUserResponse> DisableUserAsync(Elastic.Clients.Elasticsearch.Username username, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DisableUserRequestDescriptor(username);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DisableUserRequest, Elastic.Clients.Elasticsearch.Security.DisableUserResponse, Elastic.Clients.Elasticsearch.Security.DisableUserRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DisableUserResponse> DisableUserAsync(Elastic.Clients.Elasticsearch.Username username, System.Action<Elastic.Clients.Elasticsearch.Security.DisableUserRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -846,10 +1054,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequest, Elastic.Clients.Elasticsearch.Security.DisableUserProfileResponse, Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DisableUserProfileResponse> DisableUserProfileAsync(Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Security.DisableUserProfileResponse DisableUserProfile(string uid)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequestDescriptor(uid);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequest, Elastic.Clients.Elasticsearch.Security.DisableUserProfileResponse, Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequest, Elastic.Clients.Elasticsearch.Security.DisableUserProfileResponse, Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Security.DisableUserProfileResponse DisableUserProfile(string uid, System.Action<Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequestDescriptor> action)
@@ -859,6 +1069,20 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequest, Elastic.Clients.Elasticsearch.Security.DisableUserProfileResponse, Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DisableUserProfileResponse> DisableUserProfileAsync(Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequest, Elastic.Clients.Elasticsearch.Security.DisableUserProfileResponse, Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DisableUserProfileResponse> DisableUserProfileAsync(string uid, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequestDescriptor(uid);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequest, Elastic.Clients.Elasticsearch.Security.DisableUserProfileResponse, Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DisableUserProfileResponse> DisableUserProfileAsync(string uid, System.Action<Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -876,10 +1100,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.EnableUserRequest, Elastic.Clients.Elasticsearch.Security.EnableUserResponse, Elastic.Clients.Elasticsearch.Security.EnableUserRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.EnableUserResponse> EnableUserAsync(Elastic.Clients.Elasticsearch.Security.EnableUserRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Security.EnableUserResponse EnableUser(Elastic.Clients.Elasticsearch.Username username)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.EnableUserRequestDescriptor(username);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.EnableUserRequest, Elastic.Clients.Elasticsearch.Security.EnableUserResponse, Elastic.Clients.Elasticsearch.Security.EnableUserRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.EnableUserRequest, Elastic.Clients.Elasticsearch.Security.EnableUserResponse, Elastic.Clients.Elasticsearch.Security.EnableUserRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Security.EnableUserResponse EnableUser(Elastic.Clients.Elasticsearch.Username username, System.Action<Elastic.Clients.Elasticsearch.Security.EnableUserRequestDescriptor> action)
@@ -889,6 +1115,20 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.EnableUserRequest, Elastic.Clients.Elasticsearch.Security.EnableUserResponse, Elastic.Clients.Elasticsearch.Security.EnableUserRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.EnableUserResponse> EnableUserAsync(Elastic.Clients.Elasticsearch.Security.EnableUserRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.EnableUserRequest, Elastic.Clients.Elasticsearch.Security.EnableUserResponse, Elastic.Clients.Elasticsearch.Security.EnableUserRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.EnableUserResponse> EnableUserAsync(Elastic.Clients.Elasticsearch.Username username, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.EnableUserRequestDescriptor(username);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.EnableUserRequest, Elastic.Clients.Elasticsearch.Security.EnableUserResponse, Elastic.Clients.Elasticsearch.Security.EnableUserRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.EnableUserResponse> EnableUserAsync(Elastic.Clients.Elasticsearch.Username username, System.Action<Elastic.Clients.Elasticsearch.Security.EnableUserRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -906,10 +1146,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequest, Elastic.Clients.Elasticsearch.Security.EnableUserProfileResponse, Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.EnableUserProfileResponse> EnableUserProfileAsync(Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Security.EnableUserProfileResponse EnableUserProfile(string uid)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestDescriptor(uid);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequest, Elastic.Clients.Elasticsearch.Security.EnableUserProfileResponse, Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequest, Elastic.Clients.Elasticsearch.Security.EnableUserProfileResponse, Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Security.EnableUserProfileResponse EnableUserProfile(string uid, System.Action<Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestDescriptor> action)
@@ -919,6 +1161,20 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequest, Elastic.Clients.Elasticsearch.Security.EnableUserProfileResponse, Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.EnableUserProfileResponse> EnableUserProfileAsync(Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequest, Elastic.Clients.Elasticsearch.Security.EnableUserProfileResponse, Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.EnableUserProfileResponse> EnableUserProfileAsync(string uid, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestDescriptor(uid);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequest, Elastic.Clients.Elasticsearch.Security.EnableUserProfileResponse, Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.EnableUserProfileResponse> EnableUserProfileAsync(string uid, System.Action<Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -936,12 +1192,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequest, Elastic.Clients.Elasticsearch.Security.EnrollKibanaResponse, Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.EnrollKibanaResponse> EnrollKibanaAsync(Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequest, Elastic.Clients.Elasticsearch.Security.EnrollKibanaResponse, Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.EnrollKibanaResponse EnrollKibana()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequestDescriptor();
@@ -957,6 +1207,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequest, Elastic.Clients.Elasticsearch.Security.EnrollKibanaResponse, Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.EnrollKibanaResponse> EnrollKibanaAsync(Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequest, Elastic.Clients.Elasticsearch.Security.EnrollKibanaResponse, Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.EnrollKibanaResponse> EnrollKibanaAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -982,12 +1238,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.EnrollNodeRequest, Elastic.Clients.Elasticsearch.Security.EnrollNodeResponse, Elastic.Clients.Elasticsearch.Security.EnrollNodeRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.EnrollNodeResponse> EnrollNodeAsync(Elastic.Clients.Elasticsearch.Security.EnrollNodeRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.EnrollNodeRequest, Elastic.Clients.Elasticsearch.Security.EnrollNodeResponse, Elastic.Clients.Elasticsearch.Security.EnrollNodeRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.EnrollNodeResponse EnrollNode()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.EnrollNodeRequestDescriptor();
@@ -1003,6 +1253,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.EnrollNodeRequest, Elastic.Clients.Elasticsearch.Security.EnrollNodeResponse, Elastic.Clients.Elasticsearch.Security.EnrollNodeRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.EnrollNodeResponse> EnrollNodeAsync(Elastic.Clients.Elasticsearch.Security.EnrollNodeRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.EnrollNodeRequest, Elastic.Clients.Elasticsearch.Security.EnrollNodeResponse, Elastic.Clients.Elasticsearch.Security.EnrollNodeRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.EnrollNodeResponse> EnrollNodeAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -1028,12 +1284,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetApiKeyRequest, Elastic.Clients.Elasticsearch.Security.GetApiKeyResponse, Elastic.Clients.Elasticsearch.Security.GetApiKeyRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetApiKeyResponse> GetApiKeyAsync(Elastic.Clients.Elasticsearch.Security.GetApiKeyRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetApiKeyRequest, Elastic.Clients.Elasticsearch.Security.GetApiKeyResponse, Elastic.Clients.Elasticsearch.Security.GetApiKeyRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.GetApiKeyResponse GetApiKey()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetApiKeyRequestDescriptor();
@@ -1049,6 +1299,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetApiKeyRequest, Elastic.Clients.Elasticsearch.Security.GetApiKeyResponse, Elastic.Clients.Elasticsearch.Security.GetApiKeyRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetApiKeyResponse> GetApiKeyAsync(Elastic.Clients.Elasticsearch.Security.GetApiKeyRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetApiKeyRequest, Elastic.Clients.Elasticsearch.Security.GetApiKeyResponse, Elastic.Clients.Elasticsearch.Security.GetApiKeyRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetApiKeyResponse> GetApiKeyAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -1074,12 +1330,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesResponse> GetBuiltinPrivilegesAsync(Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesResponse GetBuiltinPrivileges()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequestDescriptor();
@@ -1095,6 +1345,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesResponse> GetBuiltinPrivilegesAsync(Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesResponse> GetBuiltinPrivilegesAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -1120,12 +1376,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse> GetPrivilegesAsync(Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse GetPrivileges()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor();
@@ -1141,23 +1391,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse> GetPrivilegesAsync(System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse> GetPrivilegesAsync(System.Action<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse GetPrivileges(Elastic.Clients.Elasticsearch.Name application)
@@ -1177,23 +1410,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse> GetPrivilegesAsync(Elastic.Clients.Elasticsearch.Name application, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor(application);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse> GetPrivilegesAsync(Elastic.Clients.Elasticsearch.Name application, System.Action<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor(application);
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse GetPrivileges(Elastic.Clients.Elasticsearch.Name application, Elastic.Clients.Elasticsearch.Names name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor(application, name);
@@ -1209,6 +1425,46 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse> GetPrivilegesAsync(Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse> GetPrivilegesAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse> GetPrivilegesAsync(System.Action<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse> GetPrivilegesAsync(Elastic.Clients.Elasticsearch.Name application, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor(application);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse> GetPrivilegesAsync(Elastic.Clients.Elasticsearch.Name application, System.Action<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor(application);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse> GetPrivilegesAsync(Elastic.Clients.Elasticsearch.Name application, Elastic.Clients.Elasticsearch.Names name, System.Threading.CancellationToken cancellationToken = default)
@@ -1234,12 +1490,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetRoleRequest, Elastic.Clients.Elasticsearch.Security.GetRoleResponse, Elastic.Clients.Elasticsearch.Security.GetRoleRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetRoleResponse> GetRoleAsync(Elastic.Clients.Elasticsearch.Security.GetRoleRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetRoleRequest, Elastic.Clients.Elasticsearch.Security.GetRoleResponse, Elastic.Clients.Elasticsearch.Security.GetRoleRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.GetRoleResponse GetRole()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor();
@@ -1257,23 +1507,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetRoleRequest, Elastic.Clients.Elasticsearch.Security.GetRoleResponse, Elastic.Clients.Elasticsearch.Security.GetRoleRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetRoleResponse> GetRoleAsync(System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetRoleRequest, Elastic.Clients.Elasticsearch.Security.GetRoleResponse, Elastic.Clients.Elasticsearch.Security.GetRoleRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetRoleResponse> GetRoleAsync(System.Action<Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetRoleRequest, Elastic.Clients.Elasticsearch.Security.GetRoleResponse, Elastic.Clients.Elasticsearch.Security.GetRoleRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.GetRoleResponse GetRole(Elastic.Clients.Elasticsearch.Names name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor(name);
@@ -1289,6 +1522,29 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetRoleRequest, Elastic.Clients.Elasticsearch.Security.GetRoleResponse, Elastic.Clients.Elasticsearch.Security.GetRoleRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetRoleResponse> GetRoleAsync(Elastic.Clients.Elasticsearch.Security.GetRoleRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetRoleRequest, Elastic.Clients.Elasticsearch.Security.GetRoleResponse, Elastic.Clients.Elasticsearch.Security.GetRoleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetRoleResponse> GetRoleAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetRoleRequest, Elastic.Clients.Elasticsearch.Security.GetRoleResponse, Elastic.Clients.Elasticsearch.Security.GetRoleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetRoleResponse> GetRoleAsync(System.Action<Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetRoleRequest, Elastic.Clients.Elasticsearch.Security.GetRoleResponse, Elastic.Clients.Elasticsearch.Security.GetRoleRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetRoleResponse> GetRoleAsync(Elastic.Clients.Elasticsearch.Names name, System.Threading.CancellationToken cancellationToken = default)
@@ -1314,12 +1570,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse> GetRoleMappingAsync(Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse GetRoleMapping()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor();
@@ -1337,23 +1587,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse> GetRoleMappingAsync(System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse> GetRoleMappingAsync(System.Action<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse GetRoleMapping(Elastic.Clients.Elasticsearch.Names name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor(name);
@@ -1369,6 +1602,29 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse> GetRoleMappingAsync(Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse> GetRoleMappingAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse> GetRoleMappingAsync(System.Action<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse> GetRoleMappingAsync(Elastic.Clients.Elasticsearch.Names name, System.Threading.CancellationToken cancellationToken = default)
@@ -1394,12 +1650,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse> GetServiceAccountsAsync(Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse GetServiceAccounts()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor();
@@ -1415,23 +1665,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse> GetServiceAccountsAsync(System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse> GetServiceAccountsAsync(System.Action<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse GetServiceAccounts(string @namespace, string service)
@@ -1451,23 +1684,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse> GetServiceAccountsAsync(string @namespace, string service, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor(@namespace, service);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse> GetServiceAccountsAsync(string @namespace, string service, System.Action<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor(@namespace, service);
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse GetServiceAccounts(string @namespace)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor(@namespace);
@@ -1483,6 +1699,46 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse> GetServiceAccountsAsync(Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse> GetServiceAccountsAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse> GetServiceAccountsAsync(System.Action<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse> GetServiceAccountsAsync(string @namespace, string service, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor(@namespace, service);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse> GetServiceAccountsAsync(string @namespace, string service, System.Action<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor(@namespace, service);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse> GetServiceAccountsAsync(string @namespace, System.Threading.CancellationToken cancellationToken = default)
@@ -1508,10 +1764,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsResponse> GetServiceCredentialsAsync(Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsResponse GetServiceCredentials(string @namespace, Elastic.Clients.Elasticsearch.Name service)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestDescriptor(@namespace, service);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsResponse GetServiceCredentials(string @namespace, Elastic.Clients.Elasticsearch.Name service, System.Action<Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestDescriptor> action)
@@ -1521,6 +1779,20 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsResponse> GetServiceCredentialsAsync(Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsResponse> GetServiceCredentialsAsync(string @namespace, Elastic.Clients.Elasticsearch.Name service, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestDescriptor(@namespace, service);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsResponse> GetServiceCredentialsAsync(string @namespace, Elastic.Clients.Elasticsearch.Name service, System.Action<Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -1538,12 +1810,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequest, Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsResponse, Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsResponse> GetSettingsAsync(Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequest, Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsResponse, Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsResponse GetSettings()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequestDescriptor();
@@ -1559,6 +1825,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequest, Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsResponse, Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsResponse> GetSettingsAsync(Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequest, Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsResponse, Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsResponse> GetSettingsAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -1584,12 +1856,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetTokenRequest, Elastic.Clients.Elasticsearch.Security.GetTokenResponse, Elastic.Clients.Elasticsearch.Security.GetTokenRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetTokenResponse> GetTokenAsync(Elastic.Clients.Elasticsearch.Security.GetTokenRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetTokenRequest, Elastic.Clients.Elasticsearch.Security.GetTokenResponse, Elastic.Clients.Elasticsearch.Security.GetTokenRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.GetTokenResponse GetToken()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor();
@@ -1605,6 +1871,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetTokenRequest, Elastic.Clients.Elasticsearch.Security.GetTokenResponse, Elastic.Clients.Elasticsearch.Security.GetTokenRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetTokenResponse> GetTokenAsync(Elastic.Clients.Elasticsearch.Security.GetTokenRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetTokenRequest, Elastic.Clients.Elasticsearch.Security.GetTokenResponse, Elastic.Clients.Elasticsearch.Security.GetTokenRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetTokenResponse> GetTokenAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -1630,12 +1902,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetUserRequest, Elastic.Clients.Elasticsearch.Security.GetUserResponse, Elastic.Clients.Elasticsearch.Security.GetUserRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetUserResponse> GetUserAsync(Elastic.Clients.Elasticsearch.Security.GetUserRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetUserRequest, Elastic.Clients.Elasticsearch.Security.GetUserResponse, Elastic.Clients.Elasticsearch.Security.GetUserRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.GetUserResponse GetUser()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor();
@@ -1653,23 +1919,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetUserRequest, Elastic.Clients.Elasticsearch.Security.GetUserResponse, Elastic.Clients.Elasticsearch.Security.GetUserRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetUserResponse> GetUserAsync(System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetUserRequest, Elastic.Clients.Elasticsearch.Security.GetUserResponse, Elastic.Clients.Elasticsearch.Security.GetUserRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetUserResponse> GetUserAsync(System.Action<Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetUserRequest, Elastic.Clients.Elasticsearch.Security.GetUserResponse, Elastic.Clients.Elasticsearch.Security.GetUserRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.GetUserResponse GetUser(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Username> username)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor(username);
@@ -1685,6 +1934,29 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetUserRequest, Elastic.Clients.Elasticsearch.Security.GetUserResponse, Elastic.Clients.Elasticsearch.Security.GetUserRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetUserResponse> GetUserAsync(Elastic.Clients.Elasticsearch.Security.GetUserRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetUserRequest, Elastic.Clients.Elasticsearch.Security.GetUserResponse, Elastic.Clients.Elasticsearch.Security.GetUserRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetUserResponse> GetUserAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetUserRequest, Elastic.Clients.Elasticsearch.Security.GetUserResponse, Elastic.Clients.Elasticsearch.Security.GetUserRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetUserResponse> GetUserAsync(System.Action<Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetUserRequest, Elastic.Clients.Elasticsearch.Security.GetUserResponse, Elastic.Clients.Elasticsearch.Security.GetUserRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetUserResponse> GetUserAsync(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Username> username, System.Threading.CancellationToken cancellationToken = default)
@@ -1710,12 +1982,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesResponse> GetUserPrivilegesAsync(Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesResponse GetUserPrivileges()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequestDescriptor();
@@ -1731,6 +1997,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesResponse> GetUserPrivilegesAsync(Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesResponse> GetUserPrivilegesAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -1756,10 +2028,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetUserProfileRequest, Elastic.Clients.Elasticsearch.Security.GetUserProfileResponse, Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetUserProfileResponse> GetUserProfileAsync(Elastic.Clients.Elasticsearch.Security.GetUserProfileRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Security.GetUserProfileResponse GetUserProfile(System.Collections.Generic.ICollection<string> uid)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestDescriptor(uid);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetUserProfileRequest, Elastic.Clients.Elasticsearch.Security.GetUserProfileResponse, Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetUserProfileRequest, Elastic.Clients.Elasticsearch.Security.GetUserProfileResponse, Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Security.GetUserProfileResponse GetUserProfile(System.Collections.Generic.ICollection<string> uid, System.Action<Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestDescriptor> action)
@@ -1769,6 +2043,20 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetUserProfileRequest, Elastic.Clients.Elasticsearch.Security.GetUserProfileResponse, Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetUserProfileResponse> GetUserProfileAsync(Elastic.Clients.Elasticsearch.Security.GetUserProfileRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetUserProfileRequest, Elastic.Clients.Elasticsearch.Security.GetUserProfileResponse, Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetUserProfileResponse> GetUserProfileAsync(System.Collections.Generic.ICollection<string> uid, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestDescriptor(uid);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetUserProfileRequest, Elastic.Clients.Elasticsearch.Security.GetUserProfileResponse, Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetUserProfileResponse> GetUserProfileAsync(System.Collections.Generic.ICollection<string> uid, System.Action<Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -1784,12 +2072,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest, Elastic.Clients.Elasticsearch.Security.GrantApiKeyResponse, Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestParameters>(request);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GrantApiKeyResponse> GrantApiKeyAsync(Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest, Elastic.Clients.Elasticsearch.Security.GrantApiKeyResponse, Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Security.GrantApiKeyResponse GrantApiKey(System.Action<Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor> action)
@@ -1808,6 +2090,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest, Elastic.Clients.Elasticsearch.Security.GrantApiKeyResponse, Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GrantApiKeyResponse> GrantApiKeyAsync(Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest, Elastic.Clients.Elasticsearch.Security.GrantApiKeyResponse, Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GrantApiKeyResponse> GrantApiKeyAsync(System.Action<Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -1834,12 +2122,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse> HasPrivilegesAsync(Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse HasPrivileges()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor();
@@ -1857,23 +2139,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse> HasPrivilegesAsync(System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse> HasPrivilegesAsync(System.Action<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse HasPrivileges(Elastic.Clients.Elasticsearch.Name user)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor(user);
@@ -1889,6 +2154,29 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse> HasPrivilegesAsync(Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse> HasPrivilegesAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse> HasPrivilegesAsync(System.Action<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse> HasPrivilegesAsync(Elastic.Clients.Elasticsearch.Name user, System.Threading.CancellationToken cancellationToken = default)
@@ -1914,12 +2202,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequest, Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileResponse, Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileResponse> HasPrivilegesUserProfileAsync(Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequest, Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileResponse, Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileResponse HasPrivilegesUserProfile(System.Action<Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor();
@@ -1927,6 +2209,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequest, Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileResponse, Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileResponse> HasPrivilegesUserProfileAsync(Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequest, Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileResponse, Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileResponse> HasPrivilegesUserProfileAsync(System.Action<Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -1944,12 +2232,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyResponse> InvalidateApiKeyAsync(Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyResponse InvalidateApiKey()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor();
@@ -1965,6 +2247,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyResponse> InvalidateApiKeyAsync(Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyResponse> InvalidateApiKeyAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -1990,12 +2278,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest, Elastic.Clients.Elasticsearch.Security.InvalidateTokenResponse, Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.InvalidateTokenResponse> InvalidateTokenAsync(Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest, Elastic.Clients.Elasticsearch.Security.InvalidateTokenResponse, Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.InvalidateTokenResponse InvalidateToken()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestDescriptor();
@@ -2011,6 +2293,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest, Elastic.Clients.Elasticsearch.Security.InvalidateTokenResponse, Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.InvalidateTokenResponse> InvalidateTokenAsync(Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest, Elastic.Clients.Elasticsearch.Security.InvalidateTokenResponse, Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.InvalidateTokenResponse> InvalidateTokenAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -2036,12 +2324,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequest, Elastic.Clients.Elasticsearch.Security.OidcAuthenticateResponse, Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.OidcAuthenticateResponse> OidcAuthenticateAsync(Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequest, Elastic.Clients.Elasticsearch.Security.OidcAuthenticateResponse, Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.OidcAuthenticateResponse OidcAuthenticate(System.Action<Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestDescriptor();
@@ -2049,6 +2331,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequest, Elastic.Clients.Elasticsearch.Security.OidcAuthenticateResponse, Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.OidcAuthenticateResponse> OidcAuthenticateAsync(Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequest, Elastic.Clients.Elasticsearch.Security.OidcAuthenticateResponse, Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.OidcAuthenticateResponse> OidcAuthenticateAsync(System.Action<Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -2066,12 +2354,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.OidcLogoutRequest, Elastic.Clients.Elasticsearch.Security.OidcLogoutResponse, Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.OidcLogoutResponse> OidcLogoutAsync(Elastic.Clients.Elasticsearch.Security.OidcLogoutRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.OidcLogoutRequest, Elastic.Clients.Elasticsearch.Security.OidcLogoutResponse, Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.OidcLogoutResponse OidcLogout(System.Action<Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestDescriptor();
@@ -2079,6 +2361,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.OidcLogoutRequest, Elastic.Clients.Elasticsearch.Security.OidcLogoutResponse, Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.OidcLogoutResponse> OidcLogoutAsync(Elastic.Clients.Elasticsearch.Security.OidcLogoutRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.OidcLogoutRequest, Elastic.Clients.Elasticsearch.Security.OidcLogoutResponse, Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.OidcLogoutResponse> OidcLogoutAsync(System.Action<Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -2096,12 +2384,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequest, Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationResponse, Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationResponse> OidcPrepareAuthenticationAsync(Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequest, Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationResponse, Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationResponse OidcPrepareAuthentication()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequestDescriptor();
@@ -2117,6 +2399,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequest, Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationResponse, Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationResponse> OidcPrepareAuthenticationAsync(Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequest, Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationResponse, Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationResponse> OidcPrepareAuthenticationAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -2142,12 +2430,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.PutPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.PutPrivilegesResponse> PutPrivilegesAsync(Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.PutPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.PutPrivilegesResponse PutPrivileges(System.Action<Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor();
@@ -2155,6 +2437,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.PutPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.PutPrivilegesResponse> PutPrivilegesAsync(Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.PutPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.PutPrivilegesResponse> PutPrivilegesAsync(System.Action<Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -2172,10 +2460,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.PutRoleRequest, Elastic.Clients.Elasticsearch.Security.PutRoleResponse, Elastic.Clients.Elasticsearch.Security.PutRoleRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.PutRoleResponse> PutRoleAsync(Elastic.Clients.Elasticsearch.Security.PutRoleRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Security.PutRoleResponse PutRole(Elastic.Clients.Elasticsearch.Name name)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor(name);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.PutRoleRequest, Elastic.Clients.Elasticsearch.Security.PutRoleResponse, Elastic.Clients.Elasticsearch.Security.PutRoleRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.PutRoleRequest, Elastic.Clients.Elasticsearch.Security.PutRoleResponse, Elastic.Clients.Elasticsearch.Security.PutRoleRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Security.PutRoleResponse PutRole(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor> action)
@@ -2194,6 +2484,20 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.PutRoleRequest, Elastic.Clients.Elasticsearch.Security.PutRoleResponse, Elastic.Clients.Elasticsearch.Security.PutRoleRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.PutRoleResponse> PutRoleAsync(Elastic.Clients.Elasticsearch.Security.PutRoleRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.PutRoleRequest, Elastic.Clients.Elasticsearch.Security.PutRoleResponse, Elastic.Clients.Elasticsearch.Security.PutRoleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.PutRoleResponse> PutRoleAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.PutRoleRequest, Elastic.Clients.Elasticsearch.Security.PutRoleResponse, Elastic.Clients.Elasticsearch.Security.PutRoleRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.PutRoleResponse> PutRoleAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -2220,10 +2524,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse> PutRoleMappingAsync(Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse PutRoleMapping(Elastic.Clients.Elasticsearch.Name name)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor(name);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse PutRoleMapping(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor> action)
@@ -2242,6 +2548,20 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse> PutRoleMappingAsync(Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse> PutRoleMappingAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse> PutRoleMappingAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -2268,12 +2588,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.PutUserRequest, Elastic.Clients.Elasticsearch.Security.PutUserResponse, Elastic.Clients.Elasticsearch.Security.PutUserRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.PutUserResponse> PutUserAsync(Elastic.Clients.Elasticsearch.Security.PutUserRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.PutUserRequest, Elastic.Clients.Elasticsearch.Security.PutUserResponse, Elastic.Clients.Elasticsearch.Security.PutUserRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.PutUserResponse PutUser()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor();
@@ -2289,6 +2603,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.PutUserRequest, Elastic.Clients.Elasticsearch.Security.PutUserResponse, Elastic.Clients.Elasticsearch.Security.PutUserRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.PutUserResponse> PutUserAsync(Elastic.Clients.Elasticsearch.Security.PutUserRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.PutUserRequest, Elastic.Clients.Elasticsearch.Security.PutUserResponse, Elastic.Clients.Elasticsearch.Security.PutUserRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.PutUserResponse> PutUserAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -2312,12 +2632,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest, Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse, Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestParameters>(request);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse> QueryApiKeysAsync(Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest, Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse, Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse QueryApiKeys()
@@ -2344,6 +2658,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest, Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse, Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse> QueryApiKeysAsync(Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest, Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse, Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse> QueryApiKeysAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -2378,12 +2698,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.QueryRoleRequest, Elastic.Clients.Elasticsearch.Security.QueryRoleResponse, Elastic.Clients.Elasticsearch.Security.QueryRoleRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.QueryRoleResponse> QueryRoleAsync(Elastic.Clients.Elasticsearch.Security.QueryRoleRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.QueryRoleRequest, Elastic.Clients.Elasticsearch.Security.QueryRoleResponse, Elastic.Clients.Elasticsearch.Security.QueryRoleRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.QueryRoleResponse QueryRole()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor();
@@ -2408,6 +2722,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.QueryRoleRequest, Elastic.Clients.Elasticsearch.Security.QueryRoleResponse, Elastic.Clients.Elasticsearch.Security.QueryRoleRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.QueryRoleResponse> QueryRoleAsync(Elastic.Clients.Elasticsearch.Security.QueryRoleRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.QueryRoleRequest, Elastic.Clients.Elasticsearch.Security.QueryRoleResponse, Elastic.Clients.Elasticsearch.Security.QueryRoleRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.QueryRoleResponse> QueryRoleAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -2442,12 +2762,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.QueryUserRequest, Elastic.Clients.Elasticsearch.Security.QueryUserResponse, Elastic.Clients.Elasticsearch.Security.QueryUserRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.QueryUserResponse> QueryUserAsync(Elastic.Clients.Elasticsearch.Security.QueryUserRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.QueryUserRequest, Elastic.Clients.Elasticsearch.Security.QueryUserResponse, Elastic.Clients.Elasticsearch.Security.QueryUserRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.QueryUserResponse QueryUser()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor();
@@ -2472,6 +2786,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.QueryUserRequest, Elastic.Clients.Elasticsearch.Security.QueryUserResponse, Elastic.Clients.Elasticsearch.Security.QueryUserRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.QueryUserResponse> QueryUserAsync(Elastic.Clients.Elasticsearch.Security.QueryUserRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.QueryUserRequest, Elastic.Clients.Elasticsearch.Security.QueryUserResponse, Elastic.Clients.Elasticsearch.Security.QueryUserRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.QueryUserResponse> QueryUserAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -2506,12 +2826,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest, Elastic.Clients.Elasticsearch.Security.SamlAuthenticateResponse, Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SamlAuthenticateResponse> SamlAuthenticateAsync(Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest, Elastic.Clients.Elasticsearch.Security.SamlAuthenticateResponse, Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.SamlAuthenticateResponse SamlAuthenticate(System.Action<Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestDescriptor();
@@ -2519,6 +2833,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest, Elastic.Clients.Elasticsearch.Security.SamlAuthenticateResponse, Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SamlAuthenticateResponse> SamlAuthenticateAsync(Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest, Elastic.Clients.Elasticsearch.Security.SamlAuthenticateResponse, Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SamlAuthenticateResponse> SamlAuthenticateAsync(System.Action<Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -2536,12 +2856,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest, Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutResponse, Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutResponse> SamlCompleteLogoutAsync(Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest, Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutResponse, Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutResponse SamlCompleteLogout(System.Action<Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestDescriptor();
@@ -2549,6 +2863,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest, Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutResponse, Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutResponse> SamlCompleteLogoutAsync(Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest, Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutResponse, Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutResponse> SamlCompleteLogoutAsync(System.Action<Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -2566,12 +2886,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest, Elastic.Clients.Elasticsearch.Security.SamlInvalidateResponse, Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SamlInvalidateResponse> SamlInvalidateAsync(Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest, Elastic.Clients.Elasticsearch.Security.SamlInvalidateResponse, Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.SamlInvalidateResponse SamlInvalidate(System.Action<Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestDescriptor();
@@ -2579,6 +2893,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest, Elastic.Clients.Elasticsearch.Security.SamlInvalidateResponse, Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SamlInvalidateResponse> SamlInvalidateAsync(Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest, Elastic.Clients.Elasticsearch.Security.SamlInvalidateResponse, Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SamlInvalidateResponse> SamlInvalidateAsync(System.Action<Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -2596,12 +2916,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.SamlLogoutRequest, Elastic.Clients.Elasticsearch.Security.SamlLogoutResponse, Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SamlLogoutResponse> SamlLogoutAsync(Elastic.Clients.Elasticsearch.Security.SamlLogoutRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.SamlLogoutRequest, Elastic.Clients.Elasticsearch.Security.SamlLogoutResponse, Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.SamlLogoutResponse SamlLogout(System.Action<Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestDescriptor();
@@ -2609,6 +2923,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.SamlLogoutRequest, Elastic.Clients.Elasticsearch.Security.SamlLogoutResponse, Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SamlLogoutResponse> SamlLogoutAsync(Elastic.Clients.Elasticsearch.Security.SamlLogoutRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.SamlLogoutRequest, Elastic.Clients.Elasticsearch.Security.SamlLogoutResponse, Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SamlLogoutResponse> SamlLogoutAsync(System.Action<Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -2626,12 +2946,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest, Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationResponse, Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationResponse> SamlPrepareAuthenticationAsync(Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest, Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationResponse, Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationResponse SamlPrepareAuthentication()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestDescriptor();
@@ -2647,6 +2961,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest, Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationResponse, Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationResponse> SamlPrepareAuthenticationAsync(Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest, Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationResponse, Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationResponse> SamlPrepareAuthenticationAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -2672,10 +2992,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest, Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataResponse, Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataResponse> SamlServiceProviderMetadataAsync(Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataResponse SamlServiceProviderMetadata(Elastic.Clients.Elasticsearch.Name realmName)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestDescriptor(realmName);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest, Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataResponse, Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest, Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataResponse, Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataResponse SamlServiceProviderMetadata(Elastic.Clients.Elasticsearch.Name realmName, System.Action<Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestDescriptor> action)
@@ -2685,6 +3007,20 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest, Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataResponse, Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataResponse> SamlServiceProviderMetadataAsync(Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest, Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataResponse, Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataResponse> SamlServiceProviderMetadataAsync(Elastic.Clients.Elasticsearch.Name realmName, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestDescriptor(realmName);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest, Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataResponse, Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataResponse> SamlServiceProviderMetadataAsync(Elastic.Clients.Elasticsearch.Name realmName, System.Action<Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -2702,12 +3038,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequest, Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesResponse, Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesResponse> SuggestUserProfilesAsync(Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequest, Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesResponse, Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesResponse SuggestUserProfiles()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor();
@@ -2723,6 +3053,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequest, Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesResponse, Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesResponse> SuggestUserProfilesAsync(Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequest, Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesResponse, Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesResponse> SuggestUserProfilesAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -2748,10 +3084,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.UpdateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.UpdateApiKeyResponse> UpdateApiKeyAsync(Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Security.UpdateApiKeyResponse UpdateApiKey(Elastic.Clients.Elasticsearch.Id id)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor(id);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.UpdateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.UpdateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Security.UpdateApiKeyResponse UpdateApiKey(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor> action)
@@ -2770,6 +3108,20 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.UpdateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.UpdateApiKeyResponse> UpdateApiKeyAsync(Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.UpdateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.UpdateApiKeyResponse> UpdateApiKeyAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.UpdateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.UpdateApiKeyResponse> UpdateApiKeyAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -2796,10 +3148,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest, Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyResponse, Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyResponse> UpdateCrossClusterApiKeyAsync(Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyResponse UpdateCrossClusterApiKey(Elastic.Clients.Elasticsearch.Id id)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor(id);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest, Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyResponse, Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest, Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyResponse, Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyResponse UpdateCrossClusterApiKey(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor> action)
@@ -2818,6 +3172,20 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest, Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyResponse, Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyResponse> UpdateCrossClusterApiKeyAsync(Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest, Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyResponse, Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyResponse> UpdateCrossClusterApiKeyAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest, Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyResponse, Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyResponse> UpdateCrossClusterApiKeyAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -2844,12 +3212,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest, Elastic.Clients.Elasticsearch.Security.UpdateSettingsResponse, Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.UpdateSettingsResponse> UpdateSettingsAsync(Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest, Elastic.Clients.Elasticsearch.Security.UpdateSettingsResponse, Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Security.UpdateSettingsResponse UpdateSettings()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor();
@@ -2874,6 +3236,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest, Elastic.Clients.Elasticsearch.Security.UpdateSettingsResponse, Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.UpdateSettingsResponse> UpdateSettingsAsync(Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest, Elastic.Clients.Elasticsearch.Security.UpdateSettingsResponse, Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.UpdateSettingsResponse> UpdateSettingsAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -2908,10 +3276,12 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequest, Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataResponse, Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataResponse> UpdateUserProfileDataAsync(Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataResponse UpdateUserProfileData(string uid)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor(uid);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequest, Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataResponse, Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequest, Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataResponse, Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataResponse UpdateUserProfileData(string uid, System.Action<Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor> action)
@@ -2921,6 +3291,20 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequest, Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataResponse, Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataResponse> UpdateUserProfileDataAsync(Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequest, Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataResponse, Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataResponse> UpdateUserProfileDataAsync(string uid, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor(uid);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequest, Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataResponse, Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataResponse> UpdateUserProfileDataAsync(string uid, System.Action<Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)

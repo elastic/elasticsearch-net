@@ -272,3 +272,132 @@ public readonly partial struct DeleteAliasRequestDescriptor
 		return this;
 	}
 }
+
+/// <summary>
+/// <para>
+/// Delete an alias.
+/// Removes a data stream or index from an alias.
+/// </para>
+/// </summary>
+public readonly partial struct DeleteAliasRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DeleteAliasRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public DeleteAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequest(indices, name);
+	}
+
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DeleteAliasRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequest(Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams or indices used to limit the request.
+	/// Supports wildcards (<c>*</c>).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
+	{
+		Instance.Indices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of aliases to remove.
+	/// Supports wildcards (<c>*</c>). To remove all aliases, use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Names value)
+	{
+		Instance.Name = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}

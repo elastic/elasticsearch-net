@@ -945,10 +945,11 @@ public readonly partial struct EqlSearchRequestDescriptor<TDocument>
 #pragma warning restore CS0618
 	}
 
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public EqlSearchRequestDescriptor()
 	{
-		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest(typeof(TDocument));
+#pragma warning restore CS0618
 	}
 
 	public static explicit operator Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest instance) => new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>(instance);

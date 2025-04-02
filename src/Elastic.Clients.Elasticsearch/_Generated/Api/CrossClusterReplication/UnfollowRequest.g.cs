@@ -237,3 +237,115 @@ public readonly partial struct UnfollowRequestDescriptor
 		return this;
 	}
 }
+
+/// <summary>
+/// <para>
+/// Unfollow an index.
+/// </para>
+/// <para>
+/// Convert a cross-cluster replication follower index to a regular index.
+/// The API stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+/// The follower index must be paused and closed before you call the unfollow API.
+/// </para>
+/// <para>
+/// info
+/// Currently cross-cluster replication does not support converting an existing regular index to a follower index. Converting a follower index to a regular index is an irreversible operation.
+/// </para>
+/// </summary>
+public readonly partial struct UnfollowRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UnfollowRequestDescriptor(Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public UnfollowRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequest(index);
+	}
+
+	public UnfollowRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequest(typeof(TDocument));
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequest instance) => new Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequest(Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The name of the follower index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
+	{
+		Instance.Index = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequest Build(System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}

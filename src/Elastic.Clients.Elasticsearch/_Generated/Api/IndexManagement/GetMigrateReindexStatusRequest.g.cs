@@ -195,3 +195,96 @@ public readonly partial struct GetMigrateReindexStatusRequestDescriptor
 		return this;
 	}
 }
+
+/// <summary>
+/// <para>
+/// Get the migration reindexing status.
+/// </para>
+/// <para>
+/// Get the status of a migration reindex attempt for a data stream or index.
+/// </para>
+/// </summary>
+public readonly partial struct GetMigrateReindexStatusRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetMigrateReindexStatusRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public GetMigrateReindexStatusRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequest(indices);
+	}
+
+	public GetMigrateReindexStatusRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequest(typeof(TDocument));
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequest(Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The index or data stream name.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
+	{
+		Instance.Indices = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}

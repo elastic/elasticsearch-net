@@ -44,10 +44,12 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse> DeleteLifecycleAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse DeleteLifecycle(Elastic.Clients.Elasticsearch.Name name)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestDescriptor(name);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse DeleteLifecycle(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestDescriptor> action)
@@ -57,6 +59,20 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse> DeleteLifecycleAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse> DeleteLifecycleAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse> DeleteLifecycleAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -72,12 +88,6 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>(request);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse GetLifecycle()
@@ -97,23 +107,6 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse GetLifecycle(Elastic.Clients.Elasticsearch.Name name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor(name);
@@ -129,6 +122,29 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
@@ -154,12 +170,6 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse> GetStatusAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse GetStatus()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestDescriptor();
@@ -175,6 +185,12 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse> GetStatusAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse> GetStatusAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -200,12 +216,6 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse> MigrateToDataTiersAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse MigrateToDataTiers()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor();
@@ -221,6 +231,12 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse> MigrateToDataTiersAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse> MigrateToDataTiersAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -246,10 +262,12 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse> MoveToStepAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse MoveToStep(Elastic.Clients.Elasticsearch.IndexName index)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor(index);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse MoveToStep(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor> action)
@@ -261,9 +279,75 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse MoveToStep<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse MoveToStep<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse MoveToStep<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse> MoveToStepAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse> MoveToStepAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor(index);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request, cancellationToken);
+	}
+
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse> MoveToStepAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse> MoveToStepAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse> MoveToStepAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse> MoveToStepAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>(index);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
@@ -276,10 +360,12 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse> PutLifecycleAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse PutLifecycle(Elastic.Clients.Elasticsearch.Name name)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor(name);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse PutLifecycle(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor> action)
@@ -289,6 +375,20 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse> PutLifecycleAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse> PutLifecycleAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse> PutLifecycleAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -306,10 +406,12 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse> RemovePolicyAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse RemovePolicy(Elastic.Clients.Elasticsearch.IndexName index)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor(index);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse RemovePolicy(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor> action)
@@ -321,9 +423,75 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse RemovePolicy<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse RemovePolicy<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse RemovePolicy<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse> RemovePolicyAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse> RemovePolicyAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor(index);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request, cancellationToken);
+	}
+
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse> RemovePolicyAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse> RemovePolicyAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse> RemovePolicyAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse> RemovePolicyAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>(index);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
@@ -336,10 +504,12 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse> RetryAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse Retry(Elastic.Clients.Elasticsearch.IndexName index)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor(index);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse Retry(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor> action)
@@ -351,9 +521,75 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse Retry<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse Retry<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse Retry<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse> RetryAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse> RetryAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor(index);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request, cancellationToken);
+	}
+
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse> RetryAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse> RetryAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse> RetryAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse> RetryAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>(index);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
@@ -364,12 +600,6 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestParameters>(request);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmResponse> StartAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmResponse Start()
@@ -387,6 +617,12 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmResponse> StartAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmResponse> StartAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -412,12 +648,6 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmResponse> StopAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmResponse Stop()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestDescriptor();
@@ -433,6 +663,12 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmResponse> StopAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmResponse> StopAsync(System.Threading.CancellationToken cancellationToken = default)

@@ -382,3 +382,168 @@ public readonly partial struct ResumeFollowRequestDescriptor
 		return this;
 	}
 }
+
+/// <summary>
+/// <para>
+/// Resume a follower.
+/// Resume a cross-cluster replication follower index that was paused.
+/// The follower index could have been paused with the pause follower API.
+/// Alternatively it could be paused due to replication that cannot be retried due to failures during following tasks.
+/// When this API returns, the follower index will resume fetching operations from the leader index.
+/// </para>
+/// </summary>
+public readonly partial struct ResumeFollowRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ResumeFollowRequestDescriptor(Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public ResumeFollowRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequest(index);
+	}
+
+	public ResumeFollowRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequest(typeof(TDocument));
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequest instance) => new Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequest(Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The name of the follow index to resume following.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
+	{
+		Instance.Index = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument> MaxOutstandingReadRequests(long? value)
+	{
+		Instance.MaxOutstandingReadRequests = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument> MaxOutstandingWriteRequests(long? value)
+	{
+		Instance.MaxOutstandingWriteRequests = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument> MaxReadRequestOperationCount(long? value)
+	{
+		Instance.MaxReadRequestOperationCount = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument> MaxReadRequestSize(string? value)
+	{
+		Instance.MaxReadRequestSize = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument> MaxRetryDelay(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MaxRetryDelay = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument> MaxWriteBufferCount(long? value)
+	{
+		Instance.MaxWriteBufferCount = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument> MaxWriteBufferSize(string? value)
+	{
+		Instance.MaxWriteBufferSize = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument> MaxWriteRequestOperationCount(long? value)
+	{
+		Instance.MaxWriteRequestOperationCount = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument> MaxWriteRequestSize(string? value)
+	{
+		Instance.MaxWriteRequestSize = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument> ReadPollTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.ReadPollTimeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequest Build(System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}

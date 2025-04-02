@@ -1814,10 +1814,9 @@ public readonly partial struct UpdateByQueryRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.UpdateByQueryRequest(indices);
 	}
 
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public UpdateByQueryRequestDescriptor()
 	{
-		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+		Instance = new Elastic.Clients.Elasticsearch.UpdateByQueryRequest(typeof(TDocument));
 	}
 
 	public static explicit operator Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.UpdateByQueryRequest instance) => new Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument>(instance);

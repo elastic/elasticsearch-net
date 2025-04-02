@@ -44,12 +44,6 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse> CacheStatsAsync(Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse CacheStats()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor();
@@ -67,23 +61,6 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse> CacheStatsAsync(System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse> CacheStatsAsync(System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse CacheStats(Elastic.Clients.Elasticsearch.NodeIds nodeId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor(nodeId);
@@ -99,6 +76,29 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse> CacheStatsAsync(Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse> CacheStatsAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse> CacheStatsAsync(System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse> CacheStatsAsync(Elastic.Clients.Elasticsearch.NodeIds nodeId, System.Threading.CancellationToken cancellationToken = default)
@@ -124,12 +124,6 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse> ClearCacheAsync(Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse ClearCache()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor();
@@ -145,23 +139,6 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestParameters>(request);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse> ClearCacheAsync(System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse> ClearCacheAsync(System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse ClearCache(Elastic.Clients.Elasticsearch.Indices indices)
@@ -181,6 +158,47 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse ClearCache<TDocument>(System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse ClearCache<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument>(indices);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse> ClearCacheAsync(Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse> ClearCacheAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse> ClearCacheAsync(System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestParameters>(request, cancellationToken);
+	}
+
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse> ClearCacheAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor(indices);
@@ -198,8 +216,43 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestParameters>(request, cancellationToken);
 	}
 
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse> ClearCacheAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse> ClearCacheAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument>(indices);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestParameters>(request, cancellationToken);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.MountResponse Mount(Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest request)
 	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.MountResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.MountResponse Mount(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor(repository, snapshot);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.MountResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.MountResponse Mount(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor(repository, snapshot);
+		action.Invoke(builder);
+		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.MountResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestParameters>(request);
 	}
@@ -210,13 +263,12 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.MountResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.MountResponse Mount(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor> action)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.MountResponse> MountAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor(repository, snapshot);
-		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.MountResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestParameters>(request);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.MountResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.MountResponse> MountAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -232,12 +284,6 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestParameters>(request);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse Stats()
@@ -257,23 +303,6 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse> StatsAsync(System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse> StatsAsync(System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse Stats(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor(indices);
@@ -291,6 +320,47 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse Stats<TDocument>(System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse Stats<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument>(indices);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse> StatsAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse> StatsAsync(System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestParameters>(request, cancellationToken);
+	}
+
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor(indices);
@@ -302,6 +372,24 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor(indices);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse> StatsAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument>(indices);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();

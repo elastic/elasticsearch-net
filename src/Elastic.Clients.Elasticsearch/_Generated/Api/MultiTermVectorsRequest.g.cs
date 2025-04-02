@@ -716,7 +716,7 @@ public readonly partial struct MultiTermVectorsRequestDescriptor<TDocument>
 
 	public MultiTermVectorsRequestDescriptor()
 	{
-		Instance = new Elastic.Clients.Elasticsearch.MultiTermVectorsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		Instance = new Elastic.Clients.Elasticsearch.MultiTermVectorsRequest(typeof(TDocument));
 	}
 
 	public static explicit operator Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MultiTermVectorsRequest instance) => new Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument>(instance);

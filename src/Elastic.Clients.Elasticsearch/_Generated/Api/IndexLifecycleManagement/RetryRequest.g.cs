@@ -195,3 +195,96 @@ public readonly partial struct RetryRequestDescriptor
 		return this;
 	}
 }
+
+/// <summary>
+/// <para>
+/// Retry a policy.
+/// Retry running the lifecycle policy for an index that is in the ERROR step.
+/// The API sets the policy back to the step where the error occurred and runs the step.
+/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
+/// </para>
+/// </summary>
+public readonly partial struct RetryRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RetryRequestDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public RetryRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest(index);
+	}
+
+	public RetryRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest(typeof(TDocument));
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest instance) => new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The name of the indices (comma-separated) whose failed lifecycle step is to be retry
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
+	{
+		Instance.Index = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}

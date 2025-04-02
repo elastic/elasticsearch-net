@@ -44,10 +44,12 @@ public partial class SynonymsNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse> DeleteSynonymAsync(Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse DeleteSynonym(Elastic.Clients.Elasticsearch.Id id)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor(id);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse DeleteSynonym(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor> action)
@@ -57,6 +59,20 @@ public partial class SynonymsNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse> DeleteSynonymAsync(Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse> DeleteSynonymAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse> DeleteSynonymAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -74,10 +90,12 @@ public partial class SynonymsNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequest, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleResponse, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleResponse> DeleteSynonymRuleAsync(Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleResponse DeleteSynonymRule(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestDescriptor(setId, ruleId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequest, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleResponse, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequest, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleResponse, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleResponse DeleteSynonymRule(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId, System.Action<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestDescriptor> action)
@@ -87,6 +105,20 @@ public partial class SynonymsNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequest, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleResponse, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleResponse> DeleteSynonymRuleAsync(Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequest, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleResponse, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleResponse> DeleteSynonymRuleAsync(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestDescriptor(setId, ruleId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequest, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleResponse, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleResponse> DeleteSynonymRuleAsync(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId, System.Action<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -104,10 +136,12 @@ public partial class SynonymsNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse> GetSynonymAsync(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse GetSynonym(Elastic.Clients.Elasticsearch.Id id)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor(id);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse GetSynonym(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor> action)
@@ -117,6 +151,20 @@ public partial class SynonymsNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse> GetSynonymAsync(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse> GetSynonymAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse> GetSynonymAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -134,10 +182,12 @@ public partial class SynonymsNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequest, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleResponse, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleResponse> GetSynonymRuleAsync(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleResponse GetSynonymRule(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestDescriptor(setId, ruleId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequest, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleResponse, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequest, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleResponse, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleResponse GetSynonymRule(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId, System.Action<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestDescriptor> action)
@@ -147,6 +197,20 @@ public partial class SynonymsNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequest, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleResponse, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleResponse> GetSynonymRuleAsync(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequest, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleResponse, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleResponse> GetSynonymRuleAsync(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestDescriptor(setId, ruleId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequest, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleResponse, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleResponse> GetSynonymRuleAsync(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId, System.Action<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -164,12 +228,6 @@ public partial class SynonymsNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequest, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsResponse, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsResponse> GetSynonymsSetsAsync(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequest, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsResponse, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsResponse GetSynonymsSets()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequestDescriptor();
@@ -185,6 +243,12 @@ public partial class SynonymsNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequest, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsResponse, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsResponse> GetSynonymsSetsAsync(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequest, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsResponse, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsResponse> GetSynonymsSetsAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -210,10 +274,12 @@ public partial class SynonymsNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequest, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse> PutSynonymAsync(Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse PutSynonym(Elastic.Clients.Elasticsearch.Id id)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor(id);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequest, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequest, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse PutSynonym(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor> action)
@@ -223,6 +289,20 @@ public partial class SynonymsNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequest, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse> PutSynonymAsync(Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequest, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse> PutSynonymAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequest, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse> PutSynonymAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -240,10 +320,12 @@ public partial class SynonymsNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse> PutSynonymRuleAsync(Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse PutSynonymRule(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor(setId, ruleId);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse PutSynonymRule(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId, System.Action<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor> action)
@@ -253,6 +335,20 @@ public partial class SynonymsNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse> PutSynonymRuleAsync(Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse> PutSynonymRuleAsync(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor(setId, ruleId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse> PutSynonymRuleAsync(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId, System.Action<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)

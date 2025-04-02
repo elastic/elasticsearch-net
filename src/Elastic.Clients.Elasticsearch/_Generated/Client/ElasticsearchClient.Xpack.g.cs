@@ -44,12 +44,6 @@ public partial class XpackNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest, Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse, Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse> InfoAsync(Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest, Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse, Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse Info()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor();
@@ -65,6 +59,12 @@ public partial class XpackNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest, Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse, Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse> InfoAsync(Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest, Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse, Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse> InfoAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -90,12 +90,6 @@ public partial class XpackNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequest, Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse, Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse> UsageAsync(Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequest, Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse, Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse Usage()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequestDescriptor();
@@ -111,6 +105,12 @@ public partial class XpackNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequest, Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse, Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse> UsageAsync(Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequest, Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse, Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse> UsageAsync(System.Threading.CancellationToken cancellationToken = default)

@@ -44,10 +44,12 @@ public partial class EnrichNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequest, Elastic.Clients.Elasticsearch.Enrich.DeletePolicyResponse, Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Enrich.DeletePolicyResponse> DeletePolicyAsync(Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Enrich.DeletePolicyResponse DeletePolicy(Elastic.Clients.Elasticsearch.Name name)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequestDescriptor(name);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequest, Elastic.Clients.Elasticsearch.Enrich.DeletePolicyResponse, Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequest, Elastic.Clients.Elasticsearch.Enrich.DeletePolicyResponse, Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Enrich.DeletePolicyResponse DeletePolicy(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequestDescriptor> action)
@@ -57,6 +59,20 @@ public partial class EnrichNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequest, Elastic.Clients.Elasticsearch.Enrich.DeletePolicyResponse, Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Enrich.DeletePolicyResponse> DeletePolicyAsync(Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequest, Elastic.Clients.Elasticsearch.Enrich.DeletePolicyResponse, Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Enrich.DeletePolicyResponse> DeletePolicyAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequest, Elastic.Clients.Elasticsearch.Enrich.DeletePolicyResponse, Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Enrich.DeletePolicyResponse> DeletePolicyAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -74,10 +90,12 @@ public partial class EnrichNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequest, Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyResponse, Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyResponse> ExecutePolicyAsync(Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyResponse ExecutePolicy(Elastic.Clients.Elasticsearch.Name name)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestDescriptor(name);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequest, Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyResponse, Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequest, Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyResponse, Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyResponse ExecutePolicy(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestDescriptor> action)
@@ -87,6 +105,20 @@ public partial class EnrichNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequest, Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyResponse, Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyResponse> ExecutePolicyAsync(Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequest, Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyResponse, Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyResponse> ExecutePolicyAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequest, Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyResponse, Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyResponse> ExecutePolicyAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -102,12 +134,6 @@ public partial class EnrichNamespacedClient : Elastic.Clients.Elasticsearch.Name
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequest, Elastic.Clients.Elasticsearch.Enrich.GetPolicyResponse, Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequestParameters>(request);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Enrich.GetPolicyResponse> GetPolicyAsync(Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequest, Elastic.Clients.Elasticsearch.Enrich.GetPolicyResponse, Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Enrich.GetPolicyResponse GetPolicy()
@@ -127,23 +153,6 @@ public partial class EnrichNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequest, Elastic.Clients.Elasticsearch.Enrich.GetPolicyResponse, Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Enrich.GetPolicyResponse> GetPolicyAsync(System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequest, Elastic.Clients.Elasticsearch.Enrich.GetPolicyResponse, Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Enrich.GetPolicyResponse> GetPolicyAsync(System.Action<Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequestDescriptor();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequest, Elastic.Clients.Elasticsearch.Enrich.GetPolicyResponse, Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Enrich.GetPolicyResponse GetPolicy(Elastic.Clients.Elasticsearch.Names name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequestDescriptor(name);
@@ -159,6 +168,29 @@ public partial class EnrichNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequest, Elastic.Clients.Elasticsearch.Enrich.GetPolicyResponse, Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Enrich.GetPolicyResponse> GetPolicyAsync(Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequest, Elastic.Clients.Elasticsearch.Enrich.GetPolicyResponse, Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Enrich.GetPolicyResponse> GetPolicyAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequest, Elastic.Clients.Elasticsearch.Enrich.GetPolicyResponse, Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Enrich.GetPolicyResponse> GetPolicyAsync(System.Action<Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequest, Elastic.Clients.Elasticsearch.Enrich.GetPolicyResponse, Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Enrich.GetPolicyResponse> GetPolicyAsync(Elastic.Clients.Elasticsearch.Names name, System.Threading.CancellationToken cancellationToken = default)
@@ -184,10 +216,12 @@ public partial class EnrichNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest, Elastic.Clients.Elasticsearch.Enrich.PutPolicyResponse, Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Enrich.PutPolicyResponse> PutPolicyAsync(Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Enrich.PutPolicyResponse PutPolicy(Elastic.Clients.Elasticsearch.Name name)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor(name);
+		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest, Elastic.Clients.Elasticsearch.Enrich.PutPolicyResponse, Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest, Elastic.Clients.Elasticsearch.Enrich.PutPolicyResponse, Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Enrich.PutPolicyResponse PutPolicy(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor> action)
@@ -206,6 +240,20 @@ public partial class EnrichNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest, Elastic.Clients.Elasticsearch.Enrich.PutPolicyResponse, Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Enrich.PutPolicyResponse> PutPolicyAsync(Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest, Elastic.Clients.Elasticsearch.Enrich.PutPolicyResponse, Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Enrich.PutPolicyResponse> PutPolicyAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest, Elastic.Clients.Elasticsearch.Enrich.PutPolicyResponse, Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Enrich.PutPolicyResponse> PutPolicyAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
@@ -232,12 +280,6 @@ public partial class EnrichNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequest, Elastic.Clients.Elasticsearch.Enrich.EnrichStatsResponse, Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Enrich.EnrichStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequest, Elastic.Clients.Elasticsearch.Enrich.EnrichStatsResponse, Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Enrich.EnrichStatsResponse Stats()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequestDescriptor();
@@ -253,6 +295,12 @@ public partial class EnrichNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequest, Elastic.Clients.Elasticsearch.Enrich.EnrichStatsResponse, Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Enrich.EnrichStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequest, Elastic.Clients.Elasticsearch.Enrich.EnrichStatsResponse, Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Enrich.EnrichStatsResponse> StatsAsync(System.Threading.CancellationToken cancellationToken = default)

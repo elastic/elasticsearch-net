@@ -44,12 +44,6 @@ public partial class DanglingIndicesNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest, Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse, Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse> ListDanglingIndicesAsync(Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest, Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse, Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse ListDanglingIndices()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestDescriptor();
@@ -65,6 +59,12 @@ public partial class DanglingIndicesNamespacedClient : Elastic.Clients.Elasticse
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest, Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse, Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse> ListDanglingIndicesAsync(Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest, Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse, Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse> ListDanglingIndicesAsync(System.Threading.CancellationToken cancellationToken = default)

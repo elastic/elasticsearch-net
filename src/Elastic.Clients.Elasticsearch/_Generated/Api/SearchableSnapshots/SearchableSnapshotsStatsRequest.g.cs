@@ -217,3 +217,109 @@ public readonly partial struct SearchableSnapshotsStatsRequestDescriptor
 		return this;
 	}
 }
+
+/// <summary>
+/// <para>
+/// Get searchable snapshot statistics.
+/// </para>
+/// </summary>
+public readonly partial struct SearchableSnapshotsStatsRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SearchableSnapshotsStatsRequestDescriptor(Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public SearchableSnapshotsStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest(indices);
+	}
+
+	public SearchableSnapshotsStatsRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest instance) => new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest(Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of data streams and indices to retrieve statistics for.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
+	{
+		Instance.Indices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Return stats aggregated at cluster, index or shard level
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument> Level(Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevel? value)
+	{
+		Instance.Level = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest Build(System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument>>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}

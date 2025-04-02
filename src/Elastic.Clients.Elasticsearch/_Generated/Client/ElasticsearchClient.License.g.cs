@@ -44,12 +44,6 @@ public partial class LicenseManagementNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequest, Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseResponse, Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseResponse> DeleteAsync(Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequest, Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseResponse, Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseResponse Delete()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequestDescriptor();
@@ -65,6 +59,12 @@ public partial class LicenseManagementNamespacedClient : Elastic.Clients.Elastic
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequest, Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseResponse, Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseResponse> DeleteAsync(Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequest, Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseResponse, Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseResponse> DeleteAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -90,12 +90,6 @@ public partial class LicenseManagementNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest, Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseResponse, Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseResponse> GetAsync(Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest, Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseResponse, Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseResponse Get()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor();
@@ -111,6 +105,12 @@ public partial class LicenseManagementNamespacedClient : Elastic.Clients.Elastic
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest, Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseResponse, Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseResponse> GetAsync(Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest, Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseResponse, Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseResponse> GetAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -136,12 +136,6 @@ public partial class LicenseManagementNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequest, Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusResponse, Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusResponse> GetBasicStatusAsync(Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequest, Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusResponse, Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusResponse GetBasicStatus()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequestDescriptor();
@@ -157,6 +151,12 @@ public partial class LicenseManagementNamespacedClient : Elastic.Clients.Elastic
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequest, Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusResponse, Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusResponse> GetBasicStatusAsync(Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequest, Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusResponse, Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusResponse> GetBasicStatusAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -182,12 +182,6 @@ public partial class LicenseManagementNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest, Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusResponse, Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusResponse> GetTrialStatusAsync(Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest, Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusResponse, Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusResponse GetTrialStatus()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestDescriptor();
@@ -203,6 +197,12 @@ public partial class LicenseManagementNamespacedClient : Elastic.Clients.Elastic
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest, Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusResponse, Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusResponse> GetTrialStatusAsync(Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest, Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusResponse, Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusResponse> GetTrialStatusAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -228,12 +228,6 @@ public partial class LicenseManagementNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest, Elastic.Clients.Elasticsearch.LicenseManagement.PostResponse, Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.PostResponse> PostAsync(Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest, Elastic.Clients.Elasticsearch.LicenseManagement.PostResponse, Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.LicenseManagement.PostResponse Post()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor();
@@ -249,6 +243,12 @@ public partial class LicenseManagementNamespacedClient : Elastic.Clients.Elastic
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest, Elastic.Clients.Elasticsearch.LicenseManagement.PostResponse, Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.PostResponse> PostAsync(Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest, Elastic.Clients.Elasticsearch.LicenseManagement.PostResponse, Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.PostResponse> PostAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -274,12 +274,6 @@ public partial class LicenseManagementNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequest, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicResponse, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicResponse> PostStartBasicAsync(Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequest, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicResponse, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicResponse PostStartBasic()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequestDescriptor();
@@ -295,6 +289,12 @@ public partial class LicenseManagementNamespacedClient : Elastic.Clients.Elastic
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequest, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicResponse, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicResponse> PostStartBasicAsync(Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequest, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicResponse, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicResponse> PostStartBasicAsync(System.Threading.CancellationToken cancellationToken = default)
@@ -320,12 +320,6 @@ public partial class LicenseManagementNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialResponse, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialResponse> PostStartTrialAsync(Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialResponse, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialResponse PostStartTrial()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor();
@@ -341,6 +335,12 @@ public partial class LicenseManagementNamespacedClient : Elastic.Clients.Elastic
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialResponse, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialResponse> PostStartTrialAsync(Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialResponse, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialResponse> PostStartTrialAsync(System.Threading.CancellationToken cancellationToken = default)

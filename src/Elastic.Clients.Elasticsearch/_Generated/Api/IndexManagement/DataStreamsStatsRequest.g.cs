@@ -266,3 +266,151 @@ public readonly partial struct DataStreamsStatsRequestDescriptor
 		return this;
 	}
 }
+
+/// <summary>
+/// <para>
+/// Get data stream stats.
+/// </para>
+/// <para>
+/// Get statistics for one or more data streams.
+/// </para>
+/// </summary>
+public readonly partial struct DataStreamsStatsRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataStreamsStatsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public DataStreamsStatsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName name)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest(name);
+	}
+
+	public DataStreamsStatsRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest(typeof(TDocument));
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams used to limit the request.
+	/// Wildcard expressions (<c>*</c>) are supported.
+	/// To target all data streams in a cluster, omit this parameter or use <c>*</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.IndexName? value)
+	{
+		Instance.Name = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of data stream that wildcard patterns can match.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of data stream that wildcard patterns can match.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument> ExpandWildcards()
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of data stream that wildcard patterns can match.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument> ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of data stream that wildcard patterns can match.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument>>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}

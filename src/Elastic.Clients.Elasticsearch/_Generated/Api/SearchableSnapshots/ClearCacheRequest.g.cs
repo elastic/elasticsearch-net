@@ -304,3 +304,166 @@ public readonly partial struct ClearCacheRequestDescriptor
 		return this;
 	}
 }
+
+/// <summary>
+/// <para>
+/// Clear the cache.
+/// Clear indices and data streams from the shared cache for partially mounted indices.
+/// </para>
+/// </summary>
+public readonly partial struct ClearCacheRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClearCacheRequestDescriptor(Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public ClearCacheRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest(indices);
+	}
+
+	public ClearCacheRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest instance) => new Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest(Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of data streams, indices, and aliases to clear from the cache.
+	/// It supports wildcards (<c>*</c>).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
+	{
+		Instance.Indices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes <c>_all</c> string or when no indices have been specified)
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
+	{
+		Instance.AllowNoIndices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument> ExpandWildcards()
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument> ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether specified concrete indices should be ignored when unavailable (missing or closed)
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest Build(System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument>>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}

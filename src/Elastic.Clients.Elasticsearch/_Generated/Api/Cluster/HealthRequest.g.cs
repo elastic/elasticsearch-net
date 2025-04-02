@@ -526,3 +526,265 @@ public readonly partial struct HealthRequestDescriptor
 		return this;
 	}
 }
+
+/// <summary>
+/// <para>
+/// Get the cluster health status.
+/// </para>
+/// <para>
+/// You can also use the API to get the health status of only specified data streams and indices.
+/// For data streams, the API retrieves the health status of the stream’s backing indices.
+/// </para>
+/// <para>
+/// The cluster health status is: green, yellow or red.
+/// On the shard level, a red status indicates that the specific shard is not allocated in the cluster. Yellow means that the primary shard is allocated but replicas are not. Green means that all shards are allocated.
+/// The index level status is controlled by the worst shard status.
+/// </para>
+/// <para>
+/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
+/// The cluster status is controlled by the worst index status.
+/// </para>
+/// </summary>
+public readonly partial struct HealthRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.Cluster.HealthRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HealthRequestDescriptor(Elastic.Clients.Elasticsearch.Cluster.HealthRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public HealthRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Cluster.HealthRequest(indices);
+	}
+
+	public HealthRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Cluster.HealthRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Cluster.HealthRequest instance) => new Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Cluster.HealthRequest(Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and index aliases used to limit the request. Wildcard expressions (<c>*</c>) are supported. To target all data streams and indices in a cluster, omit this parameter or use _all or <c>*</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
+	{
+		Instance.Indices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> ExpandWildcards()
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Can be one of cluster, indices or shards. Controls the details level of the health information returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> Level(Elastic.Clients.Elasticsearch.Level? value)
+	{
+		Instance.Level = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> Local(bool? value = true)
+	{
+		Instance.Local = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A number controlling to how many active shards to wait for, all to wait for all shards in the cluster to be active, or 0 to not wait.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
+	{
+		Instance.WaitForActiveShards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Can be one of immediate, urgent, high, normal, low, languid. Wait until all currently queued events with the given priority are processed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> WaitForEvents(Elastic.Clients.Elasticsearch.WaitForEvents? value)
+	{
+		Instance.WaitForEvents = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The request waits until the specified number N of nodes is available. It also accepts >=N, &lt;=N, >N and &lt;N. Alternatively, it is possible to use ge(N), le(N), gt(N) and lt(N) notation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> WaitForNodes(Elastic.Clients.Elasticsearch.Union<string, int>? value)
+	{
+		Instance.WaitForNodes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A boolean value which controls whether to wait (until the timeout provided) for the cluster to have no shard initializations. Defaults to false, which means it will not wait for initializing shards.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> WaitForNoInitializingShards(bool? value = true)
+	{
+		Instance.WaitForNoInitializingShards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A boolean value which controls whether to wait (until the timeout provided) for the cluster to have no shard relocations. Defaults to false, which means it will not wait for relocating shards.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> WaitForNoRelocatingShards(bool? value = true)
+	{
+		Instance.WaitForNoRelocatingShards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// One of green, yellow or red. Will wait (until the timeout provided) until the status of the cluster changes to the one provided or better, i.e. green > yellow > red. By default, will not wait for any status.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> WaitForStatus(Elastic.Clients.Elasticsearch.HealthStatus? value)
+	{
+		Instance.WaitForStatus = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Cluster.HealthRequest Build(System.Action<Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument>>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Cluster.HealthRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Cluster.HealthRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}

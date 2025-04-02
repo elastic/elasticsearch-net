@@ -276,12 +276,6 @@ internal sealed partial class CreateRequestConverterFactory : System.Text.Json.S
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CreateRequestConverterFactory))]
 public sealed partial class CreateRequest<TDocument> : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.CreateRequestParameters>
 {
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public CreateRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
-	{
-	}
-
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public CreateRequest(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
 	{
@@ -574,13 +568,6 @@ public readonly partial struct CreateRequestDescriptor<TDocument>
 	public CreateRequestDescriptor(Elastic.Clients.Elasticsearch.CreateRequest<TDocument> instance)
 	{
 		Instance = instance;
-	}
-
-	public CreateRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
-	{
-#pragma warning disable CS0618
-		Instance = new Elastic.Clients.Elasticsearch.CreateRequest<TDocument>(index, id);
-#pragma warning restore CS0618
 	}
 
 	public CreateRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)

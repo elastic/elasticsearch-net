@@ -750,10 +750,11 @@ public readonly partial struct FollowRequestDescriptor<TDocument>
 #pragma warning restore CS0618
 	}
 
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public FollowRequestDescriptor()
 	{
-		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest(typeof(TDocument));
+#pragma warning restore CS0618
 	}
 
 	public static explicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest instance) => new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument>(instance);

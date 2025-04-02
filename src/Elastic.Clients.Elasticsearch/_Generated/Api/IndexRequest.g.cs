@@ -329,18 +329,6 @@ internal sealed partial class IndexRequestConverterFactory : System.Text.Json.Se
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexRequestConverterFactory))]
 public partial class IndexRequest<TDocument> : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexRequestParameters>
 {
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public IndexRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Required("index", index).Optional("id", id))
-	{
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public IndexRequest(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
-	{
-	}
-
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public IndexRequest(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Required("index", index).Optional("id", id))
 	{
@@ -683,20 +671,6 @@ public readonly partial struct IndexRequestDescriptor<TDocument>
 	public IndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexRequest<TDocument> instance)
 	{
 		Instance = instance;
-	}
-
-	public IndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
-	{
-#pragma warning disable CS0618
-		Instance = new Elastic.Clients.Elasticsearch.IndexRequest<TDocument>(index, id);
-#pragma warning restore CS0618
-	}
-
-	public IndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
-	{
-#pragma warning disable CS0618
-		Instance = new Elastic.Clients.Elasticsearch.IndexRequest<TDocument>(index);
-#pragma warning restore CS0618
 	}
 
 	public IndexRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)

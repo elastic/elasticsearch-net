@@ -1161,7 +1161,7 @@ public readonly partial struct BulkRequestDescriptor<TDocument>
 
 	public BulkRequestDescriptor()
 	{
-		Instance = new Elastic.Clients.Elasticsearch.BulkRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		Instance = new Elastic.Clients.Elasticsearch.BulkRequest(typeof(TDocument));
 	}
 
 	public static explicit operator Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.BulkRequest instance) => new Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument>(instance);

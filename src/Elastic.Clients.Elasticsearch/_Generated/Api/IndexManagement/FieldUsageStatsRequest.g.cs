@@ -392,10 +392,9 @@ public readonly partial struct FieldUsageStatsRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequest(indices);
 	}
 
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public FieldUsageStatsRequestDescriptor()
 	{
-		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequest(typeof(TDocument));
 	}
 
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor<TDocument>(instance);

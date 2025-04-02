@@ -377,3 +377,191 @@ public readonly partial struct MultiSearchTemplateRequestDescriptor
 		return this;
 	}
 }
+
+/// <summary>
+/// <para>
+/// Run multiple templated searches.
+/// </para>
+/// <para>
+/// Run multiple templated searches with a single request.
+/// If you are providing a text file or text input to <c>curl</c>, use the <c>--data-binary</c> flag instead of <c>-d</c> to preserve newlines.
+/// For example:
+/// </para>
+/// <code>
+/// $ cat requests
+/// { "index": "my-index" }
+/// { "id": "my-search-template", "params": { "query_string": "hello world", "from": 0, "size": 10 }}
+/// { "index": "my-other-index" }
+/// { "id": "my-other-search-template", "params": { "query_type": "match_all" }}
+/// 
+/// $ curl -H "Content-Type: application/x-ndjson" -XGET localhost:9200/_msearch/template --data-binary "@requests"; echo
+/// </code>
+/// </summary>
+public readonly partial struct MultiSearchTemplateRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MultiSearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public MultiSearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest(indices);
+#pragma warning restore CS0618
+	}
+
+	public MultiSearchTemplateRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest instance) => new Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest(Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of data streams, indices, and aliases to search.
+	/// It supports wildcards (<c>*</c>).
+	/// To search all data streams and indices, omit this parameter or use <c>*</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
+	{
+		Instance.Indices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, network round-trips are minimized for cross-cluster search requests.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument> CcsMinimizeRoundtrips(bool? value = true)
+	{
+		Instance.CcsMinimizeRoundtrips = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The maximum number of concurrent searches the API can run.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument> MaxConcurrentSearches(long? value)
+	{
+		Instance.MaxConcurrentSearches = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the response returns <c>hits.total</c> as an integer.
+	/// If <c>false</c>, it returns <c>hits.total</c> as an object.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument> RestTotalHitsAsInt(bool? value = true)
+	{
+		Instance.RestTotalHitsAsInt = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of the search operation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument> SearchType(Elastic.Clients.Elasticsearch.SearchType? value)
+	{
+		Instance.SearchType = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the response prefixes aggregation and suggester names with their respective types.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument> TypedKeys(bool? value = true)
+	{
+		Instance.TypedKeys = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument> SearchTemplates(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.MSearchTemplate.SearchTemplateRequestItem> value)
+	{
+		Instance.SearchTemplates = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument> SearchTemplates()
+	{
+		Instance.SearchTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchTemplateRequestItem.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument> SearchTemplates(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchTemplateRequestItem>? action)
+	{
+		Instance.SearchTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchTemplateRequestItem.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument> SearchTemplates(params Elastic.Clients.Elasticsearch.Core.MSearchTemplate.SearchTemplateRequestItem[] values)
+	{
+		Instance.SearchTemplates = [.. values];
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest Build(System.Action<Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}

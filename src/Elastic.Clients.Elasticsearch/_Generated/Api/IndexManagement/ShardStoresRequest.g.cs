@@ -430,3 +430,244 @@ public readonly partial struct ShardStoresRequestDescriptor
 		return this;
 	}
 }
+
+/// <summary>
+/// <para>
+/// Get index shard stores.
+/// Get store information about replica shards in one or more indices.
+/// For data streams, the API retrieves store information for the stream's backing indices.
+/// </para>
+/// <para>
+/// The index shard stores API returns the following information:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The node on which each replica shard exists.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The allocation ID for each replica shard.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A unique ID for each replica shard.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Any errors encountered while opening the shard index or from an earlier failure.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// By default, the API returns store information only for primary shards that are unassigned or have one or more unassigned replica shards.
+/// </para>
+/// </summary>
+public readonly partial struct ShardStoresRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ShardStoresRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public ShardStoresRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest(indices);
+	}
+
+	public ShardStoresRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest(Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// List of data streams, indices, and aliases used to limit the request.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
+	{
+		Instance.Indices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If false, the request returns an error if any wildcard expression, index alias, or _all
+	/// value targets only missing or closed indices. This behavior applies even if the request
+	/// targets other open indices.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
+	{
+		Instance.AllowNoIndices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams,
+	/// this argument determines whether wildcard expressions match hidden data streams.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams,
+	/// this argument determines whether wildcard expressions match hidden data streams.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument> ExpandWildcards()
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams,
+	/// this argument determines whether wildcard expressions match hidden data streams.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument> ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams,
+	/// this argument determines whether wildcard expressions match hidden data streams.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, missing or closed indices are not included in the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// List of shard health statuses used to limit the request.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument> Status(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus>? value)
+	{
+		Instance.Status = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// List of shard health statuses used to limit the request.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument> Status()
+	{
+		Instance.Status = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfShardStoreStatus.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// List of shard health statuses used to limit the request.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument> Status(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfShardStoreStatus>? action)
+	{
+		Instance.Status = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfShardStoreStatus.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// List of shard health statuses used to limit the request.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument> Status(params Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus[] values)
+	{
+		Instance.Status = [.. values];
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument>>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}
