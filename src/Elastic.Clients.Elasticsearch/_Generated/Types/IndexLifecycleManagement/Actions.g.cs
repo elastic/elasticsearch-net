@@ -29,6 +29,7 @@ internal sealed partial class ActionsConverter : System.Text.Json.Serialization.
 	private static readonly System.Text.Json.JsonEncodedText PropDelete = System.Text.Json.JsonEncodedText.Encode("delete");
 	private static readonly System.Text.Json.JsonEncodedText PropDownsample = System.Text.Json.JsonEncodedText.Encode("downsample");
 	private static readonly System.Text.Json.JsonEncodedText PropForcemerge = System.Text.Json.JsonEncodedText.Encode("forcemerge");
+	private static readonly System.Text.Json.JsonEncodedText PropFreeze = System.Text.Json.JsonEncodedText.Encode("freeze");
 	private static readonly System.Text.Json.JsonEncodedText PropMigrate = System.Text.Json.JsonEncodedText.Encode("migrate");
 	private static readonly System.Text.Json.JsonEncodedText PropReadonly = System.Text.Json.JsonEncodedText.Encode("readonly");
 	private static readonly System.Text.Json.JsonEncodedText PropRollover = System.Text.Json.JsonEncodedText.Encode("rollover");
@@ -45,6 +46,7 @@ internal sealed partial class ActionsConverter : System.Text.Json.Serialization.
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteAction?> propDelete = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DownsampleAction?> propDownsample = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeAction?> propForcemerge = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.EmptyObject?> propFreeze = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateAction?> propMigrate = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.EmptyObject?> propReadonly = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RolloverAction?> propRollover = default;
@@ -71,6 +73,11 @@ internal sealed partial class ActionsConverter : System.Text.Json.Serialization.
 			}
 
 			if (propForcemerge.TryReadProperty(ref reader, options, PropForcemerge, null))
+			{
+				continue;
+			}
+
+			if (propFreeze.TryReadProperty(ref reader, options, PropFreeze, null))
 			{
 				continue;
 			}
@@ -131,6 +138,10 @@ internal sealed partial class ActionsConverter : System.Text.Json.Serialization.
 			Delete = propDelete.Value,
 			Downsample = propDownsample.Value,
 			Forcemerge = propForcemerge.Value,
+#pragma warning disable CS0618
+			Freeze = propFreeze.Value
+#pragma warning restore CS0618
+,
 			Migrate = propMigrate.Value,
 			Readonly = propReadonly.Value,
 			Rollover = propRollover.Value,
@@ -149,6 +160,10 @@ internal sealed partial class ActionsConverter : System.Text.Json.Serialization.
 		writer.WriteProperty(options, PropDelete, value.Delete, null, null);
 		writer.WriteProperty(options, PropDownsample, value.Downsample, null, null);
 		writer.WriteProperty(options, PropForcemerge, value.Forcemerge, null, null);
+#pragma warning disable CS0618
+		writer.WriteProperty(options, PropFreeze, value.Freeze, null, null)
+#pragma warning restore CS0618
+		;
 		writer.WriteProperty(options, PropMigrate, value.Migrate, null, null);
 		writer.WriteProperty(options, PropReadonly, value.Readonly, null, null);
 		writer.WriteProperty(options, PropRollover, value.Rollover, null, null);
@@ -207,6 +222,14 @@ public sealed partial class Actions
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeAction? Forcemerge { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The freeze action is a noop in 8.x
+	/// </para>
+	/// </summary>
+	[System.Obsolete("Deprecated in '7.0.0'.")]
+	public Elastic.Clients.Elasticsearch.EmptyObject? Freeze { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -391,6 +414,42 @@ public readonly partial struct ActionsDescriptor
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Forcemerge(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeActionDescriptor> action)
 	{
 		Instance.Forcemerge = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeActionDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.0.0'.")]
+	/// <summary>
+	/// <para>
+	/// The freeze action is a noop in 8.x
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Freeze(Elastic.Clients.Elasticsearch.EmptyObject? value)
+	{
+		Instance.Freeze = value;
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.0.0'.")]
+	/// <summary>
+	/// <para>
+	/// The freeze action is a noop in 8.x
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Freeze()
+	{
+		Instance.Freeze = Elastic.Clients.Elasticsearch.EmptyObjectDescriptor.Build(null);
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.0.0'.")]
+	/// <summary>
+	/// <para>
+	/// The freeze action is a noop in 8.x
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Freeze(System.Action<Elastic.Clients.Elasticsearch.EmptyObjectDescriptor>? action)
+	{
+		Instance.Freeze = Elastic.Clients.Elasticsearch.EmptyObjectDescriptor.Build(action);
 		return this;
 	}
 

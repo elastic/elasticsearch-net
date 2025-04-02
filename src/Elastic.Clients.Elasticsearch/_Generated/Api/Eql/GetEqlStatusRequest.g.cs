@@ -121,7 +121,7 @@ public readonly partial struct GetEqlStatusRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequest(id);
 	}
 
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("TODO")]
 	public GetEqlStatusRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

@@ -50,6 +50,16 @@ public sealed partial class ResolveClusterRequestParameters : Elastic.Transport.
 
 	/// <summary>
 	/// <para>
+	/// If true, concrete, expanded, or aliased indices are ignored when frozen.
+	/// NOTE: This option is only supported when specifying an index expression. You will get an error if you specify index
+	/// options to the <c>_resolve/cluster</c> API endpoint that takes no index expression.
+	/// </para>
+	/// </summary>
+	[System.Obsolete("Deprecated in '7.16.0'.")]
+	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
+
+	/// <summary>
+	/// <para>
 	/// If false, the request returns an error if it targets a missing or closed index.
 	/// NOTE: This option is only supported when specifying an index expression. You will get an error if you specify index
 	/// options to the <c>_resolve/cluster</c> API endpoint that takes no index expression.
@@ -260,6 +270,16 @@ public sealed partial class ResolveClusterRequest : Elastic.Clients.Elasticsearc
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+	/// <summary>
+	/// <para>
+	/// If true, concrete, expanded, or aliased indices are ignored when frozen.
+	/// NOTE: This option is only supported when specifying an index expression. You will get an error if you specify index
+	/// options to the <c>_resolve/cluster</c> API endpoint that takes no index expression.
+	/// </para>
+	/// </summary>
+	[System.Obsolete("Deprecated in '7.16.0'.")]
+	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
 	/// <summary>
 	/// <para>
@@ -495,6 +515,20 @@ public readonly partial struct ResolveClusterRequestDescriptor
 	public Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.16.0'.")]
+	/// <summary>
+	/// <para>
+	/// If true, concrete, expanded, or aliased indices are ignored when frozen.
+	/// NOTE: This option is only supported when specifying an index expression. You will get an error if you specify index
+	/// options to the <c>_resolve/cluster</c> API endpoint that takes no index expression.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor IgnoreThrottled(bool? value = true)
+	{
+		Instance.IgnoreThrottled = value;
 		return this;
 	}
 

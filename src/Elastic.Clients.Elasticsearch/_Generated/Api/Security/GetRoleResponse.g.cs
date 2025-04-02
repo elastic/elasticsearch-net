@@ -40,13 +40,6 @@ internal sealed partial class GetRoleResponseConverter : System.Text.Json.Serial
 public sealed partial class GetRoleResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetRoleResponse(System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.Role> roles)
-	{
-		Roles = roles;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetRoleResponse()
 	{
 	}

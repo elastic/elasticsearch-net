@@ -66,13 +66,6 @@ internal sealed partial class MountResponseConverter : System.Text.Json.Serializ
 public sealed partial class MountResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public MountResponse(Elastic.Clients.Elasticsearch.SearchableSnapshots.MountedSnapshot snapshot)
-	{
-		Snapshot = snapshot;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public MountResponse()
 	{
 	}

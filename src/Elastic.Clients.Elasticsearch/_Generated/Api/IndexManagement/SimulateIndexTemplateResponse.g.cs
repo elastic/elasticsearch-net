@@ -75,13 +75,6 @@ internal sealed partial class SimulateIndexTemplateResponseConverter : System.Te
 public sealed partial class SimulateIndexTemplateResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public SimulateIndexTemplateResponse(Elastic.Clients.Elasticsearch.IndexManagement.Template template)
-	{
-		Template = template;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public SimulateIndexTemplateResponse()
 	{
 	}

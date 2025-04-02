@@ -75,14 +75,6 @@ internal sealed partial class FieldCapsResponseConverter : System.Text.Json.Seri
 public sealed partial class FieldCapsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public FieldCapsResponse(System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.FieldCaps.FieldCapability>> fields, System.Collections.Generic.ICollection<string> indices)
-	{
-		Fields = fields;
-		Indices = indices;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public FieldCapsResponse()
 	{
 	}

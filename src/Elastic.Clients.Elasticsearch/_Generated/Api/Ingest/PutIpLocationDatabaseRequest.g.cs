@@ -65,7 +65,7 @@ internal sealed partial class PutIpLocationDatabaseRequestConverter : System.Tex
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestConverter))]
 public sealed partial class PutIpLocationDatabaseRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestParameters>
 {
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutIpLocationDatabaseRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
@@ -152,7 +152,7 @@ public readonly partial struct PutIpLocationDatabaseRequestDescriptor
 #pragma warning restore CS0618
 	}
 
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("TODO")]
 	public PutIpLocationDatabaseRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

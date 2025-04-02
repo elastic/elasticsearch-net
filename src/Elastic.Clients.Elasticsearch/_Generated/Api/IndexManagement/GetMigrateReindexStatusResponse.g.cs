@@ -147,20 +147,6 @@ internal sealed partial class GetMigrateReindexStatusResponseConverter : System.
 public sealed partial class GetMigrateReindexStatusResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetMigrateReindexStatusResponse(bool complete, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.StatusError> errors, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.StatusInProgress> inProgress, int pending, System.DateTime startTimeMillis, int successes, int totalIndicesInDataStream, int totalIndicesRequiringUpgrade)
-	{
-		Complete = complete;
-		Errors = errors;
-		InProgress = inProgress;
-		Pending = pending;
-		StartTimeMillis = startTimeMillis;
-		Successes = successes;
-		TotalIndicesInDataStream = totalIndicesInDataStream;
-		TotalIndicesRequiringUpgrade = totalIndicesRequiringUpgrade;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetMigrateReindexStatusResponse()
 	{
 	}

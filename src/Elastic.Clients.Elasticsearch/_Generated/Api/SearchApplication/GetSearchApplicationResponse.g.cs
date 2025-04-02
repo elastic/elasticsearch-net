@@ -102,15 +102,6 @@ internal sealed partial class GetSearchApplicationResponseConverter : System.Tex
 public sealed partial class GetSearchApplicationResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetSearchApplicationResponse(System.Collections.Generic.IReadOnlyCollection<string> indices, string name, System.DateTime updatedAtMillis)
-	{
-		Indices = indices;
-		Name = name;
-		UpdatedAtMillis = updatedAtMillis;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetSearchApplicationResponse()
 	{
 	}

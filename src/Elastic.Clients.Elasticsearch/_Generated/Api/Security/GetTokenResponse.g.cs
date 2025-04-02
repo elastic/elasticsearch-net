@@ -120,16 +120,6 @@ internal sealed partial class GetTokenResponseConverter : System.Text.Json.Seria
 public sealed partial class GetTokenResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetTokenResponse(string accessToken, Elastic.Clients.Elasticsearch.Security.AuthenticatedUser authentication, long expiresIn, string type)
-	{
-		AccessToken = accessToken;
-		Authentication = authentication;
-		ExpiresIn = expiresIn;
-		Type = type;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetTokenResponse()
 	{
 	}

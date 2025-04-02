@@ -84,15 +84,6 @@ internal sealed partial class CloneIndexResponseConverter : System.Text.Json.Ser
 public sealed partial class CloneIndexResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public CloneIndexResponse(bool acknowledged, string index, bool shardsAcknowledged)
-	{
-		Acknowledged = acknowledged;
-		Index = index;
-		ShardsAcknowledged = shardsAcknowledged;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public CloneIndexResponse()
 	{
 	}

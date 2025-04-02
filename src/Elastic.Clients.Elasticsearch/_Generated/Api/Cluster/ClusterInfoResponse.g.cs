@@ -102,13 +102,6 @@ internal sealed partial class ClusterInfoResponseConverter : System.Text.Json.Se
 public sealed partial class ClusterInfoResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ClusterInfoResponse(string clusterName)
-	{
-		ClusterName = clusterName;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ClusterInfoResponse()
 	{
 	}

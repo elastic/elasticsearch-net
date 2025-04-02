@@ -54,7 +54,7 @@ internal sealed partial class PutSearchApplicationRequestConverter : System.Text
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestConverter))]
 public sealed partial class PutSearchApplicationRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestParameters>
 {
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutSearchApplicationRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 	{
@@ -130,7 +130,7 @@ public readonly partial struct PutSearchApplicationRequestDescriptor
 #pragma warning restore CS0618
 	}
 
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("TODO")]
 	public PutSearchApplicationRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

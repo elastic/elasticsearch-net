@@ -75,14 +75,6 @@ internal sealed partial class OpenJobResponseConverter : System.Text.Json.Serial
 public sealed partial class OpenJobResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public OpenJobResponse(string node, bool opened)
-	{
-		Node = node;
-		Opened = opened;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public OpenJobResponse()
 	{
 	}

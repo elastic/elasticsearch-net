@@ -84,14 +84,6 @@ internal sealed partial class BulkUpdateApiKeysResponseConverter : System.Text.J
 public sealed partial class BulkUpdateApiKeysResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public BulkUpdateApiKeysResponse(System.Collections.Generic.IReadOnlyCollection<string> noops, System.Collections.Generic.IReadOnlyCollection<string> updated)
-	{
-		Noops = noops;
-		Updated = updated;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public BulkUpdateApiKeysResponse()
 	{
 	}

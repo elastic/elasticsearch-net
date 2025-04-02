@@ -25,6 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 
 internal sealed partial class GcsRepositorySettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.GcsRepositorySettings>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropApplicationName = System.Text.Json.JsonEncodedText.Encode("application_name");
 	private static readonly System.Text.Json.JsonEncodedText PropBasePath = System.Text.Json.JsonEncodedText.Encode("base_path");
 	private static readonly System.Text.Json.JsonEncodedText PropBucket = System.Text.Json.JsonEncodedText.Encode("bucket");
 	private static readonly System.Text.Json.JsonEncodedText PropChunkSize = System.Text.Json.JsonEncodedText.Encode("chunk_size");
@@ -37,6 +38,7 @@ internal sealed partial class GcsRepositorySettingsConverter : System.Text.Json.
 	public override Elastic.Clients.Elasticsearch.Snapshot.GcsRepositorySettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propApplicationName = default;
 		LocalJsonValue<string?> propBasePath = default;
 		LocalJsonValue<string> propBucket = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propChunkSize = default;
@@ -47,6 +49,11 @@ internal sealed partial class GcsRepositorySettingsConverter : System.Text.Json.
 		LocalJsonValue<bool?> propReadonly = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propApplicationName.TryReadProperty(ref reader, options, PropApplicationName, null))
+			{
+				continue;
+			}
+
 			if (propBasePath.TryReadProperty(ref reader, options, PropBasePath, null))
 			{
 				continue;
@@ -99,6 +106,10 @@ internal sealed partial class GcsRepositorySettingsConverter : System.Text.Json.
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Snapshot.GcsRepositorySettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+#pragma warning disable CS0618
+			ApplicationName = propApplicationName.Value
+#pragma warning restore CS0618
+,
 			BasePath = propBasePath.Value,
 			Bucket = propBucket.Value,
 			ChunkSize = propChunkSize.Value,
@@ -113,6 +124,10 @@ internal sealed partial class GcsRepositorySettingsConverter : System.Text.Json.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.GcsRepositorySettings value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+#pragma warning disable CS0618
+		writer.WriteProperty(options, PropApplicationName, value.ApplicationName, null, null)
+#pragma warning restore CS0618
+		;
 		writer.WriteProperty(options, PropBasePath, value.BasePath, null, null);
 		writer.WriteProperty(options, PropBucket, value.Bucket, null, null);
 		writer.WriteProperty(options, PropChunkSize, value.ChunkSize, null, null);
@@ -139,7 +154,7 @@ public sealed partial class GcsRepositorySettings
 	}
 #endif
 #if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public GcsRepositorySettings()
 	{
 	}
@@ -149,6 +164,14 @@ public sealed partial class GcsRepositorySettings
 	{
 		_ = sentinel;
 	}
+
+	/// <summary>
+	/// <para>
+	/// The name used by the client when it uses the Google Cloud Storage service.
+	/// </para>
+	/// </summary>
+	[System.Obsolete("Deprecated in '6.3.0'.")]
+	public string? ApplicationName { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -255,6 +278,18 @@ public readonly partial struct GcsRepositorySettingsDescriptor
 
 	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.GcsRepositorySettingsDescriptor(Elastic.Clients.Elasticsearch.Snapshot.GcsRepositorySettings instance) => new Elastic.Clients.Elasticsearch.Snapshot.GcsRepositorySettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.GcsRepositorySettings(Elastic.Clients.Elasticsearch.Snapshot.GcsRepositorySettingsDescriptor descriptor) => descriptor.Instance;
+
+	[System.Obsolete("Deprecated in '6.3.0'.")]
+	/// <summary>
+	/// <para>
+	/// The name used by the client when it uses the Google Cloud Storage service.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.GcsRepositorySettingsDescriptor ApplicationName(string? value)
+	{
+		Instance.ApplicationName = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>

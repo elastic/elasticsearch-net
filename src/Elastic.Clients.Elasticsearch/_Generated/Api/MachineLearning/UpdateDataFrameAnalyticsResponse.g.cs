@@ -165,21 +165,6 @@ internal sealed partial class UpdateDataFrameAnalyticsResponseConverter : System
 public sealed partial class UpdateDataFrameAnalyticsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public UpdateDataFrameAnalyticsResponse(bool allowLazyStart, Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis analysis, long createTime, Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination dest, string id, int maxNumThreads, string modelMemoryLimit, Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource source, string version)
-	{
-		AllowLazyStart = allowLazyStart;
-		Analysis = analysis;
-		CreateTime = createTime;
-		Dest = dest;
-		Id = id;
-		MaxNumThreads = maxNumThreads;
-		ModelMemoryLimit = modelMemoryLimit;
-		Source = source;
-		Version = version;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public UpdateDataFrameAnalyticsResponse()
 	{
 	}

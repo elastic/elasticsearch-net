@@ -43,6 +43,14 @@ public sealed partial class PutDatafeedRequestParameters : Elastic.Transport.Req
 
 	/// <summary>
 	/// <para>
+	/// If true, concrete, expanded, or aliased indices are ignored when frozen.
+	/// </para>
+	/// </summary>
+	[System.Obsolete("Deprecated in '7.16.0'.")]
+	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
+
+	/// <summary>
+	/// <para>
 	/// If true, unavailable indices (missing or closed) are ignored.
 	/// </para>
 	/// </summary>
@@ -280,6 +288,14 @@ public sealed partial class PutDatafeedRequest : Elastic.Clients.Elasticsearch.R
 
 	/// <summary>
 	/// <para>
+	/// If true, concrete, expanded, or aliased indices are ignored when frozen.
+	/// </para>
+	/// </summary>
+	[System.Obsolete("Deprecated in '7.16.0'.")]
+	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
+
+	/// <summary>
+	/// <para>
 	/// If true, unavailable indices (missing or closed) are ignored.
 	/// </para>
 	/// </summary>
@@ -432,7 +448,7 @@ public readonly partial struct PutDatafeedRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequest(datafeedId);
 	}
 
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("TODO")]
 	public PutDatafeedRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
@@ -511,6 +527,18 @@ public readonly partial struct PutDatafeedRequestDescriptor
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.16.0'.")]
+	/// <summary>
+	/// <para>
+	/// If true, concrete, expanded, or aliased indices are ignored when frozen.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor IgnoreThrottled(bool? value = true)
+	{
+		Instance.IgnoreThrottled = value;
 		return this;
 	}
 
@@ -1066,7 +1094,7 @@ public readonly partial struct PutDatafeedRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequest(datafeedId);
 	}
 
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("TODO")]
 	public PutDatafeedRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
@@ -1145,6 +1173,18 @@ public readonly partial struct PutDatafeedRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.16.0'.")]
+	/// <summary>
+	/// <para>
+	/// If true, concrete, expanded, or aliased indices are ignored when frozen.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> IgnoreThrottled(bool? value = true)
+	{
+		Instance.IgnoreThrottled = value;
 		return this;
 	}
 

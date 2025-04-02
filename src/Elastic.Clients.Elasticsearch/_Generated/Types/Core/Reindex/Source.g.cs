@@ -31,6 +31,7 @@ internal sealed partial class SourceConverter : System.Text.Json.Serialization.J
 	private static readonly System.Text.Json.JsonEncodedText PropRuntimeMappings = System.Text.Json.JsonEncodedText.Encode("runtime_mappings");
 	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
 	private static readonly System.Text.Json.JsonEncodedText PropSlice = System.Text.Json.JsonEncodedText.Encode("slice");
+	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort");
 	private static readonly System.Text.Json.JsonEncodedText PropSourceFields = System.Text.Json.JsonEncodedText.Encode("_source");
 
 	public override Elastic.Clients.Elasticsearch.Core.Reindex.Source Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -42,6 +43,7 @@ internal sealed partial class SourceConverter : System.Text.Json.Serialization.J
 		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?> propRuntimeMappings = default;
 		LocalJsonValue<int?> propSize = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.SlicedScroll?> propSlice = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>?> propSort = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propSourceFields = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -75,6 +77,11 @@ internal sealed partial class SourceConverter : System.Text.Json.Serialization.J
 				continue;
 			}
 
+			if (propSort.TryReadProperty(ref reader, options, PropSort, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.SortOptions>(o, null)))
+			{
+				continue;
+			}
+
 			if (propSourceFields.TryReadProperty(ref reader, options, PropSourceFields, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker))))
 			{
 				continue;
@@ -98,6 +105,10 @@ internal sealed partial class SourceConverter : System.Text.Json.Serialization.J
 			RuntimeMappings = propRuntimeMappings.Value,
 			Size = propSize.Value,
 			Slice = propSlice.Value,
+#pragma warning disable CS0618
+			Sort = propSort.Value
+#pragma warning restore CS0618
+,
 			SourceFields = propSourceFields.Value
 		};
 	}
@@ -111,6 +122,10 @@ internal sealed partial class SourceConverter : System.Text.Json.Serialization.J
 		writer.WriteProperty(options, PropRuntimeMappings, value.RuntimeMappings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, v, null, null));
 		writer.WriteProperty(options, PropSize, value.Size, null, null);
 		writer.WriteProperty(options, PropSlice, value.Slice, null, null);
+#pragma warning disable CS0618
+		writer.WriteProperty(options, PropSort, value.Sort, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.SortOptions>(o, v, null))
+#pragma warning restore CS0618
+		;
 		writer.WriteProperty(options, PropSourceFields, value.SourceFields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
 		writer.WriteEndObject();
 	}
@@ -130,7 +145,7 @@ public sealed partial class Source
 	}
 #endif
 #if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public Source()
 	{
 	}
@@ -182,6 +197,20 @@ public sealed partial class Source
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs to sort by before indexing.
+	/// Use it in conjunction with <c>max_docs</c> to control what documents are reindexed.
+	/// </para>
+	/// <para>
+	/// WARNING: Sort in reindex is deprecated.
+	/// Sorting in reindex was never guaranteed to index documents in order and prevents further development of reindex such as resilience and performance improvements.
+	/// If used in combination with <c>max_docs</c>, consider using a query filter instead.
+	/// </para>
+	/// </summary>
+	[System.Obsolete("Deprecated in '7.6.0'.")]
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -344,6 +373,102 @@ public readonly partial struct SourceDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> Slice(System.Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument>> action)
 	{
 		Instance.Slice = Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.6.0'.")]
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs to sort by before indexing.
+	/// Use it in conjunction with <c>max_docs</c> to control what documents are reindexed.
+	/// </para>
+	/// <para>
+	/// WARNING: Sort in reindex is deprecated.
+	/// Sorting in reindex was never guaranteed to index documents in order and prevents further development of reindex such as resilience and performance improvements.
+	/// If used in combination with <c>max_docs</c>, consider using a query filter instead.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
+	{
+		Instance.Sort = value;
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.6.0'.")]
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs to sort by before indexing.
+	/// Use it in conjunction with <c>max_docs</c> to control what documents are reindexed.
+	/// </para>
+	/// <para>
+	/// WARNING: Sort in reindex is deprecated.
+	/// Sorting in reindex was never guaranteed to index documents in order and prevents further development of reindex such as resilience and performance improvements.
+	/// If used in combination with <c>max_docs</c>, consider using a query filter instead.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> Sort()
+	{
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>.Build(null);
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.6.0'.")]
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs to sort by before indexing.
+	/// Use it in conjunction with <c>max_docs</c> to control what documents are reindexed.
+	/// </para>
+	/// <para>
+	/// WARNING: Sort in reindex is deprecated.
+	/// Sorting in reindex was never guaranteed to index documents in order and prevents further development of reindex such as resilience and performance improvements.
+	/// If used in combination with <c>max_docs</c>, consider using a query filter instead.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>>? action)
+	{
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>.Build(action);
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.6.0'.")]
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs to sort by before indexing.
+	/// Use it in conjunction with <c>max_docs</c> to control what documents are reindexed.
+	/// </para>
+	/// <para>
+	/// WARNING: Sort in reindex is deprecated.
+	/// Sorting in reindex was never guaranteed to index documents in order and prevents further development of reindex such as resilience and performance improvements.
+	/// If used in combination with <c>max_docs</c>, consider using a query filter instead.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
+	{
+		Instance.Sort = [.. values];
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.6.0'.")]
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs to sort by before indexing.
+	/// Use it in conjunction with <c>max_docs</c> to control what documents are reindexed.
+	/// </para>
+	/// <para>
+	/// WARNING: Sort in reindex is deprecated.
+	/// Sorting in reindex was never guaranteed to index documents in order and prevents further development of reindex such as resilience and performance improvements.
+	/// If used in combination with <c>max_docs</c>, consider using a query filter instead.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>.Build(action));
+		}
+
+		Instance.Sort = items;
 		return this;
 	}
 
@@ -574,6 +699,144 @@ public readonly partial struct SourceDescriptor
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor Slice<T>(System.Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<T>> action)
 	{
 		Instance.Slice = Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<T>.Build(action);
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.6.0'.")]
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs to sort by before indexing.
+	/// Use it in conjunction with <c>max_docs</c> to control what documents are reindexed.
+	/// </para>
+	/// <para>
+	/// WARNING: Sort in reindex is deprecated.
+	/// Sorting in reindex was never guaranteed to index documents in order and prevents further development of reindex such as resilience and performance improvements.
+	/// If used in combination with <c>max_docs</c>, consider using a query filter instead.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
+	{
+		Instance.Sort = value;
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.6.0'.")]
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs to sort by before indexing.
+	/// Use it in conjunction with <c>max_docs</c> to control what documents are reindexed.
+	/// </para>
+	/// <para>
+	/// WARNING: Sort in reindex is deprecated.
+	/// Sorting in reindex was never guaranteed to index documents in order and prevents further development of reindex such as resilience and performance improvements.
+	/// If used in combination with <c>max_docs</c>, consider using a query filter instead.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor Sort()
+	{
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions.Build(null);
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.6.0'.")]
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs to sort by before indexing.
+	/// Use it in conjunction with <c>max_docs</c> to control what documents are reindexed.
+	/// </para>
+	/// <para>
+	/// WARNING: Sort in reindex is deprecated.
+	/// Sorting in reindex was never guaranteed to index documents in order and prevents further development of reindex such as resilience and performance improvements.
+	/// If used in combination with <c>max_docs</c>, consider using a query filter instead.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions>? action)
+	{
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions.Build(action);
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.6.0'.")]
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs to sort by before indexing.
+	/// Use it in conjunction with <c>max_docs</c> to control what documents are reindexed.
+	/// </para>
+	/// <para>
+	/// WARNING: Sort in reindex is deprecated.
+	/// Sorting in reindex was never guaranteed to index documents in order and prevents further development of reindex such as resilience and performance improvements.
+	/// If used in combination with <c>max_docs</c>, consider using a query filter instead.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor Sort<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<T>>? action)
+	{
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<T>.Build(action);
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.6.0'.")]
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs to sort by before indexing.
+	/// Use it in conjunction with <c>max_docs</c> to control what documents are reindexed.
+	/// </para>
+	/// <para>
+	/// WARNING: Sort in reindex is deprecated.
+	/// Sorting in reindex was never guaranteed to index documents in order and prevents further development of reindex such as resilience and performance improvements.
+	/// If used in combination with <c>max_docs</c>, consider using a query filter instead.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
+	{
+		Instance.Sort = [.. values];
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.6.0'.")]
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs to sort by before indexing.
+	/// Use it in conjunction with <c>max_docs</c> to control what documents are reindexed.
+	/// </para>
+	/// <para>
+	/// WARNING: Sort in reindex is deprecated.
+	/// Sorting in reindex was never guaranteed to index documents in order and prevents further development of reindex such as resilience and performance improvements.
+	/// If used in combination with <c>max_docs</c>, consider using a query filter instead.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Build(action));
+		}
+
+		Instance.Sort = items;
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.6.0'.")]
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs to sort by before indexing.
+	/// Use it in conjunction with <c>max_docs</c> to control what documents are reindexed.
+	/// </para>
+	/// <para>
+	/// WARNING: Sort in reindex is deprecated.
+	/// Sorting in reindex was never guaranteed to index documents in order and prevents further development of reindex such as resilience and performance improvements.
+	/// If used in combination with <c>max_docs</c>, consider using a query filter instead.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor Sort<T>(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>.Build(action));
+		}
+
+		Instance.Sort = items;
 		return this;
 	}
 

@@ -75,14 +75,6 @@ internal sealed partial class ListRulesetsResponseConverter : System.Text.Json.S
 public sealed partial class ListRulesetsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ListRulesetsResponse(long count, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRulesetListItem> results)
-	{
-		Count = count;
-		Results = results;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ListRulesetsResponse()
 	{
 	}

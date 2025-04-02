@@ -75,14 +75,6 @@ internal sealed partial class EnrollKibanaResponseConverter : System.Text.Json.S
 public sealed partial class EnrollKibanaResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public EnrollKibanaResponse(string httpCa, Elastic.Clients.Elasticsearch.Security.KibanaToken token)
-	{
-		HttpCa = httpCa;
-		Token = token;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public EnrollKibanaResponse()
 	{
 	}

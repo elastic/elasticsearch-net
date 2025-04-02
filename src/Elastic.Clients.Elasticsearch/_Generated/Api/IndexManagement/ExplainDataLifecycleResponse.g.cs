@@ -66,13 +66,6 @@ internal sealed partial class ExplainDataLifecycleResponseConverter : System.Tex
 public sealed partial class ExplainDataLifecycleResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ExplainDataLifecycleResponse(System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleExplain> indices)
-	{
-		Indices = indices;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ExplainDataLifecycleResponse()
 	{
 	}

@@ -84,15 +84,6 @@ internal sealed partial class CloseIndexResponseConverter : System.Text.Json.Ser
 public sealed partial class CloseIndexResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public CloseIndexResponse(bool acknowledged, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResult> indices, bool shardsAcknowledged)
-	{
-		Acknowledged = acknowledged;
-		Indices = indices;
-		ShardsAcknowledged = shardsAcknowledged;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public CloseIndexResponse()
 	{
 	}

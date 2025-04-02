@@ -155,17 +155,6 @@ internal sealed partial class UpdateResponseConverterFactory : System.Text.Json.
 public sealed partial class UpdateResponse<TDocument> : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public UpdateResponse(string id, string index, Elastic.Clients.Elasticsearch.Result result, Elastic.Clients.Elasticsearch.ShardStatistics shards, long version)
-	{
-		Id = id;
-		Index = index;
-		Result = result;
-		Shards = shards;
-		Version = version;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public UpdateResponse()
 	{
 	}

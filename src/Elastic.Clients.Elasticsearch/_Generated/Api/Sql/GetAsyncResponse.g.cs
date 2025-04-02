@@ -102,15 +102,6 @@ internal sealed partial class GetAsyncResponseConverter : System.Text.Json.Seria
 public partial class GetAsyncResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetAsyncResponse(string id, bool isPartial, bool isRunning)
-	{
-		Id = id;
-		IsPartial = isPartial;
-		IsRunning = isRunning;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetAsyncResponse()
 	{
 	}

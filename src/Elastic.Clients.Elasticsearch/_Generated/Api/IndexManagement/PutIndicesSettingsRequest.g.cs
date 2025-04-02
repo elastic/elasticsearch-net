@@ -132,7 +132,7 @@ internal sealed partial class PutIndicesSettingsRequestConverter : System.Text.J
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestConverter))]
 public sealed partial class PutIndicesSettingsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestParameters>
 {
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutIndicesSettingsRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 	{
@@ -155,7 +155,7 @@ public sealed partial class PutIndicesSettingsRequest : Elastic.Clients.Elastics
 	}
 #endif
 #if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public PutIndicesSettingsRequest()
 	{
 	}

@@ -120,19 +120,6 @@ internal sealed partial class MigrateToDataTiersResponseConverter : System.Text.
 public sealed partial class MigrateToDataTiersResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public MigrateToDataTiersResponse(bool dryRun, System.Collections.Generic.IReadOnlyCollection<string> migratedComponentTemplates, System.Collections.Generic.IReadOnlyCollection<string> migratedComposableTemplates, System.Collections.Generic.IReadOnlyCollection<string> migratedIlmPolicies, System.Collections.Generic.ICollection<string> migratedIndices, System.Collections.Generic.IReadOnlyCollection<string> migratedLegacyTemplates, string removedLegacyTemplate)
-	{
-		DryRun = dryRun;
-		MigratedComponentTemplates = migratedComponentTemplates;
-		MigratedComposableTemplates = migratedComposableTemplates;
-		MigratedIlmPolicies = migratedIlmPolicies;
-		MigratedIndices = migratedIndices;
-		MigratedLegacyTemplates = migratedLegacyTemplates;
-		RemovedLegacyTemplate = removedLegacyTemplate;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public MigrateToDataTiersResponse()
 	{
 	}

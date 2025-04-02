@@ -40,13 +40,6 @@ internal sealed partial class DeletePrivilegesResponseConverter : System.Text.Js
 public sealed partial class DeletePrivilegesResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public DeletePrivilegesResponse(System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.FoundStatus>> result)
-	{
-		Result = result;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public DeletePrivilegesResponse()
 	{
 	}

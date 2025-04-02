@@ -93,14 +93,6 @@ internal sealed partial class GetTasksResponseConverter : System.Text.Json.Seria
 public sealed partial class GetTasksResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetTasksResponse(bool completed, Elastic.Clients.Elasticsearch.Tasks.TaskInfo task)
-	{
-		Completed = completed;
-		Task = task;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetTasksResponse()
 	{
 	}

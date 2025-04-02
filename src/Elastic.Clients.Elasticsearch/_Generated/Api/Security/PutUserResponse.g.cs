@@ -66,13 +66,6 @@ internal sealed partial class PutUserResponseConverter : System.Text.Json.Serial
 public sealed partial class PutUserResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PutUserResponse(bool created)
-	{
-		Created = created;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutUserResponse()
 	{
 	}

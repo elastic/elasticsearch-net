@@ -75,14 +75,6 @@ internal sealed partial class GetTransformStatsResponseConverter : System.Text.J
 public sealed partial class GetTransformStatsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetTransformStatsResponse(long count, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.TransformManagement.TransformStats> transforms)
-	{
-		Count = count;
-		Transforms = transforms;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetTransformStatsResponse()
 	{
 	}

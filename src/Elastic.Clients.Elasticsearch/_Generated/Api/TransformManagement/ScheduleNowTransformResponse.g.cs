@@ -66,13 +66,6 @@ internal sealed partial class ScheduleNowTransformResponseConverter : System.Tex
 public sealed partial class ScheduleNowTransformResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ScheduleNowTransformResponse(bool acknowledged)
-	{
-		Acknowledged = acknowledged;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ScheduleNowTransformResponse()
 	{
 	}

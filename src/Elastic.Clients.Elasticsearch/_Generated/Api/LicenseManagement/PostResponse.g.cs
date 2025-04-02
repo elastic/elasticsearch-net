@@ -84,14 +84,6 @@ internal sealed partial class PostResponseConverter : System.Text.Json.Serializa
 public sealed partial class PostResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PostResponse(bool acknowledged, Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus licenseStatus)
-	{
-		Acknowledged = acknowledged;
-		LicenseStatus = licenseStatus;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PostResponse()
 	{
 	}

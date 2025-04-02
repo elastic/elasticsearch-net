@@ -70,6 +70,14 @@ public sealed partial class PutJobRequestParameters : Elastic.Transport.RequestP
 
 	/// <summary>
 	/// <para>
+	/// If <c>true</c>, concrete, expanded or aliased indices are ignored when frozen.
+	/// </para>
+	/// </summary>
+	[System.Obsolete("Deprecated in '7.16.0'.")]
+	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
+
+	/// <summary>
+	/// <para>
 	/// If <c>true</c>, unavailable indices (missing or closed) are ignored.
 	/// </para>
 	/// </summary>
@@ -274,7 +282,7 @@ public sealed partial class PutJobRequest : Elastic.Clients.Elasticsearch.Reques
 	}
 #endif
 #if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public PutJobRequest()
 	{
 	}
@@ -335,6 +343,14 @@ public sealed partial class PutJobRequest : Elastic.Clients.Elasticsearch.Reques
 	/// </list>
 	/// </summary>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, concrete, expanded or aliased indices are ignored when frozen.
+	/// </para>
+	/// </summary>
+	[System.Obsolete("Deprecated in '7.16.0'.")]
+	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
 	/// <summary>
 	/// <para>
@@ -656,6 +672,18 @@ public readonly partial struct PutJobRequestDescriptor
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.16.0'.")]
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, concrete, expanded or aliased indices are ignored when frozen.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor IgnoreThrottled(bool? value = true)
+	{
+		Instance.IgnoreThrottled = value;
 		return this;
 	}
 
@@ -1265,6 +1293,18 @@ public readonly partial struct PutJobRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.16.0'.")]
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, concrete, expanded or aliased indices are ignored when frozen.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> IgnoreThrottled(bool? value = true)
+	{
+		Instance.IgnoreThrottled = value;
 		return this;
 	}
 

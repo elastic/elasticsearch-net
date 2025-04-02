@@ -59,6 +59,13 @@ public sealed partial class OpenPointInTimeRequestParameters : Elastic.Transport
 
 	/// <summary>
 	/// <para>
+	/// Maximum number of concurrent shard requests that each sub-search request executes per node.
+	/// </para>
+	/// </summary>
+	public int? MaxConcurrentShardRequests { get => Q<int?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
+
+	/// <summary>
+	/// <para>
 	/// The node or shard the operation should be performed on.
 	/// By default, it is random.
 	/// </para>
@@ -235,6 +242,13 @@ public sealed partial class OpenPointInTimeRequest : Elastic.Clients.Elasticsear
 
 	/// <summary>
 	/// <para>
+	/// Maximum number of concurrent shard requests that each sub-search request executes per node.
+	/// </para>
+	/// </summary>
+	public int? MaxConcurrentShardRequests { get => Q<int?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
+
+	/// <summary>
+	/// <para>
 	/// The node or shard the operation should be performed on.
 	/// By default, it is random.
 	/// </para>
@@ -323,7 +337,7 @@ public readonly partial struct OpenPointInTimeRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.OpenPointInTimeRequest(indices);
 	}
 
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("TODO")]
 	public OpenPointInTimeRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
@@ -427,6 +441,17 @@ public readonly partial struct OpenPointInTimeRequestDescriptor
 	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.KeepAlive = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Maximum number of concurrent shard requests that each sub-search request executes per node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor MaxConcurrentShardRequests(int? value)
+	{
+		Instance.MaxConcurrentShardRequests = value;
 		return this;
 	}
 
@@ -707,6 +732,17 @@ public readonly partial struct OpenPointInTimeRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.KeepAlive = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Maximum number of concurrent shard requests that each sub-search request executes per node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument> MaxConcurrentShardRequests(int? value)
+	{
+		Instance.MaxConcurrentShardRequests = value;
 		return this;
 	}
 

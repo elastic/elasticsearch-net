@@ -82,7 +82,7 @@ internal sealed partial class PutRulesetRequestConverter : System.Text.Json.Seri
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestConverter))]
 public sealed partial class PutRulesetRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestParameters>
 {
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutRulesetRequest(Elastic.Clients.Elasticsearch.Id rulesetId) : base(r => r.Required("ruleset_id", rulesetId))
 	{
@@ -159,7 +159,7 @@ public readonly partial struct PutRulesetRequestDescriptor
 #pragma warning restore CS0618
 	}
 
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("TODO")]
 	public PutRulesetRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

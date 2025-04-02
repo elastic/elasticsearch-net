@@ -40,13 +40,6 @@ internal sealed partial class GetServiceAccountsResponseConverter : System.Text.
 public sealed partial class GetServiceAccountsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetServiceAccountsResponse(System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorWrapper> serviceAccoutns)
-	{
-		ServiceAccoutns = serviceAccoutns;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetServiceAccountsResponse()
 	{
 	}

@@ -93,16 +93,6 @@ internal sealed partial class MlInfoResponseConverter : System.Text.Json.Seriali
 public sealed partial class MlInfoResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public MlInfoResponse(Elastic.Clients.Elasticsearch.MachineLearning.Defaults defaults, Elastic.Clients.Elasticsearch.MachineLearning.Limits limits, Elastic.Clients.Elasticsearch.MachineLearning.NativeCode nativeCode, bool upgradeMode)
-	{
-		Defaults = defaults;
-		Limits = limits;
-		NativeCode = nativeCode;
-		UpgradeMode = upgradeMode;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public MlInfoResponse()
 	{
 	}

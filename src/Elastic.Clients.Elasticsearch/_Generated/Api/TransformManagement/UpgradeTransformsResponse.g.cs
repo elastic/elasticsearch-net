@@ -84,15 +84,6 @@ internal sealed partial class UpgradeTransformsResponseConverter : System.Text.J
 public sealed partial class UpgradeTransformsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public UpgradeTransformsResponse(int needsUpdate, int noAction, int updated)
-	{
-		NeedsUpdate = needsUpdate;
-		NoAction = noAction;
-		Updated = updated;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public UpgradeTransformsResponse()
 	{
 	}

@@ -111,18 +111,6 @@ internal sealed partial class EnrollNodeResponseConverter : System.Text.Json.Ser
 public sealed partial class EnrollNodeResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public EnrollNodeResponse(string httpCaCert, string httpCaKey, System.Collections.Generic.IReadOnlyCollection<string> nodesAddresses, string transportCaCert, string transportCert, string transportKey)
-	{
-		HttpCaCert = httpCaCert;
-		HttpCaKey = httpCaKey;
-		NodesAddresses = nodesAddresses;
-		TransportCaCert = transportCaCert;
-		TransportCert = transportCert;
-		TransportKey = transportKey;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public EnrollNodeResponse()
 	{
 	}

@@ -75,14 +75,6 @@ internal sealed partial class GetJobsResponseConverter : System.Text.Json.Serial
 public sealed partial class GetJobsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetJobsResponse(long count, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Job> jobs)
-	{
-		Count = count;
-		Jobs = jobs;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetJobsResponse()
 	{
 	}

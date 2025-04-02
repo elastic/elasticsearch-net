@@ -111,17 +111,6 @@ internal sealed partial class GetAsyncStatusResponseConverter : System.Text.Json
 public sealed partial class GetAsyncStatusResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetAsyncStatusResponse(System.DateTime expirationTimeInMillis, string id, bool isPartial, bool isRunning, System.DateTime startTimeInMillis)
-	{
-		ExpirationTimeInMillis = expirationTimeInMillis;
-		Id = id;
-		IsPartial = isPartial;
-		IsRunning = isRunning;
-		StartTimeInMillis = startTimeInMillis;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetAsyncStatusResponse()
 	{
 	}

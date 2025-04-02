@@ -57,13 +57,6 @@ internal sealed partial class GetSourceResponseConverterFactory : System.Text.Js
 public partial class GetSourceResponse<TDocument> : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetSourceResponse(TDocument source)
-	{
-		Source = source;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetSourceResponse()
 	{
 	}

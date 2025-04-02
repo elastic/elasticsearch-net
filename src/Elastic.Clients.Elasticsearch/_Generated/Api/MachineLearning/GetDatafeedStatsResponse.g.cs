@@ -75,14 +75,6 @@ internal sealed partial class GetDatafeedStatsResponseConverter : System.Text.Js
 public sealed partial class GetDatafeedStatsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetDatafeedStatsResponse(long count, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DatafeedStats> datafeeds)
-	{
-		Count = count;
-		Datafeeds = datafeeds;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetDatafeedStatsResponse()
 	{
 	}

@@ -75,14 +75,6 @@ internal sealed partial class ExplainDataFrameAnalyticsResponseConverter : Syste
 public sealed partial class ExplainDataFrameAnalyticsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ExplainDataFrameAnalyticsResponse(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsFieldSelection> fieldSelection, Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsMemoryEstimation memoryEstimation)
-	{
-		FieldSelection = fieldSelection;
-		MemoryEstimation = memoryEstimation;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ExplainDataFrameAnalyticsResponse()
 	{
 	}

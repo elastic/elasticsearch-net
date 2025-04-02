@@ -84,15 +84,6 @@ internal sealed partial class GetMemoryStatsResponseConverter : System.Text.Json
 public sealed partial class GetMemoryStatsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetMemoryStatsResponse(string clusterName, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.Memory> nodes, Elastic.Clients.Elasticsearch.NodeStatistics nodeStatistics)
-	{
-		ClusterName = clusterName;
-		Nodes = nodes;
-		NodeStatistics = nodeStatistics;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetMemoryStatsResponse()
 	{
 	}

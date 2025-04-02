@@ -84,15 +84,6 @@ internal sealed partial class SearchShardsResponseConverter : System.Text.Json.S
 public sealed partial class SearchShardsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public SearchShardsResponse(System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.SearchShards.ShardStoreIndex> indices, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.SearchShards.SearchShardsNodeAttributes> nodes, System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeShard>> shards)
-	{
-		Indices = indices;
-		Nodes = nodes;
-		Shards = shards;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public SearchShardsResponse()
 	{
 	}

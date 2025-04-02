@@ -152,7 +152,7 @@ public readonly partial struct DeleteTrainedModelRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequest(modelId);
 	}
 
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("TODO")]
 	public DeleteTrainedModelRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

@@ -492,7 +492,7 @@ public sealed partial class ReindexRequest : Elastic.Clients.Elasticsearch.Reque
 	}
 #endif
 #if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public ReindexRequest()
 	{
 	}

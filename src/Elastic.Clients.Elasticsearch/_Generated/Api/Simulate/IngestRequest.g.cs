@@ -137,7 +137,7 @@ internal sealed partial class IngestRequestConverter : System.Text.Json.Serializ
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Simulate.IngestRequestConverter))]
 public sealed partial class IngestRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>
 {
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public IngestRequest(Elastic.Clients.Elasticsearch.IndexName? index) : base(r => r.Optional("index", index))
 	{
@@ -160,7 +160,7 @@ public sealed partial class IngestRequest : Elastic.Clients.Elasticsearch.Reques
 	}
 #endif
 #if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public IngestRequest()
 	{
 	}

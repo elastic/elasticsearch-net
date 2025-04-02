@@ -40,13 +40,6 @@ internal sealed partial class GetFieldMappingResponseConverter : System.Text.Jso
 public partial class GetFieldMappingResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetFieldMappingResponse(System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.TypeFieldMappings> fieldMappings)
-	{
-		FieldMappings = fieldMappings;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetFieldMappingResponse()
 	{
 	}

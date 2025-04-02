@@ -94,7 +94,7 @@ internal sealed partial class PutTrainedModelVocabularyRequestConverter : System
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestConverter))]
 public sealed partial class PutTrainedModelVocabularyRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestParameters>
 {
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutTrainedModelVocabularyRequest(Elastic.Clients.Elasticsearch.Id modelId) : base(r => r.Required("model_id", modelId))
 	{
@@ -185,7 +185,7 @@ public readonly partial struct PutTrainedModelVocabularyRequestDescriptor
 #pragma warning restore CS0618
 	}
 
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("TODO")]
 	public PutTrainedModelVocabularyRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

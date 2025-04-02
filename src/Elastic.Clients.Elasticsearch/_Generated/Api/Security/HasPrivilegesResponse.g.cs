@@ -102,17 +102,6 @@ internal sealed partial class HasPrivilegesResponseConverter : System.Text.Json.
 public sealed partial class HasPrivilegesResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public HasPrivilegesResponse(System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, bool>>> application, System.Collections.Generic.IReadOnlyDictionary<string, bool> cluster, bool hasAllRequested, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, bool>> index, string username)
-	{
-		Application = application;
-		Cluster = cluster;
-		HasAllRequested = hasAllRequested;
-		Index = index;
-		Username = username;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public HasPrivilegesResponse()
 	{
 	}

@@ -66,13 +66,6 @@ internal sealed partial class PendingTasksResponseConverter : System.Text.Json.S
 public sealed partial class PendingTasksResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PendingTasksResponse(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.PendingTask> tasks)
-	{
-		Tasks = tasks;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PendingTasksResponse()
 	{
 	}

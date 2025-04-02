@@ -246,23 +246,6 @@ internal sealed partial class UpdateJobResponseConverter : System.Text.Json.Seri
 public sealed partial class UpdateJobResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public UpdateJobResponse(bool allowLazyOpen, Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigRead analysisConfig, Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits analysisLimits, System.DateTime createTime, long dailyModelSnapshotRetentionAfterDays, Elastic.Clients.Elasticsearch.MachineLearning.DataDescription dataDescription, string jobId, string jobType, string jobVersion, long modelSnapshotRetentionDays, string resultsIndexName)
-	{
-		AllowLazyOpen = allowLazyOpen;
-		AnalysisConfig = analysisConfig;
-		AnalysisLimits = analysisLimits;
-		CreateTime = createTime;
-		DailyModelSnapshotRetentionAfterDays = dailyModelSnapshotRetentionAfterDays;
-		DataDescription = dataDescription;
-		JobId = jobId;
-		JobType = jobType;
-		JobVersion = jobVersion;
-		ModelSnapshotRetentionDays = modelSnapshotRetentionDays;
-		ResultsIndexName = resultsIndexName;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public UpdateJobResponse()
 	{
 	}

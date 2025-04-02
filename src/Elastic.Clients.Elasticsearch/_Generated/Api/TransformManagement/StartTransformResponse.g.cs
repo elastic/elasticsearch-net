@@ -66,13 +66,6 @@ internal sealed partial class StartTransformResponseConverter : System.Text.Json
 public sealed partial class StartTransformResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public StartTransformResponse(bool acknowledged)
-	{
-		Acknowledged = acknowledged;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public StartTransformResponse()
 	{
 	}

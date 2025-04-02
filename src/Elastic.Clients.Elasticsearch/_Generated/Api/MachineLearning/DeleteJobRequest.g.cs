@@ -184,7 +184,7 @@ public readonly partial struct DeleteJobRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobRequest(jobId);
 	}
 
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("TODO")]
 	public DeleteJobRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

@@ -165,17 +165,6 @@ internal sealed partial class AsyncSearchStatusResponseConverter : System.Text.J
 public sealed partial class AsyncSearchStatusResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public AsyncSearchStatusResponse(System.DateTime expirationTimeInMillis, bool isPartial, bool isRunning, Elastic.Clients.Elasticsearch.ShardStatistics shards, System.DateTime startTimeInMillis)
-	{
-		ExpirationTimeInMillis = expirationTimeInMillis;
-		IsPartial = isPartial;
-		IsRunning = isRunning;
-		Shards = shards;
-		StartTimeInMillis = startTimeInMillis;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public AsyncSearchStatusResponse()
 	{
 	}

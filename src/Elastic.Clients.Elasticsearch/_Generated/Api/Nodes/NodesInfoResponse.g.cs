@@ -84,14 +84,6 @@ internal sealed partial class NodesInfoResponseConverter : System.Text.Json.Seri
 public sealed partial class NodesInfoResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public NodesInfoResponse(string clusterName, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeInfo> nodes)
-	{
-		ClusterName = clusterName;
-		Nodes = nodes;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public NodesInfoResponse()
 	{
 	}

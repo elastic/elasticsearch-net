@@ -137,13 +137,6 @@ internal sealed partial class EqlSearchResponseConverterFactory : System.Text.Js
 public sealed partial class EqlSearchResponse<TEvent> : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public EqlSearchResponse(Elastic.Clients.Elasticsearch.Eql.EqlHits<TEvent> hits)
-	{
-		Hits = hits;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public EqlSearchResponse()
 	{
 	}

@@ -93,15 +93,6 @@ internal sealed partial class InvalidateApiKeyResponseConverter : System.Text.Js
 public sealed partial class InvalidateApiKeyResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public InvalidateApiKeyResponse(int errorCount, System.Collections.Generic.IReadOnlyCollection<string> invalidatedApiKeys, System.Collections.Generic.IReadOnlyCollection<string> previouslyInvalidatedApiKeys)
-	{
-		ErrorCount = errorCount;
-		InvalidatedApiKeys = invalidatedApiKeys;
-		PreviouslyInvalidatedApiKeys = previouslyInvalidatedApiKeys;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public InvalidateApiKeyResponse()
 	{
 	}

@@ -66,13 +66,6 @@ internal sealed partial class StartTrainedModelDeploymentResponseConverter : Sys
 public sealed partial class StartTrainedModelDeploymentResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public StartTrainedModelDeploymentResponse(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignment assignment)
-	{
-		Assignment = assignment;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public StartTrainedModelDeploymentResponse()
 	{
 	}

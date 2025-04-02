@@ -75,14 +75,6 @@ internal sealed partial class GetCalendarEventsResponseConverter : System.Text.J
 public sealed partial class GetCalendarEventsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetCalendarEventsResponse(long count, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.CalendarEvent> events)
-	{
-		Count = count;
-		Events = events;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetCalendarEventsResponse()
 	{
 	}

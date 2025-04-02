@@ -27,6 +27,15 @@ public sealed partial class GetLicenseRequestParameters : Elastic.Transport.Requ
 {
 	/// <summary>
 	/// <para>
+	/// If <c>true</c>, this parameter returns enterprise for Enterprise license types. If <c>false</c>, this parameter returns platinum for both platinum and enterprise license types. This behavior is maintained for backwards compatibility.
+	/// This parameter is deprecated and will always be set to true in 8.x.
+	/// </para>
+	/// </summary>
+	[System.Obsolete("Deprecated in '7.6.0'.")]
+	public bool? AcceptEnterprise { get => Q<bool?>("accept_enterprise"); set => Q("accept_enterprise", value); }
+
+	/// <summary>
+	/// <para>
 	/// Specifies whether to retrieve local information. The default value is <c>false</c>, which means the information is retrieved from the master node.
 	/// </para>
 	/// </summary>
@@ -104,6 +113,15 @@ public sealed partial class GetLicenseRequest : Elastic.Clients.Elasticsearch.Re
 
 	/// <summary>
 	/// <para>
+	/// If <c>true</c>, this parameter returns enterprise for Enterprise license types. If <c>false</c>, this parameter returns platinum for both platinum and enterprise license types. This behavior is maintained for backwards compatibility.
+	/// This parameter is deprecated and will always be set to true in 8.x.
+	/// </para>
+	/// </summary>
+	[System.Obsolete("Deprecated in '7.6.0'.")]
+	public bool? AcceptEnterprise { get => Q<bool?>("accept_enterprise"); set => Q("accept_enterprise", value); }
+
+	/// <summary>
+	/// <para>
 	/// Specifies whether to retrieve local information. The default value is <c>false</c>, which means the information is retrieved from the master node.
 	/// </para>
 	/// </summary>
@@ -140,6 +158,19 @@ public readonly partial struct GetLicenseRequestDescriptor
 
 	public static explicit operator Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor(Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest instance) => new Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest(Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor descriptor) => descriptor.Instance;
+
+	[System.Obsolete("Deprecated in '7.6.0'.")]
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, this parameter returns enterprise for Enterprise license types. If <c>false</c>, this parameter returns platinum for both platinum and enterprise license types. This behavior is maintained for backwards compatibility.
+	/// This parameter is deprecated and will always be set to true in 8.x.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor AcceptEnterprise(bool? value = true)
+	{
+		Instance.AcceptEnterprise = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>

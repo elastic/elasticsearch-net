@@ -66,13 +66,6 @@ internal sealed partial class RenderSearchTemplateResponseConverter : System.Tex
 public sealed partial class RenderSearchTemplateResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public RenderSearchTemplateResponse(System.Collections.Generic.IReadOnlyDictionary<string, object> templateOutput)
-	{
-		TemplateOutput = templateOutput;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public RenderSearchTemplateResponse()
 	{
 	}

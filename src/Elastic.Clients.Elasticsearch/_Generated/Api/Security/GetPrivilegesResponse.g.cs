@@ -40,13 +40,6 @@ internal sealed partial class GetPrivilegesResponseConverter : System.Text.Json.
 public sealed partial class GetPrivilegesResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetPrivilegesResponse(System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.PrivilegeActions>> privileges)
-	{
-		Privileges = privileges;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetPrivilegesResponse()
 	{
 	}

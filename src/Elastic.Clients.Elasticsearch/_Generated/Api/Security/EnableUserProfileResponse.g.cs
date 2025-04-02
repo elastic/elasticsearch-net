@@ -66,13 +66,6 @@ internal sealed partial class EnableUserProfileResponseConverter : System.Text.J
 public sealed partial class EnableUserProfileResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public EnableUserProfileResponse(bool acknowledged)
-	{
-		Acknowledged = acknowledged;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public EnableUserProfileResponse()
 	{
 	}

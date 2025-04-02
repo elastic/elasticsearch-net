@@ -56,6 +56,13 @@ public sealed partial class GetFieldMappingRequestParameters : Elastic.Transport
 	/// </para>
 	/// </summary>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request retrieves information from the local node only.
+	/// </para>
+	/// </summary>
+	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 }
 
 internal sealed partial class GetFieldMappingRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest>
@@ -180,6 +187,13 @@ public sealed partial class GetFieldMappingRequest : Elastic.Clients.Elasticsear
 	/// </para>
 	/// </summary>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request retrieves information from the local node only.
+	/// </para>
+	/// </summary>
+	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 }
 
 /// <summary>
@@ -212,7 +226,7 @@ public readonly partial struct GetFieldMappingRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest(indices, fields);
 	}
 
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("TODO")]
 	public GetFieldMappingRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
@@ -348,6 +362,17 @@ public readonly partial struct GetFieldMappingRequestDescriptor
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request retrieves information from the local node only.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor Local(bool? value = true)
+	{
+		Instance.Local = value;
+		return this;
+	}
+
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 	internal static Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor> action)
 	{
@@ -429,7 +454,7 @@ public readonly partial struct GetFieldMappingRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest(indices, fields);
 	}
 
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("TODO")]
 	public GetFieldMappingRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
@@ -562,6 +587,17 @@ public readonly partial struct GetFieldMappingRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor<TDocument> IncludeDefaults(bool? value = true)
 	{
 		Instance.IncludeDefaults = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request retrieves information from the local node only.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor<TDocument> Local(bool? value = true)
+	{
+		Instance.Local = value;
 		return this;
 	}
 

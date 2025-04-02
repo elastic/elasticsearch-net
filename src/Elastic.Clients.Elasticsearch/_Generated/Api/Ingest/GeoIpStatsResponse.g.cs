@@ -75,14 +75,6 @@ internal sealed partial class GeoIpStatsResponseConverter : System.Text.Json.Ser
 public sealed partial class GeoIpStatsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GeoIpStatsResponse(System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabases> nodes, Elastic.Clients.Elasticsearch.Ingest.GeoIpDownloadStatistics stats)
-	{
-		Nodes = nodes;
-		Stats = stats;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GeoIpStatsResponse()
 	{
 	}

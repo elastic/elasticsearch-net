@@ -66,13 +66,6 @@ internal sealed partial class GetPolicyResponseConverter : System.Text.Json.Seri
 public sealed partial class GetPolicyResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetPolicyResponse(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.EnrichSummary> policies)
-	{
-		Policies = policies;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetPolicyResponse()
 	{
 	}

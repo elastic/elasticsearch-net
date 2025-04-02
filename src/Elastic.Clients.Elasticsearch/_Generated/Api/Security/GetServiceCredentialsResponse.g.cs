@@ -93,16 +93,6 @@ internal sealed partial class GetServiceCredentialsResponseConverter : System.Te
 public sealed partial class GetServiceCredentialsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetServiceCredentialsResponse(int count, Elastic.Clients.Elasticsearch.Security.NodesCredentials nodesCredentials, string serviceAccount, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, object>> tokens)
-	{
-		Count = count;
-		NodesCredentials = nodesCredentials;
-		ServiceAccount = serviceAccount;
-		Tokens = tokens;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetServiceCredentialsResponse()
 	{
 	}

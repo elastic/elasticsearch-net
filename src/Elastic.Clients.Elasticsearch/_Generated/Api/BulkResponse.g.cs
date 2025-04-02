@@ -93,15 +93,6 @@ internal sealed partial class BulkResponseConverter : System.Text.Json.Serializa
 public partial class BulkResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public BulkResponse(bool errors, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem> items, long took)
-	{
-		Errors = errors;
-		Items = items;
-		Took = took;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public BulkResponse()
 	{
 	}

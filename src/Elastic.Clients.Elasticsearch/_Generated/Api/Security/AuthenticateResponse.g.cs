@@ -156,19 +156,6 @@ internal sealed partial class AuthenticateResponseConverter : System.Text.Json.S
 public sealed partial class AuthenticateResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public AuthenticateResponse(Elastic.Clients.Elasticsearch.Security.RealmInfo authenticationRealm, string authenticationType, bool enabled, Elastic.Clients.Elasticsearch.Security.RealmInfo lookupRealm, System.Collections.Generic.IReadOnlyDictionary<string, object> metadata, System.Collections.Generic.IReadOnlyCollection<string> roles, string username)
-	{
-		AuthenticationRealm = authenticationRealm;
-		AuthenticationType = authenticationType;
-		Enabled = enabled;
-		LookupRealm = lookupRealm;
-		Metadata = metadata;
-		Roles = roles;
-		Username = username;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public AuthenticateResponse()
 	{
 	}

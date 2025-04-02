@@ -74,7 +74,7 @@ internal sealed partial class PostCalendarEventsRequestConverter : System.Text.J
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequestConverter))]
 public sealed partial class PostCalendarEventsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequestParameters>
 {
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PostCalendarEventsRequest(Elastic.Clients.Elasticsearch.Id calendarId) : base(r => r.Required("calendar_id", calendarId))
 	{
@@ -149,7 +149,7 @@ public readonly partial struct PostCalendarEventsRequestDescriptor
 #pragma warning restore CS0618
 	}
 
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("TODO")]
 	public PostCalendarEventsRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

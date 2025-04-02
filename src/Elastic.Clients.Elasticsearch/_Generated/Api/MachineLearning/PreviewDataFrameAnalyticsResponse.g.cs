@@ -66,13 +66,6 @@ internal sealed partial class PreviewDataFrameAnalyticsResponseConverter : Syste
 public sealed partial class PreviewDataFrameAnalyticsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PreviewDataFrameAnalyticsResponse(System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyDictionary<string, string>> featureValues)
-	{
-		FeatureValues = featureValues;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PreviewDataFrameAnalyticsResponse()
 	{
 	}

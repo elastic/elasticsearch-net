@@ -479,6 +479,63 @@ internal sealed partial class FunctionScoreModeConverter : System.Text.Json.Seri
 	}
 }
 
+internal sealed partial class GeoExecutionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberMemory = System.Text.Json.JsonEncodedText.Encode("memory");
+	private static readonly System.Text.Json.JsonEncodedText MemberIndexed = System.Text.Json.JsonEncodedText.Encode("indexed");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberMemory))
+		{
+			return Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution.Memory;
+		}
+
+		if (reader.ValueTextEquals(MemberIndexed))
+		{
+			return Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution.Indexed;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberMemory.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution.Memory;
+		}
+
+		if (string.Equals(value, MemberIndexed.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution.Indexed;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution.Memory:
+				writer.WriteStringValue(MemberMemory);
+				break;
+			case Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution.Indexed:
+				writer.WriteStringValue(MemberIndexed);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
 internal sealed partial class GeoValidationMethodConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod>
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberCoerce = System.Text.Json.JsonEncodedText.Encode("coerce");
@@ -1322,6 +1379,15 @@ public enum FunctionScoreMode
 	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "min")]
 	Min
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.GeoExecutionConverter))]
+public enum GeoExecution
+{
+	[System.Runtime.Serialization.EnumMember(Value = "memory")]
+	Memory,
+	[System.Runtime.Serialization.EnumMember(Value = "indexed")]
+	Indexed
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethodConverter))]

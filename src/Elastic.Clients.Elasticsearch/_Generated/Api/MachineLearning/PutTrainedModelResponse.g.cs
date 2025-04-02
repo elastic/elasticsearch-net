@@ -246,15 +246,6 @@ internal sealed partial class PutTrainedModelResponseConverter : System.Text.Jso
 public sealed partial class PutTrainedModelResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PutTrainedModelResponse(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelConfigInput input, string modelId, System.Collections.Generic.IReadOnlyCollection<string> tags)
-	{
-		Input = input;
-		ModelId = modelId;
-		Tags = tags;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutTrainedModelResponse()
 	{
 	}

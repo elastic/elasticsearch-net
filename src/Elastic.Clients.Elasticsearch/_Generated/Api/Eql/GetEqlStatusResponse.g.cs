@@ -111,15 +111,6 @@ internal sealed partial class GetEqlStatusResponseConverter : System.Text.Json.S
 public sealed partial class GetEqlStatusResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetEqlStatusResponse(string id, bool isPartial, bool isRunning)
-	{
-		Id = id;
-		IsPartial = isPartial;
-		IsRunning = isRunning;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetEqlStatusResponse()
 	{
 	}

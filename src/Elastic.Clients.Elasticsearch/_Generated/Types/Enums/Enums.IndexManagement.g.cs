@@ -582,91 +582,6 @@ internal sealed partial class ManagedByConverter : System.Text.Json.Serializatio
 	}
 }
 
-internal sealed partial class IndexModeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexMode>
-{
-	private static readonly System.Text.Json.JsonEncodedText MemberStandard = System.Text.Json.JsonEncodedText.Encode("standard");
-	private static readonly System.Text.Json.JsonEncodedText MemberTimeSeries = System.Text.Json.JsonEncodedText.Encode("time_series");
-	private static readonly System.Text.Json.JsonEncodedText MemberLogsdb = System.Text.Json.JsonEncodedText.Encode("logsdb");
-	private static readonly System.Text.Json.JsonEncodedText MemberLookup = System.Text.Json.JsonEncodedText.Encode("lookup");
-
-	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		if (reader.ValueTextEquals(MemberStandard))
-		{
-			return Elastic.Clients.Elasticsearch.IndexManagement.IndexMode.Standard;
-		}
-
-		if (reader.ValueTextEquals(MemberTimeSeries))
-		{
-			return Elastic.Clients.Elasticsearch.IndexManagement.IndexMode.TimeSeries;
-		}
-
-		if (reader.ValueTextEquals(MemberLogsdb))
-		{
-			return Elastic.Clients.Elasticsearch.IndexManagement.IndexMode.Logsdb;
-		}
-
-		if (reader.ValueTextEquals(MemberLookup))
-		{
-			return Elastic.Clients.Elasticsearch.IndexManagement.IndexMode.Lookup;
-		}
-
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberStandard.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.IndexManagement.IndexMode.Standard;
-		}
-
-		if (string.Equals(value, MemberTimeSeries.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.IndexManagement.IndexMode.TimeSeries;
-		}
-
-		if (string.Equals(value, MemberLogsdb.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.IndexManagement.IndexMode.Logsdb;
-		}
-
-		if (string.Equals(value, MemberLookup.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.IndexManagement.IndexMode.Lookup;
-		}
-
-		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.IndexMode)}'.");
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndexMode value, System.Text.Json.JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case Elastic.Clients.Elasticsearch.IndexManagement.IndexMode.Standard:
-				writer.WriteStringValue(MemberStandard);
-				break;
-			case Elastic.Clients.Elasticsearch.IndexManagement.IndexMode.TimeSeries:
-				writer.WriteStringValue(MemberTimeSeries);
-				break;
-			case Elastic.Clients.Elasticsearch.IndexManagement.IndexMode.Logsdb:
-				writer.WriteStringValue(MemberLogsdb);
-				break;
-			case Elastic.Clients.Elasticsearch.IndexManagement.IndexMode.Lookup:
-				writer.WriteStringValue(MemberLookup);
-				break;
-			default:
-				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.IndexMode)}'.");
-		}
-	}
-
-	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexMode ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		return Read(ref reader, typeToConvert, options);
-	}
-
-	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndexMode value, System.Text.Json.JsonSerializerOptions options)
-	{
-		Write(writer, value, options);
-	}
-}
-
 internal sealed partial class TranslogDurabilityConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability>
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberRequest = System.Text.Json.JsonEncodedText.Encode("request");
@@ -1316,19 +1231,6 @@ public enum ManagedBy
 	Datastream,
 	[System.Runtime.Serialization.EnumMember(Value = "Unmanaged")]
 	Unmanaged
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.IndexModeConverter))]
-public enum IndexMode
-{
-	[System.Runtime.Serialization.EnumMember(Value = "standard")]
-	Standard,
-	[System.Runtime.Serialization.EnumMember(Value = "time_series")]
-	TimeSeries,
-	[System.Runtime.Serialization.EnumMember(Value = "logsdb")]
-	Logsdb,
-	[System.Runtime.Serialization.EnumMember(Value = "lookup")]
-	Lookup
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurabilityConverter))]

@@ -84,14 +84,6 @@ internal sealed partial class EnrichStatsResponseConverter : System.Text.Json.Se
 public sealed partial class EnrichStatsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public EnrichStatsResponse(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.CoordinatorStats> coordinatorStats, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.ExecutingPolicy> executingPolicies)
-	{
-		CoordinatorStats = coordinatorStats;
-		ExecutingPolicies = executingPolicies;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public EnrichStatsResponse()
 	{
 	}

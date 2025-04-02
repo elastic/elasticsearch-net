@@ -84,15 +84,6 @@ internal sealed partial class ShrinkIndexResponseConverter : System.Text.Json.Se
 public sealed partial class ShrinkIndexResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ShrinkIndexResponse(bool acknowledged, string index, bool shardsAcknowledged)
-	{
-		Acknowledged = acknowledged;
-		Index = index;
-		ShardsAcknowledged = shardsAcknowledged;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ShrinkIndexResponse()
 	{
 	}

@@ -309,32 +309,6 @@ internal sealed partial class XpackUsageResponseConverter : System.Text.Json.Ser
 public sealed partial class XpackUsageResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public XpackUsageResponse(Elastic.Clients.Elasticsearch.Xpack.Base aggregateMetric, Elastic.Clients.Elasticsearch.Xpack.Analytics analytics, Elastic.Clients.Elasticsearch.Xpack.Archive archive, Elastic.Clients.Elasticsearch.Xpack.Ccr ccr, Elastic.Clients.Elasticsearch.Xpack.DataTiers dataTiers, Elastic.Clients.Elasticsearch.Xpack.Eql eql, Elastic.Clients.Elasticsearch.Xpack.Base graph, Elastic.Clients.Elasticsearch.Xpack.Ilm ilm, Elastic.Clients.Elasticsearch.Xpack.Base logstash, Elastic.Clients.Elasticsearch.Xpack.MachineLearning ml, Elastic.Clients.Elasticsearch.Xpack.Monitoring monitoring, Elastic.Clients.Elasticsearch.Xpack.Base rollup, Elastic.Clients.Elasticsearch.Xpack.SearchableSnapshots searchableSnapshots, Elastic.Clients.Elasticsearch.Xpack.Security security, Elastic.Clients.Elasticsearch.Xpack.Slm slm, Elastic.Clients.Elasticsearch.Xpack.Base spatial, Elastic.Clients.Elasticsearch.Xpack.Sql sql, Elastic.Clients.Elasticsearch.Xpack.Base transform, Elastic.Clients.Elasticsearch.Xpack.Base votingOnly, Elastic.Clients.Elasticsearch.Xpack.Watcher watcher)
-	{
-		AggregateMetric = aggregateMetric;
-		Analytics = analytics;
-		Archive = archive;
-		Ccr = ccr;
-		DataTiers = dataTiers;
-		Eql = eql;
-		Graph = graph;
-		Ilm = ilm;
-		Logstash = logstash;
-		Ml = ml;
-		Monitoring = monitoring;
-		Rollup = rollup;
-		SearchableSnapshots = searchableSnapshots;
-		Security = security;
-		Slm = slm;
-		Spatial = spatial;
-		Sql = sql;
-		Transform = transform;
-		VotingOnly = votingOnly;
-		Watcher = watcher;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public XpackUsageResponse()
 	{
 	}

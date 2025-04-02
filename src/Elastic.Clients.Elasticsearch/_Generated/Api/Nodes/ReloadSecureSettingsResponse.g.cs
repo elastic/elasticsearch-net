@@ -84,14 +84,6 @@ internal sealed partial class ReloadSecureSettingsResponseConverter : System.Tex
 public sealed partial class ReloadSecureSettingsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ReloadSecureSettingsResponse(string clusterName, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeReloadResult> nodes)
-	{
-		ClusterName = clusterName;
-		Nodes = nodes;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ReloadSecureSettingsResponse()
 	{
 	}

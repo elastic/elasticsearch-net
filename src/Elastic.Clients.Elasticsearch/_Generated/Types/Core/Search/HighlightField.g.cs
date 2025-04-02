@@ -29,6 +29,7 @@ internal sealed partial class HighlightFieldConverter : System.Text.Json.Seriali
 	private static readonly System.Text.Json.JsonEncodedText PropBoundaryMaxScan = System.Text.Json.JsonEncodedText.Encode("boundary_max_scan");
 	private static readonly System.Text.Json.JsonEncodedText PropBoundaryScanner = System.Text.Json.JsonEncodedText.Encode("boundary_scanner");
 	private static readonly System.Text.Json.JsonEncodedText PropBoundaryScannerLocale = System.Text.Json.JsonEncodedText.Encode("boundary_scanner_locale");
+	private static readonly System.Text.Json.JsonEncodedText PropForceSource = System.Text.Json.JsonEncodedText.Encode("force_source");
 	private static readonly System.Text.Json.JsonEncodedText PropFragmenter = System.Text.Json.JsonEncodedText.Encode("fragmenter");
 	private static readonly System.Text.Json.JsonEncodedText PropFragmentOffset = System.Text.Json.JsonEncodedText.Encode("fragment_offset");
 	private static readonly System.Text.Json.JsonEncodedText PropFragmentSize = System.Text.Json.JsonEncodedText.Encode("fragment_size");
@@ -55,6 +56,7 @@ internal sealed partial class HighlightFieldConverter : System.Text.Json.Seriali
 		LocalJsonValue<int?> propBoundaryMaxScan = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner?> propBoundaryScanner = default;
 		LocalJsonValue<string?> propBoundaryScannerLocale = default;
+		LocalJsonValue<bool?> propForceSource = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter?> propFragmenter = default;
 		LocalJsonValue<int?> propFragmentOffset = default;
 		LocalJsonValue<int?> propFragmentSize = default;
@@ -91,6 +93,11 @@ internal sealed partial class HighlightFieldConverter : System.Text.Json.Seriali
 			}
 
 			if (propBoundaryScannerLocale.TryReadProperty(ref reader, options, PropBoundaryScannerLocale, null))
+			{
+				continue;
+			}
+
+			if (propForceSource.TryReadProperty(ref reader, options, PropForceSource, null))
 			{
 				continue;
 			}
@@ -201,6 +208,7 @@ internal sealed partial class HighlightFieldConverter : System.Text.Json.Seriali
 			BoundaryMaxScan = propBoundaryMaxScan.Value,
 			BoundaryScanner = propBoundaryScanner.Value,
 			BoundaryScannerLocale = propBoundaryScannerLocale.Value,
+			ForceSource = propForceSource.Value,
 			Fragmenter = propFragmenter.Value,
 			FragmentOffset = propFragmentOffset.Value,
 			FragmentSize = propFragmentSize.Value,
@@ -229,6 +237,7 @@ internal sealed partial class HighlightFieldConverter : System.Text.Json.Seriali
 		writer.WriteProperty(options, PropBoundaryMaxScan, value.BoundaryMaxScan, null, null);
 		writer.WriteProperty(options, PropBoundaryScanner, value.BoundaryScanner, null, null);
 		writer.WriteProperty(options, PropBoundaryScannerLocale, value.BoundaryScannerLocale, null, null);
+		writer.WriteProperty(options, PropForceSource, value.ForceSource, null, null);
 		writer.WriteProperty(options, PropFragmenter, value.Fragmenter, null, null);
 		writer.WriteProperty(options, PropFragmentOffset, value.FragmentOffset, null, null);
 		writer.WriteProperty(options, PropFragmentSize, value.FragmentSize, null, null);
@@ -300,6 +309,7 @@ public sealed partial class HighlightField
 	/// </para>
 	/// </summary>
 	public string? BoundaryScannerLocale { get; set; }
+	public bool? ForceSource { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -472,6 +482,12 @@ public readonly partial struct HighlightFieldDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor<TDocument> BoundaryScannerLocale(string? value)
 	{
 		Instance.BoundaryScannerLocale = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor<TDocument> ForceSource(bool? value = true)
+	{
+		Instance.ForceSource = value;
 		return this;
 	}
 
@@ -846,6 +862,12 @@ public readonly partial struct HighlightFieldDescriptor
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor BoundaryScannerLocale(string? value)
 	{
 		Instance.BoundaryScannerLocale = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor ForceSource(bool? value = true)
+	{
+		Instance.ForceSource = value;
 		return this;
 	}
 

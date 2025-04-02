@@ -28,6 +28,7 @@ internal sealed partial class GeoBoundingBoxQueryConverter : System.Text.Json.Se
 	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
 	private static readonly System.Text.Json.JsonEncodedText PropIgnoreUnmapped = System.Text.Json.JsonEncodedText.Encode("ignore_unmapped");
 	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
 	private static readonly System.Text.Json.JsonEncodedText PropValidationMethod = System.Text.Json.JsonEncodedText.Encode("validation_method");
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -38,6 +39,7 @@ internal sealed partial class GeoBoundingBoxQueryConverter : System.Text.Json.Se
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
 		LocalJsonValue<bool?> propIgnoreUnmapped = default;
 		LocalJsonValue<string?> propQueryName = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution?> propType = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod?> propValidationMethod = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -52,6 +54,11 @@ internal sealed partial class GeoBoundingBoxQueryConverter : System.Text.Json.Se
 			}
 
 			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
+			{
+				continue;
+			}
+
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
 			{
 				continue;
 			}
@@ -73,6 +80,10 @@ internal sealed partial class GeoBoundingBoxQueryConverter : System.Text.Json.Se
 			Field = propField.Value,
 			IgnoreUnmapped = propIgnoreUnmapped.Value,
 			QueryName = propQueryName.Value,
+#pragma warning disable CS0618
+			Type = propType.Value
+#pragma warning restore CS0618
+,
 			ValidationMethod = propValidationMethod.Value
 		};
 	}
@@ -83,6 +94,10 @@ internal sealed partial class GeoBoundingBoxQueryConverter : System.Text.Json.Se
 		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
 		writer.WriteProperty(options, PropIgnoreUnmapped, value.IgnoreUnmapped, null, null);
 		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+#pragma warning disable CS0618
+		writer.WriteProperty(options, PropType, value.Type, null, null)
+#pragma warning restore CS0618
+		;
 		writer.WriteProperty(options, PropValidationMethod, value.ValidationMethod, null, null);
 		writer.WriteProperty(options, value.Field, value.BoundingBox, null, null);
 		writer.WriteEndObject();
@@ -104,7 +119,7 @@ public sealed partial class GeoBoundingBoxQuery
 	}
 #endif
 #if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public GeoBoundingBoxQuery()
 	{
 	}
@@ -143,6 +158,8 @@ public sealed partial class GeoBoundingBoxQuery
 	/// </summary>
 	public bool? IgnoreUnmapped { get; set; }
 	public string? QueryName { get; set; }
+	[System.Obsolete("Deprecated in '7.14.0'.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution? Type { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -225,6 +242,13 @@ public readonly partial struct GeoBoundingBoxQueryDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor<TDocument> QueryName(string? value)
 	{
 		Instance.QueryName = value;
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.14.0'.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor<TDocument> Type(Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution? value)
+	{
+		Instance.Type = value;
 		return this;
 	}
 
@@ -321,6 +345,13 @@ public readonly partial struct GeoBoundingBoxQueryDescriptor
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor QueryName(string? value)
 	{
 		Instance.QueryName = value;
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.14.0'.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor Type(Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution? value)
+	{
+		Instance.Type = value;
 		return this;
 	}
 

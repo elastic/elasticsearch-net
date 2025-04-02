@@ -28,6 +28,7 @@ internal sealed partial class MatchQueryConverter : System.Text.Json.Serializati
 	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer");
 	private static readonly System.Text.Json.JsonEncodedText PropAutoGenerateSynonymsPhraseQuery = System.Text.Json.JsonEncodedText.Encode("auto_generate_synonyms_phrase_query");
 	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropCutoffFrequency = System.Text.Json.JsonEncodedText.Encode("cutoff_frequency");
 	private static readonly System.Text.Json.JsonEncodedText PropFuzziness = System.Text.Json.JsonEncodedText.Encode("fuzziness");
 	private static readonly System.Text.Json.JsonEncodedText PropFuzzyRewrite = System.Text.Json.JsonEncodedText.Encode("fuzzy_rewrite");
 	private static readonly System.Text.Json.JsonEncodedText PropFuzzyTranspositions = System.Text.Json.JsonEncodedText.Encode("fuzzy_transpositions");
@@ -62,6 +63,7 @@ internal sealed partial class MatchQueryConverter : System.Text.Json.Serializati
 		LocalJsonValue<string?> propAnalyzer = default;
 		LocalJsonValue<bool?> propAutoGenerateSynonymsPhraseQuery = default;
 		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<double?> propCutoffFrequency = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Fuzziness?> propFuzziness = default;
 		LocalJsonValue<string?> propFuzzyRewrite = default;
 		LocalJsonValue<bool?> propFuzzyTranspositions = default;
@@ -86,6 +88,11 @@ internal sealed partial class MatchQueryConverter : System.Text.Json.Serializati
 			}
 
 			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propCutoffFrequency.TryReadProperty(ref reader, options, PropCutoffFrequency, null))
 			{
 				continue;
 			}
@@ -162,6 +169,10 @@ internal sealed partial class MatchQueryConverter : System.Text.Json.Serializati
 			Analyzer = propAnalyzer.Value,
 			AutoGenerateSynonymsPhraseQuery = propAutoGenerateSynonymsPhraseQuery.Value,
 			Boost = propBoost.Value,
+#pragma warning disable CS0618
+			CutoffFrequency = propCutoffFrequency.Value
+#pragma warning restore CS0618
+			,
 			Field = propField.Value,
 			Fuzziness = propFuzziness.Value,
 			FuzzyRewrite = propFuzzyRewrite.Value,
@@ -185,6 +196,10 @@ internal sealed partial class MatchQueryConverter : System.Text.Json.Serializati
 		writer.WriteProperty(options, PropAnalyzer, value.Analyzer, null, null);
 		writer.WriteProperty(options, PropAutoGenerateSynonymsPhraseQuery, value.AutoGenerateSynonymsPhraseQuery, null, null);
 		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+#pragma warning disable CS0618
+		writer.WriteProperty(options, PropCutoffFrequency, value.CutoffFrequency, null, null)
+#pragma warning restore CS0618
+		;
 		writer.WriteProperty(options, PropFuzziness, value.Fuzziness, null, null);
 		writer.WriteProperty(options, PropFuzzyRewrite, value.FuzzyRewrite, null, null);
 		writer.WriteProperty(options, PropFuzzyTranspositions, value.FuzzyTranspositions, null, null);
@@ -250,6 +265,8 @@ public sealed partial class MatchQuery
 	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
+	[System.Obsolete("Deprecated in '7.3.0'.")]
+	public double? CutoffFrequency { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required
@@ -384,6 +401,13 @@ public readonly partial struct MatchQueryDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.3.0'.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<TDocument> CutoffFrequency(double? value)
+	{
+		Instance.CutoffFrequency = value;
 		return this;
 	}
 
@@ -587,6 +611,13 @@ public readonly partial struct MatchQueryDescriptor
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.3.0'.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor CutoffFrequency(double? value)
+	{
+		Instance.CutoffFrequency = value;
 		return this;
 	}
 

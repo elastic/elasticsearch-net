@@ -978,6 +978,52 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestParameters>(request, cancellationToken);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.FlushJobResponse FlushJob(Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.FlushJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.FlushJobResponse FlushJob(Elastic.Clients.Elasticsearch.Id jobId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor(jobId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.FlushJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.FlushJobResponse FlushJob(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor(jobId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.FlushJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.FlushJobResponse> FlushJobAsync(Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.FlushJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.FlushJobResponse> FlushJobAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor(jobId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.FlushJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.FlushJobResponse> FlushJobAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor(jobId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.FlushJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestParameters>(request, cancellationToken);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.ForecastResponse Forecast(Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequest request)
 	{
 		request.BeforeRequest();

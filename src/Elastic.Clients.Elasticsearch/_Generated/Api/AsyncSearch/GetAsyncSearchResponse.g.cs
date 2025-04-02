@@ -164,17 +164,6 @@ internal sealed partial class GetAsyncSearchResponseConverterFactory : System.Te
 public sealed partial class GetAsyncSearchResponse<TDocument> : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetAsyncSearchResponse(System.DateTime expirationTimeInMillis, bool isPartial, bool isRunning, Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearch<TDocument> response, System.DateTime startTimeInMillis)
-	{
-		ExpirationTimeInMillis = expirationTimeInMillis;
-		IsPartial = isPartial;
-		IsRunning = isRunning;
-		Response = response;
-		StartTimeInMillis = startTimeInMillis;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetAsyncSearchResponse()
 	{
 	}

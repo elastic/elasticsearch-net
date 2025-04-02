@@ -75,14 +75,6 @@ internal sealed partial class ReloadSearchAnalyzersResponseConverter : System.Te
 public sealed partial class ReloadSearchAnalyzersResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ReloadSearchAnalyzersResponse(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ReloadDetails> reloadDetails, Elastic.Clients.Elasticsearch.ShardStatistics shards)
-	{
-		ReloadDetails = reloadDetails;
-		Shards = shards;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ReloadSearchAnalyzersResponse()
 	{
 	}

@@ -75,14 +75,6 @@ internal sealed partial class StartDataFrameAnalyticsResponseConverter : System.
 public sealed partial class StartDataFrameAnalyticsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public StartDataFrameAnalyticsResponse(bool acknowledged, string node)
-	{
-		Acknowledged = acknowledged;
-		Node = node;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public StartDataFrameAnalyticsResponse()
 	{
 	}

@@ -27,6 +27,7 @@ internal sealed partial class UntypedRangeQueryConverter : System.Text.Json.Seri
 {
 	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
 	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
+	private static readonly System.Text.Json.JsonEncodedText PropFrom = System.Text.Json.JsonEncodedText.Encode("from");
 	private static readonly System.Text.Json.JsonEncodedText PropGt = System.Text.Json.JsonEncodedText.Encode("gt");
 	private static readonly System.Text.Json.JsonEncodedText PropGte = System.Text.Json.JsonEncodedText.Encode("gte");
 	private static readonly System.Text.Json.JsonEncodedText PropLt = System.Text.Json.JsonEncodedText.Encode("lt");
@@ -34,6 +35,7 @@ internal sealed partial class UntypedRangeQueryConverter : System.Text.Json.Seri
 	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
 	private static readonly System.Text.Json.JsonEncodedText PropRelation = System.Text.Json.JsonEncodedText.Encode("relation");
 	private static readonly System.Text.Json.JsonEncodedText PropTimeZone = System.Text.Json.JsonEncodedText.Encode("time_zone");
+	private static readonly System.Text.Json.JsonEncodedText PropTo = System.Text.Json.JsonEncodedText.Encode("to");
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
@@ -45,6 +47,7 @@ internal sealed partial class UntypedRangeQueryConverter : System.Text.Json.Seri
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<float?> propBoost = default;
 		LocalJsonValue<string?> propFormat = default;
+		LocalJsonValue<object?> propFrom = default;
 		LocalJsonValue<object?> propGt = default;
 		LocalJsonValue<object?> propGte = default;
 		LocalJsonValue<object?> propLt = default;
@@ -52,6 +55,7 @@ internal sealed partial class UntypedRangeQueryConverter : System.Text.Json.Seri
 		LocalJsonValue<string?> propQueryName = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation?> propRelation = default;
 		LocalJsonValue<string?> propTimeZone = default;
+		LocalJsonValue<object?> propTo = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
@@ -60,6 +64,11 @@ internal sealed partial class UntypedRangeQueryConverter : System.Text.Json.Seri
 			}
 
 			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
+			{
+				continue;
+			}
+
+			if (propFrom.TryReadProperty(ref reader, options, PropFrom, null))
 			{
 				continue;
 			}
@@ -99,6 +108,11 @@ internal sealed partial class UntypedRangeQueryConverter : System.Text.Json.Seri
 				continue;
 			}
 
+			if (propTo.TryReadProperty(ref reader, options, PropTo, null))
+			{
+				continue;
+			}
+
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
 				reader.Skip();
@@ -116,13 +130,15 @@ internal sealed partial class UntypedRangeQueryConverter : System.Text.Json.Seri
 			Boost = propBoost.Value,
 			Field = propField.Value,
 			Format = propFormat.Value,
+			From = propFrom.Value,
 			Gt = propGt.Value,
 			Gte = propGte.Value,
 			Lt = propLt.Value,
 			Lte = propLte.Value,
 			QueryName = propQueryName.Value,
 			Relation = propRelation.Value,
-			TimeZone = propTimeZone.Value
+			TimeZone = propTimeZone.Value,
+			To = propTo.Value
 		};
 	}
 
@@ -133,6 +149,7 @@ internal sealed partial class UntypedRangeQueryConverter : System.Text.Json.Seri
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
 		writer.WriteProperty(options, PropFormat, value.Format, null, null);
+		writer.WriteProperty(options, PropFrom, value.From, null, null);
 		writer.WriteProperty(options, PropGt, value.Gt, null, null);
 		writer.WriteProperty(options, PropGte, value.Gte, null, null);
 		writer.WriteProperty(options, PropLt, value.Lt, null, null);
@@ -140,6 +157,7 @@ internal sealed partial class UntypedRangeQueryConverter : System.Text.Json.Seri
 		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
 		writer.WriteProperty(options, PropRelation, value.Relation, null, null);
 		writer.WriteProperty(options, PropTimeZone, value.TimeZone, null, null);
+		writer.WriteProperty(options, PropTo, value.To, null, null);
 		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}
@@ -185,6 +203,7 @@ public sealed partial class UntypedRangeQuery : Elastic.Clients.Elasticsearch.Qu
 	/// </para>
 	/// </summary>
 	public string? Format { get; set; }
+	public object? From { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -228,6 +247,7 @@ public sealed partial class UntypedRangeQuery : Elastic.Clients.Elasticsearch.Qu
 	/// </para>
 	/// </summary>
 	public string? TimeZone { get; set; }
+	public object? To { get; set; }
 
 	string Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.Type => "untyped";
 }
@@ -285,6 +305,12 @@ public readonly partial struct UntypedRangeQueryDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor<TDocument> Format(string? value)
 	{
 		Instance.Format = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor<TDocument> From(object? value)
+	{
+		Instance.From = value;
 		return this;
 	}
 
@@ -360,6 +386,12 @@ public readonly partial struct UntypedRangeQueryDescriptor<TDocument>
 		return this;
 	}
 
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor<TDocument> To(object? value)
+	{
+		Instance.To = value;
+		return this;
+	}
+
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 	internal static Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor<TDocument>> action)
 	{
@@ -422,6 +454,12 @@ public readonly partial struct UntypedRangeQueryDescriptor
 	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor Format(string? value)
 	{
 		Instance.Format = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor From(object? value)
+	{
+		Instance.From = value;
 		return this;
 	}
 
@@ -494,6 +532,12 @@ public readonly partial struct UntypedRangeQueryDescriptor
 	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor TimeZone(string? value)
 	{
 		Instance.TimeZone = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor To(object? value)
+	{
+		Instance.To = value;
 		return this;
 	}
 

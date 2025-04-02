@@ -93,15 +93,6 @@ internal sealed partial class InvalidateTokenResponseConverter : System.Text.Jso
 public sealed partial class InvalidateTokenResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public InvalidateTokenResponse(long errorCount, long invalidatedTokens, long previouslyInvalidatedTokens)
-	{
-		ErrorCount = errorCount;
-		InvalidatedTokens = invalidatedTokens;
-		PreviouslyInvalidatedTokens = previouslyInvalidatedTokens;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public InvalidateTokenResponse()
 	{
 	}

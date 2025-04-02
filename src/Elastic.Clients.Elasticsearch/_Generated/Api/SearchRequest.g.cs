@@ -112,6 +112,14 @@ public sealed partial class SearchRequestParameters : Elastic.Transport.RequestP
 
 	/// <summary>
 	/// <para>
+	/// If <c>true</c>, concrete, expanded or aliased indices will be ignored when frozen.
+	/// </para>
+	/// </summary>
+	[System.Obsolete("Deprecated in '7.16.0'.")]
+	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
+
+	/// <summary>
+	/// <para>
 	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
 	/// </para>
 	/// </summary>
@@ -143,7 +151,7 @@ public sealed partial class SearchRequestParameters : Elastic.Transport.RequestP
 	/// This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests.
 	/// </para>
 	/// </summary>
-	public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
+	public int? MaxConcurrentShardRequests { get => Q<int?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
 
 	/// <summary>
 	/// <para>
@@ -805,6 +813,14 @@ public partial class SearchRequest : Elastic.Clients.Elasticsearch.Requests.Plai
 
 	/// <summary>
 	/// <para>
+	/// If <c>true</c>, concrete, expanded or aliased indices will be ignored when frozen.
+	/// </para>
+	/// </summary>
+	[System.Obsolete("Deprecated in '7.16.0'.")]
+	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
+
+	/// <summary>
+	/// <para>
 	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
 	/// </para>
 	/// </summary>
@@ -836,7 +852,7 @@ public partial class SearchRequest : Elastic.Clients.Elasticsearch.Requests.Plai
 	/// This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests.
 	/// </para>
 	/// </summary>
-	public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
+	public int? MaxConcurrentShardRequests { get => Q<int?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
 
 	/// <summary>
 	/// <para>
@@ -1512,6 +1528,18 @@ public readonly partial struct SearchRequestDescriptor
 		return this;
 	}
 
+	[System.Obsolete("Deprecated in '7.16.0'.")]
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, concrete, expanded or aliased indices will be ignored when frozen.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor IgnoreThrottled(bool? value = true)
+	{
+		Instance.IgnoreThrottled = value;
+		return this;
+	}
+
 	/// <summary>
 	/// <para>
 	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
@@ -1557,7 +1585,7 @@ public readonly partial struct SearchRequestDescriptor
 	/// This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor MaxConcurrentShardRequests(long? value)
+	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor MaxConcurrentShardRequests(int? value)
 	{
 		Instance.MaxConcurrentShardRequests = value;
 		return this;
@@ -3481,6 +3509,18 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 		return this;
 	}
 
+	[System.Obsolete("Deprecated in '7.16.0'.")]
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, concrete, expanded or aliased indices will be ignored when frozen.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> IgnoreThrottled(bool? value = true)
+	{
+		Instance.IgnoreThrottled = value;
+		return this;
+	}
+
 	/// <summary>
 	/// <para>
 	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
@@ -3526,7 +3566,7 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 	/// This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> MaxConcurrentShardRequests(long? value)
+	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> MaxConcurrentShardRequests(int? value)
 	{
 		Instance.MaxConcurrentShardRequests = value;
 		return this;

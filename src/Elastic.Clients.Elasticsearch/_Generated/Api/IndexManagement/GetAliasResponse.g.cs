@@ -40,13 +40,6 @@ internal sealed partial class GetAliasResponseConverter : System.Text.Json.Seria
 public partial class GetAliasResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetAliasResponse(System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexAliases> aliases)
-	{
-		Aliases = aliases;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetAliasResponse()
 	{
 	}

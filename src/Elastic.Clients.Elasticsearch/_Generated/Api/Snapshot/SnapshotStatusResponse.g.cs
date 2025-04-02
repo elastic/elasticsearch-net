@@ -66,13 +66,6 @@ internal sealed partial class SnapshotStatusResponseConverter : System.Text.Json
 public sealed partial class SnapshotStatusResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public SnapshotStatusResponse(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.Status> snapshots)
-	{
-		Snapshots = snapshots;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public SnapshotStatusResponse()
 	{
 	}

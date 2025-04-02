@@ -84,15 +84,6 @@ internal sealed partial class GetBuiltinPrivilegesResponseConverter : System.Tex
 public sealed partial class GetBuiltinPrivilegesResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetBuiltinPrivilegesResponse(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege> cluster, System.Collections.Generic.IReadOnlyCollection<string> index, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege> remoteCluster)
-	{
-		Cluster = cluster;
-		Index = index;
-		RemoteCluster = remoteCluster;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetBuiltinPrivilegesResponse()
 	{
 	}

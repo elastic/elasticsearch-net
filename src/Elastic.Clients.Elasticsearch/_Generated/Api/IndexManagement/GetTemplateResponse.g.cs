@@ -40,13 +40,6 @@ internal sealed partial class GetTemplateResponseConverter : System.Text.Json.Se
 public sealed partial class GetTemplateResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetTemplateResponse(System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.TemplateMapping> templates)
-	{
-		Templates = templates;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetTemplateResponse()
 	{
 	}

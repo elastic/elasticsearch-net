@@ -40,13 +40,6 @@ internal sealed partial class RecoveryResponseConverter : System.Text.Json.Seria
 public sealed partial class RecoveryResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public RecoveryResponse(System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStatus> statuses)
-	{
-		Statuses = statuses;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public RecoveryResponse()
 	{
 	}

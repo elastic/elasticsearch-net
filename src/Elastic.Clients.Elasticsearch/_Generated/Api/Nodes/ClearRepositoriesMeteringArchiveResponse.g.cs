@@ -84,14 +84,6 @@ internal sealed partial class ClearRepositoriesMeteringArchiveResponseConverter 
 public sealed partial class ClearRepositoriesMeteringArchiveResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ClearRepositoriesMeteringArchiveResponse(string clusterName, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.RepositoryMeteringInformation> nodes)
-	{
-		ClusterName = clusterName;
-		Nodes = nodes;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ClearRepositoriesMeteringArchiveResponse()
 	{
 	}

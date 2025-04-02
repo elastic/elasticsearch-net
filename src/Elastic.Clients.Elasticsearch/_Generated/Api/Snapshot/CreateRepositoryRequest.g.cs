@@ -81,7 +81,7 @@ internal sealed partial class CreateRepositoryRequestConverter : System.Text.Jso
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestConverter))]
 public sealed partial class CreateRepositoryRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestParameters>
 {
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public CreateRepositoryRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("repository", name))
 	{
@@ -184,7 +184,7 @@ public readonly partial struct CreateRepositoryRequestDescriptor
 #pragma warning restore CS0618
 	}
 
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("TODO")]
 	public CreateRepositoryRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

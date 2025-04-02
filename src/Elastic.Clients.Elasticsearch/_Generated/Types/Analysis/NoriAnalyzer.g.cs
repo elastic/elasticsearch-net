@@ -29,6 +29,7 @@ internal sealed partial class NoriAnalyzerConverter : System.Text.Json.Serializa
 	private static readonly System.Text.Json.JsonEncodedText PropStoptags = System.Text.Json.JsonEncodedText.Encode("stoptags");
 	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
 	private static readonly System.Text.Json.JsonEncodedText PropUserDictionary = System.Text.Json.JsonEncodedText.Encode("user_dictionary");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
 
 	public override Elastic.Clients.Elasticsearch.Analysis.NoriAnalyzer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
@@ -36,6 +37,7 @@ internal sealed partial class NoriAnalyzerConverter : System.Text.Json.Serializa
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode?> propDecompoundMode = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propStoptags = default;
 		LocalJsonValue<string?> propUserDictionary = default;
+		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propDecompoundMode.TryReadProperty(ref reader, options, PropDecompoundMode, null))
@@ -59,6 +61,11 @@ internal sealed partial class NoriAnalyzerConverter : System.Text.Json.Serializa
 				continue;
 			}
 
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
 				reader.Skip();
@@ -73,7 +80,10 @@ internal sealed partial class NoriAnalyzerConverter : System.Text.Json.Serializa
 		{
 			DecompoundMode = propDecompoundMode.Value,
 			Stoptags = propStoptags.Value,
-			UserDictionary = propUserDictionary.Value
+			UserDictionary = propUserDictionary.Value,
+#pragma warning disable CS0618
+			Version = propVersion.Value
+#pragma warning restore CS0618
 		};
 	}
 
@@ -84,6 +94,10 @@ internal sealed partial class NoriAnalyzerConverter : System.Text.Json.Serializa
 		writer.WriteProperty(options, PropStoptags, value.Stoptags, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropUserDictionary, value.UserDictionary, null, null);
+#pragma warning disable CS0618
+		writer.WriteProperty(options, PropVersion, value.Version, null, null)
+#pragma warning restore CS0618
+		;
 		writer.WriteEndObject();
 	}
 }
@@ -113,6 +127,8 @@ public sealed partial class NoriAnalyzer : Elastic.Clients.Elasticsearch.Analysi
 	public string Type => "nori";
 
 	public string? UserDictionary { get; set; }
+	[System.Obsolete("Deprecated in '7.14.0'.")]
+	public string? Version { get; set; }
 }
 
 public readonly partial struct NoriAnalyzerDescriptor
@@ -167,6 +183,13 @@ public readonly partial struct NoriAnalyzerDescriptor
 	public Elastic.Clients.Elasticsearch.Analysis.NoriAnalyzerDescriptor UserDictionary(string? value)
 	{
 		Instance.UserDictionary = value;
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.14.0'.")]
+	public Elastic.Clients.Elasticsearch.Analysis.NoriAnalyzerDescriptor Version(string? value)
+	{
+		Instance.Version = value;
 		return this;
 	}
 

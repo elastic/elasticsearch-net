@@ -154,7 +154,7 @@ public readonly partial struct GetUserProfileRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Security.GetUserProfileRequest(uid);
 	}
 
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("TODO")]
 	public GetUserProfileRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

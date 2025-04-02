@@ -52,6 +52,14 @@ public sealed partial class GetMappingRequestParameters : Elastic.Transport.Requ
 
 	/// <summary>
 	/// <para>
+	/// If <c>true</c>, the request retrieves information from the local node only.
+	/// </para>
+	/// </summary>
+	[System.Obsolete("Deprecated in '7.8.0'. This parameter is a no-op and field mappings are always retrieved locally.")]
+	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+	/// <summary>
+	/// <para>
 	/// Period to wait for a connection to the master node.
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
@@ -157,6 +165,14 @@ public sealed partial class GetMappingRequest : Elastic.Clients.Elasticsearch.Re
 	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request retrieves information from the local node only.
+	/// </para>
+	/// </summary>
+	[System.Obsolete("Deprecated in '7.8.0'. This parameter is a no-op and field mappings are always retrieved locally.")]
+	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
 	/// <para>
@@ -285,6 +301,18 @@ public readonly partial struct GetMappingRequestDescriptor
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.8.0'. This parameter is a no-op and field mappings are always retrieved locally.")]
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request retrieves information from the local node only.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor Local(bool? value = true)
+	{
+		Instance.Local = value;
 		return this;
 	}
 
@@ -474,6 +502,18 @@ public readonly partial struct GetMappingRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.8.0'. This parameter is a no-op and field mappings are always retrieved locally.")]
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request retrieves information from the local node only.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument> Local(bool? value = true)
+	{
+		Instance.Local = value;
 		return this;
 	}
 

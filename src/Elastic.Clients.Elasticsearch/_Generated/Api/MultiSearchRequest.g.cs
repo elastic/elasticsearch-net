@@ -75,16 +75,17 @@ public sealed partial class MultiSearchRequestParameters : Elastic.Transport.Req
 	/// <summary>
 	/// <para>
 	/// Maximum number of concurrent searches the multi search API can execute.
+	/// Defaults to <c>max(1, (# of data nodes * min(search thread pool size, 10)))</c>.
 	/// </para>
 	/// </summary>
-	public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
+	public int? MaxConcurrentSearches { get => Q<int?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
 
 	/// <summary>
 	/// <para>
 	/// Maximum number of concurrent shard requests that each sub-search request executes per node.
 	/// </para>
 	/// </summary>
-	public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
+	public int? MaxConcurrentShardRequests { get => Q<int?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
 
 	/// <summary>
 	/// <para>
@@ -161,7 +162,7 @@ internal sealed partial class MultiSearchRequestConverter : System.Text.Json.Ser
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MultiSearchRequestConverter))]
 public partial class MultiSearchRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MultiSearchRequestParameters>
 {
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public MultiSearchRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 	{
@@ -184,7 +185,7 @@ public partial class MultiSearchRequest : Elastic.Clients.Elasticsearch.Requests
 	}
 #endif
 #if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public MultiSearchRequest()
 	{
 	}
@@ -260,16 +261,17 @@ public partial class MultiSearchRequest : Elastic.Clients.Elasticsearch.Requests
 	/// <summary>
 	/// <para>
 	/// Maximum number of concurrent searches the multi search API can execute.
+	/// Defaults to <c>max(1, (# of data nodes * min(search thread pool size, 10)))</c>.
 	/// </para>
 	/// </summary>
-	public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
+	public int? MaxConcurrentSearches { get => Q<int?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
 
 	/// <summary>
 	/// <para>
 	/// Maximum number of concurrent shard requests that each sub-search request executes per node.
 	/// </para>
 	/// </summary>
-	public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
+	public int? MaxConcurrentShardRequests { get => Q<int?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
 
 	/// <summary>
 	/// <para>
@@ -478,9 +480,10 @@ public readonly partial struct MultiSearchRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// Maximum number of concurrent searches the multi search API can execute.
+	/// Defaults to <c>max(1, (# of data nodes * min(search thread pool size, 10)))</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor MaxConcurrentSearches(long? value)
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor MaxConcurrentSearches(int? value)
 	{
 		Instance.MaxConcurrentSearches = value;
 		return this;
@@ -491,7 +494,7 @@ public readonly partial struct MultiSearchRequestDescriptor
 	/// Maximum number of concurrent shard requests that each sub-search request executes per node.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor MaxConcurrentShardRequests(long? value)
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor MaxConcurrentShardRequests(int? value)
 	{
 		Instance.MaxConcurrentShardRequests = value;
 		return this;
@@ -793,9 +796,10 @@ public readonly partial struct MultiSearchRequestDescriptor<TDocument>
 	/// <summary>
 	/// <para>
 	/// Maximum number of concurrent searches the multi search API can execute.
+	/// Defaults to <c>max(1, (# of data nodes * min(search thread pool size, 10)))</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> MaxConcurrentSearches(long? value)
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> MaxConcurrentSearches(int? value)
 	{
 		Instance.MaxConcurrentSearches = value;
 		return this;
@@ -806,7 +810,7 @@ public readonly partial struct MultiSearchRequestDescriptor<TDocument>
 	/// Maximum number of concurrent shard requests that each sub-search request executes per node.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> MaxConcurrentShardRequests(long? value)
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> MaxConcurrentShardRequests(int? value)
 	{
 		Instance.MaxConcurrentShardRequests = value;
 		return this;

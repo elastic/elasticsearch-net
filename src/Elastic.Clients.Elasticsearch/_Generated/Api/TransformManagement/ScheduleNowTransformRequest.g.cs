@@ -146,7 +146,7 @@ public readonly partial struct ScheduleNowTransformRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest(transformId);
 	}
 
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("TODO")]
 	public ScheduleNowTransformRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

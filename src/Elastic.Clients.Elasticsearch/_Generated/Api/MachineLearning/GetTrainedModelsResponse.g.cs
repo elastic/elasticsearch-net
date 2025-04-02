@@ -75,14 +75,6 @@ internal sealed partial class GetTrainedModelsResponseConverter : System.Text.Js
 public sealed partial class GetTrainedModelsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetTrainedModelsResponse(int count, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelConfig> trainedModelConfigs)
-	{
-		Count = count;
-		TrainedModelConfigs = trainedModelConfigs;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetTrainedModelsResponse()
 	{
 	}

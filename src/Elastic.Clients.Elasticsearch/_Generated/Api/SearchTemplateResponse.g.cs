@@ -200,16 +200,6 @@ internal sealed partial class SearchTemplateResponseConverterFactory : System.Te
 public sealed partial class SearchTemplateResponse<TDocument> : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public SearchTemplateResponse(Elastic.Clients.Elasticsearch.Core.Search.HitsMetadata<TDocument> hits, Elastic.Clients.Elasticsearch.ShardStatistics shards, bool timedOut, long took)
-	{
-		Hits = hits;
-		Shards = shards;
-		TimedOut = timedOut;
-		Took = took;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public SearchTemplateResponse()
 	{
 	}

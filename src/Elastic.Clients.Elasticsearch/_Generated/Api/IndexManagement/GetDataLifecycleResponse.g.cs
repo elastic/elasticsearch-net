@@ -66,13 +66,6 @@ internal sealed partial class GetDataLifecycleResponseConverter : System.Text.Js
 public sealed partial class GetDataLifecycleResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetDataLifecycleResponse(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamWithLifecycle> dataStreams)
-	{
-		DataStreams = dataStreams;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetDataLifecycleResponse()
 	{
 	}

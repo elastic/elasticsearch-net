@@ -192,19 +192,6 @@ internal sealed partial class UpdateDatafeedResponseConverter : System.Text.Json
 public sealed partial class UpdateDatafeedResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public UpdateDatafeedResponse(Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig chunkingConfig, string datafeedId, System.Collections.Generic.IReadOnlyCollection<string> indices, string jobId, Elastic.Clients.Elasticsearch.QueryDsl.Query query, Elastic.Clients.Elasticsearch.Duration queryDelay, int scrollSize)
-	{
-		ChunkingConfig = chunkingConfig;
-		DatafeedId = datafeedId;
-		Indices = indices;
-		JobId = jobId;
-		Query = query;
-		QueryDelay = queryDelay;
-		ScrollSize = scrollSize;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public UpdateDatafeedResponse()
 	{
 	}

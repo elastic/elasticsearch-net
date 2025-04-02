@@ -28,12 +28,14 @@ internal sealed partial class SnowballAnalyzerConverter : System.Text.Json.Seria
 	private static readonly System.Text.Json.JsonEncodedText PropLanguage = System.Text.Json.JsonEncodedText.Encode("language");
 	private static readonly System.Text.Json.JsonEncodedText PropStopwords = System.Text.Json.JsonEncodedText.Encode("stopwords");
 	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
 
 	public override Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage> propLanguage = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propStopwords = default;
+		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propLanguage.TryReadProperty(ref reader, options, PropLanguage, null))
@@ -52,6 +54,11 @@ internal sealed partial class SnowballAnalyzerConverter : System.Text.Json.Seria
 				continue;
 			}
 
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
 				reader.Skip();
@@ -65,7 +72,10 @@ internal sealed partial class SnowballAnalyzerConverter : System.Text.Json.Seria
 		return new Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			Language = propLanguage.Value,
-			Stopwords = propStopwords.Value
+			Stopwords = propStopwords.Value,
+#pragma warning disable CS0618
+			Version = propVersion.Value
+#pragma warning restore CS0618
 		};
 	}
 
@@ -75,6 +85,10 @@ internal sealed partial class SnowballAnalyzerConverter : System.Text.Json.Seria
 		writer.WriteProperty(options, PropLanguage, value.Language, null, null);
 		writer.WriteProperty(options, PropStopwords, value.Stopwords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
+#pragma warning disable CS0618
+		writer.WriteProperty(options, PropVersion, value.Version, null, null)
+#pragma warning restore CS0618
+		;
 		writer.WriteEndObject();
 	}
 }
@@ -93,7 +107,7 @@ public sealed partial class SnowballAnalyzer : Elastic.Clients.Elasticsearch.Ana
 	}
 #endif
 #if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public SnowballAnalyzer()
 	{
 	}
@@ -112,6 +126,9 @@ public sealed partial class SnowballAnalyzer : Elastic.Clients.Elasticsearch.Ana
 	public System.Collections.Generic.ICollection<string>? Stopwords { get; set; }
 
 	public string Type => "snowball";
+
+	[System.Obsolete("Deprecated in '7.14.0'.")]
+	public string? Version { get; set; }
 }
 
 public readonly partial struct SnowballAnalyzerDescriptor
@@ -160,6 +177,13 @@ public readonly partial struct SnowballAnalyzerDescriptor
 	public Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzerDescriptor Stopwords(params string[] values)
 	{
 		Instance.Stopwords = [.. values];
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.14.0'.")]
+	public Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzerDescriptor Version(string? value)
+	{
+		Instance.Version = value;
 		return this;
 	}
 

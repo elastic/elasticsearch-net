@@ -66,13 +66,6 @@ internal sealed partial class GetGeoipDatabaseResponseConverter : System.Text.Js
 public sealed partial class GetGeoipDatabaseResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetGeoipDatabaseResponse(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.DatabaseConfigurationMetadata> databases)
-	{
-		Databases = databases;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetGeoipDatabaseResponse()
 	{
 	}

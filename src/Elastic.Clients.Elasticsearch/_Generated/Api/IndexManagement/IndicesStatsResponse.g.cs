@@ -84,14 +84,6 @@ internal sealed partial class IndicesStatsResponseConverter : System.Text.Json.S
 public sealed partial class IndicesStatsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public IndicesStatsResponse(Elastic.Clients.Elasticsearch.IndexManagement.IndicesStats all, Elastic.Clients.Elasticsearch.ShardStatistics shards)
-	{
-		All = all;
-		Shards = shards;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public IndicesStatsResponse()
 	{
 	}

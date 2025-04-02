@@ -75,14 +75,6 @@ internal sealed partial class CcrStatsResponseConverter : System.Text.Json.Seria
 public sealed partial class CcrStatsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public CcrStatsResponse(Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowStats autoFollowStats, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStats followStats)
-	{
-		AutoFollowStats = autoFollowStats;
-		FollowStats = followStats;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public CcrStatsResponse()
 	{
 	}

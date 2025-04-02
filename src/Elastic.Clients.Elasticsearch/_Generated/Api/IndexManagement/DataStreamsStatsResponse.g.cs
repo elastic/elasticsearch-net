@@ -111,17 +111,6 @@ internal sealed partial class DataStreamsStatsResponseConverter : System.Text.Js
 public sealed partial class DataStreamsStatsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public DataStreamsStatsResponse(int backingIndices, int dataStreamCount, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsItem> dataStreams, Elastic.Clients.Elasticsearch.ShardStatistics shards, long totalStoreSizeBytes)
-	{
-		BackingIndices = backingIndices;
-		DataStreamCount = dataStreamCount;
-		DataStreams = dataStreams;
-		Shards = shards;
-		TotalStoreSizeBytes = totalStoreSizeBytes;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public DataStreamsStatsResponse()
 	{
 	}

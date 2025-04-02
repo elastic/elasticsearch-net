@@ -31,6 +31,7 @@ internal sealed partial class HighlightConverter : System.Text.Json.Serializatio
 	private static readonly System.Text.Json.JsonEncodedText PropBoundaryScannerLocale = System.Text.Json.JsonEncodedText.Encode("boundary_scanner_locale");
 	private static readonly System.Text.Json.JsonEncodedText PropEncoder = System.Text.Json.JsonEncodedText.Encode("encoder");
 	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropForceSource = System.Text.Json.JsonEncodedText.Encode("force_source");
 	private static readonly System.Text.Json.JsonEncodedText PropFragmenter = System.Text.Json.JsonEncodedText.Encode("fragmenter");
 	private static readonly System.Text.Json.JsonEncodedText PropFragmentSize = System.Text.Json.JsonEncodedText.Encode("fragment_size");
 	private static readonly System.Text.Json.JsonEncodedText PropHighlightFilter = System.Text.Json.JsonEncodedText.Encode("highlight_filter");
@@ -57,6 +58,7 @@ internal sealed partial class HighlightConverter : System.Text.Json.Serializatio
 		LocalJsonValue<string?> propBoundaryScannerLocale = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder?> propEncoder = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField>> propFields = default;
+		LocalJsonValue<bool?> propForceSource = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter?> propFragmenter = default;
 		LocalJsonValue<int?> propFragmentSize = default;
 		LocalJsonValue<bool?> propHighlightFilter = default;
@@ -101,6 +103,11 @@ internal sealed partial class HighlightConverter : System.Text.Json.Serializatio
 			}
 
 			if (propFields.TryReadProperty(ref reader, options, PropFields, static System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propForceSource.TryReadProperty(ref reader, options, PropForceSource, null))
 			{
 				continue;
 			}
@@ -203,6 +210,7 @@ internal sealed partial class HighlightConverter : System.Text.Json.Serializatio
 			BoundaryScannerLocale = propBoundaryScannerLocale.Value,
 			Encoder = propEncoder.Value,
 			Fields = propFields.Value,
+			ForceSource = propForceSource.Value,
 			Fragmenter = propFragmenter.Value,
 			FragmentSize = propFragmentSize.Value,
 			HighlightFilter = propHighlightFilter.Value,
@@ -231,6 +239,7 @@ internal sealed partial class HighlightConverter : System.Text.Json.Serializatio
 		writer.WriteProperty(options, PropBoundaryScannerLocale, value.BoundaryScannerLocale, null, null);
 		writer.WriteProperty(options, PropEncoder, value.Encoder, null, null);
 		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField> v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField>(o, v, null, null));
+		writer.WriteProperty(options, PropForceSource, value.ForceSource, null, null);
 		writer.WriteProperty(options, PropFragmenter, value.Fragmenter, null, null);
 		writer.WriteProperty(options, PropFragmentSize, value.FragmentSize, null, null);
 		writer.WriteProperty(options, PropHighlightFilter, value.HighlightFilter, null, null);
@@ -265,7 +274,7 @@ public sealed partial class Highlight
 	}
 #endif
 #if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public Highlight()
 	{
 	}
@@ -312,6 +321,7 @@ public sealed partial class Highlight
 	required
 #endif
 	System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField> Fields { get; set; }
+	public bool? ForceSource { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -572,6 +582,12 @@ public readonly partial struct HighlightDescriptor<TDocument>
 	{
 		Instance.Fields ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField>();
 		Instance.Fields.Add(key, Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> ForceSource(bool? value = true)
+	{
+		Instance.ForceSource = value;
 		return this;
 	}
 
@@ -1033,6 +1049,12 @@ public readonly partial struct HighlightDescriptor
 	{
 		Instance.Fields ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField>();
 		Instance.Fields.Add(key, Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor ForceSource(bool? value = true)
+	{
+		Instance.ForceSource = value;
 		return this;
 	}
 

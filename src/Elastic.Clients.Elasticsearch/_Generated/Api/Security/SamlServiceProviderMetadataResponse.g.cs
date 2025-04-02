@@ -66,13 +66,6 @@ internal sealed partial class SamlServiceProviderMetadataResponseConverter : Sys
 public sealed partial class SamlServiceProviderMetadataResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public SamlServiceProviderMetadataResponse(string metadata)
-	{
-		Metadata = metadata;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public SamlServiceProviderMetadataResponse()
 	{
 	}

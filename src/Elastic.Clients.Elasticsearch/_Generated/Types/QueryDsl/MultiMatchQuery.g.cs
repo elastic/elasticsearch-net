@@ -28,6 +28,7 @@ internal sealed partial class MultiMatchQueryConverter : System.Text.Json.Serial
 	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer");
 	private static readonly System.Text.Json.JsonEncodedText PropAutoGenerateSynonymsPhraseQuery = System.Text.Json.JsonEncodedText.Encode("auto_generate_synonyms_phrase_query");
 	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropCutoffFrequency = System.Text.Json.JsonEncodedText.Encode("cutoff_frequency");
 	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
 	private static readonly System.Text.Json.JsonEncodedText PropFuzziness = System.Text.Json.JsonEncodedText.Encode("fuzziness");
 	private static readonly System.Text.Json.JsonEncodedText PropFuzzyRewrite = System.Text.Json.JsonEncodedText.Encode("fuzzy_rewrite");
@@ -50,6 +51,7 @@ internal sealed partial class MultiMatchQueryConverter : System.Text.Json.Serial
 		LocalJsonValue<string?> propAnalyzer = default;
 		LocalJsonValue<bool?> propAutoGenerateSynonymsPhraseQuery = default;
 		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<double?> propCutoffFrequency = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propFields = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Fuzziness?> propFuzziness = default;
 		LocalJsonValue<string?> propFuzzyRewrite = default;
@@ -78,6 +80,11 @@ internal sealed partial class MultiMatchQueryConverter : System.Text.Json.Serial
 			}
 
 			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propCutoffFrequency.TryReadProperty(ref reader, options, PropCutoffFrequency, null))
 			{
 				continue;
 			}
@@ -172,6 +179,10 @@ internal sealed partial class MultiMatchQueryConverter : System.Text.Json.Serial
 			Analyzer = propAnalyzer.Value,
 			AutoGenerateSynonymsPhraseQuery = propAutoGenerateSynonymsPhraseQuery.Value,
 			Boost = propBoost.Value,
+#pragma warning disable CS0618
+			CutoffFrequency = propCutoffFrequency.Value
+#pragma warning restore CS0618
+,
 			Fields = propFields.Value,
 			Fuzziness = propFuzziness.Value,
 			FuzzyRewrite = propFuzzyRewrite.Value,
@@ -196,6 +207,10 @@ internal sealed partial class MultiMatchQueryConverter : System.Text.Json.Serial
 		writer.WriteProperty(options, PropAnalyzer, value.Analyzer, null, null);
 		writer.WriteProperty(options, PropAutoGenerateSynonymsPhraseQuery, value.AutoGenerateSynonymsPhraseQuery, null, null);
 		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+#pragma warning disable CS0618
+		writer.WriteProperty(options, PropCutoffFrequency, value.CutoffFrequency, null, null)
+#pragma warning restore CS0618
+		;
 		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
 		writer.WriteProperty(options, PropFuzziness, value.Fuzziness, null, null);
 		writer.WriteProperty(options, PropFuzzyRewrite, value.FuzzyRewrite, null, null);
@@ -229,7 +244,7 @@ public sealed partial class MultiMatchQuery
 	}
 #endif
 #if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public MultiMatchQuery()
 	{
 	}
@@ -263,6 +278,8 @@ public sealed partial class MultiMatchQuery
 	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
+	[System.Obsolete("Deprecated in '7.3.0'.")]
+	public double? CutoffFrequency { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -422,6 +439,13 @@ public readonly partial struct MultiMatchQueryDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.3.0'.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor<TDocument> CutoffFrequency(double? value)
+	{
+		Instance.CutoffFrequency = value;
 		return this;
 	}
 
@@ -671,6 +695,13 @@ public readonly partial struct MultiMatchQueryDescriptor
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.3.0'.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor CutoffFrequency(double? value)
+	{
+		Instance.CutoffFrequency = value;
 		return this;
 	}
 

@@ -66,13 +66,6 @@ internal sealed partial class GetScriptContextResponseConverter : System.Text.Js
 public sealed partial class GetScriptContextResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetScriptContextResponse(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.GetScriptContext.Context> contexts)
-	{
-		Contexts = contexts;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetScriptContextResponse()
 	{
 	}

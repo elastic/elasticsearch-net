@@ -75,14 +75,6 @@ internal sealed partial class PutSynonymResponseConverter : System.Text.Json.Ser
 public sealed partial class PutSynonymResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PutSynonymResponse(Elastic.Clients.Elasticsearch.IndexManagement.ReloadResult reloadAnalyzersDetails, Elastic.Clients.Elasticsearch.Result result)
-	{
-		ReloadAnalyzersDetails = reloadAnalyzersDetails;
-		Result = result;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutSynonymResponse()
 	{
 	}

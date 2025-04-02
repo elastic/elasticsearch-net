@@ -93,14 +93,6 @@ internal sealed partial class PostStartTrialResponseConverter : System.Text.Json
 public sealed partial class PostStartTrialResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PostStartTrialResponse(bool acknowledged, bool trialWasStarted)
-	{
-		Acknowledged = acknowledged;
-		TrialWasStarted = trialWasStarted;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PostStartTrialResponse()
 	{
 	}

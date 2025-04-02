@@ -95,7 +95,7 @@ public sealed partial class StoredScript
 	}
 #endif
 #if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public StoredScript()
 	{
 	}
@@ -109,7 +109,7 @@ public sealed partial class StoredScript
 	/// <summary>
 	/// <para>
 	/// The language the script is written in.
-	/// For serach templates, use <c>mustache</c>.
+	/// For search templates, use <c>mustache</c>.
 	/// </para>
 	/// </summary>
 	public
@@ -154,7 +154,7 @@ public readonly partial struct StoredScriptDescriptor
 	/// <summary>
 	/// <para>
 	/// The language the script is written in.
-	/// For serach templates, use <c>mustache</c>.
+	/// For search templates, use <c>mustache</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.StoredScriptDescriptor Language(Elastic.Clients.Elasticsearch.ScriptLanguage value)

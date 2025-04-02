@@ -142,7 +142,7 @@ public readonly partial struct DeleteByQueryRethrottleRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequest(taskId);
 	}
 
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("TODO")]
 	public DeleteByQueryRethrottleRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

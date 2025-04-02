@@ -75,14 +75,6 @@ internal sealed partial class GetModelSnapshotsResponseConverter : System.Text.J
 public sealed partial class GetModelSnapshotsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetModelSnapshotsResponse(long count, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshot> modelSnapshots)
-	{
-		Count = count;
-		ModelSnapshots = modelSnapshots;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetModelSnapshotsResponse()
 	{
 	}

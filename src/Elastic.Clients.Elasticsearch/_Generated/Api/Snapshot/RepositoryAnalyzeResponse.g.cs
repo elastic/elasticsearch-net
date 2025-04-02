@@ -237,32 +237,6 @@ internal sealed partial class RepositoryAnalyzeResponseConverter : System.Text.J
 public sealed partial class RepositoryAnalyzeResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public RepositoryAnalyzeResponse(int blobCount, string blobPath, int concurrency, Elastic.Clients.Elasticsearch.Snapshot.SnapshotNodeInfo coordinatingNode, Elastic.Clients.Elasticsearch.Duration deleteElapsed, System.TimeSpan deleteElapsedNanos, Elastic.Clients.Elasticsearch.Snapshot.DetailsInfo details, int earlyReadNodeCount, System.Collections.Generic.IReadOnlyCollection<string> issuesDetected, Elastic.Clients.Elasticsearch.Duration listingElapsed, System.TimeSpan listingElapsedNanos, Elastic.Clients.Elasticsearch.ByteSize maxBlobSize, long maxBlobSizeBytes, Elastic.Clients.Elasticsearch.ByteSize maxTotalDataSize, long maxTotalDataSizeBytes, double rareActionProbability, int readNodeCount, string repository, long seed, Elastic.Clients.Elasticsearch.Snapshot.SummaryInfo summary)
-	{
-		BlobCount = blobCount;
-		BlobPath = blobPath;
-		Concurrency = concurrency;
-		CoordinatingNode = coordinatingNode;
-		DeleteElapsed = deleteElapsed;
-		DeleteElapsedNanos = deleteElapsedNanos;
-		Details = details;
-		EarlyReadNodeCount = earlyReadNodeCount;
-		IssuesDetected = issuesDetected;
-		ListingElapsed = listingElapsed;
-		ListingElapsedNanos = listingElapsedNanos;
-		MaxBlobSize = maxBlobSize;
-		MaxBlobSizeBytes = maxBlobSizeBytes;
-		MaxTotalDataSize = maxTotalDataSize;
-		MaxTotalDataSizeBytes = maxTotalDataSizeBytes;
-		RareActionProbability = rareActionProbability;
-		ReadNodeCount = readNodeCount;
-		Repository = repository;
-		Seed = seed;
-		Summary = summary;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public RepositoryAnalyzeResponse()
 	{
 	}

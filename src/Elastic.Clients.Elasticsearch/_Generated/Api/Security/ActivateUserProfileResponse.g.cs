@@ -120,18 +120,6 @@ internal sealed partial class ActivateUserProfileResponseConverter : System.Text
 public sealed partial class ActivateUserProfileResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ActivateUserProfileResponse(System.Collections.Generic.IReadOnlyDictionary<string, object> data, Elastic.Clients.Elasticsearch.Security.UserProfileHitMetadata doc, System.Collections.Generic.IReadOnlyDictionary<string, object> labels, long lastSynchronized, string uid, Elastic.Clients.Elasticsearch.Security.UserProfileUser user)
-	{
-		Data = data;
-		Doc = doc;
-		Labels = labels;
-		LastSynchronized = lastSynchronized;
-		Uid = uid;
-		User = user;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ActivateUserProfileResponse()
 	{
 	}

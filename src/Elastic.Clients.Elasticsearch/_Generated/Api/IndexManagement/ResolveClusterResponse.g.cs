@@ -40,13 +40,6 @@ internal sealed partial class ResolveClusterResponseConverter : System.Text.Json
 public sealed partial class ResolveClusterResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ResolveClusterResponse(System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterInfo> infos)
-	{
-		Infos = infos;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ResolveClusterResponse()
 	{
 	}

@@ -75,14 +75,6 @@ internal sealed partial class GetFiltersResponseConverter : System.Text.Json.Ser
 public sealed partial class GetFiltersResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetFiltersResponse(long count, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Filter> filters)
-	{
-		Count = count;
-		Filters = filters;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetFiltersResponse()
 	{
 	}

@@ -75,13 +75,6 @@ internal sealed partial class HasPrivilegesUserProfileResponseConverter : System
 public sealed partial class HasPrivilegesUserProfileResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public HasPrivilegesUserProfileResponse(System.Collections.Generic.IReadOnlyCollection<string> hasPrivilegeUids)
-	{
-		HasPrivilegeUids = hasPrivilegeUids;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public HasPrivilegesUserProfileResponse()
 	{
 	}

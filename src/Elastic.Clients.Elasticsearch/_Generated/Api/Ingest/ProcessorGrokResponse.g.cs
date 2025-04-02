@@ -66,13 +66,6 @@ internal sealed partial class ProcessorGrokResponseConverter : System.Text.Json.
 public sealed partial class ProcessorGrokResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ProcessorGrokResponse(System.Collections.Generic.IReadOnlyDictionary<string, string> patterns)
-	{
-		Patterns = patterns;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ProcessorGrokResponse()
 	{
 	}

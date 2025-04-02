@@ -282,16 +282,6 @@ internal sealed partial class AllocationExplainResponseConverter : System.Text.J
 public sealed partial class AllocationExplainResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public AllocationExplainResponse(string currentState, string index, bool primary, int shard)
-	{
-		CurrentState = currentState;
-		Index = index;
-		Primary = primary;
-		Shard = shard;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public AllocationExplainResponse()
 	{
 	}

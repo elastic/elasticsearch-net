@@ -120,18 +120,6 @@ internal sealed partial class ClusterStatsResponseConverter : System.Text.Json.S
 public sealed partial class ClusterStatsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ClusterStatsResponse(string clusterName, string clusterUuid, Elastic.Clients.Elasticsearch.Cluster.ClusterIndices indices, Elastic.Clients.Elasticsearch.Cluster.ClusterNodes nodes, Elastic.Clients.Elasticsearch.HealthStatus status, long timestamp)
-	{
-		ClusterName = clusterName;
-		ClusterUuid = clusterUuid;
-		Indices = indices;
-		Nodes = nodes;
-		Status = status;
-		Timestamp = timestamp;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ClusterStatsResponse()
 	{
 	}

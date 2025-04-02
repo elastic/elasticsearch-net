@@ -84,15 +84,6 @@ internal sealed partial class TermsEnumResponseConverter : System.Text.Json.Seri
 public sealed partial class TermsEnumResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public TermsEnumResponse(bool complete, Elastic.Clients.Elasticsearch.ShardStatistics shards, System.Collections.Generic.IReadOnlyCollection<string> terms)
-	{
-		Complete = complete;
-		Shards = shards;
-		Terms = terms;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public TermsEnumResponse()
 	{
 	}

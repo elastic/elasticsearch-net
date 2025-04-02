@@ -66,13 +66,6 @@ internal sealed partial class PutRoleResponseConverter : System.Text.Json.Serial
 public sealed partial class PutRoleResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PutRoleResponse(Elastic.Clients.Elasticsearch.Security.CreatedStatus role)
-	{
-		Role = role;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutRoleResponse()
 	{
 	}

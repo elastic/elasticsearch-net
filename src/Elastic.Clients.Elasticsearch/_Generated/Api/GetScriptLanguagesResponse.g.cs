@@ -75,14 +75,6 @@ internal sealed partial class GetScriptLanguagesResponseConverter : System.Text.
 public sealed partial class GetScriptLanguagesResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetScriptLanguagesResponse(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.GetScriptLanguages.LanguageContext> languageContexts, System.Collections.Generic.IReadOnlyCollection<string> typesAllowed)
-	{
-		LanguageContexts = languageContexts;
-		TypesAllowed = typesAllowed;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetScriptLanguagesResponse()
 	{
 	}

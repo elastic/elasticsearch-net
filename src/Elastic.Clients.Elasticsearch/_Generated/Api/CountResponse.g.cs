@@ -75,14 +75,6 @@ internal sealed partial class CountResponseConverter : System.Text.Json.Serializ
 public sealed partial class CountResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public CountResponse(long count, Elastic.Clients.Elasticsearch.ShardStatistics shards)
-	{
-		Count = count;
-		Shards = shards;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public CountResponse()
 	{
 	}

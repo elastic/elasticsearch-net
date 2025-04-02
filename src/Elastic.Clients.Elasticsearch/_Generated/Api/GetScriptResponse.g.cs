@@ -84,14 +84,6 @@ internal sealed partial class GetScriptResponseConverter : System.Text.Json.Seri
 public sealed partial class GetScriptResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetScriptResponse(bool found, string id)
-	{
-		Found = found;
-		Id = id;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetScriptResponse()
 	{
 	}

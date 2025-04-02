@@ -102,16 +102,6 @@ internal sealed partial class GetRuleResponseConverter : System.Text.Json.Serial
 public sealed partial class GetRuleResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetRuleResponse(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActions actions, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria> criteria, string ruleId, Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType type)
-	{
-		Actions = actions;
-		Criteria = criteria;
-		RuleId = ruleId;
-		Type = type;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetRuleResponse()
 	{
 	}

@@ -66,13 +66,6 @@ internal sealed partial class RevertModelSnapshotResponseConverter : System.Text
 public sealed partial class RevertModelSnapshotResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public RevertModelSnapshotResponse(Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshot model)
-	{
-		Model = model;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public RevertModelSnapshotResponse()
 	{
 	}

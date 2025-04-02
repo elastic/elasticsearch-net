@@ -75,14 +75,6 @@ internal sealed partial class SegmentsResponseConverter : System.Text.Json.Seria
 public sealed partial class SegmentsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public SegmentsResponse(System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexSegment> indices, Elastic.Clients.Elasticsearch.ShardStatistics shards)
-	{
-		Indices = indices;
-		Shards = shards;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public SegmentsResponse()
 	{
 	}

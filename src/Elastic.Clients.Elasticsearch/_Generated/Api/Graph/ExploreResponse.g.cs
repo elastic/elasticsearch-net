@@ -102,17 +102,6 @@ internal sealed partial class ExploreResponseConverter : System.Text.Json.Serial
 public sealed partial class ExploreResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ExploreResponse(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Graph.Connection> connections, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure> failures, bool timedOut, long took, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Graph.Vertex> vertices)
-	{
-		Connections = connections;
-		Failures = failures;
-		TimedOut = timedOut;
-		Took = took;
-		Vertices = vertices;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ExploreResponse()
 	{
 	}

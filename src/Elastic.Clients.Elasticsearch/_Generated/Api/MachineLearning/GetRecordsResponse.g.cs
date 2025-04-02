@@ -75,14 +75,6 @@ internal sealed partial class GetRecordsResponseConverter : System.Text.Json.Ser
 public sealed partial class GetRecordsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetRecordsResponse(long count, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Anomaly> records)
-	{
-		Count = count;
-		Records = records;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetRecordsResponse()
 	{
 	}

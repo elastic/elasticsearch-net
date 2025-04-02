@@ -75,14 +75,6 @@ internal sealed partial class StartDatafeedResponseConverter : System.Text.Json.
 public sealed partial class StartDatafeedResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public StartDatafeedResponse(System.Collections.Generic.ICollection<string> node, bool started)
-	{
-		Node = node;
-		Started = started;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public StartDatafeedResponse()
 	{
 	}

@@ -114,7 +114,7 @@ internal sealed partial class UpdateCrossClusterApiKeyRequestConverter : System.
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestConverter))]
 public sealed partial class UpdateCrossClusterApiKeyRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestParameters>
 {
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public UpdateCrossClusterApiKeyRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
@@ -232,7 +232,7 @@ public readonly partial struct UpdateCrossClusterApiKeyRequestDescriptor
 #pragma warning restore CS0618
 	}
 
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("TODO")]
 	public UpdateCrossClusterApiKeyRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
@@ -464,7 +464,7 @@ public readonly partial struct UpdateCrossClusterApiKeyRequestDescriptor<TDocume
 #pragma warning restore CS0618
 	}
 
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("TODO")]
 	public UpdateCrossClusterApiKeyRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

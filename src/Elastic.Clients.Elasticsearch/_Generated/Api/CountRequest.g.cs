@@ -77,6 +77,14 @@ public sealed partial class CountRequestParameters : Elastic.Transport.RequestPa
 
 	/// <summary>
 	/// <para>
+	/// If <c>true</c>, concrete, expanded, or aliased indices are ignored when frozen.
+	/// </para>
+	/// </summary>
+	[System.Obsolete("Deprecated in '7.16.0'.")]
+	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
+
+	/// <summary>
+	/// <para>
 	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
 	/// </para>
 	/// </summary>
@@ -280,6 +288,14 @@ public partial class CountRequest : Elastic.Clients.Elasticsearch.Requests.Plain
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, concrete, expanded, or aliased indices are ignored when frozen.
+	/// </para>
+	/// </summary>
+	[System.Obsolete("Deprecated in '7.16.0'.")]
+	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
 	/// <summary>
 	/// <para>
@@ -513,6 +529,18 @@ public readonly partial struct CountRequestDescriptor
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.16.0'.")]
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, concrete, expanded, or aliased indices are ignored when frozen.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CountRequestDescriptor IgnoreThrottled(bool? value = true)
+	{
+		Instance.IgnoreThrottled = value;
 		return this;
 	}
 
@@ -859,6 +887,18 @@ public readonly partial struct CountRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.16.0'.")]
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, concrete, expanded, or aliased indices are ignored when frozen.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument> IgnoreThrottled(bool? value = true)
+	{
+		Instance.IgnoreThrottled = value;
 		return this;
 	}
 

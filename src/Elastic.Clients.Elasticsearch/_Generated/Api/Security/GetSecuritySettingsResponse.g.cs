@@ -84,15 +84,6 @@ internal sealed partial class GetSecuritySettingsResponseConverter : System.Text
 public sealed partial class GetSecuritySettingsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetSecuritySettingsResponse(Elastic.Clients.Elasticsearch.Security.SecuritySettings security, Elastic.Clients.Elasticsearch.Security.SecuritySettings securityProfile, Elastic.Clients.Elasticsearch.Security.SecuritySettings securityTokens)
-	{
-		Security = security;
-		SecurityProfile = securityProfile;
-		SecurityTokens = securityTokens;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetSecuritySettingsResponse()
 	{
 	}

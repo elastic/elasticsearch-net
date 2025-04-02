@@ -32,12 +32,16 @@ internal sealed partial class BooleanPropertyConverter : System.Text.Json.Serial
 	private static readonly System.Text.Json.JsonEncodedText PropFielddata = System.Text.Json.JsonEncodedText.Encode("fielddata");
 	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
 	private static readonly System.Text.Json.JsonEncodedText PropIgnoreAbove = System.Text.Json.JsonEncodedText.Encode("ignore_above");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMalformed = System.Text.Json.JsonEncodedText.Encode("ignore_malformed");
 	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
 	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
 	private static readonly System.Text.Json.JsonEncodedText PropNullValue = System.Text.Json.JsonEncodedText.Encode("null_value");
+	private static readonly System.Text.Json.JsonEncodedText PropOnScriptError = System.Text.Json.JsonEncodedText.Encode("on_script_error");
 	private static readonly System.Text.Json.JsonEncodedText PropProperties = System.Text.Json.JsonEncodedText.Encode("properties");
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
 	private static readonly System.Text.Json.JsonEncodedText PropStore = System.Text.Json.JsonEncodedText.Encode("store");
 	private static readonly System.Text.Json.JsonEncodedText PropSyntheticSourceKeep = System.Text.Json.JsonEncodedText.Encode("synthetic_source_keep");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeSeriesDimension = System.Text.Json.JsonEncodedText.Encode("time_series_dimension");
 	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
 
 	public override Elastic.Clients.Elasticsearch.Mapping.BooleanProperty Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -50,12 +54,16 @@ internal sealed partial class BooleanPropertyConverter : System.Text.Json.Serial
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata?> propFielddata = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propFields = default;
 		LocalJsonValue<int?> propIgnoreAbove = default;
+		LocalJsonValue<bool?> propIgnoreMalformed = default;
 		LocalJsonValue<bool?> propIndex = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, string>?> propMeta = default;
 		LocalJsonValue<bool?> propNullValue = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.OnScriptError?> propOnScriptError = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propProperties = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
 		LocalJsonValue<bool?> propStore = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum?> propSyntheticSourceKeep = default;
+		LocalJsonValue<bool?> propTimeSeriesDimension = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
@@ -93,6 +101,11 @@ internal sealed partial class BooleanPropertyConverter : System.Text.Json.Serial
 				continue;
 			}
 
+			if (propIgnoreMalformed.TryReadProperty(ref reader, options, PropIgnoreMalformed, null))
+			{
+				continue;
+			}
+
 			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
 			{
 				continue;
@@ -108,7 +121,17 @@ internal sealed partial class BooleanPropertyConverter : System.Text.Json.Serial
 				continue;
 			}
 
+			if (propOnScriptError.TryReadProperty(ref reader, options, PropOnScriptError, null))
+			{
+				continue;
+			}
+
 			if (propProperties.TryReadProperty(ref reader, options, PropProperties, null))
+			{
+				continue;
+			}
+
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
 			{
 				continue;
 			}
@@ -119,6 +142,11 @@ internal sealed partial class BooleanPropertyConverter : System.Text.Json.Serial
 			}
 
 			if (propSyntheticSourceKeep.TryReadProperty(ref reader, options, PropSyntheticSourceKeep, null))
+			{
+				continue;
+			}
+
+			if (propTimeSeriesDimension.TryReadProperty(ref reader, options, PropTimeSeriesDimension, null))
 			{
 				continue;
 			}
@@ -148,12 +176,16 @@ internal sealed partial class BooleanPropertyConverter : System.Text.Json.Serial
 			Fielddata = propFielddata.Value,
 			Fields = propFields.Value,
 			IgnoreAbove = propIgnoreAbove.Value,
+			IgnoreMalformed = propIgnoreMalformed.Value,
 			Index = propIndex.Value,
 			Meta = propMeta.Value,
 			NullValue = propNullValue.Value,
+			OnScriptError = propOnScriptError.Value,
 			Properties = propProperties.Value,
+			Script = propScript.Value,
 			Store = propStore.Value,
-			SyntheticSourceKeep = propSyntheticSourceKeep.Value
+			SyntheticSourceKeep = propSyntheticSourceKeep.Value,
+			TimeSeriesDimension = propTimeSeriesDimension.Value
 		};
 	}
 
@@ -167,12 +199,16 @@ internal sealed partial class BooleanPropertyConverter : System.Text.Json.Serial
 		writer.WriteProperty(options, PropFielddata, value.Fielddata, null, null);
 		writer.WriteProperty(options, PropFields, value.Fields, null, null);
 		writer.WriteProperty(options, PropIgnoreAbove, value.IgnoreAbove, null, null);
+		writer.WriteProperty(options, PropIgnoreMalformed, value.IgnoreMalformed, null, null);
 		writer.WriteProperty(options, PropIndex, value.Index, null, null);
 		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
 		writer.WriteProperty(options, PropNullValue, value.NullValue, null, null);
+		writer.WriteProperty(options, PropOnScriptError, value.OnScriptError, null, null);
 		writer.WriteProperty(options, PropProperties, value.Properties, null, null);
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
 		writer.WriteProperty(options, PropStore, value.Store, null, null);
 		writer.WriteProperty(options, PropSyntheticSourceKeep, value.SyntheticSourceKeep, null, null);
+		writer.WriteProperty(options, PropTimeSeriesDimension, value.TimeSeriesDimension, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
 	}
@@ -204,6 +240,7 @@ public sealed partial class BooleanProperty : Elastic.Clients.Elasticsearch.Mapp
 	public Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata? Fielddata { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 	public int? IgnoreAbove { get; set; }
+	public bool? IgnoreMalformed { get; set; }
 	public bool? Index { get; set; }
 
 	/// <summary>
@@ -213,9 +250,18 @@ public sealed partial class BooleanProperty : Elastic.Clients.Elasticsearch.Mapp
 	/// </summary>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public bool? NullValue { get; set; }
+	public Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptError { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
+	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 	public bool? Store { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
+	/// </para>
+	/// </summary>
+	public bool? TimeSeriesDimension { get; set; }
 
 	public string Type => "boolean";
 }
@@ -299,6 +345,12 @@ public readonly partial struct BooleanPropertyDescriptor<TDocument>
 		return this;
 	}
 
+	public Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor<TDocument> IgnoreMalformed(bool? value = true)
+	{
+		Instance.IgnoreMalformed = value;
+		return this;
+	}
+
 	public Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor<TDocument> Index(bool? value = true)
 	{
 		Instance.Index = value;
@@ -351,6 +403,12 @@ public readonly partial struct BooleanPropertyDescriptor<TDocument>
 		return this;
 	}
 
+	public Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor<TDocument> OnScriptError(Elastic.Clients.Elasticsearch.Mapping.OnScriptError? value)
+	{
+		Instance.OnScriptError = value;
+		return this;
+	}
+
 	public Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
 		Instance.Properties = value;
@@ -363,6 +421,24 @@ public readonly partial struct BooleanPropertyDescriptor<TDocument>
 		return this;
 	}
 
+	public Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? value)
+	{
+		Instance.Script = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor<TDocument> Script()
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
+	}
+
 	public Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor<TDocument> Store(bool? value = true)
 	{
 		Instance.Store = value;
@@ -372,6 +448,17 @@ public readonly partial struct BooleanPropertyDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? value)
 	{
 		Instance.SyntheticSourceKeep = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor<TDocument> TimeSeriesDimension(bool? value = true)
+	{
+		Instance.TimeSeriesDimension = value;
 		return this;
 	}
 
@@ -474,6 +561,12 @@ public readonly partial struct BooleanPropertyDescriptor
 		return this;
 	}
 
+	public Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor IgnoreMalformed(bool? value = true)
+	{
+		Instance.IgnoreMalformed = value;
+		return this;
+	}
+
 	public Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor Index(bool? value = true)
 	{
 		Instance.Index = value;
@@ -526,6 +619,12 @@ public readonly partial struct BooleanPropertyDescriptor
 		return this;
 	}
 
+	public Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor OnScriptError(Elastic.Clients.Elasticsearch.Mapping.OnScriptError? value)
+	{
+		Instance.OnScriptError = value;
+		return this;
+	}
+
 	public Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
 		Instance.Properties = value;
@@ -544,6 +643,24 @@ public readonly partial struct BooleanPropertyDescriptor
 		return this;
 	}
 
+	public Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor Script(Elastic.Clients.Elasticsearch.Script? value)
+	{
+		Instance.Script = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor Script()
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
+	}
+
 	public Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor Store(bool? value = true)
 	{
 		Instance.Store = value;
@@ -553,6 +670,17 @@ public readonly partial struct BooleanPropertyDescriptor
 	public Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? value)
 	{
 		Instance.SyntheticSourceKeep = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor TimeSeriesDimension(bool? value = true)
+	{
+		Instance.TimeSeriesDimension = value;
 		return this;
 	}
 

@@ -147,22 +147,6 @@ internal sealed partial class GetStatsResponseConverter : System.Text.Json.Seria
 public sealed partial class GetStatsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetStatsResponse(System.Collections.Generic.IReadOnlyCollection<string> policyStats, Elastic.Clients.Elasticsearch.Duration retentionDeletionTime, System.TimeSpan retentionDeletionTimeMillis, long retentionFailed, long retentionRuns, long retentionTimedOut, long totalSnapshotDeletionFailures, long totalSnapshotsDeleted, long totalSnapshotsFailed, long totalSnapshotsTaken)
-	{
-		PolicyStats = policyStats;
-		RetentionDeletionTime = retentionDeletionTime;
-		RetentionDeletionTimeMillis = retentionDeletionTimeMillis;
-		RetentionFailed = retentionFailed;
-		RetentionRuns = retentionRuns;
-		RetentionTimedOut = retentionTimedOut;
-		TotalSnapshotDeletionFailures = totalSnapshotDeletionFailures;
-		TotalSnapshotsDeleted = totalSnapshotsDeleted;
-		TotalSnapshotsFailed = totalSnapshotsFailed;
-		TotalSnapshotsTaken = totalSnapshotsTaken;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetStatsResponse()
 	{
 	}

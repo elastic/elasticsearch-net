@@ -92,14 +92,6 @@ internal sealed partial class MultiSearchTemplateResponseConverterFactory : Syst
 public partial class MultiSearchTemplateResponse<TDocument> : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public MultiSearchTemplateResponse(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchResponseItem<TDocument>> responses, long took)
-	{
-		Responses = responses;
-		Took = took;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public MultiSearchTemplateResponse()
 	{
 	}

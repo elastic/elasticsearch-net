@@ -183,19 +183,6 @@ internal sealed partial class UpdateTransformResponseConverter : System.Text.Jso
 public sealed partial class UpdateTransformResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public UpdateTransformResponse(long createTime, string description, Elastic.Clients.Elasticsearch.Core.Reindex.Destination dest, string id, Elastic.Clients.Elasticsearch.TransformManagement.Settings settings, Elastic.Clients.Elasticsearch.Core.Reindex.Source source, string version)
-	{
-		CreateTime = createTime;
-		Description = description;
-		Dest = dest;
-		Id = id;
-		Settings = settings;
-		Source = source;
-		Version = version;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public UpdateTransformResponse()
 	{
 	}

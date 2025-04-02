@@ -92,14 +92,6 @@ internal sealed partial class PreviewTransformResponseConverterFactory : System.
 public sealed partial class PreviewTransformResponse<TTransform> : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PreviewTransformResponse(Elastic.Clients.Elasticsearch.IndexManagement.IndexState generatedDestIndex, System.Collections.Generic.IReadOnlyCollection<TTransform> preview)
-	{
-		GeneratedDestIndex = generatedDestIndex;
-		Preview = preview;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PreviewTransformResponse()
 	{
 	}

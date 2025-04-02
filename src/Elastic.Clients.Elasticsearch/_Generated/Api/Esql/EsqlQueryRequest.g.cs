@@ -27,13 +27,6 @@ public sealed partial class EsqlQueryRequestParameters : Elastic.Transport.Reque
 {
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, partial results will be returned if there are shard failures, but the query can continue to execute on other clusters and shards.
-	/// </para>
-	/// </summary>
-	public bool? AllowPartialResults { get => Q<bool?>("allow_partial_results"); set => Q("allow_partial_results", value); }
-
-	/// <summary>
-	/// <para>
 	/// The character to use between values within a CSV row. Only valid for the CSV format.
 	/// </para>
 	/// </summary>
@@ -168,7 +161,7 @@ public sealed partial class EsqlQueryRequest : Elastic.Clients.Elasticsearch.Req
 	}
 #endif
 #if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public EsqlQueryRequest()
 	{
 	}
@@ -186,13 +179,6 @@ public sealed partial class EsqlQueryRequest : Elastic.Clients.Elasticsearch.Req
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "esql.query";
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, partial results will be returned if there are shard failures, but the query can continue to execute on other clusters and shards.
-	/// </para>
-	/// </summary>
-	public bool? AllowPartialResults { get => Q<bool?>("allow_partial_results"); set => Q("allow_partial_results", value); }
 
 	/// <summary>
 	/// <para>
@@ -292,17 +278,6 @@ public readonly partial struct EsqlQueryRequestDescriptor
 
 	public static explicit operator Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor(Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest instance) => new Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest(Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor descriptor) => descriptor.Instance;
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, partial results will be returned if there are shard failures, but the query can continue to execute on other clusters and shards.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor AllowPartialResults(bool? value = true)
-	{
-		Instance.AllowPartialResults = value;
-		return this;
-	}
 
 	/// <summary>
 	/// <para>
@@ -544,17 +519,6 @@ public readonly partial struct EsqlQueryRequestDescriptor<TDocument>
 
 	public static explicit operator Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest instance) => new Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest(Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, partial results will be returned if there are shard failures, but the query can continue to execute on other clusters and shards.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> AllowPartialResults(bool? value = true)
-	{
-		Instance.AllowPartialResults = value;
-		return this;
-	}
 
 	/// <summary>
 	/// <para>

@@ -200,16 +200,6 @@ internal sealed partial class SearchResponseConverterFactory : System.Text.Json.
 public partial class SearchResponse<TDocument> : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public SearchResponse(Elastic.Clients.Elasticsearch.Core.Search.HitsMetadata<TDocument> hitsMetadata, Elastic.Clients.Elasticsearch.ShardStatistics shards, bool timedOut, long took)
-	{
-		HitsMetadata = hitsMetadata;
-		Shards = shards;
-		TimedOut = timedOut;
-		Took = took;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public SearchResponse()
 	{
 	}

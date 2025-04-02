@@ -26,15 +26,22 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 internal sealed partial class KeywordAnalyzerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
 
 	public override Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (reader.ValueTextEquals(PropType))
 			{
 				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
 				continue;
 			}
 
@@ -50,6 +57,9 @@ internal sealed partial class KeywordAnalyzerConverter : System.Text.Json.Serial
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+#pragma warning disable CS0618
+			Version = propVersion.Value
+#pragma warning restore CS0618
 		};
 	}
 
@@ -57,6 +67,10 @@ internal sealed partial class KeywordAnalyzerConverter : System.Text.Json.Serial
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropType, value.Type, null, null);
+#pragma warning disable CS0618
+		writer.WriteProperty(options, PropVersion, value.Version, null, null)
+#pragma warning restore CS0618
+		;
 		writer.WriteEndObject();
 	}
 }
@@ -81,6 +95,9 @@ public sealed partial class KeywordAnalyzer : Elastic.Clients.Elasticsearch.Anal
 	}
 
 	public string Type => "keyword";
+
+	[System.Obsolete("Deprecated in '7.14.0'.")]
+	public string? Version { get; set; }
 }
 
 public readonly partial struct KeywordAnalyzerDescriptor
@@ -101,6 +118,13 @@ public readonly partial struct KeywordAnalyzerDescriptor
 
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzerDescriptor(Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer instance) => new Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzerDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer(Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzerDescriptor descriptor) => descriptor.Instance;
+
+	[System.Obsolete("Deprecated in '7.14.0'.")]
+	public Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzerDescriptor Version(string? value)
+	{
+		Instance.Version = value;
+		return this;
+	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 	internal static Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzerDescriptor>? action)

@@ -53,6 +53,14 @@ public sealed partial class SearchTemplateRequestParameters : Elastic.Transport.
 
 	/// <summary>
 	/// <para>
+	/// If <c>true</c>, specified concrete, expanded, or aliased indices are not included in the response when throttled.
+	/// </para>
+	/// </summary>
+	[System.Obsolete("Deprecated in '7.16.0'.")]
+	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
+
+	/// <summary>
+	/// <para>
 	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
 	/// </para>
 	/// </summary>
@@ -247,6 +255,14 @@ public sealed partial class SearchTemplateRequest : Elastic.Clients.Elasticsearc
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, specified concrete, expanded, or aliased indices are not included in the response when throttled.
+	/// </para>
+	/// </summary>
+	[System.Obsolete("Deprecated in '7.16.0'.")]
+	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
 	/// <summary>
 	/// <para>
@@ -459,6 +475,18 @@ public readonly partial struct SearchTemplateRequestDescriptor
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.16.0'.")]
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, specified concrete, expanded, or aliased indices are not included in the response when throttled.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor IgnoreThrottled(bool? value = true)
+	{
+		Instance.IgnoreThrottled = value;
 		return this;
 	}
 
@@ -809,6 +837,18 @@ public readonly partial struct SearchTemplateRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.16.0'.")]
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, specified concrete, expanded, or aliased indices are not included in the response when throttled.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> IgnoreThrottled(bool? value = true)
+	{
+		Instance.IgnoreThrottled = value;
 		return this;
 	}
 

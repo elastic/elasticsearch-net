@@ -66,13 +66,6 @@ internal sealed partial class PutSearchApplicationResponseConverter : System.Tex
 public sealed partial class PutSearchApplicationResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PutSearchApplicationResponse(Elastic.Clients.Elasticsearch.Result result)
-	{
-		Result = result;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutSearchApplicationResponse()
 	{
 	}

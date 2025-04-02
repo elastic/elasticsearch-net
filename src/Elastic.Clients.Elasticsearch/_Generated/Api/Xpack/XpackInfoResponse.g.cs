@@ -93,16 +93,6 @@ internal sealed partial class XpackInfoResponseConverter : System.Text.Json.Seri
 public sealed partial class XpackInfoResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public XpackInfoResponse(Elastic.Clients.Elasticsearch.Xpack.BuildInformation build, Elastic.Clients.Elasticsearch.Xpack.Features features, Elastic.Clients.Elasticsearch.Xpack.MinimalLicenseInformation license, string tagline)
-	{
-		Build = build;
-		Features = features;
-		License = license;
-		Tagline = tagline;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public XpackInfoResponse()
 	{
 	}

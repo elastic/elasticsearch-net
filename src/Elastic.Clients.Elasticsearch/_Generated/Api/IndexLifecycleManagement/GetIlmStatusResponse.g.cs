@@ -66,13 +66,6 @@ internal sealed partial class GetIlmStatusResponseConverter : System.Text.Json.S
 public sealed partial class GetIlmStatusResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetIlmStatusResponse(Elastic.Clients.Elasticsearch.LifecycleOperationMode operationMode)
-	{
-		OperationMode = operationMode;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetIlmStatusResponse()
 	{
 	}

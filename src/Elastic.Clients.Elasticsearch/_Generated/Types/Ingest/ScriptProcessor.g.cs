@@ -42,7 +42,7 @@ internal sealed partial class ScriptProcessorConverter : System.Text.Json.Serial
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propId = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propIf = default;
 		LocalJsonValue<bool?> propIgnoreFailure = default;
-		LocalJsonValue<string?> propLang = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ScriptLanguage?> propLang = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>?> propOnFailure = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propParams = default;
 		LocalJsonValue<string?> propSource = default;
@@ -188,7 +188,7 @@ public sealed partial class ScriptProcessor
 	/// Script language.
 	/// </para>
 	/// </summary>
-	public string? Lang { get; set; }
+	public Elastic.Clients.Elasticsearch.ScriptLanguage? Lang { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -313,7 +313,7 @@ public readonly partial struct ScriptProcessorDescriptor<TDocument>
 	/// Script language.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor<TDocument> Lang(string? value)
+	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor<TDocument> Lang(Elastic.Clients.Elasticsearch.ScriptLanguage? value)
 	{
 		Instance.Lang = value;
 		return this;
@@ -550,7 +550,7 @@ public readonly partial struct ScriptProcessorDescriptor
 	/// Script language.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor Lang(string? value)
+	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor Lang(Elastic.Clients.Elasticsearch.ScriptLanguage? value)
 	{
 		Instance.Lang = value;
 		return this;

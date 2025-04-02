@@ -75,14 +75,6 @@ internal sealed partial class ListResponseConverter : System.Text.Json.Serializa
 public sealed partial class ListResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ListResponse(long count, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplication> results)
-	{
-		Count = count;
-		Results = results;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ListResponse()
 	{
 	}

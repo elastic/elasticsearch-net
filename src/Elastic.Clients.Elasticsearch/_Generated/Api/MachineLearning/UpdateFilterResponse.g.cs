@@ -84,15 +84,6 @@ internal sealed partial class UpdateFilterResponseConverter : System.Text.Json.S
 public sealed partial class UpdateFilterResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public UpdateFilterResponse(string description, string filterId, System.Collections.Generic.IReadOnlyCollection<string> items)
-	{
-		Description = description;
-		FilterId = filterId;
-		Items = items;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public UpdateFilterResponse()
 	{
 	}

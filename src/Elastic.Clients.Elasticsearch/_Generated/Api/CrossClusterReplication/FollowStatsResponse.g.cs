@@ -66,13 +66,6 @@ internal sealed partial class FollowStatsResponseConverter : System.Text.Json.Se
 public sealed partial class FollowStatsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public FollowStatsResponse(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowIndexStats> indices)
-	{
-		Indices = indices;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public FollowStatsResponse()
 	{
 	}

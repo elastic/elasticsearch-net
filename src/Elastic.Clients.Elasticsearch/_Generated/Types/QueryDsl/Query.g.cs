@@ -28,6 +28,7 @@ internal sealed partial class QueryConverter : System.Text.Json.Serialization.Js
 	private static readonly System.Text.Json.JsonEncodedText VariantBool = System.Text.Json.JsonEncodedText.Encode("bool");
 	private static readonly System.Text.Json.JsonEncodedText VariantBoosting = System.Text.Json.JsonEncodedText.Encode("boosting");
 	private static readonly System.Text.Json.JsonEncodedText VariantCombinedFields = System.Text.Json.JsonEncodedText.Encode("combined_fields");
+	private static readonly System.Text.Json.JsonEncodedText VariantCommon = System.Text.Json.JsonEncodedText.Encode("common");
 	private static readonly System.Text.Json.JsonEncodedText VariantConstantScore = System.Text.Json.JsonEncodedText.Encode("constant_score");
 	private static readonly System.Text.Json.JsonEncodedText VariantDisMax = System.Text.Json.JsonEncodedText.Encode("dis_max");
 	private static readonly System.Text.Json.JsonEncodedText VariantDistanceFeature = System.Text.Json.JsonEncodedText.Encode("distance_feature");
@@ -37,6 +38,7 @@ internal sealed partial class QueryConverter : System.Text.Json.Serialization.Js
 	private static readonly System.Text.Json.JsonEncodedText VariantGeoBoundingBox = System.Text.Json.JsonEncodedText.Encode("geo_bounding_box");
 	private static readonly System.Text.Json.JsonEncodedText VariantGeoDistance = System.Text.Json.JsonEncodedText.Encode("geo_distance");
 	private static readonly System.Text.Json.JsonEncodedText VariantGeoGrid = System.Text.Json.JsonEncodedText.Encode("geo_grid");
+	private static readonly System.Text.Json.JsonEncodedText VariantGeoPolygon = System.Text.Json.JsonEncodedText.Encode("geo_polygon");
 	private static readonly System.Text.Json.JsonEncodedText VariantGeoShape = System.Text.Json.JsonEncodedText.Encode("geo_shape");
 	private static readonly System.Text.Json.JsonEncodedText VariantHasChild = System.Text.Json.JsonEncodedText.Encode("has_child");
 	private static readonly System.Text.Json.JsonEncodedText VariantHasParent = System.Text.Json.JsonEncodedText.Encode("has_parent");
@@ -79,6 +81,9 @@ internal sealed partial class QueryConverter : System.Text.Json.Serialization.Js
 	private static readonly System.Text.Json.JsonEncodedText VariantTerm = System.Text.Json.JsonEncodedText.Encode("term");
 	private static readonly System.Text.Json.JsonEncodedText VariantTerms = System.Text.Json.JsonEncodedText.Encode("terms");
 	private static readonly System.Text.Json.JsonEncodedText VariantTermsSet = System.Text.Json.JsonEncodedText.Encode("terms_set");
+	private static readonly System.Text.Json.JsonEncodedText VariantTextExpansion = System.Text.Json.JsonEncodedText.Encode("text_expansion");
+	private static readonly System.Text.Json.JsonEncodedText VariantType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText VariantWeightedTokens = System.Text.Json.JsonEncodedText.Encode("weighted_tokens");
 	private static readonly System.Text.Json.JsonEncodedText VariantWildcard = System.Text.Json.JsonEncodedText.Encode("wildcard");
 	private static readonly System.Text.Json.JsonEncodedText VariantWrapper = System.Text.Json.JsonEncodedText.Encode("wrapper");
 
@@ -110,6 +115,14 @@ internal sealed partial class QueryConverter : System.Text.Json.Serialization.Js
 				variantType = VariantCombinedFields.Value;
 				reader.Read();
 				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantCommon))
+			{
+				variantType = VariantCommon.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.CommonTermsQuery>(options, null);
 				continue;
 			}
 
@@ -182,6 +195,14 @@ internal sealed partial class QueryConverter : System.Text.Json.Serialization.Js
 				variantType = VariantGeoGrid.Value;
 				reader.Read();
 				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantGeoPolygon))
+			{
+				variantType = VariantGeoPolygon.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQuery>(options, null);
 				continue;
 			}
 
@@ -521,6 +542,30 @@ internal sealed partial class QueryConverter : System.Text.Json.Serialization.Js
 				continue;
 			}
 
+			if (reader.ValueTextEquals(VariantTextExpansion))
+			{
+				variantType = VariantTextExpansion.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantType))
+			{
+				variantType = VariantType.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.TypeQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantWeightedTokens))
+			{
+				variantType = VariantWeightedTokens.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQuery>(options, null);
+				continue;
+			}
+
 			if (reader.ValueTextEquals(VariantWildcard))
 			{
 				variantType = VariantWildcard.Value;
@@ -570,6 +615,9 @@ internal sealed partial class QueryConverter : System.Text.Json.Serialization.Js
 			case "combined_fields":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery)value.Variant, null, null);
 				break;
+			case "common":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.CommonTermsQuery)value.Variant, null, null);
+				break;
 			case "constant_score":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQuery)value.Variant, null, null);
 				break;
@@ -596,6 +644,9 @@ internal sealed partial class QueryConverter : System.Text.Json.Serialization.Js
 				break;
 			case "geo_grid":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery)value.Variant, null, null);
+				break;
+			case "geo_polygon":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQuery)value.Variant, null, null);
 				break;
 			case "geo_shape":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery)value.Variant, null, null);
@@ -723,6 +774,15 @@ internal sealed partial class QueryConverter : System.Text.Json.Serialization.Js
 			case "terms_set":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQuery)value.Variant, null, null);
 				break;
+			case "text_expansion":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQuery)value.Variant, null, null);
+				break;
+			case "type":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.TypeQuery)value.Variant, null, null);
+				break;
+			case "weighted_tokens":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQuery)value.Variant, null, null);
+				break;
 			case "wildcard":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery)value.Variant, null, null);
 				break;
@@ -778,6 +838,8 @@ public sealed partial class Query
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery? CombinedFields { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery>("combined_fields"); set => SetVariant("combined_fields", value); }
+	[System.Obsolete("Deprecated in '7.3.0'.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.CommonTermsQuery? Common { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.CommonTermsQuery>("common"); set => SetVariant("common", value); }
 
 	/// <summary>
 	/// <para>
@@ -843,6 +905,8 @@ public sealed partial class Query
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery? GeoGrid { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery>("geo_grid"); set => SetVariant("geo_grid", value); }
+	[System.Obsolete("Deprecated in '7.12.0'. Use geo-shape instead.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQuery? GeoPolygon { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQuery>("geo_polygon"); set => SetVariant("geo_polygon", value); }
 
 	/// <summary>
 	/// <para>
@@ -1148,6 +1212,24 @@ public sealed partial class Query
 
 	/// <summary>
 	/// <para>
+	/// Uses a natural language processing model to convert the query text into a list of token-weight pairs which are then used in a query against a sparse vector or rank features field.
+	/// </para>
+	/// </summary>
+	[System.Obsolete("Deprecated in '8.15.0'.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQuery? TextExpansion { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQuery>("text_expansion"); set => SetVariant("text_expansion", value); }
+	[System.Obsolete("Deprecated in '7.0.0'. https://www.elastic.co/guide/en/elasticsearch/reference/7.x/removal-of-types.html")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.TypeQuery? Type { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.TypeQuery>("type"); set => SetVariant("type", value); }
+
+	/// <summary>
+	/// <para>
+	/// Supports returning text_expansion query results by sending in precomputed tokens with the query.
+	/// </para>
+	/// </summary>
+	[System.Obsolete("Deprecated in '8.15.0'.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQuery? WeightedTokens { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQuery>("weighted_tokens"); set => SetVariant("weighted_tokens", value); }
+
+	/// <summary>
+	/// <para>
 	/// Returns documents that contain terms matching a wildcard pattern.
 	/// </para>
 	/// </summary>
@@ -1163,6 +1245,9 @@ public sealed partial class Query
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { Bool = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { Boosting = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { CombinedFields = value };
+#pragma warning disable CS0618
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.CommonTermsQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { Common = value };
+#pragma warning restore CS0618
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { ConstantScore = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { DisMax = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.DateDistanceFeatureQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { DistanceFeature = value };
@@ -1174,6 +1259,9 @@ public sealed partial class Query
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { GeoBoundingBox = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { GeoDistance = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { GeoGrid = value };
+#pragma warning disable CS0618
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { GeoPolygon = value };
+#pragma warning restore CS0618
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { GeoShape = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { HasChild = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { HasParent = value };
@@ -1219,6 +1307,15 @@ public sealed partial class Query
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.TermQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { Term = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { Terms = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { TermsSet = value };
+#pragma warning disable CS0618
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { TextExpansion = value };
+#pragma warning restore CS0618
+#pragma warning disable CS0618
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.TypeQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { Type = value };
+#pragma warning restore CS0618
+#pragma warning disable CS0618
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { WeightedTokens = value };
+#pragma warning restore CS0618
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { Wildcard = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.WrapperQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { Wrapper = value };
 
@@ -1334,6 +1431,20 @@ public readonly partial struct QueryDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> CombinedFields(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor<TDocument>> action)
 	{
 		Instance.CombinedFields = Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.3.0'.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Common(Elastic.Clients.Elasticsearch.QueryDsl.CommonTermsQuery? value)
+	{
+		Instance.Common = value;
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.3.0'.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Common(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.CommonTermsQueryDescriptor<TDocument>> action)
+	{
+		Instance.Common = Elastic.Clients.Elasticsearch.QueryDsl.CommonTermsQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
@@ -1547,6 +1658,20 @@ public readonly partial struct QueryDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> GeoGrid(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor<TDocument>> action)
 	{
 		Instance.GeoGrid = Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.12.0'. Use geo-shape instead.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> GeoPolygon(Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQuery? value)
+	{
+		Instance.GeoPolygon = value;
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.12.0'. Use geo-shape instead.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> GeoPolygon(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQueryDescriptor<TDocument>> action)
+	{
+		Instance.GeoPolygon = Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
@@ -2537,6 +2662,68 @@ public readonly partial struct QueryDescriptor<TDocument>
 		return this;
 	}
 
+	[System.Obsolete("Deprecated in '8.15.0'.")]
+	/// <summary>
+	/// <para>
+	/// Uses a natural language processing model to convert the query text into a list of token-weight pairs which are then used in a query against a sparse vector or rank features field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> TextExpansion(Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQuery? value)
+	{
+		Instance.TextExpansion = value;
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '8.15.0'.")]
+	/// <summary>
+	/// <para>
+	/// Uses a natural language processing model to convert the query text into a list of token-weight pairs which are then used in a query against a sparse vector or rank features field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> TextExpansion(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor<TDocument>> action)
+	{
+		Instance.TextExpansion = Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.0.0'. https://www.elastic.co/guide/en/elasticsearch/reference/7.x/removal-of-types.html")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Type(Elastic.Clients.Elasticsearch.QueryDsl.TypeQuery? value)
+	{
+		Instance.Type = value;
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.0.0'. https://www.elastic.co/guide/en/elasticsearch/reference/7.x/removal-of-types.html")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Type(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TypeQueryDescriptor> action)
+	{
+		Instance.Type = Elastic.Clients.Elasticsearch.QueryDsl.TypeQueryDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '8.15.0'.")]
+	/// <summary>
+	/// <para>
+	/// Supports returning text_expansion query results by sending in precomputed tokens with the query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> WeightedTokens(Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQuery? value)
+	{
+		Instance.WeightedTokens = value;
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '8.15.0'.")]
+	/// <summary>
+	/// <para>
+	/// Supports returning text_expansion query results by sending in precomputed tokens with the query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> WeightedTokens(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor<TDocument>> action)
+	{
+		Instance.WeightedTokens = Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Returns documents that contain terms matching a wildcard pattern.
@@ -2716,6 +2903,27 @@ public readonly partial struct QueryDescriptor
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor CombinedFields<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor<T>> action)
 	{
 		Instance.CombinedFields = Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.3.0'.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Common(Elastic.Clients.Elasticsearch.QueryDsl.CommonTermsQuery? value)
+	{
+		Instance.Common = value;
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.3.0'.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Common(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.CommonTermsQueryDescriptor> action)
+	{
+		Instance.Common = Elastic.Clients.Elasticsearch.QueryDsl.CommonTermsQueryDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.3.0'.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Common<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.CommonTermsQueryDescriptor<T>> action)
+	{
+		Instance.Common = Elastic.Clients.Elasticsearch.QueryDsl.CommonTermsQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
@@ -3030,6 +3238,27 @@ public readonly partial struct QueryDescriptor
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor GeoGrid<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor<T>> action)
 	{
 		Instance.GeoGrid = Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.12.0'. Use geo-shape instead.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor GeoPolygon(Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQuery? value)
+	{
+		Instance.GeoPolygon = value;
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.12.0'. Use geo-shape instead.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor GeoPolygon(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQueryDescriptor> action)
+	{
+		Instance.GeoPolygon = Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQueryDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.12.0'. Use geo-shape instead.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor GeoPolygon<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQueryDescriptor<T>> action)
+	{
+		Instance.GeoPolygon = Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
@@ -4420,6 +4649,92 @@ public readonly partial struct QueryDescriptor
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor TermsSet<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor<T>> action)
 	{
 		Instance.TermsSet = Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '8.15.0'.")]
+	/// <summary>
+	/// <para>
+	/// Uses a natural language processing model to convert the query text into a list of token-weight pairs which are then used in a query against a sparse vector or rank features field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor TextExpansion(Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQuery? value)
+	{
+		Instance.TextExpansion = value;
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '8.15.0'.")]
+	/// <summary>
+	/// <para>
+	/// Uses a natural language processing model to convert the query text into a list of token-weight pairs which are then used in a query against a sparse vector or rank features field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor TextExpansion(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor> action)
+	{
+		Instance.TextExpansion = Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '8.15.0'.")]
+	/// <summary>
+	/// <para>
+	/// Uses a natural language processing model to convert the query text into a list of token-weight pairs which are then used in a query against a sparse vector or rank features field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor TextExpansion<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor<T>> action)
+	{
+		Instance.TextExpansion = Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.0.0'. https://www.elastic.co/guide/en/elasticsearch/reference/7.x/removal-of-types.html")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Type(Elastic.Clients.Elasticsearch.QueryDsl.TypeQuery? value)
+	{
+		Instance.Type = value;
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.0.0'. https://www.elastic.co/guide/en/elasticsearch/reference/7.x/removal-of-types.html")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Type(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TypeQueryDescriptor> action)
+	{
+		Instance.Type = Elastic.Clients.Elasticsearch.QueryDsl.TypeQueryDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '8.15.0'.")]
+	/// <summary>
+	/// <para>
+	/// Supports returning text_expansion query results by sending in precomputed tokens with the query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor WeightedTokens(Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQuery? value)
+	{
+		Instance.WeightedTokens = value;
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '8.15.0'.")]
+	/// <summary>
+	/// <para>
+	/// Supports returning text_expansion query results by sending in precomputed tokens with the query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor WeightedTokens(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor> action)
+	{
+		Instance.WeightedTokens = Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '8.15.0'.")]
+	/// <summary>
+	/// <para>
+	/// Supports returning text_expansion query results by sending in precomputed tokens with the query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor WeightedTokens<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor<T>> action)
+	{
+		Instance.WeightedTokens = Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor<T>.Build(action);
 		return this;
 	}
 

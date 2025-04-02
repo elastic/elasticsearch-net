@@ -84,14 +84,6 @@ internal sealed partial class GetClusterSettingsResponseConverter : System.Text.
 public sealed partial class GetClusterSettingsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetClusterSettingsResponse(System.Collections.Generic.IReadOnlyDictionary<string, object> persistent, System.Collections.Generic.IReadOnlyDictionary<string, object> transient)
-	{
-		Persistent = persistent;
-		Transient = transient;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetClusterSettingsResponse()
 	{
 	}

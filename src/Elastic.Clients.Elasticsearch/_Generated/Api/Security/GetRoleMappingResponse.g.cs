@@ -40,13 +40,6 @@ internal sealed partial class GetRoleMappingResponseConverter : System.Text.Json
 public sealed partial class GetRoleMappingResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetRoleMappingResponse(System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleMapping> roleMappings)
-	{
-		RoleMappings = roleMappings;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetRoleMappingResponse()
 	{
 	}

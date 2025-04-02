@@ -92,13 +92,13 @@ internal sealed partial class PutScriptRequestConverter : System.Text.Json.Seria
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.PutScriptRequestConverter))]
 public sealed partial class PutScriptRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.PutScriptRequestParameters>
 {
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutScriptRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
 	}
 
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutScriptRequest(Elastic.Clients.Elasticsearch.Id id, Elastic.Clients.Elasticsearch.Name? context) : base(r => r.Required("id", id).Optional("context", context))
 	{
@@ -214,7 +214,7 @@ public readonly partial struct PutScriptRequestDescriptor
 #pragma warning restore CS0618
 	}
 
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("TODO")]
 	public PutScriptRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

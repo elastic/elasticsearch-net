@@ -31,6 +31,7 @@ internal sealed partial class PatternAnalyzerConverter : System.Text.Json.Serial
 	private static readonly System.Text.Json.JsonEncodedText PropStopwords = System.Text.Json.JsonEncodedText.Encode("stopwords");
 	private static readonly System.Text.Json.JsonEncodedText PropStopwordsPath = System.Text.Json.JsonEncodedText.Encode("stopwords_path");
 	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
 
 	public override Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
@@ -40,6 +41,7 @@ internal sealed partial class PatternAnalyzerConverter : System.Text.Json.Serial
 		LocalJsonValue<string?> propPattern = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propStopwords = default;
 		LocalJsonValue<string?> propStopwordsPath = default;
+		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propFlags.TryReadProperty(ref reader, options, PropFlags, null))
@@ -73,6 +75,11 @@ internal sealed partial class PatternAnalyzerConverter : System.Text.Json.Serial
 				continue;
 			}
 
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
 				reader.Skip();
@@ -89,7 +96,10 @@ internal sealed partial class PatternAnalyzerConverter : System.Text.Json.Serial
 			Lowercase = propLowercase.Value,
 			Pattern = propPattern.Value,
 			Stopwords = propStopwords.Value,
-			StopwordsPath = propStopwordsPath.Value
+			StopwordsPath = propStopwordsPath.Value,
+#pragma warning disable CS0618
+			Version = propVersion.Value
+#pragma warning restore CS0618
 		};
 	}
 
@@ -102,6 +112,10 @@ internal sealed partial class PatternAnalyzerConverter : System.Text.Json.Serial
 		writer.WriteProperty(options, PropStopwords, value.Stopwords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropStopwordsPath, value.StopwordsPath, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
+#pragma warning disable CS0618
+		writer.WriteProperty(options, PropVersion, value.Version, null, null)
+#pragma warning restore CS0618
+		;
 		writer.WriteEndObject();
 	}
 }
@@ -164,6 +178,9 @@ public sealed partial class PatternAnalyzer : Elastic.Clients.Elasticsearch.Anal
 	public string? StopwordsPath { get; set; }
 
 	public string Type => "pattern";
+
+	[System.Obsolete("Deprecated in '7.14.0'.")]
+	public string? Version { get; set; }
 }
 
 public readonly partial struct PatternAnalyzerDescriptor
@@ -276,6 +293,13 @@ public readonly partial struct PatternAnalyzerDescriptor
 	public Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor StopwordsPath(string? value)
 	{
 		Instance.StopwordsPath = value;
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.14.0'.")]
+	public Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor Version(string? value)
+	{
+		Instance.Version = value;
 		return this;
 	}
 

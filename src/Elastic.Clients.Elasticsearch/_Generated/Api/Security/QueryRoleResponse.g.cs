@@ -84,15 +84,6 @@ internal sealed partial class QueryRoleResponseConverter : System.Text.Json.Seri
 public sealed partial class QueryRoleResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public QueryRoleResponse(int count, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.QueryRole> roles, int total)
-	{
-		Count = count;
-		Roles = roles;
-		Total = total;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public QueryRoleResponse()
 	{
 	}

@@ -137,13 +137,6 @@ internal sealed partial class EqlGetResponseConverterFactory : System.Text.Json.
 public partial class EqlGetResponse<TEvent> : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public EqlGetResponse(Elastic.Clients.Elasticsearch.Eql.EqlHits<TEvent> hits)
-	{
-		Hits = hits;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public EqlGetResponse()
 	{
 	}

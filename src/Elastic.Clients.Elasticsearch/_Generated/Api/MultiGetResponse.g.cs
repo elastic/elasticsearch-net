@@ -83,13 +83,6 @@ internal sealed partial class MultiGetResponseConverterFactory : System.Text.Jso
 public sealed partial class MultiGetResponse<TDocument> : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public MultiGetResponse(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetResponseItem<TDocument>> docs)
-	{
-		Docs = docs;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public MultiGetResponse()
 	{
 	}

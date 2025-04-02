@@ -66,13 +66,6 @@ internal sealed partial class MultiTermVectorsResponseConverter : System.Text.Js
 public sealed partial class MultiTermVectorsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public MultiTermVectorsResponse(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsResult> docs)
-	{
-		Docs = docs;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public MultiTermVectorsResponse()
 	{
 	}

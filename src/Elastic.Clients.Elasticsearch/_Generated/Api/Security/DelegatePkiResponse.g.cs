@@ -93,15 +93,6 @@ internal sealed partial class DelegatePkiResponseConverter : System.Text.Json.Se
 public sealed partial class DelegatePkiResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public DelegatePkiResponse(string accessToken, long expiresIn, string type)
-	{
-		AccessToken = accessToken;
-		ExpiresIn = expiresIn;
-		Type = type;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public DelegatePkiResponse()
 	{
 	}

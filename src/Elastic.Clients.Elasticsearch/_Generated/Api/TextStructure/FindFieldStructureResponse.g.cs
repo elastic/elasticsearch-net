@@ -192,21 +192,6 @@ internal sealed partial class FindFieldStructureResponseConverter : System.Text.
 public sealed partial class FindFieldStructureResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public FindFieldStructureResponse(string charset, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.TextStructure.FieldStat> fieldStats, Elastic.Clients.Elasticsearch.TextStructure.FormatType format, Elastic.Clients.Elasticsearch.Ingest.PipelineConfig ingestPipeline, Elastic.Clients.Elasticsearch.Mapping.TypeMapping mappings, bool needClientTimezone, int numLinesAnalyzed, int numMessagesAnalyzed, string sampleStart)
-	{
-		Charset = charset;
-		FieldStats = fieldStats;
-		Format = format;
-		IngestPipeline = ingestPipeline;
-		Mappings = mappings;
-		NeedClientTimezone = needClientTimezone;
-		NumLinesAnalyzed = numLinesAnalyzed;
-		NumMessagesAnalyzed = numMessagesAnalyzed;
-		SampleStart = sampleStart;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public FindFieldStructureResponse()
 	{
 	}

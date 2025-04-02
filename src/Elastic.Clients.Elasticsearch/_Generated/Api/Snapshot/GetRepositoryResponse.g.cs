@@ -40,13 +40,6 @@ internal sealed partial class GetRepositoryResponseConverter : System.Text.Json.
 public sealed partial class GetRepositoryResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetRepositoryResponse(Elastic.Clients.Elasticsearch.Snapshot.Repositories repositories)
-	{
-		Repositories = repositories;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetRepositoryResponse()
 	{
 	}

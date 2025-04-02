@@ -31,6 +31,7 @@ internal sealed partial class DateHistogramAggregationConverter : System.Text.Js
 	private static readonly System.Text.Json.JsonEncodedText PropFixedInterval = System.Text.Json.JsonEncodedText.Encode("fixed_interval");
 	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
 	private static readonly System.Text.Json.JsonEncodedText PropHardBounds = System.Text.Json.JsonEncodedText.Encode("hard_bounds");
+	private static readonly System.Text.Json.JsonEncodedText PropInterval = System.Text.Json.JsonEncodedText.Encode("interval");
 	private static readonly System.Text.Json.JsonEncodedText PropMinDocCount = System.Text.Json.JsonEncodedText.Encode("min_doc_count");
 	private static readonly System.Text.Json.JsonEncodedText PropMissing = System.Text.Json.JsonEncodedText.Encode("missing");
 	private static readonly System.Text.Json.JsonEncodedText PropOffset = System.Text.Json.JsonEncodedText.Encode("offset");
@@ -48,6 +49,7 @@ internal sealed partial class DateHistogramAggregationConverter : System.Text.Js
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propFixedInterval = default;
 		LocalJsonValue<string?> propFormat = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath>?> propHardBounds = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propInterval = default;
 		LocalJsonValue<int?> propMinDocCount = default;
 		LocalJsonValue<System.DateTime?> propMissing = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propOffset = default;
@@ -83,6 +85,11 @@ internal sealed partial class DateHistogramAggregationConverter : System.Text.Js
 			}
 
 			if (propHardBounds.TryReadProperty(ref reader, options, PropHardBounds, null))
+			{
+				continue;
+			}
+
+			if (propInterval.TryReadProperty(ref reader, options, PropInterval, null))
 			{
 				continue;
 			}
@@ -140,6 +147,10 @@ internal sealed partial class DateHistogramAggregationConverter : System.Text.Js
 			FixedInterval = propFixedInterval.Value,
 			Format = propFormat.Value,
 			HardBounds = propHardBounds.Value,
+#pragma warning disable CS0618
+			Interval = propInterval.Value
+#pragma warning restore CS0618
+,
 			MinDocCount = propMinDocCount.Value,
 			Missing = propMissing.Value,
 			Offset = propOffset.Value,
@@ -159,6 +170,10 @@ internal sealed partial class DateHistogramAggregationConverter : System.Text.Js
 		writer.WriteProperty(options, PropFixedInterval, value.FixedInterval, null, null);
 		writer.WriteProperty(options, PropFormat, value.Format, null, null);
 		writer.WriteProperty(options, PropHardBounds, value.HardBounds, null, null);
+#pragma warning disable CS0618
+		writer.WriteProperty(options, PropInterval, value.Interval, null, null)
+#pragma warning restore CS0618
+		;
 		writer.WriteProperty(options, PropMinDocCount, value.MinDocCount, null, null);
 		writer.WriteProperty(options, PropMissing, value.Missing, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropOffset, value.Offset, null, null);
@@ -232,6 +247,8 @@ public sealed partial class DateHistogramAggregation
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath>? HardBounds { get; set; }
+	[System.Obsolete("Deprecated in '7.2.0'. use `fixed_interval` or `calendar_interval`")]
+	public Elastic.Clients.Elasticsearch.Duration? Interval { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -413,6 +430,13 @@ public readonly partial struct DateHistogramAggregationDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument> HardBounds(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfFieldDateMathDescriptor>? action)
 	{
 		Instance.HardBounds = Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfFieldDateMathDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.2.0'. use `fixed_interval` or `calendar_interval`")]
+	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument> Interval(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Interval = value;
 		return this;
 	}
 
@@ -706,6 +730,13 @@ public readonly partial struct DateHistogramAggregationDescriptor
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor HardBounds(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfFieldDateMathDescriptor>? action)
 	{
 		Instance.HardBounds = Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfFieldDateMathDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.2.0'. use `fixed_interval` or `calendar_interval`")]
+	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor Interval(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Interval = value;
 		return this;
 	}
 

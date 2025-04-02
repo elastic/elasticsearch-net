@@ -36,11 +36,13 @@ public partial class ElasticsearchClient
 	public virtual Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient Graph { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IndexLifecycleManagementNamespacedClient IndexLifecycleManagement { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.IndicesNamespacedClient Indices { get; private set; }
+	public virtual Elastic.Clients.Elasticsearch.Inference.InferenceNamespacedClient Inference { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient Ingest { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient LicenseManagement { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.MachineLearningNamespacedClient MachineLearning { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesNamespacedClient Nodes { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient QueryRules { get; private set; }
+	public virtual Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient Rollup { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient SearchableSnapshots { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient SearchApplication { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.Security.SecurityNamespacedClient Security { get; private set; }
@@ -67,11 +69,13 @@ public partial class ElasticsearchClient
 		Graph = new Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient(this);
 		IndexLifecycleManagement = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IndexLifecycleManagementNamespacedClient(this);
 		Indices = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesNamespacedClient(this);
+		Inference = new Elastic.Clients.Elasticsearch.Inference.InferenceNamespacedClient(this);
 		Ingest = new Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient(this);
 		LicenseManagement = new Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient(this);
 		MachineLearning = new Elastic.Clients.Elasticsearch.MachineLearning.MachineLearningNamespacedClient(this);
 		Nodes = new Elastic.Clients.Elasticsearch.Nodes.NodesNamespacedClient(this);
 		QueryRules = new Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient(this);
+		Rollup = new Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient(this);
 		SearchableSnapshots = new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient(this);
 		SearchApplication = new Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient(this);
 		Security = new Elastic.Clients.Elasticsearch.Security.SecurityNamespacedClient(this);

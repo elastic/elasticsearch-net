@@ -66,13 +66,6 @@ internal sealed partial class GetApiKeyResponseConverter : System.Text.Json.Seri
 public sealed partial class GetApiKeyResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetApiKeyResponse(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApiKey> apiKeys)
-	{
-		ApiKeys = apiKeys;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetApiKeyResponse()
 	{
 	}

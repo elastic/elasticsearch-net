@@ -113,7 +113,7 @@ internal sealed partial class RankEvalRequestConverter : System.Text.Json.Serial
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.RankEvalRequestConverter))]
 public sealed partial class RankEvalRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.RankEvalRequestParameters>
 {
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public RankEvalRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 	{
@@ -136,7 +136,7 @@ public sealed partial class RankEvalRequest : Elastic.Clients.Elasticsearch.Requ
 	}
 #endif
 #if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public RankEvalRequest()
 	{
 	}

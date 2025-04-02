@@ -99,7 +99,7 @@ internal sealed partial class MoveToStepRequestConverter : System.Text.Json.Seri
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestConverter))]
 public sealed partial class MoveToStepRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>
 {
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public MoveToStepRequest(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
 	{
@@ -202,7 +202,7 @@ public readonly partial struct MoveToStepRequestDescriptor
 #pragma warning restore CS0618
 	}
 
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("TODO")]
 	public MoveToStepRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

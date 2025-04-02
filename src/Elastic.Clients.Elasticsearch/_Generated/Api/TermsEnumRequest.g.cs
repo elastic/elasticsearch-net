@@ -136,7 +136,7 @@ internal sealed partial class TermsEnumRequestConverter : System.Text.Json.Seria
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TermsEnumRequestConverter))]
 public sealed partial class TermsEnumRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.TermsEnumRequestParameters>
 {
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public TermsEnumRequest(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
 	{
@@ -270,7 +270,7 @@ public readonly partial struct TermsEnumRequestDescriptor
 #pragma warning restore CS0618
 	}
 
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("TODO")]
 	public TermsEnumRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

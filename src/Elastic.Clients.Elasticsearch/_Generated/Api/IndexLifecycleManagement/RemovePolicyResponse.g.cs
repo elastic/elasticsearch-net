@@ -75,14 +75,6 @@ internal sealed partial class RemovePolicyResponseConverter : System.Text.Json.S
 public sealed partial class RemovePolicyResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public RemovePolicyResponse(System.Collections.Generic.IReadOnlyCollection<string> failedIndexes, bool hasFailures)
-	{
-		FailedIndexes = failedIndexes;
-		HasFailures = hasFailures;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public RemovePolicyResponse()
 	{
 	}

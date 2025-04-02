@@ -102,17 +102,6 @@ internal sealed partial class SamlAuthenticateResponseConverter : System.Text.Js
 public sealed partial class SamlAuthenticateResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public SamlAuthenticateResponse(string accessToken, int expiresIn, string realm, string refreshToken, string username)
-	{
-		AccessToken = accessToken;
-		ExpiresIn = expiresIn;
-		Realm = realm;
-		RefreshToken = refreshToken;
-		Username = username;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public SamlAuthenticateResponse()
 	{
 	}

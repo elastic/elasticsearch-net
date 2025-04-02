@@ -37,7 +37,7 @@ internal sealed partial class RangeAggregationConverter : System.Text.Json.Seria
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propField = default;
 		LocalJsonValue<string?> propFormat = default;
 		LocalJsonValue<int?> propMissing = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>?> propRanges = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>?> propRanges = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -56,7 +56,7 @@ internal sealed partial class RangeAggregationConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propRanges.TryReadProperty(ref reader, options, PropRanges, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>(o, null)))
+			if (propRanges.TryReadProperty(ref reader, options, PropRanges, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>(o, null)))
 			{
 				continue;
 			}
@@ -92,7 +92,7 @@ internal sealed partial class RangeAggregationConverter : System.Text.Json.Seria
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropFormat, value.Format, null, null);
 		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
-		writer.WriteProperty(options, PropRanges, value.Ranges, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>(o, v, null));
+		writer.WriteProperty(options, PropRanges, value.Ranges, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>(o, v, null));
 		writer.WriteProperty(options, PropScript, value.Script, null, null);
 		writer.WriteEndObject();
 	}
@@ -138,7 +138,7 @@ public sealed partial class RangeAggregation
 	/// An array of ranges used to bucket documents.
 	/// </para>
 	/// </summary>
-	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? Ranges { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>? Ranges { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
 
@@ -206,7 +206,7 @@ public readonly partial struct RangeAggregationDescriptor<TDocument>
 	/// An array of ranges used to bucket documents.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument> Ranges(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? value)
+	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument> Ranges(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>? value)
 	{
 		Instance.Ranges = value;
 		return this;
@@ -219,7 +219,7 @@ public readonly partial struct RangeAggregationDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument> Ranges()
 	{
-		Instance.Ranges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfAggregationRange.Build(null);
+		Instance.Ranges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIAggregationRange.Build(null);
 		return this;
 	}
 
@@ -228,9 +228,9 @@ public readonly partial struct RangeAggregationDescriptor<TDocument>
 	/// An array of ranges used to bucket documents.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument> Ranges(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfAggregationRange>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument> Ranges(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIAggregationRange>? action)
 	{
-		Instance.Ranges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfAggregationRange.Build(action);
+		Instance.Ranges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIAggregationRange.Build(action);
 		return this;
 	}
 
@@ -239,7 +239,7 @@ public readonly partial struct RangeAggregationDescriptor<TDocument>
 	/// An array of ranges used to bucket documents.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument> Ranges(params Elastic.Clients.Elasticsearch.Aggregations.AggregationRange[] values)
+	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument> Ranges(params Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange[] values)
 	{
 		Instance.Ranges = [.. values];
 		return this;
@@ -250,12 +250,12 @@ public readonly partial struct RangeAggregationDescriptor<TDocument>
 	/// An array of ranges used to bucket documents.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument> Ranges(params System.Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor>?[] actions)
+	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument> Ranges(params System.Func<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRangeBuilder, Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>[] actions)
 	{
-		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>();
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.Aggregations.IAggregationRangeBuilder.Build(action));
 		}
 
 		Instance.Ranges = items;
@@ -358,7 +358,7 @@ public readonly partial struct RangeAggregationDescriptor
 	/// An array of ranges used to bucket documents.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor Ranges(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? value)
+	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor Ranges(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>? value)
 	{
 		Instance.Ranges = value;
 		return this;
@@ -371,7 +371,7 @@ public readonly partial struct RangeAggregationDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor Ranges()
 	{
-		Instance.Ranges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfAggregationRange.Build(null);
+		Instance.Ranges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIAggregationRange.Build(null);
 		return this;
 	}
 
@@ -380,9 +380,9 @@ public readonly partial struct RangeAggregationDescriptor
 	/// An array of ranges used to bucket documents.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor Ranges(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfAggregationRange>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor Ranges(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIAggregationRange>? action)
 	{
-		Instance.Ranges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfAggregationRange.Build(action);
+		Instance.Ranges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIAggregationRange.Build(action);
 		return this;
 	}
 
@@ -391,7 +391,7 @@ public readonly partial struct RangeAggregationDescriptor
 	/// An array of ranges used to bucket documents.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor Ranges(params Elastic.Clients.Elasticsearch.Aggregations.AggregationRange[] values)
+	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor Ranges(params Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange[] values)
 	{
 		Instance.Ranges = [.. values];
 		return this;
@@ -402,12 +402,12 @@ public readonly partial struct RangeAggregationDescriptor
 	/// An array of ranges used to bucket documents.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor Ranges(params System.Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor>?[] actions)
+	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor Ranges(params System.Func<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRangeBuilder, Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>[] actions)
 	{
-		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>();
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.Aggregations.IAggregationRangeBuilder.Build(action));
 		}
 
 		Instance.Ranges = items;

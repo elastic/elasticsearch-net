@@ -66,13 +66,6 @@ internal sealed partial class DeleteRoleResponseConverter : System.Text.Json.Ser
 public sealed partial class DeleteRoleResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public DeleteRoleResponse(bool found)
-	{
-		Found = found;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public DeleteRoleResponse()
 	{
 	}

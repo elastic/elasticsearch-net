@@ -75,13 +75,6 @@ internal sealed partial class PutRoleMappingResponseConverter : System.Text.Json
 public sealed partial class PutRoleMappingResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PutRoleMappingResponse(Elastic.Clients.Elasticsearch.Security.CreatedStatus roleMapping)
-	{
-		RoleMapping = roleMapping;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutRoleMappingResponse()
 	{
 	}

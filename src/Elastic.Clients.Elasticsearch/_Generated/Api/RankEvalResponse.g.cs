@@ -84,15 +84,6 @@ internal sealed partial class RankEvalResponseConverter : System.Text.Json.Seria
 public sealed partial class RankEvalResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public RankEvalResponse(System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDetail> details, System.Collections.Generic.IReadOnlyDictionary<string, object> failures, double metricScore)
-	{
-		Details = details;
-		Failures = failures;
-		MetricScore = metricScore;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public RankEvalResponse()
 	{
 	}

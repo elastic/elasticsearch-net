@@ -95,7 +95,7 @@ public sealed partial class BulkDeleteRoleRequest : Elastic.Clients.Elasticsearc
 	}
 #endif
 #if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public BulkDeleteRoleRequest()
 	{
 	}

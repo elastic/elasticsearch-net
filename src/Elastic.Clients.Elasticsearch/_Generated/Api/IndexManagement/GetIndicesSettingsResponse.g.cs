@@ -40,13 +40,6 @@ internal sealed partial class GetIndicesSettingsResponseConverter : System.Text.
 public sealed partial class GetIndicesSettingsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetIndicesSettingsResponse(System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexState> settings)
-	{
-		Settings = settings;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetIndicesSettingsResponse()
 	{
 	}

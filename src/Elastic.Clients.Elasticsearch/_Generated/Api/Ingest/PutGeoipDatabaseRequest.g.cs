@@ -100,7 +100,7 @@ internal sealed partial class PutGeoipDatabaseRequestConverter : System.Text.Jso
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestConverter))]
 public sealed partial class PutGeoipDatabaseRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestParameters>
 {
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutGeoipDatabaseRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
@@ -206,7 +206,7 @@ public readonly partial struct PutGeoipDatabaseRequestDescriptor
 #pragma warning restore CS0618
 	}
 
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("TODO")]
 	public PutGeoipDatabaseRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

@@ -102,16 +102,6 @@ internal sealed partial class CreateCrossClusterApiKeyResponseConverter : System
 public sealed partial class CreateCrossClusterApiKeyResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public CreateCrossClusterApiKeyResponse(string apiKey, string encoded, string id, string name)
-	{
-		ApiKey = apiKey;
-		Encoded = encoded;
-		Id = id;
-		Name = name;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public CreateCrossClusterApiKeyResponse()
 	{
 	}

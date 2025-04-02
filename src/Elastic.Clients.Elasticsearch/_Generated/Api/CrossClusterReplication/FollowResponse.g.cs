@@ -84,15 +84,6 @@ internal sealed partial class FollowResponseConverter : System.Text.Json.Seriali
 public sealed partial class FollowResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public FollowResponse(bool followIndexCreated, bool followIndexShardsAcked, bool indexFollowingStarted)
-	{
-		FollowIndexCreated = followIndexCreated;
-		FollowIndexShardsAcked = followIndexShardsAcked;
-		IndexFollowingStarted = indexFollowingStarted;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public FollowResponse()
 	{
 	}

@@ -3,27 +3,27 @@
 // See the LICENSE file in the project root for more information.
 
 using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
+
+using Elastic.Clients.Elasticsearch.Core.Search;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
-using Elastic.Transport.Extensions;
 
 namespace Elastic.Clients.Elasticsearch.Core.MSearch;
 
 // POC - If we have more than one union doing this, can we autogenerate with correct ctors etc.
 public sealed class SearchRequestItem : IStreamSerializable
 {
-	public SearchRequestItem(MultisearchBody body) => Body = body;
+	public SearchRequestItem(SearchRequestBody body) => Body = body;
 
-	public SearchRequestItem(MultisearchHeader header, MultisearchBody body)
+	public SearchRequestItem(MultisearchHeader header, SearchRequestBody body)
 	{
 		Header = header;
 		Body = body;
 	}
 
 	public MultisearchHeader Header { get; init; }
-	public MultisearchBody Body { get; init; }
+	public SearchRequestBody Body { get; init; }
 
 	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
 	{

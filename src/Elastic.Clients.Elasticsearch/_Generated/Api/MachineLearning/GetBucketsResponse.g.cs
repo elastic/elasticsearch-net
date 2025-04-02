@@ -75,14 +75,6 @@ internal sealed partial class GetBucketsResponseConverter : System.Text.Json.Ser
 public sealed partial class GetBucketsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetBucketsResponse(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.BucketSummary> buckets, long count)
-	{
-		Buckets = buckets;
-		Count = count;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetBucketsResponse()
 	{
 	}

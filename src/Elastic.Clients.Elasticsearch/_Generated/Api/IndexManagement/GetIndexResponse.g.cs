@@ -40,13 +40,6 @@ internal sealed partial class GetIndexResponseConverter : System.Text.Json.Seria
 public sealed partial class GetIndexResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetIndexResponse(System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexState> indices)
-	{
-		Indices = indices;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetIndexResponse()
 	{
 	}

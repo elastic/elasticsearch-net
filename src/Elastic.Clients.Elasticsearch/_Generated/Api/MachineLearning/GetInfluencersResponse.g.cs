@@ -75,14 +75,6 @@ internal sealed partial class GetInfluencersResponseConverter : System.Text.Json
 public sealed partial class GetInfluencersResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetInfluencersResponse(long count, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Influencer> influencers)
-	{
-		Count = count;
-		Influencers = influencers;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetInfluencersResponse()
 	{
 	}

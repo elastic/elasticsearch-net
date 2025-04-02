@@ -120,17 +120,6 @@ internal sealed partial class GetUserPrivilegesResponseConverter : System.Text.J
 public sealed partial class GetUserPrivilegesResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetUserPrivilegesResponse(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges> applications, System.Collections.Generic.IReadOnlyCollection<string> cluster, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege> global, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserIndicesPrivileges> indices, System.Collections.Generic.IReadOnlyCollection<string> runAs)
-	{
-		Applications = applications;
-		Cluster = cluster;
-		Global = global;
-		Indices = indices;
-		RunAs = runAs;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetUserPrivilegesResponse()
 	{
 	}

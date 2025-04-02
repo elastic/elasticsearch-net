@@ -219,28 +219,6 @@ internal sealed partial class HealthResponseConverter : System.Text.Json.Seriali
 public sealed partial class HealthResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public HealthResponse(int activePrimaryShards, int activeShards, Elastic.Clients.Elasticsearch.Percentage activeShardsPercentAsNumber, string clusterName, int delayedUnassignedShards, int initializingShards, int numberOfDataNodes, int numberOfInFlightFetch, int numberOfNodes, int numberOfPendingTasks, int relocatingShards, Elastic.Clients.Elasticsearch.HealthStatus status, System.TimeSpan taskMaxWaitingInQueueMillis, bool timedOut, int unassignedPrimaryShards, int unassignedShards)
-	{
-		ActivePrimaryShards = activePrimaryShards;
-		ActiveShards = activeShards;
-		ActiveShardsPercentAsNumber = activeShardsPercentAsNumber;
-		ClusterName = clusterName;
-		DelayedUnassignedShards = delayedUnassignedShards;
-		InitializingShards = initializingShards;
-		NumberOfDataNodes = numberOfDataNodes;
-		NumberOfInFlightFetch = numberOfInFlightFetch;
-		NumberOfNodes = numberOfNodes;
-		NumberOfPendingTasks = numberOfPendingTasks;
-		RelocatingShards = relocatingShards;
-		Status = status;
-		TaskMaxWaitingInQueueMillis = taskMaxWaitingInQueueMillis;
-		TimedOut = timedOut;
-		UnassignedPrimaryShards = unassignedPrimaryShards;
-		UnassignedShards = unassignedShards;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public HealthResponse()
 	{
 	}

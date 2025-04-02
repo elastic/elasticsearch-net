@@ -75,14 +75,6 @@ internal sealed partial class GetSynonymsSetsResponseConverter : System.Text.Jso
 public sealed partial class GetSynonymsSetsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetSynonymsSetsResponse(int count, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Synonyms.SynonymsSetItem> results)
-	{
-		Count = count;
-		Results = results;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetSynonymsSetsResponse()
 	{
 	}

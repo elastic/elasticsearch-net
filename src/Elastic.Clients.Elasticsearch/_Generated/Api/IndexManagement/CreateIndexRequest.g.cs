@@ -302,7 +302,7 @@ public readonly partial struct CreateIndexRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest(index);
 	}
 
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("TODO")]
 	public CreateIndexRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

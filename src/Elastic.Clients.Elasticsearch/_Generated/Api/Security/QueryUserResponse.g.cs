@@ -84,15 +84,6 @@ internal sealed partial class QueryUserResponseConverter : System.Text.Json.Seri
 public sealed partial class QueryUserResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public QueryUserResponse(int count, int total, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.QueryUser> users)
-	{
-		Count = count;
-		Total = total;
-		Users = users;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public QueryUserResponse()
 	{
 	}

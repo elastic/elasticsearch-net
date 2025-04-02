@@ -30,7 +30,6 @@ internal sealed partial class DataStreamConverter : System.Text.Json.Serializati
 	private static readonly System.Text.Json.JsonEncodedText PropGeneration = System.Text.Json.JsonEncodedText.Encode("generation");
 	private static readonly System.Text.Json.JsonEncodedText PropHidden = System.Text.Json.JsonEncodedText.Encode("hidden");
 	private static readonly System.Text.Json.JsonEncodedText PropIlmPolicy = System.Text.Json.JsonEncodedText.Encode("ilm_policy");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexMode = System.Text.Json.JsonEncodedText.Encode("index_mode");
 	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
 	private static readonly System.Text.Json.JsonEncodedText PropLifecycle = System.Text.Json.JsonEncodedText.Encode("lifecycle");
 	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("_meta");
@@ -52,7 +51,6 @@ internal sealed partial class DataStreamConverter : System.Text.Json.Serializati
 		LocalJsonValue<int> propGeneration = default;
 		LocalJsonValue<bool> propHidden = default;
 		LocalJsonValue<string?> propIlmPolicy = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexMode?> propIndexMode = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamIndex>> propIndices = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover?> propLifecycle = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>?> propMeta = default;
@@ -88,11 +86,6 @@ internal sealed partial class DataStreamConverter : System.Text.Json.Serializati
 			}
 
 			if (propIlmPolicy.TryReadProperty(ref reader, options, PropIlmPolicy, null))
-			{
-				continue;
-			}
-
-			if (propIndexMode.TryReadProperty(ref reader, options, PropIndexMode, null))
 			{
 				continue;
 			}
@@ -174,7 +167,6 @@ internal sealed partial class DataStreamConverter : System.Text.Json.Serializati
 			Generation = propGeneration.Value,
 			Hidden = propHidden.Value,
 			IlmPolicy = propIlmPolicy.Value,
-			IndexMode = propIndexMode.Value,
 			Indices = propIndices.Value,
 			Lifecycle = propLifecycle.Value,
 			Meta = propMeta.Value,
@@ -198,7 +190,6 @@ internal sealed partial class DataStreamConverter : System.Text.Json.Serializati
 		writer.WriteProperty(options, PropGeneration, value.Generation, null, null);
 		writer.WriteProperty(options, PropHidden, value.Hidden, null, null);
 		writer.WriteProperty(options, PropIlmPolicy, value.IlmPolicy, null, null);
-		writer.WriteProperty(options, PropIndexMode, value.IndexMode, null, null);
 		writer.WriteProperty(options, PropIndices, value.Indices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamIndex> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamIndex>(o, v, null));
 		writer.WriteProperty(options, PropLifecycle, value.Lifecycle, null, null);
 		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
@@ -238,7 +229,7 @@ public sealed partial class DataStream
 	}
 #endif
 #if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public DataStream()
 	{
 	}
@@ -294,13 +285,6 @@ public sealed partial class DataStream
 	/// </para>
 	/// </summary>
 	public string? IlmPolicy { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The index mode for the data stream that will be used for newly created backing indices.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexMode? IndexMode { get; set; }
 
 	/// <summary>
 	/// <para>

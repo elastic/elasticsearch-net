@@ -84,15 +84,6 @@ internal sealed partial class ResolveIndexResponseConverter : System.Text.Json.S
 public sealed partial class ResolveIndexResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ResolveIndexResponse(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexAliasItem> aliases, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexDataStreamsItem> dataStreams, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexItem> indices)
-	{
-		Aliases = aliases;
-		DataStreams = dataStreams;
-		Indices = indices;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ResolveIndexResponse()
 	{
 	}

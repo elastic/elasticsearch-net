@@ -102,14 +102,6 @@ internal sealed partial class PostStartBasicResponseConverter : System.Text.Json
 public sealed partial class PostStartBasicResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PostStartBasicResponse(bool acknowledged, bool basicWasStarted)
-	{
-		Acknowledged = acknowledged;
-		BasicWasStarted = basicWasStarted;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PostStartBasicResponse()
 	{
 	}

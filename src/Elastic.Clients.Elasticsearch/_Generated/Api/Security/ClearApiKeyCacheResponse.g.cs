@@ -84,15 +84,6 @@ internal sealed partial class ClearApiKeyCacheResponseConverter : System.Text.Js
 public sealed partial class ClearApiKeyCacheResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ClearApiKeyCacheResponse(string clusterName, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.ClusterNode> nodes, Elastic.Clients.Elasticsearch.NodeStatistics nodeStats)
-	{
-		ClusterName = clusterName;
-		Nodes = nodes;
-		NodeStats = nodeStats;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ClearApiKeyCacheResponse()
 	{
 	}

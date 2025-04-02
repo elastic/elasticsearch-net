@@ -66,13 +66,6 @@ internal sealed partial class InferTrainedModelResponseConverter : System.Text.J
 public sealed partial class InferTrainedModelResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public InferTrainedModelResponse(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.InferenceResponseResult> inferenceResults)
-	{
-		InferenceResults = inferenceResults;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public InferTrainedModelResponse()
 	{
 	}

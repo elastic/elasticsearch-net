@@ -66,13 +66,6 @@ internal sealed partial class ExecuteLifecycleResponseConverter : System.Text.Js
 public sealed partial class ExecuteLifecycleResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ExecuteLifecycleResponse(string snapshotName)
-	{
-		SnapshotName = snapshotName;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ExecuteLifecycleResponse()
 	{
 	}

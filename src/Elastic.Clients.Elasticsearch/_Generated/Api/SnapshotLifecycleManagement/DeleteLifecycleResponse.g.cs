@@ -66,13 +66,6 @@ internal sealed partial class DeleteLifecycleResponseConverter : System.Text.Jso
 public sealed partial class DeleteLifecycleResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public DeleteLifecycleResponse(bool acknowledged)
-	{
-		Acknowledged = acknowledged;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public DeleteLifecycleResponse()
 	{
 	}

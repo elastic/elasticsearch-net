@@ -66,13 +66,6 @@ internal sealed partial class ClearCursorResponseConverter : System.Text.Json.Se
 public sealed partial class ClearCursorResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ClearCursorResponse(bool succeeded)
-	{
-		Succeeded = succeeded;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ClearCursorResponse()
 	{
 	}

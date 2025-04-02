@@ -84,14 +84,6 @@ internal sealed partial class HealthReportResponseConverter : System.Text.Json.S
 public sealed partial class HealthReportResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public HealthReportResponse(string clusterName, Elastic.Clients.Elasticsearch.Core.HealthReport.Indicators indicators)
-	{
-		ClusterName = clusterName;
-		Indicators = indicators;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public HealthReportResponse()
 	{
 	}

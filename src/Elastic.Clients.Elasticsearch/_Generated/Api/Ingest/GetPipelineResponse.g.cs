@@ -40,13 +40,6 @@ internal sealed partial class GetPipelineResponseConverter : System.Text.Json.Se
 public sealed partial class GetPipelineResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetPipelineResponse(System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline> pipelines)
-	{
-		Pipelines = pipelines;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetPipelineResponse()
 	{
 	}

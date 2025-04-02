@@ -66,13 +66,6 @@ internal sealed partial class StopDatafeedResponseConverter : System.Text.Json.S
 public sealed partial class StopDatafeedResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public StopDatafeedResponse(bool stopped)
-	{
-		Stopped = stopped;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public StopDatafeedResponse()
 	{
 	}

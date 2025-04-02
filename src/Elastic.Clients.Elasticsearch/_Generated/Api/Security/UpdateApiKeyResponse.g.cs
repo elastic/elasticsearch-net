@@ -66,13 +66,6 @@ internal sealed partial class UpdateApiKeyResponseConverter : System.Text.Json.S
 public sealed partial class UpdateApiKeyResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public UpdateApiKeyResponse(bool updated)
-	{
-		Updated = updated;
-	}
-
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public UpdateApiKeyResponse()
 	{
 	}

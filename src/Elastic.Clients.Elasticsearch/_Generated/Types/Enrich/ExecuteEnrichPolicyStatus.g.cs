@@ -26,14 +26,21 @@ namespace Elastic.Clients.Elasticsearch.Enrich;
 internal sealed partial class ExecuteEnrichPolicyStatusConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Enrich.ExecuteEnrichPolicyStatus>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropPhase = System.Text.Json.JsonEncodedText.Encode("phase");
+	private static readonly System.Text.Json.JsonEncodedText PropStep = System.Text.Json.JsonEncodedText.Encode("step");
 
 	public override Elastic.Clients.Elasticsearch.Enrich.ExecuteEnrichPolicyStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase> propPhase = default;
+		LocalJsonValue<string?> propStep = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propPhase.TryReadProperty(ref reader, options, PropPhase, null))
+			{
+				continue;
+			}
+
+			if (propStep.TryReadProperty(ref reader, options, PropStep, null))
 			{
 				continue;
 			}
@@ -50,7 +57,8 @@ internal sealed partial class ExecuteEnrichPolicyStatusConverter : System.Text.J
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Enrich.ExecuteEnrichPolicyStatus(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
-			Phase = propPhase.Value
+			Phase = propPhase.Value,
+			Step = propStep.Value
 		};
 	}
 
@@ -58,6 +66,7 @@ internal sealed partial class ExecuteEnrichPolicyStatusConverter : System.Text.J
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropPhase, value.Phase, null, null);
+		writer.WriteProperty(options, PropStep, value.Step, null, null);
 		writer.WriteEndObject();
 	}
 }
@@ -76,7 +85,7 @@ public sealed partial class ExecuteEnrichPolicyStatus
 	}
 #endif
 #if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public ExecuteEnrichPolicyStatus()
 	{
 	}
@@ -92,4 +101,5 @@ public sealed partial class ExecuteEnrichPolicyStatus
 	required
 #endif
 	Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase Phase { get; set; }
+	public string? Step { get; set; }
 }
