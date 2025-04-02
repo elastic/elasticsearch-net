@@ -42,10 +42,10 @@ internal sealed partial class NumberRangeQueryConverter : System.Text.Json.Seria
 		reader.Read();
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<float?> propBoost = default;
-		LocalJsonValue<double?> propGt = default;
-		LocalJsonValue<double?> propGte = default;
-		LocalJsonValue<double?> propLt = default;
-		LocalJsonValue<double?> propLte = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Number?> propGt = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Number?> propGte = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Number?> propLt = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Number?> propLte = default;
 		LocalJsonValue<string?> propQueryName = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation?> propRelation = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -166,28 +166,28 @@ public sealed partial class NumberRangeQuery : Elastic.Clients.Elasticsearch.Que
 	/// Greater than.
 	/// </para>
 	/// </summary>
-	public double? Gt { get; set; }
+	public Elastic.Clients.Elasticsearch.Number? Gt { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Greater than or equal to.
 	/// </para>
 	/// </summary>
-	public double? Gte { get; set; }
+	public Elastic.Clients.Elasticsearch.Number? Gte { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Less than.
 	/// </para>
 	/// </summary>
-	public double? Lt { get; set; }
+	public Elastic.Clients.Elasticsearch.Number? Lt { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Less than or equal to.
 	/// </para>
 	/// </summary>
-	public double? Lte { get; set; }
+	public Elastic.Clients.Elasticsearch.Number? Lte { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>
@@ -250,7 +250,7 @@ public readonly partial struct NumberRangeQueryDescriptor<TDocument>
 	/// Greater than.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument> Gt(double? value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument> Gt(Elastic.Clients.Elasticsearch.Number? value)
 	{
 		Instance.Gt = value;
 		return this;
@@ -261,7 +261,7 @@ public readonly partial struct NumberRangeQueryDescriptor<TDocument>
 	/// Greater than or equal to.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument> Gte(double? value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument> Gte(Elastic.Clients.Elasticsearch.Number? value)
 	{
 		Instance.Gte = value;
 		return this;
@@ -272,7 +272,7 @@ public readonly partial struct NumberRangeQueryDescriptor<TDocument>
 	/// Less than.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument> Lt(double? value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument> Lt(Elastic.Clients.Elasticsearch.Number? value)
 	{
 		Instance.Lt = value;
 		return this;
@@ -283,7 +283,7 @@ public readonly partial struct NumberRangeQueryDescriptor<TDocument>
 	/// Less than or equal to.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument> Lte(double? value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument> Lte(Elastic.Clients.Elasticsearch.Number? value)
 	{
 		Instance.Lte = value;
 		return this;
@@ -365,7 +365,7 @@ public readonly partial struct NumberRangeQueryDescriptor
 	/// Greater than.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor Gt(double? value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor Gt(Elastic.Clients.Elasticsearch.Number? value)
 	{
 		Instance.Gt = value;
 		return this;
@@ -376,7 +376,7 @@ public readonly partial struct NumberRangeQueryDescriptor
 	/// Greater than or equal to.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor Gte(double? value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor Gte(Elastic.Clients.Elasticsearch.Number? value)
 	{
 		Instance.Gte = value;
 		return this;
@@ -387,7 +387,7 @@ public readonly partial struct NumberRangeQueryDescriptor
 	/// Less than.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor Lt(double? value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor Lt(Elastic.Clients.Elasticsearch.Number? value)
 	{
 		Instance.Lt = value;
 		return this;
@@ -398,7 +398,7 @@ public readonly partial struct NumberRangeQueryDescriptor
 	/// Less than or equal to.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor Lte(double? value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor Lte(Elastic.Clients.Elasticsearch.Number? value)
 	{
 		Instance.Lte = value;
 		return this;

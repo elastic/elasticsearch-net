@@ -8,9 +8,10 @@ using System.Runtime.CompilerServices;
 
 using System.Text.Json;
 using System.Text.Json.Serialization;
+
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Number;
+namespace Elastic.Clients.Elasticsearch;
 
 [JsonConverter(typeof(NumberConverter))]
 public readonly struct Number
@@ -31,13 +32,14 @@ public readonly struct Number
 	}
 
 	public static implicit operator Number(long value) => new(value);
+
 	public static implicit operator Number(double value) => new(value);
 
 	public bool TryGetLong(out long value)
 	{
 		if (_tag is not 1)
 		{
-			value = 0l;
+			value = 0L;
 			return false;
 		}
 
